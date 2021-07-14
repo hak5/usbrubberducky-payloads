@@ -4,7 +4,7 @@
 This payload copies the names of all the files on a victims PC then puts them on a file on the root of the ducky.
 In order to remove suspicion, the ducky also automatically hides the gathered recon info so that it can only be seen when the batch file is run.
 This whole process is relatively discreet, bug free and can run and finish in a matter of seconds.
-This payload is great for the first phase of a Pen Test, since it effortlessly shows you the contents of a victims PC, which can then later be used for an "involuntary backup".
+This payload is great for the first phase of a Pen Test, since it effortlessly shows you the contents of a victim's PC, which can then later be used for an "involuntary backup".
 
 ## Requirements:
 - Only works on Windows (7/8/8.1/10)
