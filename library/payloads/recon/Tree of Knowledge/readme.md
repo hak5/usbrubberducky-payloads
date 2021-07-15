@@ -14,6 +14,11 @@ This payload is great for the first phase of a Pen Test, since it effortlessly s
 ## Viewing files
 In order to view the gathered recon file(s), simply put the show.bat program onto the root of the ducky and run it.
 
+## Troubleshooting
+1. Experiment with those delays.
+2. Make sure that you don't already have a recon file saved from that computer.
+3. ALT SPACE doesn't work on some encoders. Try using the java based encoder.
+
 ## Bonus
 I have used a "bat to exe" converter in order to convert the batch file into a program disguised as Bing. That way the batch file can remain on the root of the ducky, while still being discreet.
 Another tip, that I have learned, is that the inject.bin still works even if it is marked as "hidden".
