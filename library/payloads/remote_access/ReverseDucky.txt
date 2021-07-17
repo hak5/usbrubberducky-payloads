@@ -3,8 +3,8 @@
 #      Author: 0iphor13
 #
 #      A Reverse shell executed in the background with powershell
-#      LINE 16 - Fill the IP blocks (*FIRST BLOCK* etc) - 192 | 168 | 178 | 33
-#      LINE 17 - Change *PORT* to Port number
+#      LINE 23 - Fill the IP blocks (*FIRST BLOCK* etc) - 192 | 168 | 178 | 33
+#      LINE 25 - Change *PORT* to Port number
 #      DON'T FORGET TO START LISTENER
 
 
