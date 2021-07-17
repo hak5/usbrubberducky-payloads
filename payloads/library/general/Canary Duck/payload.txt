@@ -1,0 +1,19 @@
+# Title:        Canary Duck
+# Description:   Opens hidden powershell and connects to canary webserver using Invoke-WebRequest alerting you to spies and snoops.
+# Author:        Jessie Crimson Hart
+# Props:         Hak5, Thinkst
+# Version:       1.0
+# Category:      General
+# Target:        Windows 10 (Powershell)
+# Attackmodes:   HID
+DELAY 1000
+GUI r
+DELAY 100
+REM Run a hidden powershell
+STRING powershell -windowstyle hidden
+ENTER
+REM make sure powershell is open by waiting for 1 second.
+DELAY 1000
+REM Open IE and connect to canary site. Replace the URL with the URL of your canary token from http://canarytokens.com
+STRING powershell -NoP -NonI -W Hidden -Exec Bypass Invoke-WebRequest "[CANARY URL HERE]"
+ENTER
