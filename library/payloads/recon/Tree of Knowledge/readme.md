@@ -20,8 +20,7 @@ In order to view the gathered recon file(s), simply put the show.bat program ont
 3. ALT SPACE doesn't work on some encoders. Try using the java based encoder.
 
 ## Bonus
-I have used a "bat to exe" converter in order to convert the batch file into a program disguised as Bing. That way the batch file can remain on the root of the ducky, while still being discreet.
-Another tip, that I have learned, is that the inject.bin still works even if it is marked as "hidden".
+The inject.bin still works even if it is marked as "hidden".
 
 That's it folks!
 I spent quite long in order optimise this payload, so enjoy!
