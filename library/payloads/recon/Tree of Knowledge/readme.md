@@ -19,7 +19,7 @@ In order to view the gathered recon file(s), simply put the show.bat program ont
 2. Make sure that you don't already have a recon file saved from that computer.
 3. ALT SPACE doesn't work on some encoders. Try using the java based encoder.
 
-## Bonus
+### Tip
 The inject.bin still works even if it is marked as "hidden".
 
 That's it folks!
