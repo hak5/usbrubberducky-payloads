@@ -1,3 +1,8 @@
+REM Title: $MFT-Duck-Crasher
+REM Author: JonnyBanana
+REM A Simple Script for Rubber Ducky which Exploits Windows $MFT Vulnerability.
+REM $MFT is used by NTFS systems to manage some metadata. Works on windows 7, 8 and vista, dont work on windows 10. 
+REM I think work on Xp and earlier. The system crash lasts until the machine is switched off, or until the blue screen of death appears
 REM works on w7 - w8 - Vista (and i think xp and earlier too)
 REM it uses a high delay to support even older computers
 DELAY 1000
