@@ -1,3 +1,9 @@
+REM Title: DUCKY_REAPER
+REM Author: JonnyBanana
+REM Requirements -none
+REM How it works?
+REM The script is a One-Liner and call an html page with a css webkit filter attack inside, this webpage crash the system ...
+REM webpage with the exploit here: https://github.com/JonnyBanana/safari-ie-reaper.github.io
 REM the script have 3 version (2 for windows and 1 for mac os)
 REM all payloads here: https://github.com/JonnyBanana/DUCKY_REAPER
 DELAY 2000
