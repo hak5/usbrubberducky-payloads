@@ -1,11 +1,11 @@
-# Title:        Canary Duck
-# Description:   Opens hidden powershell and connects to canary webserver using Invoke-WebRequest alerting you to spies and snoops.
-# Author:        Jessie Crimson Hart
-# Props:         Hak5, Thinkst
-# Version:       1.0
-# Category:      General
-# Target:        Windows 10 (Powershell)
-# Attackmodes:   HID
+REM Title:        Canary Duck
+REM Description:   Opens hidden powershell and connects to canary webserver using Invoke-WebRequest alerting you to spies and snoops.
+REM Author:        Jessie Crimson Hart
+REM Props:         Hak5, Thinkst
+REM Version:       1.0
+REM Category:      General
+REM Target:        Windows 10 (Powershell)
+REM Attackmodes:   HID
 DELAY 1000
 GUI r
 DELAY 100
