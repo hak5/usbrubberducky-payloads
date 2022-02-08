@@ -1,4 +1,4 @@
-REM Title: DawnKit
+REM Title: pwnKit
 REM Description: Privilege escalation in Unix-like operating systems
 REM Author: drapl0n
 REM Version: 1.0
