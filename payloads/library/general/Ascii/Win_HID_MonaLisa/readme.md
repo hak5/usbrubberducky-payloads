@@ -10,4 +10,4 @@
 | 1.0     | Initial release |
 
 ## Description
-My Ducky testing script opens notepad and displays an ascii art version of the Mona Lisa.
+Opens notepad and displays an ascii art version of the Mona Lisa.
