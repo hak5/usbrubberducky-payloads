@@ -12,7 +12,7 @@ DELAY 400
 STRING terminal
 ENTER
 DELAY 200
-STRING dig +short txt ch whoami.cloudflare "1.0.0.1 > /Volumes/DUCKY/public-ip.txt
+STRING dig +short txt ch whoami.cloudflare @1.0.0.1 > /Volumes/DUCKY/public-ip.txt
 ENTER
 DELAY 200
 ENTER
