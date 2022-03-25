@@ -1,0 +1,29 @@
+REM Title: Digital Rain 
+REM Author:	Angelina Tsuboi
+REM Description: Opens a terminal window and produces a digital rain effect inspired by the Matrix using cmatrix
+REM Target:	macOS 11.0+ with Homebrew
+REM Version:	1.0
+REM Category:	Prank
+REM Source: https://github.com/angelina-tsuboi/Digital_Rain_Payload
+
+GUI SPACE
+DELAY 100
+STRING terminal.app
+DELAY 100
+ENTER
+DELAY 1000
+CTRL c
+DELAY 100
+STRING cd ~
+DELAY 100
+ENTER
+DELAY 100
+GUI CTRL f
+DELAY 700
+STRING brew install automake cmatrix
+DELAY 100
+ENTER 
+DELAY 20000
+STRING cmatrix
+DELAY 100
+ENTER
