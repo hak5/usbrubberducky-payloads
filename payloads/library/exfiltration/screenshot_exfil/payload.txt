@@ -6,8 +6,8 @@ REM Version: 1.0
 REM Category: Exfiltration
 
 REM ~~~~ You must change the USER_EMAIL and USER_PASSWORD to your outlook credentials.
-REM ~~~~ Can exfil more than 5, but kept to 5 to keep file sizes low.
-REM ~~~~ Can exfil from directory other than screenshots by changing path on lines 14, 53, and 57.
+REM ~~~~ Can exfil more than 5, but I chose 5 to keep file sizes low.
+REM ~~~~ Can exfil from directory other than screenshots by changing path on lines 18, 57, and 61.
 REM ~~~~ You might have to adjust the delays, depending on the target machine, but these worked ok for me.
 REM ~~~~ Use responsibly, and within the confines of the law.
 
