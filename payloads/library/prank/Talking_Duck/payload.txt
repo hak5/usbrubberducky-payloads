@@ -4,7 +4,7 @@ REM Description: Uses .NET SpeechSynthesizer to make the computer talk.
 REM Target:	Windows NT with .NET Framework 3.0+ with PowerShell 
 REM Version:	1.0
 REM Category:	Prank
-REM Source: github link
+REM Source: https://github.com/JoustingZebra/usbrubberducky-payloads/blob/master/payloads/library/prank/Talking_Duck/payload.txt
 
 DELAY 1000
 GUI r
