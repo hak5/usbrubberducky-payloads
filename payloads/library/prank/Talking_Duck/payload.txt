@@ -1,0 +1,19 @@
+REM Title: Talking_Duck
+REM Author:	JoustingZebra
+REM Description: Uses .NET SpeechSynthesizer to make the computer talk.
+REM Target:	Windows NT with .NET Framework 3.0+ with PowerShell 
+REM Version:	1.0
+REM Category:	Prank
+REM Source: https://github.com/JoustingZebra/usbrubberducky-payloads/blob/master/payloads/library/prank/Talking_Duck/payload.txt
+
+DELAY 1000
+GUI r
+DELAY 100
+
+REM Execute hidden powershell window with no profile, initialize SpeechSynthesizer, and speak.
+REM Uncomment line 15 and comment 16 to change to female voice
+REM STRING powershell.exe -nop -win hidden -c "Add-Type -AssemblyName System.speech; $synth = New-Object System.Speech.Synthesis.SpeechSynthesizer; $synth.SelectVoice('Microsoft Zira Desktop'); $synth.Speak('Delicate things are not as easy to break as you may think.')"
+STRING powershell.exe -nop -win hidden -c "Add-Type -AssemblyName System.speech; $synth = New-Object System.Speech.Synthesis.SpeechSynthesizer; $synth.Speak('Delicate things are not as easy to break as you may think.')"
+
+DELAY 100
+ENTER
