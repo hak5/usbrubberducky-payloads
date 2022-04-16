@@ -25,7 +25,7 @@ TAB
 DELAY 200
 ENTER
 DELAY 200
-REM AUTOCORRECT "the" WITH "teh" ~~~ change these below to whatever words you want to add a rule for ~~~~~
+REM AUTOCORRECT "the" TO "teh" ~~~ change these below to whatever words you want to add a rule for ~~~~~
 STRING the
 DELAY 200
 TAB
