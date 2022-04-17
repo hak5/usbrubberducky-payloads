@@ -1,0 +1,44 @@
+REM Title: AUTOinCORRECT
+REM Author: the-jcksn
+REM Description: Creates a custom Microsoft Word Autocorrect rule, default sets rule to change "the" to "teh". Can be changed to any words you wish.
+REM Target: Windows 10 / Microsoft Word
+REM Version: 1.0
+REM Category: Prank
+
+DELAY 2000
+REM OPEN NEW MICROSOFT WORD DOCUMENT
+GUI r
+DELAY 200
+STRING winword
+ENTER
+DELAY 1000
+ENTER
+DELAY 200
+REM EDIT AUTOCORRECT RULES
+ALT q
+DELAY 300
+STRING options spelling
+DELAY 500
+ENTER
+DELAY 200
+TAB
+DELAY 200
+ENTER
+DELAY 200
+REM AUTOCORRECT "the" TO "teh" ~~~ change these below to whatever words you want to add a rule for ~~~~~
+STRING the
+DELAY 200
+TAB
+STRING teh
+DELAY 200
+ALT a
+DELAY 200
+REM SAVE AND EXIT
+ENTER
+DELAY 200
+SHIFT TAB
+DELAY 200
+ENTER
+DELAY 200
+ALT F4
+DELAY 200
