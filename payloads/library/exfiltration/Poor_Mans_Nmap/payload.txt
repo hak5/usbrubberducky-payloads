@@ -1,6 +1,6 @@
 REM Title: Poor_Mans_Nmap
 REM Author: JoustingZebra
-REM Description: Writes powershell LAN scanner .ps1 and runs it. Then emails results using outlook.
+REM Description: Scans the LAN with PowerShell. Then emails results using outlook..
 REM Target: Windows with powershell v5/7.
 REM Props: Hak5, the-jcksn
 REM Version: 1.0
