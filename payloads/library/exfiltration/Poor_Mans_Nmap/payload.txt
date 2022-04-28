@@ -44,4 +44,7 @@ STRING .\netscan.ps1 | Out-File netscan.txt && Send-MailMessage -From user@examp
 DELAY 100
 ENTER
 DELAY 100
-EXIT
+STRING EXIT
+DELAY 100
+ENTER
+
