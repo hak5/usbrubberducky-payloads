@@ -1,4 +1,4 @@
-REM Title: OMG-PineApple
+REM Title: RD-PineApple
 REM Description: This payload is meant to use powershell to add the network profile of your wifi pineapple to the targets PC and connect to it
 REM This version of the payload is executed using an invoke web-request to download and execute the file to add the PineApple's network profile
 REM The powershell script needed is provided as OMG-PineApple.ps1
