@@ -1,10 +1,11 @@
-REM Title: You Have Been Quacked
+REM Title: You-Have-Been-Quacked-2.0
 REM Author: LulzAnarchyAnon
-REM Description: Speech Synthesizer states that you have been Quacked followed by an animated browser image of a floating rubber ducky
-REM Target: Windows 10
+REM Description: Speech Synthesizer states you have been Quacked followed by an animated image of a floating rubber ducky
+REM Target: Windows 10 (Powershell)
+REM Props: Hak5
 REM Version: 2.0
 REM Category: Prank
-REM This payload is based off the original Hak5 "QUACKED" payload, and was created for my own personal amusement as I'm not good at sharing. It's more fun when deplolyed with OMG
+REM This payload is based off the original Hak5 "QUACKED" payload, and was created for my own personal amusement...
 
 GUI r
 DELAY 500
