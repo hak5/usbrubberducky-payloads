@@ -11,5 +11,8 @@ The ratlocker adds ratcode file extensions, draws and sets background without th
 ## Requirements:
 - Windows (7/8/8.1/10)
 - Unlocked device
+- No internet connection or proxy by-pass is needed as the wallpaper will be created in script
 
+## Recovering
+Obviously, there is no key or tool needed to recover. All you have to do is to remove the .ratl0ck3r extention before the .original one and everything works again. The background will be stored in \pictures\wallpaper.ratl0ck3r to avoid accidential removial of any important backgrounds.
 
