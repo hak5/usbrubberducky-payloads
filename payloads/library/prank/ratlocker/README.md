@@ -31,5 +31,7 @@ There are multiple reasons why ratl0ck3r is the best ducky-locker around to this
 Obviously, there is no key or tool needed to recover. All you have to do is to remove the .ratl0ck3r extention before the .original one and everything works again. The background will be stored in \pictures\wallpaper.ratl0ck3r to avoid accidential removial of any important backgrounds or family photos!
 
 To quick-recover you can use this powershell command, but it's much more fun to watch them to it by hand:  
-`dir $HOME\Desktop\* | Rename-Item -NewName {$_.name - ".ratl0ck3r"}`
+`dir $HOME\Desktop\* | Rename-Item -NewName { $_.name.substring(0,$_.name.length-10) }`
+
+The rat3ncrypt3er.bat does run this command and renames the wallpaper located in \pictures\ back to a .jpg, before one could set it as a background once again.
 
