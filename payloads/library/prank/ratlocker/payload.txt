@@ -22,7 +22,7 @@ STRING Add-Type -AssemblyName System.Drawing
 ENTER
 STRING $filename = "$home\pictures\ratl0ck3r.png"
 ENTER
-STRING $bmp = new-object System.Drawing.Bitmap 1920,1080
+STRING $bmp = new-object System.Drawing.Bitmap 1080,720
 ENTER
 STRING $font = new-object System.Drawing.Font Consolas,10
 ENTER
