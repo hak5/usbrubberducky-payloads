@@ -1,25 +1,28 @@
-REM Title: You-Have-Been-Quacked-2.0
-REM Author: LulzAnarchyAnon
-REM Description: Speech Synthesizer states you have been Quacked followed by an animated image of a floating rubber ducky
-REM Target: Windows 10 (Powershell)
-REM Props: Hak5
-REM Version: 2.0
-REM Category: Prank
-REM This payload is based off the original Hak5 "QUACKED" payload, and was created for my own personal amusement...
-
 GUI r
-DELAY 500
+DELAY 200
 STRING powershell -windowstyle hidden
 ENTER
 DELAY 200
-STRING Add-Type -AssemblyName System.speech
-ENTER
-STRING $speak = New-Object System.Speech.Synthesis.SpeechSynthesizer
-ENTER
-STRING $speak.Speak("you have been quacked")
+STRING $key=[Math]::Ceiling(100/2);$obj=New-Object -ComObject WScript.Shell;for($i=0;$i -lt $key;$i++){$obj.SendKeys([char] 175)}
 ENTER
 DELAY 500
-STRING start firefox https://giphy.com/gifs/hackmylife-trutv-hack-my-life-L12ZXih8cd6YHZKLYi/fullscreen
+STRING $sp=New-Object -ComObject SAPI.SpVoice
+ENTER
+DELAY 500
+STRING $sp.Speak("you have been quacked.")
+ENTER
+DELAY 100
+STRING start firefox https://loginportal.funnyjunk.com/pictures/Mytril+urorubragg+taboo+quacked_d7d9b1_6228073.jpg
+ENTER
+DELAY 2000
+GUI r
+DELAY 200
+STRING powershell -windowstyle hidden
+ENTER
+DELAY 200
+STRING start firefox https://www.youtube.com/watch?v=CRkzItBabzs
+ENTER
+DELAY 2000
 ENTER
 STRING exit
 ENTER
