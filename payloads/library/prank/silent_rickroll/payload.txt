@@ -1,6 +1,9 @@
 REM Author: victor-a-c
 REM Title: silent_rickroll
 REM Target: Windows10/11
+REM Props: Hak5
+REM Version: 2.0
+REM Category: Prank
 
 REM Description:
 REM the payload sets volume to maximum
@@ -13,72 +16,102 @@ REM "GUI r" should be used for regular computers
 REM set volume to max as fast as possible
 DELAY 2000
 GUI
-SPACE
-STRING settings
-ENTER
+DELAY 500
 STRING adjust volume
-DOWNARROW
+DELAY 100
 ENTER
+DELAY 1000
 TAB
 REPEAT 10
+DELAY 1000
 RIGHTARROW
-REPEAT 78
+REPEAT 120
+DELAY 100
 ALT F4
 
-
+DELAY 1500
 REM creates batch file
 GUI
-SPACE
-STRING notepad
-DELAY 12
-ENTER
 DELAY 100
+SPACE
+DELAY 1000
+STRING notepad
+DELAY 500
+ENTER
+DELAY 1000
 REM batch file commands
 REM uses just "start" batch command to open website on default browser
 REM double quotes after "start" are necessary for the command to work
 REM Batch file will run while minimized
 STRING if not DEFINED IS_MINIMIZED set IS_MINIMIZED=1 && start "" /min "%~dpnx0" %* && exit
 DELAY 100
-REM batch delay for when Never Gonna Give You Up will start being played
+ENTER
+REM batch delay for when "Never Gonna Give You Up" will start being played
 REM enough time for the ducky to be removed after the script is executed and allow for a safe getaway
-STRING TIMEOUT /T 600
-DELAY 37
+STRING TIMEOUT /T 30
+DELAY 500
 ENTER
 REM on default browser
 STRING START "" https://www.youtube.com/watch?v=xm3YgoEiEDc
 DELAY 10
 ENTER
+STRING TIMEOUT /T 3
+ENTER
+DELAY 500
 REM Opens microsoft edge, opens fake windows update and sets it full screen
-STRING START Powershell -command "$wshell = New-Object -ComObject wscript.shell;[system.Diagnostics.Process]::Start(\"msedge\",\"about:blank\");Sleep 1;$wshell.SendKeys('^"{l}"');Sleep 1;$wshell.SendKeys('https://fakeupdate.net/win10ue/');$wshell.SendKeys('"{Enter}"');$wshell.SendKeys('"{F11}"')"
+STRING Powershell -command "$wshell = New-Object -ComObject wscript.shell;[system.Diagnostics.Process]::Start(\"msedge\",\"about:blank\");Sleep 1;$wshell.SendKeys('^"{l}"');Sleep 1;$wshell.SendKeys('https://fakeupdate.net/win10ue/');$wshell.SendKeys('"{Enter}"');$wshell.SendKeys('"{F11}"')"
+ENTER
 STRING exit
+DELAY 1000
 REM save as
 ALT F
 DOWNARROW
 REPEAT 3
-ENTER
 DELAY 100
-TAB
-REPEAT 9
-DELAY 57
-REM selects documents folder
-STRING doc
 ENTER
-DELAY 32
-TAB
-REPEAT 2
-REM tr = silent roll
 STRING sr.bat
+DELAY 500
+TAB
+DELAY 100
 DOWNARROW
 REPEAT 1
-TAB
-REPEAT 2
 ENTER
+REM
+REM unfortunately "TAB REPEAT 9" causes the script to get stuck to file explorer's search bar
+REM splitting the repeat and adding delays between them did not solve it
+REM
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+REM selects documents folder
 DELAY 200
-REM batch file has been saved to documents folder out of the user's immediate view
+STRING doc
+ENTER
+DELAY 1000
+ALT F4
 
 
+DELAY 500
 REM execute the batch file
 GUI
+DELAY 500
 SPACE
-STRING sr.bat
+STRING sr.b
+DELAY 500
+STRING at
+DELAY 1000
 ENTER
