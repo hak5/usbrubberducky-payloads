@@ -1,0 +1,68 @@
+REM Title: WindowS_PoP_uP
+REM Author: LulzAnarchyAnon
+REM Description: Old School fun meets modern day with this payload. 
+REM Description: So for starters notepad is opened, and a few choice words are typed out ;)
+REM Afterwards the notepad file is saved as an Error.bat to the Desktop, and notepad closes.
+REM The hapless victim notices the new addition to the desktop, and begins to click away having
+REM no idea it's just a prank, As they sweat their way with hesitation through each mouse click.
+REM Only To See.... THIS IS ONLY A PRANK! at the END! As the last ok is clicked the pop up 
+REM closes FOREVER! Leaving the victim unsure of what just happened.... :)
+REM Target: Windows 10  
+REM Props: Darren Kitchen and I am Jakoby
+REM Version: 1.0
+REM Category: Prank
+
+
+GUI r
+DELAY 20
+STRING notepad 
+ENTER
+DELAY 100
+STRING @echo off
+STRING msg * ***COMPUTER HEALTH ALERT***
+DELAY 50
+ENTER
+STRING msg * Microsoft Security Error
+DELAY 50
+ENTER
+STRING msg * Due to suspicious activity on your computer
+DELAY 50
+ENTER
+STRING msg * Please contact a Microsoft Certified Technician
+DELAY 50
+ENTER
+STRING msg * +1877-600-4257 (Toll Free)
+DELAY 50
+ENTER
+STRING msg * Please wait ...........
+DELAY 50
+ENTER
+STRING msg * Please wait ...........
+DELAY 50
+ENTER
+STRING msg * Please wait ...........
+DELAY 50
+ENTER
+STRING msg * Please wait ...........
+DELAY 50
+ENTER
+STRING msg * THIS IS ONLY A PRANK!
+DELAY 50
+CTRL s
+DELAY 100
+STRING Microsoft Error.bat
+DELAY 200
+ALT d
+DELAY 200
+SHIFT 
+DELAY 200
+SPACE
+DELAY 200
+STRING Desktop
+DELAY 200
+ENTER
+DELAY 200
+ALT s
+DELAY 800
+ALT f
+SHIFT x
