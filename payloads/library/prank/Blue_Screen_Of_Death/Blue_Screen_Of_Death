@@ -1,0 +1,97 @@
+REM Title: Blue_Screen_Of_Death
+REM Author: LulzAnarchyAnon
+REM Description: A web browser downloads a blue screen of death image. Then saves it to the 
+REM downloads folder as an ms paint image where it is then set as the desktop wallpaper. All desktop icons are hidden.
+REM Target: Windows 10 
+REM Props: Darren Kitchen, and cribb-it 
+REM Version: 1.0
+REM Category: Prank
+ 
+
+GUI r
+DELAY 1000
+STRING https://media.itpro.co.uk/image/upload/f_auto,t_primary-image-desktop@1/v1570814016/itpro/blue_screen_of_death.png
+ENTER
+DELAY 2000
+CTRL s
+DELAY 2000
+STRING %userprofile%\downloads\blue_screen_of_death.png
+ENTER
+GUI r
+DELAY 1000
+STRING mspaint
+ENTER
+DELAY 1000
+CTRL o
+DELAY 1000
+STRING %userprofile%\downloads\blue_screen_of_death.png
+DELAY 1000
+DOWNARROW
+ENTER
+ALT f
+DELAY 200
+STRING k
+DELAY 2000
+STRING f
+DELAY 3000
+ALT F
+DELAY 20
+SHIFT x
+DELAY 20
+ALT f
+DELAY 20
+SHIFT x
+ENTER
+DELAY 500
+GUI d
+MOUSE MOVE -10000 -10000
+MOUSE CLICK 3
+v
+RIGHTARROW
+UPARROW
+ENTER
+DELAY 1000
+ENTER
+DELAY 1000
+STRING exit
+ENTER
+DELAY 20
+SHIFT x
+DELAY 20
+ALT f
+DELAY 20
+SHIFT x
+ENTER
+DELAY 200
+GUI d
+MOUSE MOVE -10000 -10000
+MOUSE CLICK 3
+v
+RIGHTARROW
+UPARROW
+ENTER
+DELAY 200
+ENTER
+DELAY 200
+STRING exit
+ENTER
+DELAY 50
+SHIFT x
+DELAY 20
+ALT f
+DELAY 20
+SHIFT x
+ENTER
+DELAY 200
+GUI d
+MOUSE MOVE -10000 -10000
+MOUSE CLICK 3
+v
+RIGHTARROW
+UPARROW
+ENTER
+DELAY 500
+ENTER
+DELAY 500
+STRING exit
+ENTER
