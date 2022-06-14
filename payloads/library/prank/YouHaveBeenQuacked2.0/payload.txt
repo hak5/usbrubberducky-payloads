@@ -1,0 +1,37 @@
+REM Title: YouHaveBeenQuacked
+REM Author: LulzAnarchyAnon
+REM Description: A speech synthesizer with the volume increased to 100% states "you have been quacked" followed by a browser image "You've Been Quacked!" and a "Quacked" REM Youtube video.
+REM Target: Windows 10 (Powershell)
+REM Props: Hak5
+REM Version: 2.0
+REM Category: Prank
+REM This payload is based off the original Hak5 "QUACKED" payload, and was created for my own personal amusement 
+
+GUI r
+DELAY 200
+STRING powershell -windowstyle hidden
+ENTER
+DELAY 200
+STRING $key=[Math]::Ceiling(100/2);$obj=New-Object -ComObject WScript.Shell;for($i=0;$i -lt $key;$i++){$obj.SendKeys([char] 175)}
+ENTER
+DELAY 500
+STRING $sp=New-Object -ComObject SAPI.SpVoice
+ENTER
+DELAY 500
+STRING $sp.Speak("you have been quacked.")
+ENTER
+DELAY 100
+STRING start firefox https://loginportal.funnyjunk.com/pictures/Mytril+urorubragg+taboo+quacked_d7d9b1_6228073.jpg
+ENTER
+DELAY 2000
+GUI r
+DELAY 200
+STRING powershell -windowstyle hidden
+ENTER
+DELAY 200
+STRING start firefox https://www.youtube.com/watch?v=CRkzItBabzs
+ENTER
+DELAY 2000
+ENTER
+STRING exit
+ENTER

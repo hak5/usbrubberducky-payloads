@@ -1,0 +1,36 @@
+This new version allows you to use alternative layout. It supports ASCII, ISO-8859-1 and unicode.
+
+$java -jar duckencode.jar -i script.txt -o inject.bin -l fr
+or
+$java -jar duckencode.jar -i script.txt -o inject.bin -l resources/mylayout.properties
+
+----------
+
+Hak5 Duck Encoder 2.6.3
+
+usage: duckencode -i [file ..] encode specified file
+   or: duckencode -i [file ..] -o [file ..] encode to specified file
+
+Arguments:
+   -i [file ..]         Input File
+   -o [file ..]         Output File
+   -l [file ..]         Keyboard Layout (us/uk/fr/pt or a path to a properties file)
+
+Script Commands:
+   ALT [key name] (ex: ALT F4, ALT SPACE)
+   ALT-SHIFT (Input Lanugage Swap)
+   CTRL | CONTROL [key name] (ex: CTRL ESC)
+   CTRL-ALT [key name] (ex: CTRL-ALT DEL)
+   CTRL-SHIFT [key name] (ex: CTRL-SHIFT ESC)
+   DEFAULT_DELAY | DEFAULTDELAY [Time in millisecond * 10] (change the delay between each command)
+   DELAY [Time in millisecond * 10] (used to overide temporary the default delay)
+   COMMAND | COMMAND [key] (For OSX Users ex: COMMAND SPACE)
+   GUI | WINDOWS [key name] (ex: GUI r, GUI l)
+   REM [anything] (used to comment your code, no obligation :) )
+   SHIFT [key name] (ex: SHIFT DEL)
+   REPEAT [Number] (Repeat last command N times)
+   STRING [any character of your layout]
+   [key name] (anything in the keyboard.properties)
+
+Note:
+   Getting strange behaviour with GUI to open windows-menu, WINDOWS appears to work ok (but GUI maps to WINDOWS), strange?

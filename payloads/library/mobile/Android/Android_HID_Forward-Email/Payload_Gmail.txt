@@ -1,0 +1,28 @@
+REM Forwards the first email in the primary section
+REM Only works for phones. 
+REM Does not work tablets as menu bar stops tabs
+REM GMAIL SHORTCUTS https://support.google.com/mail/answer/6594?co=GENIE.Platform%3DAndroid&hl=en&oco=1
+DELAY 1000
+GUI e
+DELAY 1000
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+REM LOOP FROM HERE
+DELAY 500
+CTRL r
+DELAY 1000
+TAB
+DELAY 500
+SHIFT TAB
+DELAY 500
+BACKSPACE
+DELAY 500
+STRING your@email.com
+CTRL ENTER
+DELAY 1000
+REM Moves to the next email
+RIGHTARROW
+REM GOTO LOOP

