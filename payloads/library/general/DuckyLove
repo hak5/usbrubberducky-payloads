@@ -1,0 +1,168 @@
+REM Submitting for Payload Hero Awards contest
+REM inject.bin works on Macs only
+REM If for some reason you decide to read this code,
+REM I wrote all of this from the bottom of my heart
+REM for the woman I love most on this tiny blue rock.
+REM Her name is Ona... Baby, I will never stop loving
+REM you with every piece of my heart and soul.
+DELAY 2000
+GUI SPACE
+DELAY 4000
+STRING Chrome
+DELAY 2000
+ENTER
+ENTER
+DELAY 4000
+GUI n
+STRING https://www.yout-ube.com/watch?v=iP0tHmoc1rs
+DELAY 2000
+ENTER
+DELAY 4000
+GUI SPACE
+DELAY 3000
+STRING Notes
+DELAY 2000
+ENTER
+ENTER
+DELAY 1000
+TAB
+DELAY 2000
+GUI n
+DELAY 3000
+STRING My dearest Ona,
+DELAY 2000
+ENTER
+STRING There are so many things I want to say to you... How badly I miss holding you while we fall asleep,
+ENTER
+DELAY 3000
+STRING laughing until our sides hurt at our ridiculous jokes and banter or the plethora of ways we could
+ENTER
+DELAY 3000
+STRING draw a cock into pretty much anything. 8===D~~~ ~~ ~ Or cooking together while we listen to music
+ENTER
+DELAY 3000
+STRING and dance in the kitchen. It all seems so far away from me now, as if it had taken place in
+STRING another life time.
+DELAY 1000
+STRING .
+DELAY 1000
+STRING .
+DELAY 1000
+STRING .
+DELAY 1000
+ENTER
+ENTER
+STRING It's strange to imagine my life without you.  I have to fight back tears at the thought that I
+ENTER
+STRING dont get to call you my lady any more.
+DELAY 3000
+STRING Memories of our time together live rent free in the front of my mind like a never ending loop.
+ENTER
+DELAY 3000
+STRING The first night we met and danced under the stars together, rescuing you from a blizzard in New
+ENTER
+STRING Mexico after the first leg of your journey across the country, Key West for your birthday...
+ENTER
+DELAY 3000
+STRING the love notes you used to hide all over the house for me to find.  They are like bittersweet dreams
+ENTER
+STRING that play through a tiny movie projector in my mind. They make me happy and sad at the same time.
+ENTER
+DELAY 3000
+STRING I don't think I have ever missed someone so much. I've lost my best friend and the love of my life.
+DELAY 3000
+ENTER
+ENTER
+STRING I wish that night had never happened.  I've relived it thousands of times by now and each time the same
+ENTER
+DELAY 3000
+STRING amount of regret fills my conscience with that miserable sick feeling.  I let my anger get the best of me
+ENTER
+STRING and it's cost me the most important person in my entire life. I've shed tears until I couldn't breathe
+ENTER
+DELAY 3000
+STRING ... I've prayed to all the gods in the heavens for help, mercy, and strength and after some time they
+ENTER
+DELAY 3000
+STRING responded. I have broken the cycle but it took time.  Like finding a vulnerability on a server or
+ENTER
+STRING cracking a password, it was worth it. I have changed.  I am still so far from perfect that it's laughable
+ENTER
+DELAY 3000
+STRING but I have learned how to control my emotions, calm my mind, and have said farewell to anger in my life.
+ENTER
+ENTER
+DELAY 8000
+STRING It’s true, I know my mistakes, my faults, my responsibilities, my failures. But I also know that my
+ENTER
+STRING feelings are resolutely still there. I love you and that has never changed, my love for you has never
+ENTER
+DELAY 3000
+STRING been the cause of our problems as a couple or of our recent separation. To me that question wasn’t
+ENTER
+STRING even an issue. I hope, I want to hope, that you feel the same way. That I will not be denied a chance to
+ENTER
+DELAY 3000
+STRING win you back and to prove my honesty to you, my ability to control my anger, my will of being with you, my feelings.
+ENTER
+ENTER
+DELAY 5000
+STRING That is my dearest wish, to be with you, at your side, taking care of you and loving you. I understand you still may
+DELAY 3000
+STRING  need time. You have my patience the way you have my heart. And I know that, obviously, you need proof, action,
+STRING  more than these simple words embedded in a program written with the goal of making you smile. Seeing you smile
+DELAY 3000
+STRING  everyday because you know you are loved and watching happiness pour out of you... That is my dream for both of us.
+DELAY 5000
+ENTER
+ENTER
+STRING Before this program concludes I need you to always know, deeply and truly know, that I won't repeat the mistakes I've made.
+DELAY 3000
+STRING  That what we have is worth fighting for and never giving up on. And that you are the single most wonderful
+STRING  person I've ever known in my life. You make me smile all the time, even in your absence and through our separation.
+DELAY 3000
+STRING  While neither of us have ever been religious, I do believe that in you I found my soul mate and my truest partner.
+STRING For as long as I survive on this world the only person I ever want to do life with will always be you.
+DELAY 3000
+ENTER
+ENTER
+STRING I love you, Ona. I will always love you.  Please consider my words and take the time to consider how wonderful we could
+STRING  be together once again. Lets lift each other up and be happy and adventurous together, never stop playing together...
+DELAY 3000
+STRING Build each other up, grow as individuals as well as together sharing the love that we have with everyone in our lives...
+STRING Knowing that space is ok, cuddling is a necessity, and that our laughter will never end.  No more anger, no more frustration...
+DELAY 2000
+ENTER
+STRING Just joy, healthy, sober living, endless smiles and an eagerness to create beautiful new memories together... Our original plans.
+DELAY 5000
+ENTER
+ENTER
+STRING Eternally yours,
+ENTER
+STRING Patrick
+ENTER
+ENTER
+ENTER
+STRING P.S.
+DELAY 3000
+ENTER
+STRING These are the memories that bring a smile to my face whenever I think of you and our time together...........
+DELAY 3000
+STRING I love you more than words could ever describe
+ENTER
+ENTER
+DELAY 2000
+GUI SPACE
+DELAY 5000
+STRING Chrome
+DELAY 3000
+ENTER
+ENTER
+DELAY 3000
+ENTER
+DELAY 3000
+GUI n
+DELAY 3000
+STRING https://photos.app.goo.gl/redacted
+ENTER
+DELAY 9000
