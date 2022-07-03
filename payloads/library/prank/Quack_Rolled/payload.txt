@@ -1,0 +1,91 @@
+REM Title: Quack_Rolled
+REM Author: LulzAnarchyAnon
+REM Description: The first thing is volume is increased to 100%
+REM Afterwards Afterwards you get Rick Rolled Ducky Style.
+REM Target: Windows 10 PowerShell
+REM Props: Darren Kitchen and I am Jakoby
+REM Version: 1.0
+REM Category: Prank
+
+DELAY 500
+GUI r
+DELAY 500
+STRING powershell -windowstyle hidden
+DELAY 500
+ENTER
+DELAY 500
+STRING Function Set-SoundVolume
+DELAY 500
+ENTER
+STRING {
+DELAY 500
+ENTER
+STRING Param(
+DELAY 500
+ENTER
+STRING [Parameter(Mandatory=$true)]
+DELAY 500
+ENTER
+STRING [ValidateRange(0,100)]
+DELAY 500
+ENTER
+STRING [Int]
+DELAY 500
+ENTER
+STRING $volume
+DELAY 500
+ENTER
+STRING )
+DELAY 500
+ENTER
+DELAY 500
+STRING $keyPresses = [Math]::Ceiling( $volume / 2 )
+DELAY 500
+ENTER
+DELAY 500
+STRING $obj = New-Object -ComObject WScript.Shell
+DELAY 500
+ENTER
+DELAY 500
+STRING 1..50 | ForEach-Object { $obj.SendKeys( [char] 174 ) }
+DELAY 500
+ENTER
+STRING for( $i = 0; $i -lt $keyPresses; $i++ )
+DELAY 500
+ENTER
+STRING {
+DELAY 500
+ENTER
+STRING $obj.SendKeys( [char] 175 )
+DELAY 500
+ENTER
+STRING }
+DELAY 500
+ENTER
+STRING }
+DELAY 500
+ENTER
+STRING New-Alias -Name "ssv" Set-SoundVolume
+DELAY 500
+ENTER
+STRING Set-SoundVolume 100
+DELAY 500
+ENTER
+DELAY 1000
+STRING exit
+DELAY 500
+ENTER
+DELAY 2000
+GUI r
+DELAY 500
+STRING cmd /c start https://www.youtube.com/watch?v=L_B5kYSTK_Y
+DELAY 500
+ENTER
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+TAB
+DELAY 500
+f
