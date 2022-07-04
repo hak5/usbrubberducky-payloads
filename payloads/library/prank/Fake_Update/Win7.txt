@@ -1,0 +1,7 @@
+REM FalsePhilosopher
+REM let the ducky HID enumerate
+DELAY 300
+GUI r
+DELAY 500
+STRING iexplore -k https://fakeupdate.net/win7/
+ENTER

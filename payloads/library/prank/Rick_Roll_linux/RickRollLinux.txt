@@ -1,0 +1,12 @@
+REM FalsePhilosopher
+REM This was my hello world
+DELAY 200
+CTRL-ALT t
+DELAY 1500
+STRING open 'https://www.youtube.com/watch?v=x31tDT-4fQw'
+ENTER
+REM big delay for slow machine adjust as needed
+DELAY 10000
+STRING f
+DELAY 200
+SPACE

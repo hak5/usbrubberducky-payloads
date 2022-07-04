@@ -1,0 +1,3 @@
+REM FalsePhilosopher
+DELAY 300
+CTRL-ALT DOWN
