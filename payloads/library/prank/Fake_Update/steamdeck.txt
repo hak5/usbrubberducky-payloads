@@ -1,9 +1,0 @@
-REM FalsePhilosopher
-REM Untested
-DELAY 300
-CTRL-ALT t
-DELAY 300
-STRING open https://fakeupdate.net/steam/
-ENTER
-DELAY 1000
-STRING f
