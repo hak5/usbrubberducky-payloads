@@ -1,6 +1,6 @@
 REM Title: Terminal RickRoll Tux style
 REM Author: FalsePhilosopher
-REM Target:  Unix-like tested on kubuntu 22.04 with chrome fork brave.
+REM Target:  Unix-like tested on kubuntu 22.04.
 REM Props: Hak5, strippers and memes
 REM Version: 1.0
 REM Category: Prank
