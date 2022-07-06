@@ -1,5 +1,8 @@
-# rickrollrc
+# Terminal rick roll
+Here is a link to the repo to the script and it's readme that is launched in this ducky
 https://github.com/keroserene/rickrollrc
+
+# rickrollrc
 
 Bash script which [rickrolls](http://en.wikipedia.org/wiki/Rickrolling) your
 terminal by playing Rick Astley’s “Never Gonna Give You Up” with ANSI 256-color

