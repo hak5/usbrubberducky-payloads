@@ -4,7 +4,7 @@ REM Target:  Unix-like tested on kubuntu 22.04
 REM Props: Hak5, 0iphor13 for pointing me towards netcat an other advice, strippers and memes
 REM Version: 1.0
 REM Category: Recon
-REM Launches terminal, turns off history, launches linpeas, uploads the report to your nc listener, covers tracks and exits. Best viewing of report is to view it in the terminal.
+REM Launches terminal, turns off history, launches linpeas in background, uploads the report to your nc listener, covers tracks and exits. Best viewing of report is to view it in the terminal.
 REM
 REM initialization delay
 DELAY 300

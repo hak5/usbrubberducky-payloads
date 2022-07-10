@@ -4,7 +4,7 @@ REM Target:  Unix-like tested on kubuntu 22.04
 REM Props: Hak5, 0iphor13 for pointing me towards netcat an other advice, strippers and memes
 REM Version: 1.0
 REM Category: Recon
-REM Launches terminal, turns off history, launches LinEnum, uploads the report to your nc listener, covers tracks and exits.
+REM Launches terminal, turns off history, launches LinEnum in the background, uploads the report to your nc listener and covers tracks.
 DELAY 300
 CTRL-ALT+t
 DELAY 1000
