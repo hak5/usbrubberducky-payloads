@@ -4,7 +4,7 @@ REM Target:  Unix-like tested on kubuntu 22.04
 REM Props: Hak5, strippers and memes
 REM Version: 1.0
 REM Category: Prank
-REM changes to all the main dir's in home, then home, then root and creates negative named files in each
+REM changes to all the main dir's in home, then home, then root and creates negative named files in each, mean version which I used gpt3 to generate longer word list for a meaner script. Apparently I can only get it to say poopoo head over and over, so this is what I mined lol.
 REM
 REM initialization delay
 DELAY 300
@@ -19,75 +19,14 @@ STRING set +o history
 DELAY 200
 ENTER
 DELAY 200
-STRING cd /Home/Pictures
-DELAY 200
-ENTER
-DELAY 200
-REM used gpt3 to generate longer word list for a meaner script. Apparently I can only get it to say poopoo head over and over, so this is what I mined lol.
-REM
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
-DELAY 300
-ENTER
-DELAY 500
-STRING cd /Home/Documents
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
-DELAY 300
-ENTER
-DELAY 500
-STRING cd /Home/Music
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
-DELAY 300
-ENTER
-DELAY 500
-STRING cd /Home/Videos
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
-DELAY 300
-ENTER
-DELAY 500
-STRING cd /Home/Desktop
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
-DELAY 300
-ENTER
+STRING nohup cd /Home/Pictures && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Documents && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Music && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Videos && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd /Home/Desktop && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain &
 STRING cd ..
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
-DELAY 300
-ENTER
 DELAY 500
-STRING cd ..
-DELAY 200
 ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick poopoo_breath cum_dumpster fart_breath ass_eater turd_burglar butt_munch crap_monster turd_face shit_stain shit_eater asshat asshole fuck_stick slut whore cunt dickhead shit_weasel prick motherfucker whorebag dickwad fucktard shitstain butt_pirate skank_fuck whore_monger dickwad shit_stain
-DELAY 300
-ENTER
+DELAY 1000
+CTRL C
 DELAY 500
-REM sneak +1 cover your tracks
-STRING history | grep history
+STRING exit
 DELAY 200
 ENTER
-STRING line=$(history | grep history | awk '{ print $1 }')
-DELAY 200
-ENTER
-STRING history -d $line
-DELAY 200
-ENTER
-DELAY 200
-STRING set -o history && exit
-DELAY 200
-ENTER
-REM to make your friends not hate you make a ducky going to each dir and rm copy paste the list, so basically do it in reverse with rm. Will add those versions later when I get time.
+REM to make your friends not hate you replace touch with rm, so basically do it in reverse with rm. Will add those versions later when I get time.

