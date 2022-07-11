@@ -12,11 +12,10 @@ REM Minimize all windows as that ensures launch happens smoother.
 WINDOWS d
 DELAY 300
 CTRL-ALT t
-REM adjust delay as needed
 DELAY 1500
 STRING open 'https://www.youtube.com/watch?v=x31tDT-4fQw'
 ENTER
-REM big delay for slow machine adjust as needed
+REM big delay for disgusting stock firefox snap to launch, seriously canonical wtf?
 DELAY 10000
 STRING f
 DELAY 200
