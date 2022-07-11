@@ -1,4 +1,4 @@
-REM Title: File bomb
+REM Title: Zip bomb tux style
 REM Author: FalsePhilosopher
 REM Target:  Unix-like tested on kubuntu 22.04
 REM Props: Hak5, strippers and memes
