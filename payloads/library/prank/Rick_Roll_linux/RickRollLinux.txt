@@ -1,0 +1,22 @@
+REM Title: RickRoll Tux style
+REM Author: FalsePhilosopher
+REM Target: Unix-like tested on kubuntu 22.04.
+REM Props: Hak5, strippers and memes
+REM Version: 1.0
+REM Category: Prank
+REM Everybody loves a good ole rickroll, so this was my hello world.
+REM
+REM initialization delay
+DELAY 300
+REM Minimize all windows as that ensures launch happens smoother.
+WINDOWS d
+DELAY 300
+CTRL-ALT t
+DELAY 1500
+STRING open 'https://www.youtube.com/watch?v=x31tDT-4fQw'
+ENTER
+REM big delay for disgusting stock firefox snap to launch, seriously canonical wtf?
+DELAY 10000
+STRING f
+DELAY 200
+SPACE

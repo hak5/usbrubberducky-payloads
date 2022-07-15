@@ -1,0 +1,35 @@
+REM Title: Musical monitors
+REM Author: FalsePhilosopher
+REM Target:  Windows
+REM Props: Hak5, strippers and memes
+REM Version: 1.0
+REM Category: Prank
+REM Rearanges the program windows on multi monitor setups
+REM
+REM startup delay
+DELAY 300
+REM Move selected window to the left monitor and switch window
+SHIFT-GUI LEFT
+DELAY 300
+ALT TAB
+DELAY 300
+REM Move selected window to the right monitor and switch window
+SHIFT-GUI RIGHT
+DELAY 300
+ALT TAB
+DELAY 300
+REM rinse and repeat, it does it 5 times so copy paste for more lulz at 5x
+SHIFT-GUI LEFT
+DELAY 300
+ALT TAB
+DELAY 300
+SHIFT-GUI RIGHT
+DELAY 300
+ALT TAB
+DELAY 300
+SHIFT-GUI LEFT
+DELAY 300
+ALT TAB
+DELAY 300
+SHIFT-GUI RIGHT
+DELAY 300
