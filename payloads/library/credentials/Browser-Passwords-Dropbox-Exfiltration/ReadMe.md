@@ -25,4 +25,4 @@
 4. Check your Dropbox for the files.
 
 
-DIYSpy on Twitter
+OfficialDIYSpy on Twitter
