@@ -18,11 +18,11 @@
 * Saves a plaintext file of all of the usernames, passwords, websites 
 * Deletes the Temp files, recycle bin, Run and PowerShell history
 
-### Usage:
+### Usage Version 01:
 1. Follow the instructions on the link enclosed in the PowerShell script to create the correct API access credentials for your Dropbox account.
 2. Obtain your Authentication Token and add it to the PowerShell script, upload that script to your dropbox and add the link to it in the payload file.
 3. Encode payload.txt and inject into target's system.
 4. Check your Dropbox for the files.
 
 
-OfficialDIYSpy on Twitter
+DIYSpy on Twitter
