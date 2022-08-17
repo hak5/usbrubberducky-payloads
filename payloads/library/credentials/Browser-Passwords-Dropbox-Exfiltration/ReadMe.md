@@ -24,5 +24,7 @@
 3. Encode payload.txt and inject into target's system.
 4. Check your Dropbox for the files.
 
+### Possible Issues:
+1. AVG detected this was trying to access Chrome info and blocked it from working some of the time.
 
 DIYSpy on Twitter
