@@ -1,0 +1,1 @@
+REM Example modifier key holdATTACKMODE HID STORAGEDELAY 2000INJECT_MODHOLD CONTROLDELAY 4000RELEASE CONTROLREM The CONTROL key will be held for 4 seconds.

@@ -1,0 +1,4 @@
+REM Example while loop - blink LED 42 timesVAR $FOO = 42WHILE ( $FOO > 0 )    LED_G    DELAY 500    LED_OFF    DELAY 500    $FOO = ( $FOO - 1 )END_WHILELED_R
+
+
+REM The variable $FOO is set to 42.REM The WHILE loop begins, evaluating the condition "is $FOO greater than 0".REM Every time the condition is TRUE, the block of code between WHILE and END_WHILE will run.REM The LED will blink green: half a second on, half a second off.REM The variable $FOO will decrement by one.REM Once $FOO reaches zero, the WHILE condition will no longer evaluate to TRUE. The payload will continue execution after the END_WHILE statement, where the LED will light red.REM If the button is pressed at any time during the payload execution, the WHILE loop will end and the USB Rubber Ducky will enter ATTACKMODE STORAGE since that is the default behavior when no BUTTON_DEF has been initiated.

@@ -1,0 +1,1 @@
+REM Example RESETATTACKMODE HID STORAGEDELAY 2000INJECT_MODHOLD SHIFTHOLD aDELAY 700RELEASE aRESETDELAY 1000STRING nd resetREM On a Windows or Linux target, the payload may result in AAAAAAAAAAAAnd resetREM Notice that a RELEASE SHIFT command was omitted, and yet the nd reset string is lowercase. This is because the RESET command released all keys.

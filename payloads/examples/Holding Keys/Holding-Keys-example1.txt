@@ -1,0 +1,7 @@
+REM Example HOLD and RELEASEREM Target: WindowsATTACKMODE HID STORAGEDELAY 2000REM Open PowershellGUI rDELAY 1000STRING powershellENTERREM Hide Powershell WindowDELAY 2000ALT SPACEDELAY 100mDELAY 100HOLD DOWNARROWDELAY 3000RELEASE DOWNARROWENTERREM Run desired commands in obfuscated powershell windowSTRING tree c:\ENTER
+
+REM This example payload targets Windows systems.
+REM Using the GUI r key combo to open the Run dialog, a powershell window will be opened.
+REM The ALT SPACE key combo opens the window menu of the currently active window (in this case, the powershell window), followed by the m key to select the Move command.
+REM The DOWNARROW is held for 3 seconds, as specified by the DELAY 3000 command, before being released — thus hiding the contents of the powershell window below the screen.
+REM The benign tree c:\ command is run, producing a graphical directory structure of the disk.

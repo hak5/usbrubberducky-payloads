@@ -1,0 +1,1 @@
+REM The LED_G command will enable the green LED.ATTACKMODE HID STORAGEBUTTON_DEF  LED_OFF  STOP_PAYLOADEND_BUTTONWHILE TRUE  LED_OFF  LED_G  DELAY 1000  LED_OFF  LED_R  DELAY 1000END_WHILEREM The LED will alternate between solid red and solid green at one second intervals.REM Pressing the button will turn the LED off and stop the payload.

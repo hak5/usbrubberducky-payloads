@@ -1,0 +1,5 @@
+REM Example FUNCTION with RETURNATTACKMODE HIDDELAY 2000BUTTON_DEF    STRING !END_BUTTONFUNCTION TEST_BUTTON()    STRING Press the button within the next 5 seconds.    VAR $TIMER = 5    WHILE ($TIMER > 0)        STRING .        DELAY 1000        $TIMER = ($TIMER - 1)    END_WHILE    ENTER    IF ($_BUTTON_PUSH_RECEIVED == TRUE) THEN        RETURN TRUE    ELSE IF ($_BUTTON_PUSH_RECEIVED == FALSE) THEN        RETURN FALSE    END_IF    $_BUTTON_PUSH_RECEIVED = FALSEEND_FUNCTIONIF (TEST_BUTTON() == TRUE) THEN    STRINGLN The button was pressed!ELSE    STRINGLN The button was not pressed!END_IF
+
+REM When the IF statement on line 26 checks the condition of the function TEST_BUTTON, the function is called and executed.
+REM Based on whether or not the button is pressed, the RETURN value (lines 19 and 21) will be set to TRUE or FALSE.
+REM The IF statement on line 26 evaluates the RETURN of the function TEST_BUTTON and types the result accordingly.

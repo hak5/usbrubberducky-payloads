@@ -1,0 +1,1 @@
+REM Example Jitter with increasing $_JITTER_MAXATTACKMODE HID STORAGEDELAY 2000$_JITTER_ENABLED = TRUEWHILE TRUE    STRINGLN The quick brown fox jumps over the lazy dog    $_JITTER_MAX = ($_JITTER_MAX * 2)END_WHILEREM With each iteration of typing the test string the jitter limit is doubled, yielding slower and more sporadic typing.

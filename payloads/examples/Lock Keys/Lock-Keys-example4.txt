@@ -1,0 +1,2 @@
+REM Example ONLY CAPS FOR YOU (Evil Prank)ATTACKMODE HID STORAGEDELAY 2000WHILE TRUE    IF ($_CAPSLOCK_ON == FALSE) THEN        CAPSLOCK    END_IF    DELAY 100END_WHILEREM If caps lock is turned off by the user, it will be turned on by the USB Rubber Ducky.
+REM @Hak5Darren loves this prank.

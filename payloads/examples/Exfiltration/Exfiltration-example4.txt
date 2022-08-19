@@ -1,0 +1,1 @@
+REM Example variable exfiltrationVAR $FOO = 1337EXFIL $FOOREM The binary contents of the variable $FOO will be written (appended) to the loot.bin file on the root of the USB Rubber Ducky MicroSD card.
