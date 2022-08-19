@@ -8,7 +8,7 @@ A "flash drive" that types keystroke injection payloads into unsuspecting comput
 
 -   [Purchase at Hak5](https://hak5.org/products/usb-rubber-ducky-deluxe "Purchase at Hak5")
 -   [Documentation](https://help.hak5.org/usb-rubber-ducky-1/ "Documentation")
--   [Encoder](https://downloads.hak5.org/ducky "Encoder")
+-   [Encoder](https://payloadstudio.hak5.org "Encoder")
 -   [Forums](https://forums.hak5.org/forum/56-usb-rubber-ducky/ "Forums")
 -   [Discord](https://hak5.org/discord "Discord")
 
