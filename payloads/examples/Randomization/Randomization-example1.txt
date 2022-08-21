@@ -1,0 +1,6 @@
+REM Example Random KeysATTACKMODE HID STORAGEDELAY 2000BUTTON_DEF    RANDOM_CHARACTEREND_BUTTONSTRINGLN Here are 10 random lowercase letters:VAR $TIMES = 10WHILE ($TIMES > 0)    RANDOM_LOWERCASE_LETTER    $TIMES = ($TIMES - 1)END_WHILEENTERENTERSTRINGLN Here are 20 random numbers:VAR $TIMES = 20WHILE ($TIMES > 0)    RANDOM_NUMBER    $TIMES = ($TIMES - 1)END_WHILEENTERENTERSTRINGLN Here are 3 random special characters:RANDOM_SPECIALRANDOM_SPECIALRANDOM_SPECIALSTRINGLN Press the button for a random character:
+
+
+
+REM This payload will type:REM 10 random lowercase letters, per the while loop.REM 20 random numbers, per the while loop.REM 3 random special characters.
+REM The payload will then instruct the user to press the button.REM On each press of the button, the BUTTON_DEF will execute. REM This special functions contains the RANDOM_CHARACTER command, and thus a random character will be typed.

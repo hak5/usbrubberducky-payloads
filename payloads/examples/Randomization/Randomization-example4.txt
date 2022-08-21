@@ -1,0 +1,5 @@
+REM !!!! Use caution with random VID and PID values as unexpected results are likely !!!!
+
+ATTACKMODE OFFWHILE TRUE  ATTACKMODE HID VID_RANDOM PID_RANDOM MAN_RANDOM PROD_RANDOM SERIAL_RANDOM  LED_R  DELAY 2000  STRINGLN Hello, World!  WAIT_FOR_BUTTON_PRESS  LED_GEND_WHILE
+
+REM On each press of the button, the USB Rubber Ducky will re-enumerate as a new USB HID device with a random VID, PID, MAN, PROD and SERIAL.REM The string Hello, World! may be typed.REM Because VID and PID values may dictate device driver initialization, the USB Rubber Ducky may not be correctly enumerated as a Human Interface Device by the target OS.

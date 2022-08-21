@@ -1,0 +1,4 @@
+REM Example JitterATTACKMODE HID STORAGEDELAY 2000$_JITTER_ENABLED = TRUEWHILE TRUE    STRINGLN The quick brown fox jumps over the lazy dogEND_WHILE
+
+
+REM The test string is typed continuously with a modulated delay between each key press.

@@ -1,0 +1,1 @@
+LED_RREM First Stage Payload Code...REM Wait for operator to assess target REM before executing second stage.WAIT_FOR_BUTTON_PRESSLED_GREM Second Stage Payload Code...REM The operator is instructed to press the button as soon as the target is ready for the next stage.REM The LED command is used to indicate to the operator that the payload is waiting for a button press.

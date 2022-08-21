@@ -1,0 +1,101 @@
+REM Example Injection/Text Based Payload selection
+REM COMPATABILITY: 
+REM DuckyScript 3.0
+
+REM TARGET:
+Any host that will reflect NUMLOCK
+
+REM USAGE:
+REM Replace the Hello Payload 1/2/3 stubs below with payloads of your choice. 
+
+REM DEPLOYMENT:
+REM Open PayloadStudio Console, notepad or text editor, make sure cursor is active there
+REM Plug in Ducky
+REM Hit NUMLOCK on the host machine to cycle through modes
+REM Hit the button on the Ducky to confirm current selection
+REM Replace Example Modes with desired payloads - marked via comments below
+
+DELAY 1000
+VAR $SELECTED = 0
+DEFINE MODE_MAX 2
+DEFINE MODE_1 0
+DEFINE MODE_2 1
+DEFINE MODE_3 2
+
+FUNCTION inc_mode()
+	IF ($SELECTED == MODE_MAX) THEN
+		$SELECTED = 0
+	ELSE
+		$SELECTED = ($SELECTED + 1)
+	END_IF
+END_FUNCTION
+
+BUTTON_DEF
+	ENTER
+	STRING SELECTION MADE
+	ENTER
+	$MODE_SELECTED = TRUE
+END_BUTTON
+
+FUNCTION draw_menu()
+	ENTER
+	STRINGLN Menu
+	STRING [
+	IF ($SELECTED == MODE_1) THEN
+		STRING *
+	END_IF
+	STRINGLN ] PAYLOAD 1
+	STRING [
+	IF ($SELECTED == MODE_2) THEN
+		STRING *
+	END_IF
+	STRINGLN ] PAYLOAD 2
+	STRING [
+	IF ($SELECTED == MODE_3) THEN
+		STRING *
+	END_IF
+	STRINGLN ] PAYLOAD 3
+END_FUNCTION
+
+FUNCTION run_menu()
+	VAR $MODE_SELECTED = FALSE
+	VAR $NUMSTATE = $_NUMLOCK_ON
+	draw_menu()
+	WHILE ($MODE_SELECTED == FALSE) 
+		IF ($NUMSTATE != $_NUMLOCK_ON) THEN
+			$NUMSTATE = $_NUMLOCK_ON
+			inc_mode()
+			draw_menu()
+		END_IF
+		DELAY 200
+	END_WHILE
+	DELAY 1000
+	$_BUTTON_USER_DEFINED = FALSE
+	IF ($SELECTED == MODE_1) THEN
+		STRINGLN PAYLOAD 1
+	ELSE IF ($SELECTED == MODE_2) THEN
+		STRINGLN PAYLOAD 2
+	ELSE IF ($SELECTED == MODE_3) THEN
+		STRINGLN PAYLOAD 3
+	END_IF
+END_FUNCTION
+
+STRING PRESS NUMLOCK to change selection
+ENTER
+STRING PRESS BUTTON to confirm selection
+ENTER
+run_menu()
+
+
+REM PAYLOADS/MODES
+IF ($SELECTED == MODE_1) THEN
+    REM PLACE PAYLOAD 1 HERE
+	STRING Hello Payload 1!
+ELSE IF ($SELECTED == MODE_2) THEN
+    REM PLACE PAYLOAD 2 HERE
+	STRING Hello Payload 2!
+ELSE IF ($SELECTED == MODE_3) THEN
+    REM PLACE PAYLOAD 3 HERE
+	STRING Hello Payload 3!
+END_IF
+

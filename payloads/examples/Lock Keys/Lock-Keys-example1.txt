@@ -1,0 +1,1 @@
+ATTACKMODE HID STORAGELED_OFFDELAY 2000WHILE TRUE    LED_R    WAIT_FOR_CAPS_CHANGE    LED_G    WAIT_FOR_CAPS_CHANGEEND_WHILEREM Pressing the caps lock key on the target will cycle the USB Rubber Ducky LED between red and green.
