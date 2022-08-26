@@ -18,5 +18,5 @@ Un-REM the method to try. And place and image at the C:\Users\{Current user}\tes
 The smaller image the better a file of 807 bytes took about 7 mins.
 
 ## Props
-To Darren and Korban for all the hard work they have put in to new ducky & key reflection. And for answer my questions i had about the duck before i had it.
+To Darren and Korban for all the hard work they have put in to new ducky & key reflection. And for answering my questions i had about the ducky before i had it.
 To I am Jakoby for shorting the System.Windows.Forms bit

