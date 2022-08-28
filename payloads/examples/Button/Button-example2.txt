@@ -1,0 +1,1 @@
+STRING Press the button 3 times...WAIT_FOR_BUTTON_PRESSSTRING 1...WAIT_FOR_BUTTON_PRESSSTRING 2...WAIT_FOR_BUTTON_PRESSSTRING 3... You did it!REM The button must be pressed 3 times to complete the payload.

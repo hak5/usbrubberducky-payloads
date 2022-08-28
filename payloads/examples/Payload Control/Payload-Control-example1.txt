@@ -1,0 +1,1 @@
+REM Example RESTART_PAYLOADATTACKMODE HID STORAGEDELAY 2000STRINGLN Hello, World!RESTART_PAYLOADSTRINGLN Nothing to see here.REM The payload loop typing the "Hello, World!" line infinitely.REM The "Nothing to see here." string will never be typed.

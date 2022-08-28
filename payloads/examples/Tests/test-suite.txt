@@ -1,0 +1,1193 @@
+VAR $PASS = 0
+VAR $FAILED = 0
+
+VAR $TOGGLE = 0
+VAR $CD = 3
+
+FUNCTION PASSED()
+	STRINGLN P
+	$PASS = ($PASS + 1)
+END_FUNCTION
+
+FUNCTION FAIL()
+	STRINGLN F
+	LED_R
+	$FAILED = ($FAILED + 1)
+END_FUNCTION
+
+EXTENSION TRANSLATE()
+	REM DEFINE STRICT_TRUTH FALSE
+	DEFINE PRINT_INT 0
+	DEFINE PRINT_HEX 1
+	VAR $DIGIT_PRINT_MODE = PRINT_INT
+	VAR $D = 0
+	VAR $IN = 0
+	VAR $INPUT = 0
+	VAR $MOD = 0
+	VAR $P = FALSE
+	VAR $NL = TRUE
+	FUNCTION PRINTDIGIT()
+		IF ($D == 0) THEN
+			STRING 0
+		ELSE IF ($D == 1) THEN
+			STRING 1
+		ELSE IF ($D == 2) THEN
+			STRING 2
+		ELSE IF ($D == 3) THEN
+			STRING 3
+		ELSE IF ($D == 4) THEN
+			STRING 4
+		ELSE IF ($D == 5) THEN
+			STRING 5
+		ELSE IF ($D == 6) THEN
+			STRING 6
+		ELSE IF ($D == 7) THEN
+			STRING 7
+		ELSE IF ($D == 8) THEN
+			STRING 8
+		ELSE IF ($D == 9) THEN
+			STRING 9
+		ELSE IF ($DIGIT_PRINT_MODE == PRINT_HEX) THEN 
+			IF ($D == 10) THEN
+				STRING A
+			ELSE IF ($D == 11) THEN
+				STRING B
+			ELSE IF ($D == 12) THEN
+				STRING C
+			ELSE IF ($D == 13) THEN
+				STRING D
+			ELSE IF ($D == 14) THEN
+				STRING E
+			ELSE IF ($D == 15) THEN
+				STRING F
+			END_IF
+		ELSE 
+			STRING ?
+		END_IF
+	END_FUNCTION
+	FUNCTION CONSUME()
+		$D = 0
+		WHILE ($INPUT >= $MOD)
+			$D = ($D + 1)
+			$INPUT = ($INPUT - $MOD)
+		END_WHILE
+		IF (($D > 0) || ($P == TRUE)) THEN
+			$P = TRUE
+			PRINTDIGIT()
+		END_IF
+	END_FUNCTION
+	FUNCTION SWAP_ENDIAN()
+		$INPUT = ((($INPUT >> 8) & 0x00FF) | (($INPUT << 8) & 0xFF00))
+	END_FUNCTION
+	FUNCTION TRANSLATE_INT() 
+		$DIGIT_PRINT_MODE = PRINT_INT
+		$P = FALSE
+		IF ( $INPUT >= 10000) THEN
+			$MOD = 10000
+			CONSUME()
+		END_IF
+		IF (($INPUT >= 1000) || ($P == TRUE)) THEN
+			$MOD = 1000
+			CONSUME()
+		END_IF
+		IF (($INPUT >= 100) || ($P == TRUE)) THEN
+			$MOD = 100
+			CONSUME()
+		END_IF
+		IF (($INPUT >= 10) || ($P == TRUE)) THEN
+			$MOD = 10
+			CONSUME()
+		END_IF()
+		$D = $INPUT
+		PRINTDIGIT()
+		IF $NL THEN
+			ENTER
+		END_IF
+	END_FUNCTION
+	FUNCTION TRANSLATE_BOOL()
+		REM IF STRICT_TRUTH THEN
+		REM	IF ($INPUT == TRUE) THEN
+		REM		STRING TRUE
+		REM	ELSE IF ($INPUT == FALSE) THEN
+		REM		STRING FALSE
+		REM	ELSE 
+		REM		STRING ?
+		REM	END_IF
+		REM ELSE
+			IF $INPUT THEN
+				STRING TRUE
+			ELSE
+				STRING FALSE
+			END_IF
+		REM END_IF
+		IF $NL THEN
+			ENTER
+		END_IF
+	END_FUNCTION
+	FUNCTION TRANSLATE_HEX()
+		$DIGIT_PRINT_MODE = PRINT_HEX
+		VAR $chars = 0
+		VAR $d1 = 0
+		VAR $d2 = 0
+		VAR $d3 = 0
+		VAR $d4 = 0
+		WHILE ($INPUT > 0)
+			IF ($chars == 0) THEN
+				$d1 = ($INPUT % 16)
+			ELSE IF ($chars == 1) THEN
+				$d2 = ($INPUT % 16)
+			ELSE IF ($chars == 2) THEN
+				$d3 = ($INPUT % 16)
+			ELSE IF ($chars == 3) THEN
+				$d4 = ($INPUT % 16)
+			END_IF
+			$chars = ($chars + 1)
+			$INPUT = ($INPUT / 16)
+		END_WHILE
+		VAR $i = 0
+		STRING 0x
+		IF ($chars == 0) THEN
+			STRING 0x0000
+		ELSE IF ($chars == 1) THEN
+			STRING 000
+			$D = $d1
+			PRINTDIGIT()
+		ELSE IF ($chars == 2) THEN
+			STRING 00
+			$D = $d2
+			PRINTDIGIT()
+			$D = $d1
+			PRINTDIGIT()
+		ELSE IF ($chars == 3) THEN
+			STRING 0
+			$D = $d3
+			PRINTDIGIT()
+			$D = $d2
+			PRINTDIGIT()
+			$D = $d1
+			PRINTDIGIT()
+		ELSE IF ($chars == 4) THEN
+			STRING 0
+			$D = $d4
+			PRINTDIGIT()
+			$D = $d3
+			PRINTDIGIT()
+			$D = $d2
+			PRINTDIGIT()
+			$D = $d1
+			PRINTDIGIT()
+		END_IF
+		IF $NL THEN
+			ENTER
+		END_IF
+	END_FUNCTION
+END_EXTENSION
+
+FUNCTION countdown()
+	WHILE ( $CD > 0 )
+		STRING .
+		$CD = ($CD - 1)
+		DELAY 1000
+	END_WHILE
+END_FUNCTION
+
+DELAY 1000
+ENTER
+STRINGLN ~TEST SUITE~
+STRINGLN press button NOW to stop & enter storage
+DELAY 1000
+
+ENTER
+STRINGLN _LED_
+
+STRING OFF :
+LED_OFF
+DELAY 500
+PASSED()
+
+STRING R :
+LED_R
+DELAY 500
+PASSED()
+
+STRING G :
+LED_G
+DELAY 500
+PASSED()
+
+
+FUNCTION injection_test()
+ENTER
+STRINGLN abcdefghijklmnopqrstuvxyz0123456789
+STRINGLN ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789
+STRINGLN aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ0123456789
+STRINGLN  _________ 
+STRINGLN /__TEST__/\
+STRINGLN \__.::.__\/
+STRINGLN    \::\ \  
+STRINGLN     \::\ \ 
+STRINGLN      \::\ \ 
+STRINGLN       \__\/
+END_FUNCTION
+
+
+ENTER
+STRINGLN _Injection_
+injection_test()
+STRING Basic injection :
+PASSED()
+
+STRING (DEFAULT)HID->OFF->HID STORAGE :
+DELAY 500
+ATTACKMODE OFF
+LED_OFF
+DELAY 500
+LED_R
+DELAY 500
+LED_OFF
+ATTACKMODE HID STORAGE VID_05AC PID_021E MAN_TEST PROD_TEST SERIAL_133713371337
+DELAY 500
+PASSED()
+
+ENTER
+STRINGLN _UNIT TESTS_
+REM ------------------------------------------------------------------------------------------------------------------------------
+
+STRING TRUE :
+IF TRUE THEN 
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING FALSE :
+IF FALSE THEN 
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+STRING (TRUE) :
+IF ( TRUE ) THEN 
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (FALSE) :
+IF ( FALSE ) THEN 
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+STRING TRUE==TRUE :
+IF ( TRUE == TRUE ) THEN
+	PASSED()
+ELSE 
+	FAIL()
+END_IF
+
+STRING FALSE==FALSE :
+IF ( FALSE == FALSE ) THEN
+	PASSED()
+ELSE 
+	FAIL()
+END_IF
+
+STRING TRUE==FALSE :
+IF ( TRUE == FALSE ) THEN
+	FAIL()
+ELSE 
+	PASSED()
+END_IF
+
+STRING TRUE!=FALSE :
+IF ( TRUE != FALSE ) THEN
+	PASSED()
+ELSE 
+	FAIL()
+END_IF
+
+STRING 1==1 :
+IF ( 1 == 1 ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING 0==0 :
+IF ( 0 == 0 ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ((1+1)==2) :
+IF ((1+1) == 2) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ((2-1)==(0+1)) :
+IF ((2-1) == (0+1)) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ((2*2)==4) :
+IF ((2*2) == 4) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ((4/2)==2) :
+IF ((4/2) == 2) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ((4/2)==2) :
+IF ((4/2) == 2) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (10>0) :
+IF (10 > 0) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (10<100) :
+IF (10 < 100) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (10<=11) :
+IF (10 <= 11) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (10<=10) :
+IF (10 <= 10) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (11>=10) :
+IF (11 >= 10) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (10>=10) :
+IF (10 >= 10) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (TRUE&&TRUE) :
+IF (TRUE && TRUE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (FALSE&&TRUE) :
+IF (FALSE && TRUE) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+STRING (TRUE||TRUE) :
+IF (TRUE || TRUE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (FALSE||TRUE) :
+IF (FALSE || TRUE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ((10%2)==0) :
+IF ((10 % 2) == 0) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ((11%2)==1) :
+IF ((11 % 2) == 1) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING $zero=0;($zero ==0) :
+VAR $zero = 0
+IF ( $zero == 0 ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ($zero==1) :
+IF ( $zero == 1 ) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+STRING $one=1;($one==1) :
+VAR $one = 1
+IF ( $one == 1 ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ($one!=1) :
+IF ( $one != 1 ) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+STRING ($one+1);($two==2) :
+VAR $two = ( $one + 1 )
+IF ( $two == 2 ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ($two!=2) :
+IF ( $two != 2 ) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+STRING ($two==$two) :
+IF ( $two == $two ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ($two!=$two) :
+IF ( $two != $two ) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+STRING (($two==$one)||($two==$zero)) :
+IF ( ($two == $one) || ($two == $zero) ) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+STRING ((($one+1)==$two)&&((($zero+$two)+1)==3)) :
+IF ( (($one + 1) == $two) && ((($zero + $two) + 1) == 3) ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+ENTER
+STRINGLN _FUNCTIONS_ 
+REM ------------------------------------------------------------------------------------------------------------------------------
+
+FUNCTION f_one()
+	RETURN 1
+END_FUNCTION
+
+FUNCTION f_v_one()
+	RETURN $one
+END_FUNCTION
+
+FUNCTION f_zero()
+	RETURN 0
+END_FUNCTION
+
+FUNCTION early_ret()
+	IF ( 0 == 0 ) THEN
+		RETURN TRUE
+	ELSE
+		RETURN FALSE
+	END_IF
+END_FUNCTION
+
+STRING (early_ret()==TRUE) :
+IF (early_ret() == TRUE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (f_one()==1) :
+IF (f_one() == 1) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING (f_zero()==0) :
+IF (f_zero() == 0) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING $retVal=f_one();($retVal==1) :
+VAR $retVal = f_one()
+IF ($retVal == 1) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING $retVal=f_v_one();($retVal==1) :
+$retVal = f_v_one()
+IF ($retVal == 1) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+ENTER
+STRING _BUTTON_
+REM ------------------------------------------------------------------------------------------------------------------------------
+
+FUNCTION print_button_states()
+	ENTER
+	STRING Button push received :
+	$INPUT = $_BUTTON_PUSH_RECEIVED
+	TRANSLATE_BOOL()
+	STRING Button Enabled :
+	$INPUT = $_BUTTON_ENABLED
+	TRANSLATE_BOOL()
+	STRING Button user defined :
+	$INPUT = $_BUTTON_USER_DEFINED
+	TRANSLATE_BOOL()
+	STRING Button timeout :
+	$INPUT = $_BUTTON_TIMEOUT
+	TRANSLATE_INT()
+END_FUNCTION
+
+FUNCTION request_button_press()
+	STRING PRESS DUCK BUTTON :
+	WAIT_FOR_BUTTON_PRESS
+	PASSED()
+END_FUNCTION
+
+print_button_states()
+
+request_button_press()
+request_button_press()
+
+REM print_button_states()
+STRINGLN $_BUTTON_ENABLED = FALSE;
+$_BUTTON_ENABLED = FALSE
+REM print_button_states()
+STRING ($_BUTTON_ENABLED==TRUE) :
+IF ($_BUTTON_ENABLED == TRUE) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+STRING PRESS DUCK BUTTON (expect no result) within 3s
+$CD = 3
+countdown()
+PASSED()
+REM print_button_states()
+STRINGLN $_BUTTON_ENABLED = TRUE;
+$_BUTTON_ENABLED = TRUE
+REM print_button_states()
+STRING ($_BUTTON_ENABLED==FALSE) :
+IF ($_BUTTON_ENABLED == FALSE) THEN
+	FAIL()
+ELSE
+	PASSED()
+END_IF
+
+request_button_press()
+
+BUTTON_DEF
+	PASSED()
+	STRINGLN PRESSED ONCE
+	BUTTON_DEF
+		PASSED()
+		STRINGLN PRESSED TWICE
+	END_BUTTON
+END_BUTTON
+
+DELAY 1000
+STRING MASH BUTTON within 5s
+$CD = 5
+countdown()
+ENTER
+
+STRINGLN Manual button check
+$_BUTTON_ENABLED = FALSE
+$_BUTTON_PUSH_RECEIVED = FALSE
+REM print_button_states()
+STRING PUSH BUTTON N times within 5s
+$CD = 15 
+WHILE ($CD > 0)
+	IF ($_BUTTON_PUSH_RECEIVED == TRUE) THEN
+		STRINGLN p
+		$_BUTTON_PUSH_RECEIVED = FALSE
+	END_IF
+	$CD = ($CD - 1)
+	STRING .
+	DELAY 200 
+END_WHILE
+$_BUTTON_ENABLED = TRUE
+$_BUTTON_PUSH_RECEIVED = FALSE
+
+ENTER
+STRINGLN _LOCKS_
+REM ------------------------------------------------------------------------------------------------------------------------------
+
+STRING Saving lock state :
+SAVE_HOST_KEYBOARD_LOCK_STATE
+PASSED()
+
+FUNCTION compare_saved_lock_states()
+	STRING ($_SAVED_CAPSLOCK_ON==$_CAPSLOCK_ON) :
+	IF ($_SAVED_CAPSLOCK_ON == $_CAPSLOCK_ON) THEN
+		PASSED()
+	ELSE
+		FAIL()
+	END_IF
+
+	STRING ($_SAVED_NUMLOCK_ON==$_NUMLOCK_ON) :
+	IF ($_SAVED_NUMLOCK_ON == $_NUMLOCK_ON) THEN
+		PASSED()
+	ELSE
+		FAIL()
+	END_IF
+
+	STRING ($_SAVED_SCROLLLOCK_ON==$_SCROLLLOCK_ON) :
+	IF ($_SAVED_SCROLLLOCK_ON == $_SCROLLLOCK_ON) THEN
+		PASSED()
+	ELSE
+		FAIL()
+	END_IF
+END_FUNCTION
+
+compare_saved_lock_states()
+
+STRING ($_CAPSLOCK_ON==TRUE) THEN; CAPSLOCK;
+IF ( $_CAPSLOCK_ON == TRUE ) THEN
+	CAPSLOCK
+	DELAY 100
+END_IF
+
+STRING ( $_CAPSLOCK_ON == FALSE ) :
+IF ( $_CAPSLOCK_ON == FALSE ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING ( $_NUMLOCK_ON == FALSE ) THEN; NUMLOCK;
+IF ( $_NUMLOCK_ON == FALSE ) THEN
+	NUMLOCK
+	DELAY 100
+END_IF
+
+STRING ( $_NUMLOCK_ON == TRUE ) :
+IF ( $_NUMLOCK_ON == TRUE ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+FUNCTION wait_for_caps_on() 
+	STRING press capslock(wait for caps on):
+	WAIT_FOR_CAPS_ON
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_caps_off()
+	STRING press capslock(wait for caps off):
+	WAIT_FOR_CAPS_OFF
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_caps_change()
+	STRING press capslock(wait for caps change):
+	WAIT_FOR_CAPS_CHANGE
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_num_off()
+	STRING press numlock(wait for num off):
+	WAIT_FOR_NUM_OFF
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_num_on()
+	STRING press numlock(wait for num on):
+	WAIT_FOR_NUM_ON
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_num_change()
+	STRING press numlock(wait for num change):
+	WAIT_FOR_NUM_CHANGE
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_scroll_off()
+	STRING press scroll lock(wait for scroll off):
+	WAIT_FOR_SCROLL_OFF
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_scroll_on()
+	STRING press scroll lock(wait for scroll on):
+	WAIT_FOR_SCROLL_ON
+	PASSED()
+END_FUNCTION
+FUNCTION wait_for_scroll_change()
+	STRING press scroll lock(wait for scroll change):
+	WAIT_FOR_SCROLL_CHANGE
+	PASSED()
+END_FUNCTION
+
+IF ($_CAPSLOCK_ON == TRUE) THEN
+	wait_for_caps_off()
+	wait_for_caps_on()
+ELSE
+	wait_for_caps_on()
+	wait_for_caps_off()
+END_IF
+
+wait_for_caps_change()
+wait_for_caps_change()
+
+IF ($_NUMLOCK_ON == TRUE) THEN
+	wait_for_num_off()
+	wait_for_num_on()
+ELSE
+	wait_for_num_on()
+	wait_for_num_off()
+END_IF
+
+wait_for_num_change()
+wait_for_num_change()
+
+IF($_SCROLLLOCK_ON == TRUE) THEN
+	wait_for_scroll_off()
+	wait_for_scroll_on()
+ELSE
+	wait_for_scroll_on()
+	wait_for_scroll_off()
+END_IF
+
+wait_for_scroll_change()
+wait_for_scroll_change()
+
+STRING Restoring lock state :
+RESTORE_HOST_KEYBOARD_LOCK_STATE
+PASSED()
+
+compare_saved_lock_states()
+
+
+REM ------------------------------------------------------------------------------------------------------------------------------
+
+STRING Storage activity timeout :
+$INPUT = $_STORAGE_ACTIVITY_TIMEOUT
+TRANSLATE_INT()
+
+REM this is 0 because its already timed out
+STRING ($_STORAGE_ACTIVITY_TIMEOUT==0) :
+IF ( $_STORAGE_ACTIVITY_TIMEOUT == 0 ) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING Payload Parse Speed :
+$INPUT = $_PAYLOAD_PARSE_SPEED
+TRANSLATE_INT()
+
+STRING ($_PAYLOAD_PARSE_SPEED==2) :
+IF ($_PAYLOAD_PARSE_SPEED == 2) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING System LEDs enabled :
+$INPUT = $_SYSTEM_LEDS_ENABLED
+TRANSLATE_BOOL()
+
+STRING Storage LEDs enabled :
+$INPUT = $_STORAGE_LEDS_ENABLED
+TRANSLATE_BOOL()
+
+STRING Injecting LEDs enabled :
+$INPUT = $_INJECTING_LEDS_ENABLED
+TRANSLATE_BOOL()
+
+STRING Exfil LEDs enabled :
+$INPUT = $_EXFIL_LEDS_ENABLED
+TRANSLATE_BOOL()
+
+STRING Received host lock LED reply :
+$INPUT = $_RECEIVED_HOST_LOCK_LED_REPLY
+TRANSLATE_BOOL()
+
+STRING EXFIL mode enabled :
+$INPUT = $_EXFIL_MODE_ENABLED
+TRANSLATE_BOOL()
+
+STRING ($_EXFIL_MODE_ENABLED==FALSE) :
+IF ( $_EXFIL_MODE_ENABLED == FALSE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING OS(default):
+$INPUT = $_OS
+TRANSLATE_INT()
+
+STRING Driver counter :
+$INPUT = $_HOST_CONFIGURATION_REQUEST_COUNT
+TRANSLATE_INT()
+
+STRING Storage active :
+$INPUT = $_STORAGE_ACTIVE
+TRANSLATE_BOOL()
+
+ENTER
+STRINGLN _JITTER_
+REM ------------------------------------------------------------------------------------------------------------------------------
+
+STRING Jitter enabled :
+$INPUT = $_JITTER_ENABLED
+TRANSLATE_BOOL()
+
+STRING ($_JITTER_ENABLED==FALSE) :
+IF ($_JITTER_ENABLED == FALSE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING Jitter max :
+$INPUT = $_JITTER_MAX
+TRANSLATE_INT()
+
+STRINGLN $_JITTER_ENABLED=TRUE;
+$_JITTER_ENABLED = TRUE
+STRING ($_JITTER_ENABLED == TRUE) :
+IF ($_JITTER_ENABLED == TRUE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+injection_test()
+$_JITTER_ENABLED = FALSE
+STRING TEST W/FW JITTER ON :
+PASSED()
+
+ENTER
+STRINGLN _HOLD_
+REM ------------------------------------------------------------------------------------------------------------------------------
+
+STRINGLN HOLD a;DELAY 1500;RELEASE a :
+HOLD a
+DELAY 1000
+RELEASE a
+ENTER
+PASSED()
+
+STRINGLN HOLD A;DELAY 1500;RELEASE A :
+HOLD A
+DELAY 1000
+RELEASE A
+PASSED()
+
+STRINGLN MANUAL INJECTMOD, HOLD MOD, KEY_DOWN, RELEASE a, RESET test :
+INJECT_MOD
+HOLD SHIFT
+KEY_DOWN 0400
+DELAY 1000
+RELEASE a
+RESET
+
+STRING MANUAL inject A :
+INJECT 0402 
+STRING  :
+PASSED()
+
+STRING MANUAL state type A :
+MOD_DOWN 0402
+MOD_KEY_DOWN 0402
+MOD_KEY_UP 0402
+MOD_UP 0402
+STRING  :
+PASSED()
+
+STRING MANUAL type a :
+KEY_DOWN 0402
+KEY_UP 0402
+STRING  :
+PASSED()
+
+STRING DELAY $ :
+VAR $T = 1000
+STRING $T(1000) :
+DELAY $T
+PASSED()
+STRINGLN $T = ($T * 2);
+$T = ($T * 2)
+STRING DELAY $T :
+DELAY $T
+PASSED()
+
+REM EXTENDED DELAY
+REM DELAY 65536
+
+
+STRINGLN _EXFIL VAR_
+REM ------------------------------------------------------------------------------------------------------------------------------
+STRING EXFIL $T : 
+$T = 1000
+EXFIL $T
+PASSED()
+
+STRING _RAND_
+REM ------------------------------------------------------------------------------------------------------------------------------
+ENTER
+
+STRING Rand min :
+$INPUT = $_RANDOM_MIN
+TRANSLATE_INT()
+
+STRING ($_RANDOM_MIN==0) :
+IF ($_RANDOM_MIN == 0) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING Rand max :
+$INPUT = $_RANDOM_MAX
+TRANSLATE_INT()
+
+STRING ($_RANDOM_MAX==9) :
+IF ($_RANDOM_MAX == 9) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING $_RANDOM_INT :
+$INPUT = $_RANDOM_INT
+TRANSLATE_INT()
+
+STRING 0<$_RANDOM_INT>9 bounds :
+IF (($_RANDOM_INT >= 0) && ($_RANDOM_INT <= 9)) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING min<$_RANDOM_INT>max bounds :
+IF (($_RANDOM_INT >= $_RANDOM_MIN) && ($_RANDOM_INT <= $_RANDOM_MAX)) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+STRING Random seed :
+$INPUT = $_RANDOM_SEED
+TRANSLATE_INT()
+
+VAR $length = 100
+FUNCTION generate_random_lower()
+	$length = 100
+	WHILE ( $length > 0 ) 
+		RANDOM_LOWERCASE_LETTER
+		$length = ($length - 1)
+	END_WHILE
+	ENTER
+END_FUNCTION
+
+FUNCTION generate_random_upper()
+	$length = 100
+	WHILE ( $length > 0 ) 
+		RANDOM_UPPERCASE_LETTER
+		$length = ($length - 1)
+	END_WHILE
+	ENTER
+END_FUNCTION
+
+FUNCTION generate_random_letter()
+	$length = 100
+	WHILE ( $length > 0 ) 
+		RANDOM_LETTER
+		$length = ($length - 1)
+	END_WHILE
+	ENTER
+END_FUNCTION
+
+FUNCTION generate_random_number()
+	$length = 100
+	WHILE ( $length > 0 ) 
+		RANDOM_NUMBER
+		$length = ($length - 1)
+	END_WHILE
+	ENTER
+END_FUNCTION
+
+FUNCTION generate_random_special()
+	$length = 100
+	WHILE ( $length > 0 ) 
+		RANDOM_SPECIAL
+		$length = ($length - 1)
+	END_WHILE
+	ENTER
+END_FUNCTION
+
+FUNCTION generate_random_char()
+	$length = 100
+	WHILE ( $length > 0 ) 
+		RANDOM_CHAR
+		$length = ($length - 1)
+	END_WHILE
+	ENTER
+END_FUNCTION
+
+STRINGLN RAND LOWER:
+generate_random_lower()
+STRINGLN RAND UPPER:
+generate_random_upper()
+STRINGLN RAND LETTER:
+generate_random_letter()
+STRINGLN RAND NUMBER:
+generate_random_number()
+STRINGLN RAND SPECIAL:
+generate_random_special()
+STRINGLN RAND CHAR:
+generate_random_char()
+
+REM ------------------------------------------------------------------------------------------------------------------------------
+FUNCTION vid_pid_check()
+	$INPUT = $_CURRENT_VID
+	SWAP_ENDIAN()
+	STRING ($INPUT(vid)==0x05AC) :
+	IF ($INPUT == 0x05AC) THEN
+		PASSED()
+	ELSE
+		FAIL()
+	END_IF
+	STRING $_CURRENT_VID(hex):
+	TRANSLATE_HEX()
+	$INPUT = $_CURRENT_PID
+	SWAP_ENDIAN()
+	STRING ($INPUT(pid)==0x021E) :
+	IF ($INPUT == 0x021E) THEN
+		PASSED()
+	ELSE
+		FAIL()
+	END_IF
+	STRING $_CURRENT_PID(hex):
+	TRANSLATE_HEX()
+END_FUNCTION
+
+vid_pid_check()
+
+STRINGLN SAVE_ATTACKMODE;ATTACKMODE OFF;RESTORE_ATTACKMODE;
+SAVE_ATTACKMODE
+DELAY 500
+ATTACKMODE OFF
+DELAY 500
+LED_OFF
+DELAY 50
+LED_R
+DELAY 50
+LED_G
+DELAY 50
+LED_R
+DELAY 50
+LED_OFF
+RESTORE_ATTACKMODE
+PASSED()
+DELAY 500
+
+vid_pid_check()
+
+STRING ($_CURRENT_ATTACKMODE==3) :
+IF ($_CURRENT_ATTACKMODE == 3) THEN
+	PASSED()
+ELSE
+	FAILED
+END_IF
+
+STRING ATTACKMODE HID STORAGE MAN_T PROD_T SERIAL_RANDOM :
+ATTACKMODE HID STORAGE MAN_T PROD_T SERIAL_RANDOM
+DELAY 500
+PASSED()
+
+STRINGLN Setting BUTTON to toggle hide/restore
+BUTTON_DEF
+	IF (($TOGGLE % 2) == 0) THEN
+		ATTACKMODE OFF
+		HIDE_PAYLOAD
+		DELAY 500
+		ATTACKMODE STORAGE
+	ELSE
+		ATTACKMODE OFF
+		RESTORE_PAYLOAD
+		DELAY 500
+		ATTACKMODE STORAGE
+	END_IF
+	$TOGGLE = ($TOGGLE + 1)
+END_BUTTON
+
+STRING ($_BUTTON_USER_DEFINED==TRUE) :
+IF ($_BUTTON_USER_DEFINED == TRUE) THEN
+	PASSED()
+ELSE
+	FAIL()
+END_IF
+
+ENTER
+STRINGLN ~DONE~
+STRING F:
+$INPUT = $FAILED
+TRANSLATE_INT()
+STRING P:
+$INPUT = $PASS
+TRANSLATE_INT()
+IF ( $FAILED == 0 ) THEN
+	STRINGLN TESTS PASSED
+	LED_G
+ELSE 
+	STRINGLN TESTS FAILED
+	LED_R
+END_IF
+ENTER
+STRINGLN DONE

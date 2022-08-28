@@ -1,0 +1,2 @@
+REM Example of optimized IF statement REM with internal variableIF $_CAPSLOCK_ON THEN    STRINGLN The caps lock key is onEND_IFREM The internal variable $_CAPSLOCK_ON is checked. 
+REM If it evaluates as TRUE, the message “The caps lock key is on” is typed.

@@ -1,0 +1,18 @@
+REM Title: Android Browse to URL Example
+REM Author: Hak5Darren
+REM Desscription: Opens browser. Navigates to URL.
+REM Target: "most" Android devices (compatibility varies by vendor implementation)
+REM DuckyScript: 3.0
+ATTACKMODE HID STORAGE
+WAIT_FOR_BUTTON_PRESS
+REM HID and STORAGE for convenience. Doesn't execute payload until button press.
+DEFINE URL hak5.org
+REM Change to URL of your choosing.
+GUI b
+REM Open browser
+DELAY 700
+CTRL l
+REM Select URL bar
+DELAY 700
+STRINGLN URL
+REM inject URL and press ENTER

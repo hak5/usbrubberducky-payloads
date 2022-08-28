@@ -1,0 +1,15 @@
+REM Example Random Integer
+ATTACKMODE HID STORAGE
+
+LED_OFF
+VAR $A = $_RANDOM_INT
+WHILE ($A > 0)
+    LED_G
+    DELAY 500
+    LED_OFF
+    DELAY 500
+    $A = ($A - 1)
+END_WHILE
+
+
+REM Each time this payload is executed, the LED will randomly blink between 1 and 9 times.

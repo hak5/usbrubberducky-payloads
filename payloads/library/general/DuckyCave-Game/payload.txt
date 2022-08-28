@@ -1,0 +1,308 @@
+REM Title: Ducky Cave
+REM Author: Hak5's Korben (@notkorben) w. tweaks by @Hak5Darren
+REM Description: Do you have what it takes to be a Ducky Cave champion?
+REM This incredible Keystroke Injection game for the new USB Rubber Ducky
+REM shows off the power of DuckyScript 3.0 while testing your skills!
+REM
+REM Usage: Open notepad or similar, deploy payload. 
+REM Use CAPSLOCK to navigate randomly generated cave!
+REM Post your score on Twitter to enter the points-don't-matter leaderboard!
+REM
+REM Note: Requires target which reflects lock keys & new USB Rubber Ducky
+REM
+ATTACKMODE HID STORAGE
+LED_G
+DELAY 1000
+STRINGLN QUACK! Hello world!
+ENTER
+DELAY 1200
+STRINGLN       _      _      _      USB       _      _      _
+STRINGLN    __(.)< __(.)> __(.)=   Rubber   >(.)__ <(.)__ =(.)__
+STRINGLN    \___)  \___)  \___)    Ducky!    (___/  (___/  (___/ 
+ENTER
+STRINGLN * Documentation: https://docs.hak5.org
+STRINGLN * Community: https://community.hak5.org
+STRINGLN * Payloads: https://payloads.hak5.org
+DELAY 1200
+ENTER
+STRINGLN Press CAPSLOCK 5 times for fun! (Windows/Linux)
+WAIT_FOR_CAPS_CHANGE
+LED_OFF
+WAIT_FOR_CAPS_CHANGE
+LED_G
+WAIT_FOR_CAPS_CHANGE
+LED_OFF
+WAIT_FOR_CAPS_CHANGE
+LED_G
+WAIT_FOR_CAPS_CHANGE
+LED_R
+STRINGLN  ___          _         ___               _ _
+STRINGLN |   \ _  _ __| |___  _ / __|__ ___ _____ | | |
+STRINGLN | |) | || / _| / / || | (__/ _` \ V / -_)|_|_|
+STRINGLN |___/ \_,_\__|_\_\\_, |\___\__,_|\_/\___|(_)_)
+STRINGLN                   |__/                   
+DEFINE RIGHT 0
+DEFINE LEFT 1
+DEFINE GAME_MAX_WIDTH 40
+DEFINE GAME_SPEED 50
+VAR $mode = RIGHT
+VAR $lock_state = FALSE
+VAR $score = 0
+VAR $running = TRUE
+VAR $direction_changes = 0
+VAR $D = 0
+VAR $INPUT = 0
+VAR $MOD = 0
+VAR $P = FALSE
+FUNCTION PRINTDIGIT()
+    IF ($D == 0) THEN
+        STRING 0
+    ELSE IF ($D == 1) THEN
+        STRING 1
+    ELSE IF ($D == 2) THEN
+        STRING 2
+    ELSE IF ($D == 3) THEN
+        STRING 3
+    ELSE IF ($D == 4) THEN
+        STRING 4
+    ELSE IF ($D == 5) THEN
+        STRING 5
+    ELSE IF ($D == 6) THEN
+        STRING 6
+    ELSE IF ($D == 7) THEN
+        STRING 7
+    ELSE IF ($D == 8) THEN
+        STRING 8
+    ELSE IF ($D == 9) THEN
+        STRING 9
+    ELSE 
+        STRING ?
+    END_IF
+END_FUNCTION
+FUNCTION CONSUME()
+    $D = 0
+    WHILE ($INPUT >= $MOD)
+        $D = ($D + 1)
+        $INPUT = ($INPUT - $MOD)
+    END_WHILE
+    IF (($D > 0) || ($P == TRUE)) THEN
+        $P = TRUE
+        PRINTDIGIT()
+    END_IF
+END_FUNCTION
+FUNCTION TRANSLATE_INT() 
+    $P = FALSE
+    IF ( $INPUT >= 10000) THEN
+        $MOD = 10000
+        CONSUME()
+    END_IF
+    IF (($INPUT >= 1000) || ($P == TRUE)) THEN
+        $MOD = 1000
+        CONSUME()
+    END_IF
+    IF (($INPUT >= 100) || ($P == TRUE)) THEN
+        $MOD = 100
+        CONSUME()
+    END_IF
+    IF (($INPUT >= 10) || ($P == TRUE)) THEN
+        $MOD = 10
+        CONSUME()
+    END_IF()
+    $D = $INPUT
+    PRINTDIGIT()
+END_FUNCTION
+FUNCTION TRANSLATE_BOOL()
+    IF ($INPUT == TRUE) THEN
+        STRING TRUE
+    ELSE IF ($INPUT == FALSE) THEN
+        STRING FALSE
+    ELSE 
+        STRING ?
+    END_IF
+    ENTER
+END_FUNCTION
+VAR $CD = 3
+FUNCTION COUNTDOWN()
+    WHILE ( $CD > 0 )
+        STRING .
+        $CD = ($CD - 1)
+        DELAY 1000
+    END_WHILE
+END_FUNCTION
+FUNCTION ENSURE_CAPS_OFF()
+    IF ($_CAPSLOCK_ON == TRUE) THEN
+        CAPSLOCK
+    END_IF
+END_FUNCTION
+FUNCTION init() 
+    $_RANDOM_MIN = 9
+    $_RANDOM_MAX = 19
+    VAR $l_wall = $_RANDOM_INT
+    $_RANDOM_MIN = 20 
+    $_RANDOM_MAX = 29
+    VAR $player = $_RANDOM_INT
+    $_RANDOM_MIN = 30
+    $_RANDOM_MAX = 40
+    VAR $r_wall = $_RANDOM_INT
+END_FUNCTION
+FUNCTION check_input()
+    VAR $changed = FALSE
+    IF ($_CAPSLOCK_ON != $lock_state) THEN
+        $lock_state = $_CAPSLOCK_ON
+        $direction_changes = ($direction_changes + 1)
+        IF ($mode == RIGHT) THEN
+            $mode = LEFT
+        ELSE
+            $mode = RIGHT
+        END_IF
+    END_IF
+END_FUNCTION
+FUNCTION end_game()
+        LED_R
+        $running = FALSE
+END_FUNCTION
+FUNCTION move_walls()
+    $_RANDOM_MIN = 0
+    $_RANDOM_MAX = 100
+    VAR $CHANCE = $_RANDOM_INT
+    IF ($CHANCE > 45) THEN
+        IF ($l_wall < GAME_MAX_WIDTH) THEN
+            $l_wall = ($l_wall + 1)
+            REM STRING l+
+        END_IF
+    ELSE
+        IF ($l_wall > 0) THEN
+            $l_wall = ($l_wall - 1)
+            REM STRING l-
+        ELSE
+            $l_wall = ($l_wall + 1)
+        END_IF
+    END_IF
+    $CHANCE = $_RANDOM_INT
+    IF ($CHANCE > 45) THEN
+        IF ($r_wall > 0) THEN
+            $r_wall = ($r_wall - 1)
+            REM STRING r-
+        END_IF
+    ELSE
+        IF ($r_wall < GAME_MAX_WIDTH) THEN
+            $r_wall = ($r_wall + 1)
+            REM STRING r+
+        ELSE
+            $r_wall = ($r_wall - 1)
+        END_IF
+    END_IF
+    REM ENTER
+END_FUNCTION
+FUNCTION move_player()
+    IF ($mode == RIGHT) THEN
+        IF ($player < GAME_MAX_WIDTH) THEN
+            $player = ($player + 1)
+        END_IF
+    ELSE IF ($mode == LEFT) THEN
+        IF ($player > 0) THEN
+            $player = ($player - 1)
+        END_IF
+    END_IF
+END_FUNCTION
+FUNCTION draw()
+    IF (($player <= $l_wall) || ($player >= $r_wall)) THEN
+        end_game()
+        STRING BONK
+        RETURN 0
+    END_IF
+    VAR $l_inside_whitespace = (($player - $l_wall) - 1)
+    VAR $r_inside_whitespace = (($r_wall - $player) - 1)
+    IF ($l_wall > 1) THEN
+        VAR $l_outside_whitespace = ($l_wall - 1)
+        WHILE ($l_outside_whitespace > 0)
+            SPACE
+            $l_outside_whitespace = ($l_outside_whitespace - 1)
+        END_WHILE
+    END_IF 
+    STRING |
+    WHILE ($l_inside_whitespace > 0)
+        SPACE
+        $l_inside_whitespace = ($l_inside_whitespace - 1)
+    END_WHILE
+    IF ($mode == RIGHT) THEN
+        STRING >
+    ELSE IF ($mode == LEFT) THEN
+        STRING <
+    END_IF
+    WHILE ($r_inside_whitespace > 0)
+        SPACE
+        $r_inside_whitespace = ($r_inside_whitespace - 1)
+    END_WHILE
+    STRING |
+    ENTER
+    $score = ($score + 1)
+    RETURN 0
+END_FUNCTION
+FUNCTION run()
+    check_input()
+    move_walls()
+    check_input()
+    move_player()
+    check_input()
+    draw()
+END_FUNCTION
+FUNCTION play_cave()
+    WHILE TRUE
+        ENSURE_CAPS_OFF()
+        $score = 0
+        LED_G
+        STRING Game Starting in 3s
+        $CD = 3
+        COUNTDOWN()
+        ENTER
+        STRING GOOD LUCK!
+        ENTER
+        init()
+        WHILE ($running == TRUE) 
+            DELAY GAME_SPEED
+            run()
+        END_WHILE
+        ENSURE_CAPS_OFF()
+        ENTER
+        STRING Left wall:
+        SPACE
+        $INPUT = $l_wall
+        TRANSLATE_INT()
+        ENTER
+        STRING Right wall:
+        SPACE
+        $INPUT = $r_wall
+        TRANSLATE_INT()
+        ENTER
+        STRING Player position:
+        SPACE
+        $INPUT = $player
+        TRANSLATE_INT()
+        ENTER
+        STRING Player Moves: 
+        SPACE
+        $INPUT = $direction_changes
+        TRANSLATE_INT()
+        ENTER
+        STRING GAME OVER. SCORE:
+        SPACE
+        $INPUT = $score
+        TRANSLATE_INT()
+        ENTER
+STRING https://twitter.com/intent/tweet?text=I%20scored%20
+        $INPUT = $score
+        TRANSLATE_INT()
+STRING %20in%20DuckyCave%20with%20my%20USB%20Rubber%20Ducky%21%20&url=https://hak5.org/duckycave&hashtags=DuckyCave&via=hak5
+        ENTER
+        ENTER
+        STRINGLN Shall we play again? Press CAPS to restart.
+        WAIT_FOR_CAPS_CHANGE
+        $running = TRUE
+        DELAY 100
+    END_WHILE 
+END_FUNCTION
+BUTTON_DEF
+    end_game()
+END_BUTTON
+play_cave()

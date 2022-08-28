@@ -1,0 +1,1 @@
+ATTACKMODE HID STORAGEWHILE TRUE  LED_R  WAIT_FOR_BUTTON_PRESS  LED_G  WAIT_FOR_BUTTON_PRESSEND_WHILEREM The LED will alternate between red and green on each button press.

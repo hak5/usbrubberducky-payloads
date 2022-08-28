@@ -1,0 +1,3 @@
+REM The LED_R command will enable the red LED.REM To show only a red LED disable any default LED behavior (such as storage or payload processing) by executing LED_OFF before LED_R.
+
+ATTACKMODE HID STORAGEWHILE TRUE  IF ($_CAPSLOCK_ON == TRUE) THEN    LED_OFF    LED_R  ELSE IF ($_CAPSLOCK_ON == FALSE) THEN    LED_OFF  END_IFEND_WHILEREM The LED will turn solid red while caps lock is on.

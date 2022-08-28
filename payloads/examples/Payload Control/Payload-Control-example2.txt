@@ -1,0 +1,1 @@
+REM Example STOP_PAYLOADATTACKMODE HID STORAGEDELAY 2000BUTTON_DEF    STOP_PAYLOADEND_BUTTONWHILE TRUE    RANDOM_CHARACTEREND_WHILEREM The payload will continuously type a random character.REM Pressing the button will stop the payload.
