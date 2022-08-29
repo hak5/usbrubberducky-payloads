@@ -1,5 +1,5 @@
 # **Dropbox Bandit**
-This payload is designed to target Windows 10/11 machines, but but may run on older versions of Windows. The script is made with Ducky Script 3.0, but you should be able to easily convert it to run on older versions by deleting the first and last lines
+This payload is designed to target Windows 10/11 machines, but but may run on older versions of Windows. If you are using an older Rubber Ducky please use the "payload_duckyscript_old.txt" file.
 
 This payload extracts files from a specific location on a target's machine and uploads them in archives to a dropbox account. The actual payload takes about 5 seconds to run (faster on real machines, tested on virtual machine), but the actual exfiltration, which is invisible to the victim one started, can take longer depending on the total size of data to be uploaded. 
 
