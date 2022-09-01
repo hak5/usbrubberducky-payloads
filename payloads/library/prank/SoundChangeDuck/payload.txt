@@ -1,0 +1,15 @@
+REM       SoundChangeDuck
+REM       Version 1.0
+REM       OS: Windows
+REM       Author: 0iphor13
+
+REM       Nothing special, something cheap. Changes the sound of device connection from Hardware Insert to Hardware fail.
+REM       You can of course decide which system sounds you want to change.
+REM       You can also bring your own .wav file to change it to your desired sound.
+
+DELAY 2000
+GUI r
+DELAY 200
+STRING cmd.exe /c reg add "HKEY_CURRENT_USER\AppEvents\Schemes\Apps\.Default\DeviceConnect\.Current" /t REG_SZ /d "%SystemRoot%\media\Windows Hardware Fail.wav" /f
+DELAY 200
+ENTER
