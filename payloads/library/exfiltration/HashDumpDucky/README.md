@@ -17,6 +17,6 @@ Bring some time... This payload will run an obfuscated script to dump user hashe
 Compile this payload with payloadstudio, place it inside of your Ducky as inject.bin and you are good to go
 #
 Exfiltrate the out.txt file and try to crack the hashes.
-![alt text](https://github.com/0iphor13/usbrubberducky-payloads/tree/master/payloads/library/credentials/HashDumpDucky/hash.png)
+![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/exfiltration/HashDumpDucky/hash.png)
 
 *props to Nikhil Mittal*
