@@ -4,7 +4,7 @@ REM 	Author: LyQuid
 REM 	Description: Minimizing all windows within specific time
 REM 	Target: Windows 10
 REM 	Category: Prank
-REM	You can change the delay when the windows to minimize, 1 Second = 1000 Milliseconds. Change on "WScript.Sleep"
+REM	  You can change the delay when the windows to minimize, 1 Second = 1000 Milliseconds. Change on "WScript.Sleep"
 REM	==============================================================================================================
 DELAY 2000
 GUI r
@@ -12,10 +12,10 @@ DELAY 200
 STRING cmd
 ENTER
 DELAY 500
-REM 	Make sure there is no file named minimize.vbs
+REM 	= Make sure there is no file named minimize.vbs =
 STRING del %tmp%\minimze.vbs
 ENTER
-REM 	Creating script
+REM 	= Creating script =
 STRING cd %tmp% && copy con minimze.vbs
 ENTER
 STRING do
@@ -30,6 +30,6 @@ STRING loop
 ENTER
 CTRL z
 ENTER
-REM 	Run Script & exit cmd
+REM 	= Run Script & exit cmd =
 STRING start minimze.vbs && exit
 ENTER
