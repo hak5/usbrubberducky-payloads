@@ -1,5 +1,5 @@
 # Always Minimize
-Minimizing all opened window within specific time/delay. It's a loop process, that means this script won't end until you stop it.
+Minimizing all opened window within specific time/delay. It's a **loop** process, that means this script won't end until you stop it.
 
 ## Config
 If you want to change the delay, you can change here :
