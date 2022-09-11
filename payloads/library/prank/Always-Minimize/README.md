@@ -1,5 +1,5 @@
 # Always Minimize
-Minimizing all opened window within spesific time/delay.
+Basically minimizing all opened window within spesific time/delay.
 
 ## Config
 If you want to change the delay, you can change here :
@@ -23,7 +23,7 @@ It's simple but hard to do. There's 2 ways to stop/kill this process.
 
 > Second way
 
-- Open Command Prompt using <kbd>⊞</kbd>+<kbd>r</kbd>
+- Open Command Prompt using <kbd>⊞</kbd>+<kbd>r</kbd> (Windows+r)
 - Type `cmd`
 - Run this command
 ```
