@@ -1,5 +1,5 @@
 # Always Minimize
-Basically minimizing all opened window within spesific time/delay.
+Minimizing all opened window within spesific time/delay.
 
 ## Config
 If you want to change the delay, you can change here :
