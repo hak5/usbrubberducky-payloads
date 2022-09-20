@@ -1,4 +1,20 @@
-REM Example FunctionFUNCTION COUNTDOWN()    WHILE ($TIMER > 0)        STRING .        $TIMER = ($TIMER - 1)        DELAY 500    END_WHILEEND_FUNCTIONSTRING And then it happenedVAR $TIMER = 3COUNTDOWN()SPACESTRING a door opened to a world$TIMER = 5COUNTDOWN()
+REM Example Function
+VAR $TIMER = 3
+FUNCTION COUNTDOWN()
+    WHILE ($TIMER > 0)
+        STRING .
+        $TIMER = ($TIMER - 1)
+        DELAY 500
+    END_WHILE
+END_FUNCTION
+
+STRING And then it happened
+COUNTDOWN()
+
+SPACE
+STRING a door opened to a world
+$TIMER = 5
+COUNTDOWN()
 
 REM The FUNCTION command defines a new function named COUNTDOWN() containing a code block with a WHILE loop which types a single period (".") for each value of $TIMER.
 REM The first time the COUNTDOWN() function is called, the $TIMER variable holds the value 3. The second time it is called, the $TIMER variable holds the value 5.
