@@ -1,1 +1,18 @@
-REM BUTTON_DEF defines a function which will execute when the button is pressed anytime within the payload so long as the button control is not already in use by the WAIT_FOR_BUTTON_PRESS command or other such function.REM By default, if no button definition (BUTTON_DEF) is included in the payload, the button will stop all further payload execution and invoke ATTACKMODE STORAGE — entering the USB Rubber Ducky into arming mode.REM Similar to functions (described later), which begin with FUNCTION NAME() and with END_FUNCTION, the button definition begins with BUTTON_DEF and ends with END_BUTTON.BUTTON_DEF  STRING The button was pressed!  STOP_PAYLOADEND_BUTTONWHILE TRUE  STRING .  DELAY 1000END WHILEREM The payload will type a period every second until the button is pressed. REM Once the button is pressed, the payload will type the text “The button was pressed!”REM After the button press text is typed, the payload will terminate.
+REM BUTTON_DEF defines a function which will execute when the button is pressed anytime within the payload so long as the button control is not already in use by the WAIT_FOR_BUTTON_PRESS command or other such function.
+REM By default, if no button definition (BUTTON_DEF) is included in the payload, the button will stop all further payload execution and invoke ATTACKMODE STORAGE — entering the USB Rubber Ducky into arming mode.
+REM Similar to functions (described later), which begin with FUNCTION NAME() and with END_FUNCTION, the button definition begins with BUTTON_DEF and ends with END_BUTTON.
+
+BUTTON_DEF
+  STRING The button was pressed!
+  STOP_PAYLOAD
+END_BUTTON
+
+WHILE TRUE
+  STRING .
+  DELAY 1000
+END_WHILE
+
+
+REM The payload will type a period every second until the button is pressed. 
+REM Once the button is pressed, the payload will type the text “The button was pressed!”
+REM After the button press text is typed, the payload will terminate.
