@@ -1,1 +1,16 @@
-BUTTON_DEF  WHILE TRUE  LED_R  DELAY 1000  LED_OFF  DELAY 1000  END_WHILEEND_BUTTONSTRING Press the button at any point to blink the LED redWHILE TRUE  STRING .  DELAY 1000END WHILEREM If the button is pressed at any point in the payload it will stop typing “.” and the LED will start blink red until the device is unplugged.
+BUTTON_DEF
+  WHILE TRUE
+  LED_R
+  DELAY 1000
+  LED_OFF
+  DELAY 1000
+  END_WHILE
+END_BUTTON
+
+STRING Press the button at any point to blink the LED red
+WHILE TRUE
+  STRING .
+  DELAY 1000
+END_WHILE
+
+REM If the button is pressed at any point in the payload it will stop typing “.” and the LED will start blink red until the device is unplugged.
