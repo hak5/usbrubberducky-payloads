@@ -3,7 +3,7 @@ REM COMPATABILITY:
 REM DuckyScript 3.0
 
 REM TARGET:
-Any host that will reflect NUMLOCK
+REM Any host that will reflect NUMLOCK
 
 REM USAGE:
 REM Replace the Hello Payload 1/2/3 stubs below with payloads of your choice. 
