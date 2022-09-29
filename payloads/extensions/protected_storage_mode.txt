@@ -1,9 +1,9 @@
 EXTENSION PROTECTED_STORAGE_MODE
-    VERSION 1.0
+    REM VERSION 1.0
 
     REM Example hidden storage mode
-    REM Forces user to "padlock style" unlock storage mode by setting
-    REM the host's lock keys and pressing the duck button to "submit" a 
+    REM Forces user to padlock style unlock storage mode by setting
+    REM the HOSTs lock keys and pressing the duck button to submit a 
     REM combination three times. 
     REM The wrong combination will immediately fail silently.
     REM The correct combination will trigger ATTACKMODE STORAGE and LED_G
@@ -17,31 +17,30 @@ EXTENSION PROTECTED_STORAGE_MODE
     REM END_BUTTON
     
     FUNCTION STORAGE_PASSWORD_CHECK()
-    	VAR $ACCEPED = FALSE
-    	LED_R
-    	WAIT_FOR_BUTTON_PRESS
+        VAR $ACCEPED = FALSE
+        LED_R
+        WAIT_FOR_BUTTON_PRESS
 
-    	REM first combination ALL LOCKS OFF
-    	IF (($_CAPSLOCK_ON == FALSE) && ($_NUMLOCK_ON == FALSE) && ($_SCROLLLOCK_ON == FALSE)) THEN
-    		STRING .
-    		WAIT_FOR_BUTTON_PRESS
+        REM first combination ALL LOCKS OFF
+        IF (($_CAPSLOCK_ON == FALSE) && ($_NUMLOCK_ON == FALSE) && ($_SCROLLLOCK_ON == FALSE)) THEN
+            STRING .
+            WAIT_FOR_BUTTON_PRESS
 
-        	REM second combination ONLY CAPS ON 
-    		IF (($_CAPSLOCK_ON == TRUE) && ($_NUMLOCK_ON == FALSE) && ($_SCROLLLOCK_ON == FALSE)) THEN
-    			STRING .
-    			WAIT_FOR_BUTTON_PRESS
+            REM second combination ONLY CAPS ON 
+            IF (($_CAPSLOCK_ON == TRUE) && ($_NUMLOCK_ON == FALSE) && ($_SCROLLLOCK_ON == FALSE)) THEN
+                STRING .
+                WAIT_FOR_BUTTON_PRESS
 
-            	REM third combination ONLY NUM ON 
-    			IF (($_CAPSLOCK_ON == FALSE) && ($_NUMLOCK_ON == TRUE) && ($_SCROLLLOCK_ON == FALSE)) THEN
-    				$ACCEPTED = TRUE
-    			END_IF
-    		END_IF
-    	END_IF
+                REM third combination ONLY NUM ON 
+                IF (($_CAPSLOCK_ON == FALSE) && ($_NUMLOCK_ON == TRUE) && ($_SCROLLLOCK_ON == FALSE)) THEN
+                    $ACCEPTED = TRUE
+                END_IF
+            END_IF
+        END_IF
 
-    	IF $ACCEPTED THEN
-    	    LED_G
-    	    ATTACKMODE STORAGE
-    	END_IF
+        IF $ACCEPTED THEN
+            LED_G
+            ATTACKMODE STORAGE
+        END_IF
     END_FUNCTION
-
 END_EXTENSION

