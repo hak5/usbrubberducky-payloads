@@ -7,7 +7,7 @@ This repository contains payloads and extensions for the Hak5 USB Rubber Ducky. 
 A "flash drive" that types keystroke injection payloads into unsuspecting computers at incredible speeds.
 
 -   [Purchase at Hak5](https://hak5.org/products/usb-rubber-ducky-deluxe "Purchase at Hak5")
--   [Documentation](https://help.hak5.org/usb-rubber-ducky-1/ "Documentation")
+-   [Documentation](https://docs.hak5.org/hak5-usb-rubber-ducky/ "Documentation")
 -   [Encoder](https://payloadstudio.hak5.org "Encoder")
 -   [Forums](https://forums.hak5.org/forum/111-new-usb-rubber-ducky/ "Forums")
 -   [Discord](https://hak5.org/discord "Discord")

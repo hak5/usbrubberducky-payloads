@@ -1,1 +1,5 @@
-ATTACKMODE_OFFLED_OFFDISABLE_BUTTONREM The USB Rubber Ducky will be effectively disabled.
+ATTACKMODE OFF
+LED_OFF
+DISABLE_BUTTON
+
+REM The USB Rubber Ducky will be effectively disabled.
