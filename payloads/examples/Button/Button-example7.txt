@@ -1,1 +1,17 @@
-REN The DISABLE_BUTTON command prevents the button from calling the BUTTON_DEF. BUTTON_DEF  STRING This will never executeEND_BUTTONDISABLE_BUTTONSTRING The button is disabledWHILE TRUE  STRING .  DELAY 1000END_WHILEREM The DISABLE_BUTTON command disables the BUTTON_DEF.REM The button definition which types "This will never execute", will never execute — even if the button is pressed.
+REM The DISABLE_BUTTON command prevents the button from calling the BUTTON_DEF. 
+
+BUTTON_DEF
+  STRING This will never execute
+END_BUTTON
+
+DISABLE_BUTTON
+
+STRING The button is disabled
+WHILE TRUE
+  STRING .
+  DELAY 1000
+END_WHILE
+
+
+REM The DISABLE_BUTTON command disables the BUTTON_DEF.
+REM The button definition which types "This will never execute", will never execute — even if the button is pressed.

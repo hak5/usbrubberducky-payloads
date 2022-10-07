@@ -1,0 +1,33 @@
+REM       MacOS-REMAP.DVORAK
+REM       Version 1.0
+REM       OS: macOS 10.4 - (Present)
+REM       Author: NateW
+REM       Requirements: Any DuckyScript Capable Device. In my case, I am building for a FlipperZero.
+REM       Description: Launches terminal, uses hidutil to remap All keys to the Dvorak layout.
+REM       More Instructions and Revert Script https://github.com/nwhistler/flipper-tools/tree/master/badusb/MacOS/key-remap
+DELAY 200
+GUI SPACE
+DELAY 500
+STRING Terminal
+DELAY 700
+ENTER
+DELAY 700
+STRING hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc": 0x70000002D,"HIDKeyboardModifierMappingDst": 0x70000002F},{"HIDKeyboardModifierMappingSrc": 0x70000002E,
+STRING "HIDKeyboardModifierMappingDst": 0x700000030},{"HIDKeyboardModifierMappingSrc": 0x700000014,"HIDKeyboardModifierMappingDst": 0x700000034},{"HIDKeyboardModifierMappingSrc": 0x70000001A,
+STRING "HIDKeyboardModifierMappingDst": 0x700000036},{"HIDKeyboardModifierMappingSrc": 0x700000008,"HIDKeyboardModifierMappingDst": 0x700000037},{"HIDKeyboardModifierMappingSrc": 0x700000015,
+STRING "HIDKeyboardModifierMappingDst": 0x700000013},{"HIDKeyboardModifierMappingSrc": 0x700000017,"HIDKeyboardModifierMappingDst": 0x70000001C},{"HIDKeyboardModifierMappingSrc": 0x70000001C,
+STRING "HIDKeyboardModifierMappingDst": 0x700000009},{"HIDKeyboardModifierMappingSrc": 0x700000018,"HIDKeyboardModifierMappingDst": 0x70000000A},{"HIDKeyboardModifierMappingSrc": 0x70000000C,
+STRING "HIDKeyboardModifierMappingDst": 0x700000006},{"HIDKeyboardModifierMappingSrc": 0x700000012,"HIDKeyboardModifierMappingDst": 0x700000015},{"HIDKeyboardModifierMappingSrc": 0x700000013,
+STRING "HIDKeyboardModifierMappingDst": 0x70000000F},{"HIDKeyboardModifierMappingSrc": 0x70000002F,"HIDKeyboardModifierMappingDst": 0x700000038},{"HIDKeyboardModifierMappingSrc": 0x700000030,
+STRING "HIDKeyboardModifierMappingDst": 0x70000002E},{"HIDKeyboardModifierMappingSrc": 0x700000016,"HIDKeyboardModifierMappingDst": 0x700000012},{"HIDKeyboardModifierMappingSrc": 0x700000007,
+STRING "HIDKeyboardModifierMappingDst": 0x700000008},{"HIDKeyboardModifierMappingSrc": 0x700000009,"HIDKeyboardModifierMappingDst": 0x700000018},{"HIDKeyboardModifierMappingSrc": 0x70000000A,
+STRING "HIDKeyboardModifierMappingDst": 0x70000000C},{"HIDKeyboardModifierMappingSrc": 0x70000000B,"HIDKeyboardModifierMappingDst": 0x700000007},{"HIDKeyboardModifierMappingSrc": 0x70000000D,
+STRING "HIDKeyboardModifierMappingDst": 0x70000000B},{"HIDKeyboardModifierMappingSrc": 0x70000000E,"HIDKeyboardModifierMappingDst": 0x700000017},{"HIDKeyboardModifierMappingSrc": 0x70000000F,
+STRING "HIDKeyboardModifierMappingDst": 0x700000011},{"HIDKeyboardModifierMappingSrc": 0x700000033,"HIDKeyboardModifierMappingDst": 0x700000016},{"HIDKeyboardModifierMappingSrc": 0x700000034,
+STRING "HIDKeyboardModifierMappingDst": 0x70000002D},{"HIDKeyboardModifierMappingSrc": 0x70000001D,"HIDKeyboardModifierMappingDst": 0x700000033},{"HIDKeyboardModifierMappingSrc": 0x70000001B,
+STRING "HIDKeyboardModifierMappingDst": 0x700000014},{"HIDKeyboardModifierMappingSrc": 0x700000006,"HIDKeyboardModifierMappingDst": 0x70000000D},{"HIDKeyboardModifierMappingSrc": 0x700000019,
+STRING "HIDKeyboardModifierMappingDst": 0x70000000E},{"HIDKeyboardModifierMappingSrc": 0x700000005,"HIDKeyboardModifierMappingDst": 0x70000001B},{"HIDKeyboardModifierMappingSrc": 0x700000011,
+STRING "HIDKeyboardModifierMappingDst": 0x700000005},{"HIDKeyboardModifierMappingSrc": 0x700000010,"HIDKeyboardModifierMappingDst": 0x700000010},{"HIDKeyboardModifierMappingSrc": 0x700000036,"HIDKeyboardModifierMappingDst": 0x70000001A},
+STRING {"HIDKeyboardModifierMappingSrc": 0x700000037,"HIDKeyboardModifierMappingDst": 0x700000019},{"HIDKeyboardModifierMappingSrc": 0x700000038,"HIDKeyboardModifierMappingDst": 0x70000001D}]}'
+DELAY 3500
+ENTER

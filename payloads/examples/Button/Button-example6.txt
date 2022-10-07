@@ -1,1 +1,23 @@
-BUTTON_DEF  REM This is the first button definition  STRINGLN The button was pressed once!  BUTTON_DEF    REM This second button definition     REM overwrites the first    STRINGLN The button was pressed twice!  END_BUTTONEND_BUTTONSTRING Press the button twice to seeSTRING how nested button definitions work!ENTERWHILE TRUE  STRING .  DELAY 1000END WHILEREM If the button is pressed once at any point in the payload it will stop typing “.” and the first button definition will be executed.REM When the first button definition is executed, a secondary button definition will be implemented.REM If the button pressed a second time, the newly implement second button definition will execute.
+BUTTON_DEF
+  REM This is the first button definition
+  STRINGLN The button was pressed once!
+  BUTTON_DEF
+    REM This second button definition 
+    REM overwrites the first
+    STRINGLN The button was pressed twice!
+  END_BUTTON
+END_BUTTON
+
+STRING Press the button twice to see
+STRING how nested button definitions work!
+ENTER
+
+WHILE TRUE
+  STRING .
+  DELAY 1000
+END_WHILE
+
+
+REM If the button is pressed once at any point in the payload it will stop typing “.” and the first button definition will be executed.
+REM When the first button definition is executed, a secondary button definition will be implemented.
+REM If the button pressed a second time, the newly implement second button definition will execute.

