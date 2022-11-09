@@ -1,4 +1,4 @@
-# Payload Library for the [USB Rubber Ducky](https://hak5.org/products/usb-rubber-ducky?variant=39874478932081) by [Hak5](hak5.org)
+# Payload Library for the [USB Rubber Ducky](https://hak5.org/products/usb-rubber-ducky?variant=39874478932081) by [Hak5](https://hak5.org)
 
 This repository contains payloads and extensions for the Hak5 USB Rubber Ducky. Community developed payloads are listed and developers are encouraged to create pull requests to make changes to or submit new payloads.
 
