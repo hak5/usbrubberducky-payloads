@@ -138,8 +138,8 @@ OR
 
 ## DuckyScript Ecosystem
 
-<h3><a href='https://github.com/dallaswinger/usbrubberducky-payloads/blob/master/languages'>Languages </a></h3>
-Support for different keyboard layouts can be found, modified or contributed to in the <b><a href='https://github.com/dallaswinger/usbrubberducky-payloads/blob/master/languages'> languages/ </a></b> directory of this repository.
+<h3><a href='https://github.com/hak5/usbrubberducky-payloads/blob/master/languages'>Languages </a></h3>
+Support for different keyboard layouts can be found, modified or contributed to in the <b><a href='https://github.com/hak5/usbrubberducky-payloads/blob/master/languages'> languages/ </a></b> directory of this repository.
 
 Compiling payloads for the correct language / keyboard layout has never been easier:
 
@@ -149,7 +149,7 @@ PayloadStudio includes all the languages provided in this repo built-in for your
 
 <a href="https://hak5.org/products/payload-studio-pro">PayloadStudio Pro</a> has a <b>dedicated language editor</b> specifically for editing and building language files! 
 
-The default language is US <a href='https://github.com/dallaswinger/usbrubberducky-payloads/blob/master/languages/us.json'>(languages/us.json)</a>
+The default language is US <a href='https://github.com/hak5/usbrubberducky-payloads/blob/master/languages/us.json'>(languages/us.json)</a>
 
 <h3><a href="https://docs.hak5.org/hak5-usb-rubber-ducky/advanced-features/extensions">Extensions</a></h3>
 It should be clear by now that so much is possible with DuckyScript 3.0. The combination of  keystroke injection with various attack modes, logic and data processing, along with the built-in features like randomization and internal variables — the possibilities for advanced payload functions seems endless.
