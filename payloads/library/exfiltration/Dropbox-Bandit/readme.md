@@ -1,3 +1,4 @@
+
 # **Dropbox Bandit**
 This payload is designed to target Windows 10/11 machines, but but may run on older versions of Windows. If you are using an older Rubber Ducky please use the "payload_duckyscript_old.txt" file.
 
@@ -29,8 +30,8 @@ This payload extracts files from a specific location on a target's machine and u
 -- Go to the "Settings" tab and copy your "App key" and "App secret"
 -- Go to the "Settings" tab -> OAuth 2 -> Generated Access token and copy the token that you generate. **Important: This token will expire in 4 hours**, so you will only use this one to get your refresh token
 -- Enter this link in your browser: https://www.dropbox.com/oauth2/authorize?client_id=YOUR_APP_KEY_GOES_HERE&token_access_type=offline&response_type=code, but ensure you replace "YOUR_APP_KEY_GOES_HERE" with your app key from above
--- Click "Continue" and "Allow" and then copy the token it gives you. 
--- Open a command prompt and type "curl https://api.dropbox.com/oauth2/token -d code=THE_CODE_YOU_GOT_FROM_THE_LAST_STEP -d grant_type=authorization_code -u YOUR_APP_KEY:YOUR_APP_SECRET". Hit enter and then copy the "refresh_token" from the result. This is your "refresh_token"
+* Click "Continue" and "Allow" and then copy the token it gives you. 
+* Open a command prompt and type "curl https://api.dropbox.com/oauth2/token -d code=THE_CODE_YOU_GOT_FROM_THE_LAST_STEP -d grant_type=authorization_code -u YOUR_APP_KEY:YOUR_APP_SECRET". Hit enter and then copy the "refresh_token" from the result. This is your "refresh_token"
 - Now that we have all our dropbox information, download the powershell script "ex.ps1"
 -- Set $s to the folder you want to exfiltrate data from
 -- Set $fileTypes to the filters for what files you want to grab
