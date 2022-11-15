@@ -22,14 +22,15 @@ With automatic setup:
 Define INSTALL and set it to TRUE
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/install.png)
 
+Define the IP of your attacking machine between the quotes at the ATTACKER section
+![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/ip.png)
+
 Open up a terminal and put it into focus. Insert the Ducky into your non-Windows attack machine - wait for it to finish setup (Linux recommended - Perl required!)
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/setup.png)
 
 Start the client -> `perl PingZhellDucky.pl`
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/Client.png)
 
-Define the IP of your attacking machine between the quotes at the ATTACKER section
-![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/ip.png)
 <p>Plug your Ducky into a Windows target.<br>
 Achieve reverse shell.<br>
    run away <3</p>
