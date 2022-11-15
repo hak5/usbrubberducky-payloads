@@ -54,7 +54,7 @@ REM Set the default DELAY
 DEFINE WAIT 250
 REM Do you want to install the dependencies and set up the infratructre?
 REM Will trigger when not using Windows - Best use with Linux
-DEFINE INSTALL TRUE
+DEFINE INSTALL FALSE
 
 IF ($_OS == WINDOWS) THEN
     DELAY 1500
