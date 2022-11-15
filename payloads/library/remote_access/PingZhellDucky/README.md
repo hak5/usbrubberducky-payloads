@@ -16,22 +16,25 @@ Requirements: DuckyScript 3.0 higher</p>
 #
 After PingZhellCable and PingZhellBunny, PingZhellDucky released. But what is different? PZD gives you the option to set up the infrastructre when not used on a Windows machine (perl and elevated privs required).
 
-**Instruction:**
+**Instruction Version 1:**
+
 With automatic setup:
 Define INSTALL and set it to TRUE
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/install.png)
 
 Open up a terminal and put it into focus. Insert the Ducky into your non-Windows attack machine - wait for it to finish setup (Linux recommended - Perl required!)
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/setup.png)
+
 Start the client -> `perl PingZhellDucky.pl`
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/Client.png)
-<p>Define the IP of your attacking machine between the quotes at the ATTACKER section<br>
+
+Define the IP of your attacking machine between the quotes at the ATTACKER section
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/ip.png)
 <p>Plug your Ducky into a Windows target.<br>
 Achieve reverse shell.<br>
    run away <3</p>
 
-**Instruction II:**
+**Instruction Version 2:**
 Without automatic setup:
 Define INSTALL and set it to FALSE
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/install.png)
@@ -48,7 +51,7 @@ Disable ICMP replies by the OS:
 Start the client -> `perl PingZhellDucky.pl`
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/Client.png)
 
-<p>Define the IP of your attacking machine between the quotes at the ATTACKER section<br>
+Define the IP of your attacking machine between the quotes at the ATTACKER section
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/ip.png)
 
 <p>Plug your Ducky into a Windows target.<br>
