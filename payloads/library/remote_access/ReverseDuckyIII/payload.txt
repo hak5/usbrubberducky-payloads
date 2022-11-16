@@ -1,5 +1,5 @@
 REM       ReverseDucky3
-REM       Version 1.2
+REM       Version 1.2 (End of Life - This payload won't be updated anymore)
 REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
 REM       Author: 0iphor13
 
