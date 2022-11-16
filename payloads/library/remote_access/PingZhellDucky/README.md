@@ -2,8 +2,8 @@
 
 <p>Author: 0iphor13<br>
 OS: Windows & Unix<br>
-Version: 1.1<br>
-Requirements: DuckyScript 3.0 higher</p>
+Version: 1.2<br>
+Requirements: DuckyScript 3.0, perl</p>
 
 **What is PingZhellDucky?**
 #
