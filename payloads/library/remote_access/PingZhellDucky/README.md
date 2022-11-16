@@ -19,8 +19,7 @@ After PingZhellCable and PingZhellBunny, PingZhellDucky released. But what is di
 **Instruction Version 1:**
 
 With automatic setup:
-Define INSTALL and set it to TRUE
-Leave CLIENTLINK with default or choose your own
+Define INSTALL and set it to TRUE & Leave CLIENTLINK with default or choose your own
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/PingZhellDucky/media/setupauto.png)
 
 Define the IP of your attacking machine between the quotes at the ATTACKER section
