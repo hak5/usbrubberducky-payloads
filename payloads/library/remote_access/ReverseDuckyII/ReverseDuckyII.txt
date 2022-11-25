@@ -64,7 +64,6 @@ IF ($_OS == WINDOWS) THEN
 REM Capslock light will indicate a finished payload
     CAPSLOCK
 ELSE
-    DELAY WAIT
 REM Inserting the Ducky into a non Windows machine will result in ATTACKMODE OFF
     ATTACKMODE OFF
 END_IF
