@@ -1,6 +1,6 @@
 # Payload Library for the [USB Rubber Ducky](https://hak5.org/products/usb-rubber-ducky?variant=39874478932081) by [Hak5](https://hak5.org)
 
-This repository contains payloads and extensions for the Hak5 USB Rubber Ducky. Community developed payloads are listed and developers are encouraged to create pull requests to make changes to or submit new payloads.
+This repository contains payloads, extensions and languages for the Hak5 USB Rubber Ducky. Community developed payloads are listed and developers are encouraged to create pull requests to make changes to or submit new payloads.
 
 <div align="center">
 
@@ -32,7 +32,20 @@ This repository contains payloads and extensions for the Hak5 USB Rubber Ducky. 
 
 </div>
 
-# Shop
+# Table of contents
+<details>
+<ul>
+<li><a href="#shop">Links</a></li>
+<li><a href="#about-the-new-usb-rubber-ducky">About the USB Rubber Ducky</a></li>
+<li><a href="#build-your-payloads-with-payloadstudio">PayloadStudio (Editor + Compiler)</a></li>
+<li><a href="#about-duckyscript">About DuckyScript™</a></li>
+<li><a href="#contributing">Contributing Payloads</a></li>
+<li><a href="#legal"><b>Legal and Disclaimers</b></a></li>
+</ul> 
+</details>
+
+
+## Shop
 - [NEW USB Rubber Ducky](https://hak5.org/products/usb-rubber-ducky?variant=39874478932081 "Purchase the NEW USB Rubber Ducky")
 - [PayloadStudio Pro](https://hak5.org/products/payload-studio-pro "Purchase PayloadStudio Pro")
 - [Shop All Hak5 Tools](https://shop.hak5.org "Shop All Hak5 Tools")
@@ -224,6 +237,9 @@ Example:
 	REM Category: General
 </pre>
 
+## Staged Payloads
+While staging code used in payloads is often useful and appropriate, using this repository as the means of deploying those stages is not. This repository is **not a CDN for deployment on target systems**. URLs used for retrieving staged code should refer exclusively to **example.com** using DEFINE in any payload submissions (see above). Staged code should be copied to and hosted on an appropriate server for doing so - Github and this repository are simply resources for sharing code among developers and users.
+
 
 <h1><a href="https://hak5.org/pages/policy">Legal</a></h1>
 
@@ -236,4 +252,5 @@ This material is for education, authorized auditing and analysis purposes where 
 Hak5 LLC products and technology are only available to BIS recognized license exception ENC favorable treatment countries pursuant to US 15 CFR Supplement No 3 to Part 740.
 
 # Disclaimer
-Generally, payloads may execute commands on your device. As such, it is possible for a payload to damage your device. Payloads from this repository are provided AS-IS without warranty. While Hak5 makes a best effort to review payloads, there are no guarantees as to their effectiveness. As with any script, you are advised to proceed with caution.
+<h3><b>As with any script, you are advised to proceed with caution.</h3></b>
+<h3><b>Generally, payloads may execute commands on your device. As such, it is possible for a payload to damage your device. Payloads from this repository are provided AS-IS without warranty. While Hak5 makes a best effort to review payloads, there are no guarantees as to their effectiveness.</h3></b>
