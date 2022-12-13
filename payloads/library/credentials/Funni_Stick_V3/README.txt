@@ -1,7 +1,7 @@
 Funni Stick V3 is the third generation of Maker Inc. Funni Stick Products.
 Steal Windows Passwords in 30 Seconds (or less)!
 
-It runs on the same core principle as the "Simple_User_Password_Grabber" by makozort (https://github.com/makozort thank you makozort!)
+It runs on the same core principle as the "Simple_User_Password_Grabber" by foxtrot
 This time using the Twin Duck Firmware on the Rubber-Ducky and a couple of optimiziations it's just the slightest bit faster + it doesnt require Internet access to work potentailly bypassing any firewall/network restrictions.
 One less Dependancy is always good.
 
