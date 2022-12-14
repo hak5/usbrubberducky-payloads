@@ -17,7 +17,7 @@
   </ol>
 </details>
 
-# Printer-Recon
+# Priv-Paths
 
 ## Description
 
