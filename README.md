@@ -192,7 +192,7 @@ While Hak5 developers cannot envision all possible use cases for the USB Rubber 
 Once you have developed your payload, you are encouraged to contribute to this repository by submitting a Pull Request. Reviewed and Approved pull requests will add your payload to this repository, where they may be publically available.
 
 # Please adhere to the following best practices and style guides when submitting a payload.
-### Purely Desctructive payloads will not be accepted. No, it's not "just a prank".
+### Purely Destructive payloads will not be accepted. No, it's not "just a prank".
 Subject to change. Please ensure any submissions meet the [latest version](https://github.com/hak5/usbrubberducky-payloads/blob/master/README.md) of these standards before submitting a Pull Request.
 
 
