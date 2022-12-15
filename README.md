@@ -2,8 +2,11 @@
 
 This repository contains payloads, extensions and languages for the Hak5 USB Rubber Ducky. Community developed payloads are listed and developers are encouraged to create pull requests to make changes to or submit new payloads.
 
-<div align="center">
+**Payloads here are written in official DuckyScript™ specifically for the USB Rubber Ducky. Payloads here must be compiled using Hak5 PayloadStudio. Hak5 does NOT guarantee payload functionality.** <a href="#legal"><b>See Legal and Disclaimers</b></a>
 
+
+
+<div align="center">
 <img src="https://img.shields.io/github/forks/hak5/usbrubberducky-payloads?style=for-the-badge"/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://img.shields.io/github/stars/hak5/usbrubberducky-payloads?style=for-the-badge"/>
@@ -192,7 +195,7 @@ While Hak5 developers cannot envision all possible use cases for the USB Rubber 
 Once you have developed your payload, you are encouraged to contribute to this repository by submitting a Pull Request. Reviewed and Approved pull requests will add your payload to this repository, where they may be publically available.
 
 # Please adhere to the following best practices and style guides when submitting a payload.
-### Purely Desctructive payloads will not be accepted. No, it's not "just a prank".
+### Purely Destructive payloads will not be accepted. No, it's not "just a prank".
 Subject to change. Please ensure any submissions meet the [latest version](https://github.com/hak5/usbrubberducky-payloads/blob/master/README.md) of these standards before submitting a Pull Request.
 
 
