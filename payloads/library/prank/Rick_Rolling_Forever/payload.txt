@@ -1,6 +1,6 @@
 REM Title: Rick Rolling Forever
 REM Author:	UberGuidoZ
-REM Inspired by burnttoast when assisting with a LONG script (pver 2,750 lines!)
+REM Inspired by burnttoast when assisting with a LONG script (over 2,750 lines!)
 REM
 REM Description: Creates a batch file that opens a Rick Roll every 5 mins in default browser
 REM Notes: Creates batch file, starts batch file, minimizes the window
