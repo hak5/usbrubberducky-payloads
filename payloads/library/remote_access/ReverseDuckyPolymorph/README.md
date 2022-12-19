@@ -14,10 +14,11 @@ Requirements: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum</p>
 **Instruction**
 
 Using ReverseDuckyPolymorph is easy and straight forward.
-First, start a listener on your attacking machine via the tool of your choice.
-Second, define the IP-Address and Port of your listening machine
+- First, start a listener on your attacking machine via the tool of your choice.
+- Second, define the IP-Address and Port of your listening machine
+
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/ReverseDuckyPolymorph/media/listener.png)
-Third, compile the payload, using payloadstudio in version 1.3.0 minimum, transfer it onto your Ducky and you are good to go.
+- Third, compile the payload, using payloadstudio in version 1.3.0 minimum, transfer it onto your Ducky and you are good to go.
 #
 Every session you will gain via this payload will result in a different ID to verify a different pattern.
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/ReverseDuckyPolymorph/media/ID.png)
