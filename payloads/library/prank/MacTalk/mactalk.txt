@@ -1,0 +1,25 @@
+REM Title: MACTALK
+REM Author: Ecto-1A
+REM Description: Opens terminal, turns the volume to max 
+REM and makes the computer say "Hello! We've been trying to reach you about your cars extended warrantee!"
+REM using the Macs built in text to speach function
+REM Target: MacOS 
+REM Version: 1.0
+REM Category: Prank
+
+DELAY 500
+GUI SPACE
+DELAY 500
+STRING terminal
+DELAY 200
+ENTER
+DELAY 500
+STRING osascript -e "set Volume 10"
+DELAY 500
+ENTER
+DELAY 500
+STRING say Hello! We have been trying to reach you about your cars extended warrantee!
+DELAY 500
+ENTER
+DELAY 200
+GUI M
