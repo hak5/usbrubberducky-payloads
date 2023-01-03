@@ -7,7 +7,7 @@
 - Props: *[Hak5Darren](https://github.com/hak5darren)* for original idea, *[Kalani](https://github.com/kalanihelekunihi)* & Shinichi Kudo for info on backspace CVE
 
 ## Description
-An updated version of Hak5 episode 1217.1 android pin brute force method using just Ducky Script 3. Please not this brute force method is at least 10-year-old at time of writing. So, will not work on modern android phones. But give you a PoC of a way it could of be written.
+An updated version of Hak5 episode 1217.1 android pin brute force method using just Ducky Script 3. Please note this brute force method is at least 10-year-old at time of writing. So, will not work on modern android phones. But gives you a PoC of a way it could of be written.
 
 There is also a version to work with CVE-2017-10709 that uses backspaces.
 
