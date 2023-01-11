@@ -46,9 +46,7 @@ REM This is the message that will be sent.
 REM You can change it as you want, if you want.
 STRING YOUR_MESSAGE
 ENTER
-DELAY 500
-ALT F4
-DELAY 500
-ALT F4
+
+REM Closing Signal App
 DELAY 500
 ALT F4
