@@ -49,7 +49,7 @@ EXTENSION EXTENSION PASSIVE_WINDOWS_DETECT
 END_EXTENSION
 
 DEFINE #WINDOW_OPEN_DELAY 350
-REM Example available at http://h4k.cc/s.wav
+REM link to hosted .wav file
 DEFINE #WAV_FILE_URL http://example.com
 IF ($_OS == WINDOWS) THEN
     GUI r
