@@ -11,7 +11,7 @@ REM #########################################
 REM Requirements:
 REM   - Internet Connection
 REM   - Signal App installed
-REM   - Plugin Plug-And-Play but can be edited as you want the message
+REM Payload Plug-And-Play but can be edited as you want the message
 
 DELAY 1000
 GUI r
