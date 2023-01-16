@@ -1,0 +1,20 @@
+REM PUBLIC-SERVICE-ANNOUCEMENT
+REM (or (EAS)ter-eggs)
+REM By Lumen
+REM Warns the user of the danger of ducks!
+DELAY 500
+GUI r
+DELAY 300
+STRING powershell
+DELAY 300
+ENTER
+DELAY 600
+STRING Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Lumen-git/RubberDucky-PublicServiceAnnouncement/main/a_friendly_psa.txt?token=GHSAT0AAAAAAB5G6IXPEOGD37CAQ7IMOSZOY6E4R5A" -OutFile "~\Desktop\a_friendly_psa.txt"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Lumen-git/RubberDucky-PublicServiceAnnouncement/main/egg1.jpg?token=GHSAT0AAAAAAB5G6IXOLVTSXOWIABYPDKRSY6E4THA" -OutFile "~\Documents\egg1.png"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Lumen-git/RubberDucky-PublicServiceAnnouncement/main/egg2.jpg?token=GHSAT0AAAAAAB5G6IXOHAJAQ4XFLR5YBUOUY6E4X3A" -OutFile "~\Pictures\egg2.png"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Lumen-git/RubberDucky-PublicServiceAnnouncement/main/egg3.jpg?token=GHSAT0AAAAAAB5G6IXP5GW3XARQKHGZS47MY6E4YFA" -OutFile "~\Documents\My Games\egg3.png"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Lumen-git/RubberDucky-PublicServiceAnnouncement/main/egg5.jpg?token=GHSAT0AAAAAAB5G6IXO3KJDFSXJXFITMAVQY6E4YMA" -OutFile "~\Downloads\egg5.png"; & ~\Desktop\a_friendly_psa.txt
+ENTER
+REM This script makes heavy use of the Invoke-WebRequest command, which
+REM gathers a webpage and optionally saves it
+REM Here, we use it to give the user a nice warning about security :D
+REM This script hides 4 eggs, gives a little warning, and may
+REM or may not send them on a quest for a mythical 5th egg ¯\_(ツ)_/¯
+REM These statements can be removed to save on space, and the links above
+REM can be cahnged to short links to save on typing time
