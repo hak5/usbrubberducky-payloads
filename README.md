@@ -202,6 +202,12 @@ Subject to change. Please ensure any submissions meet the [latest version](https
 ## Naming Conventions
 Please give your payload a unique, descriptive and appropriate name. Do not use spaces in payload, directory or file names. Each payload should be submit into its own directory, with `-` or `_` used in place of spaces, to one of the categories such as exfiltration, phishing, remote_access or recon. Do not create your own category.
 
+## Staged Payloads
+While staging code used in payloads is often useful and appropriate, using this repository as the means of deploying those stages is not. This repository is **not a CDN for deployment on target systems**. URLs used for retrieving staged code should refer exclusively to **example.com** using DEFINE in any payload submissions (see above). Staged code should be copied to and hosted on an appropriate server for doing so - Github and this repository are simply resources for sharing code among developers and users.
+See: [GitHub acceptable use policies](https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies#5-site-access-and-safety)
+
+Additionally, any source code that is intended to be staged **(by the end user on the appropriate infrastructure)** should be included in any payload submissions either in the comments of the payload itself or as a seperate file. **Links to staged code are unacceptable**; not only for the reasons listed above but also for version control and user safety reasons. Arbitrary code hidden behind some pre-defined external resource via URL in a payload could be replaced at any point in the future unbeknownst to the user -- potentially turning a harmless payload into something dangerous.
+
 ## Payload Configuration
 In many cases, payloads will require some level of configuration by the end payload user. Be sure to take the following into careful consideration to ensure your payload is easily tested, used and maintained. 
 
@@ -239,10 +245,6 @@ Example:
 	REM Version: 1.0
 	REM Category: General
 </pre>
-
-## Staged Payloads
-While staging code used in payloads is often useful and appropriate, using this repository as the means of deploying those stages is not. This repository is **not a CDN for deployment on target systems**. URLs used for retrieving staged code should refer exclusively to **example.com** using DEFINE in any payload submissions (see above). Staged code should be copied to and hosted on an appropriate server for doing so - Github and this repository are simply resources for sharing code among developers and users.
-
 
 <h1><a href="https://hak5.org/pages/policy">Legal</a></h1>
 
