@@ -10,7 +10,11 @@ REM featured on 'Painful Screaming Payload of DOOM - Hak5 2517'
 REM https://www.youtube.com/watch?v=nuN6PqrnB7Q
 REM https://forums.hak5.org/topic/46078-payload-making-windows-scream-when-you-unplug-devices/
 
-EXTENSION EXTENSION PASSIVE_WINDOWS_DETECT
+DEFINE #WINDOW_OPEN_DELAY 350
+REM link to hosted .wav file
+DEFINE #WAV_FILE_URL http://example.com
+
+EXTENSION PASSIVE_WINDOWS_DETECT
     REM VERSION 1.0
 
     REM Windows fully passive OS Detection and passive Detect Ready
@@ -48,9 +52,6 @@ EXTENSION EXTENSION PASSIVE_WINDOWS_DETECT
     REM END_IF
 END_EXTENSION
 
-DEFINE #WINDOW_OPEN_DELAY 350
-REM link to hosted .wav file
-DEFINE #WAV_FILE_URL http://example.com
 IF ($_OS == WINDOWS) THEN
     GUI r
     DELAY #WINDOW_OPEN_DELAY
