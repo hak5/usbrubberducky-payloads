@@ -1,8 +1,8 @@
 **Title: ReverseDuckyPolymorph**
 
-<p>Author: 0iphor13<br>
+<p>Author: 0iphor13, Korben<br>
 OS: Windows<br>
-Version: 1.0<br>
+Version: 1.1<br>
 Requirements: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum</p>
 
 **What is ReverseDuckyPolymorph?**
