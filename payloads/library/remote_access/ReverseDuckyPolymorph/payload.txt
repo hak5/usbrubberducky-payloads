@@ -1,6 +1,6 @@
 REM Title: ReverseDuckyPolymorph
-REM Author: 0iphor13
-REM Version 1.0
+REM Author: 0iphor13, Korben
+REM Version 1.1
 
 REM Target: Windows / Linux(?) (Not tested with Powershell on Linux)
 REM Requirements: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum
