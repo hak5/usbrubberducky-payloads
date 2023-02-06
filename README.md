@@ -180,6 +180,10 @@ As the payload library continues to grow, so too will the DuckyScript 3.0 langua
 <b>Extensions are blocks of reusable code which may be implemented in any payload. Think of them as snippets, or building blocks, upon which your next payload may benefit.</b>
 While Hak5 developers cannot envision all possible use cases for the USB Rubber Ducky, the DuckyScript language has been architected in such a way so that the community as a whole may gain new features and abilities with each contributed extension.
 
+Extensions (beyond some first party examples) are currently reserved for collections of helper functions (+ required variables, defines, and configuration options) required to make a complex task simple - abstracting very complex problems down into one or a few calls for the ease of use to others (example: the translate extension).
+
+To add an extension to your payload, simply start typing the name of the desired extension in your payload from within PayloadStudio then select it from the auto-complete drop down. Alternatively the full library can be found from within the Extensions folder of this repo.
+
 [Read more here](https://docs.hak5.org/hak5-usb-rubber-ducky/advanced-features/extensions "Read more here")
 
 
