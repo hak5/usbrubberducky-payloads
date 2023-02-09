@@ -33,7 +33,7 @@ Establish NGROK Tunnel forwarding Traffic to our Hoaxshell Engine
 `ngrok http 8080`
 ![alt text](https://github.com/HackingMark/usbrubberducky-payloads/blob/master/payloads/library/remote_access/VillainShellviaNGROKTunnel/media/ngrok1.png)
 Leave this Window open
-![alt text](https://github.com/HackingMark/usbrubberducky-payloads/blob/master/payloads/library/remote_access/VillainShellviaNGROKTunnel/media/ngrok1.png)
+![alt text](https://github.com/HackingMark/usbrubberducky-payloads/blob/master/payloads/library/remote_access/VillainShellviaNGROKTunnel/media/ngrok2.png)
 
 **Preparing the Payload:**
 You need 2 Values from above: NGROK HTTPS Link and Session Identifier from Villain
@@ -44,4 +44,4 @@ Copy your Inject.bin to your Ducky!
 
 <p>Plug your Ducky into a Windows target.<br>
 Achieve reverse shell.<br>
-   open a shell with `shell {SESSION-ID}`</p>
+   open a shell with </p>`shell {SESSION-ID}`
