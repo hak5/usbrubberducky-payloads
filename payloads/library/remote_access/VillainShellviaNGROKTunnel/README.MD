@@ -38,7 +38,7 @@ Leave this Window open
 **Preparing the Payload:**
 You need 2 Values from above: NGROK HTTPS Link and Session Identifier from Villain
 Put it into the Payload then compile it to inject.bin
-![alt text](https://github.com/HackingMark/usbrubberducky-payloads/blob/master/payloads/library/remote_access/VillainShellviaNGROKTunnel/media/payloadstudio)
+![alt text](https://github.com/HackingMark/usbrubberducky-payloads/blob/master/payloads/library/remote_access/VillainShellviaNGROKTunnel/media/payloadstudio.png)
 
 Copy your Inject.bin to your Ducky!
 
