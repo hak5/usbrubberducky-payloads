@@ -37,11 +37,12 @@ Leave this Window open
 
 **Preparing the Payload:**
 You need 2 Values from above: NGROK HTTPS Link and Session Identifier from Villain
-Put it into the Payload then compile it to inject.bin
+Put it into the Payload then compile it to inject.bin and download.
 ![alt text](https://github.com/HackingMark/usbrubberducky-payloads/blob/master/payloads/library/remote_access/VillainShellviaNGROKTunnel/media/payloadstudio.png)
 
 Copy your Inject.bin to your Ducky!
 
 <p>Plug your Ducky into a Windows target.<br>
 Achieve reverse shell.<br>
-   open a shell with </p>`shell {SESSION-ID}`
+   open a shell with </p>
+   `shell SESSION-ID`
