@@ -1,0 +1,24 @@
+So you left your computer unlocked...
+
+Not a good idea! It only takes a few seconds of access to your computer
+download, install, and execute code! For example, someone could use a tool
+called a USB Rubber Ducky (https://shop.hak5.org/products/usb-rubber-ducky)
+to quickly inject code into your PC... which somebody already did!
+
+If you're seeing this, it means someone plugged a device into your computer
+and used a piece of code called PUBLIC_SERVICE_ANNOUNCEMENT
+(https://github.com/Lumen-git/RubberDucky-PublicServiceAnnouncement)
+to warn you of the dangers of leaving your computer unlocked in a public space! Now, 5 
+images of Easter Eggs have been downloaded to your computer. I'll give you a hint, 
+the first is in "My Documents". 
+
+Just think if someone downloaded a crypto miner! Or uploaded all your files
+to the internet! Stay safe, and protect your PC!
+
+
+Computer Safety Tips (see #6!!): https://security.berkeley.edu/resources/best-practices-how-to-articles/top-10-secure-computing-tips
+Other USB attacks that could have happened: https://www.bleepingcomputer.com/news/security/heres-a-list-of-29-different-types-of-usb-attacks/
+
+
+Although the code was written my Lumen, they do not suggest its use on targets
+without permission, nor do they hold any responsibility for its use.

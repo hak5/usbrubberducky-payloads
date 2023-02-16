@@ -1,0 +1,42 @@
+REM PUBLIC-SERVICE-ANNOUCEMENT
+REM (or (EAS)ter-eggs)
+REM By Lumen
+REM Warns the user of the danger of ducks!
+DEFINE EGG1 example.com/egg1.png
+DEFINE EGG2 example.com/egg2.png
+DEFINE EGG3 example.com/egg3.png
+DEFINE EGG4 example.com/egg5.png
+DEFINE TEXTFILE example.com/a_friendly_psa.txt
+REM See below for how to configure these URLs
+DELAY 500
+GUI r
+DELAY 300
+STRING powershell
+DELAY 300
+ENTER
+DELAY 600
+STRING Invoke-WebRequest -Uri "
+STRING TEXTFILE
+STRING " -OutFile "~\Desktop\a_friendly_psa.txt"; Invoke-WebRequest -Uri "
+STRING EGG1
+STRING " -OutFile "~\Documents\egg1.png"; Invoke-WebRequest -Uri "
+STRING EGG2
+STRING " -OutFile "~\Pictures\egg2.png"; Invoke-WebRequest -Uri "
+STRING EGG3
+STRING " -OutFile "~\Documents\My Games\egg3.png"; Invoke-WebRequest -Uri "
+STRING EGG4
+STRING " -OutFile "~\Downloads\egg5.png"; & ~\Desktop\a_friendly_psa.txt
+ENTER
+REM This script makes heavy use of the Invoke-WebRequest command, which
+REM gathers a webpage and optionally saves it
+REM Here, we use it to give the user a nice warning about security :D
+REM This script hides 4 eggs, gives a little warning, and may
+REM or may not send them on a quest for a mythical 5th egg ¯\_(ツ)_/¯
+REM These statements can be removed to save on space, and the links above
+REM can be changed to short links to save on typing time
+
+REM To set up the URLs for deployment, use a file share service to host
+REM the 4 images and text files that come with this payload.
+REM Any file share can be used as long as it offers a link
+REM directly to the file that can be saved or downloaded
+REM (for example, a dropbox link with ?dl=1 at the end)
