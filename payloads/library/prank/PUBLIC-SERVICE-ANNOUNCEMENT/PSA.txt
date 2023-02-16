@@ -2,11 +2,12 @@ REM PUBLIC-SERVICE-ANNOUCEMENT
 REM (or (EAS)ter-eggs)
 REM By Lumen
 REM Warns the user of the danger of ducks!
-DEFINE EGG1 https://www.dropbox.com/s/dlvhuf1x1l1ct7u/egg1.jpg?dl=1
-DEFINE EGG2 https://www.dropbox.com/s/x8ixq8wbkeebnor/egg2.jpg?dl=1
-DEFINE EGG3 https://www.dropbox.com/s/foj6om7kdhljof2/egg3.jpg?dl=1
-DEFINE EGG4 https://www.dropbox.com/s/15zj4z5vl25740z/egg5.jpg?dl=1
-DEFINE TEXTFILE https://www.dropbox.com/s/imj78m8t0lprzrr/a_friendly_psa.txt?dl=1
+DEFINE EGG1 example.com/egg1.png
+DEFINE EGG2 example.com/egg2.png
+DEFINE EGG3 example.com/egg3.png
+DEFINE EGG4 example.com/egg5.png
+DEFINE TEXTFILE example.com/a_friendly_psa.txt
+REM See below for how to configure these URLs
 DELAY 500
 GUI r
 DELAY 300
@@ -33,4 +34,9 @@ REM This script hides 4 eggs, gives a little warning, and may
 REM or may not send them on a quest for a mythical 5th egg ¯\_(ツ)_/¯
 REM These statements can be removed to save on space, and the links above
 REM can be changed to short links to save on typing time
-REM All files are on DropBox, but copies for self hosting can be found in the Git repo
+
+REM To set up the URLs for deployment, use a file share service to host
+REM the 4 images and text files that come with this payload.
+REM Any file share can be used as long as it offers a link
+REM directly to the file that can be saved or downloaded
+REM (for example, a dropbox link with ?dl=1 at the end)
