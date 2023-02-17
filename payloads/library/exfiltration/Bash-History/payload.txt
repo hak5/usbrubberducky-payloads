@@ -1,7 +1,7 @@
 REM Title: Bash-History
 REM Author: Zoe Ronen
 REM Description: This payload is meant to exfiltrate bash history to a dropbox
-REM Target: Linux
+REM Target: Linux/Xfce4
 
 DELAY 500
 ALT-F2
