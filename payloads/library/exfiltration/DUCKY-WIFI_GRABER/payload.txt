@@ -80,7 +80,7 @@ STRING $SMTPInfo.Send($ReportEmail)
 ENTER
 REM Delete Log.txt and exit
 DELAY 3000
-STRING del Log.txt
+STRINGLN del Log.txt
 DELAY 500
-STRING exit
+STRINGLN exit
 ENTER
