@@ -1,0 +1,236 @@
+REM TITLE Hey Got Any Grapes?
+REM AUTHOR Cribbit
+REM DESCRIPTION Get Powershell or MacOS "say" or Linux (ubuntu) "espeak" to speak the opening of the duck song
+REM NOTE espeak need to be install on the system for it to work
+REM PROP Song by Bryant Oden
+
+EXTENSION OS_DETECTION
+    REM VERSION 1.0
+
+    REM USB Rubber Ducky Host OS Detection
+    REM Generic OS detection at a high view is a moving target
+    REM results may vary greatly depending 
+    REM on a combination of many variables:
+    REM  - number of testing stages
+    REM  - specific devices and versions tested against
+    REM  - number of systems testing for (scope)
+    REM  - detection techniques (passive/invisible/active/hybrid)
+    REM  - overall speed
+    REM  - overall accuracy
+
+    REM TARGET:
+    REM DEFAULT - Windows, Mac, Linux
+    REM ADVANCED_DETECTION - Windows, Mac, Linux, iOS, ChromeOS, Android
+
+    REM USAGE:
+    REM Uncomment the function call below to run this extension inline (here)
+    REM or call DETECT_OS() anywhere in your payload after the extension
+    REM Place this extension and the DETECT_OS() before
+    REM you would like to first reference $_OS to execute payload code conditionally
+
+    REM CONFIGURATION:
+    DEFINE VERBOSE FALSE
+    DEFINE ADVANCED_DETECTION FALSE
+    DEFINE STARTUP_DELAY 1500
+    DEFINE RESTART_WAIT 1000
+    DEFINE CONNECT_WAIT 1000
+    DEFINE OS_DETECT_MODE HID
+    DEFINE OS_DETECT_VID VID_05AC
+    DEFINE OS_DETECT_PID PID_021E
+    DEFINE WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE HOST_RESPONSE_TIMEOUT 1000
+
+    FUNCTION DETECT_OS()
+        $_HOST_CONFIGURATION_REQUEST_COUNT = 0
+        ATTACKMODE OS_DETECT_MODE OS_DETECT_VID OS_DETECT_PID
+        DELAY STARTUP_DELAY
+        SAVE_HOST_KEYBOARD_LOCK_STATE
+
+        IF VERBOSE THEN
+            IF ADVANCED_DETECTION THEN
+                STRING ADVANCED OS DETECT
+            ELSE 
+                STRING OS DETECT
+            END_IF
+
+            ENTER
+            STRING test caps
+        END_IF
+
+        IF ($_CAPSLOCK_ON == FALSE) THEN
+            LED_R
+            CAPSLOCK
+            DELAY HOST_RESPONSE_TIMEOUT
+        END_IF
+        LED_OFF
+
+        IF VERBOSE THEN
+            ENTER
+            STRING test done
+        END_IF
+
+        IF $_RECEIVED_HOST_LOCK_LED_REPLY THEN
+            IF VERBOSE THEN
+                ENTER
+                STRING received led response
+            END_IF
+            LED_G
+            IF ($_HOST_CONFIGURATION_REQUEST_COUNT > WINDOWS_HOST_REQUEST_COUNT) THEN
+                IF VERBOSE THEN
+                    ENTER
+                    STRING prediction: Windows
+                END_IF
+                $_OS = WINDOWS
+            ELSE
+                IF VERBOSE THEN
+                    ENTER
+                    STRING prediction: Linux
+                END_IF
+                $_OS = LINUX
+            END_IF
+        ELSE
+            IF VERBOSE THEN
+                ENTER
+                STRING no led response
+                ENTER
+                STRING prediciton: MacOS
+            END_IF
+            $_OS = MACOS
+        END_IF
+
+        IF ADVANCED_DETECTION THEN
+            IF ( $_OS == LINUX ) THEN
+                IF VERBOSE THEN
+                    ENTER
+                    STRING soft reconnect
+                END_IF
+                ATTACKMODE OFF
+                DELAY RESTART_WAIT
+                ATTACKMODE OS_DETECT_MODE OS_DETECT_VID OS_DETECT_PID
+                DELAY CONNECT_WAIT
+                IF VERBOSE THEN
+                    ENTER
+                    STRING reconnected
+                END_IF
+                IF ($_CAPSLOCK_ON == TRUE) THEN
+                    IF VERBOSE THEN
+                        ENTER
+                        STRING caps led on
+                        ENTER
+                        STRING test numlock
+                    END_IF
+                    NUMLOCK
+                    DELAY HOST_RESPONSE_TIMEOUT
+                    IF VERBOSE THEN
+                        ENTER
+                        STRING test done
+                    END_IF
+                    IF ($_NUMLOCK_ON == FALSE) THEN
+                        IF VERBOSE THEN
+                            ENTER
+                            STRING no numlock led
+                            ENTER
+                            STRING prediciton: ChromeOS
+                        END_IF
+                        $_OS = CHROMEOS
+                    ELSE
+                        IF VERBOSE THEN
+                            ENTER
+                            STRING numlock led on
+                            ENTER
+                            STRING testing scrolllock
+                        END_IF
+                        SCROLLLOCK
+                        DELAY HOST_RESPONSE_TIMEOUT
+                        IF VERBOSE THEN
+                            ENTER
+                            STRING test done
+                        END_IF
+                        IF ($_SCROLLLOCK_ON == TRUE) THEN
+                            IF VERBOSE THEN
+                                ENTER
+                                STRING scrolllock led on
+                                ENTER
+                                STRING prediciton: Android
+                            END_IF
+                            $_OS = ANDROID
+                        ELSE
+                            IF VERBOSE THEN
+                                ENTER
+                                STRING no scrolllock reply
+                                ENTER
+                                STRING prediction: Linux
+                            END_IF
+                            $_OS = LINUX
+                        END_IF
+                    END_IF
+                END_IF
+            ELSE IF ($_OS == MACOS) THEN
+                IF ($_CAPSLOCK_ON == TRUE) THEN
+                    IF VERBOSE THEN
+                        ENTER
+                        STRING caps led on
+                        ENTER
+                        STRING prediction: iOS
+                    END_IF
+                    $_OS = IOS
+                ELSE 
+                    IF VERBOSE THEN
+                        ENTER
+                        STRING no caps reply
+                        ENTER
+                        STRING prediction: MacOS
+                    END_IF
+                    $_OS = MACOS
+                END_IF
+            ELSE IF ($_OS == WINDOWS) THEN
+                IF VERBOSE THEN
+                    ENTER
+                    STRING Confident Windows Prediction
+                END_IF
+                $_OS = WINDOWS
+            END_IF
+        END_IF
+
+        RESTORE_HOST_KEYBOARD_LOCK_STATE
+
+        IF VERBOSE THEN
+            ENTER
+            STRING OS_DETECT complete
+            ENTER
+        END_IF
+    END_FUNCTION
+
+    REM Uncomment the function call below to run this extension inline (here)
+    REM or call DETECT_OS() anywhere in your payload after the extension
+
+    REM DETECT_OS()
+END_EXTENSION
+
+
+DEFINE #DUCKSONG "A duck walked up to a lemonade stand and he said to the man, running the stand. Hey! Bum bum bum. Got any grapes? The man said No we just sell lemonade. But it's cold. And it's fresh. And it's all home-made. Can I get you a Glass? The duck said I'll pass! Then he waddled away. waddle waddle. Til the very next day. Bum bum bum bum bum bumbum" 
+
+DETECT_OS()
+
+IF ($_OS == WINDOWS) THEN
+    GUI r
+    DELAY 200
+    STRINGLN powershell
+    DELAY 300
+    REM the powershell version uses Speech Synthesis Markup Language so the speech can emphasis some words a change pitch for the duck
+    STRINGLN Add-Type -AssemblyName System.speech;(New-Object System.Speech.Synthesis.SpeechSynthesizer).SpeakSsml('<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">A duck walked up to a lemonade stand<break time="0.5s"/>And he said to the man, running the stand<break time="0.5s"/><prosody rate="fast"><emphasis>Hey!</emphasis></prosody><prosody pitch="x-low">Bum bum bum</prosody><break time="0.5s"/><prosody rate="fast"><emphasis>Got any grapes?</emphasis></prosody>The man said<break time="0.5s"/>No we just sell lemonade. But it''s cold. And it''s fresh. And it''s all home-made. Can I get you a <emphasis>Glass?</emphasis><break time="0.5s"/>The duck said<break time="0.5s"/><prosody rate="fast">I''ll <emphasis>pass!</emphasis></prosody>Then he waddled away<prosody pitch="x-low">waddle waddle</prosody><break time="0.2s"/>Til the very next day<prosody pitch="x-low">Bum bum bum<break time="0.2s"/>bum bum bumbum</prosody></speak>')
+ELSE IF ($_OS == MACOS)
+    COMMAND SPACE
+    DELAY 100
+    STRINGLN terminal
+    DELAY 100
+    STRING say
+    SPACE
+    STRINGLN #DUCKSONG
+ELSE IF ($_OS == LINUX)
+    CTRL-ALT t
+    DELAY 300
+    STRING espeak
+    SPACE
+    STRINGLN #DUCKSONG
+END_IF
