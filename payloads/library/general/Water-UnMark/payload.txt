@@ -7,6 +7,7 @@ DELAY 2000
 GUI r
 DELAY 100
 STRING powershell Start-Process powershell -verb runAs
+ENTER
 DELAY 1000
 ALT Y
 DELAY 1000
