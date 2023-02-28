@@ -12,7 +12,7 @@ Requirements: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum</p>
 #
 ## Instruction
 
-Using ReverseDuckyUltimate is easy and straight forward, for instructions for automatic setup, click [here](https://github.com/0iphor13/usbrubberducky-payloads/edit/master/payloads/library/remote_access/ReverseDuckyUltimate/README.md#instruction---automatic-setup).
+Using ReverseDuckyUltimate is easy and straight forward, for instructions for automatic setup, click [here](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/ReverseDuckyUltimate/README.md#instruction---automatic-setup).
 - First: Create key.pem & cert.pem like so: <br>
 ```
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
