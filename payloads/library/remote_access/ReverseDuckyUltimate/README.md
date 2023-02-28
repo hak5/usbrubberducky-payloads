@@ -8,7 +8,7 @@ Requirements: DuckyScript 3.0, PayloadStudio v. 1.3.0 minimum</p>
 **What is ReverseDuckyUlitmate?**
 #
 *ReverseDuckyUltimate (RDU) takes the best of every ReverseDucky payload. Customization, encryption, indentifiers, multi-layer polymorphism and automatic setup!*
-*RDU is the ulitmate experience when it comes to remote access via your Rubber Ducky and it's so easy to use! *
+*RDU is the ulitmate experience when it comes to remote access via your Rubber Ducky and it's so easy to use!*
 #
 ## Instruction
 
