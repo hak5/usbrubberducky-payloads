@@ -17,7 +17,7 @@ This payload exfiltrates Windows system information and installed programs from 
     - Create a Dropbox account.
     - [Create a Dropbox "App"](https://www.dropbox.com/developers/apps/create) with a "Scoped access" API and a "Full Dropbox" access.
     - Go to the settings of this app and write down your "App key" and "App secret".  
-    *These are your "<APP_KEY>" and "<APP_SECRET>".
+    *These are your "<APP_KEY>" and "<APP_SECRET>".*
     - Next, go to the "Permissions" tab and enable the "files.metadata.write" and "files.content.write" permissions.
     - After that, open this link in your browser *(values between brackets must be changed)*.
     ```
