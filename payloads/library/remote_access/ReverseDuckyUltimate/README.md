@@ -34,7 +34,7 @@ ncat --listen -p [Port Number] --ssl --ssl-cert cert.pem --ssl-key key.pem
 - Fourth: Compile the payload, using PayloadStudio in version 1.3.0 minimum, transfer it onto your Ducky and you are good to go.
 
 ## Instruction - Automatic Setup
-- First: Navigate to line 122 within the payload and set `#SETUP` to `TRUE` and set your desired `#PORT` to the port you want to use in line 119.
+- First: Navigate to `#SETUP` and set its value to `TRUE` and set your desired `#PORT` to the port you want to use.
 
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/ReverseDuckyUltimate/media/setup.png)
 
@@ -42,7 +42,7 @@ ncat --listen -p [Port Number] --ssl --ssl-cert cert.pem --ssl-key key.pem
 
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/ReverseDuckyUltimate/media/execsetup.png)
 
-- Third: After the automatic setup, a listener should be running on your machine. Now re-enter PayloadStudio, set `#SETUP` to `FALSE`, define your IP-Address in line 118, compile the payload and you're good to go!
+- Third: After the automatic setup, a listener should be running on your machine. Now re-enter PayloadStudio, set `#SETUP` to `FALSE`, define your IP-Address, compile the payload and you're good to go!
 
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/ReverseDuckyUltimate/media/autoip.png)
 #
