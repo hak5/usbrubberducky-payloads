@@ -31,7 +31,7 @@ $access_token = $access_token_response.access_token
 $headers = @{
 "Authorization" = "Bearer $access_token"
 "Content-Type" = "application/octet-stream"
-"Dropbox-API-Arg" = '{ "path": "/' + $env:computername + '-report.txt", "mode": "add", "autorename": true, "mute": false }'
+"Dropbox-API-Arg" = '{ "path": "/reports/' + $env:computername + '.txt", "mode": "add", "autorename": true, "mute": false }'
 }
 
 #Define the report for the file upload
