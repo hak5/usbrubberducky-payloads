@@ -130,7 +130,7 @@ The files in this repository are _the source code_ in the form of `payload.txt` 
 
 <h1><a href="https://shop.hak5.org/collections/usb-rubber-ducky-accessories/products/advanced-duckyscript-course">Learn DuckyScript directly from the creators</a></h1>
 <p align="center">
-<img width="500px" src="https://cdn.shopify.com/s/files/1/0068/2142/products/online-course-icon_2000x.png"/>
+<a href="https://shop.hak5.org/collections/usb-rubber-ducky-accessories/products/advanced-duckyscript-course"><img width="500px" src="https://cdn.shopify.com/s/files/1/0068/2142/products/online-course-icon_2000x.png"/></a>
 
 <p>
 Learn Advanced DuckyScript directly from the creators and unlock creative potential for the USB Rubber Ducky. Covering all aspects of advanced DuckyScript and Keystroke Injection attacks, these practical lessons build on one another from the basics on up.
