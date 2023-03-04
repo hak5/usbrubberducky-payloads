@@ -31,18 +31,19 @@ This repository contains payloads, extensions and languages for the Hak5 USB Rub
 <a href="https://youtube.com/hak5"><img src="https://img.shields.io/youtube/channel/subscribers/UC3s0BtrBJpwNDaflRSoiieQ?style=for-the-badge"/></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://twitter.com/hak5"><img src="https://img.shields.io/badge/follow-%40hak5-1DA1F2?logo=twitter&style=for-the-badge"/></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://instagram.com/hak5gear"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/></a>
 <br/><br/>
 
 </div>
 
 # Table of contents
-<details>
+<details open>
 <ul>
-<li><a href="#shop">Links</a></li>
 <li><a href="#about-the-new-usb-rubber-ducky">About the USB Rubber Ducky</a></li>
 <li><a href="#build-your-payloads-with-payloadstudio">PayloadStudio (Editor + Compiler)</a></li>
 <li><a href="#about-duckyscript">About DuckyScript™</a></li>
-<li><a href="#contributing">Contributing Payloads</a></li>
+<li><b><a href="#contributing">Contributing Payloads</a></b></li>
 <li><a href="#legal"><b>Legal and Disclaimers</b></a></li>
 </ul> 
 </details>
@@ -86,9 +87,11 @@ A "flash drive" that types keystroke injection payloads into unsuspecting device
 <br/><br/>
 </div></b>
 
-[![USB Rubber Ducky](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FW1Cy0NoSZJhOkaG7gk9t%2Fusb-rubber-ducky-3d-white-bg.png?alt=media&token=7a92ff75-c7ae-4280-b4da-690bef71dac8 "USB Rubber Ducky")](https://hak5.org/products/usb-rubber-ducky)
-
-<p align="center"><i> New USB Rubber Ducky (A+C, DuckyScript 3.0, 2022)</i></p>
+<p align="center">
+<a href="https://www.youtube.com/watch?v=meNlOrdQJFo"><img src="https://3076592524-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiIkRK_o3RBhZzUkrzr%2Fuploads%2FCiHTAeL8jlCA3mG7ltCF%2FScreencast%20from%2003-03-2023%2001_08_58%20PM.gif?alt=media"/></a>
+<br/>
+<i>New USB Rubber Ducky (A+C, DuckyScript 3.0, 2022)</i>
+</p>
 
 Computers trust humans. Humans use keyboards. Hence the universal spec — HID, or Human Interface Device.
 
@@ -97,6 +100,8 @@ A keyboard presents itself as a HID, and in turn it's inherently trusted as huma
 The USB Rubber Ducky — which looks like an innocent flash drive to humans — takes advantage of this trust to deliver powerful payloads, injecting keystrokes at superhuman speeds. 
 
 Easily automate any task you can perform with a keyboard with an easy to learn language designed specifically for the USB Rubber Ducky.
+
+
 
 # About DuckyScript™
 
@@ -123,12 +128,24 @@ _Compiled DuckyScript means that there is both `source code` and an `inject.bin`
 
 The files in this repository are _the source code_ in the form of `payload.txt` files. 
 
+<h1><a href="https://shop.hak5.org/collections/usb-rubber-ducky-accessories/products/advanced-duckyscript-course">Learn DuckyScript directly from the creators</a></h1>
+<p align="center">
+<a href="https://shop.hak5.org/collections/usb-rubber-ducky-accessories/products/advanced-duckyscript-course"><img width="500px" src="https://cdn.shopify.com/s/files/1/0068/2142/products/online-course-icon_2000x.png"/></a>
+
+<p>
+Learn Advanced DuckyScript directly from the creators and unlock creative potential for the USB Rubber Ducky. Covering all aspects of advanced DuckyScript and Keystroke Injection attacks, these practical lessons build on one another from the basics on up.
+
+This online course includes 7 hours of video instruction covering 54 lessons, 40+ exercises to reinforce your knowledge, quizzes throughout as well as 8 projects to test your skills.
+</p>
+</p>
+
+
 
 <h1><a href="https://payloadstudio.hak5.org">Build your payloads with PayloadStudio</a></h1>
 <p align="center">
 Take your DuckyScript™ payloads to the next level with this full-featured,<b> web-based (entirely client side) </b> development environment.
 <br/>
-<a href="https://payloadstudio.hak5.org"><img src="https://cdn.shopify.com/s/files/1/0068/2142/products/payload-studio-icon_180x.png?v=1659135374"></a>
+<a href="https://payloadstudio.hak5.org"><img width="500px" src="https://cdn.shopify.com/s/files/1/0068/2142/products/payload-studio-icon_2000x.png"></a>
 <br/>
 <i>Payload studio features all of the conveniences of a modern IDE, right from your browser. From syntax highlighting and auto-completion to live error-checking and repo synchronization - building payloads for Hak5 hotplug tools has never been easier!
 <br/><br/>
