@@ -1,6 +1,6 @@
 # Steal Linux Content With Dropbox - BADUSB ✅
 
-A script used to close all target open applications.
+A script used to steal folder content on Linux Systems.
 
 **Category**: Exfiltration, Execution
 
