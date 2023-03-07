@@ -1,6 +1,6 @@
-# Steal Linux Content With Dropbox - BADUSB ✅
+# Exfiltrate Linux Content With Dropbox - BADUSB ✅
 
-A script used to steal folder content on Linux Systems.
+A script used to take folder content on Linux Systems.
 
 **Category**: Exfiltration, Execution
 
@@ -8,7 +8,7 @@ A script used to steal folder content on Linux Systems.
 
 ## Description
 
-A script used to steal folder content on Linux Systems.
+A script used to take folder content on Linux Systems.
 
 Opens a shel, zip all zippable (R permission) content of the folder, send the zip into the dropbox folder, delete shell history.
 
