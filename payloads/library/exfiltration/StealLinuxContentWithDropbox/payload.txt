@@ -1,12 +1,12 @@
-REM #####################################################
-REM #                                                   |
-REM # Title        : Steal Linux Content With Dropbox   |
-REM # Author       : Aleff                              |
-REM # Version      : 1.0                                |
-REM # Category     : Exfiltration, Execution            |
-REM # Target       : Linux                              |
-REM #                                                   |
-REM #####################################################
+REM ##########################################################
+REM #                                                        |
+REM # Title        : Exfiltrate Linux Content With Dropbox   |
+REM # Author       : Aleff                                   |
+REM # Version      : 1.0                                     |
+REM # Category     : Exfiltration, Execution                 |
+REM # Target       : Linux                                   |
+REM #                                                        |
+REM ##########################################################
 
 REM Requirements:
 REM     - Internet Connection
