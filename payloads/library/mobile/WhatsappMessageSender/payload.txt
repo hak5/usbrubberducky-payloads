@@ -44,7 +44,7 @@ REM # Below lines will enter wa.me after https://
 REM # Replace the mobile number with your's
 
 STRING wa.me/
-STRING MESSAGE
+STRING PHONENUMBER
 ENTER
 DELAY 5000
 REM #-------------------------------------------------
