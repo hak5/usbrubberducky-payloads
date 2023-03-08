@@ -1,0 +1,43 @@
+REM # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REM #  TITTLE: Whatsapp Message Sender
+REM #
+REM #  AUTHOR: Gopalsamy Rajendran     LinkedIn: @gopalsamyrajendran     Version:1.0
+REM #
+REM #  Disclaimer: This script is only for Educational purpose. Please don't misuse it.
+REM #
+REM #  Tested OS: Android version 12 Pixel OS
+REM #
+REM #  Note: Script won't work on locked devices. Also this script runs on rubber ducky alternatives too.
+REM #
+REM #  Date: 08/03/2023
+REM # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+DELAY 1000
+GUI r
+DELAY 100
+STRING h
+DELAY 100
+STRING t
+DELAY 100
+STRING t
+DELAY 100
+STRING p
+DELAY 100
+STRING s
+DELAY 500
+DELAY 100
+STRING :
+DELAY 100
+STRING /
+DELAY 100
+STRING /
+DELAY 100
+STRING wa.me/+91XXXXXXXXXX
+ENTER
+DELAY 5000   
+STRING Hi this is Gopalsamy Rajendran
+TAB
+TAB
+ENTER
+DELAY 1000
