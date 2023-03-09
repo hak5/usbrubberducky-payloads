@@ -9,6 +9,7 @@ EXTENSION HELLO_OS
     END_REM 
     
     REM Additional Example: Defining custom $_OS enums
+    DEFINE #EXTRA_EXAMPLES FALSE
     DEFINE #SOME_OTHER_OS 6
     DEFINE #ANOTHER_OS 7
 

