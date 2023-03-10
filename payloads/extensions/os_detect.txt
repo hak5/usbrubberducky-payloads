@@ -56,8 +56,8 @@ EXTENSION OS_DETECTION
         DELAY #STARTUP_DELAY
         SAVE_HOST_KEYBOARD_LOCK_STATE
 
-        IF_DEFINED #DEBUGGING_OUTPUT 
-            IF_DEFINED #ADVANCED_DETECTION
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+            IF_DEFINED_TRUE #ADVANCED_DETECTION
                 STRING ADVANCED OS DETECT
             ELSE_DEFINED
                 STRING OS DETECT
@@ -74,32 +74,32 @@ EXTENSION OS_DETECTION
         END_IF
         LED_OFF
 
-        IF_DEFINED #DEBUGGING_OUTPUT
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
             ENTER
             STRING test done
         END_IF_DEFINED
 
         IF $_RECEIVED_HOST_LOCK_LED_REPLY THEN
-            IF_DEFINED #DEBUGGING_OUTPUT
+            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                 ENTER
                 STRING received led response
             END_IF_DEFINED
             LED_G
             IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
-                IF_DEFINED #DEBUGGING_OUTPUT
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                     ENTER
                     STRING prediction: Windows
                 END_IF_DEFINED
                 $_OS = WINDOWS
             ELSE
-                IF_DEFINED #DEBUGGING_OUTPUT
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                     ENTER
                     STRING prediction: Linux
                 END_IF_DEFINED
                 $_OS = LINUX
             END_IF
         ELSE
-            IF_DEFINED #DEBUGGING_OUTPUT
+            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                 ENTER
                 STRING no led response
                 ENTER
@@ -108,9 +108,9 @@ EXTENSION OS_DETECTION
             $_OS = MACOS
         END_IF
 
-        IF_DEFINED #ADVANCED_DETECTION
+        IF_DEFINED_TRUE #ADVANCED_DETECTION
             IF ( $_OS == LINUX ) THEN
-                IF_DEFINED #DEBUGGING_OUTPUT
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                     ENTER
                     STRING soft reconnect
                 END_IF_DEFINED
@@ -118,12 +118,12 @@ EXTENSION OS_DETECTION
                 DELAY #RESTART_WAIT
                 ATTACKMODE #OS_DETECT_MODE #OS_DETECT_VID #OS_DETECT_PID
                 DELAY #CONNECT_WAIT
-                IF_DEFINED #DEBUGGING_OUTPUT
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                     ENTER
                     STRING reconnected
                 END_IF_DEFINED
                 IF ($_CAPSLOCK_ON == TRUE) THEN
-                    IF_DEFINED #DEBUGGING_OUTPUT
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                         ENTER
                         STRING caps led on
                         ENTER
@@ -131,12 +131,12 @@ EXTENSION OS_DETECTION
                     END_IF_DEFINED
                     NUMLOCK
                     DELAY #HOST_RESPONSE_TIMEOUT
-                    IF_DEFINED #DEBUGGING_OUTPUT
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                         ENTER
                         STRING test done
                     END_IF_DEFINED
                     IF ($_NUMLOCK_ON == FALSE) THEN
-                        IF_DEFINED #DEBUGGING_OUTPUT
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                             ENTER
                             STRING no numlock led
                             ENTER
@@ -144,7 +144,7 @@ EXTENSION OS_DETECTION
                         END_IF_DEFINED
                         $_OS = CHROMEOS
                     ELSE
-                        IF_DEFINED #DEBUGGING_OUTPUT
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                             ENTER
                             STRING numlock led on
                             ENTER
@@ -152,12 +152,12 @@ EXTENSION OS_DETECTION
                         END_IF_DEFINED
                         SCROLLLOCK
                         DELAY #HOST_RESPONSE_TIMEOUT
-                        IF_DEFINED #DEBUGGING_OUTPUT
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                             ENTER
                             STRING test done
                         END_IF_DEFINED
                         IF ($_SCROLLLOCK_ON == TRUE) THEN
-                            IF_DEFINED #DEBUGGING_OUTPUT
+                            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                                 ENTER
                                 STRING scrolllock led on
                                 ENTER
@@ -165,7 +165,7 @@ EXTENSION OS_DETECTION
                             END_IF_DEFINED
                             $_OS = ANDROID
                         ELSE
-                            IF_DEFINED #DEBUGGING_OUTPUT
+                            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                                 ENTER
                                 STRING no scrolllock reply
                                 ENTER
@@ -177,7 +177,7 @@ EXTENSION OS_DETECTION
                 END_IF
             ELSE IF ($_OS == MACOS) THEN
                 IF ($_CAPSLOCK_ON == TRUE) THEN
-                    IF_DEFINED #DEBUGGING_OUTPUT
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                         ENTER
                         STRING caps led on
                         ENTER
@@ -185,7 +185,7 @@ EXTENSION OS_DETECTION
                     END_IF_DEFINED
                     $_OS = IOS
                 ELSE 
-                    IF_DEFINED #DEBUGGING_OUTPUT
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                         ENTER
                         STRING no caps reply
                         ENTER
@@ -194,7 +194,7 @@ EXTENSION OS_DETECTION
                     $_OS = MACOS
                 END_IF
             ELSE IF ($_OS == WINDOWS) THEN
-                IF_DEFINED #DEBUGGING_OUTPUT
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
                     ENTER
                     STRING Confident Windows Prediction
                 END_IF_DEFINED
@@ -204,7 +204,7 @@ EXTENSION OS_DETECTION
 
         RESTORE_HOST_KEYBOARD_LOCK_STATE
 
-        IF_DEFINED #DEBUGGING_OUTPUT
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
             ENTER
             STRING OS_DETECT complete
             ENTER

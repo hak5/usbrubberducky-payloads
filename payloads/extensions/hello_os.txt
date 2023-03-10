@@ -26,7 +26,7 @@ EXTENSION HELLO_OS
             STRING Hello ChromeOS!
         ELSE IF ($_OS == ANDROID) THEN
             STRING Hello Android!
-        IF_DEFINED #EXTRA_EXAMPLES
+        IF_DEFINED_TRUE #EXTRA_EXAMPLES
             ELSE IF($_OS == #SOME_OTHER_OS) THEN
                 REM Example Only
                 STRING HELLO Custom OS Type!

@@ -70,7 +70,7 @@ EXTENSION TRANSLATE
             STRING 8
         ELSE IF ($D == 9) THEN
             STRING 9
-        IF_DEFINED #INCLUDE_TRANSLATE_HEX
+        IF_DEFINED_TRUE #INCLUDE_TRANSLATE_HEX
             ELSE IF ($DIGIT_PRINT_MODE == #PRINT_HEX) THEN
                 IF ($D == 10) THEN
                     STRING A
@@ -104,7 +104,7 @@ EXTENSION TRANSLATE
         END_IF
     END_FUNCTION
 
-    IF_DEFINED #INCLUDE_SWAP_ENDIAN
+    IF_DEFINED_TRUE #INCLUDE_SWAP_ENDIAN
         REM ENDIAN SWAPPER helper, (useful for working with VID/PID)
         FUNCTION SWAP_ENDIAN()
             $INPUT = ((($INPUT >> 8) & 0x00FF) | (($INPUT << 8) & 0xFF00))
@@ -143,7 +143,7 @@ EXTENSION TRANSLATE
     REM Translates a variable of presumed boolean type and attempts to convert
     REM and inject a BOOLEAN string representation
     REM TO ENABLE SET INCLUDE_TRANSLATE_BOOL to TRUE before compiling
-    IF_DEFINED #INCLUDE_TRANSLATE_BOOL
+    IF_DEFINED_TRUE #INCLUDE_TRANSLATE_BOOL
         FUNCTION TRANSLATE_BOOL()
             IF $INPUT THEN
                 STRING TRUE
@@ -159,7 +159,7 @@ EXTENSION TRANSLATE
     REM Translates a variable of presumed integer type and attempts to convert
     REM and inject a HEX string representation
     REM TO ENABLE SET INCLUDE_TRANSLATE_HEX to TRUE before compiling
-    IF_DEFINED #INCLUDE_TRANSLATE_HEX
+    IF_DEFINED_TRUE #INCLUDE_TRANSLATE_HEX
         FUNCTION TRANSLATE_HEX()
             $DIGIT_PRINT_MODE = #PRINT_HEX
             VAR $chars = 0
@@ -222,7 +222,7 @@ EXTENSION TRANSLATE
     REM Translates a variable of presumed integer type and attempts to convert
     REM and inject a BINARY string representation
     REM TO ENABLE SET INCLUDE_TRANSLATE_BINARY to TRUE before compiling
-    IF_DEFINED #INCLUDE_TRANSLATE_BINARY
+    IF_DEFINED_TRUE #INCLUDE_TRANSLATE_BINARY
         FUNCTION TRANSLATE_BINARY()
             VAR $I = 16
             WHILE ( $I > 0 )
