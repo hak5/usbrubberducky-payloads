@@ -6,7 +6,7 @@
 
 ## Description
 
-This payload exfiltrates Windows system information and installed programs from the target computer to Dropbox cloud storage for subsequent privilege escalation analysis. *Only works on Windows 10,11.*
+This payload exfiltrates Windows system information, user information (such as privileges), and installed programs from the target computer to Dropbox cloud storage for subsequent privilege escalation analysis. *Only works on Windows 10,11.*
 
 ## Usage
 
@@ -34,9 +34,9 @@ This payload exfiltrates Windows system information and installed programs from 
 
 - **Prepare your payload**
 
-    - Download the Powershell script ".ps1".
+    - Download the Powershell script "script.ps1".
     - Modify it to include the <APP_KEY>, <APP_SECRET>, and <REFRESH_TOKEN> of your application.
-    - Upload your modified ".ps1" file to Dropbox and copy the upload link.
+    - Upload your modified "script.ps1" file to Dropbox and copy the upload link.
     - Replace the end of the link from "?dl=0" to "?dl=1"  
     *This is your "<DOWNLOAD_LINK>".*
     - Download the "payload.txt" file.
@@ -44,9 +44,13 @@ This payload exfiltrates Windows system information and installed programs from 
 
 ### Analysis
 
-Once you have your report file, you can easily extract the information from the system and scan it for vulnerabilities. You can use a tool such as [WES-NG](https://github.com/bitsadmin/wesng) to check for missing patches that may result in a vulnerability that you could use to elevate your privileges on the target system.
+Once you have your report file, you can easily scan it for vulnerabilities or misconfigurations that would allow you to elevate your privileges on the target system.
 
-The software installed on the target system may also present various opportunities for elevation of privileges. That's why the report also contains the name and version of each software installed on the target computer, allowing you to search for existing exploits on each installed software, through sites like [Exploit Database](https://www.exploit-db.com) or [Packet Storm](https://packetstormsecurity.com).
+You can use a tool such as [WES-NG](https://github.com/bitsadmin/wesng) to look for missing patches on the system.
+
+You can check if the user has dangerous permissions that can be exploited.
+
+The report also contains a list of software installed on the target computer, which allows you to search for exploits that already exist on this software, via sites such as [Exploit Database](https://www.exploit-db.com) or [Packet Storm](https://packetstormsecurity.com).
 
 ---
 

