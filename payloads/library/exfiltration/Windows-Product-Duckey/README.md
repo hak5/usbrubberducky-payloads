@@ -16,10 +16,10 @@ This payload exfiltrate the target's Windows product key to a remote server. *On
 ```
 python -m http.server 80
 ```
-- Download the "payload.txt" and ".ps1" files and modify them to include the IP address of your server.
-- Move the modified ".ps1" file to the root directory of your website, so it is downloadable from this address:
+- Download the "payload.txt" and "script.ps1" files and modify them to include the IP address of your server.
+- Move the modified "script.ps1" file to the root directory of your website, so it is downloadable from this address:
 ```
-http://<REMOTE_IP_ADDRESS>/.ps1
+http://<REMOTE_IP_ADDRESS>/script.ps1
 ```
 
 ### Analysis

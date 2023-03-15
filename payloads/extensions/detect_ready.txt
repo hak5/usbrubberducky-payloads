@@ -1,23 +1,26 @@
 EXTENSION DETECT_READY
-    REM VERSION 1.0
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
-    REM USAGE:
-    REM Extension runs inline (here)
-    REM Place at beginning of payload (besides ATTACKMODE) to act as dynamic
-    REM boot delay
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
 
-    REM TARGETS:
-    REM Any system that reflects CAPSLOCK will detect minimum required delay
-    REM Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
 
     REM CONFIGURATION:
-    DEFINE RESPONSE_DELAY 25
-    DEFINE ITERATION_LIMIT 120
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
 
     VAR $C = 0
-    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < ITERATION_LIMIT))
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
         CAPSLOCK
-        DELAY RESPONSE_DELAY
+        DELAY #RESPONSE_DELAY
         $C = ($C + 1)
     END_WHILE
     CAPSLOCK

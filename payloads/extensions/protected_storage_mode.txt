@@ -1,38 +1,62 @@
 EXTENSION PROTECTED_STORAGE_MODE
-    REM VERSION 1.0
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
-    REM Example hidden storage mode
-    REM Forces user to padlock style unlock storage mode by setting
-    REM the HOSTs lock keys and pressing the duck button to submit a 
-    REM combination three times. 
-    REM The wrong combination will immediately fail silently.
-    REM The correct combination will trigger ATTACKMODE STORAGE and LED_G
+    REM_BLOCK
+        Example hidden storage mode
+        Forces user to padlock style unlock storage mode by setting
+        the HOSTs lock keys and pressing the duck button to submit a
+        combination three times.
+        The wrong combination will immediately fail silently.
+        The correct combination will trigger ATTACKMODE STORAGE and LED_G
 
-    REM TARGET:
-    REM Any host that will reflect CAPSLOCK,NUMLOCK, and SCROLLLOCK
+        TARGET:
+            Any host that will reflect CAPSLOCK,NUMLOCK, and SCROLLLOCK
 
-    REM USAGE: 
-    REM BUTTON_DEF
-    REM     STORAGE_PASSWORD_CHECK()
-    REM END_BUTTON
+        USAGE:
+            BUTTON_DEF
+                STORAGE_PASSWORD_CHECK()
+            END_BUTTON
+
+        CONFIGURATION:
+            Available combinations provided as DEFINEs below,
+            change within the STORAGE_PASSWORD_CHECK as desired
+
+            Method of input submission can be changed using SUBMIT_FOR_CHECK
+            But will obviously convolute combination checks.
+    END_REM
+
+    REM Combinations provided as defines for convenience (verbosely spaced - DEFINES aren't re-formatted by preprocessor)
+    DEFINE #ALL_LOCKS_OFF ( ( $_CAPSLOCK_ON == FALSE ) && ( $_NUMLOCK_ON == FALSE ) && ( $_SCROLLLOCK_ON == FALSE ) )
+    DEFINE #ALL_LOCKS_ON ( ( $_CAPSLOCK_ON == TRUE ) && ( $_NUMLOCK_ON == TRUE ) && ( $_SCROLLLOCK_ON == FALSE ) )
+
+    DEFINE #ONLY_CAPS_ON ( ( $_CAPSLOCK_ON == TRUE ) && ( $_NUMLOCK_ON == FALSE ) && ( $_SCROLLLOCK_ON == FALSE ) )
+    DEFINE #ONLY_NUM_ON  ( ( $_CAPSLOCK_ON == FALSE ) && ( $_NUMLOCK_ON == TRUE ) && ( $_SCROLLLOCK_ON == FALSE ) )
+    DEFINE #ONLY_SCROLL_ON ( ( $_CAPSLOCK_ON == FALSE ) && ( $_NUMLOCK_ON == FALSE ) && ( $_SCROLLLOCK_ON == TRUE ) )
+
+    DEFINE #ONLY_CAPS_OFF ( ( $_CAPSLOCK_ON == FALSE ) && ( $_NUMLOCK_ON == TRUE ) && ( $_SCROLLLOCK_ON == TRUE ) )
+    DEFINE #ONLY_NUM_OFF  ( ( $_CAPSLOCK_ON == TRUE ) && ( $_NUMLOCK_ON == FALSE ) && ( $_SCROLLLOCK_ON == TRUE ) )
+    DEFINE #ONLY_SCROLL_OFF ( ( $_CAPSLOCK_ON == TRUE ) && ( $_NUMLOCK_ON == TRUE ) && ( $_SCROLLLOCK_ON == FALSE ) )
+
+    DEFINE #SUBMIT_FOR_CHECK WAIT_FOR_BUTTON_PRESS
     
     FUNCTION STORAGE_PASSWORD_CHECK()
         VAR $ACCEPED = FALSE
         LED_R
-        WAIT_FOR_BUTTON_PRESS
+        #SUBMIT_FOR_CHECK
 
         REM first combination ALL LOCKS OFF
-        IF (($_CAPSLOCK_ON == FALSE) && ($_NUMLOCK_ON == FALSE) && ($_SCROLLLOCK_ON == FALSE)) THEN
+        IF #ALL_LOCKS_OFF THEN
             STRING .
-            WAIT_FOR_BUTTON_PRESS
+            #SUBMIT_FOR_CHECK
 
             REM second combination ONLY CAPS ON 
-            IF (($_CAPSLOCK_ON == TRUE) && ($_NUMLOCK_ON == FALSE) && ($_SCROLLLOCK_ON == FALSE)) THEN
+            IF #ONLY_CAPS_ON THEN
                 STRING .
-                WAIT_FOR_BUTTON_PRESS
+                #SUBMIT_FOR_CHECK
 
                 REM third combination ONLY NUM ON 
-                IF (($_CAPSLOCK_ON == FALSE) && ($_NUMLOCK_ON == TRUE) && ($_SCROLLLOCK_ON == FALSE)) THEN
+                IF #ONLY_NUM_ON THEN
                     $ACCEPTED = TRUE
                 END_IF
             END_IF

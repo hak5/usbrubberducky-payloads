@@ -1,21 +1,24 @@
 EXTENSION PASSIVE_DETECT_READY
-    REM VERSION 1.0
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
-    REM Passive Detect Ready - no injection dynamic boot delay
-    REM for hosts that reflect current OS lock key state on connect
+    REM_BLOCK DOCUMENTATION
+        Passive Detect Ready - no injection dynamic boot delay
+        for hosts that reflect current OS lock key state on connect
 
-    REM USAGE:
-    REM Extension runs inline (here)
-    REM Place at beginning of payload (besides ATTACKMODE) to act as dynamic
-    REM boot delay
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+    END_REM
 
     REM CONFIGURATION:
-    DEFINE MAX_WAIT 150
-    DEFINE CHECK_INTERVAL 20
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
 
-    VAR $MAX_TRIES = MAX_WAIT
+    VAR $MAX_TRIES = #MAX_WAIT
     WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
-        DELAY CHECK_INTERVAL
+        DELAY #CHECK_INTERVAL
         $MAX_TRIES = ($MAX_TRIES - 1)
     END_WHILE
 END_EXTENSION

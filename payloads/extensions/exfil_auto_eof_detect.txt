@@ -1,18 +1,24 @@
 EXTENSION EXFIL_AUTO_EOF_DETECT
-    REM VERSION 1.0
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
-    REM USAGE:
-    REM Call WAIT_FOR_EOF() after starting Keystroke Reflection / HID Exfil 
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Call WAIT_FOR_EOF() after starting Keystroke Reflection / HID Exfil
 
-    REM TARGETS:
-    REM Any; intended for use on systems that dont reflect more than 2 lock keys
+        TARGETS:
+            Requires reflection of at least 2 lock keys.
+            Intended for use on systems that dont reflect more than 2 lock keys.
+    END_REM
+
+    REM CONFIGURATION
+    DEFINE #INACTIVTY_TARGET 10
 
     FUNCTION WAIT_FOR_EOF()
         VAR $CURRENT_CAPSLOCK_STATE = $_CAPSLOCK_ON
         VAR $CURRENT_NUMLOCK_STATE = $_NUMLOCK_ON
         VAR $PROCESSING = TRUE
         VAR $INACTIVITY_COUNT = 0
-        DEFINE INACTIVTY_TARGET 10
         WHILE ($PROCESSING)
             DELAY 20 
             IF($CURRENT_CAPSLOCK_STATE != $_CAPSLOCK_ON) THEN
@@ -25,7 +31,7 @@ EXTENSION EXFIL_AUTO_EOF_DETECT
                 LED_R
             ELSE 
                 $INACTIVTY_COUNT = ($INACTIVTY_COUNT + 1)
-                IF ($INACTIVTY_COUNT >= INACTIVTY_TARGET) THEN
+                IF ($INACTIVTY_COUNT >= #INACTIVTY_TARGET) THEN
                     $PROCESSING = FALSE
                 END_IF
                 LED_OFF
