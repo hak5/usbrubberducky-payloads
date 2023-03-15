@@ -51,8 +51,7 @@ EXTENSION Rolling_Powershell_Execution
             STRING powershell.exe -noP -nOnI -windo H
         END_IF
 
-
-    IF_DEFINED_TRUE #EXECUTIONPOLICY
+    IF_DEFINED #EXECUTIONPOLICY
         SPACE
         IF (($RANDOM_PS % 2) == 0) THEN
             STRING -ep ByPasS
