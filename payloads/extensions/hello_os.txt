@@ -1,13 +1,17 @@
 EXTENSION HELLO_OS
-    REM VERSION 1.0
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
-    REM USAGE:
-    REM For use with OS_DETECT Extension, call HELLO_OS() after DETECT_OS()
-    REM prints the OS determination
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            For use with OS_DETECT Extension, call HELLO_OS() after DETECT_OS()
+            prints the OS determination
+    END_REM
 
     REM Additional Example: Defining custom $_OS enums
-    DEFINE SOME_OTHER_OS 6
-    DEFINE ANOTHER_OS 7
+    DEFINE #EXTRA_EXAMPLES FALSE
+    DEFINE #SOME_OTHER_OS 6
+    DEFINE #ANOTHER_OS 7
 
     FUNCTION HELLO_OS() 
         IF ($_OS == WINDOWS) THEN
@@ -22,12 +26,14 @@ EXTENSION HELLO_OS
             STRING Hello ChromeOS!
         ELSE IF ($_OS == ANDROID) THEN
             STRING Hello Android!
-        ELSE IF($_OS == SOME_OTHER_OS) THEN
-            REM Example Only
-            STRING HELLO Custom OS Type!
-        ELSE IF($_OS == ANOTHER_OS) THEN
-            REM Example Only
-            STRING HELLO Another Custom OS Type!
+        IF_DEFINED_TRUE #EXTRA_EXAMPLES
+            ELSE IF($_OS == #SOME_OTHER_OS) THEN
+                REM Example Only
+                STRING HELLO Custom OS Type!
+            ELSE IF($_OS == #ANOTHER_OS) THEN
+                REM Example Only
+                STRING HELLO Another Custom OS Type!
+        END_IF_DEFINED
         ELSE
             STRING Hello World!
         END_IF
