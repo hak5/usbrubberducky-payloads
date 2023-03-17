@@ -6,31 +6,17 @@
 
 ## Description
 
-This payload exfiltrates Windows system information, user information (such as privileges), and installed programs from the target computer to Dropbox cloud storage for subsequent privilege escalation analysis. *Only works on Windows 10,11.*
+This payload exfiltrates Windows system information, user information, stored credentials and installed programs from the target computer to Dropbox for subsequent privilege escalation analysis. *Only works on Windows 10,11.*
 
-## Usage
+*The setup needs to be done only once for the payload to work forever.*
 
-### Setup
+## Setup
 
-- **Configure your Dropbox application**
+> If you already have your <APP_KEY>, <APP_SECRET> and <REFRESH_TOKEN>, you can go directly to the "Prepare your payload" step.
 
-    - Create a Dropbox account.
-    - [Create a Dropbox "App"](https://www.dropbox.com/developers/apps/create) with a "Scoped access" API and a "Full Dropbox" access.
-    - Go to the settings of this app and write down your "App key" and "App secret".  
-    *These are your "<APP_KEY>" and "<APP_SECRET>".*
-    - Next, go to the "Permissions" tab and enable the "files.metadata.write" and "files.content.write" permissions.
-    - After that, open this link in your browser *(values between brackets must be changed)*.
-    ```
-    https://www.dropbox.com/oauth2/authorize?client_id=<APP_KEY>&token_access_type=offline&response_type=code
-    ```
-    - Connect your application, allow its permissions, and note the code it gives you.  
-    *This is your "<APP_CODE>".*
-    - Open a command prompt and run this command *(values between brackets must be changed)*.
-    ```
-    curl https://api.dropbox.com/oauth2/token -d code=<APP_CODE> -d grant_type=authorization_code -u <APP_KEY>:<APP_SECRET>
-    ```
-    - Note the "refresh_token" value of the result.  
-    *This is your "<REFRESH_TOKEN>".*
+- **Configure your Dropbox application** 
+ 
+    - Follow the instructions in "[DROPBOXSETUP.md](https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/library/exfiltration/Windows-Privilege-Excalibur/DROPBOXSETUP.md)".
 
 - **Prepare your payload**
 
@@ -42,15 +28,20 @@ This payload exfiltrates Windows system information, user information (such as p
     - Download the "payload.txt" file.
     - Edit it to include your <DOWNLOAD_LINK>.
 
-### Analysis
+## Analysis
 
-Once you have your report file, you can easily scan it for vulnerabilities or misconfigurations that would allow you to elevate your privileges on the target system.
+Once you have your report file, you can use the following resources to help you find ways to escalate your privileges:
 
-You can use a tool such as [WES-NG](https://github.com/bitsadmin/wesng) to look for missing patches on the system.
+| Report Categories | Useful Resources |
+| --- | --- |
+| System Information | [WES-NG](https://github.com/bitsadmin/wesng)  |
+| User Information | [Priv2Admin](https://github.com/gtworek/Priv2Admin) |
+| Stored Credentials | |
+| Installed Programs | [Exploit Database](https://www.exploit-db.com) & [Packet Storm](https://packetstormsecurity.com) |
 
-You can check if the user has dangerous permissions that can be exploited.
+#### Coming soon...
 
-The report also contains a list of software installed on the target computer, which allows you to search for exploits that already exist on this software, via sites such as [Exploit Database](https://www.exploit-db.com) or [Packet Storm](https://packetstormsecurity.com).
+- [ ] Windows Services Misconfigurations
 
 ---
 
