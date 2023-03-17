@@ -32,7 +32,7 @@ This payload exfiltrates Windows system information, user information, stored cr
 
 Once you have your report file, you can use the following resources to help you find ways to escalate your privileges:
 
-| Report Categories | Useful Resources |
+| Report Category | Useful Resources |
 | --- | --- |
 | System Information | [WES-NG](https://github.com/bitsadmin/wesng)  |
 | User Information | [Priv2Admin](https://github.com/gtworek/Priv2Admin) |
