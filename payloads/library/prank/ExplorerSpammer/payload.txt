@@ -1,0 +1,9 @@
+REM Title: Explorer Spammer
+REM Description: Reopens Windows explorer
+REM Author: JustinKras
+REM Version: 1.0
+REM Category: Execution
+REM Target: Windows 10-11
+REM Attackmode: HID
+
+GUI e
