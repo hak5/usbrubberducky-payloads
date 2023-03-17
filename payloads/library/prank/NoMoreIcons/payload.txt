@@ -3,7 +3,7 @@ REM DESCRIPTION: Disables the icons on the desktop
 REM AUTHOR: JustinKras
 REM VERSION: 1.0
 REM CATEGORY: PRANK
-REM TARGET: Windows 10-11
+REM TARGET: Windows 11
 
 MENU
 DELAY 10
