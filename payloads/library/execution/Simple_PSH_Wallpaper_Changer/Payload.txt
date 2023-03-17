@@ -3,7 +3,7 @@ REM H4ck1ngM4rk
 REM Downloads a picture and set it as wallpaper, gets Visible after Restart or Relogin
 REM Tested on Windows 11 PRO
 
-EXTENSION EXTENSION DETECT_READY
+EXTENSION DETECT_READY
     REM VERSION 1.1
     REM AUTHOR: Korben
 
