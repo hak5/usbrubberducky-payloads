@@ -4,6 +4,6 @@ REM Author: JustinKras
 REM Version: 1.0
 REM Category: Execution
 REM Target: Windows 10-11
-REM Attackmode: HID
+REM Attackmode: PRANK
 
 GUI e
