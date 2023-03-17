@@ -12,6 +12,7 @@ REM ###########################################################
 REM Requirements:
 REM     - Internet Connection
 REM     - Discord webhook
+REM     - KDE/kdialog based
 
 DELAY 1000
 CTRL-ALT t

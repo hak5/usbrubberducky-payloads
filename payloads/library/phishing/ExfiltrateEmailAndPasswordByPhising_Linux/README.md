@@ -1,13 +1,13 @@
  
 # Exfiltrate Email And Password By Phising - Linux ✅
 
-A script used to exfiltrate the email and the email password by a popup phishing based on linux systems.
+A script used to exfiltrate the email and the email password by a popup (KDE/kdialog based) phishing based on linux systems.
 
 **Category**: Phishing, Credentials
 
 ## Description
 
-A script used to exfiltrate the email and the email password by a popup phishing based on linux systems.
+A script used to exfiltrate the email and the email password by a popup (KDE/kdialog based) phishing based on linux systems.
 
 Opens a shell, get the email and the email password by a popup, send the input to a Discord webhook.
 
@@ -16,6 +16,8 @@ Opens a shell, get the email and the email password by a popup, send the input t
 ### Dependencies
 
 * Internet Connection
+* Discord webhook
+* KDE/kdialog based
 
 ### Executing program
 
