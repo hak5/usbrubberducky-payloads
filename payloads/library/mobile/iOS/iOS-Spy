@@ -1,0 +1,73 @@
+REM       iOS-Spy
+REM       Version 1.0
+REM       OS: iOS
+REM       Author: 0iphor13
+REM       Requirements: DuckyScript 3.0, Unlocked iOS Device, Lighting to USB-A or C OTG (camera) adapter
+REM       Description: The perfect payload to get all relevant information, if you suspect your partner cheating or something similar.
+REM       The perfectly timed keypresses are important for this payload to work - Do not change anything except the receiving e-mail address! 
+
+
+REM Define your E-Mail address
+DEFINE #RECEIVER your@mail.de
+
+REM Keycombo - Do not change!
+DEFINE $ICON T
+DEFINE $V P
+DEFINE $X T
+DEFINE $DRAG E
+DEFINE $Y R
+DEFINE $BYPASS H
+DEFINE $M A
+DEFINE $C I
+DEFINE $L S
+
+DELAY 2000
+GUI SPACE
+DELAY 500
+INJECT_MOD CTRL
+DELAY 100
+INJECT_MOD CTRL
+DELAY 100
+INJECT_MOD CTRL
+DELAY 100
+INJECT_MOD CTRL
+DELAY 100
+CAPSLOCK
+DELAY 100
+CAPSLOCK
+DELAY 100
+INJECT_MOD CTRL
+DELAY 100
+INJECT_MOD CTRL
+DELAY 100
+INJECT_MOD CTRL
+DELAY 100
+INJECT_MOD CTRL
+DELAY 100
+CAPSLOCK
+DELAY 100
+CAPSLOCK
+DELAY 100
+STRING Safari
+ENTER
+DELAY 500
+GUI l
+DELAY 500
+STRING $ICON
+DELAY 20
+STRING $BYPASS
+DELAY 20
+STRING $DRAG
+DELAY 20
+STRING $Y
+DELAY 20
+STRING $M
+DELAY 20
+STRING $V
+DELAY 20
+STRING $C
+DELAY 20
+STRING $L
+DELAY 20
+STRINGLN $X FOR #RECEIVER
+REM Get yourself some help... respect privacy
