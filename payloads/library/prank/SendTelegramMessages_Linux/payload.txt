@@ -1,0 +1,45 @@
+ 
+REM #########################################
+REM #                                       |
+REM # Title        : Send Telegram Messages |
+REM # Author       : Aleff                  |
+REM # Version      : 1.0                    |
+REM # Category     : Prank                  |
+REM # Target       : Linux                  |
+REM #                                       |
+REM #########################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - telegram-desktop installed and activated
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+STRING telegram-desktop
+ENTER
+REM It depends by the computer...
+DELAY 3000
+
+REM Define the message receiver username
+DEFINE USERNAME @example
+STRING USERNAME
+ENTER
+DELAY 500
+
+REM Define the message(s)
+DEFINE MESSAGE1 example
+STRING MESSAGE1
+ENTER
+DELAY 500
+REM other messages here...
+REM ...
+REM ...
+
+REM Closing Telegram App and the Shell
+ALT F4
+DELAY 500
+CTRL c
+DELAY 500
+ALT F4
