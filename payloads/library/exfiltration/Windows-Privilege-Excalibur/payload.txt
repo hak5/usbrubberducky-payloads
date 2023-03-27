@@ -1,6 +1,6 @@
 REM     Title: Windows Privilege Excalibur
 REM     Author: Who-Is-Julien
-REM     Description: This payload exfiltrates Windows system information and installed programs from the target computer to DropBox cloud storage for subsequent privilege escalation analysis.
+REM     Description: This payload exfiltrates Windows system information, user information, stored credentials and installed programs from the target computer to Dropbox for subsequent privilege escalation analysis.
 REM     Target: Windows 10, 11
 
 REM     Replace DOWNLOAD_LINK with the actual download link of the script.
