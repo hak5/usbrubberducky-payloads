@@ -1,0 +1,69 @@
+.snapchatFontThin {
+	font-family: 'HelveticaNeue-Thin', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+a {
+	cursor: pointer;
+}
+
+#navigationMenu {
+	text-align: center;
+	padding: 1rem;
+}
+	#navigationMenu .button {
+		width: 75%;
+		max-width: 240px;
+	}
+
+#navigationMenuButton {
+	float: right;
+}
+	#navigationMenuButton img {
+		width: 20px;
+	}
+
+.ui.snapchatHeader.stackable.grid .column {
+	margin-top: 2rem !important;
+	margin-bottom: 1rem;
+	padding-top: 1rem !important;
+	padding-bottom: 1rem;
+}
+	.snapchatHeader .logo {
+		width: 80px;
+	}
+
+.snapchatInvertedHeader h1 {
+	text-align: center;
+}
+	.snapchatInvertedHeader h1 .logo {
+		padding-top: .5rem;
+		width: 36px;
+	}
+
+
+.snapchatBody.stackable.grid {
+	padding-bottom: 5rem !important;
+}
+
+.snapchatFooter.stackable.grid {
+	padding-top: 3rem;
+	padding-bottom: 4rem;
+	border-top: 1px solid #EEE;
+}
+
+	.snapchatFooter.stackable.grid h5 {
+		text-transform: uppercase;
+	}
+
+	.snapchatFooter .column {
+		text-align: center;
+	}
+
+@font-face {
+  font-family: 'Dropdown';
+  src: url("themes/default/assets/fonts/icons.woff");
+  format('truetype'), url("themes/default/assets/fonts/icons.woff");
+  format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

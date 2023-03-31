@@ -1,0 +1,47 @@
+.authAppsBody {
+	padding-bottom: 5rem!important;
+	font-size: 16px;
+}
+.authAppItem {
+	position: relative;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px 0px;
+	margin-bottom: 0px;
+	border-top: 1px solid rgb(255, 255, 255);
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    border-bottom: 1px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+}
+.authAppItem h3, .authAppItem p {
+	margin: 0;
+}
+.authAppItem .ui.button.revokeButton {
+	background-color: #fff;
+	color: #262626!important;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%); /* IE 9 */
+    -webkit-transform: translateY(-50%); /* Safari */
+	transform: translateY(-50%);
+	right: 0;
+}
+.authAppItem .ui.button.revokeButton:hover {
+	background-color: #fffc01;
+}
+.authAppItem .authAppMessageField {
+	float: left;
+	text-align: left;
+	width: 75%;
+}
+.authAppsBody .authText {
+	margin-top: 16px;
+}
+.authAppsBody .authSubTitle {
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}

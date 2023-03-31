@@ -1,0 +1,74 @@
+.authClearfix::before, .authClearfix::after {
+	content: " "; 
+	display: table; 
+}
+.authClearfix::after {
+	 clear: both;
+}
+.authCentered {
+	text-align: center;
+}
+.authBody {
+	padding-bottom: 5rem!important;
+	font-size: 16px;
+}
+.authTitle {
+	font-size: 48px;
+	font-weight: 300;
+	margin-top: 3rem!important;
+}
+.authSubTitle {
+	font-size: 17px;
+	font-weight: 300;
+	margin-top: 1rem!important;
+}
+.authText, .authWideInput, .authField {
+	max-width: 305px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.authText {
+	font-size: 12px;
+	/*margin-bottom: 20px;*/
+}
+.authFieldMessage {
+	text-align: left;
+	float: left;
+	width: 85%;
+	padding-left: 15px;
+}
+.authSmallMarginTop {
+	margin-top: 1em;
+}
+.authButton {
+	min-width: 305px;
+	margin-right: 0!important;
+}
+.authButton.authSecondaryButton {
+	background-color: #fff;
+	color: #262626!important;
+}
+.authButton.authSecondaryButton:hover {
+	background-color: #fff;
+}
+.authField {
+	padding: 20px 0px;
+	margin-bottom: 0px;
+	border-top: 1px solid rgb(255, 255, 255);
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    border-bottom: 1px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+}
+.authField.firstField {
+	border-bottom: none;
+}
+.authField.lastField {
+	border-top: none;
+	margin-bottom: 20px;
+}
+.authFieldIcon {
+	float: left;
+	width: 40px;
+}

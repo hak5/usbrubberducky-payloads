@@ -1,0 +1,117 @@
+.accountsBody {
+	padding-bottom: 5rem !important;
+	min-height: calc(100vh - 79px - 311px);
+}
+
+.accountsLeftAligned {
+	text-align: left;
+}
+
+.accountsCentered {
+	text-align: center;
+}
+
+.accountsTitle {
+	font-size: 48px;
+	font-weight: 300;
+}
+
+.accountsText {
+	max-width: 360px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.accountsWideText {
+	max-width: 440px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.accountsLastText {
+	margin-bottom: 2rem;
+}
+
+.accountsForm {
+	margin-bottom: 1rem;
+}
+
+.accountsFormError {
+	max-width: 304px;
+	margin: 1rem auto 1rem auto !important;
+	color: #db4a38 !important;
+	background: transparent !important;
+}
+
+.accountsWideFormError {
+	max-width: 384px;
+	margin: 1rem auto 1rem auto !important;
+	color: #db4a38 !important;
+	background: transparent !important;
+}
+
+.accountsNarrowField {
+
+}
+
+.accountsWideField {
+	max-width: 304px;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.accountsNarrowButton {
+	min-width: 240px;
+}
+
+.accountsWideButton {
+	min-width: 304px;
+}
+
+.accountsNarrowButton.accountsButton-id-id {
+	width: 274px;
+}
+
+.accountsNarrowButton.accountsButton-de-de {
+	width: 284px;
+}
+
+.accountsNarrowButton.accountsButton-el-gr {
+	width: 261px;
+}
+
+.accountsNarrowButton.accountsButton-fi-fi {
+	width: 308px;
+}
+
+.accountsNarrowButton.accountsButton-fr-fr {
+	width: 260px;
+}
+
+.accountsNarrowButton.accountsButton-it-it {
+	width: 251px;
+}
+
+.accountsNarrowButton.accountsButton-nl-nl {
+	width: 272px;
+}
+
+.accountsNarrowButton.accountsButton-pt-br {
+	width: 320px;
+}
+
+.accountsNarrowButton.accountsButton-pt-pt {
+	width: 344px;
+}
+
+.accountsNarrowButton.accountsButton-ro-ro {
+	width: 272px;
+}
+
+.accountsNarrowButton.accountsButton-ru-ru {
+	width: 253px;
+}
+
+.DownloadMyData tr tr td {
+	padding: 0px 12px;
+}
