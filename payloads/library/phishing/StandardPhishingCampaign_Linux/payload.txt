@@ -1,12 +1,12 @@
-REM ###########################################
-REM #                                         |
-REM # Title        : Standard Phishing Attack |
-REM # Author       : Aleff                    |
-REM # Version      : 1.0                      |
-REM # Category     : Phishing                 |
-REM # Target       : Linux                    |
-REM #                                         |
-REM ###########################################
+REM #############################################
+REM #                                           |
+REM # Title        : Standard Phishing Campaign |
+REM # Author       : Aleff                      |
+REM # Version      : 1.0                        |
+REM # Category     : Phishing                   |
+REM # Target       : Linux                      |
+REM #                                           |
+REM #############################################
 
 REM Requirements:
 REM     - Internet Connection
