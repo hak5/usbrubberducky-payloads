@@ -2,7 +2,7 @@ REM ########################################
 REM #                                      |
 REM # Title        : Encrypt All Documents |
 REM # Author       : Aleff                 |
-REM # Version      : 1.0                   |
+REM # Version      : 1.1                   |
 REM # Category     : Execution             |
 REM # Target       : Linux                 |
 REM #                                      |
