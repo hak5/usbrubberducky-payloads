@@ -15,7 +15,7 @@ body:
   - type: input
     id: PayloadURL
     attributes:
-      label: "Payload Title and URL"
+      label: "Payload URL"
       description: "Provide a direct link (URL) to the payload in question within this repo. Not the payload name. "
       placeholder: "ex. https://github.com/hak5/usbrubberducky-payloads/........"
     validations:
