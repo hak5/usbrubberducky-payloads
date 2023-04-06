@@ -5,7 +5,7 @@ title: "[Payload BUG] write a short description here"
 body:
   - type: markdown
     attributes:
-    value: Keep in mind - the more information provided here, the more actionable it will become. Please provide detailed answers to the prompts below. Please read and answer carefully. [Common Ducky Troubleshooting](https://docs.hak5.org/hak5-usb-rubber-ducky/troubleshooting/common-issues)
+      value: Keep in mind - the more information provided here, the more actionable it will become. Please provide detailed answers to the prompts below. Please read and answer carefully. [Common Ducky Troubleshooting](https://docs.hak5.org/hak5-usb-rubber-ducky/troubleshooting/common-issues)
   
   - type: input
     id: PayloadName
