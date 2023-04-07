@@ -102,13 +102,13 @@ body:
 	  - label: "I have actually read the above checkboxes before checking them, including this one, which I have intentionally left unchecked as confirmation of this statement"
           required: false
 
-   - type: checkboxes
-     id: agreement
-     attributes:
-       label: "Agreement"
-       options:
-         - label: "I believe this is an issue with the actual payload itself. I acknowledge this form is not a request for help following instructions."
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: "Agreement"
+      options:
+        - label: "I believe this is an issue with the actual payload itself. I acknowledge this form is not a request for help following instructions."
           required: true
           
-         - label: "I have carefully read and filled out every section of this issue form to the best of my ability. I acknowledge by providing insufficient information I cannot receieve adequate assistance."
+        - label: "I have carefully read and filled out every section of this issue form to the best of my ability. I acknowledge by providing insufficient information I cannot receieve adequate assistance."
           required: true
