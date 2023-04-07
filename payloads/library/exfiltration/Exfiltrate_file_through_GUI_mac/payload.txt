@@ -1,6 +1,6 @@
-REM TITLE Exfiltrate specific file macOS
+REM TITLE Exfiltrate files through GUI mac
 REM AUTHOR Kile
-REM DESCRIPTION Opens the terminal, then uses search to find all files matching filename and copies them to the DUCKY
+REM DESCRIPTION Opens the finder, then uses search to find all files matching filename and copies them to the DUCKY
 
 REM NOTE This is not unlikely to fail depending on the speed of search or if a large amount of files meet the criteria. Adjust DELAYs to your needs
 
