@@ -16,6 +16,7 @@ Opens a shell, download the vpn file, set the vpn through openvpn, erase traces.
 
 * Permissions
 * Internet Connection
+* 'openvpn' installed
 
 ### Executing program
 

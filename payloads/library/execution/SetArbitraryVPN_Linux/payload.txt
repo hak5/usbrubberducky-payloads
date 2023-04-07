@@ -12,6 +12,7 @@ REM ####################################
 REM Requirements:
 REM     - Permissions
 REM     - Internet Connection
+REM     - 'openvpn' installed
 
 REM REQUIRED: You need to know the sudo password and replace 'example' with this
 DEFINE SUDO_PASS example
