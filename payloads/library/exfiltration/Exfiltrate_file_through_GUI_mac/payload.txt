@@ -1,6 +1,12 @@
-REM TITLE Exfiltrate files through GUI mac
-REM AUTHOR Kile
-REM DESCRIPTION Opens the finder, then uses search to find all files matching filename and copies them to the DUCKY
+REM ###################################################
+REM #                                                 |
+REM # Title        : Exfiltrate Files through GUI mac |
+REM # Author       : Kile                             |
+REM # Version      : 1.0                              |
+REM # Category     : Exfiltration                     |
+REM # Target       : MacOS                            |
+REM #                                                 |
+REM ###################################################
 
 REM NOTE This is not unlikely to fail depending on the speed of search or if a large amount of files meet the criteria. Adjust DELAYs to your needs
 
