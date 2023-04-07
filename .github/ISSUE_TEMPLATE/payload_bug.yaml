@@ -7,6 +7,10 @@ body:
     attributes:
       value: Keep in mind - the more information provided here, the more actionable it will become. Please provide detailed answers to the prompts below. Please read and answer carefully. [Common Ducky Troubleshooting](https://docs.hak5.org/hak5-usb-rubber-ducky/troubleshooting/common-issues)
   
+  - type: markdown
+    attributes:
+      value: **If you are simply seeking assistance with a payload contact the payload author or join our** [Community discord](hak5.org/discord)
+  
   - type: input
     id: PayloadName
     attributes:
@@ -70,9 +74,9 @@ body:
       required: false
 
   - type: checkboxes
-    id: no-duplicate-issues
+    id: checklist
     attributes:
-      label: "Checklist ✅"
+      label: "Checklist ✅ - READ CAREFULLY"
       options:
         - label: "I checked and didn't find a similar issue already reported"
           required: true
@@ -83,7 +87,7 @@ body:
         - label: "I made sure to redact any private information in the details shared above"
           required: true
 
-        - label: "I have read the documentation provided by the original payload author and configured the payload (if required)"
+        - label: "I have read and followed the documentation provided by the original payload author and configured the payload (if required)"
           required: true
 
         - label: "I have confirmed I am deploying this payload with the correct device intended by the original author (Original USB Rubber Ducky vs New USB Rubber Ducky)"
@@ -95,5 +99,16 @@ body:
         - label: "I have confirmed the payload is compiled in the correct keyboard language for the target host I'm trying to deploy it on (US, DE, etc)"
           required: true
 
-        - label: "I have actually read the above checkboxes before checking them, including this one, which I have intentionally left unchecked as confirmation of this statement"
+	  - label: "I have actually read the above checkboxes before checking them, including this one, which I have intentionally left unchecked as confirmation of this statement"
           required: false
+
+   - type: checkboxes
+    id: agreement
+    attributes:
+      label: "Agreement"
+      options:
+        - label: "I believe this is an issue with the actual payload itself. I acknowledge this form is not a request for help following instructions."
+          required: true
+          
+        - label: "I have carefully read and filled out every section of this issue form to the best of my ability. I acknowledge by providing insufficient information I cannot receieve adequate assistance."
+          required: true
