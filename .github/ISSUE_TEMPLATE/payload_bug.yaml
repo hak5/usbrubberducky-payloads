@@ -99,7 +99,7 @@ body:
         - label: "I have confirmed the payload is compiled in the correct keyboard language for the target host I'm trying to deploy it on (US, DE, etc)"
           required: true
 
-	      - label: "I have actually read the above checkboxes before checking them, including this one, which I have intentionally left unchecked as confirmation of this statement"
+	- label: "I have actually read the above checkboxes before checking them, including this one, which I have intentionally left unchecked as confirmation of this statement"
           required: false
 
   - type: checkboxes
