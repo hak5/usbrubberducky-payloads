@@ -26,31 +26,31 @@ body:
       required: true
 
   - type: textarea
-    id: Description
+    id: Modifications
     attributes:
-      label: "Description"
-      description: "A thorough description of the issue"
-      placeholder: 'ex. Here is what I am trying to do; I did X and expected Y to happen but instead...'
+      label: "Payload Setup"
+      description: "Describe what you've done to set up the payload. This includes any required configuration. If any, please list what changes or modifications you have made to the original payload to experience this problem. DO NOT SHARE PRIVATE INFO SUCH AS YOUR DOMAINS OR API KEYS."
+      placeholder: "DO NOT LEAVE THIS BLANK. ex. I changed the DEFINE URL example.com to a domain of my own where I'm hosting xyz"
     validations:
       required: true
 
   - type: textarea
-    id: Modifications
+    id: Description
     attributes:
-      label: "Payload Modifications (if any)"
-      description: "If any, please list what changes or modifications you have made to the original payload to experience this problem. DO NOT SHARE PRIVATE INFO SUCH AS YOUR DOMAINS OR API KEYS."
-      placeholder: "ex. I changed the DEFINE URL example.com to a domain of my own where I'm hosting xyz"
+      label: "Problem Description"
+      description: "A thorough description of the issue"
+      placeholder: 'DO NOT LEAVE THIS BLANK. ex. Here is what I am trying to do; I did X and expected Y to happen but instead...'
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: attempts
     attributes:
-      label: "Troubleshooting"
-      description: "List any steps youve taken trying to troubleshoot or solve the problem you're experiencing "
-      placeholder: "ex. I tried A, B, and C, to fix the issue, but..."
+      label: "Troubleshooting steps"
+      description: "List any steps youve taken trying to troubleshoot or solve the problem you're experiencing. "
+      placeholder: "DO NOT LEAVE THIS BLANK. ex. I tried A, B, and C, to fix the issue, but..."
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: causes
