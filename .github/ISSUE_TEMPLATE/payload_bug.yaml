@@ -9,7 +9,7 @@ body:
   
   - type: markdown
     attributes:
-      value: **If you are simply seeking assistance with a payload contact the payload author or join our** [Community discord](hak5.org/discord)
+      value: If you are simply seeking assistance with a payload contact the payload author or join our [Community discord](hak5.org/discord)
   
   - type: input
     id: PayloadName
