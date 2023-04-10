@@ -65,12 +65,14 @@ This repository contains payloads, extensions and languages for the Hak5 USB Rub
 
 ## Additional Links
 <b> Follow the creators </b><br/>
-<p >
-	<a href="https://twitter.com/notkorben">Korben's Twitter</a> | 
-	<a href="https://instagram.com/hak5korben">Korben's Instagram</a>
+<p>
+	<b>Korben's Socials</b><br/>	
+	<a href="https://twitter.com/notkorben"><img src="https://img.shields.io/twitter/follow/notkorben?style=social"/></a>  
+	<a href="https://instagram.com/hak5korben"><img src="https://img.shields.io/badge/Instagram-Follow%20@hak5korben-E1306C"/></a>
 <br/>
-	<a href="https://twitter.com/hak5darren">Darren's Twitter</a> | 
-	<a href="https://instagram.com/hak5darren">Darren's Instagram</a>
+	<b>Darren's Socials</b><br/>
+	<a href="https://twitter.com/hak5darren"><img src="https://img.shields.io/twitter/follow/hak5darren?style=social"/></a>  
+	<a href="https://instagram.com/hak5darren"><img src="https://img.shields.io/badge/Instagram-Follow%20@hak5darren-E1306C"/></a>
 </p>
 
 <br/>
