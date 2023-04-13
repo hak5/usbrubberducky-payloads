@@ -1,0 +1,65 @@
+REM ################################################
+REM #                                              |
+REM # Title        : Setting VSCode theme to light |
+REM # Author       : Kile                          |
+REM # Version      : 1.0                           |
+REM # Category     : Prank                         |
+REM # Target       : MacOS                         |
+REM #                                              |
+REM ################################################
+
+REM DESCRIPTION: Opens VSCode settings and sets it to light mode - beware, eyes may be permanently damaged
+
+ATTACKMODE HID VID_05AC PID_021E
+DELAY 500
+
+REM Press the down arrow a lot to select the bottom most theme (which is a light theme)
+FUNCTION DO_DOWNS()
+    VAR $COUNTER = 0
+    WHILE ($COUNTER < 20)
+        DOWN
+        $COUNTER = ($COUNTER + 1)
+    END_WHILE
+END_FUNCTION
+
+REM Open VSCode
+COMMAND SPACE
+STRING Visual Studio Code
+DELAY 200
+ENTER
+DELAY 300
+
+REM Open settings
+COMMAND ,
+DELAY 200
+REM Look for "theme"
+STRING theme
+DELAY 200
+ENTER
+DELAY 200
+
+REM Tab to the first result
+TAB
+DELAY 100
+TAB
+DELAY 100
+TAB
+DELAY 100
+TAB
+DELAY 100
+TAB
+DELAY 100
+REM Open the theme dropdown
+ENTER
+ENTER
+DELAY 200
+
+REM Note: There is also a key combinations to open a theme dropdown, however on that dropdown if you press down at the end it will go back up, so you canot be certain what mode is selected.
+
+REM Select light mode
+DO_DOWNS()
+ENTER
+
+DELAY 100
+REM Close the settings window
+COMMAND w
