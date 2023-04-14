@@ -1,0 +1,114 @@
+name: Payload Bug
+description: Report an issue to help improve payloads provided within this project.  
+title: "[Payload BUG] write a short description here"
+
+body:
+  - type: markdown
+    attributes:
+      value: Keep in mind - the more information provided here, the more actionable it will become. Please provide detailed answers to the prompts below. Please read and answer carefully. [Common Ducky Troubleshooting](https://docs.hak5.org/hak5-usb-rubber-ducky/troubleshooting/common-issues)
+
+  - type: markdown
+    attributes:
+      value: If you are simply seeking assistance with a payload contact the payload author or join our [Community discord](https://hak5.org/discord)
+
+  - type: input
+    id: PayloadName
+    attributes:
+      label: "Payload Title"
+      description: "Title of the payload you're experiencing an issue with"
+      placeholder: "ex. ExampleTitle"
+    validations:
+      required: true
+
+  - type: input
+    id: PayloadURL
+    attributes:
+      label: "Payload URL"
+      description: "Provide a direct link (URL) to the payload in question within this repo. Not the payload name. "
+      placeholder: "ex. https://github.com/hak5/usbrubberducky-payloads/........"
+    validations:
+      required: true
+
+  - type: textarea
+    id: Modifications
+    attributes:
+      label: "Payload Setup"
+      description: "Describe what you've done to set up the payload. This includes any required configuration. If any, please list what changes or modifications you have made to the original payload to experience this problem. DO NOT SHARE PRIVATE INFO SUCH AS YOUR DOMAINS OR API KEYS."
+      placeholder: "DO NOT LEAVE THIS BLANK. ex. I changed the DEFINE URL example.com to a domain of my own where I'm hosting xyz"
+    validations:
+      required: true
+
+  - type: textarea
+    id: Description
+    attributes:
+      label: "Problem Description"
+      description: "A thorough description of the issue"
+      placeholder: 'DO NOT LEAVE THIS BLANK. ex. Here is what I am trying to do; I did X and expected Y to happen but instead...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: attempts
+    attributes:
+      label: "Troubleshooting steps"
+      description: "List any steps youve taken trying to troubleshoot or solve the problem you're experiencing. "
+      placeholder: "DO NOT LEAVE THIS BLANK. ex. I tried A, B, and C, to fix the issue, but..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: causes
+    attributes:
+      label: "Suspected Cause"
+      description: "Could this be because ...?"
+      placeholder: "ex. Maybe this is because..."
+    validations:
+      required: false
+      
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots or additional information"
+      description: "Please add screenshots or extra details without a specific category if applicable"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist ✅ - READ CAREFULLY"
+      options:
+        - label: "I checked and didn't find a similar issue already reported"
+          required: true
+
+        - label: "I am using PayloadStudio to encode this payload"
+          required: true
+
+        - label: "I made sure to redact any private information in the details shared above"
+          required: true
+
+        - label: "I have read and followed the documentation provided by the original payload author and configured the payload (if required)"
+          required: true
+
+        - label: "I have confirmed I am deploying this payload with the correct device intended by the original author (Original USB Rubber Ducky vs New USB Rubber Ducky)"
+          required: true
+
+        - label: "I have confirmed I am deploying this payload on the correct target host intended by the original author (Windows, Mac, Linux, etc)"
+          required: true
+
+        - label: "I have confirmed the payload is compiled in the correct keyboard language for the target host I'm trying to deploy it on (US, DE, etc)"
+          required: true
+
+        - label: "I have actually read the above checkboxes before checking them, including this one, which I have intentionally left unchecked as confirmation of this statement"
+          required: false
+
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: "Agreement"
+      options:
+        - label: "I believe this is an issue with the actual payload itself. I acknowledge this form is not a request for help following instructions."
+          required: true
+
+        - label: "I have carefully read and filled out every section of this issue form to the best of my ability. I acknowledge by providing insufficient information I cannot receieve adequate assistance."
+          required: true

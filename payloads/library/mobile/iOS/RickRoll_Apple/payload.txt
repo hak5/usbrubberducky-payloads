@@ -13,7 +13,6 @@ STRING Safari
 ENTER
 DELAY 500
 GUI t
-https://www.youtube.com/watch?v=xm3YgoEiEDc
-ENTER
+STRINGLN https://www.youtube.com/watch?v=xm3YgoEiEDc
 DELAY 500
 STRING f
