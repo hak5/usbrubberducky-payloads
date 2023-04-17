@@ -1,15 +1,15 @@
-*     Title: ADV-RickRoll
+REM     Title: ADV-RickRoll
 
-*     Author: I am Jakoby
+REM     Author: I am Jakoby
 
-*     Description: This is a one liner payload that will Rick Roll your target. Video will be played a full screen and max volume. 
-*     Upon deployment payload will pause until a mouse movement is detected and run once one is. 
+REM     Description: This is a one liner payload that will Rick Roll your target. Video will be played a full screen and max volume. 
+REM     Upon deployment payload will pause until a mouse movement is detected and run once one is. 
 
-*     Target: Windows 10, 11
+REM     Target: Windows 10, 11
 
-*     --------------------------------------------------------------------------------------
-*     THIS PAYLOAD IS PLUG AND PLAY. NO MODIFICATIONS NEEDED SIMPLY RUN THE CODE DOWN BELOW.
-*     --------------------------------------------------------------------------------------
+REM     --------------------------------------------------------------------------------------
+REM     THIS PAYLOAD IS PLUG AND PLAY. NO MODIFICATIONS NEEDED SIMPLY RUN THE CODE DOWN BELOW.
+REM     --------------------------------------------------------------------------------------
 
 DELAY 2000
 GUI r
