@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+}
+
+h1, #url {
+    text-align: center;
+}
+
+#url {
+    font-size: small;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    color: whitesmoke;
+    padding: 1vh 0 1vh 0;
+    background-color: lightslategray;
+}
+
+iframe {
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 98vh;
+    max-height: 98vh;
+    border-style: none;
+}
