@@ -12,6 +12,7 @@ REM ##################################################
 REM Requirements:
 REM     - Internet Connection
 REM     - Spotify installed and user logged-in
+REM     - ExecutionPolicy Bypass
 
 
 REM REQUIRED - Set your song name

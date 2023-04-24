@@ -16,6 +16,7 @@ A script used to prank friends by playing songs through Spotify. Open a PowerShe
 
 * Internet Connection
 * Spotify installed and user logged-in
+* ExecutionPolicy Bypass
 
 ### Executing program
 
