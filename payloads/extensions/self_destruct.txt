@@ -59,7 +59,7 @@ EXTENSION SELF_DESTRUCT
     FUNCTION REVERT_TO_THUMBDRIVE()
             LED_OFF
             HIDE_PAYLOAD
-            DELAY 100
+            DELAY 500
             ATTACKMODE STORAGE
     END_FUNCTION
     
