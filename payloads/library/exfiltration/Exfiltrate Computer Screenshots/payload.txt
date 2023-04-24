@@ -12,6 +12,8 @@ REM ###################################################
 REM Requirements:
 REM     - Internet Connection
 REM     - Discord Webhook (or whatever you want for the exfiltration)
+REM     - ExecutionPolicy Bypass
+REM     - Python
 
 
 REM REQUIRED - Set your Python script link

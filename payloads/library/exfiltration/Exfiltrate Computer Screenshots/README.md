@@ -16,6 +16,8 @@ Open a PowerShell, download the Python script and execute it. The Python script 
 
 * Internet Connection
 * Discord Webhook (or whatever you want for the exfiltration)
+* ExecutionPolicy Bypass
+* Python
 
 ### Executing program
 
