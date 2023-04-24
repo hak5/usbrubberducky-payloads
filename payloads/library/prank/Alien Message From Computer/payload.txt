@@ -14,6 +14,8 @@ REM Plug-And-Play <3
 
 REM Requirements:
 REM     - Internet Connection
+REM     - ExecutionPolicy Bypass
+REM     - Python
 
 GUI r
 DELAY 500

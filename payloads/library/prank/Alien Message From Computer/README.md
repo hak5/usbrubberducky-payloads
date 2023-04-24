@@ -15,6 +15,8 @@ Open a PowerShell, download the Python script and execute it. The Python script 
 ### Dependencies
 
 * Internet Connection
+* ExecutionPolicy Bypass
+* Python
 
 ### Executing program
 
