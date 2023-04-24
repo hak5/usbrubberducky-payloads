@@ -12,6 +12,7 @@ REM ########################################################
 REM Requirements:
 REM     - Internet Connection
 REM     - Thunderbird installed and email configured
+REM     - ExecutionPolicy Bypass (for Windows target)
 
 REM This payload is tested on:
 REM     - Ubuntu 23.04

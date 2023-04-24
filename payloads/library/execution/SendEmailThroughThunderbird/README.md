@@ -39,6 +39,7 @@ DELAY 4000
 
 * Internet Connection
 * Thunderbird installed and email configured
+* ExecutionPolicy Bypass (for Windows target)
 
 ### Settings
 
