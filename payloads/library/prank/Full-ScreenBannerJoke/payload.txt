@@ -12,6 +12,8 @@ REM ############################################
 
 REM Requirements:
 REM     - Internet Connection
+REM     - Python installed
+REM     - ExecutionPolicy Bypass
 
 
 REM REQUIRED - Set your Python script link
