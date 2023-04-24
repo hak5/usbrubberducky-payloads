@@ -1,0 +1,57 @@
+REM ##################################################
+REM #                                                |
+REM # Title        : Play A Song Through Spotify     |
+REM # Author       : Aleff                           |
+REM # Version      : 1.0                             |
+REM # Category     : Prank                           |
+REM # Target       : Windows 10-11                   |
+REM #                                                |
+REM ##################################################
+
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Spotify installed and user logged-in
+REM     - ExecutionPolicy Bypass
+
+
+REM REQUIRED - Set your song name
+DEFINE SONG-NAME example
+
+
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 2000
+
+STRINGLN Start-Process "spotify://"
+DELAY 5000
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+
+REM Some times popups of advertisements may come out and usually they will click on the search screen, if you want you can uncomment line 42 so that the popup closes but in case the popup does not click then the rest of the script will not work because escaping it takes it out of its scope.
+REM ESCAPE
+REM DELAY 500
+
+STRING SONG-NAME
+ENTER
+DELAY 1000
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+GUI m
