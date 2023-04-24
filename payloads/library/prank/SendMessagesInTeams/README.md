@@ -16,6 +16,8 @@ Open a PowerShell, stop Teams if is runned, run Teams, run new message function,
 
 * Internet Connection
 * Microsoft Teams installed and user logged-in
+* ExecutionPolicy Bypass
+* Python
 
 ### Settings
 

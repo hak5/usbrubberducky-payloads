@@ -11,6 +11,8 @@ REM ###########################################
 REM Requirements:
 REM     - Microsoft Teams installed and user logged-in
 REM     - Internet Connection
+REM     - ExecutionPolicy Bypass
+REM     - Python
 
 REM 1. Open a powershell
 REM 2. Close if Teams is opens and reopen it
