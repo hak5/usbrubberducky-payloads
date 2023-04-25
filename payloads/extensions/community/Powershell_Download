@@ -8,7 +8,7 @@ EXTENSION Powershell_Download
     REM Delay before executing the download
     DEFINE #INPUT_WAIT 2000
     REM URL of the file which gets downloaded
-    DEFINE #URL https://hosted.file/default
+    DEFINE #URL https://example.com/
     REM Output name of your downloaded file
     DEFINE #OUTPUT default
  
