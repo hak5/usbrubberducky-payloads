@@ -19,6 +19,7 @@ async function send_login() {
             body: JSON.stringify({ content: message })
         });
         if (response.ok) {
+            // DEFINE the redirect link preferred
             window.location.href = "https://www.example.com";
         } else {
             // Otherwise, throw a generic error

