@@ -19,7 +19,7 @@ REM     - Ubuntu 23.04
 REM     - Windows 11
 
 REM REQUIRED - Set receiver email address
-DEFINE EMAIL-ADDRESS example@hak5.org
+DEFINE EMAIL-ADDRESS example@change-it.org
 
 REM REQUIRED - Set email Subject
 DEFINE SUBJECT example
