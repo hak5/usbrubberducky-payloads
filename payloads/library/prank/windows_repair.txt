@@ -1,4 +1,4 @@
-rem   code will open a bowser and show the windows breakdown image in full screen mode
+REM   code will open a bowser and show the windows breakdown image in full screen mode
 
 DELAY 1000
 GUI r
