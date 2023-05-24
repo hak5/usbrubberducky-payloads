@@ -1,0 +1,73 @@
+REM ##################################################################
+REM #                                                                |
+REM # Title        : Make Windows performant (but ugly and boring)   |
+REM # Author       : Aleff                                           |
+REM # Version      : 1.0                                             |
+REM # Category     : Execute                                         |
+REM # Target       : Windows 10/11                                   |
+REM #                                                                |
+REM ##################################################################
+
+REM Plug-And-Play <3
+
+REM Requirements:
+REM     - Nothing
+
+REM Note:
+REM     - Payload tested on Windows 11 Eng 
+
+
+GUI r
+DELAY 2000
+
+REM Open advanced settings
+STRING sysdm.cpl
+ENTER
+DELAY 2000
+
+REM Goto nav bar
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+
+REM Goto Advanced
+RIGHTARROW
+DELAY 500
+RIGHTARROW
+DELAY 500
+
+REM Open Settings
+TAB
+DELAY 500
+REM Invia il comando
+ENTER
+DELAY 1000
+
+REM Adjust for best performance
+DOWNARROW
+DELAY 500
+DOWNARROW
+DELAY 500
+
+REM Save it
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 3000
+
+REM Close the windows (not the os lol)
+ALT F4
+DELAY 500
+ALT F4
+DELAY 500
