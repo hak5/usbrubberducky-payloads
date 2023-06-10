@@ -1,0 +1,36 @@
+REM ####################################################
+REM #                                                  |
+REM # Title        : Continuos Print In Terminal       |
+REM # Author       : Aleff                             |
+REM # Version      : 1.0                               |
+REM # Category     : Prank                             |
+REM # Target       : Windows 10/11                     |
+REM #                                                  |
+REM ####################################################
+
+
+REM Plug And Play <3
+
+REM Requirements:
+REM     - Internet Connection
+REM     - ExecutionPolicy Bypass
+REM     - Python
+
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 2000
+
+STRINGLN (New-Object -ComObject WScript.Shell).SendKeys("{F11}")
+DELAY 500
+
+STRINGLN New-Item -Path ".\script.py" -ItemType "file" -Force
+DELAY 500
+
+STRINGLN Set-Content -Path ".\script.py" -Value "import os`nos.system('pip install colorama')`nimport colorama`nimport random`nfrom time import sleep`ncolorama.init()`nwhile True:`n`tcolor = random.choice([colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW])`n`tprint(color + 'Your computer is infected!')`n`tsleep(0.1)"
+DELAY 500
+
+STRINGLN clear; python .\script.py;
