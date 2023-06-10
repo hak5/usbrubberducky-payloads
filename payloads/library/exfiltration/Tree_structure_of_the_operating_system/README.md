@@ -26,7 +26,3 @@ Open a PowerShell and run the command `tree /f /a > out.txt` that permit to list
 
     - `tree \ /f /a > out.txt`
     - `tree C:\Users\Aleff\Documents /f /a > out.txt`
-
-- It depends byt the content and by the path choosen
-    
-    `DELAY 5000`
