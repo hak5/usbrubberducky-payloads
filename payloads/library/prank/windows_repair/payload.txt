@@ -1,0 +1,12 @@
+REM Title: Windows Repair
+REM Author: yadhumanikandan
+REM Description: code will open a bowser and show the windows breakdown image in full screen mode
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://upload.wikimedia.org/wikipedia/commons/5/56/Bsodwindows10.png
+ENTER
+DELAY 1000
+F11
+DELAY 500
