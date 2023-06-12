@@ -18,9 +18,9 @@ Open a PowerShell and run the command `tree /f /a > out.txt` that permit to list
 
 ## Settings
 
-- You must define your Dropbox accessToken or modify the exfiltration modality. Replace just the example word with your token.
+- You must define your Dropbox accessToken or modify the exfiltration modality.
 
-    `DEFINE DROPBOX_ACCESS_TOKEN "example"`
+    `DEFINE #DROPBOX_ACCESS_TOKEN example`
 
 - The path to check can be changed putting the full-path `tree <full-path> /f /a > out.txt`.
 

