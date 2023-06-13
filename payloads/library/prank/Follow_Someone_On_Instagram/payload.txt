@@ -28,7 +28,7 @@ REM It depends by the computer power and by the internet connection power
 DELAY 2000
 
 REM Go to Follow button and click it
-REPEAT 13 TAB
+REPEAT 12 TAB
 DELAY 500
 ENTER
 DELAY 1000
