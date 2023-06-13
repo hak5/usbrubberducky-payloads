@@ -1,0 +1,37 @@
+REM ################################################
+REM #                                              |
+REM # Title        : Follow someone on Instagram   |
+REM # Author       : Aleff                         |
+REM # Version      : 1.0                           |
+REM # Category     : Prank                         |
+REM # Target       : Windows 10/11                 |
+REM #                                              |
+REM ################################################
+
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Instagram account logged in
+
+REM You must set the Instagram account that you want to follow i.e. https://www.instagram.com/alessandro_greco_aka_aleff/
+DEFINE #INSTAGRAM_LINK example
+
+
+DELAY 1000
+GUI r
+DELAY 500
+STRINGLN powershell
+DELAY 500
+
+STRINGLN Start-Process "#INSTAGRAM_LINK"; exit;
+REM It depends by the computer power and by the internet connection power
+DELAY 2000
+
+REM Go to Follow button and click it
+REPEAT 13 TAB
+DELAY 500
+ENTER
+DELAY 1000
+
+REM Close the Browser
+ALT F4
