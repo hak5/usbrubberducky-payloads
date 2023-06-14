@@ -78,9 +78,9 @@ ALTSTRING "%TEMP%\script.hex"
 Replace `<hexadecimal_code>` with the actual hexadecimal code generated in the previous step. I used a combo ALT F and STRING S for save the file using `"%TEMP%\script.hex"` that save it in a `TEMP` directory
 
 ## Decoding Hexadecimal Code and Executing the Program
-Now, we need to decode the hexadecimal code and execute the program. We can use the `certutil` command again to accomplish this.
+Now, we need to decode the hexadecimal code and execute the program. We can use the `certutil` command to accomplish this.
 
-Save the DuckyScript file as `script.hex` and run the following command in the Command Prompt:
+Once saved the file with a hex extension, run the following command in the Command Prompt:
 
 ```powershell
 certutil -f -decodeHex "%TEMP%\script.hex" "%TEMP%\script.exe"
