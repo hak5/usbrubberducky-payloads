@@ -1,5 +1,7 @@
 # Example
 
+Executables have been removed for security reasons.
+
 ## File list
 
 - Python code: `example.py`
