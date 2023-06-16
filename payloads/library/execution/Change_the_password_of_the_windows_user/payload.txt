@@ -3,7 +3,7 @@ REM #                                                          |
 REM # Title        : Change the password of the Windows user   |
 REM # Author       : Aleff                                     |
 REM # Version      : 1.0                                       |
-REM # Category     : Execute                                   |
+REM # Category     : Execution                                   |
 REM # Target       : Windows 10-11                             |
 REM #                                                          |
 REM ############################################################

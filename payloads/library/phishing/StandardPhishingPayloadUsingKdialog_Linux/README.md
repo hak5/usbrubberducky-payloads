@@ -57,3 +57,31 @@ Generally it is recommended to divide the various steps at different times by di
 
 - Why is used the 'cyber-attack' word?
 This payload is intended to be a working tool for performing cybersecurity analysis and is not intended to harm malicious users in any way. This term is used for simplicity in speaking but is really meant to be a study tool that can be worked on.
+
+## Credits
+
+<h2 align="center"> Aleff :octocat: </h2>
+<div align=center>
+<table>
+  <tr>
+    <td align="center" width="96">
+      <a href="https://github.com/aleff-github">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/github.png?raw=true width="48" height="48" />
+      </a>
+      <br>Github
+    </td>
+    <td align="center" width="96">
+      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
+      </a>
+      <br>Instagram
+    </td>
+    <td align="center" width="96">
+      <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
+      </a>
+      <br>Discord
+    </td>
+  </tr>
+</table>
+</div>
