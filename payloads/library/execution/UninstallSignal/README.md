@@ -41,7 +41,7 @@ Open a PowerShell, stop the Signal proccess if it runs and then execute the unin
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>Linkedin
     </td>
   </tr>
 </table>

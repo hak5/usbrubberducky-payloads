@@ -44,7 +44,7 @@ Opens a shell, runs the telegram-desktop app, search the user by the id, enter i
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>Linkedin
     </td>
   </tr>
 </table>

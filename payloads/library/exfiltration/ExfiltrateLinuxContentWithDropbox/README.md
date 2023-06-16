@@ -53,7 +53,7 @@ Opens a shel, zip all zippable (R permission) content of the folder, send the zi
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>Linkedin
     </td>
   </tr>
 </table>
