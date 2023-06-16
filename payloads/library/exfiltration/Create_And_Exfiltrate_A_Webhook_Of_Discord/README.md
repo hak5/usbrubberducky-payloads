@@ -32,3 +32,31 @@ To do the exfiltration I decided to use another discord webhook but of course yo
 - The open time may vary depending on the pc and whether there may be updates that need to be done
     
     `DELAY 6000`
+    
+## Credits
+
+<h2 align="center"> Aleff :octocat: </h2>
+<div align=center>
+<table>
+  <tr>
+    <td align="center" width="96">
+      <a href="https://github.com/aleff-github">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/github.png?raw=true width="48" height="48" />
+      </a>
+      <br>Github
+    </td>
+    <td align="center" width="96">
+      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
+      </a>
+      <br>Instagram
+    </td>
+    <td align="center" width="96">
+      <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
+      </a>
+      <br>Discord
+    </td>
+  </tr>
+</table>
+</div>
