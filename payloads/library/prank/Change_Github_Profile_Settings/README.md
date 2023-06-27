@@ -16,6 +16,7 @@ The script will run a shell and open the default browser in `https://github.com/
 
 * Internet connection
 * Logged in Github
+* PayloadStudio >= 1.3.1
 
 ### Settings
 
