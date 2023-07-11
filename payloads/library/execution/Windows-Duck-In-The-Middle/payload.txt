@@ -12,7 +12,7 @@ DEFINE MEDIUM 2000
 REM Long delay time
 DEFINE LONG 4000
 REM The download link for your Trusted Root CA certificate
-DEFINE CERT_URL http://127.0.0.1:8080/cert
+DEFINE CERT_URL example.com
 REM Your proxy's IP address
 DEFINE PROXY_IP 127.0.0.1
 REM Your proxy port
