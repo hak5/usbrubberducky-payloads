@@ -19,7 +19,7 @@ The certificate must be downloadable from a website, either from your proxy serv
 4. Confirm the addition of a trusted certificate through the confirmation dialog box.
 5. Close the virtual desktop.
 
-> Note : No configuration is required for Edge and Chrome browsers, as they accept user root certificates by default.
+> Note: No configuration is required for Edge and Chrome browsers, as they accept user root certificates by default.
 
 
 ## Results
