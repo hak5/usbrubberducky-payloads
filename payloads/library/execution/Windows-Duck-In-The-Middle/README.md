@@ -9,7 +9,7 @@ The payload configures the target PC user to redirect network traffic via a prox
 2. Open a PowerShell window using the Windows+X menu.
 3. Runs PowerShell code that performs the following actions:
 - Downloads your certificate to a temporary file.
-- *Configure Firefox to accept user root certificates for each profile.*
+- *Configures Firefox to accept user root certificates for each profile.*
 - Configures and activates the proxy for the current user.
 - Deletes the temporary certificate file and PowerShell history, then closes the window.
 4. Confirm adding a trusted certificate in the confirmation dialog.
