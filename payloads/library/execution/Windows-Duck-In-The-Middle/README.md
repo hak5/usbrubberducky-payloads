@@ -6,13 +6,13 @@ The payload configures the target PC user to redirect network traffic via a prox
 <summary>Payload operation</summary>
 
 1. Create a new virtual desktop.
-2. Open a PowerShell window using the Windows+x menu.
-3. Run PowerShell code that performs the following actions:
-- Download your certificate to a temporary file.
+2. Open a PowerShell window using the Windows+X menu.
+3. Runs PowerShell code that performs the following actions:
+- Downloads your certificate to a temporary file.
 - *Configure Firefox to accept user root certificates for each profile.*
-- Configure and activate the proxy for the current user.
-- Delete the temporary certificate file and clear PowerShell history, then close the window.
-4. Confirm the addition of a trusted certificate through the confirmation dialog box.
+- Configures and activates the proxy for the current user.
+- Deletes the temporary certificate file and PowerShell history, then closes the window.
+4. Confirm adding a trusted certificate in the confirmation dialog.
 5. Close the virtual desktop.
 
 > Note: No configuration is required for Edge and Chrome browsers, as they accept user root certificates by default.

