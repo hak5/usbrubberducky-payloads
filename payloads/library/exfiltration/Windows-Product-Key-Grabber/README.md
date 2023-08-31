@@ -31,7 +31,7 @@ Once you've obtained them, you need to download the "script.ps1" file from this 
 
 |Advanced options|Data type|Default value|Description|
 |-|-|-|-|
-|ACTIVE_DETECTION|Boolean|FALSE|Detects when the Rubber Ducky USB is ready using the CAPSLOCK reflection function, if set to "false" detects for hosts that reflect the current state of the operating system lock key.|
+|ACTIVE_DETECTION|Boolean|FALSE|Detects if the USB Rubber Ducky is ready using CAPSLOCK reflection (if set to "FALSE", it detects using the current operating system lock key reflection state)|
 |DETECTION_MAX_TRIES|Integer|200|Maximum number of detection attempts|
 |DETECTION_CHECK_INTERVAL|Integer|20|The interval between each detection attempt|
 |SHORT_DELAY|Integer|500|Short delay time|
