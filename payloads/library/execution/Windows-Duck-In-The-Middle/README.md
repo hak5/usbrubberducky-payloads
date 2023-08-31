@@ -1,19 +1,20 @@
 # Windows Duck In The Middle
 
-The payload configures the target PC user to redirect network traffic via a proxy, enabling a [Man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack). After executing your payload, the proxy server will intercept all the target user's network traffic.
+This payload configures the target PC user to redirect network traffic via a proxy, enabling a [Man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack). After executing your payload, the proxy server will intercept all the target user's network traffic.
 
 <details>
 <summary>Payload operation</summary>
 
-1. Create a new virtual desktop.
-2. Open a PowerShell window using the Windows+X menu.
+1. Creates a new virtual desktop.
+2. Opens a PowerShell window using the Windows+X menu.
 3. Runs PowerShell code that performs the following actions:
 - Downloads your certificate to a temporary file.
-- *Configures Firefox to accept user root certificates for each profile.*
+- *Configures Firefox to accepts root user certificates for each profile.*
 - Configures and activates the proxy for the current user.
 - Deletes the temporary certificate file and PowerShell history, then closes the window.
-4. Confirm adding a trusted certificate in the confirmation dialog.
-5. Close the virtual desktop.
+4. Confirms the addition of a trusted certificate in the confirmation dialog box.
+5. Closes the virtual desktop.
+6. *Disables USB Rubber Ducky*
 
 > Note: No configuration is required for Edge and Chrome browsers, as they accept user root certificates by default.
 
@@ -41,7 +42,8 @@ The certificate must be downloadable from a website, either from your proxy serv
 |SHORT_DELAY|Integer|500|Short delay time|
 |MEDIUM_DELAY|Integer|2000|Medium delay time|
 |LONG_DELAY|Integer|4000|Long delay time|
-|CONFIGURE_FIREFOX|Boolean|TRUE|Configure Firefox to accept user root certificates for each profile|
+|CONFIGURE_FIREFOX|Boolean|TRUE|Configures Firefox to accepts root user certificates for each profile|
+|DISABLE_AFTER_EXECUTION|Boolean|TRUE|Disables USB Rubber Ducky after payload execution|
 
 
 ## Authors
