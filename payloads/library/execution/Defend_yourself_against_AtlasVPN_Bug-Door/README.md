@@ -4,6 +4,8 @@ This script has been developed to allow you to mitigate a well-known vulnerabili
 
 **Category**: Incident Response
 
+![](1.png)
+
 ## Table of contents:
 
 - Payload description
@@ -85,8 +87,9 @@ One of the ways to delete iptables rules is by rule specification. To do so, you
 
 `sudo iptables -D INPUT -p tcp --dport 8076 -m state --state NEW -j DROP`
 
-## Credits
+![](1.png)
 
+## Credits
 
 <h2 align="center"> Aleff :octocat: </h2>
 <div align=center>
