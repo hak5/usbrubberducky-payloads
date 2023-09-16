@@ -5,16 +5,17 @@ This payload configures the target PC user to redirect network traffic via a pro
 <details>
 <summary>Payload operation</summary>
 
-1. Creates a new virtual desktop.
-2. Opens a PowerShell window using the Windows+X menu.
-3. Runs PowerShell code that performs the following actions:
+1. Detects when the USB Rubber Ducky is ready and whether the target operating system is Windows.
+2. Creates a new virtual desktop.
+3. Opens a PowerShell window using the Windows+X menu.
+4. Runs PowerShell code that performs the following actions:
 - Downloads your certificate to a temporary file.
 - *Configures Firefox to accepts root user certificates for each profile.*
 - Configures and activates the proxy for the current user.
 - Deletes the temporary certificate file and PowerShell history, then closes the window.
-4. Confirms the addition of a trusted certificate in the confirmation dialog box.
-5. Closes the virtual desktop.
-6. *Disables USB Rubber Ducky*
+5. Confirms the addition of a trusted certificate in the confirmation dialog box.
+6. Closes the virtual desktop.
+7. *Disables USB Rubber Ducky*
 
 > Note: No configuration is required for Edge and Chrome browsers, as they accept user root certificates by default.
 

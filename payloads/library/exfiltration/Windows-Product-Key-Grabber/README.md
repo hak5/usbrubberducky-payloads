@@ -5,12 +5,13 @@ This payload sends you the target PC's Windows product key via Dropbox.
 <details>
 <summary>Extension operation</summary>
 
-1. Opens a Windows Run dialog box.
-2. Executes a hosted PowerShell script that performs the following actions:
+1. Detects when the USB Rubber Ducky is ready and whether the target operating system is Windows.
+2. Opens a Windows Run dialog box.
+3. Executes a hosted PowerShell script that performs the following actions:
 - Clears the history of the Windows Run menu.
 - Recovers Windows product key from target PC.
 - Sends the Windows product key of the target PC to a file in your Dropbox.
-3. *Disables USB rubber ducky.*
+4. *Disables USB Rubber Ducky.*
 
 </details>
 
@@ -29,15 +30,7 @@ Once you've obtained them, you need to download the "script.ps1" file from this 
 |-|-|-|-|
 |SCRIPT_URL|String|example.com|Your PowerShell script download link|
 
-|Advanced options|Data type|Default value|Description|
-|-|-|-|-|
-|ACTIVE_DETECTION|Boolean|FALSE|Detects if the USB Rubber Ducky is ready using CAPSLOCK reflection (if set to "FALSE", it detects using the current operating system lock key reflection state)|
-|DETECTION_MAX_TRIES|Integer|200|Maximum number of detection attempts|
-|DETECTION_CHECK_INTERVAL|Integer|20|The interval between each detection attempt|
-|SHORT_DELAY|Integer|500|Short delay time|
-|MEDIUM_DELAY|Integer|2000|Medium delay time|
-|ELEVATED_EXECUTION|Boolean|FALSE|Runs your script with administrator rights|
-|DISABLE_AFTER_EXECUTION|Boolean|TRUE|Disables USB Rubber Ducky after extension execution|
+You can find the advanced options documentation directly in the [Run Hosted PowerShell](https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Extensions/Run_Hosted_PowerShell/README.md) extension documentation.
 
 
 ## Authors
