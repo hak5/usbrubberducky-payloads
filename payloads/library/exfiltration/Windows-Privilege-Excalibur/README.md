@@ -3,7 +3,7 @@
 This payload sends you a brief privilege escalation report of the target PC user via Dropbox. Once you have the report, you can perform further privilege escalation analysis, including using the following resources:
 
 | Report Category | Useful Resources |
-| --- | --- |
+| - | - |
 | System Information | [WES-NG](https://github.com/bitsadmin/wesng)  |
 | User Information | [Priv2Admin](https://github.com/gtworek/Priv2Admin) |
 | Stored Credentials | |
