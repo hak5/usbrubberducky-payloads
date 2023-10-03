@@ -1,0 +1,41 @@
+REM TITLE : "Mr. Robot" - eXit
+REM AUTHOR : TW-D
+REM TARGET : Microsoft Edge
+REM VERSION : 1.0
+REM CATEGORY : Prank
+REM REQUIREMENT : DuckyScript 3.0
+
+ATTACKMODE HID STORAGE
+DELAY 15000
+
+REM ---
+REM USB Rubber Ducky label.
+REM ---
+DEFINE #RD_LABEL DUCKY
+
+REM ---
+REM Enable/Disable hints.
+REM - TRUE if you don't know the exact answers given by Elliot in both parts.
+REM - FALSE only if you know the exact answers given by Elliot in both parts.
+REM ---
+DEFINE #HINT TRUE
+
+SAVE_HOST_KEYBOARD_LOCK_STATE
+
+IF ( $_CAPSLOCK_ON ) THEN
+    CAPSLOCK
+    DELAY 500
+END_IF
+
+IF ( $_NUMLOCK_ON == FALSE ) THEN
+    NUMLOCK
+    DELAY 500
+END_IF
+
+GUI r
+DELAY 1500
+STRINGLN CMD /K "MODE CON:COLS=18 LINES=1 && FOR /F %d IN ('WMIC Volume GET DriveLetter^, Label^|FINDSTR "#RD_LABEL"') DO @SET RD_LABEL=%d"
+DELAY 2000
+STRINGLN START MSEDGE --app="file:///%RD_LABEL%/prank_files/index.html?hint=#HINT" --kiosk --kiosk-idle-timeout-minutes=0 --edge-kiosk-type=fullscreen --disable-features=Translate --no-first-run
+
+RESTORE_HOST_KEYBOARD_LOCK_STATE
