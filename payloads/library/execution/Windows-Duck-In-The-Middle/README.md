@@ -1,6 +1,19 @@
 # Windows Duck In The Middle
 
-<a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/Who-Is-Julien/Ducky-Utilities/main/Payloads/Windows-Duck-In-The-Middle/payload.txt"><img alt="View on Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square"></a>
+<p align="center">
+  <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/Who-Is-Julien/Ducky-Utilities/main/Payloads/Windows-Duck-In-The-Middle/payload.txt">
+    <img alt="View on Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square">
+  </a>
+  <a href="#">
+    <img alt="Operating System: Windows 10, 11" src="https://img.shields.io/badge/Operating_System-Windows_10,_11-blue?style=flat-square">
+  </a>
+  <a href="#">
+    <img alt="Category: Execution" src="https://img.shields.io/badge/Category-Execution-purple?style=flat-square">
+  </a>
+  <a href="#">
+    <img alt="Payload: Unstaged" src="https://img.shields.io/badge/Payload-Unstaged-yellow?style=flat-square">
+  </a>
+</p>
 
 This payload configures the target PC user to redirect network traffic via a proxy, enabling a [Man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack). After executing your payload, the proxy server will intercept all the target user's network traffic.
 
