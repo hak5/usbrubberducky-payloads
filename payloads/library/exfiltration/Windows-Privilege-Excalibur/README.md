@@ -1,5 +1,7 @@
 ## Windows Privilege Excalibur
 
+<a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/Who-Is-Julien/Ducky-Utilities/main/Payloads/Windows-Privilege-Excalibur/payload.txt"><img alt="View on Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square"></a>
+
 This payload sends you a brief privilege escalation report of the target PC user via Dropbox. Once you have the report, you can perform further privilege escalation analysis, including using the following resources:
 
 | Report Category | Useful Resources |
