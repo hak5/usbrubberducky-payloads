@@ -27,7 +27,9 @@ It will ask for information about the certificate - Insert whatever you want.<br
 openssl s_server -quiet -key key.pem -cert cert.pem -port [Port Number]
 ncat --listen -p [Port Number] --ssl --ssl-cert cert.pem --ssl-key key.pem
 ```
-- Third: Define the IP-Address and Port of your listening machine within the payload. Additionally add an unique identifier to give your Duck a name.
+- Third: Define the IP-Address and Port of your listening machine within the payload, as also if your target is a Windows 11 based system. _Disclaimer: Windows 11 mode will modify the registry. Bad opsec!_
+
+Additionally add an unique identifier to give your Duck a name.
 
 ![alt text](https://github.com/0iphor13/usbrubberducky-payloads/blob/master/payloads/library/remote_access/ReverseDuckyUltimate/media/config.png)
 
