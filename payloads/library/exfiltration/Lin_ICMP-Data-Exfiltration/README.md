@@ -8,7 +8,7 @@
 
 ## Description
 
-Exfiltrates a local file from a victim machine using the native "ping" utility.
+Exfiltrates a local file from a target machine using the native "ping" utility.
 The file is first converted to "Base64", then divided into 16-byte fragments.
 The "ping" utility is then used to transmit the data to a receiving host.
 
