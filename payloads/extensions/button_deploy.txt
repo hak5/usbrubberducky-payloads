@@ -1,0 +1,30 @@
+EXTENSION BUTTON_DEPLOY
+    REM VERSION 1.0
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Use this during development to invert the default behavior of the ducky.
+        With this extension the ducky will now be storage by default - pressing the button
+        will start the payload - all subsequent button presses will be default unless
+        redefined by a BUTTON_DEF
+
+        TARGET:
+            Any
+        
+        USAGE:
+            Place at the top of your payload
+
+        DEPLOYMENT:
+            Insert into target host, it will appear as storage, press the button to leave storage and start the payload
+
+        IMPORTANT NOTE:
+            Pressing the button will not reload the inject.bin;
+            the duck will still need to be power cycled (removed/reinserted)
+            to test a NEW inject.bin. This is simply a helper/method to 
+            avoid accidentally running a payload on your development machine
+    END_REM
+
+    ATTACKMODE STORAGE
+    WAIT_FOR_BUTTON_PRESS
+    ATTACKMODE HID
+END_EXTENSION
