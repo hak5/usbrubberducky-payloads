@@ -10,6 +10,7 @@ REM ####################################
 
 
 REM Requirements:
+REM     - Python
 REM     - Internet Connection
 
 REM REQUIRED - Set your Python script link
