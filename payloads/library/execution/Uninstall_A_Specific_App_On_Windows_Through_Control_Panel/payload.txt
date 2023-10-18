@@ -3,7 +3,7 @@ REM #                                                                           
 REM # Title        : Uninstall A Specific App On Windows Through Control Panel   |
 REM # Author       : Aleff                                                       |
 REM # Version      : 1.0                                                         |
-REM # Category     : Execute                                                     |
+REM # Category     : Execution                                                   |
 REM # Target       : Windows 10/11                                               |
 REM #                                                                            |
 REM ##############################################################################
@@ -15,7 +15,7 @@ REM Note:
 REM     - Payload tested on Windows 11 Eng 
 
 REM Set the exact name of the application as it appears within the control panel. Do not assume that just because an application is known by a certain name then it will have exactly that name, e.g. `Firefox` shows up again as `Mozilla Firefox (x64 en)`
-DEFINE APP_NAME example
+DEFINE #APP_NAME example
 
 
 REM Open Windows research
@@ -50,7 +50,7 @@ TAB
 DELAY 500
 TAB
 DELAY 500
-STRING APP_NAME
+STRING #APP_NAME
 DELAY 500
 
 REM Select the app and click on it

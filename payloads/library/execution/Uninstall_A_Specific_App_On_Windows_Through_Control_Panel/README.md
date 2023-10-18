@@ -2,7 +2,7 @@
 
 This script can be used to uninstall a specific app on a Windows System.
 
-**Category**: Execute
+**Category**: Execution
 
 ## Description
 
@@ -21,7 +21,7 @@ In addition to legal implications, **unauthorized removal of an application can 
 * Set the exact name of the application as it appears within the control panel. Do not assume that just because an application is known by a certain name then it will have exactly that name, e.g. `Firefox` shows up again as `Mozilla Firefox (x64 en)`
 
     ```DuckyScript
-    DEFINE APP_NAME example
+    DEFINE #APP_NAME example
     ```
 
 ## Credits
