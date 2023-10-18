@@ -2,7 +2,7 @@
 
 This script can be used to play a song really fast using an iPhone, so iOS system.
 
-**Category**: Prank
+**Category**: Execution
 
 ## Description
 

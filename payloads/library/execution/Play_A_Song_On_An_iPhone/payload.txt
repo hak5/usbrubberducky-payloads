@@ -3,7 +3,7 @@ REM #                                            |
 REM # Title        : Play A Song On An iPhone    |
 REM # Author       : Aleff                       |
 REM # Version      : 1.0                         |
-REM # Category     : Prank                       |
+REM # Category     : Execution                   |
 REM # Target       : iPhone                      |
 REM #                                            |
 REM ##############################################
