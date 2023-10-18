@@ -1,6 +1,6 @@
 # Persistent Keylogger - Telegram Based
 
-A script used to configure a persistent keylogger on a Linux computer trough a pre-configured Telegram Bot.
+A script used to configure a persistent keylogger on a Linux computer through a pre-configured Telegram Bot.
 
 **Category**: Execution
 
@@ -10,7 +10,7 @@ A script used to configure a persistent keylogger on a Linux computer trough a p
 
 ## Description
 
-A script used to configure a persistent keylogger on a Linux computer trough a pre-configured Telegram Bot.
+A script used to configure a persistent keylogger on a Linux computer through a pre-configured Telegram Bot.
 
 This payload is based on [Telegram Persistent Connection](Telegram_Persistent_Connection) payload for create the Telegram connection.
 
