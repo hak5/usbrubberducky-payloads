@@ -2,7 +2,7 @@
 
 This script can be used to prank your friends by modifying their Github profiles as you wish.
 
-**Category**: Prank
+**Category**: Execution
 
 ## Description
 

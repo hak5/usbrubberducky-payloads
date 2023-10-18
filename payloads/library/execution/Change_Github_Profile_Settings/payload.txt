@@ -3,7 +3,7 @@ REM #                                                 |
 REM # Title        : Change Github Profile Settings   |
 REM # Author       : Aleff                            |
 REM # Version      : 1.0                              |
-REM # Category     : Prank                            |
+REM # Category     : Execution                        |
 REM # Target       : Windows 10/11                    |
 REM #                                                 |
 REM ###################################################
