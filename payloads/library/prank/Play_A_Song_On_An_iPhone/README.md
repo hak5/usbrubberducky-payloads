@@ -1,4 +1,4 @@
-# Play A Song With An iPhone
+# Play A Song On An iPhone
 
 This script can be used to play a song really fast using an iPhone, so iOS system.
 
