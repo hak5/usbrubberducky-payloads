@@ -1,4 +1,4 @@
-# Delete A Reminder With An iPhone
+# Delete A Reminder On An iPhone
 
 This script can be used to delete a reminder really fast using an iPhone, so iOS system.
 
