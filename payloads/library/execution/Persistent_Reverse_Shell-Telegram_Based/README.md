@@ -1,6 +1,6 @@
 # Persistent Reverse Shell - Telegram Based
 
-A script used to configure a persistent reverse shell on a Linux computer trough a pre-configured Telegram Bot.
+A script used to configure a persistent reverse shell on a Linux computer through a pre-configured Telegram Bot.
 
 **Category**: Execution
 
@@ -10,11 +10,11 @@ A script used to configure a persistent reverse shell on a Linux computer trough
 
 ## Description
 
-A script used to configure a persistent reverse shell on a Linux computer trough a pre-configured Telegram Bot.
+A script used to configure a persistent reverse shell on a Linux computer through a pre-configured Telegram Bot.
 
 This payload is based on [Telegram Persistent Connection](Telegram_Persistent_Connection) payload for create the Telegram connection.
 
-The script accept the `/reverse` command using the format `/reverse <shell_command>` and split `/reverse` from `<shell_command>` trough the `extract_command()` function, then execute the command acquired acquiring the output trough the function `run_command()`.
+The script accept the `/reverse` command using the format `/reverse <shell_command>` and split `/reverse` from `<shell_command>` through the `extract_command()` function, then execute the command acquired acquiring the output through the function `run_command()`.
 
 Because Telegram uses a limited size per message, the script divides the output of the command into a theoretically infinite chunk of 1000 characters in length that will be sent one by one through the Telegram Bot.
 
