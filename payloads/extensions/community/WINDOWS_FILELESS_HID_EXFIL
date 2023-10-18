@@ -10,7 +10,7 @@ EXTENSION WINDOWS_FILELESS_HID_EXFIL
             Windows Hosts that supports powershell and SendKeys
 
         USAGE:
-            Type out your command or script with powershell, afterwards you put the function Windows_Fileless_HID_Exfil() behind it.
+            Type out your command or script with powershell, don't execute it yet (so just type it out with STRING), afterwards you put the function Windows_Fileless_HID_Exfil() behind it.
             It'll take the commands/scritps output and writes it into a variable, which then gets exfiltrated.
 
         Example Usage:
