@@ -1,8 +1,8 @@
-# Edit A Reminder With An iPhone
+# Edit A Reminder On An iPhone
 
 This script can be used to change a reminder name really fast using an iPhone, so iOS system.
 
-**Category**: Prank
+**Category**: Execution
 
 ## Description
 

@@ -1,12 +1,12 @@
-REM ###################################################
-REM #                                                 |
-REM # Title        : Edit A Reminder With An iPhone   |
-REM # Author       : Aleff                            |
-REM # Version      : 1.0                              |
-REM # Category     : Prank                            |
-REM # Target       : iPhone                           |
-REM #                                                 |
-REM ###################################################
+REM #################################################
+REM #                                               |
+REM # Title        : Edit A Reminder On An iPhone   |
+REM # Author       : Aleff                          |
+REM # Version      : 1.0                            |
+REM # Category     : Execution                      |
+REM # Target       : iPhone                         |
+REM #                                               |
+REM #################################################
 
 
 REM Requirements:
