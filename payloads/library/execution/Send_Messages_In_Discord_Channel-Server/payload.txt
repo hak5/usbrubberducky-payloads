@@ -14,7 +14,7 @@ REM     - Internet connection
 REM     - Discord Installed
 
 
-REM If, for example, the server is Hak5 and the channel in which you want to send the message is called wifi-pineapple then you should write just wifi-pineapple
+REM If, for example, the server is Hak5 and the channel in which you want to send the message is called usb-rubber-ducky then you should write just usb-rubber-ducky
 DEFINE #CHAT_NAME example
 
 
