@@ -19,7 +19,7 @@ Open a PowerShell, the get dinamically the Notion full-path and then add the `no
 
 - You must define your Dropbox accessToken or modify the exfiltration modality. Replace just the example word with your token.
 
-`DEFINE DROPBOX_ACCESS_TOKEN "example"`
+`DEFINE #DROPBOX_ACCESS_TOKEN "example"`
 
 ## Credits
 

