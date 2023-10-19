@@ -12,6 +12,8 @@ This script allows the exfiltration of the structure of the files contained in a
 
 Open a PowerShell and run the command `tree /f /a > out.txt` that permit to list the file name and not only the directories, using text characters instead of graphic characters to display rows linking subdirectories. Save all the output in the out.txt file and then send this file through Dropbox.
 
+I used the [DETECT_READY](https://shop.hak5.org/blogs/usb-rubber-ducky/detect-ready) extension.
+
 ## Dependencies
 
 * Firefox must be installed
