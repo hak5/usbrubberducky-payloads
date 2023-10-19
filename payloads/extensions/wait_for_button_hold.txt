@@ -1,0 +1,54 @@
+EXTENSION WAIT_FOR_BUTTON_HOLD
+    REM VERSION: 1.0
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Call WAIT_FOR_BUTTON_HOLD() - RETURNS TRUE if button held before timeout, FALSE if not
+        
+        CONFIGURATION:
+            MAX_WAIT - number of ms requried before execution continues 
+            regardless of button press - set to 0 to block forever until button hold
+            
+            HOLD_LENGTH - number of ms required to regsiter button activity as a valid hold
+            
+            CHECK_INTERVAL - number of ms interval to check button status
+    END_REM
+
+    REM set #MAX_WAIT to 0 for no timeout -- wait forever
+    DEFINE #MAX_WAIT 10000
+    REM amount of time required to be considered a hold in ms
+    DEFINE #HOLD_LENGTH 3000
+    REM how frequently we check that the button is continuously being held
+    DEFINE #CHECK_INTERVAL 100
+
+    FUNCTION WAIT_FOR_BUTTON_HOLD()
+        VAR $MAX_WAIT = #MAX_WAIT
+        VAR $CURRENT_WAIT = 0
+        VAR $CONTINUE = TRUE
+        VAR $HELD_FOR = 0
+
+        WHILE ($CONTINUE)
+            DELAY #CHECK_INTERVAL 
+            IF ($_BUTTON_PUSH_RECEIVED) THEN
+                $HELD_FOR = ($HELD_FOR + #CHECK_INTERVAL)
+                IF ($HELD_FOR >= #HOLD_LENGTH) THEN
+                    $MAX_WAIT = 0
+                    REM button held target met
+                    RETURN TRUE
+                END_IF
+            ELSE
+                $HELD_FOR = 0
+            END_IF
+            $_BUTTON_PUSH_RECEIVED = FALSE
+            $CURRENT_WAIT = ($CURRENT_WAIT + #CHECK_INTERVAL) 
+
+            REM check to see if we have timed out, if non-0
+            IF (($MAX_WAIT > 0) && ($CURRENT_WAIT > $MAX_WAIT)) THEN
+                $CONTINUE = FALSE
+            END_IF
+        END_WHILE
+
+        RETURN FALSE
+    END_FUNCTION
+END_EXTENSION
