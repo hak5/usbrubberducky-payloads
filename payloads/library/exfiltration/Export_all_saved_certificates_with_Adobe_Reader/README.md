@@ -21,7 +21,7 @@ Open a PowerShell, go to Adobe Reader Path dinamically, then select all the pfx 
 
 - You must define your Dropbox accessToken or modify the exfiltration modality. Replace just the example word with your token.
 
-    `DEFINE DROPBOX_ACCESS_TOKEN "example"`
+    `DEFINE #DROPBOX_ACCESS_TOKEN "example"`
 
 ## Credits
 
@@ -36,16 +36,10 @@ Open a PowerShell, go to Adobe Reader Path dinamically, then select all the pfx 
       <br>Github
     </td>
     <td align="center" width="96">
-      <a href="https://www.instagram.com/alessandro_greco_aka_aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/instagram.png?raw=true width="48" height="48" />
-      </a>
-      <br>Instagram
-    </td>
-    <td align="center" width="96">
       <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
         <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
       </a>
-      <br>Discord
+      <br>Linkedin
     </td>
   </tr>
 </table>
