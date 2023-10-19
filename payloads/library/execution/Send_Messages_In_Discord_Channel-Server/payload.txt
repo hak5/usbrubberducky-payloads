@@ -29,7 +29,7 @@ DELAY 6000
 REM Search by Discord keyboard shortcut and open it
 CTRL-k
 DELAY 500
-STRINGLN ##CHAT_NAME
+STRINGLN #CHAT_NAME
 DELAY 500
 
 STRINGLN_BLOCK
