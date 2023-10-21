@@ -1,0 +1,32 @@
+REM ############################################################
+REM #                                                          #
+REM # Title        : Defend yourself against AtlasVPN Bug-Door #
+REM # Author       : Aleff                                     #
+REM # Version      : 1.0                                       #
+REM # Category     : Execution                                 #
+REM # Target       : Linux                                     #
+REM #                                                          #
+REM ############################################################
+
+REM Requirements:
+REM     - Administrator Permission
+REM     - AtlasVPN installed
+
+REM Define the sudo user password
+DEFINE #SUDO-PWS example
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+REM Add the rule and close the shell
+STRINGLN sudo iptables -A INPUT -p tcp --dport 8076 -m state --state NEW -j DROP; exit;
+
+REM Add the rule and display it
+REM STRINGLN sudo iptables -A INPUT -p tcp --dport 8076 -m state --state NEW -j DROP; sudo iptables -S | grep "8076";
+
+REM Remove the rule
+REM STRINGLN sudo iptables -D INPUT -p tcp --dport 8076 -m state --state NEW -j DROP
+
+DELAY 500
+STRINGLN #SUDO-PWS

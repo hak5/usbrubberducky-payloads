@@ -1,0 +1,11 @@
+#prompt {
+    background-color: black;
+    caret-color: white;
+    font-size: large;
+    color: white;
+    border: none;
+}
+
+#prompt:focus {
+    outline: none;
+}
