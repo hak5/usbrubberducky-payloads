@@ -1,7 +1,7 @@
 ## Windows Privilege Excalibur
 
 <p align="center">
-  <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/Who-Is-Julien/Ducky-Utilities/main/Payloads/Windows-Privilege-Excalibur/payload.txt">
+  <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/exfiltration/Windows-Privilege-Excalibur/payload.txt">
     <img alt="View on Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square">
   </a>
   <a href="#">
@@ -17,12 +17,12 @@
 
 This payload sends you a brief privilege escalation report of the target PC user via Dropbox. Once you have the report, you can perform further privilege escalation analysis, including using the following resources:
 
-| Report Category | Useful Resources |
-| - | - |
-| System Information | [WES-NG](https://github.com/bitsadmin/wesng)  |
-| User Information | [Priv2Admin](https://github.com/gtworek/Priv2Admin) |
-| Stored Credentials | |
-| Installed Programs | [Exploit Database](https://www.exploit-db.com) & [Packet Storm](https://packetstormsecurity.com) |
+|Report Category|Useful Resources|
+|-|-|
+|System Information|[WES-NG](https://github.com/bitsadmin/wesng)|
+|User Information|[Priv2Admin](https://github.com/gtworek/Priv2Admin)|
+|Stored Credentials||
+|Installed Programs|[Exploit Database](https://www.exploit-db.com) & [Packet Storm](https://packetstormsecurity.com)|
 
 <details>
 <summary>Extension operation</summary>
@@ -33,7 +33,6 @@ This payload sends you a brief privilege escalation report of the target PC user
 - Clears the history of the Windows Run menu.
 - Prepares a report on target PC user privilege escalation.
 - Sends the report to a file in your Dropbox.
-4. *Disables USB Rubber Ducky.*
 
 </details>
 
@@ -48,11 +47,9 @@ Once you've obtained them, you need to download the "script.ps1" file from this 
 
 ## Options
 
-|Required options|Data type|Default value|Description|
-|-|-|-|-|
-|SCRIPT_URL|String|example.com|Your PowerShell script download link|
-
-You can find the advanced options documentation directly in the [Run Hosted PowerShell](https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Extensions/Run_Hosted_PowerShell/README.md) extension documentation.
+|Required extension options|Extension|Data type|Default value|Description|
+|-|-|-|-|-|
+|SCRIPT_URL|Run Hosted PowerShell|String|example.com|Your PowerShell script download link|
 
 
 ## Authors

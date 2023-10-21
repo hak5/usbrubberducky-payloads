@@ -1,7 +1,7 @@
 # Windows Product Key Grabber
 
 <p align="center">
-  <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/Who-Is-Julien/Ducky-Utilities/main/Payloads/Windows-Product-Key-Grabber/payload.txt">
+  <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/exfiltration/Windows-Product-Key-Grabber/payload.txt">
     <img alt="View on Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square">
   </a>
   <a href="#">
@@ -26,7 +26,6 @@ This payload sends you the target PC's Windows product key via Dropbox.
 - Clears the history of the Windows Run menu.
 - Recovers Windows product key from target PC.
 - Sends the Windows product key of the target PC to a file in your Dropbox.
-4. *Disables USB Rubber Ducky.*
 
 </details>
 
@@ -41,11 +40,9 @@ Once you've obtained them, you need to download the "script.ps1" file from this 
 
 ## Options
 
-|Required options|Data type|Default value|Description|
-|-|-|-|-|
-|SCRIPT_URL|String|example.com|Your PowerShell script download link|
-
-You can find the advanced options documentation directly in the [Run Hosted PowerShell](https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Extensions/Run_Hosted_PowerShell/README.md) extension documentation.
+|Required extension options|Extension|Data type|Default value|Description|
+|-|-|-|-|-|
+|SCRIPT_URL|Run Hosted PowerShell|String|example.com|Your PowerShell script download link|
 
 
 ## Authors
