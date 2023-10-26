@@ -4,7 +4,7 @@ REM_BLOCK INFOS
     Author: Who-Is-Julien
     Description: This payload configures the target PC user to redirect network traffic via a proxy, enabling a Man-in-the-middle attack.
     Target: Windows 10, 11
-    Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Payloads/Windows-Duck-In-The-Middle/README.md
+    Documentation: https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/library/execution/Windows-Duck-In-The-Middle/README.md
 END_REM
 
 REM Required options:

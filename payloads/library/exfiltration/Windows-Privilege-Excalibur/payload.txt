@@ -4,7 +4,7 @@ REM_BLOCK INFOS
     Author: Who-Is-Julien
     Description: This payload sends you a brief privilege escalation report of the target PC user via Dropbox.
     Target: Windows 10, 11
-    Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/Payloads/Windows-Privilege-Excalibur/README.md
+    Documentation: https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/library/exfiltration/Windows-Privilege-Excalibur/README.md
 END_REM
 
 EXTENSION PASSIVE_WINDOWS_DETECT
