@@ -1,7 +1,7 @@
 # Windows Duck In The Middle
 
 <p align="center">
-  <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/execution/Windows-Duck-In-The-Middle/payload.txt">
+  <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/Who-Is-Julien/Ducky-Utilities/main/Payloads/Windows-Duck-In-The-Middle/payload.txt">
     <img alt="View on Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square">
   </a>
   <a href="#">
