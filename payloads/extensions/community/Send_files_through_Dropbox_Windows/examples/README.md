@@ -1,0 +1,1 @@
+In all examples it is good to look at the extension configuration settings to understand the differences.
