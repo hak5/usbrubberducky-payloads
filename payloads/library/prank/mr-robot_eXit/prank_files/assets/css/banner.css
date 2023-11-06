@@ -1,0 +1,10 @@
+#banner {
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 50vh;
+    max-height: 50vh;
+}
