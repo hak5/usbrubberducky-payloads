@@ -1,0 +1,19 @@
+REM Title: Open a Site in Edge of your wish
+	REM Author: Logikconfirmed
+	REM Descriptionhttps://payloadstudio.com/pro/src/hak5/assets/payloadstudiopro_large.svg: Opens edge enters automatically the defined link and goes into fullscreen
+	REM Target: Windows 10
+	REM Version: 1.0
+	REM Category: General / Prank
+
+REM Enter the sitelink down below
+DEFINE #link https://example.com
+DELAY 500
+GUI r
+DELAY 800
+STRINGLN %windir%\system32\cmd.exe /c "start microsoft-edge:"
+F11
+DELAY 800
+STRINGLN link
+ENTER
+F11
+
