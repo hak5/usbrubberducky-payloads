@@ -64,4 +64,4 @@ The certificate must be downloadable from a website, either from your proxy serv
 
 ## Authors
 
-- [@Who-Is-Julien](https://github.com/Who-Is-Julien)
+- [@PudgyTurkey](https://github.com/PudgyTurkey)

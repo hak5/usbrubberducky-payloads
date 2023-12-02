@@ -39,7 +39,7 @@ This payload sends you a brief privilege escalation report of the target PC user
 
 ## Prerequisites
 
-First of all, you need to set up an appropriate Dropbox exfiltration "App" to obtain your "app key", "app secret" and "refresh token", which you can do by following the quick tutorial available [here](https://github.com/Who-Is-Julien/Ducky-Utilities/blob/main/PowerShell-Functions/Send-ToDropbox/README.md).
+First of all, you need to set up an appropriate Dropbox exfiltration "App" to obtain your "app key", "app secret" and "refresh token", which you can do by following the quick tutorial available [here](https://github.com/PudgyTurkey/Ducky-Utilities/blob/main/PowerShell-Functions/Send-ToDropbox/README.md).
 Once you've obtained them, you need to download the "script.ps1" file from this payload and modify it to add your "App" values. Once you've done that, all you have to do is host the modified file and make it downloadable from a url you define as an option to this payload.
 
 > Note: If you're using Dropbox to host your script, make sure the download link for your script ends with "dl=1" and not "dl=0".
@@ -54,4 +54,4 @@ Once you've obtained them, you need to download the "script.ps1" file from this 
 
 ## Authors
 
-- [@Who-Is-Julien](https://github.com/Who-Is-Julien)
+- [@PudgyTurkey](https://github.com/PudgyTurkey)
