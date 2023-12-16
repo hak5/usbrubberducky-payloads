@@ -1,0 +1,19 @@
+REM Title: Open Link
+REM Author:	Mr. Proxy
+REM Description: Opens Spotlight, prints the link, enters it.
+REM Target:	Apple iOS (iPhone, iPad)
+REM Version:	1.0
+REM Category:	Mobile-IOS
+REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
+GUI h
+DELAY 1000
+GUI SPACE
+DELAY 250
+REM Put your link down there ↓
+STRING https://hak5.org
+DELAY 70
+TAB
+DELAY 70
+ENTER
+DELAY 150
+ENTER
