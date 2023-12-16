@@ -1,5 +1,5 @@
 Title: Open Link<br>
-Author:	Mr. Proxy<br>
+Author:	mrproxy<br>
 
 Description: Opens Spotlight, Prints the link, enters it.<br>
 Target:	Apple iOS (iPhone, iPad)<br>
