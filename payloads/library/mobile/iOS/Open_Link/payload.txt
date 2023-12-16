@@ -1,5 +1,5 @@
 REM Title: Open Link
-REM Author:	Mr. Proxy
+REM Author:	mrproxy
 REM Description: Opens Spotlight, prints the link, enters it.
 REM Target:	Apple iOS (iPhone, iPad)
 REM Version:	1.0
