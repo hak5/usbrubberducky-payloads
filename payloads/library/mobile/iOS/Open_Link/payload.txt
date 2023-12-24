@@ -5,6 +5,8 @@ REM Target:	Apple iOS (iPhone, iPad)
 REM Version:	1.0
 REM Category:	Mobile-IOS
 REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
+
+DELAY 1500
 GUI h
 DELAY 1000
 GUI SPACE
