@@ -164,5 +164,14 @@
     "\\":"40,00,64",
     "COMMAND-CTRL-SHIFT":"40,00,64",
     "COMMAND-CTRL":"40,00,64",
-    "COMMAND-OPTION-SHIFT'":"40,00,64"
+    "COMMAND-OPTION-SHIFT'":"40,00,64",
+    "__comment": "Everything below additionally added by Auoggi",
+    "´": "00,00,2e",
+    "¨": "00,00,30",
+    "½": "00,00,35",
+    "¤": "02,00,21",
+    "`": "02,00,2e",
+    "§": "02,00,35",
+    "£": "40,00,20",
+    "€": "40,00,22"
 }
