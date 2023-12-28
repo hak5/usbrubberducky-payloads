@@ -15,6 +15,7 @@ EXTENSION TRANSLATE
     VAR $MOD = 0
     VAR $P = FALSE
     VAR $NL = TRUE
+
     
     FUNCTION PRINTDIGIT()
         IF ($D == 0) THEN
