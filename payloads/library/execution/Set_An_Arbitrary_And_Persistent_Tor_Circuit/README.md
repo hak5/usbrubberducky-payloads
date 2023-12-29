@@ -84,7 +84,7 @@ The Tor circuit is a fundamental component of the infrastructure that ensures an
 3. **Exit Node:**
    - The Exit Node is the last node in the Tor circuit.
    - It receives encrypted traffic from the Middle Node and decrypts it before sending it to the final destination on the internet.
-   - The Exit Node is aware of the destination address but does not know the user's IP address or the previous nodes in the circuit.
+   - The Exit Node is aware of the destination address but does not know the user's IP address or the entry nodes in the circuit.
    - Its primary function is to provide a point of exit for the traffic while maintaining the anonymity of the user.
 
 ### Torrc Configuration File
