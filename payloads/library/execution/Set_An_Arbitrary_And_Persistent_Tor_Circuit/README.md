@@ -36,6 +36,10 @@ _**Note**: The nodes are unmodifiable unless the initial Tor settings are restor
 - Payload tested using TorBrowser 13.0.8 based on Mozilla Firefox 115.6.0esr ENG
 - Payload tested on Windows 11_eng; Debian 12_eng; Ubuntu 23.10_eng;
 
+To find fingerprints of various nodes you can go to https://metrics.torproject.org and set up a search based on what you are interested in such as country, node name, etc... For example if you try to search for '**Aleff**' it will send you to my [Tor Relay page](https://metrics.torproject.org/rs.html#details/B8C9DF8404FE175E37241774856907184A667ED2) (_Unless someone has created other Relays with the same name in the meantime_) where you can find the fingerprint information which is the data you are interested in.
+
+![](https://i.ibb.co/YN5515G/tor-node.png)
+
 The script begins by defining the fingerprints of the entry, middle, and exit nodes using the `DEFINE` commands. Additionally, it provides instructions for activating administrator permissions, with specific considerations for systems like Debian and Ubuntu.
 
 **Configuration on Linux:**
@@ -84,7 +88,7 @@ The Tor circuit is a fundamental component of the infrastructure that ensures an
 3. **Exit Node:**
    - The Exit Node is the last node in the Tor circuit.
    - It receives encrypted traffic from the Middle Node and decrypts it before sending it to the final destination on the internet.
-   - The Exit Node is aware of the destination address but does not know the user's IP address or the previous nodes in the circuit.
+   - The Exit Node is aware of the destination address but does not know the user's IP address and the Entry Node in the same circuit.
    - Its primary function is to provide a point of exit for the traffic while maintaining the anonymity of the user.
 
 ### Torrc Configuration File
