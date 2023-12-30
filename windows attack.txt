@@ -1,7 +1,7 @@
 
 REM Title: windows attack 
 REM Arthor : youssef mohamed fathy
-REM Target: windows 10 , 7
+REM Target: windows 10 , 7 
 GUI r
 STRING powershell
 CTRL-SHIFT ENTER
