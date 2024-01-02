@@ -6,13 +6,15 @@ REM Version:	1.0
 REM Category:	Mobile-IOS
 REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
 
+REM Put your link down there
+DEFINE TARGET_URL https://hak5.org
+
 DELAY 1500
 GUI h
 DELAY 1000
 GUI SPACE
 DELAY 250
-REM Put your link down there ↓
-STRING https://hak5.org
+STRING TARGET_URL
 DELAY 70
 TAB
 DELAY 70
