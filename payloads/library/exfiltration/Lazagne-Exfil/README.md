@@ -7,8 +7,3 @@ Target:	Windows<br>
 Version:	1.0<br>
 Category:	Exfiltration<br>
 Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads<br>
-
-## Usage: ##
-### Change $bt (bot token) ###
-### Change $ci (chat id) ###
-![alt](https://files.catbox.moe/soqjdr.png)
