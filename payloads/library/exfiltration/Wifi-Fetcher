@@ -1,3 +1,9 @@
+REM DISCLAIMER: the end User of the Script IS the only Person Held responsible for the harm or leak of information caused by the payload, Neither the creator of the Script nor the Distribute(Hak5 LLC.) shall BE Held responsible for any damages caused.
+
+
+REM INSTRUCTIONS: IF YOU DONT HAVE THE  DIRECTORY D:\loot\PwnedWIFI\ On THE DUCKY, THIS SCRIPT WILL NOT WORK, EITHER CREATE THE DIRECTORY OR MODIFY THE PAYLOAD TO STORE THE OUTPUT FILE ELSEWHERE
+REM After creating the directory and adjusting the delays, it IS basically plug 'n play
+
 REM NAME: Wifi-Fetcher
 REM AUTHOR: nightcrafttrl1
 REM DEVICE: RubberDucky
