@@ -1,4 +1,4 @@
-EXTENSION Windows_Elevated_Execution
+EXTENSION WINDOWS_ELEVATED_EXECUTION
     REM VERSION 1.1
     REM Author: 0iphor13
     REM Executes the desired program with elevated privileges
