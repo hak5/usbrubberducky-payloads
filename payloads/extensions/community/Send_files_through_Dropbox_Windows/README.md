@@ -9,21 +9,21 @@ How many files do you want to exfiltrate?
 |   |
 |   |-- Do you already know the full file path? (e.g., C:\Users\Aleff\Downloads\photo.png)
 |   |   |
-|   |   |-- Use the #SINGLE-FILE version
+|   |   |-- Use the SINGLE-FILE version
 |   |   |   |
-|   |   |   |-- Set #SINGLE-FILE to TRUE
+|   |   |   |-- Set #FLAG-SINGLE-FILE to TRUE
 |   |   |   |-- Define the file path in #SINGLE-PATH
 |   |   |
 |   |-- Don't know the full path but can obtain it at runtime through PowerShell?
 |   |   |
 |   |   |-- Use the $dropboxFilePath variable
 |   |   |   |
-|   |   |   |-- Set #SINGLE-FILE to TRUE
+|   |   |   |-- Set #FLAG-SINGLE-FILE to TRUE
 |   |   |   |-- Obtain the file path through PowerShell and assign it to $dropboxFilePath
 |
 |-- Multiple Files
 |   |
-|   |-- Set the #MULTIPLE-FILES variable to TRUE
+|   |-- Set the #FLAG-SINGLE-FILE variable to FALSE
 |   |   |
 |   |   |-- Use an array of strings named $dropboxFilePaths to collect the paths of all the files you want to use
 
@@ -59,13 +59,13 @@ You can choose to send a single file or multiple files. Configure the extension 
 
 #### Single File Configuration
 
-- **Variable**: #SINGLE-FILE
+- **Variable**: #FLAG-SINGLE-FILE
 - **Type**: Boolean (TRUE or FALSE)
-- **Description**: Set #SINGLE-FILE to TRUE if you want to send just one file. In this case, you will need to specify the file path within the #SINGLE-PATH variable. Alternatively, you can acquire the file path at runtime via PowerShell and store it in the $dropboxFilePath variable.
+- **Description**: Set #FLAG-SINGLE-FILE to TRUE if you want to send just one file. In this case, you will need to specify the file path within the #SINGLE-PATH variable. Alternatively, you can acquire the file path at runtime via PowerShell and store it in the $dropboxFilePath variable.
 
 Example in DuckyScript:
 ```DuckyScript
-DEFINE #SINGLE-FILE TRUE
+DEFINE #FLAG-SINGLE-FILE TRUE
 DEFINE #SINGLE-PATH C:\Users\Aleff\Downloads\photo.png
 ```
 
@@ -76,9 +76,9 @@ $dropboxFilePath = "C:\Users\Aleff\Downloads\photo.png"
 
 #### Multiple Files Configuration
 
-- **Variable**: #MULTIPLE-FILES
+- **Variable**: #FLAG-SINGLE-FILE
 - **Type**: Boolean (TRUE or FALSE)
-- **Description**: Set #MULTIPLE-FILES to TRUE if you want to send multiple files. In this case, in PowerShell, you will have to create the variable $dropboxFilePaths, which is an array of strings containing the list of paths related to the files you want to export.
+- **Description**: Set #FLAG-SINGLE-FILE to FALSE if you want to send multiple files. In this case, in PowerShell, you will have to create the variable $dropboxFilePaths, which is an array of strings containing the list of paths related to the files you want to export.
 
 Example in PowerShell before using the extension:
 ```powershell

