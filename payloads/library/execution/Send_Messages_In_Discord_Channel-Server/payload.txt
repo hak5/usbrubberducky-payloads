@@ -1,0 +1,41 @@
+REM ############################################################
+REM #                                                          |
+REM # Title        : Send Messages In Discord Channel-Server   |
+REM # Author       : Aleff                                     |
+REM # Version      : 1.0                                       |
+REM # Category     : Execution                                 |
+REM # Target       : Windows 10-11                             |
+REM #                                                          |
+REM ############################################################
+
+
+REM Requirements:
+REM     - Internet connection
+REM     - Discord Installed
+
+
+REM If, for example, the server is Hak5 and the channel in which you want to send the message is called usb-rubber-ducky then you should write just usb-rubber-ducky
+DEFINE #CHAT_NAME example
+
+
+REM Open Discord app
+GUI
+DELAY 1000
+STRINGLN Discord
+
+REM This depends on the power of the computer and whether there are upgrades to be done
+DELAY 6000
+
+REM Search by Discord keyboard shortcut and open it
+CTRL-k
+DELAY 500
+STRINGLN #CHAT_NAME
+DELAY 500
+
+STRINGLN_BLOCK
+    Write here..
+    your...
+    messages...
+END_STRINGLN
+
+ALT F4
