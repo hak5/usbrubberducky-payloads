@@ -6,7 +6,7 @@ This script can be used to prank your friends by editing their Github account or
 
 ## Description
 
-This script can be used to prank your friends by modifying their Github profiles as you wish.
+This script can be used to prank your friends by editing their Github account or editing your own to speed up the editing process.
 
 The script will run a shell and open the default browser in `https://github.com/settings/profile` and close the powershell. When the page is open go to the profile settings TABing many times.
 
