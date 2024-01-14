@@ -1,6 +1,6 @@
 # Change Github Profile Settings
 
-This script can be used to prank your friends by modifying their Github profiles as you wish.
+This script can be used to prank your friends by editing their Github account or editing your own to speed up the editing process.
 
 **Category**: Execution
 
