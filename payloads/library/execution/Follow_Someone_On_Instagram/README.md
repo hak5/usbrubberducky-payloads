@@ -1,12 +1,12 @@
 # Follow someone on Instagram
 
-This script can be used play a prank on friends by having them follow an Instagram account.
+This script can be used to prank friends by having them follow an Instagram account or it can be used by yourself to speed up this process.
 
-**Category**: Prank
+**Category**: Execution
 
 ## Description
 
-This script can be used play a prank on friends by having them follow an Instagram account.
+This script can be used to prank friends by having them follow an Instagram account or it can be used by yourself to speed up this process.
 
 Open a PowerShell, start a process trough the default browser that go to an instagram link like this one `https://www.instagram.com/alessandro_greco_aka_aleff/` closing the PowerShell. Then use some TABs to go to Follow button and then close the browser.
 
