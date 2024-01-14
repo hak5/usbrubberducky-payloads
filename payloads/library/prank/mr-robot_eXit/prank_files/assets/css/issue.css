@@ -1,0 +1,15 @@
+@keyframes alert {
+    50% {
+        border-color: transparent;
+    }
+}
+
+#issue {
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-name: alert;
+    border-width: 0.5vw;
+    border-color: red;
+    border-style: ridge;
+    padding: 2vh;
+}

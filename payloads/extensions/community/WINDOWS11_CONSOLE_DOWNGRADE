@@ -1,0 +1,35 @@
+EXTENSION WINDOWS11_CONSOLE_DOWNGRADE
+    REM_BLOCK
+        Version: 1.0
+        Author: 0iphor13
+        Description: Downgrade the default command prompt of Windows 11 to use Conhost again. 
+        Afterwards PowerShell can be used with paramters like "-WindowStyle Hidden" again.
+    END_REM
+
+    REM CONFIGURATION:
+    REM Used to wait until initial execution
+    DEFINE #INPUT_WAIT 2000
+    REM GUID for using the legacy console host for terminal execution
+    DEFINE #CONHOST B23D10C0-E52E-411E-9D5B-C09FDF709C7D
+ 
+    FUNCTION Console_Downgrade()
+        DELAY #INPUT_WAIT  
+        GUI r
+        DELAY 500
+        STRINGLN powershell -NoP -NonI
+        DELAY 1000
+        STRING Set-ItemProperty -Path "HKCU:\Console\%%Startup" -Name DelegationConsole -Value "{#CONHOST}";
+        STRINGLN Set-ItemProperty -Path "HKCU:\Console\%%Startup" -Name DelegationTerminal -Value "{#CONHOST}";exit
+    END_FUNCTION
+
+    REM_BLOCK
+        EXAMPLE USAGE AFTER EXTENSION: Downgrade the command prompt via registry, then open a hidden PS instance and execute Calc.exe.
+        Console_Downgrade()
+        DELAY 2000
+        GUI r
+        DELAY 2000
+        STRINGLN powershell -w h
+        DELAY 1500
+        STRINGLN calc.exe;exit
+    END_REM
+END_EXTENSION

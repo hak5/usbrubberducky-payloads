@@ -1,0 +1,83 @@
+EXTENSION SELF_DESTRUCT
+    REM VERSION 1.0
+    REM AUTHOR: Korben
+
+    REM_BLOCK Documentation
+        This extension is used to "SELF DESTRUCT" a payload in one of two ways
+
+        TARGET: 
+            Any
+
+        USAGE:
+            Place this extension at top of your payload.
+
+
+        CONFIGURATION:
+            Set the #DESTRUCT_METHOD to one of the following methods:
+                REVERT_TO_THUMBDRIVE() 
+                    - delete payload and enter storage mode.
+                    To return to normal usage simply add a new inject.bin
+        
+                SOFT_BRICK() 
+                    - keeps payload in order to force OFF w/ disabled button.
+                    To return to normal usage the SD card will need to be removed and
+                    the inject.bin replaced.
+    
+            Set #RUNS_BEFORE_DESTROY to an integer - the number of times the payload 
+            must run before it self destructs
+    
+            #REQUIRES_FINISH if set to TRUE will require you to call PAYLOAD_FINISHED()
+            at the end of the payload for the deployment to count towards #RUNS_BEFORE_DESTROY
+    
+            Since this extension replaces "boot", #BOOT_ATTACKMODE defines the
+            the default mode to enter after this extension has run
+    END_REM
+    DEFINE #REQUIRES_FINISH FALSE
+    DEFINE #RUNS_BEFORE_DESTROY 1
+    DEFINE #DESTRUCT_METHOD REVERT_TO_THUMBDRIVE()
+    DEFINE #BOOT_ATTACKMODE ATTACKMODE HID
+
+    ATTACKMODE OFF
+    
+    FUNCTION PERSIST()
+        REM_BLOCK note
+            this takes advantage of a sideaffect of hide/restore procedure and
+            _how_ we initialize the variable we want to persist.
+        END_REM
+        HIDE_PAYLOAD
+        DELAY 100
+        RESTORE_PAYLOAD
+    END_FUNCTION
+    
+    FUNCTION SOFT_BRICK()
+            ATTACKMODE OFF
+            LED_OFF
+            DISABLE_BUTTON
+            STOP_PAYLOAD
+    END_FUNCTION
+
+    FUNCTION REVERT_TO_THUMBDRIVE()
+            LED_OFF
+            HIDE_PAYLOAD
+            DELAY 500
+            ATTACKMODE STORAGE
+    END_FUNCTION
+    
+    FUNCTION PAYLOAD_FINISHED()
+        $TIMES_RAN = ($TIMES_RAN + 1)
+        PERSIST()
+        IF ($TIMES_RAN < #RUNS_BEFORE_DESTROY) THEN
+            #DESTRUCT_METHOD
+        END_IF
+    END_FUNCTION
+
+    IF ($TIMES_RAN < #RUNS_BEFORE_DESTROY) THEN
+        IF_NOT_DEFINED_TRUE #REQUIRES_FINISH
+            VAR $TIMES_RAN = ($TIMES_RAN + 1)
+            PERSIST()
+        END_IF_DEFINED
+        #BOOT_ATTACKMODE
+    ELSE
+        #DESTRUCT_METHOD
+    END_IF
+END_EXTENSION
