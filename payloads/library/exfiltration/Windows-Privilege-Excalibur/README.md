@@ -1,48 +1,48 @@
-<h1 align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com/?lines=Windows+Privilege+Excalibur+🪟🗡️">
-  </a>
-</h1>
+## Windows Privilege Excalibur
 
-## Description
+<p>
+    <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/exfiltration/Windows-Privilege-Excalibur/payload.txt">
+        <img alt="View on: Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square">
+    </a>
+    <a href="#">
+        <img alt="Target: Windows 10, 11" src="https://img.shields.io/badge/Target-Windows_10,_11-blue?style=flat-square">
+    </a>
+</p>
 
-This payload exfiltrates Windows system information, user information, stored credentials and installed programs from the target computer to Dropbox for subsequent privilege escalation analysis. *Only works on Windows 10,11.*
+This payload sends you a brief user privilege escalation report via Dropbox. Once you have the report, you can perform further privilege escalation analysis, including using the following resources:
 
-*The setup needs to be done only once for the payload to work forever.*
+|Report Category|Useful Resources|
+|-|-|
+|System Information|[WES-NG](https://github.com/bitsadmin/wesng)|
+|User Information|[Priv2Admin](https://github.com/gtworek/Priv2Admin)|
+|Stored Credentials||
+|Installed Programs|[Exploit Database](https://www.exploit-db.com) & [Packet Storm](https://packetstormsecurity.com)|
 
-## Setup
+<details>
+<summary>Extension operation</summary>
 
-> If you already have your <APP_KEY>, <APP_SECRET> and <REFRESH_TOKEN>, you can go directly to the "Prepare your payload" step.
+1. Detects when the USB Rubber Ducky is ready and whether the target operating system is Windows.
+2. Opens a Windows Run dialog box.
+3. Executes a hosted PowerShell script that performs the following actions:
+- Clears the history of the Windows Run menu.
+- Prepares a report on target PC user privilege escalation.
+- Sends the report to a file in your Dropbox.
 
-- **Configure your Dropbox application** 
- 
-    - Follow the instructions in "[DROPBOXSETUP.md](https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/library/exfiltration/Windows-Privilege-Excalibur/DROPBOXSETUP.md)".
+</details>
 
-- **Prepare your payload**
+## Prerequisites
 
-    - Download the Powershell script "script.ps1".
-    - Modify it to include the <APP_KEY>, <APP_SECRET>, and <REFRESH_TOKEN> of your application.
-    - Upload your modified "script.ps1" file to Dropbox and copy the upload link.
-    - Replace the end of the link from "?dl=0" to "?dl=1"  
-    *This is your "<DOWNLOAD_LINK>".*
-    - Download the "payload.txt" file.
-    - Edit it to include your <DOWNLOAD_LINK>.
+First of all, you need to set up an appropriate Dropbox exfiltration "App" to obtain your "app key", "app secret" and "refresh token", which you can do by following the quick tutorial available [here](https://github.com/PlumpyTurkey/Ducky-Utilities/tree/main/PowerShell-Functions/Send-ToDropbox).
+Once you get them, you need to download the "script.ps1" file for this payload and edit it to add the values for your "App". Once you've done that, all you need to do is host the modified file and make it downloadable from a URL that you set as an option for this payload.
 
-## Analysis
+> Note: If you're using Dropbox to host your script, make sure the download link for your script ends with "dl=1" and not "dl=0".
 
-Once you have your report file, you can use the following resources to help you find ways to escalate your privileges:
+## Options
 
-| Report Category | Useful Resources |
-| --- | --- |
-| System Information | [WES-NG](https://github.com/bitsadmin/wesng)  |
-| User Information | [Priv2Admin](https://github.com/gtworek/Priv2Admin) |
-| Stored Credentials | |
-| Installed Programs | [Exploit Database](https://www.exploit-db.com) & [Packet Storm](https://packetstormsecurity.com) |
+|Required extension options|Extension|Data type|Default value|Description|
+|-|-|-|-|-|
+|RHP_SCRIPT_URL|Run Hosted PowerShell|String|example.com|Your PowerShell script download link|
 
-#### Coming soon...
+## Contributors
 
-- [ ] Windows Services Misconfigurations
-
----
-
-*This script is for educational purposes only. This script is authorized auditing and security analysis purposes only where permitted subject to local and international laws where applicable. Users are solely responsible for compliance with all laws of their locality. This author claims no responsibility for unauthorized or unlawful use.*
+- [@PlumpyTurkey](https://github.com/PlumpyTurkey)

