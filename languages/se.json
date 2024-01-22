@@ -17,7 +17,7 @@
     "__comment":" ",
     "__comment":"A = LeftShift + a, { = LeftShift + [",
     "__comment":" ",
-    "__comment":"An adjusted version of the one @dark_pyro made on:",
+    "__comment":"An adjusted version of the one @dark_pyrro made on:",
     "__comment":"  https://codeberg.org/dark_pyrro/Swedish_Layout_Test",
     "__comment":"Tested by @lerold with a few payloads without problems.",
     "__comment":" ",
@@ -192,4 +192,4 @@
     "COMMAND-CTRL": "40,00,64",
     "COMMAND-CTRL-SHIFT": "40,00,64",
     "COMMAND-OPTION-SHIFT'": "40,00,64"
-}"
+}
