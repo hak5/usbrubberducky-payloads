@@ -58,3 +58,5 @@ ELSE
     STRINGLN cat .bashrc >> .tmp
     STRINGLN mv .tmp >> .bashrc
 END_IF
+
+ALT F4
