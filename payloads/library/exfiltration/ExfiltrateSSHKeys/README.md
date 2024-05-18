@@ -15,6 +15,10 @@ Requirements: DuckyScript 3.0, PayloadStudio v1.3.1
 
     `DEFINE #PARENT_DIR Desktop`
 
+- You must define your ducky drive label:
+
+    `DEFINE #DUCKY_DRIVE_LABEL DUCKY`
+
 - You can switch between operating systems by changing the following bools:
 
     `DEFINE #WINDOWS TRUE`
@@ -23,4 +27,4 @@ Requirements: DuckyScript 3.0, PayloadStudio v1.3.1
 
     `DEFINE #LINUX FALSE`
 
-    Alternatively, you may replace the conditional compilation flags with the OS_DETECTION EXTENSION.
+    Only set ONE definition at the time to TRUE (e.g. DEFINE #WINDOWS TRUE). DEFINE #WINDOWS TRUE, DEFINE #MACOS TRUE, and DEFINE #LINUX TRUE won't function.
