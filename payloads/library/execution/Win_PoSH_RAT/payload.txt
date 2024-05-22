@@ -1,6 +1,6 @@
 REM TITLE R.A.T
 REM AUTHOR TRIBBIC
-REM DESCRIPTION Set up a R.A.T on the target windows merchine
+REM DESCRIPTION Set up a R.A.T on the target windows machine
 REM DUCKY SCRIPT 3
 
 REM USERNAME to login to the R.A.T

@@ -2,7 +2,7 @@
 - Author: TRIBBIC
 - Version: 1.0
 - Target: Windows 10 (Powershell 5.1+)
-- Category: Remote Access
+- Category: Execution
 - Attackmode: HID & Storage
 - Ducky Script Version: 3
 
