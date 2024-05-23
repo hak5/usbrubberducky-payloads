@@ -35,7 +35,7 @@ To obtain all active process PIDs the tasklist command is used, which provides t
 1. Download ProcDump\[5].
 2. Move the extracted ProcDump folder or directly the executable, as you prefer, inside Rubber Ducky's memory.
 3. Then you have to change the variable `$WHAT_EXE_DO_YOU_WANT_TO_USE` if you want to use an executable other than `procdump64a.exe`, i.e. `procdump.exe` and, in this case, you have to change the variable to `procdump`.
-4. When you put the executable(s) inside the Rubber Ducky memory you must indicate the path where is stored, i.e. if the executable is inside the path `F:\ProcDump\Procdump\procdump.exe` you must change the variable `$PATH_TO_EXE` into `\ProcDump\Procdump\` mean while if it is insie the path `F:\somethingelse\procdump.exe` you must change this varaible into `\somethingelse\`.
+4. When you put the executable(s) inside the Rubber Ducky memory you must indicate the path where is stored, i.e. if the executable is inside the path `F:\ProcDump\Procdump\procdump.exe` you must change the variable `$PATH_TO_EXE` into `\ProcDump\Procdump\` mean while if it is inside the path `F:\somethingelse\procdump.exe` you must change this variable into `\somethingelse\`.
 
 ## Read More
 
