@@ -54,7 +54,7 @@ REM #     * Be responsible.                                                     
 REM #                                                                           #
 REM # Kudos:                                                                    #
 REM #     * RootJunky   -   "Three Payloads from LOCK Key Double Press"         #
-REM #     * 0iphor13    -   "EngagementDucky", "ReverseDuckyII"                 #
+REM #     * 0i41E    -   "EngagementDucky", "ReverseDuckyII"                 #
 REM #     * the-jcksn   -   "ducky_crab"                                        #
 REM #     * I am Jakoby -   "-RD-PineApple"                                     #
 REM #     * Hak5 Team                                                           #

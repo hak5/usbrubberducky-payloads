@@ -1,7 +1,7 @@
 EXTENSION WINDOWS11_CONSOLE_DOWNGRADE
     REM_BLOCK
         Version: 1.0
-        Author: 0iphor13
+        Author: 0i41E
         Description: Downgrade the default command prompt of Windows 11 to use Conhost again. 
         Afterwards PowerShell can be used with paramters like "-WindowStyle Hidden" again.
     END_REM

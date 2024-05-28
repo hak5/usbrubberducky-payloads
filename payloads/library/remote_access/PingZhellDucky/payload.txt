@@ -1,7 +1,7 @@
 REM PingZhellDucky
 REM Version 1.2
 REM OS: Windows & Unix
-REM Author: 0iphor13
+REM Author: 0i41E
 REM Requirements: DuckScript 3.0, Perl
 
 REM       Getting remote access via ICMP or perform the required setup
@@ -54,7 +54,7 @@ REM Do you want to install the dependencies and set up the infratructre?
 REM Will trigger when not using Windows - Best use with Linux
 DEFINE INSTALL TRUE
 REM Link to the PingZhellDucky.pl client - Required for installation
-DEFINE CLIENTLINK https://raw.githubusercontent.com/0iphor13/usbrubberducky-payloads/master/payloads/library/remote_access/PingZhellDucky/PingZhellDucky.pl
+DEFINE CLIENTLINK https://raw.githubusercontent.com/0i41E/usbrubberducky-payloads/master/payloads/library/remote_access/PingZhellDucky/PingZhellDucky.pl
 
 
 IF ($_OS == WINDOWS) THEN
