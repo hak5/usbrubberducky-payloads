@@ -1,5 +1,5 @@
 REM Title: ReverseDuckyPolymorph
-REM Author: 0iphor13, Korben
+REM Author: 0i41E, Korben
 REM Version 1.1
 
 REM Target: Windows / Linux(?) (Not tested with Powershell on Linux)

@@ -1,7 +1,7 @@
 REM       SoundChangeDuck
 REM       Version 1.0
 REM       OS: Windows
-REM       Author: 0iphor13
+REM       Author: 0i41E
 
 REM       Nothing special, something cheap. Changes the sound of device connection from Hardware Insert to Hardware fail.
 REM       You can of course decide which system sounds you want to change.
