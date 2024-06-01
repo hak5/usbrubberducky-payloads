@@ -16,7 +16,7 @@ The described payload aims to modify the configuration file of the default shell
 
 However, it's important to note that starting from version 2020.4, Kali Linux has changed its default shell from Bash to Zsh \[1] for users installing this distribution. Consequently, the main configuration file is no longer `.bashrc` but `.zshrc`. Therefore, if the target is a Kali Linux machine with this version or later, it's necessary to modify the `.zshrc` file instead of `.bashrc`.
 
-To correctly identify whether the target system is Kali Linux and if it's using Zsh as the default shell, the payload suggests using a variable `#ONE_ONLY_IF_YOU_USE_IT_ON_KALI_LINUX`, which should be set to `TRUE`. This variable would serve as a placeholder to distinguish between usage on Kali Linux and other Linux systems.
+To correctly identify whether the target system is Kali Linux and if it's using Zsh as the default shell, the payload suggests using a variable `#TARGET_KALI_LINUX`, which should be set to `TRUE`. This variable would serve as a placeholder to distinguish between usage on Kali Linux and other Linux systems.
 
 To restore proper shell operation, it will be necessary to edit via a text editor the `.bashrc` or `.zshrc` file by deleting the first line that consists of the command `exit`.
 

