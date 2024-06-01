@@ -42,7 +42,11 @@ Insert this extension when you have one or more files that you want to save via 
 
 Before using the extension, you need to configure it by setting certain variables in the DuckyScript payload. Here are the configuration options:
 
-### 2. Single File or Multiple Files
+### Driver Label
+
+This extension utilizes the 'Get-Volume' command to scan the available volumes on the computer where the command is executed, aiming to detect our USB Rubber Ducky device. Upon detection, the device is selected to serve as a reference, allowing us to perform data saving operations. By default, USB Rubber Duckys are identified by the label 'DUCK'. However, this label can be altered, particularly if we want to keep the operation discreet. If the default label has been changed, it will be necessary to update the #DRIVER-LABEL variable with the correct label.
+
+### Single File or Multiple Files
 
 You can choose to send a single file or multiple files. Configure the extension accordingly.
 
