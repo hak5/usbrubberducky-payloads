@@ -1,7 +1,7 @@
 REM       ReverseDucky3
 REM       Version 1.2 (End of Life - This payload won't be updated anymore)
 REM       OS: Windows / Linux(?) (Not tested with Powershell on Linux)
-REM       Author: 0iphor13
+REM       Author: 0i41E
 
 REM       UDP Reverse shell executed in the background. Might create a firewall pop up, but will execute anyway.
 REM       Fill in Attacker-IP and Port in Line 18
