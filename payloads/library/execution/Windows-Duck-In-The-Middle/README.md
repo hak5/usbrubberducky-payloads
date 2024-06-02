@@ -2,17 +2,19 @@
 
 <p>
     <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/execution/Windows-Duck-In-The-Middle/payload.txt">
-        <img alt="View on: Payload Studio" src="https://img.shields.io/badge/View_on-Payload_Studio-red?style=flat-square">
+        <img alt="VIEW ON: HAK5 PAYLOADSTUDIO" src="https://img.shields.io/badge/VIEW_ON-HAK5_PAYLOADSTUDIO-red?style=for-the-badge">
     </a>
     <a href="#">
-        <img alt="Target: Windows 10, 11" src="https://img.shields.io/badge/Target-Windows_10,_11-blue?style=flat-square">
+        <img alt="TARGET: WINDOWS 10, 11" src="https://img.shields.io/badge/TARGET-WINDOWS_10,_11-blue?style=for-the-badge">
+    </a>
+    <a href="#">
+        <img alt="VERSION: 1.0" src="https://img.shields.io/badge/VERSION-1.0-green?style=for-the-badge">
     </a>
 </p>
 
 This payload sets up a trustworthy proxy for the user, enabling a [Man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack). After executing your payload, the proxy server will intercept all the target user's network traffic.
 
-<details>
-<summary>Payload operation</summary>
+## Process
 
 1. Detects when the USB Rubber Ducky is ready and whether the target operating system is Windows.
 2. Creates a new virtual desktop.
@@ -26,16 +28,15 @@ This payload sets up a trustworthy proxy for the user, enabling a [Man-in-the-mi
 6. Closes the virtual desktop.
 7. *Disables USB Rubber Ducky*
 
-> Note: No configuration is required for Chromium-based browsers since they accept user root certificates by default.
-
-</details>
+> [!NOTE]
+> No configuration is required for Chromium-based browsers since they accept user root certificates by default.
 
 ## Prerequisites
 
-To use this payload, you'll need a proxy server and a [root certificate](https://en.wikipedia.org/wiki/Root_certificate).
-The certificate must be downloadable from a website, either from your proxy server or from an online file hosting service such as [Dropbox](https://www.dropbox.com). You can easily generate the certificate using tools such as [mitmproxy](https://mitmproxy.org) or [Burp Suite](https://portswigger.net/burp).
+To use this payload, you'll need a proxy server and a [root certificate](https://en.wikipedia.org/wiki/Root_certificate). The certificate must be downloadable from a website, either from your proxy server or from an online file hosting service such as [Dropbox](https://www.dropbox.com/). You can easily generate the certificate using tools such as [mitmproxy](https://mitmproxy.org/) or [Burp Suite](https://portswigger.net/burp).
 
-> Note: To ensure the payload functions properly, generate the "mitmproxy-ca-cert.pem" certificate in the "Other platforms" section when using mitmproxy.
+> [!WARNING]
+> To ensure the payload functions properly, generate the "mitmproxy-ca-cert.pem" certificate in the "Other platforms" section when using mitmproxy.
 
 ## Options
 
@@ -55,4 +56,4 @@ The certificate must be downloadable from a website, either from your proxy serv
 
 ## Contributors
 
-- [@PlumpyTurkey](https://github.com/PlumpyTurkey)
+- [PlumpyTurkey](https://codeberg.org/PlumpyTurkey)
