@@ -23,7 +23,7 @@ The name of the payload `Prank In The Middle` is named after the pun Prank + Man
 
 This program automates a series of actions on a Windows system (*tested on Windows 10 but should works in Windows 11*) to manipulate the contents of emails found in a Thunderbird profile. Specifically, it identifies emails in the `INBOX` file of each configured email account and replaces the sender's email addresses with a fictitious address `Rick.Roll@tinyurl.com/prinkrollme` where `prinkrollme` is the union of the words `Prank`, `Rick Roll` and `Me` (*this one was necessary becouse prinkwoll era già stato preso* **:c** *so sad...* ) all compressed into the link `tinyurl.com/prinkrollme` ([*3° note*](#notes)) that redirect to the YouTube video `https://www.youtube.com/watch?v=xMHJGd3wwZk`.
 
-![](./1.PNG)
+![](https://i.ibb.co/VJjfbkJ/1.png)
 
 ## Requirements
 
