@@ -26,9 +26,9 @@ EXTENSION POWERSHELL_TO_DROPBOX
                         "Content-Type" = "application/x-www-form-urlencoded" 
                     } -Body @{ 
                         "grant_type" = "refresh_token"; 
-                        "refresh_token" = #PTD_REFRESH_TOKEN; 
-                        "client_id" = #PTD_APP_KEY; 
-                        "client_secret" = #PTD_APP_SECRET 
+                        "refresh_token" = "#PTD_REFRESH_TOKEN"; 
+                        "client_id" = "#PTD_APP_KEY"; 
+                        "client_secret" = "#PTD_APP_SECRET" 
                     }
                 ).access_token)"; 
                     "Content-Type" = "application/octet-stream"; 
