@@ -1,4 +1,4 @@
-EM Title: Add_Local_Admin
+REM Title: Add_Local_Admin
 REM Author: LulzAnarchyAnon
 REM Description: Administrator PowerShell is opened, and resized for a more stealthy payload delivery, then the payload
 REM creates a local admin account on the target system, afterwards powershell exits, and all history is cleared.
