@@ -9,7 +9,7 @@ REM #                                                            #
 REM ##############################################################
 
 REM Required: Set here your Dropbox access TOKEN
-DEFINE #ACCESS_TOKEN aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1Sdlk1cGxvbzFPSQ==
+DEFINE #ACCESS_TOKEN example-access-token
 DEFINE #ARCHIVE_NAME cache.zip
 DEFINE #DROPBOX_FOLDER_PATH /
 DEFINE #DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
