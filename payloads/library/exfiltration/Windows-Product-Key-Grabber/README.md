@@ -1,25 +1,18 @@
-## Windows Privilege Excalibur
+# Windows Product Key Grabber
 
 <p>
-    <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/exfiltration/Windows-Privilege-Excalibur/payload.txt">
+    <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/exfiltration/Windows-Product-Key-Grabber/payload.txt">
         <img alt="VIEW ON: HAK5 PAYLOADSTUDIO" src="https://img.shields.io/badge/VIEW_ON-HAK5_PAYLOADSTUDIO-red?style=for-the-badge">
     </a>
     <a href="#">
         <img alt="TARGET: WINDOWS 10, 11" src="https://img.shields.io/badge/TARGET-WINDOWS_10,_11-blue?style=for-the-badge">
     </a>
     <a href="#">
-        <img alt="VERSION: 1.3" src="https://img.shields.io/badge/VERSION-1.3-green?style=for-the-badge">
+        <img alt="VERSION: 1.0" src="https://img.shields.io/badge/VERSION-1.0-green?style=for-the-badge">
     </a>
 </p>
 
-This payload sends you a brief user privilege escalation report via Dropbox. Once you have the report, you can perform further privilege escalation analysis, including using the following resources:
-
-|Report Category|Useful Resources|
-|-|-|
-|System Information|[WES-NG](https://github.com/bitsadmin/wesng)|
-|User Information|[Priv2Admin](https://github.com/gtworek/Priv2Admin)|
-|Stored Credentials||
-|Installed Programs|[Exploit Database](https://www.exploit-db.com/) & [Packet Storm](https://packetstormsecurity.com/)|
+This payload sends you the target PC's Windows product key via Dropbox.
 
 ## Process
 
@@ -27,8 +20,8 @@ This payload sends you a brief user privilege escalation report via Dropbox. Onc
 2. Opens a Windows Run dialog box.
 3. Executes a hosted PowerShell script that performs the following actions:
 - Clears the history of the Windows Run menu.
-- Prepares a report on target PC user privilege escalation.
-- Sends the report to a file in your Dropbox.
+- Recovers Windows product key from target PC.
+- Sends the Windows product key of the target PC to a file in your Dropbox.
 
 ## Prerequisites
 
