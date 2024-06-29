@@ -2,7 +2,7 @@
 
 This script can be used to change the remote link from which updates will be downloaded and where new updates will be uploaded.
 
-**Category**: Execute
+**Category**: Execution
 
 ## Description
 
@@ -55,3 +55,25 @@ To make it easier to use below you can find the various tested configurations, a
 ```DuckyScript
     DEFINE #BRANCH example
 ```
+
+## Credits
+
+<h2 align="center"> Aleff :octocat: </h2>
+<div align=center>
+<table>
+  <tr>
+    <td align="center" width="96">
+      <a href="https://github.com/aleff-github">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/github.png?raw=true width="48" height="48" />
+      </a>
+      <br>Github
+    </td>
+    <td align="center" width="96">
+      <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
+      </a>
+      <br>Linkedin
+    </td>
+  </tr>
+</table>
+</div>
