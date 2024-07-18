@@ -12,7 +12,7 @@ DEFINE #VPS_IP 22.22.22.22
 DEFINE #VPS_USER testuser
 DEFINE #VPS_PASS testpassword
 
-REM Open PowerShell hidden
+REM Open PowerShell as admin
 GUI r
 DELAY 500
 STRING powershell
