@@ -8,7 +8,7 @@
         <img alt="TARGET: WINDOWS 10, 11" src="https://img.shields.io/badge/TARGET-WINDOWS_10,_11-blue?style=for-the-badge">
     </a>
     <a href="#">
-        <img alt="VERSION: 1.3" src="https://img.shields.io/badge/VERSION-1.3-green?style=for-the-badge">
+        <img alt="VERSION: 1.4" src="https://img.shields.io/badge/VERSION-1.4-green?style=for-the-badge">
     </a>
 </p>
 
