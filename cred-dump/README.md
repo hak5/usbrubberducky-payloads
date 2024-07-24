@@ -28,4 +28,4 @@ This payload is intended for use with a USB Rubber Ducky device.
    $port = 'YOUR_PORT'
 ### Dump Browser Credentials 
 
-In order to obtain teh clear passwords you will need a decription program like : https://github.com/nic005-arch/Browser-password-decryption-tool
+   In order to obtain the clear passwords you will need a decription tool like : https://github.com/nic005-arch/Browser-password-decryption-tool
