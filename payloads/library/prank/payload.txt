@@ -1,0 +1,60 @@
+REM Title: Resolution Prank
+REM Author: mavisinator30001
+REM Description: The duck will open a settings window and decrease the screen reolution until caps lock is toggled, in which case it returns to normal
+REM Target: Any Unlocked Windows 11/10 system
+
+
+DELAY 2000
+ATTACKMODE HID
+CTRL GUI d
+DELAY 500
+GUI i
+DELAY 1000
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+ENTER
+DELAY 1000
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+ENTER
+DELAY 200
+HOLD DOWN
+DELAY 1000
+RELEASE DOWN
+ENTER
+DELAY 200
+LEFT
+ENTER
+WAIT_FOR_CAPS_CHANGE
+DELAY 300
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+ENTER
+DELAY 200
+HOLD UP
+DELAY 1000
+RELEASE UP
+ENTER
+DELAY 200
+LEFT
+ENTER
+DELAY 1000
+ALT F4
+DELAY 200
+CTRL GUI LEFT
