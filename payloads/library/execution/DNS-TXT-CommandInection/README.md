@@ -1,4 +1,4 @@
-# DNS-TXT-CommandInection
+# DNS-TXT-CommandInjection
 Ducky Script uses Resolve-DnsName to perform a DNS name query resolution for a domain hosting a malicious TXT record.
 ## Description
 A usb rubber ducky payload that leverages DNS TXT records to perform command injection. Windows Powershell is the CLI used by the payload. Replace the DNS TXT record for your domain with the base64 encoded payload you have. See link below for an example of creating your DNS TXT record in AWS Route53 service.
