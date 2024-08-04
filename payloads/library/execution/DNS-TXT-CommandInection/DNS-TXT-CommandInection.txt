@@ -1,4 +1,4 @@
-REM     Title: DNS-TXT-CommandInection
+REM     Title: DNS-TXT-CommandInjection
 REM     Author: Nate
 REM     Description: A usb rubber ducky payload that leverages DNS TXT records to perform command injection.
 REM     Windows Powershell is the CLI used by the payload. Replace the DNS TXT record for your domain with
