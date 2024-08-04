@@ -1,10 +1,10 @@
 # DNS-TXT-CommandInjection
 Ducky Script uses Resolve-DnsName to perform a DNS name query resolution for a domain hosting a malicious TXT record. The payload leverages DNS TXT records to perform command injection. Windows Powershell is the CLI used by the payload. Replace the DNS TXT record for your domain with the base64 encoded payload you have. 
 ## Description
-Author: Nate
-Target: Windows 10, 11
-Props: Hak5, Darren Kitchen, Korben
-Version: 1.0
+Author: Nate\
+Target: Windows 10, 11\
+Props: Hak5, Darren Kitchen, Korben\
+Version: 1.0\
 Category: Execution
 ## Configuration
 1. A domain with the ability to manipulate the DNS TXT records.
