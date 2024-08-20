@@ -32,7 +32,7 @@ Tested on:
 This portion of the payload serves as a user-defined configuration section where you should input your Discord Webhook URL. You should replace "example.com" with the actual Discord Webhook URL you want to use. The Webhook URL is the endpoint where your payload will send the acquired information related to the Windows Product Key, as well as its type, for exfiltration to a specified Discord channel or server. It's a crucial part of the payload that connects the data extraction process to your Discord platform for further analysis or actions.
 
 ```DuckyScript
-DEFINE #DISCORD-WEBHOOK example.com
+DEFINE #DISCORD_WEBHOOK example.com
 ```
 
 ## Payload Description
