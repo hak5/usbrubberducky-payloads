@@ -11,16 +11,16 @@ EXTENSION SAVE_FILES_IN_RUBBER_DUCKY_STORAGE_WINDOWS
             Insert this extension when you have one or more files that you want to save in your USB Rubber Ducky.
 
         CONFIGURATION:
-            Set #DRIVER-LABEL variable with the correct Label of your USB Rubber Ducky considering that the default value is 'DUCK'.
+            Set #DRIVER_LABEL variable with the correct Label of your USB Rubber Ducky considering that the default value is 'DUCK'.
 
-            Set #FLAG-SINGLE-FILE with TRUE if you want to save just one file.
-            In this case you will need to specify the file path within the #SINGLE-PATH variable OR, in case the exact path to the file you can only acquire it at runtime and so via the powershell, use in the powershell the $fileToSavePath variable to capture this path.
+            Set #FLAG_SINGLE_FILE with TRUE if you want to save just one file.
+            In this case you will need to specify the file path within the #SINGLE_PATH variable OR, in case the exact path to the file you can only acquire it at runtime and so via the powershell, use in the powershell the $fileToSavePath variable to capture this path.
                 i.e. in DuckyScript EXTENSION
-                    DEFINE #SINGLE-PATH C:\Users\Aleff\Downloads\photo.png
+                    DEFINE #SINGLE_PATH C:\Users\Aleff\Downloads\photo.png
                 i.e. in PowerShell before extension
                     $fileToSavePath = "C:\Users\Aleff\Downloads\photo.png"
 
-            Set #FLAG-SINGLE-FILE FALSE if you want to send multiple files.
+            Set #FLAG_SINGLE_FILE FALSE if you want to send multiple files.
             In this case in the PowerShell you will have to create the variable $fileToSavePaths, which is an array of strings that should contain the list of paths related to the files you want to save.
                 i.e. in PowerShell before extension:
                     $fileToSavePaths = @(
@@ -37,20 +37,20 @@ EXTENSION SAVE_FILES_IN_RUBBER_DUCKY_STORAGE_WINDOWS
                         > $fileToSavePaths
     END_REM
     REM Settings
-    DEFINE #DRIVER-LABEL DUCK
-    DEFINE #FLAG-SINGLE-FILE FALSE
-    DEFINE #SINGLE-PATH 0
+    DEFINE #DRIVER_LABEL DUCK
+    DEFINE #FLAG_SINGLE_FILE FALSE
+    DEFINE #SINGLE_PATH 0
 
     REM Extension Code
-    FUNCTION SAVE-SINGLE-FILE()
-        IF ( #SINGLE-PATH != 0 ) THEN
-            STRINGLN mv #SINGLE-PATH >> ${m}:\
-        ELSE IF ( #SINGLE-PATH == 0 ) THEN
+    FUNCTION SAVE_SINGLE_FILE()
+        IF ( #SINGLE_PATH != 0 ) THEN
+            STRINGLN mv #SINGLE_PATH >> ${m}:\
+        ELSE IF ( #SINGLE_PATH == 0 ) THEN
             STRINGLN mv ${fileToSavePath} >> ${m}:\
         END_IF
     END_FUNCTION
 
-    FUNCTION SAVE-MULTIPLE-FILES()
+    FUNCTION SAVE_MULTIPLE_FILES()
         STRINGLN
             foreach ($fileToSavePath in $fileToSavePaths) {
                 mv ${fileToSavePath} >> ${m}:\
@@ -58,11 +58,11 @@ EXTENSION SAVE_FILES_IN_RUBBER_DUCKY_STORAGE_WINDOWS
         END_STRINGLN
     END_FUNCTION
 
-    STRINGLN $m=(Get-Volume -FileSystemLabel '#DRIVER-LABEL').DriveLetter;
-    IF_DEFINED_TRUE #FLAG-SINGLE-FILE
-        SAVE-SINGLE-FILE()
+    STRINGLN $m=(Get-Volume -FileSystemLabel '#DRIVER_LABEL').DriveLetter;
+    IF_DEFINED_TRUE #FLAG_SINGLE_FILE
+        SAVE_SINGLE_FILE()
     END_IF_DEFINED
-    IF_NOT_DEFINED_TRUE #FLAG-SINGLE-FILE
-        SAVE-MULTIPLE-FILES()
+    IF_NOT_DEFINED_TRUE #FLAG_SINGLE_FILE
+        SAVE_MULTIPLE_FILES()
     END_IF_DEFINED
 END_EXTENSION
