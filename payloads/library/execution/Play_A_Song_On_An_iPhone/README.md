@@ -2,13 +2,9 @@
 
 This script can be used to play a song really fast using an iPhone, so iOS system.
 
-**Category**: Execution
-
-## Description
-
-This script can be used to play a song really fast using an iPhone, so iOS system.
-
 Open search bar, then open the Music app (I used the italian name so 'Telefono'), then delete what is (hidden) stored and write the number, then call it.
+
+**Category**: Execution
 
 ## Dependencies
 
