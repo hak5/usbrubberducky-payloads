@@ -2,13 +2,9 @@
 
 This script can be used to delete a reminder really fast using an iPhone, so iOS system.
 
-**Category**: Prank
-
-## Description
-
-This script can be used to delete a reminder really fast using an iPhone, so iOS system.
-
 Open search bar, then open the Reminder app (I used the italian name so 'Promemoria'), then delete what is (hidden) stored and write the number, then call it.
+
+**Category**: Execution
 
 ## Dependencies
 
@@ -24,13 +20,13 @@ Open search bar, then open the Reminder app (I used the italian name so 'Promemo
 - You need to change the name of the application according to the language you have on your phone.
 
   ```DuckyScript
-  [20] DEFINE #REMINDER-APP-NAME example
+  [21] DEFINE #REMINDER-APP-NAME example
   ```
 
 - You should know the reminder name that you want to delete
 
 ```DuckyScript
-  [22] DEFINE #REMINDER-NAME example
+  [23] DEFINE #REMINDER-NAME example
 ```
 
 ## Credits
