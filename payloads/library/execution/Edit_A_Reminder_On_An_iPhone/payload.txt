@@ -1,0 +1,42 @@
+REM_BLOCK
+#################################################
+#                                               #
+# Title        : Edit A Reminder On An iPhone   #
+# Author       : Aleff                          #
+# Version      : 1.0                            #
+# Category     : Execution                      #
+# Target       : iPhone                         #
+#                                               #
+#################################################
+END_REM
+
+REM Requirements:
+REM     - The phone must be unlocked
+
+REM Tested on:
+REM     - iPhone 14
+REM     - iOS 16.4.1
+
+REM You need to change the name of the application according to the language you have on your phone.
+DEFINE #REMINDER-APP-NAME example
+REM You should know the old name of the reminder that you want to change
+DEFINE #OLD-REMINDER-NAME example
+REM Here you should set the new reminder name
+DEFIN #NEW-REMINDER-NAME example
+
+DELAY 500
+GUI SPACE
+DELAY 300
+STRINGLN #REMINDER-APP-NAME
+DELAY 2000
+GUI f
+DELAY 1000
+STRING #OLD-REMINDER-NAME
+DELAY 500
+TAB
+DELAY 500
+GUI a
+BACKSPACE
+STRINGLN #NEW-REMINDER-NAME
+DELAY 500
+GUI h
