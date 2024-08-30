@@ -1,0 +1,32 @@
+REM ##############################################
+REM #                                            |
+REM # Title        : Call Someone On An iPhone   |
+REM # Author       : Aleff                       |
+REM # Version      : 1.0                         |
+REM # Category     : Execution                   |
+REM # Target       : iPhone                      |
+REM #                                            |
+REM ##############################################
+
+
+REM Requirements:
+REM     - The phone must be unlocked
+
+REM Tested on:
+REM     - iPhone 14
+REM     - iOS 16.4.1
+
+REM You need to change the name of the application according to the language you have on your phone.
+DEFINE #PHONE-APP-NAME example
+REM You must set the phone number to be called
+DEFINE #NUMBER example
+
+GUI SPACE
+DELAY 300
+STRING #PHONE-APP-NAME
+ENTER
+DELAY 1000
+BACKSPACE
+STRING #NUMBER
+DELAY 500
+ENTER
