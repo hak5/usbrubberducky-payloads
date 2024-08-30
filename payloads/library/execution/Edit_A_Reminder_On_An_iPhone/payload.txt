@@ -1,13 +1,14 @@
-REM #################################################
-REM #                                               |
-REM # Title        : Edit A Reminder On An iPhone   |
-REM # Author       : Aleff                          |
-REM # Version      : 1.0                            |
-REM # Category     : Execution                      |
-REM # Target       : iPhone                         |
-REM #                                               |
-REM #################################################
-
+REM_BLOCK
+#################################################
+#                                               #
+# Title        : Edit A Reminder On An iPhone   #
+# Author       : Aleff                          #
+# Version      : 1.0                            #
+# Category     : Execution                      #
+# Target       : iPhone                         #
+#                                               #
+#################################################
+END_REM
 
 REM Requirements:
 REM     - The phone must be unlocked
@@ -23,10 +24,10 @@ DEFINE #OLD-REMINDER-NAME example
 REM Here you should set the new reminder name
 DEFIN #NEW-REMINDER-NAME example
 
+DELAY 500
 GUI SPACE
 DELAY 300
-STRING #REMINDER-APP-NAME
-ENTER
+STRINGLN #REMINDER-APP-NAME
 DELAY 2000
 GUI f
 DELAY 1000
@@ -36,7 +37,6 @@ TAB
 DELAY 500
 GUI a
 BACKSPACE
-STRING #NEW-REMINDER-NAME
-ENTER
+STRINGLN #NEW-REMINDER-NAME
 DELAY 500
 GUI h
