@@ -1,0 +1,41 @@
+REM_BLOCK
+###################################################
+#                                                 #
+# Title        : Delete A Reminder On An iPhone   #
+# Author       : Aleff                            #
+# Version      : 1.0                              #
+# Category     : Execution                        #
+# Target       : iPhone                           #
+#                                                 #
+###################################################
+END_REM
+
+REM Requirements:
+REM     - The phone must be unlocked
+
+REM Tested on:
+REM     - iPhone 14
+REM     - iOS 16.4.1
+
+REM You need to change the name of the application according to the language you have on your phone.
+DEFINE #REMINDER-APP-NAME example
+REM You should know the reminder name that you want to delete
+DEFINE #REMINDER-NAME example
+
+DELAY 500
+GUI SPACE
+DELAY 300
+STRINGLN #REMINDER-APP-NAME
+DELAY 2000
+GUI f
+DELAY 1000
+STRING #REMINDER-NAME
+DELAY 500
+TAB
+DELAY 500
+GUI a
+BACKSPACE
+DELAY 500
+ENTER
+DELAY 500
+GUI h
