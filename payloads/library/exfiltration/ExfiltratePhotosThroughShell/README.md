@@ -18,10 +18,6 @@ A script used to exfiltrate photos using fswebcam shell command. The permissions
 * sudo permission
 * 'fswebcam' installed but you can install it with the payload
 
-### Executing program
-
-* Plug in your device
-
 ### Settings
 
 * Dropbox Token - You should change it into the script.sh file, line 7.
@@ -54,3 +50,25 @@ REM DELAY 5000
 REM DELAY Based On Internet Power
 DELAY 4000
 ```
+
+## Credits
+
+<h2 align="center"> Aleff :octocat: </h2>
+<div align=center>
+<table>
+  <tr>
+    <td align="center" width="96">
+      <a href="https://github.com/aleff-github">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/github.png?raw=true width="48" height="48" />
+      </a>
+      <br>Github
+    </td>
+    <td align="center" width="96">
+      <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
+        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
+      </a>
+      <br>Linkedin
+    </td>
+  </tr>
+</table>
+</div>
