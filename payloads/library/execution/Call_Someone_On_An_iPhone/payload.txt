@@ -1,13 +1,14 @@
-REM ##############################################
-REM #                                            |
-REM # Title        : Call Someone On An iPhone   |
-REM # Author       : Aleff                       |
-REM # Version      : 1.0                         |
-REM # Category     : Execution                   |
-REM # Target       : iPhone                      |
-REM #                                            |
-REM ##############################################
-
+REM_BLOCK
+##############################################
+#                                            |
+# Title        : Call Someone On An iPhone   |
+# Author       : Aleff                       |
+# Version      : 1.0                         |
+# Category     : Execution                   |
+# Target       : iPhone                      |
+#                                            |
+##############################################
+END_REM
 
 REM Requirements:
 REM     - The phone must be unlocked

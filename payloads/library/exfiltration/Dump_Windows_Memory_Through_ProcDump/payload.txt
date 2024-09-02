@@ -1,17 +1,17 @@
-REM ########################################################
-REM #                                                      #
-REM # Title        : Dump Windows Memory Through ProcDump  #
-REM # Author       : Aleff                                 #
-REM # Version      : 1.0                                   #
-REM # Category     : Exfiltration                          #
-REM # Target       : Windows                               #
-REM #                                                      #
-REM ########################################################
-
+REM_BLOCK
+########################################################
+#                                                      #
+# Title        : Dump Windows Memory Through ProcDump  #
+# Author       : Aleff                                 #
+# Version      : 1.0                                   #
+# Category     : Exfiltration                          #
+# Target       : Windows                               #
+#                                                      #
+########################################################
+END_REM
 
 REM Requirements:
 REM     - Authorization to execute powershell commands
-
 
 REM You must change it to 'procdump' if you want to use procdump.exe instead of procdump64a.exe
 DEFINE #WHAT_EXE_DO_YOU_WANT_TO_USE procdump64a
