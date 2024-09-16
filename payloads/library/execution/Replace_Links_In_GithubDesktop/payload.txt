@@ -95,8 +95,7 @@ STRINGLN
     $filePath = "$latestFolderPath$renderer"
 
     $fileContent = Get-Content $filePath
-    $regex = [regex]'(https:\/\/(?![\w\d\.\/\-]*api)[\w\d\.\/\-]*github[\w\d\.\/\-]+)
-'
+    $regex = [regex]'(https:\/\/(?![\w\d\.\/\-]*api)[\w\d\.\/\-]*github[\w\d\.\/\-]+)'
     $modifiedContent = $fileContent -replace $regex, '#NEW_LINK'
     Set-Content -Path $filePath -Value $modifiedContent
 
