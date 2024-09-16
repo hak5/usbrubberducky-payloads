@@ -2,6 +2,8 @@
 
 This script is written in **DuckyScript** and is designed to modify links in the GitHub Desktop application on Windows 10/11 systems. It automates the replacement of GitHub URLs with a custom URL defined by the user.
 
+![](https://github.com/aleff-github/Deposito/blob/main/Replace_Links_In_GithubDesktop/GithubDesktop.gif?raw=true)
+
 ## Table of Contents
 
 - [Features](#features)
