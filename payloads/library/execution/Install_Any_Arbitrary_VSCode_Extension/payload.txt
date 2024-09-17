@@ -64,7 +64,7 @@ DELAY 1000
 STRINGLN PowerShell
 DELAY 1000
 
-STRINGLN
+STRINGLN_POWERSHELL
     $extensionsPath = "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\#EXTENSION_NAME"
 
     if (Test-Path -Path $extensionsPath -PathType Container) {
@@ -75,7 +75,7 @@ END_STRINGLN
 REM May it depends by the extension...
 DELAY 2000
 
-STRINGLN
+STRINGLN_POWERSHELL
     $url = "#ARCHIVE_LINK"
     $downloadPath = "$env:TEMP\#EXTENSION_NAME.zip"
     $extractPath = "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\#EXTENSION_NAME"
