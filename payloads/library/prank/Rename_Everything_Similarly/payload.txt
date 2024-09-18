@@ -10,14 +10,9 @@ REM_BLOCK
 #################################################
 END_REM
 
-REM %%%%% DEFINE-SECTION %%%%%
-DEFINE #DIRECTORY_WHERE_TO_RUN_THE_COMMAND .
-
 REM I am very sorry not to be able to release scripts for macOS systems as well but unfortunately not having one would be too risky to test it in a VM, at least in my opinion, so if someone from the community wants to contribute they could propose a pull request with the macOS version so that we can integrate it and make this payload cross-platfom.
 
-REM leave it TRUE if you want to run this script into a target that use Windows as OS, else if you want to run this script into a GNU/Linux system you must change it to FALSE.
-DEFINE #TRUE_IF_THE_TARGET_IS_WINDOWS_ELSE_FALSE TRUE
-
+REM %%%%% DEFINE-SECTION %%%%%
 REM_BLOCK
     
     Consider that the main route for Windows generally is “C:\Users\Username\” while for GNU/Linux systems it is something like “/home/username/” but in both cases if for example you add “./Desktop/Hello/World/” you will go to the World folder in the path “C:\Users\Username\Desktop\Hello\World\” for Windows systems and “/home/username/Desktop/Hello/World/” for **GNU/Linux** systems.
@@ -34,6 +29,10 @@ REM_BLOCK
         |-> https://stackoverflow.com/questions/8674796/on-windows-what-is-the-maximum-file-name-length-considered-acceptable-for-an-ap
 
 END_REM
+DEFINE #DIRECTORY_WHERE_TO_RUN_THE_COMMAND .
+
+REM leave it TRUE if you want to run this script into a target that use Windows as OS, else if you want to run this script into a GNU/Linux system you must change it to FALSE.
+DEFINE #TRUE_IF_THE_TARGET_IS_WINDOWS_ELSE_FALSE TRUE
 
 REM %%%%% PAYLOAD-SECTION %%%%%
 
