@@ -1,6 +1,6 @@
 # Rename Everything Similarly
 
-This script, titled **Rename Everything Similarly**, is written in **DuckyScript 3.0** and designed to rename files and directories recursively on **Windows** or **Linux** systems, depending on the target environment. The script renames directories and files within a specified directory, giving them sequential and similar names.
+This script, titled **Rename Everything Similarly**, is written in **DuckyScript 3.0** and designed to rename files and directories recursively on **Windows** or **GNU/Linux** systems, depending on the target environment. The script renames directories and files within a specified directory, giving them sequential and similar names.
 
 Specifically, the ability to add a blank space to the end of the name is used. On Windows systems, if file extension viewing is not enabled the names will look identical to the human eye, while on GNU/Linux systems the difference may be more easily noticed.
 
