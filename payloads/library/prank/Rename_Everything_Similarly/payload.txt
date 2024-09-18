@@ -5,7 +5,7 @@ REM_BLOCK
 # Author       : Aleff                          #
 # Version      : 1.0                            #
 # Category     : Prank                          #
-# Target       : Windows 10                     #
+# Target       : Windows 10/11; GNU/Linux       #
 #                                               #
 #################################################
 END_REM
