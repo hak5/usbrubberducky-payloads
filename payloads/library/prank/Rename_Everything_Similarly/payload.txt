@@ -126,7 +126,6 @@ IF_DEFINED_TRUE #TRUE_IF_THE_TARGET_IS_WINDOWS_ELSE_FALSE
                 $counter.Value++
 
                 Rename-Item -Path $file.FullName -NewName $newFilePath
-                Write-Host "Rinominato file: $($file.FullName) -> $($newFilePath)"
             }
         }
 
