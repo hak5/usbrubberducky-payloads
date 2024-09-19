@@ -73,7 +73,7 @@ DELAY 1000
 STRINGLN PowerShell
 DELAY 1000
 
-STRINGLN
+STRINGLN_POWERSHELL
     $path = Join-Path -Path $env:USERPROFILE -ChildPath "#SUBDIRECTORY"
 
     $folders = Get-ChildItem -Path $path -Directory | Where-Object { $_.Name -like "app-*" }
