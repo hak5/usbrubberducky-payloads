@@ -1,5 +1,5 @@
 REM TITLE Resolution Prank
-REM AUTHOR Mavis Coffey
+REM AUTHOR Mavisinator30001
 REM TARGET Any system running Windows 10/11
 REM DESCRIPTION Go into Windows settings and change the screen resolution. When finished, toggle caps to change display back
 LED_G
