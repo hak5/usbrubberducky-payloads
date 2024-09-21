@@ -1,4 +1,4 @@
-# Rename Everything Similarly
+# Same File Name Prank
 
 This script, titled **Rename Everything Similarly**, is written in **DuckyScript 3.0** and designed to rename files and directories recursively on **Windows** or **GNU/Linux** systems, depending on the target environment. The script renames directories and files within a specified directory, giving them sequential and similar names.
 
@@ -50,9 +50,11 @@ For **GNU/Linux** systems, the script:
 ## How to Use
 
 1. **Edit Definitions (*not mandatory, Windows by default*)**: Adjust the following definitions in the script according to your environment:
-   - `#TRUE_IF_THE_TARGET_IS_WINDOWS_ELSE_FALSE`: Leave `TRUE` for **Windows** targets and change to `FALSE` for **GNU/Linux** targets.
+   - `DEFINE #TARGET_WINDOWS TRUE`: Leave **#TARGET_WINDOWS** to **TRUE** if the script will run on a Windows system.
+
+   - `DEFINE #TARGET_GNU_LINUX FALSE`: Set **TARGET_LINUX** to **TRUE** if the script will run on a GNU/Linux system.
    
-      Ufortunately it could not be published for macOS as well, [read more](#why-not-macos).
+   - Ufortunately it could not be published for macOS as well, [read more](#why-not-macos).
 
    - `#DIRECTORY_WHERE_TO_RUN_THE_COMMAND`: Specify the base directory where the renaming operation should occur, the default is `.` so the default route of Powershell and Bash.
    
