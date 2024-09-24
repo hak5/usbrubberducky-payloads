@@ -4,7 +4,7 @@ A script used to exfiltrate the NTLM hash on a Windows machine.
 
 ## Description
 
-A script used to capture and exfiltrate the NTLM hash of a Windows machine. It utilizes PowerShell to retrieve the SAM and SYSTEM files, then sends them to a Discord webhook.
+A script used to capture and exfiltrate the NTLM hash of a Windows machine. It utilizes PowerShell to retrieve the SAM and SYSTEM files, then sends them to a Discord webhook. These files can than be used to extract the NTLM hash of all users.
 
 ### Settings
 
