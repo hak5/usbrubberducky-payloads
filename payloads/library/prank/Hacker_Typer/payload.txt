@@ -6,7 +6,7 @@ REM Target:	Windows but easily modified to work on any OS with a browser
 REM Version:	1.0
 REM Category:	Prank
 REM Source: https://github.com/UberGuidoZ/OMG-Payloads
-REM
+ATTACKMODE HID STORAGE
 DELAY 1500
 GUI r
 DELAY 1000
