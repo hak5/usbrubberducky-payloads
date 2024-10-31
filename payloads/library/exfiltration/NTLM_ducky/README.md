@@ -10,8 +10,7 @@ This payload script captures and <strong>exfiltrates NTLM hash files</strong> fr
 ### Settings
 
 - **Drive Label:** Set the target drive label for Rubber Ducky storage (default: `DUCKY`).
-- **Number o:** Ensure the payload has the necessary permissions for registry access.
-- **Extension Requirements:** This payload includes a passive Windows detection extension for compatibility.
+- **Blink Count:** Adjust the number of Caps Lock LED blinks by setting the `#numBlinks` variable (default is 9 blinks).
 
 ## Credits
 
