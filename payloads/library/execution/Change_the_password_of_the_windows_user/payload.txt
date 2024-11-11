@@ -12,7 +12,7 @@ REM Requirements:
 REM     - Nothing (i know it's absurd)
 
 REM You must define the new Windows user password
-DEFINE NEW_PASSWORD example
+DEFINE NEW_PASSWORD Getherdun!
 
 DELAY 1000
 GUI x
@@ -24,8 +24,8 @@ DELAY 500
 ENTER
 
 DELAY 2000
-STRING net user $env:USERNAME 
-STRING NEW_PASSWORD
+STRING net user $env:misfit3
+STRING Getherdun!
 ENTER
 DELAY 1000
 
