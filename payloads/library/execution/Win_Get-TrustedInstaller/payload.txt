@@ -39,9 +39,7 @@ STRING CMD /K "MODE CON:COLS=18 LINES=1 && FOR /F %d IN ('WMIC Volume GET DriveL
 DELAY 1000
 CTRL-SHIFT ENTER
 DELAY 2000
-LEFTARROW
-DELAY 1000
-ENTER
+ALT y
 DELAY 2000
 STRINGLN powershell -NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Unrestricted -File "%RD_LABEL%\TrustedInstaller.ps1" -Command #TRUSTEDINSTALLER_COMMAND
 
