@@ -8,7 +8,7 @@ When a new device connects, this script will copy a desired file to the root of 
 
 **WHY?**
 
-I developed this Powershell one-liner to spread a malicious file stored alongside the script to be copied when USB flash drives are connected. For instance to a photo printing booth.
+I developed this Powershell one-liner to spread a malicious file stored alongside the script to be copied when USB flash drives are connected to a Windows system.
 
 Imitating part of the attack chain for this attack in 2023
 
@@ -19,7 +19,7 @@ Imitating part of the attack chain for this attack in 2023
 
 **USAGE**
 
-1. Replace path/to/your/file.exe on line 10 with the local path to your file to copy.
+1. Replace `path/to/your/file.exe` on line 10 with the local path to your file to copy.
 2. Run the bad-USB on a target.
 3. When any new USB storage device is detected, it will copy the specified file to the USB folder root. 
 
