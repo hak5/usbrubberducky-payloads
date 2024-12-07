@@ -14,19 +14,6 @@ EXTENSION PASSIVE_WINDOWS_DETECT
     REM VERSION 1.1
     REM AUTHOR: Korben
 
-    REM_BLOCK DOCUMENTATION
-        Windows fully passive OS Detection and passive Detect Ready
-        Includes its own passive detect ready.
-        Does not require additional extensions.
-
-        USAGE:
-            Extension runs inline (here)
-            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
-            boot delay
-            $_OS will be set to WINDOWS or NOT_WINDOWS
-            See end of payload for usage within payload
-    END_REM
-
     REM CONFIGURATION:
     DEFINE #MAX_WAIT 150
     DEFINE #CHECK_INTERVAL 20
@@ -44,13 +31,6 @@ EXTENSION PASSIVE_WINDOWS_DETECT
         $_OS = WINDOWS
     END_IF
 
-    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
-        IF ($_OS == WINDOWS) THEN
-            STRING HELLO WINDOWS!
-        ELSE
-            STRING HELLO WORLD!
-        END_IF
-    END_REM
 END_EXTENSION
 IF $_OS != WINDOWS
     LED_R                                                                                                                                       
