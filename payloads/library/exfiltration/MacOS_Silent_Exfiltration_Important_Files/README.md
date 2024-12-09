@@ -4,6 +4,8 @@
 **OS**: MacOS
 **Version**: 1.0
 
+**Note**: This script is created for Original USB Rubber Ducky, This may not work on the newer version of rubber ducky but I am not sure.
+
 ## Description
 A stealth script that silently collects and exfiltrates files through Discord webhooks. The script automatically searches for specific file types, sends them to a Discord channel, and removes all traces of the operation.
 
