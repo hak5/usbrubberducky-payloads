@@ -12,9 +12,10 @@ I developed this small Powershell script to quickly setup PS transcription and l
 
 **USAGE**
 
-1. Run once to enable logging
-2. Check transcript files in `Documents/WindowsPowerShell` folder
-3. Run once more to remove logging
+1. Replace `https://yourserver.com/rawfile/Global-Powershell-Logging.ps1` on line 9 with the URL to your own hosted .ps1 script
+2. Run once to enable logging
+3. Check transcript files in `Documents/WindowsPowerShell` folder
+4. Run once more to remove logging
 
 
 **NOTE**
