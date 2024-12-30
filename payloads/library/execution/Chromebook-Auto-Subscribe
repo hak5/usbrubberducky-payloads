@@ -1,0 +1,46 @@
+REM ####################################
+REM #                                  |
+REM # Title        : Thank's for the sub! |
+REM # Author       : Alex P            |
+REM # Version      : 1.4               |
+REM # Category     : Prank             |
+REM # Target       : Chromebook        |
+REM #                                  |
+REM ####################################
+
+DELAY 1000
+GUI r
+DELAY 500
+STRINGLN chrome
+DELAY 2000
+REM Open YouTube channel link
+CTRL t
+DELAY 500
+DEFINE #YTLINK example.com
+STRINGLN #YTLINK
+DELAY 5000  REM 5 seconds to load the YouTube channel
+
+REM Use TAB to navigate to the Subscribe button (14 TAB presses)
+REPEAT 14 TAB
+DELAY 50
+
+REM Press Enter to Subscribe (ensure it's 100% on the Subscribe button)
+ENTER
+DELAY 1000
+
+REM Go back to Google
+ALT LEFT
+DELAY 2000
+
+REM Clear the search bar
+CTRL k
+DELAY 500
+BACKSPACE
+DELAY 500
+
+REM Open Google Docs
+STRINGLN https://docs.google.com/document/create
+DELAY 3000  REM Wait for Google Docs to load
+
+REM Type full message in Google Docs
+STRINGLN Thanks for the sub!
