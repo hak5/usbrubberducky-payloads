@@ -8,6 +8,7 @@ REM Category: General
 
 REM get into safe mode
 STRING QQQQQQQQQ
+CTRL ALT DELETE
 DELAY 3000
 HOLD SHIFT
 TAB
