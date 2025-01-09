@@ -1,12 +1,14 @@
-REM #####################################################
-REM #                                     		        #
-REM # Title       : Prank In The Middle - Thunderbird   #
-REM # Author      : Aleff                 		        #
-REM # Version	  : 1.0                   		        #
-REM # Category	  : Prank                 		        #
-REM # Target	  : Windows 10/11         		        #
-REM #                                     		        #
-REM #####################################################
+REM_BLOCK
+#####################################################
+#                                     		        #
+# Title       : Prank In The Middle - Thunderbird   #
+# Author      : Aleff                 		        #
+# Version	  : 1.0                   		        #
+# Category	  : Prank                 		        #
+# Target	  : Windows 10/11         		        #
+#                                     		        #
+#####################################################
+END_REM
 
 EXTENSION DETECT_READY
     REM VERSION 1.1
@@ -38,8 +40,7 @@ END_EXTENSION
 
 REM Open Thunderbird and goto settings
 GUI r
-STRING thunderbird
-ENTER
+STRINGLN thunderbird
 DELAY 1000
 REPEAT 4 TAB
 ENTER
@@ -70,8 +71,7 @@ DELAY 500
 
 REM Open the powershell and goto the directory
 GUI r
-STRING powershell
-ENTER
+STRINGLN powershell
 DELAY 1500
 STRING cd 
 DELAY 500
