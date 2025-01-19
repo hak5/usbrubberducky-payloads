@@ -1,14 +1,14 @@
-# WLAN Windows Password
+# Better Wifi Stealer
 
-A script used to stole target WLAN Passwords.
+A script used to steal Network Passwords and more from Windows targets
 
 **Category**: Credentials
 
 ## Description
 
-A script used to stole target WLAN Passwords.
+A script used to steal Network Passwords and more
 
-Opens PowerShell hidden, grabs wlan passwords, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
+Opens PowerShell hidden, grabs network .xml files (containing Passwords and more) and exfiltrates info via Discord Webhook.
 
 ## Getting Started
 
