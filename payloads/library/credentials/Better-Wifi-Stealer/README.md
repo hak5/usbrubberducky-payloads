@@ -29,20 +29,14 @@ Opens PowerShell hidden, grabs network .xml files (containing Passwords and more
 
 <h2 align="center"> true_lock :octocat: </h2>
 <div align=center>
-<table>
-  <tr>
-    <td align="center" width="96">
-      <a href="https://github.com/truelockmc/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/github.png?raw=true width="48" height="48" />
-      </a>
-      <br>Github
-    </td>
-    <td align="center" width="96">
-      <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
-      </a>
-      <br>Linkedin
-    </td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td align="center" width="96">
+        <a href="https://github.com/truelockmc/">
+          <img src="https://github.com/aleff-github/aleff-github/blob/main/img/github.png?raw=true" width="48" height="48" />
+        </a>
+        <br>Github
+      </td>
+    </tr>
+  </table>
 </div>
