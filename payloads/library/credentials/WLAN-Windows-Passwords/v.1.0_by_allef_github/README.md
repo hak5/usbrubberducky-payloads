@@ -1,12 +1,12 @@
 # WLAN Windows Password
 
-A script used to stole target WLAN Passwords.
+A script used to steale target WLAN Passwords.
 
 **Category**: Credentials
 
 ## Description
 
-A script used to stole target WLAN Passwords.
+A script used to stealle target WLAN Passwords.
 
 Opens PowerShell hidden, grabs wlan passwords, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
 
