@@ -1,5 +1,4 @@
-# Better Wifi Stealer
-
+# Wifi Stealer v.2.0
 A script used to steal Network Passwords and more from Windows targets
 
 **Category**: Credentials
