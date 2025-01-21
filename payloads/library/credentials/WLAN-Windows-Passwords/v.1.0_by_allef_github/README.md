@@ -1,4 +1,4 @@
-# WLAN Windows Password
+# WLAN Windows Password v.1.0
 
 A script used to steale target WLAN Passwords.
 
