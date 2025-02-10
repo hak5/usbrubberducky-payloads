@@ -1,8 +1,6 @@
 #### Title: Russian Roulette
-#### Author: Phishing Tides
+Author: Phishing Tides
 
-#### Description: User is forced to play a game of russian roulette
-#### Target: Windows 10, 11
-#### Version: 1.0
-#### Category: Prank
-#### Source: https://github.com/UberGuidoZ/OMG-Payloads
+**USAGE**
+1. Download the ps1 script to a server you own and Please replace the link with your .ps1 raw file
+2. run the script 
