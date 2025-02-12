@@ -8,9 +8,9 @@ REM_BLOCK
 # Target       : Windows 10/11   #
 #                                #
 ##################################
-END_REM
 
 Plug-And-Play <3
+END_REM
 
 REM_BLOCK
 Requirements:
@@ -73,12 +73,11 @@ END_EXTENSION
 
 GUI r
 DELAY 1000
-STRING notepad.exe
-ENTER
+STRINGLN notepad.exe
 DELAY 2000
 STRING #HEX_CODE
 DELAY 2000
-ALT F
+ALT f
 DELAY 1000
 STRING S
 DELAY 1000
