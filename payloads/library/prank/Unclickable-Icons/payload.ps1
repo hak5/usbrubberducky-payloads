@@ -11,6 +11,6 @@ function screenshot([Drawing.Rectangle]$bounds, $path) {
    $bmp.Dispose()
 }
 
-$bounds = [Drawing.Rectangle]::FromLTRB(0, 0, 1000, 900)
+$bounds = [Drawing.Rectangle]::FromLTRB(0, 0, 100000, 10000)
 screenshot $bounds "./DesktopScreenShot.png" 
 
