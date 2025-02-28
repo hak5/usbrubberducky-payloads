@@ -1,23 +1,22 @@
-void][reflection.assembly]::loadwithpartialname("system.windows.forms")
-$DemoScreenshot = [System.Windows.Forms.SystemInformation]::VirtualScreen
-$WIDTH = $DemoScreenshot.Width
-$HEIGHT = $DemoScreenshot.Height
-$LEFTDIM = $DemoScreenshot.Left
-$TOPDIM = $DemoScreenshot.Top
+# Define the function to take a screenshot
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
 
-[Reflection.Assembly]::LoadWithPartialName("System.Drawing")
-function screenshot([Drawing.Rectangle]$bounds, $path) {
-   $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height
-   $graphics = [Drawing.Graphics]::FromImage($bmp)
-   
-   $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size)
-   
-   $bmp.Save($path)
-   
-   $graphics.Dispose()
-   $bmp.Dispose()
-}
+# Create a bitmap object with the size of the screen
+$bitmap = New-Object System.Drawing.Bitmap([System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width, [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height)
 
-$bounds = [Drawing.Rectangle]::FromLTRB(0, 0, $HEIGHT, $WIDTH)
-screenshot $bounds "./DesktopScreenShot.png" 
+# Create a graphics object from the bitmap
+$graphics = [System.Drawing.Graphics]::FromImage($bitmap)
 
+# Capture the screen
+$graphics.CopyFromScreen(0, 0, 0, 0, $bitmap.Size)
+
+# Save the screenshot to a file
+$screenshotPath = "./DesktopScreenshot"
+$bitmap.Save($screenshotPath, [System.Drawing.Imaging.ImageFormat]::Png)
+
+# Clean up
+$graphics.Dispose()
+$bitmap.Dispose()
+
+Write-Host "Screenshot saved to $screenshotPath"
