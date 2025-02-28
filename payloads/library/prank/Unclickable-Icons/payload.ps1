@@ -1,3 +1,10 @@
+void][reflection.assembly]::loadwithpartialname("system.windows.forms")
+$DemoScreenshot = [System.Windows.Forms.SystemInformation]::VirtualScreen
+$WIDTH = $DemoScreenshot.Width
+$HEIGHT = $DemoScreenshot.Height
+$LEFTDIM = $DemoScreenshot.Left
+$TOPDIM = $DemoScreenshot.Top
+
 [Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 function screenshot([Drawing.Rectangle]$bounds, $path) {
    $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height
@@ -11,6 +18,6 @@ function screenshot([Drawing.Rectangle]$bounds, $path) {
    $bmp.Dispose()
 }
 
-$bounds = [Drawing.Rectangle]::FromLTRB(0, 0, 100000, 10000)
+$bounds = [Drawing.Rectangle]::FromLTRB(0, 0, $WIDTH, $HEIGHT)
 screenshot $bounds "./DesktopScreenShot.png" 
 
