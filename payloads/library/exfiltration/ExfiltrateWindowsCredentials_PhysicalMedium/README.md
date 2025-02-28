@@ -6,7 +6,7 @@ Script to dump Windows Credentials using mimikatz and exfiltrate sensitive infor
 
 ## Description
 
-This script creates a memory dump of the lsass.exe process using the TaskManager, downloads and uses mimikatz to extract credentials from the dump file and exfiltrates data to the SSD storage of the USB Rubber Ducky. The exfiltrated data is stored in a folder with the name of the computer that is attacked. Cleanup is performed after the exfiltration is completed.
+This script creates a memory dump of the lsass.exe process using the TaskManager, downloads and uses mimikatz to extract credentials from the dump file and exfiltrates data to the SD storage of the USB Rubber Ducky. The exfiltrated data is stored in a folder with the name of the computer that is attacked. Cleanup is performed after the exfiltration is completed.
 
 ## Getting Started
 
