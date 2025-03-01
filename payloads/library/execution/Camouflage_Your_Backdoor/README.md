@@ -83,6 +83,20 @@ By redefining `netstat`, any user who relies on this command to check active con
 
 ---
 
+## Why sudo netstat Still Shows Connections
+
+When we define the custom netstat function in a user’s `~/.bashrc`, it only affects that user’s shell environment. However, if you run the command via sudo, you typically switch to the root environment, which does not include the overridden netstat function from your user account.
+
+The `~/.bashrc` (or other configuration files) for root reside under `/root/`, which is distinct from a standard user’s home directory. Unless you also modify `/root/.bashrc` or other relevant files for root, the netstat binary will remain unmodified when you use `sudo`.
+
+By default, sudo does not preserve the calling user’s shell functions or environment variables. It launches the new process under root’s clean environment. Hence, the original system netstat is executed, revealing all connections, including the supposedly hidden IP.
+
+If you configure sudo to preserve specific environment variables or shell functions (for instance, using the `-E` flag or modifying `/etc/sudoers`), then the override might carry over to the elevated session. However, this is rarely a default setting and usually requires explicit configuration.
+
+In a real-world scenario, an attacker determined to hide connections from root as well might attempt to modify root’s shell configuration or even replace the binary at the system level - a more complex and riskier technique that leaves more evidence and typically requires privileged access in the first place.
+
+---
+
 ## Protective Measures
 
 1. **Check Startup Files**:  
