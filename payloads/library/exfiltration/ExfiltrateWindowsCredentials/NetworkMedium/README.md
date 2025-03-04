@@ -8,6 +8,8 @@ Script to dump Windows Credentials using mimikatz and exfiltrate sensitive infor
 
 This script creates a memory dump of the lsass.exe process using the TaskManager, downloads and uses mimikatz to extract credentials from the dump file and exfiltrates compressed data to a remote webserver over a network. Cleanup is performed after the exfiltration is completed.
 
+Cleanup is performed after the exfiltration is completed. This cleanup includes the removal of temporary files and the deletion of the PowerShell history on line 121.
+
 ## Getting Started
 
 ### Dependencies

