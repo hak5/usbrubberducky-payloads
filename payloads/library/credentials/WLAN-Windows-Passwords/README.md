@@ -5,8 +5,8 @@ A script used to steal Network Passwords and more from Windows targets
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## What Version should i use?
-### Version 1.0 by [allef-github](https://github.com/aleff-github):
-This version uses a very direct way, is a bit faster then v.2.0 and the PowerShell script is very short, but it only sends the Wifi Name and Password to the webhook and does only work on English Machines.
+### Version 1.1 by [allef-github](https://github.com/aleff-github):
+This version uses a very direct way, is a bit faster then v.2.0 and the PowerShell script is very short, but it only sends the Wifi Name and Password to the webhook and does only work on English, Italian and German Machines.
 Also the Payload has a few more lines.
 
 ### Version 2.0 by [truelockmc](https://github.com/truelockmc):
