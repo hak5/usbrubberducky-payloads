@@ -5,6 +5,8 @@ REM Target: IOS
 REM Props: Hak5
 REM Version: 1.2
 REM Category: Mobile
+REM Requirements: Full Keyboard Access Enabled
+
 DEFINE #EMAIL sideswipe@exmaple.com
 DEFAULT_DELAY 600
 DELAY 200
