@@ -1,4 +1,4 @@
-**ITrack** is a simple **Flipper Zero/Rubber Ducky Payload** developed for **IOS** which uses the **Full Keyboard Access** capabilities of an Iphone to **grant Location Sharing** for 24h to an Email Address of Choice:
+**ITrack** is a simple **Rubber Ducky Payload** developed for **IOS** which uses the **Full Keyboard Access** capabilities of an Iphone to **grant Location Sharing** for 24h to an Email Address of Choice:
 1. Opens **Google Maps**
 2. Opens **Location Sharing Settings**
 3. Sets the Timer to **24h**
@@ -15,13 +15,6 @@ The Payload requires **Full Keyboard Access to be enabled** to run properly. The
 	- **Speed Optimization** from Flipper
 - <u>**ITrack_CrossPV.txt:**</u>
 	- **USB Rubber Ducky** Payload
-	- Default Delay of 600ms & Minor Custom Delays
-- <u>**FITrack.txt:**</u>
-	- **Flipper Zero** BadUSB Payload
-	- Custom Delays set for **Speed Optimization**
-	- Speed tested on **Iphone 14 Pro**
-- <u>**FITrack_CrossPV.txt:**</u>
-	- **Flipper Zero** BadUSB Payload
 	- Default Delay of 600ms & Minor Custom Delays
 
 1. **Enable Full Keyboard Access**
