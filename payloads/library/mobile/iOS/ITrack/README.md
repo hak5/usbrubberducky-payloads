@@ -23,8 +23,6 @@ The Payload requires **Full Keyboard Access to be enabled** to run properly. The
 4. **Connect** to Phone
 5. **!!!SEND IT!!!**
 
-## Demo
-
 ## Limitations
 Sadly the **Payload is not perfect** and is not completely cross-platform. Additionally there are still some limitations that I would like to work on in the future with the community to make the payload more sophisticated and maybe even faster than it already is(~12s).
 - Required **Full Keyboard Access** to be enabled manually
