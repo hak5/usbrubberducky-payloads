@@ -8,10 +8,6 @@ REM DESCRIPTION: Brave Breacher is a side-channel attack payload that utilizes v
 
 ![bbdemo](https://github.com/user-attachments/assets/1c0776ed-2c0f-477f-94ea-87ab4fd95066)
 
-![loot](https://github.com/user-attachments/assets/203efd4a-0e53-48a9-9f6b-3d8bc35bd2bf)
-
-![loott](https://github.com/user-attachments/assets/4bffc3b8-466e-46ca-a6a8-4ea988342cd4)
-
 ```
 name,url,username,password,note
 site1.com,https://site1.com/,user1,pass1,
