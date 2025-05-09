@@ -19,19 +19,17 @@ edit2exfil is a persistent file exfiltration payload that embeds itself as a `cr
 **The payload builds a bash script (.e2e.sh) that performs multiple tasks in the following order:**
 
 1. a `net_check` conditional statement is utilized to see if the machine has internet connectivity. This is acheived by sending a `PING` to [Hak5.org](https://hak5.org). If `PING` was **NOT** successful, the script exits and will be ran again in 24 hours by default (or the next scheduled time of your choosing). If the `PING` **WAS** successful, the script moves to a secondary conditional statement >
-2. a `file_check` conditional statement is utilized to see if the following document file types have been modified (edited) in the past 24 hours: `.txt, .pdf, .docx, .doc, .csv, .xlsx, .png", .jpg", .jpeg", .sh"`. If there are **NOT** any documents (with the previous file types) that have been modified in the past 24 hours, the script exits and will be ran again in 24 hours by default (or the next scheduled time of your choosing), else >
+2. a `file_check` conditional statement is utilized to see if the following document file types have been modified (edited) in the past 24 hours: `.txt, .pdf, .docx, .doc, .csv, .xlsx, .png, .jpg, .jpeg, .sh`. If there are **NOT** any documents (with the previous file types) that have been modified in the past 24 hours, the script exits and will be ran again in 24 hours by default (or the next scheduled time of your choosing), else >
 3. The files are tarballed (.loot.tar.gz) and placed (hidden) in the /home directory for exfiltration >
 4. The tarball is then exfiltrated via Discord webhook >
 5. The tarball is then `shredded` to obfuscate its' presence >
-6. fi (end of script).
-
-This allows for persistent data exfiltration of files as they are updated daily.
+6. End of script.
 
 Total time for DuckyScript payload to run: `7 seconds`.
 
 **DuckyScript Payload Workflow:**
   1. Terminal window is opened >
-  2. Terminal history is unset (to obfuscate building of the payloads' bash script (.e2e.sh) > bash script is built and hidden (due to prepending with `.`, in home directory) >
+  2. Terminal history is unset (to obfuscate building of the payloads' bash script (.e2e.sh) > bash script is built >
   3. Execution permissions are given to .e2e.sh > .e2e.sh is added to `cronjob` to automatically run silently in the bachkground daily at 10:00 AM >
   4. Terminal window is closed >
   5. End of payload.
