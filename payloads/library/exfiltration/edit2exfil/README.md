@@ -8,7 +8,7 @@ REM TARGET OS: Linux (tested on Kali Linux Release 2025-W19)
 
 REM DESCRIPTION: (See below)
 
-REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10 | Place the USER of the target system in the #USER constant on line 11 | Timing of when and how frequent the script will be ran via `cronjob` can be changed in line 53.
+REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10 | Place the USER of the target system in the #USER constant on line 11 | Timing of when and how frequent the script will be ran (10:00 AM, daily by default) via `cronjob` can be changed in line 53.
 
 ==========================================================================================
 
