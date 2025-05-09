@@ -27,7 +27,7 @@ edit2exfil is a persistent file exfiltration payload that embeds itself as a `cr
 
 This allows for persistent data exfiltration of files as they are updated daily.
 
-Total time for DuckyScript payload to run (including building bash script): `7 seconds`.
+Total time for DuckyScript payload to run: `7 seconds`.
 
 **DuckyScript Payload Workflow:**
   1. Terminal window is opened >
