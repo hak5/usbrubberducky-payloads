@@ -3,10 +3,11 @@
   <h1>DEMO</h1> 
   <img src="https://github.com/user-attachments/assets/518e6e26-ca02-4b58-90f0-fb0e95fac2d3">
   <h1>Getting Saved Passwords</h1>
-  <p>Getting Saved Passwords Using Rubber Ducky from a computer.</p>
-  <p>I used a bat file which directly downloads in pc and runs, this makes it very quick and we can remove the rubber ducky in like 3 seconds as the else will be done on its own!</p>
-  </body>
-
+  <ul>
+  <li>Getting Saved Passwords Using Rubber Ducky from a computer.</li>
+  <li>Localstate and Login data files are Exfiltrated</li>
+  <li>Using a bat file which directly downloads on pc and runs, this makes the attack very quick, we can remove the rubber ducky within 3-4 seconds as the attack will take place on its own!</li>
+  </ul>
   <h1>What is going on?</h1>
   <ol>
     <li>We are using powershell to download batch file in victim's pc.</li>
@@ -21,5 +22,5 @@
     <li>This file contains settings and information</li>
     <li>One of the information is encrypted password </li>
   </ol>
-
+</body>
 </html>
