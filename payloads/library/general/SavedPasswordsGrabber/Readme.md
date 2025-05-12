@@ -22,5 +22,7 @@
     <li>This file contains settings and information</li>
     <li>One of the information is encrypted password </li>
   </ol>
+  <h1>Source: </h1> 
+  <p>https://github.com/Tarnishsilver/usbrubberducky-payloads/tree/master</p>
 </body>
 </html>
