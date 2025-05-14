@@ -1,37 +1,82 @@
-REM ###########################################
-REM #                                         |
-REM # Title        : Send Messages In Teams   |
-REM # Author       : Aleff                    |
-REM # Version      : 1.0                      |
-REM # Category     : Prank                    |
-REM # Target       : Windows 10-11            |
-REM #                                         |
-REM ###########################################
+REM_BLOCK
+###########################################
+#                                         #
+# Title        : Send Messages In Teams   #
+# Author       : Aleff                    #
+# Version      : 1.0                      #
+# Category     : Prank                    #
+# Target       : Windows 10-11            #
+#                                         #
+###########################################
 
-REM Requirements:
-REM     - Microsoft Teams installed and user logged-in
-REM     - Internet Connection
-REM     - ExecutionPolicy Bypass
-REM     - Python
+Requirements:
+    - Microsoft Teams installed and user logged-in
+    - Internet Connection
+    - ExecutionPolicy Bypass
+    - Python
 
-REM 1. Open a powershell
-REM 2. Close if Teams is opens and reopen it
-REM 3. Goto search bar
-REM 4. Search the person by name, email, id or what you want...
-REM 5. Downarrow and enter to open the chat
+1. Open a powershell
+2. Close if Teams is opens and reopen it
+3. Goto search bar
+4. Search the person by name, email, id or what you want...
+5. Downarrow and enter to open the chat
+END_REM
 
 REM REQUIRED - Name, email, id or what you want for contact the target
-DEFINE USER-ID example
-REM REQUIRED - Messages
-DEFINE MESSAGE1 example
-REM ...
-REM DEFINE MESSAGEN example..
+DEFINE #USER-ID example
 
-DELAY 1000
+REM REQUIRED - Messages
+DEFINE #MESSAGE1 example
+
+REM ...
+REM DEFINE #MESSAGEN example..
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
 GUI r
 DELAY 1000
-STRING powershell
-ENTER
+STRINGLN powershell
 DELAY 2000
 
 REM #### Powershell ####
@@ -44,8 +89,7 @@ DELAY 10000
 REM #### Teams ####
 CTRL N
 DELAY 2000
-STRING USER-ID
-ENTER
+STRINGLN #USER-ID
 DELAY 2000
 TAB
 DELAY 1000
@@ -53,11 +97,10 @@ TAB
 DELAY 1000
 
 REM #### Messages ####
-STRING MESSAGE1
-ENTER
+STRINGLN #MESSAGE1
 DELAY 1000
 REM ...
-REM STRINGLN MESSAGEN
+REM STRINGLN #MESSAGEN
 
 DELAY 500
 ALT F4
