@@ -1,8 +1,8 @@
-REM Author: anonymized
-REM Title: ShadowPuppet – Conditional LAN Streamer
+REM Author: Coderace
+REM Title: ShadowPuppet 
 REM Category: remote-access
-REM Target: Windows 10/11 physical only
-REM Encoder: PayloadStudio (DuckyScript 3.0)
+REM Target: Windows 10/11 
+
 
 ATTACKMODE HID
 LED_OFF
