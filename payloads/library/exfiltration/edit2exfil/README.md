@@ -1,5 +1,3 @@
-==========================================================================================
-
 REM TITLE: edit2exfil
 
 REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
@@ -10,7 +8,7 @@ REM DESCRIPTION: (See below)
 
 REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10 | Timing of when and how frequent the script will be ran (10:00 AM, daily by default) via `cronjob` can be changed in line 53.
 
-==========================================================================================
+-------
 
 ## edit2exfil
 
