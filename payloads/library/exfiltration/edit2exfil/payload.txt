@@ -50,4 +50,4 @@ END_STRINGLN
 CTRL c
 
 REM Granting execution permissions and adding ".e2e.sh" to cronjob to be executed at 10:00 AM, daily:
-STRINGLN chmod +x .e2e.sh && crontab -l > e2etemp && echo "0 10 * * * ~/.e2e.sh" >> e2etemp && crontab e2etemp && shred -fuz e2etemp && exit
+STRINGLN chmod +x .e2e.sh; crontab -l > e2etemp; echo "0 10 * * * ~/.e2e.sh" >> e2etemp; crontab e2etemp; shred -fuz e2etemp; exit
