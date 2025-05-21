@@ -1,4 +1,4 @@
-# Close All Applications - BADUSB ✅
+# Close All Applications
 
 A script used to close all target open applications.
 
