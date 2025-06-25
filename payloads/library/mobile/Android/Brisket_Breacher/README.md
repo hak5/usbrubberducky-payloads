@@ -36,7 +36,7 @@ Due to the payload changing the homepage in the settings of the Google Chrome br
 
 4. Start BeEF:
     - `sudo beef-xss`.
-   -----
+
 ## The homepage
 The homepage was designed to imitate a typical Google Search landing page. Multiple features were added in an attempt to help obfuscate the fact that it is a *malicious* homepage. The homepage also delivers the BeEF C2 hook.
   - Features:
