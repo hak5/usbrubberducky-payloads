@@ -17,6 +17,7 @@ STRINGLN chrome
 DELAY 200
 ENTER
 DELAY 500
+
 REM Opening new tab to ensure proper default Chrome environment to execute payload properly:
 CTRL t
 DELAY 300
