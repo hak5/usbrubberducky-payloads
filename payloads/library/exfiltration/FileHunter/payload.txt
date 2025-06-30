@@ -70,7 +70,7 @@ EXTENSION DETECT_FINISHED
 END_EXTENSION
 
 REM Define the file name or type by using a wildcard i.e. *.pdf
-DEFINE #FILENAME example.jpg
+DEFINE #*.jpg
 DEFINE #NAME Ducky
 
 DELAY 1000
