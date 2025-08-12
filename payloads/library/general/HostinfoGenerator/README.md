@@ -65,19 +65,19 @@ str3tch
 <div align=center>
 <table>
   <tr>
-    <td align="center" width="96">
+    <td align="center">
       <a href="https://www.linkedin.com/in/jeromy-leugers-a747b96/">Corporate Lacky</a>
       <br>LinkedIn
     </td>
-    <td align="center" width="96">
+    <td align="center">
       <a href="https://twitter.com/JustJeromy">@JustJeromy</a>
       <br>Twitter
     </td>
-    <td align="center" width="96">
+    <td align="center"128">
       <a href="https://discord.gg/yYkuwGxU">Vegas 2.0</a>
       <br>Discord
     </td>
-    <td align="center" width="96">
+    <td align="center">
       <a href="https://discord.gg/rx4eTBG8">DC702</a>
       <br>Discord
     </td>
