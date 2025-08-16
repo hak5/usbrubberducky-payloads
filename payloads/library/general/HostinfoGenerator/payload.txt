@@ -1,0 +1,384 @@
+REM_BLOCK DOCUMENTATION
+    Title: Hostinfo Generator
+    Author: str3tch @ Vegas 2.0 | dc702 | PHS (https://github.com/PacketHouse)
+    Description: This payload generates random hostnames, IPs, and MACs
+    Target: Windows, Ubuntu
+    Version: 1.0
+    Category: General
+END_REM
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
+
+EXTENSION HOSTINFO_GENERATOR
+    REM VERSION 1.0
+    REM AUTHOR: str3tch @ Vegas 2.0 | dc702 | PHS (https://github.com/PacketHouse)
+
+    REM_BLOCK DOCUMENTATION
+        Random data generator
+
+        USAGE:
+            Place at beginning of payload (besides ATTACKMODE) to make data
+            generator functions available for use in payload.
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    REM length of numerical portion of hostname (ABC-D12345 = 5)
+    DEFINE #HOST_NUM_LEN 5
+    REM set to 0 for random first octet, or specify your own (e.g. 10 for 10.x)
+    VAR $IP_FIRST_OCTET = 0
+    REM set one of these to TRUE to add a separator
+    VAR $MAC_USE_COLON = FALSE
+    VAR $MAC_USE_HYPHEN = FALSE
+    VAR $MAC_USE_DOT = FALSE
+
+    REM Change at your own risk
+    DEFINE #VALUE_6 6543
+    DEFINE #VALUE_5 5432
+    DEFINE #VALUE_4 4321
+    DEFINE #VALUE_3 3210
+    DEFINE #VALUE_2 2345
+    DEFINE #VALUE_1 1234
+    DEFINE #VALUE_0 0123
+
+    REM Don't change these
+    DEFINE #MAC_LEN 12
+    VAR $GET_NUM = FALSE
+    VAR $HEX_VALUE = 0
+    VAR $OCTET = 0
+
+
+    FUNCTION GET_RANDOM_HEX_VALUE()
+        REM Generate a random decimal or hexadecimal value based on $GET_NUM
+        $_RANDOM_MIN = 0
+        IF ($GET_NUM == TRUE) THEN
+            $_RANDOM_MAX = 9
+        ELSE
+            $_RANDOM_MAX = 15
+        END_IF
+        RETURN $_RANDOM_INT
+    END_FUNCTION
+
+
+    REM Print $HEX_VALUE
+    FUNCTION PRINT_HEX_VALUE()
+        IF ($HEX_VALUE == 0) THEN
+            STRING 0
+        ELSE IF ($HEX_VALUE == 1) THEN
+            STRING 1
+        ELSE IF ($HEX_VALUE == 2) THEN
+            STRING 2
+        ELSE IF ($HEX_VALUE == 3) THEN
+            STRING 3
+        ELSE IF ($HEX_VALUE == 4) THEN
+            STRING 4
+        ELSE IF ($HEX_VALUE == 5) THEN
+            STRING 5
+        ELSE IF ($HEX_VALUE == 6) THEN
+            STRING 6
+        ELSE IF ($HEX_VALUE == 7) THEN
+            STRING 7
+        ELSE IF ($HEX_VALUE == 8) THEN
+            STRING 8
+        ELSE IF ($HEX_VALUE == 9) THEN
+            STRING 9
+        ELSE IF ($HEX_VALUE == 10) THEN
+            STRING A
+        ELSE IF ($HEX_VALUE == 11) THEN
+            STRING B
+        ELSE IF ($HEX_VALUE == 12) THEN
+            STRING C
+        ELSE IF ( $HEX_VALUE == 13 ) THEN
+            STRING D
+        ELSE IF ( $HEX_VALUE == 14 ) THEN
+            STRING E
+        ELSE IF ( $HEX_VALUE == 15 ) THEN
+            STRING F
+        END_IF
+    END_FUNCTION
+
+
+    FUNCTION PRINT_OCTET_VALUE()
+        REM Print 100s position
+        IF ($OCTET >= 100) THEN
+            $HEX_VALUE = ($OCTET / 100)
+            PRINT_HEX_VALUE()
+
+            REM Remove 100s
+            $OCTET = ($OCTET % 100)
+        END_IF
+
+        REM Print 10s position
+        IF ($OCTET >= 10) THEN
+            $HEX_VALUE = ($OCTET / 10)
+            PRINT_HEX_VALUE()
+        END_IF
+
+        REM Print 1s position
+        $HEX_VALUE = ($OCTET % 10)
+        PRINT_HEX_VALUE()
+    END_FUNCTION
+
+
+    REM Generate a random IPv4 address
+    FUNCTION PRINT_RANDOM_IP()
+        REM Generate the first octet
+        IF ($IP_FIRST_OCTET > 0) THEN
+            $OCTET = $IP_FIRST_OCTET
+        ELSE
+            REM Avoiding possible network and broadcast addresses
+            REM TODO: Do something about other reserved IPs? (e.g. 239., 169.)
+            $_RANDOM_MIN = 1
+            $_RANDOM_MAX = 254
+            $OCTET = $_RANDOM_INT
+        END_IF
+        PRINT_OCTET_VALUE()
+        STRING .
+
+        REM Second octet
+        $_RANDOM_MIN = 0
+        $_RANDOM_MAX = 255
+        $OCTET = $_RANDOM_INT
+        PRINT_OCTET_VALUE()
+        STRING .
+
+        REM Third octet
+        $OCTET = $_RANDOM_INT
+        PRINT_OCTET_VALUE()
+        STRING .
+
+        REM Fourth octet, avoiding possible network and broadcast addresses
+        $_RANDOM_MIN = 1
+        $_RANDOM_MAX = 254
+        $OCTET = $_RANDOM_INT
+        PRINT_OCTET_VALUE()
+    END_FUNCTION
+
+
+    FUNCTION PRINT_RANDOM_MAC()
+        REM_BLOCK DOCUMENTATION
+        Generates a random MAC address with support for separators
+            # Format commonly seen in Forescout
+            NONE: FEEDDEADBEEF (default)
+            
+            # Format commonly seen in Linux/Unix
+            $MAC_USE_COLON: FE:ED:DE:AD:BE:EF
+            
+            # Foremat commonly seen in Windows
+            $MAC_USE_HYPHEN: FE-ED-DE-AD-BE-EF
+            
+            # Format commonly seen in network devices
+            $MAC_USE_DOT: FEED.DEAD.BEEF
+        END_REM
+
+        VAR $MAC_POS = 0
+        $GET_NUM = FALSE
+        WHILE ($MAC_POS < #MAC_LEN)
+            $MAC_POS = ($MAC_POS + 1)
+            $HEX_VALUE = GET_RANDOM_HEX_VALUE()
+            PRINT_HEX_VALUE()
+
+            REM Print separator
+            IF (($MAC_POS < #MAC_LEN) && (($MAC_POS % 2) == 0)) THEN
+                IF ($MAC_USE_COLON) THEN
+                    STRING :
+                ELSE IF ($MAC_USE_HYPHEN) THEN
+                    STRING -
+                ELSE IF (($MAC_USE_DOT) && (($MAC_POS % 4) == 0)) THEN
+                    STRING .
+                END_IF
+            END_IF
+        END_WHILE
+    END_FUNCTION
+
+
+    FUNCTION PRINT_RANDOM_SITE_CODE()
+        REM_BLOCK DOCUMENTATION
+        Generates a random site code:
+            RUB = Playa Grande, Guatemala
+            BER = Schönefeld, Brandenburg
+            DUC = Duncan, Oklahoma
+            KIE = Kieta, Papua New Guinea
+            CAN = Baiyun-Huadu, Guangzhou, Guangdong, China
+            HAK = Lingshan Town, Meilan District, Haikou, Hainan, China
+        END_REM
+
+        $_RANDOM_MIN = 0
+        $_RANDOM_MAX = #VALUE_6
+    
+        VAR $SITE_NUM = $_RANDOM_INT
+        IF ($SITE_NUM > #VALUE_5) THEN
+            STRING RUB
+        ELSE IF ($SITE_NUM > #VALUE_4) THEN
+            STRING BER
+        ELSE IF ($SITE_NUM > #VALUE_3) THEN
+            STRING DUC
+        ELSE IF ($SITE_NUM > #VALUE_2) THEN
+            STRING KIE
+        ELSE IF ($SITE_NUM > #VALUE_1) THEN
+            STRING CAN
+        ELSE
+            STRING HAK
+        END_IF
+    END_FUNCTION
+
+
+    FUNCTION PRINT_RANDOM_HOST_TYPE()
+        REM_BLOCK DOCUMENTATION
+        Generates a random device type:
+            L = Laptop
+            V = Virtual
+            S = Server
+            T = Tablet
+            D = Desktop
+        END_REM
+
+        $_RANDOM_MIN = 0
+        $_RANDOM_MAX = #VALUE_5
+        VAR $HOST_NUM = $_RANDOM_INT
+        IF ($HOST_NUM > #VALUE_4) THEN
+            STRING L
+        ELSE IF ($HOST_NUM > #VALUE_3) THEN
+            STRING V
+        ELSE IF ($HOST_NUM > #VALUE_2) THEN
+            STRING S
+        ELSE IF ($HOST_NUM > #VALUE_1) THEN
+            STRING T
+        ELSE
+            STRING D
+        END_IF
+    END_FUNCTION
+
+
+    REM Print a random hostname
+    FUNCTION PRINT_RANDOM_HOSTNAME()
+        PRINT_RANDOM_SITE_CODE()
+        DELAY 100
+        
+        STRING -
+        
+        PRINT_RANDOM_HOST_TYPE()
+        DELAY 100
+        
+        $COUNT = 0
+        $GET_NUM = TRUE
+        WHILE ($COUNT < #HOST_NUM_LEN)
+            $HEX_VALUE = GET_RANDOM_HEX_VALUE()
+            PRINT_HEX_VALUE()
+            $COUNT = ($COUNT + 1)
+        END_WHILE
+    END_FUNCTION
+
+
+    REM_BLOCK EXAMPLE EXTENSION USAGE
+        STRINGLN Host,IP Address,MAC Address
+        PRINT_RANDOM_HOSTNAME()
+        STRING ,
+        PRINT_RANDOM_IP()
+        STRING ,
+        $MAC_USE_COLON = TRUE
+        PRINT_RANDOM_MAC()
+        ENTER
+    END_REM
+END_EXTENSION
+
+
+REM CONFIGURATION:
+REM number of fake host entries to generate
+DEFINE #HOST_COUNT 10
+$MAC_USE_DOT = TRUE
+
+REM Impersonate a Logitech DeLuxe 250 Keyboard
+ATTACKMODE HID VID_046D PID_C312 MAN_Logitech PROD_DeLuxe250 SERIAL_8013509
+DELAY #VALUE_2
+
+REM Launch a text editor
+IF ($_OS == WINDOWS) THEN
+    REM Open the Run dialog
+    GUI r
+    DELAY #VALUE_1
+    STRINGLN notepad.exe
+ELSE
+    REM launch the Text Editor app
+    INJECT_MOD WINDOWS
+    DELAY #VALUE_1
+    STRING text
+    DELAY #VALUE_1
+    ENTER
+END_IF
+
+$_RANDOM_MIN = #VALUE_1
+$_RANDOM_MAX = #VALUE_3
+DELAY $_RANDOM_INT
+
+REM CSV header
+REM broken up in STRINGs vs STRINGLN due to some chars missing during testing
+STRING Host,
+STRING IP Address,
+STRING MAC Address
+ENTER
+
+VAR $NUM = 0
+WHILE ($NUM < #HOST_COUNT)
+    REM CSV entry
+    PRINT_RANDOM_HOSTNAME()
+    STRING ,
+    PRINT_RANDOM_IP()
+    STRING ,
+    $MAC_USE_COLON = TRUE
+    PRINT_RANDOM_MAC()
+    ENTER
+
+    $NUM = ($NUM + 1)
+
+    REM Random sleep between CSV entries
+    $_RANDOM_MIN = #VALUE_0
+    $_RANDOM_MAX = #VALUE_1
+
+    REM Stop running if CAPSLOCK is turned on
+    IF ($_CAPSLOCK_ON) THEN
+        RETURN 0
+    END_IF
+END_WHILE
