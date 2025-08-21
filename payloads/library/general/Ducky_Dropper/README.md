@@ -45,8 +45,8 @@ Again, please remember that these provided payloads are PoC only, and to not use
 
 1. The Ducky will pop a terminal, unset the history file, and then download the two aforementioned Bash scripts (`cron_dropper.sh` and `payload.sh`).
 2. Creates two hidden directories inside of the users home folder (`.cronfg` and `.confg`) that place and host the aforementioned Bash scripts.
-	- `.cronfg` is the directory responsible for hosting the `cron_dropper.sh` script.
-	- `.confg` is the directory responsible for hosting the `payload.sh` script.
+	- `~/.cronfg` is the directory responsible for hosting the `cron_dropper.sh` script.
+	- `~/.confg` is the directory responsible for hosting the `payload.sh` script.
    
 3. Grants execution permissions to both scripts.
 4. Sets up `cron_dropper.sh` as a cronjob to be ran 60 seconds after the target machine is booted.
