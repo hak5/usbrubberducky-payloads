@@ -1,48 +1,22 @@
-# WLAN Windows Password
-
-A script used to stole target WLAN Passwords.
+# Wlan Password Grabber
+A script used to steal Network Passwords and more from Windows targets
 
 **Category**: Credentials
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Description
+## What Version should i use?
+### Version 1.0 by [allef-github](https://github.com/aleff-github):
+This version uses a very direct way, is a bit faster then v.2.0 and the PowerShell script is very short, but it only sends the Wifi Name and Password to the webhook and does only work on English Machines.
+Also the Payload has a few more lines.
 
-A script used to stole target WLAN Passwords.
+### Version 2.0 by [truelockmc](https://github.com/truelockmc):
+This Version works on every Windows Machine, no matter what language your system is.
+Version 2.0 also sends you more Information to the Webhook, and so it also gives you access to networks that are secured with other Methods then Passwords.
+The down side is that Version 2.0 writes stuff on the disk, version 1.0 not, also v.2.0 takes a few seconds longer to execute and the PowerShell script is longer.
+The Payload is shorter and formatted so its easier to read.
 
-Opens PowerShell hidden, grabs wlan passwords, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
-
-Then it cleans up traces of what you have done after.
-
-## Getting Started
-
-### Dependencies
-
-* An internet connection
-* Windows 10,11
-
-### Executing program
-
-* Plug in your device
-* Invoke 2 netsh commands
-* Invoke-WebRequest will be entered in the Run Box to send the content
-
-## Credits
-
-<h2 align="center"> Aleff :octocat: </h2>
-<div align=center>
-<table>
-  <tr>
-    <td align="center" width="96">
-      <a href="https://github.com/aleff-github">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/github.png?raw=true width="48" height="48" />
-      </a>
-      <br>Github
-    </td>
-    <td align="center" width="96">
-      <a href="https://www.linkedin.com/in/alessandro-greco-aka-aleff/">
-        <img src=https://github.com/aleff-github/aleff-github/blob/main/img/linkedin.png?raw=true width="48" height="48" />
-      </a>
-      <br>Linkedin
-    </td>
-  </tr>
-</table>
-</div>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### Further Information for [1.0](https://github.com/hak5/usbrubberducky-payloads/tree/master/payloads/library/credentials/WLAN-Windows-Passwords/v.1.0_by_allef_github)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### Further Information for [2.0](https://github.com/hak5/usbrubberducky-payloads/tree/master/payloads/library/credentials/WLAN-Windows-Passwords/v.2.0_by_truelockmc)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

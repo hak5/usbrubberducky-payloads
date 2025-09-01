@@ -1,0 +1,83 @@
+REM_BLOCK
+#############################################################
+#                                                           #
+# Title        : Randomizing User-Agent in Google Chrome    #
+# Author       : Aleff                                      #
+# Version      : 1.0                                        #
+# Category     : Execution                                  #
+# Target       : Chrome on Linux (Tested on Ubuntu)         #
+#                                                           #
+#############################################################
+END_REM
+
+REM Replace it with your sudo user password
+DEFINE #SUDO_PSWD example
+
+REM May it depends...
+DEFAULT_DELAY 250
+
+REM Define if you want to erase the tracks of your commands
+DEFINE I_WANT_TO_ERASE_THE_SHELL_TRACKS FALSE
+
+REM_BLOCK
+    Credits:    Hak5 LLC
+    Website:    https://hak5.org/
+    Source:     https://github.com/hak5/usbrubberducky-payloads/blob/master/payloads/extensions/detect_ready.txt
+END_REM
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+CTRL-ALT t
+DELAY 1000
+
+STRINGLN_BASH
+    echo '#!/bin/bash' > .randomize_user_agent
+    echo 'UA=$(torify curl "https://user-agents.net/random" -H "content-type: application/x-www-form-urlencoded" -H "referer: https://user-agents.net/random" --data-raw "limit=1&action=generate")' >> .randomize_user_agent
+    echo 're="<li><a href=\".+\">(.+)<\/a><\/li>"' >> .randomize_user_agent
+    echo 'if [[ $UA =~ $re ]]; then
+        /usr/bin/google-chrome-stable --user-agent="${BASH_REMATCH[1]}"
+    else
+        /usr/bin/google-chrome-stable
+    fi' >> .randomize_user_agent
+    sudo chmod +x .randomize_user_agent
+END_STRINGLN
+
+DELAY 750
+
+STRINGLN_BASH
+    #SUDO_PSWD
+    NEW_STRING="/home/$(whoami)/.randomize_user_agent"
+    awk -v new="$NEW_STRING" '{gsub("/usr/bin/google-chrome-stable", new)}1' /usr/share/applications/google-chrome.desktop > tmp
+    sudo tee /usr/share/applications/google-chrome.desktop < tmp
+    gtk-update-icon-cache
+END_STRINGLN
+
+IF_DEFINED_TRUE #I_WANT_TO_ERASE_THE_SHELL_TRACKS
+    STRINGLN rm $HISTFILE; exit
+END_IF_DEFINED

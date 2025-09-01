@@ -32,7 +32,7 @@ if (-not (Test-Path `$transcriptDir))
 `$dateStamp = Get-Date -Format ((Get-culture).DateTimeFormat.SortableDateTimePattern -replace ':','.')
 try 
 {
-    Start-Transcript "`$transcriptDir\Transcript.`$dateStamp.txt" | Out-File -FilePath "$transcriptDir\Transcripts_Logging.txt" -Append
+    Start-Transcript "`$transcriptDir\Transcript.`$dateStamp.txt" | Out-File -FilePath "`$transcriptDir\Transcripts_Logging.txt" -Append
 }
 catch [System.Management.Automation.PSNotSupportedException]
 {
