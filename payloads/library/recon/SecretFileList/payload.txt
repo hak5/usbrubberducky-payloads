@@ -1,7 +1,9 @@
-REM Title:			Secret File List
+REM Title:		Secret File List
 REM Description:	This will list all files that contain the words “password” or “secret”, excluding those from the C: drive. You can replace these keywords with your own search terms.
-REM Author:			ih-hira
-
+REM Author:		ih-hira
+REM Target: 		Windows 10
+REM Version: 		1.0
+REM Category: 		RECON
 
 ATTACKMODE HID STORAGE
 
