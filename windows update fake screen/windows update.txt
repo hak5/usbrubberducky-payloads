@@ -1,0 +1,18 @@
+REM TITLE  windows 10 update screen
+REM AUTHOR youssef mohamed fathy
+
+windows-S
+STRING microsoft Edge
+ENTER
+
+DELAY 1000
+
+STRING https://fakeupdate.net/win10ue/
+
+ENTER
+
+DELAY 3000
+
+F11
+
+
