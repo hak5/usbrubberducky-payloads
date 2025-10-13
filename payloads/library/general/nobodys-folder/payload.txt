@@ -1,0 +1,2737 @@
+ATTACKMODE HID
+DUCKY_LANG us
+LED Y IQUIN
+QUACK GUI r
+QUACK DELAY 50
+QUACK STRING notepad
+QUACK DELAY 5
+QUACK ENTER
+QUACK DELAY 50
+QUACK STRING "According to all known laws of aviation, there is no way a bee should be able to fly."
+QUACK ENTER
+QUACK STRING "Its wings are too small to get its fat little body off the ground."
+QUACK ENTER
+QUACK STRING "The bee, of course, flies anyway because bees don't care what humans think is impossible."
+QUACK ENTER
+QUACK STRING "Yellow, black. Yellow, black. Yellow, black. Yellow, black."
+QUACK ENTER
+QUACK STRING "Ooh, black and yellow!"
+QUACK ENTER
+QUACK STRING "Let's shake it up a little."
+QUACK ENTER
+QUACK STRING "Barry! Breakfast is ready!"
+QUACK ENTER
+QUACK STRING "Coming!"
+QUACK ENTER
+QUACK STRING "Hang on a second."
+QUACK ENTER
+QUACK STRING "Hello?"
+QUACK ENTER
+QUACK STRING "Barry?"
+QUACK ENTER
+QUACK STRING "Adam?"
+QUACK ENTER
+QUACK STRING "Can you believe this is happening?"
+QUACK ENTER
+QUACK STRING "I can't."
+QUACK ENTER
+QUACK STRING "I'll pick you up."
+QUACK ENTER
+QUACK STRING "Looking sharp."
+QUACK ENTER
+QUACK STRING "Use the stairs, Your father paid good money for those."
+QUACK ENTER
+QUACK STRING "Sorry. I'm excited."
+QUACK ENTER
+QUACK STRING "Here's the graduate."
+QUACK ENTER
+QUACK STRING "We're very proud of you, son."
+QUACK ENTER
+QUACK STRING "A perfect report card, all B's."
+QUACK ENTER
+QUACK STRING "Very proud."
+QUACK ENTER
+QUACK STRING "Ma! I got a thing going here."
+QUACK ENTER
+QUACK STRING "You got lint on your fuzz."
+QUACK ENTER
+QUACK STRING "Ow! That's me!"
+QUACK ENTER
+QUACK STRING "Wave to us! We'll be in row 118,000."
+QUACK ENTER
+QUACK STRING "Bye!"
+QUACK ENTER
+QUACK STRING "Barry, I told you, stop flying in the house!"
+QUACK ENTER
+QUACK STRING "Hey, Adam."
+QUACK ENTER
+QUACK STRING "Hey, Barry."
+QUACK ENTER
+QUACK STRING "Is that fuzz gel?"
+QUACK ENTER
+QUACK STRING "A little. Special day, graduation."
+QUACK ENTER
+QUACK STRING "Never thought I'd make it."
+QUACK ENTER
+QUACK STRING "Three days grade school, three days high school."
+QUACK ENTER
+QUACK STRING "Those were awkward."
+QUACK ENTER
+QUACK STRING "Three days college. I'm glad I took a day and hitchhiked around The Hive."
+QUACK ENTER
+QUACK STRING "You did come back different."
+QUACK ENTER
+QUACK STRING "Hi, Barry. Artie, growing a mustache? Looks good."
+QUACK ENTER
+QUACK STRING "Hear about Frankie?"
+QUACK ENTER
+QUACK STRING "Yeah."
+QUACK ENTER
+QUACK STRING "You going to the funeral?"
+QUACK ENTER
+QUACK STRING "No, I'm not going."
+QUACK ENTER
+QUACK STRING "Everybody knows, sting someone, you die."
+QUACK ENTER
+QUACK STRING "Don't waste it on a squirrel."
+QUACK ENTER
+QUACK STRING "Such a hothead."
+QUACK ENTER
+QUACK STRING "I guess he could have just gotten out of the way."
+QUACK ENTER
+QUACK STRING "I love this incorporating an amusement park into our day."
+QUACK ENTER
+QUACK STRING "That's why we don't need vacations."
+QUACK ENTER
+QUACK STRING "Boy, quite a bit of pomp under the circumstances."
+QUACK ENTER
+QUACK STRING "Well, Adam, today we are men."
+QUACK ENTER
+QUACK STRING "We are!"
+QUACK ENTER
+QUACK STRING "Bee-men."
+QUACK ENTER
+QUACK STRING "Amen!"
+QUACK ENTER
+QUACK STRING "Hallelujah!"
+QUACK ENTER
+QUACK STRING "Students, faculty, distinguished bees,"
+QUACK ENTER
+QUACK STRING "please welcome Dean Buzzwell."
+QUACK ENTER
+QUACK STRING "Welcome, New Hive City graduating class of 9:15."
+QUACK ENTER
+QUACK STRING "That concludes our ceremonies And begins your career at Honex Industries!"
+QUACK ENTER
+QUACK STRING "Will we pick our job today?"
+QUACK ENTER
+QUACK STRING "I heard it's just orientation."
+QUACK ENTER
+QUACK STRING "Heads up! Here we go."
+QUACK ENTER
+QUACK STRING "Keep your hands and antennas inside the tram at all times."
+QUACK ENTER
+QUACK STRING "Wonder what it'll be like?"
+QUACK ENTER
+QUACK STRING "A little scary."
+QUACK ENTER
+QUACK STRING "Welcome to Honex, a division of Honesco and a part of the Hexagon Group."
+QUACK ENTER
+QUACK STRING "This is it!"
+QUACK ENTER
+QUACK STRING "Wow."
+QUACK ENTER
+QUACK STRING "Wow."
+QUACK ENTER
+QUACK STRING "We know that you, as a bee, have worked your whole life to get to the point where you can work for your whole life."
+QUACK ENTER
+QUACK STRING "Honey begins when our valiant Pollen Jocks bring the nectar to The Hive."
+QUACK ENTER
+QUACK STRING "Our top-secret formula is automatically color-corrected, scent-adjusted and bubble-contoured into this soothing sweet syrup with its distinctive golden glow you know as... Honey!"
+QUACK ENTER
+QUACK STRING "That girl was hot."
+QUACK ENTER
+QUACK STRING "She's my cousin!"
+QUACK ENTER
+QUACK STRING "She is?"
+QUACK ENTER
+QUACK STRING "Yes, we're all cousins."
+QUACK ENTER
+QUACK STRING "Right. You're right."
+QUACK ENTER
+QUACK STRING "At Honex, we constantly strive to improve every aspect of bee existence."
+QUACK ENTER
+QUACK STRING "These bees are stress-testing a new helmet technology."
+QUACK ENTER
+QUACK STRING "What do you think he makes?"
+QUACK ENTER
+QUACK STRING "Not enough."
+QUACK ENTER
+QUACK STRING "Here we have our latest advancement, the Krelman."
+QUACK ENTER
+QUACK STRING "What does that do?"
+QUACK ENTER
+QUACK STRING "Catches that little strand of honey that hangs after you pour it."
+QUACK ENTER
+QUACK STRING "Saves us millions."
+QUACK ENTER
+QUACK STRING "Can anyone work on the Krelman?"
+QUACK ENTER
+QUACK STRING "Of course. Most bee jobs are small ones."
+QUACK ENTER
+QUACK STRING "But bees know that every small job, if it's done well, means a lot."
+QUACK ENTER
+QUACK STRING "But choose carefully because you'll stay in the job you pick for the rest of your life."
+QUACK ENTER
+QUACK STRING "The same job the rest of your life? I didn't know that."
+QUACK ENTER
+QUACK STRING "What's the difference?"
+QUACK ENTER
+QUACK STRING "You'll be happy to know that bees, as a species, haven't had one day off in 27 million years."
+QUACK ENTER
+QUACK STRING "So you'll just work us to death?"
+QUACK ENTER
+QUACK STRING "We'll sure try."
+QUACK ENTER
+QUACK STRING "Wow! That blew my mind!"
+QUACK ENTER
+QUACK STRING "\"What's the difference?\""
+QUACK ENTER
+QUACK STRING "How can you say that?"
+QUACK ENTER
+QUACK STRING "One job forever?"
+QUACK ENTER
+QUACK STRING "That's an insane choice to have to make."
+QUACK ENTER
+QUACK STRING "I'm relieved. Now we only have to make one decision in life."
+QUACK ENTER
+QUACK STRING "But, Adam, how could they never have told us that?"
+QUACK ENTER
+QUACK STRING "Why would you question anything? We're bees."
+QUACK ENTER
+QUACK STRING "We're the most perfectly functioning society on Earth."
+QUACK ENTER
+QUACK STRING "You ever think maybe things work a little too well here?"
+QUACK ENTER
+QUACK STRING "Like what? Give me one example."
+QUACK ENTER
+QUACK STRING "I don't know. But you know what I'm talking about."
+QUACK ENTER
+QUACK STRING "Please clear the gate. Royal Nectar Force on approach."
+QUACK ENTER
+QUACK STRING "Wait a second. Check it out."
+QUACK ENTER
+QUACK STRING "Hey, those are Pollen Jocks!"
+QUACK ENTER
+QUACK STRING "Wow."
+QUACK ENTER
+QUACK STRING "I've never seen them this close."
+QUACK ENTER
+QUACK STRING "They know what it's like outside The Hive."
+QUACK ENTER
+QUACK STRING "Yeah, but some don't come back."
+QUACK ENTER
+QUACK STRING "Hey, Jocks!"
+QUACK ENTER
+QUACK STRING "Hi, Jocks!"
+QUACK ENTER
+QUACK STRING "You guys did great!"
+QUACK ENTER
+QUACK STRING "You're monsters!"
+QUACK ENTER
+QUACK STRING "You're sky freaks! I love it! I love it!"
+QUACK ENTER
+QUACK STRING "I wonder where they were."
+QUACK ENTER
+QUACK STRING "I don't know."
+QUACK ENTER
+QUACK STRING "Their day's not planned."
+QUACK ENTER
+QUACK STRING "Outside The Hive, flying who knows where, doing who knows what."
+QUACK ENTER
+QUACK STRING "You can't just decide to be a Pollen Jock. You have to be bred for that."
+QUACK ENTER
+QUACK STRING "Right."
+QUACK ENTER
+QUACK STRING "Look. That's more pollen than you and I will see in a lifetime."
+QUACK ENTER
+QUACK STRING "It's just a status symbol."
+QUACK ENTER
+QUACK STRING "Bees make too much of it."
+QUACK ENTER
+QUACK STRING "Perhaps. Unless you're wearing it and the ladies see you wearing it."
+QUACK ENTER
+QUACK STRING "Those ladies?"
+QUACK ENTER
+QUACK STRING "Aren't they our cousins too?"
+QUACK ENTER
+QUACK STRING "Distant. Distant."
+QUACK ENTER
+QUACK STRING "Look at these two."
+QUACK ENTER
+QUACK STRING "Couple of Hive Harrys."
+QUACK ENTER
+QUACK STRING "Let's have fun with them."
+QUACK ENTER
+QUACK STRING "It must be dangerous being a Pollen Jock."
+QUACK ENTER
+QUACK STRING "Yeah. Once a bear pinned me against a mushroom!"
+QUACK ENTER
+QUACK STRING "He had a paw on my throat, and with the other, he was slapping me!"
+QUACK ENTER
+QUACK STRING "Oh, my!"
+QUACK ENTER
+QUACK STRING "I never thought I'd knock him out."
+QUACK ENTER
+QUACK STRING "What were you doing during this?"
+QUACK ENTER
+QUACK STRING "Trying to alert the authorities."
+QUACK ENTER
+QUACK STRING "I can autograph that."
+QUACK ENTER
+QUACK STRING "A little gusty out there today, wasn't it, comrades?"
+QUACK ENTER
+QUACK STRING "Yeah. Gusty."
+QUACK ENTER
+QUACK STRING "We're hitting a sunflower patch six miles from here tomorrow."
+QUACK ENTER
+QUACK STRING "Six miles, huh?"
+QUACK ENTER
+QUACK STRING "Barry!"
+QUACK ENTER
+QUACK STRING "A puddle jump for us, but maybe you're not up for it."
+QUACK ENTER
+QUACK STRING "Maybe I am."
+QUACK ENTER
+QUACK STRING "You are not!"
+QUACK ENTER
+QUACK STRING "We're going 0900 at J-Gate."
+QUACK ENTER
+QUACK STRING "What do you think, buzzy-boy?"
+QUACK ENTER
+QUACK STRING "Are you bee enough?"
+QUACK ENTER
+QUACK STRING "I might be. It all depends on what 0900 means."
+QUACK ENTER
+QUACK STRING "Hey, Honex!"
+QUACK ENTER
+QUACK STRING "Dad, you surprised me."
+QUACK ENTER
+QUACK STRING "You decide what you're interested in?"
+QUACK ENTER
+QUACK STRING "Well, there's a lot of choices."
+QUACK ENTER
+QUACK STRING "But you only get one."
+QUACK ENTER
+QUACK STRING "Do you ever get bored doing the same job every day?"
+QUACK ENTER
+QUACK STRING "Son, let me tell you about stirring."
+QUACK ENTER
+QUACK STRING "You grab that stick, and you just move it around, and you stir it around."
+QUACK ENTER
+QUACK STRING "You get yourself into a rhythm."
+QUACK ENTER
+QUACK STRING "It's a beautiful thing."
+QUACK ENTER
+QUACK STRING "You know, Dad, the more I think about it,"
+QUACK ENTER
+QUACK STRING "maybe the honey field just isn't right for me."
+QUACK ENTER
+QUACK STRING "You were thinking of what, making balloon animals?"
+QUACK ENTER
+QUACK STRING "That's a bad job for a guy with a stinger."
+QUACK ENTER
+QUACK STRING "Janet, your son's not sure he wants to go into honey!"
+QUACK ENTER
+QUACK STRING "Barry, you are so funny sometimes."
+QUACK ENTER
+QUACK STRING "I'm not trying to be funny."
+QUACK ENTER
+QUACK STRING "You're not funny! You're going into honey. Our son, the stirrer!"
+QUACK ENTER
+QUACK STRING "You're gonna be a stirrer?"
+QUACK ENTER
+QUACK STRING "No one's listening to me!"
+QUACK ENTER
+QUACK STRING "Wait till you see the sticks I have."
+QUACK ENTER
+QUACK STRING "I could say anything right now."
+QUACK ENTER
+QUACK STRING "I'm gonna get an ant tattoo!"
+QUACK ENTER
+QUACK STRING "Let's open some honey and celebrate!"
+QUACK ENTER
+QUACK STRING "Maybe I'll pierce my thorax. Shave my antennae. Shack up with a grasshopper. Get a gold tooth and call everybody \"dawg\"!"
+QUACK ENTER
+QUACK STRING "I'm so proud."
+QUACK ENTER
+QUACK STRING "We're starting work today!"
+QUACK ENTER
+QUACK STRING "Today's the day."
+QUACK ENTER
+QUACK STRING "Come on! All the good jobs will be gone."
+QUACK ENTER
+QUACK STRING "Yeah, right."
+QUACK ENTER
+QUACK STRING "Pollen counting, stunt bee, pouring, stirrer, front desk, hair removal..."
+QUACK ENTER
+QUACK STRING "Is it still available?"
+QUACK ENTER
+QUACK STRING "Hang on. Two left!"
+QUACK ENTER
+QUACK STRING "One of them's yours! Congratulations!"
+QUACK ENTER
+QUACK STRING "Step to the side."
+QUACK ENTER
+QUACK STRING "What'd you get?"
+QUACK ENTER
+QUACK STRING "Picking crud out. Stellar!"
+QUACK ENTER
+QUACK STRING "Wow!"
+QUACK ENTER
+QUACK STRING "Couple of newbies?"
+QUACK ENTER
+QUACK STRING "Yes, sir! Our first day! We are ready!"
+QUACK ENTER
+QUACK STRING "Make your choice."
+QUACK ENTER
+QUACK STRING "You want to go first?"
+QUACK ENTER
+QUACK STRING "No, you go."
+QUACK ENTER
+QUACK STRING "Oh, my. What's available?"
+QUACK ENTER
+QUACK STRING "Restroom attendant's open, not for the reason you think."
+QUACK ENTER
+QUACK STRING "Any chance of getting the Krelman?"
+QUACK ENTER
+QUACK STRING "Sure, you're on."
+QUACK ENTER
+QUACK STRING "I'm sorry, the Krelman just closed out."
+QUACK ENTER
+QUACK STRING "Wax monkey's always open."
+QUACK ENTER
+QUACK STRING "The Krelman opened up again."
+QUACK ENTER
+QUACK STRING "What happened?"
+QUACK ENTER
+QUACK STRING "A bee died. Makes an opening. See? He's dead. Another dead one."
+QUACK ENTER
+QUACK STRING "Deady. Deadified. Two more dead."
+QUACK ENTER
+QUACK STRING "Dead from the neck up. Dead from the neck down. That's life!"
+QUACK ENTER
+QUACK STRING "Oh, this is so hard!"
+QUACK ENTER
+QUACK STRING "Heating, cooling, stunt bee, pourer, stirrer, humming, inspector number seven, lint coordinator, stripe supervisor, mite wrangler."
+QUACK ENTER
+QUACK STRING "Barry, what do you think I should... Barry?"
+QUACK ENTER
+QUACK STRING "Barry!"
+QUACK ENTER
+QUACK STRING "All right, we've got the sunflower patch in quadrant nine..."
+QUACK ENTER
+QUACK STRING "What happened to you?"
+QUACK ENTER
+QUACK STRING "Where are you?"
+QUACK ENTER
+QUACK STRING "I'm going out."
+QUACK ENTER
+QUACK STRING "Out? Out where?"
+QUACK ENTER
+QUACK STRING "Out there."
+QUACK ENTER
+QUACK STRING "Oh, no!"
+QUACK ENTER
+QUACK STRING "I have to, before I go to work for the rest of my life."
+QUACK ENTER
+QUACK STRING "You're gonna die! You're crazy! Hello?"
+QUACK ENTER
+QUACK STRING "Another call coming in."
+QUACK ENTER
+QUACK STRING "If anyone's feeling brave, there's a Korean deli on 83rd that gets their roses today."
+QUACK ENTER
+QUACK STRING "Hey, guys."
+QUACK ENTER
+QUACK STRING "Look at that."
+QUACK ENTER
+QUACK STRING "Isn't that the kid we saw yesterday?"
+QUACK ENTER
+QUACK STRING "Hold it, son, flight deck's restricted."
+QUACK ENTER
+QUACK STRING "It's OK, Lou. We're gonna take him up."
+QUACK ENTER
+QUACK STRING "Really? Feeling lucky, are you?"
+QUACK ENTER
+QUACK STRING "Sign here, here. Just initial that."
+QUACK ENTER
+QUACK STRING "Thank you."
+QUACK ENTER
+QUACK STRING "OK."
+QUACK ENTER
+QUACK STRING "You got a rain advisory today, and as you all know, bees cannot fly in rain."
+QUACK ENTER
+QUACK STRING "So be careful. As always, watch your brooms, hockey sticks, dogs, birds, bears and bats."
+QUACK ENTER
+QUACK STRING "Also, I got a couple of reports of root beer being poured on us."
+QUACK ENTER
+QUACK STRING "Murphy's in a home because of it, babbling like a cicada!"
+QUACK ENTER
+QUACK STRING "That's awful."
+QUACK ENTER
+QUACK STRING "And a reminder for you rookies, bee law number one, absolutely no talking to humans!"
+QUACK ENTER
+QUACK STRING " All right, launch positions!"
+QUACK ENTER
+QUACK STRING "Buzz, buzz, buzz, buzz! Buzz, buzz, buzz, buzz! Buzz, buzz, buzz, buzz!"
+QUACK ENTER
+QUACK STRING "Black and yellow!"
+QUACK ENTER
+QUACK STRING "Hello!"
+QUACK ENTER
+QUACK STRING "You ready for this, hot shot?"
+QUACK ENTER
+QUACK STRING "Yeah. Yeah, bring it on."
+QUACK ENTER
+QUACK STRING "Wind, check."
+QUACK ENTER
+QUACK STRING "Antennae, check."
+QUACK ENTER
+QUACK STRING "Nectar pack, check."
+QUACK ENTER
+QUACK STRING "Wings, check."
+QUACK ENTER
+QUACK STRING "Stinger, check."
+QUACK ENTER
+QUACK STRING "Scared out of my shorts, check."
+QUACK ENTER
+QUACK STRING "OK, ladies,"
+QUACK ENTER
+QUACK STRING "let's move it out!"
+QUACK ENTER
+QUACK STRING "Pound those petunias, you striped stem-suckers!"
+QUACK ENTER
+QUACK STRING "All of you, drain those flowers!"
+QUACK ENTER
+QUACK STRING "Wow! I'm out!"
+QUACK ENTER
+QUACK STRING "I can't believe I'm out!"
+QUACK ENTER
+QUACK STRING "So blue."
+QUACK ENTER
+QUACK STRING "I feel so fast and free!"
+QUACK ENTER
+QUACK STRING "Box kite!"
+QUACK ENTER
+QUACK STRING "Wow!"
+QUACK ENTER
+QUACK STRING "Flowers!"
+QUACK ENTER
+QUACK STRING "This is Blue Leader, We have roses visual."
+QUACK ENTER
+QUACK STRING "Bring it around 30 degrees and hold."
+QUACK ENTER
+QUACK STRING "Roses!"
+QUACK ENTER
+QUACK STRING "30 degrees, roger. Bringing it around."
+QUACK ENTER
+QUACK STRING "Stand to the side, kid."
+QUACK ENTER
+QUACK STRING "It's got a bit of a kick."
+QUACK ENTER
+QUACK STRING "That is one nectar collector!"
+QUACK ENTER
+QUACK STRING "Ever see pollination up close?"
+QUACK ENTER
+QUACK STRING "No, sir."
+QUACK ENTER
+QUACK STRING "I pick up some pollen here, sprinkle it over here. Maybe a dash over there, a pinch on that one."
+QUACK ENTER
+QUACK STRING "See that? It's a little bit of magic."
+QUACK ENTER
+QUACK STRING "That's amazing. Why do we do that?"
+QUACK ENTER
+QUACK STRING "That's pollen power. More pollen, more flowers, more nectar, more honey for us."
+QUACK ENTER
+QUACK STRING "Cool."
+QUACK ENTER
+QUACK STRING "I'm picking up a lot of bright yellow, Could be daisies, Don't we need those?"
+QUACK ENTER
+QUACK STRING "Copy that visual."
+QUACK ENTER
+QUACK STRING "Wait. One of these flowers seems to be on the move."
+QUACK ENTER
+QUACK STRING "Say again? You're reporting a moving flower?"
+QUACK ENTER
+QUACK STRING "Affirmative."
+QUACK ENTER
+QUACK STRING "That was on the line!"
+QUACK ENTER
+QUACK STRING "This is the coolest. What is it?"
+QUACK ENTER
+QUACK STRING "I don't know, but I'm loving this color."
+QUACK ENTER
+QUACK STRING "It smells good."
+QUACK ENTER
+QUACK STRING "Not like a flower, but I like it."
+QUACK ENTER
+QUACK STRING "Yeah, fuzzy."
+QUACK ENTER
+QUACK STRING "Chemical-y."
+QUACK ENTER
+QUACK STRING "Careful, guys. It's a little grabby."
+QUACK ENTER
+QUACK STRING "My sweet lord of bees!"
+QUACK ENTER
+QUACK STRING "Candy-brain, get off there!"
+QUACK ENTER
+QUACK STRING "Problem!"
+QUACK ENTER
+QUACK STRING "Guys!"
+QUACK ENTER
+QUACK STRING "This could be bad."
+QUACK ENTER
+QUACK STRING "Affirmative."
+QUACK ENTER
+QUACK STRING "Very close."
+QUACK ENTER
+QUACK STRING "Gonna hurt."
+QUACK ENTER
+QUACK STRING "Mama's little boy."
+QUACK ENTER
+QUACK STRING "You are way out of position, rookie!"
+QUACK ENTER
+QUACK STRING "Coming in at you like a missile!"
+QUACK ENTER
+QUACK STRING "Help me!"
+QUACK ENTER
+QUACK STRING "I don't think these are flowers."
+QUACK ENTER
+QUACK STRING "Should we tell him?"
+QUACK ENTER
+QUACK STRING "I think he knows."
+QUACK ENTER
+QUACK STRING "What is this?!"
+QUACK ENTER
+QUACK STRING "Match point!"
+QUACK ENTER
+QUACK STRING "You can start packing up, honey, because you're about to eat it!"
+QUACK ENTER
+QUACK STRING "Yowser!"
+QUACK ENTER
+QUACK STRING "Gross."
+QUACK ENTER
+QUACK STRING "There's a bee in the car!"
+QUACK ENTER
+QUACK STRING "Do something!"
+QUACK ENTER
+QUACK STRING "I'm driving!"
+QUACK ENTER
+QUACK STRING "Hi, bee."
+QUACK ENTER
+QUACK STRING "He's back here!"
+QUACK ENTER
+QUACK STRING "He's going to sting me!"
+QUACK ENTER
+QUACK STRING "Nobody move. If you don't move, he won't sting you. Freeze!"
+QUACK ENTER
+QUACK STRING "He blinked!"
+QUACK ENTER
+QUACK STRING "Spray him, Granny!"
+QUACK ENTER
+QUACK STRING "What are you doing?!"
+QUACK ENTER
+QUACK STRING "Wow... the tension level out here is unbelievable."
+QUACK ENTER
+QUACK STRING "I gotta get home."
+QUACK ENTER
+QUACK STRING "Can't fly in rain. Can't fly in rain. Can't fly in rain."
+QUACK ENTER
+QUACK STRING "Mayday! Mayday! Bee going down!"
+QUACK ENTER
+QUACK STRING "Ken, could you close the window please?"
+QUACK ENTER
+QUACK STRING "Ken, could you close the window please?"
+QUACK ENTER
+QUACK STRING "Check out my new resume. I made it into a fold-out brochure. You see? Folds out."
+QUACK ENTER
+QUACK STRING "Oh, no. More humans. I don't need this."
+QUACK ENTER
+QUACK STRING "What was that?"
+QUACK ENTER
+QUACK STRING "Maybe this time. This time. This time. This time! This time! This... Drapes!"
+QUACK ENTER
+QUACK STRING "That is diabolical."
+QUACK ENTER
+QUACK STRING "It's fantastic. It's got all my special skills, even my top-ten favorite movies."
+QUACK ENTER
+QUACK STRING "What's number one? Star Wars?"
+QUACK ENTER
+QUACK STRING "Nah, I don't go for that... kind of stuff."
+QUACK ENTER
+QUACK STRING "No wonder we shouldn't talk to them. They're out of their minds."
+QUACK ENTER
+QUACK STRING "When I leave a job interview, they're flabbergasted, can't believe what I say."
+QUACK ENTER
+QUACK STRING "There's the sun. Maybe that's a way out."
+QUACK ENTER
+QUACK STRING "I don't remember the sun having a big 75 on it."
+QUACK ENTER
+QUACK STRING "I predicted global warming. I could feel it getting hotter. At first I thought it was just me."
+QUACK ENTER
+QUACK STRING "Wait! Stop! Bee!"
+QUACK ENTER
+QUACK STRING "Stand back. These are winter boots."
+QUACK ENTER
+QUACK STRING "Wait!"
+QUACK ENTER
+QUACK STRING "Don't kill him!"
+QUACK ENTER
+QUACK STRING "You know I'm allergic to them! This thing could kill me!"
+QUACK ENTER
+QUACK STRING "Why does his life have less value than yours?"
+QUACK ENTER
+QUACK STRING "Why does his life have any less value than mine? Is that your statement?"
+QUACK ENTER
+QUACK STRING "I'm just saying all life has value. You don't know what he's capable of feeling."
+QUACK ENTER
+QUACK STRING "My brochure!"
+QUACK ENTER
+QUACK STRING "There you go, little guy."
+QUACK ENTER
+QUACK STRING "I'm not scared of him.It's an allergic thing."
+QUACK ENTER
+QUACK STRING " Put that on your resume brochure."
+QUACK ENTER
+QUACK STRING "My whole face could puff up."
+QUACK ENTER
+QUACK STRING "Make it one of your special skills."
+QUACK ENTER
+QUACK STRING "Knocking someone out is also a special skill."
+QUACK ENTER
+QUACK STRING "Right. Bye, Vanessa. Thanks."
+QUACK ENTER
+QUACK STRING "Vanessa, next week? Yogurt night?"
+QUACK ENTER
+QUACK STRING "Sure, Ken. You know, whatever."
+QUACK ENTER
+QUACK STRING "You could put carob chips on there."
+QUACK ENTER
+QUACK STRING "Bye."
+QUACK ENTER
+QUACK STRING "Supposed to be less calories."
+QUACK ENTER
+QUACK STRING "Bye."
+QUACK ENTER
+QUACK STRING "I gotta say something. She saved my life. I gotta say something."
+QUACK ENTER
+QUACK STRING "All right, here it goes."
+QUACK ENTER
+QUACK STRING "Nah."
+QUACK ENTER
+QUACK STRING "What would I say?"
+QUACK ENTER
+QUACK STRING "I could really get in trouble. It's a bee law. You're not supposed to talk to a human."
+QUACK ENTER
+QUACK STRING "I can't believe I'm doing this. I've got to."
+QUACK ENTER
+QUACK STRING "Oh, I can't do it. Come on!"
+QUACK ENTER
+QUACK STRING "No. Yes. No. Do it. I can't."
+QUACK ENTER
+QUACK STRING "How should I start it? \"You like jazz?\" No, that's no good."
+QUACK ENTER
+QUACK STRING "Here she comes! Speak, you fool!"
+QUACK ENTER
+QUACK STRING "Hi!"
+QUACK ENTER
+QUACK STRING "I'm sorry. You're talking."
+QUACK ENTER
+QUACK STRING "Yes, I know."
+QUACK ENTER
+QUACK STRING "You're talking!"
+QUACK ENTER
+QUACK STRING "I'm so sorry."
+QUACK ENTER
+QUACK STRING "No, it's OK. It's fine."
+QUACK ENTER
+QUACK STRING "I know I'm dreaming. But I don't recall going to bed."
+QUACK ENTER
+QUACK STRING "Well, I'm sure this is very disconcerting."
+QUACK ENTER
+QUACK STRING "This is a bit of a surprise to me. I mean, you're a bee!"
+QUACK ENTER
+QUACK STRING "I am. And I'm not supposed to be doing this, but they were all trying to kill me."
+QUACK ENTER
+QUACK STRING "And if it wasn't for you... I had to thank you. It's just how I was raised."
+QUACK ENTER
+QUACK STRING "That was a little weird. I'm talking with a bee."
+QUACK ENTER
+QUACK STRING "Yeah."
+QUACK ENTER
+QUACK STRING "I'm talking to a bee. And the bee is talking to me!"
+QUACK ENTER
+QUACK STRING "I just want to say I'm grateful."
+QUACK ENTER
+QUACK STRING "I'll leave now."
+QUACK ENTER
+QUACK STRING "Wait! How did you learn to do that?"
+QUACK ENTER
+QUACK STRING "What?"
+QUACK ENTER
+QUACK STRING "The talking thing."
+QUACK ENTER
+QUACK STRING "Same way you did, I guess. \"Mama, Dada, honey.\" You pick it up."
+QUACK ENTER
+QUACK STRING "That's very funny."
+QUACK ENTER
+QUACK STRING "Yeah."
+QUACK ENTER
+QUACK STRING "Bees are funny. If we didn't laugh, we'd cry with what we have to deal with."
+QUACK ENTER
+QUACK STRING "Anyway... Can I... get you something?"
+QUACK ENTER
+QUACK STRING "Like what?"
+QUACK ENTER
+QUACK STRING "I don't know. I mean... I don't know. Coffee?"
+QUACK ENTER
+QUACK STRING "I don't want to put you out."
+QUACK ENTER
+QUACK STRING "It's no trouble. It takes two minutes."
+QUACK ENTER
+QUACK STRING "It's just coffee."
+QUACK ENTER
+QUACK STRING "I hate to impose."
+QUACK ENTER
+QUACK STRING "Don't be ridiculous!"
+QUACK ENTER
+QUACK STRING "Actually, I would love a cup."
+QUACK ENTER
+QUACK STRING "Hey, you want rum cake?"
+QUACK ENTER
+QUACK STRING "I shouldn't."
+QUACK ENTER
+QUACK STRING "Have some."
+QUACK ENTER
+QUACK STRING "No, I can't."
+QUACK ENTER
+QUACK STRING "Come on!"
+QUACK ENTER
+QUACK STRING "I'm trying to lose a couple micrograms."
+QUACK ENTER
+QUACK STRING "Where?"
+QUACK ENTER
+QUACK STRING "These stripes don't help."
+QUACK ENTER
+QUACK STRING "You look great!"
+QUACK ENTER
+QUACK STRING "I don't know if you know anything about fashion."
+QUACK ENTER
+QUACK STRING "Are you all right?"
+QUACK ENTER
+QUACK STRING "No."
+QUACK ENTER
+QUACK STRING "He's making the tie in the cab as they're flying up Madison."
+QUACK ENTER
+QUACK STRING "He finally gets there."
+QUACK ENTER
+QUACK STRING "He runs up the steps into the church."
+QUACK ENTER
+QUACK STRING "The wedding is on."
+QUACK ENTER
+QUACK STRING "And he says, \"Watermelon?"
+QUACK ENTER
+QUACK STRING "I thought you said Guatemalan."
+QUACK ENTER
+QUACK STRING "Why would I marry a watermelon?\""
+QUACK ENTER
+QUACK STRING "Is that a bee joke?"
+QUACK ENTER
+QUACK STRING "That's the kind of stuff we do."
+QUACK ENTER
+QUACK STRING "Yeah, different."
+QUACK ENTER
+QUACK STRING "So, what are you gonna do, Barry?"
+QUACK ENTER
+QUACK STRING "About work? I don't know."
+QUACK ENTER
+QUACK STRING "I want to do my part for The Hive, but I can't do it the way they want."
+QUACK ENTER
+QUACK STRING "I know how you feel."
+QUACK ENTER
+QUACK STRING "You do?"
+QUACK ENTER
+QUACK STRING "Sure."
+QUACK ENTER
+QUACK STRING "My parents wanted me to be a lawyer or a doctor, but I wanted to be a florist."
+QUACK ENTER
+QUACK STRING "Really?"
+QUACK ENTER
+QUACK STRING "My only interest is flowers."
+QUACK ENTER
+QUACK STRING "Our new queen was just elected with that same campaign slogan."
+QUACK ENTER
+QUACK STRING "Anyway, if you look... There's my hive right there. See it?"
+QUACK ENTER
+QUACK STRING "You're in Sheep Meadow!"
+QUACK ENTER
+QUACK STRING "Yes! I'm right off the Turtle Pond!"
+QUACK ENTER
+QUACK STRING "No way! I know that area. I lost a toe ring there once."
+QUACK ENTER
+QUACK STRING "Why do girls put rings on their toes?"
+QUACK ENTER
+QUACK STRING "Why not?"
+QUACK ENTER
+QUACK STRING "It's like putting a hat on your knee."
+QUACK ENTER
+QUACK STRING "Maybe I'll try that."
+QUACK ENTER
+QUACK STRING "You all right, ma'am?"
+QUACK ENTER
+QUACK STRING "Oh, yeah. Fine."
+QUACK ENTER
+QUACK STRING "Just having two cups of coffee!"
+QUACK ENTER
+QUACK STRING "Anyway, this has been great."
+QUACK ENTER
+QUACK STRING "Thanks for the coffee."
+QUACK ENTER
+QUACK STRING "Yeah, it's no trouble."
+QUACK ENTER
+QUACK STRING "Sorry I couldn't finish it. If I did, I'd be up the rest of my life."
+QUACK ENTER
+QUACK STRING "Are you...?"
+QUACK ENTER
+QUACK STRING "Can I take a piece of this with me?"
+QUACK ENTER
+QUACK STRING "Sure! Here, have a crumb."
+QUACK ENTER
+QUACK STRING "Thanks!"
+QUACK ENTER
+QUACK STRING "Yeah."
+QUACK ENTER
+QUACK STRING "All right. Well, then... I guess I'll see you around. Or not."
+QUACK ENTER
+QUACK STRING "OK, Barry."
+QUACK ENTER
+QUACK STRING "And thank you so much again... for before."
+QUACK ENTER
+QUACK STRING "Oh, that? That was nothing."
+QUACK ENTER
+QUACK STRING "Well, not nothing, but... Anyway..."
+QUACK ENTER
+QUACK STRING "This can't possibly work."
+QUACK ENTER
+QUACK STRING "He's all set to go."
+QUACK ENTER
+QUACK STRING "We may as well try it."
+QUACK ENTER
+QUACK STRING "OK, Dave, pull the chute."
+QUACK ENTER
+QUACK STRING "Sounds amazing."
+QUACK ENTER
+QUACK STRING "It was amazing!"
+QUACK ENTER
+QUACK STRING "It was the scariest, happiest moment of my life."
+QUACK ENTER
+QUACK STRING "Humans! I can't believe you were with humans!"
+QUACK ENTER
+QUACK STRING "Giant, scary humans!"
+QUACK ENTER
+QUACK STRING "What were they like?"
+QUACK ENTER
+QUACK STRING "Huge and crazy. They talk crazy."
+QUACK ENTER
+QUACK STRING "They eat crazy giant things."
+QUACK ENTER
+QUACK STRING "They drive crazy."
+QUACK ENTER
+QUACK STRING "Do they try and kill you, like on TV?"
+QUACK ENTER
+QUACK STRING "Some of them. But some of them don't."
+QUACK ENTER
+QUACK STRING "How'd you get back?"
+QUACK ENTER
+QUACK STRING "Poodle."
+QUACK ENTER
+QUACK STRING "You did it, and I'm glad. You saw whatever you wanted to see."
+QUACK ENTER
+QUACK STRING "You had your \"experience.\" Now you can pick out yourjob and be normal."
+QUACK ENTER
+QUACK STRING "Well..."
+QUACK ENTER
+QUACK STRING "Well?"
+QUACK ENTER
+QUACK STRING "Well, I met someone."
+QUACK ENTER
+QUACK STRING "You did? Was she Bee-ish?"
+QUACK ENTER
+QUACK STRING "A wasp?! Your parents will kill you!"
+QUACK ENTER
+QUACK STRING "No, no, no, not a wasp."
+QUACK ENTER
+QUACK STRING "Spider?"
+QUACK ENTER
+QUACK STRING "I'm not attracted to spiders."
+QUACK ENTER
+QUACK STRING "I know it's the hottest thing, with the eight legs and all. I can't get by that face."
+QUACK ENTER
+QUACK STRING "So who is she?"
+QUACK ENTER
+QUACK STRING "She's... human."
+QUACK ENTER
+QUACK STRING "No, no. That's a bee law. You wouldn't break a bee law."
+QUACK ENTER
+QUACK STRING "Her name's Vanessa."
+QUACK ENTER
+QUACK STRING "Oh, boy."
+QUACK ENTER
+QUACK STRING "She's so nice. And she's a florist!"
+QUACK ENTER
+QUACK STRING "Oh, no! You're dating a human florist!"
+QUACK ENTER
+QUACK STRING "We're not dating."
+QUACK ENTER
+QUACK STRING "You're flying outside The Hive, talking to humans that attack our homes with power washers and M-80s! One-eighth a stick of dynamite!"
+QUACK ENTER
+QUACK STRING "She saved my life! And she understands me."
+QUACK ENTER
+QUACK STRING "This is over!"
+QUACK ENTER
+QUACK STRING "Eat this."
+QUACK ENTER
+QUACK STRING "This is not over! What was that?"
+QUACK ENTER
+QUACK STRING "They call it a crumb."
+QUACK ENTER
+QUACK STRING "It was so stingin' stripey!"
+QUACK ENTER
+QUACK STRING "And that's not what they eat."
+QUACK ENTER
+QUACK STRING "That's what falls off what they eat!"
+QUACK ENTER
+QUACK STRING "You know what a Cinnabon is?"
+QUACK ENTER
+QUACK STRING "No."
+QUACK ENTER
+QUACK STRING "It's bread and cinnamon and frosting. They heat it up..."
+QUACK ENTER
+QUACK STRING "Sit down!"
+QUACK ENTER
+QUACK STRING "...really hot!"
+QUACK ENTER
+QUACK STRING "Listen to me!"
+QUACK ENTER
+QUACK STRING "We are not them! We're us."
+QUACK ENTER
+QUACK STRING "There's us and there's them!"
+QUACK ENTER
+QUACK STRING "Yes, but who can deny the heart that is yearning?"
+QUACK ENTER
+QUACK STRING "There's no yearning. Stop yearning. Listen to me!"
+QUACK ENTER
+QUACK STRING "You have got to start thinking bee, my friend. Thinking bee!"
+QUACK ENTER
+QUACK STRING "Thinking bee."
+QUACK ENTER
+QUACK STRING "Thinking bee."
+QUACK ENTER
+QUACK STRING "Thinking bee! Thinking bee! Thinking bee! Thinking bee!"
+QUACK ENTER
+QUACK STRING "There he is. He's in the pool."
+QUACK ENTER
+QUACK STRING "You know what your problem is, Barry?"
+QUACK ENTER
+QUACK STRING "I gotta start thinking bee?"
+QUACK ENTER
+QUACK STRING "How much longer will this go on?"
+QUACK ENTER
+QUACK STRING "It's been three days! Why aren't you working?"
+QUACK ENTER
+QUACK STRING "I've got a lot of big life decisions to think about."
+QUACK ENTER
+QUACK STRING "What life? You have no life!"
+QUACK ENTER
+QUACK STRING "You have no job. You're barely a bee!"
+QUACK ENTER
+QUACK STRING "Would it kill you to make a little honey?"
+QUACK ENTER
+QUACK STRING "Barry, come out. Your father's talking to you."
+QUACK ENTER
+QUACK STRING "Martin, would you talk to him?"
+QUACK ENTER
+QUACK STRING "Barry, I'm talking to you!"
+QUACK ENTER
+QUACK STRING "You coming?"
+QUACK ENTER
+QUACK STRING "Got everything?"
+QUACK ENTER
+QUACK STRING "All set!"
+QUACK ENTER
+QUACK STRING "Go ahead. I'll catch up."
+QUACK ENTER
+QUACK STRING "Don't be too long."
+QUACK ENTER
+QUACK STRING "Watch this!"
+QUACK ENTER
+QUACK STRING "Vanessa!"
+QUACK ENTER
+QUACK STRING "We're still here."
+QUACK ENTER
+QUACK STRING "I told you not to yell at him."
+QUACK ENTER
+QUACK STRING "He doesn't respond to yelling!"
+QUACK ENTER
+QUACK STRING "Then why yell at me?"
+QUACK ENTER
+QUACK STRING "Because you don't listen!"
+QUACK ENTER
+QUACK STRING "I'm not listening to this."
+QUACK ENTER
+QUACK STRING "Sorry, I've gotta go."
+QUACK ENTER
+QUACK STRING "Where are you going?"
+QUACK ENTER
+QUACK STRING "I'm meeting a friend."
+QUACK ENTER
+QUACK STRING "A girl? Is this why you can't decide?"
+QUACK ENTER
+QUACK STRING "Bye."
+QUACK ENTER
+QUACK STRING "I just hope she's Bee-ish."
+QUACK ENTER
+QUACK STRING "They have a huge parade of flowers every year in Pasadena?"
+QUACK ENTER
+QUACK STRING "To be in the Tournament of Roses, that's every florist's dream!"
+QUACK ENTER
+QUACK STRING "Up on a float, surrounded by flowers, crowds cheering."
+QUACK ENTER
+QUACK STRING "A tournament. Do the roses compete in athletic events?"
+QUACK ENTER
+QUACK STRING "No. All right, I've got one."
+QUACK ENTER
+QUACK STRING "How come you don't fly everywhere?"
+QUACK ENTER
+QUACK STRING "It's exhausting. Why don't you run everywhere? It's faster."
+QUACK ENTER
+QUACK STRING "Yeah, OK, I see, I see."
+QUACK ENTER
+QUACK STRING "All right, your turn."
+QUACK ENTER
+QUACK STRING "TiVo. You can just freeze live TV? That's insane!"
+QUACK ENTER
+QUACK STRING "You don't have that?"
+QUACK ENTER
+QUACK STRING "We have Hivo, but it's a disease. It's a horrible, horrible disease."
+QUACK ENTER
+QUACK STRING "Oh, my."
+QUACK ENTER
+QUACK STRING "Dumb bees!"
+QUACK ENTER
+QUACK STRING "You must want to sting all those jerks."
+QUACK ENTER
+QUACK STRING "We try not to sting. It's usually fatal for us."
+QUACK ENTER
+QUACK STRING "So you have to watch your temper."
+QUACK ENTER
+QUACK STRING "Very carefully."
+QUACK ENTER
+QUACK STRING "You kick a wall, take a walk, write an angry letter and throw it out. Work through it like any emotion: Anger, jealousy, lust."
+QUACK ENTER
+QUACK STRING "Oh, my goodness! Are you OK?"
+QUACK ENTER
+QUACK STRING "Yeah."
+QUACK ENTER
+QUACK STRING "What is wrong with you?!"
+QUACK ENTER
+QUACK STRING "It's a bug."
+QUACK ENTER
+QUACK STRING "He's not bothering anybody."
+QUACK ENTER
+QUACK STRING "Get out of here, you creep!"
+QUACK ENTER
+QUACK STRING "What was that? A Pic 'N' Save circular?"
+QUACK ENTER
+QUACK STRING "Yeah, it was. How did you know?"
+QUACK ENTER
+QUACK STRING "It felt like about 10 pages. Seventy-five is pretty much our limit."
+QUACK ENTER
+QUACK STRING "You've really got that down to a science."
+QUACK ENTER
+QUACK STRING "I lost a cousin to Italian Vogue."
+QUACK ENTER
+QUACK STRING "I'll bet."
+QUACK ENTER
+QUACK STRING "What in the name of Mighty Hercules is this?"
+QUACK ENTER
+QUACK STRING "How did this get here? cute Bee, Golden Blossom, Ray Liotta Private Select?"
+QUACK ENTER
+QUACK STRING "Is he that actor?"
+QUACK ENTER
+QUACK STRING "I never heard of him."
+QUACK ENTER
+QUACK STRING "Why is this here?"
+QUACK ENTER
+QUACK STRING "For people. We eat it."
+QUACK ENTER
+QUACK STRING "You don't have enough food of your own?"
+QUACK ENTER
+QUACK STRING "Well, yes."
+QUACK ENTER
+QUACK STRING "How do you get it?"
+QUACK ENTER
+QUACK STRING "Bees make it."
+QUACK ENTER
+QUACK STRING "I know who makes it! And it's hard to make it!"
+QUACK ENTER
+QUACK STRING "There's heating, cooling, stirring. You need a whole Krelman thing!"
+QUACK ENTER
+QUACK STRING "It's organic."
+QUACK ENTER
+QUACK STRING "It's our-ganic!"
+QUACK ENTER
+QUACK STRING "It's just honey, Barry."
+QUACK ENTER
+QUACK STRING "Just what?!"
+QUACK ENTER
+QUACK STRING "Bees don't know about this! This is stealing! A lot of stealing!"
+QUACK ENTER
+QUACK STRING "You've taken our homes, schools,hospitals! This is all we have!"
+QUACK ENTER
+QUACK STRING "And it's on sale?! I'm getting to the bottom of this."
+QUACK ENTER
+QUACK STRING "I'm getting to the bottom of all of this!"
+QUACK ENTER
+QUACK STRING "Hey, Hector. You almost done?"
+QUACK ENTER
+QUACK STRING "Almost."
+QUACK ENTER
+QUACK STRING "He is here. I sense it."
+QUACK ENTER
+QUACK STRING "Well, I guess I'll go home now and just leave this nice honey out, with no one around."
+QUACK ENTER
+QUACK STRING "You're busted, box boy!"
+QUACK ENTER
+QUACK STRING "I knew I heard something."
+QUACK ENTER
+QUACK STRING "So you can talk!"
+QUACK ENTER
+QUACK STRING "I can talk. And now you'll start talking!"
+QUACK ENTER
+QUACK STRING "Where you getting the sweet stuff? Who's your supplier?"
+QUACK ENTER
+QUACK STRING "I don't understand."
+QUACK ENTER
+QUACK STRING "I thought we were friends."
+QUACK ENTER
+QUACK STRING "The last thing we want to do is upset bees!"
+QUACK ENTER
+QUACK STRING "You're too late! It's ours now!"
+QUACK ENTER
+QUACK STRING "You, sir, have crossed the wrong sword!"
+QUACK ENTER
+QUACK STRING "You, sir, will be lunch for my iguana, Ignacio!"
+QUACK ENTER
+QUACK STRING "Where is the honey coming from? Tell me where!"
+QUACK ENTER
+QUACK STRING "Honey Farms! It comes from Honey Farms!"
+QUACK ENTER
+QUACK STRING "Crazy person!"
+QUACK ENTER
+QUACK STRING "What horrible thing has happened here?"
+QUACK ENTER
+QUACK STRING "These faces, they never knew what hit them. And now"
+QUACK ENTER
+QUACK STRING "they're on the road to nowhere!"
+QUACK ENTER
+QUACK STRING "Just keep still."
+QUACK ENTER
+QUACK STRING "What? You're not dead?"
+QUACK ENTER
+QUACK STRING "Do I look dead? They will wipe anything that moves. Where you headed?"
+QUACK ENTER
+QUACK STRING "To Honey Farms. I am onto something huge here."
+QUACK ENTER
+QUACK STRING "I'm going to Alaska. Moose blood, crazy stuff. Blows your head off!"
+QUACK ENTER
+QUACK STRING "I'm going to Tacoma."
+QUACK ENTER
+QUACK STRING "And you?"
+QUACK ENTER
+QUACK STRING "He really is dead."
+QUACK ENTER
+QUACK STRING "All right."
+QUACK ENTER
+QUACK STRING "Uh-oh!"
+QUACK ENTER
+QUACK STRING "What is that?!"
+QUACK ENTER
+QUACK STRING "Oh, no!"
+QUACK ENTER
+QUACK STRING "A wiper! Triple blade!"
+QUACK ENTER
+QUACK STRING "Triple blade?"
+QUACK ENTER
+QUACK STRING "Jump on! It's your only chance, bee!"
+QUACK ENTER
+QUACK STRING "Why does everything have"
+QUACK ENTER
+QUACK STRING "to be so doggone clean?!"
+QUACK ENTER
+QUACK STRING "How much do you people need to see?!"
+QUACK ENTER
+QUACK STRING "Open your eyes!"
+QUACK ENTER
+QUACK STRING "Stick your head out the window!"
+QUACK ENTER
+QUACK STRING "From NPR News in Washington,"
+QUACK ENTER
+QUACK STRING "I'm Carl Kasell."
+QUACK ENTER
+QUACK STRING "But don't kill no more bugs!"
+QUACK ENTER
+QUACK STRING "Bee!"
+QUACK ENTER
+QUACK STRING "Moose blood guy!!"
+QUACK ENTER
+QUACK STRING "You hear something?"
+QUACK ENTER
+QUACK STRING "Like what?"
+QUACK ENTER
+QUACK STRING "Like tiny screaming."
+QUACK ENTER
+QUACK STRING "Turn off the radio."
+QUACK ENTER
+QUACK STRING "Whassup, bee boy?"
+QUACK ENTER
+QUACK STRING "Hey, Blood."
+QUACK ENTER
+QUACK STRING "Just a row of honey jars, as far as the eye could see."
+QUACK ENTER
+QUACK STRING "Wow!"
+QUACK ENTER
+QUACK STRING "I assume wherever this truck goes is where they're getting it. I mean, that honey's ours."
+QUACK ENTER
+QUACK STRING "Bees hang tight. We're all jammed in."
+QUACK ENTER
+QUACK STRING "It's a close community."
+QUACK ENTER
+QUACK STRING "Not us, man. We on our own. Every mosquito on his own."
+QUACK ENTER
+QUACK STRING "What if you get in trouble?"
+QUACK ENTER
+QUACK STRING "You a mosquito, you in trouble. Nobody likes us. They just smack. See a mosquito, smack, smack!"
+QUACK ENTER
+QUACK STRING "At least you're out in the world. You must meet girls."
+QUACK ENTER
+QUACK STRING "Mosquito girls try to trade up, get with a moth, dragonfly. Mosquito girl don't want no mosquito."
+QUACK ENTER
+QUACK STRING "You got to be kidding me!"
+QUACK ENTER
+QUACK STRING "Mooseblood's about to leave the building! So long, bee!"
+QUACK ENTER
+QUACK STRING "Hey, guys!"
+QUACK ENTER
+QUACK STRING "Mooseblood!"
+QUACK ENTER
+QUACK STRING "I knew I'd catch y'all down here."
+QUACK ENTER
+QUACK STRING "Did you bring your crazy straw?"
+QUACK ENTER
+QUACK STRING "We throw it in jars, slap a label on it, and it's pretty much pure profit."
+QUACK ENTER
+QUACK STRING "What is this place?"
+QUACK ENTER
+QUACK STRING "A bee's got a brain the size of a pinhead."
+QUACK ENTER
+QUACK STRING "They are pinheads!"
+QUACK ENTER
+QUACK STRING "Pinhead."
+QUACK ENTER
+QUACK STRING "Check out the new smoker."
+QUACK ENTER
+QUACK STRING "Oh, sweet. That's the one you want. The Thomas 3000!"
+QUACK ENTER
+QUACK STRING "Smoker?"
+QUACK ENTER
+QUACK STRING "Ninety puffs a minute, semi-automatic. Twice the nicotine, all the tar. A couple breaths of this knocks them right out."
+QUACK ENTER
+QUACK STRING "They make the honey, and we make the money."
+QUACK ENTER
+QUACK STRING "\"They make the honey, and we make the money\"?"
+QUACK ENTER
+QUACK STRING "Oh, my!"
+QUACK ENTER
+QUACK STRING "What's going on? Are you OK?"
+QUACK ENTER
+QUACK STRING "Yeah. It doesn't last too long."
+QUACK ENTER
+QUACK STRING "Do you know you're in a fake hive with fake walls?"
+QUACK ENTER
+QUACK STRING "Our queen was moved here. We had no choice."
+QUACK ENTER
+QUACK STRING "This is your queen? That's a man in women's clothes! That's a drag queen!"
+QUACK ENTER
+QUACK STRING "What is this?"
+QUACK ENTER
+QUACK STRING "Oh, no!"
+QUACK ENTER
+QUACK STRING "There's hundreds of them!"
+QUACK ENTER
+QUACK STRING "Bee honey."
+QUACK ENTER
+QUACK STRING "Our honey is being brazenly stolen on a massive scale!"
+QUACK ENTER
+QUACK STRING "This is worse than anything bears have done! I intend to do something."
+QUACK ENTER
+QUACK STRING "Oh, Barry, stop."
+QUACK ENTER
+QUACK STRING "Who told you humans are taking our honey? That's a rumor."
+QUACK ENTER
+QUACK STRING "Do these look like rumors?"
+QUACK ENTER
+QUACK STRING "That's a conspiracy theory. These are obviously doctored photos. How did you get mixed up in this?"
+QUACK ENTER
+QUACK STRING "He's been talking to humans."
+QUACK ENTER
+QUACK STRING "What? Talking to humans?!"
+QUACK ENTER
+QUACK STRING "He has a human girlfriend. And they make out!"
+QUACK ENTER
+QUACK STRING "Make out? Barry!"
+QUACK ENTER
+QUACK STRING "We do not."
+QUACK ENTER
+QUACK STRING "You wish you could."
+QUACK ENTER
+QUACK STRING "Whose side are you on?"
+QUACK ENTER
+QUACK STRING "The bees!"
+QUACK ENTER
+QUACK STRING "I dated a cricket once in San Antonio. Those crazy legs kept me up all night."
+QUACK ENTER
+QUACK STRING "Barry, this is what you want to do with your life?"
+QUACK ENTER
+QUACK STRING "I want to do it for all our lives. Nobody works harder than bees!"
+QUACK ENTER
+QUACK STRING "Dad, I remember you coming home so overworked"
+QUACK ENTER
+QUACK STRING "your hands were still stirring. You couldn't stop."
+QUACK ENTER
+QUACK STRING "I remember that."
+QUACK ENTER
+QUACK STRING "What right do they have to our honey?"
+QUACK ENTER
+QUACK STRING "We live on two cups a year. They put it in lip balm for no reason whatsoever!"
+QUACK ENTER
+QUACK STRING "Even if it's true, what can one bee do?"
+QUACK ENTER
+QUACK STRING "Sting them where it really hurts."
+QUACK ENTER
+QUACK STRING "In the face! The eye!"
+QUACK ENTER
+QUACK STRING "That would hurt."
+QUACK ENTER
+QUACK STRING "No."
+QUACK ENTER
+QUACK STRING "Up the nose? That's a killer."
+QUACK ENTER
+QUACK STRING "There's only one place you can sting the humans, one place where it matters."
+QUACK ENTER
+QUACK STRING "Hive at Five, The Hive's only full-hour action news source."
+QUACK ENTER
+QUACK STRING "No more bee beards!"
+QUACK ENTER
+QUACK STRING "With Bob Bumble at the anchor desk. Weather with Storm Stinger. Sports with Buzz Larvi. And Jeanette Chung."
+QUACK ENTER
+QUACK STRING "Good evening. I'm Bob Bumble."
+QUACK ENTER
+QUACK STRING "And I'm Jeanette Ohung."
+QUACK ENTER
+QUACK STRING "A tri-county bee, Barry Benson, intends to sue the human race for stealing our honey, packaging it and profiting from it illegally!"
+QUACK ENTER
+QUACK STRING "Tomorrow night on Bee Larry King, we'll have three former queens here in our studio, discussing their new book, classy Ladies, out this week on Hexagon."
+QUACK ENTER
+QUACK STRING "Tonight we're talking to Barry Benson."
+QUACK ENTER
+QUACK STRING "Did you ever think, \"I'm a kid from The Hive. I can't do this\"?"
+QUACK ENTER
+QUACK STRING "Bees have never been afraid to change the world."
+QUACK ENTER
+QUACK STRING "What about Bee Oolumbus? Bee Gandhi? Bejesus?"
+QUACK ENTER
+QUACK STRING "Where I'm from, we'd never sue humans."
+QUACK ENTER
+QUACK STRING "We were thinking of stickball or candy stores."
+QUACK ENTER
+QUACK STRING "How old are you?"
+QUACK ENTER
+QUACK STRING "The bee community is supporting you in this case, which will be the trial of the bee century."
+QUACK ENTER
+QUACK STRING "You know, they have a Larry King in the human world too."
+QUACK ENTER
+QUACK STRING "It's a common name. Next week..."
+QUACK ENTER
+QUACK STRING "He looks like you and has a show and suspenders and colored dots..."
+QUACK ENTER
+QUACK STRING "Next week..."
+QUACK ENTER
+QUACK STRING "Glasses, quotes on the bottom from the guest even though you just heard 'em."
+QUACK ENTER
+QUACK STRING "Bear Week next week! They're scary, hairy and here live."
+QUACK ENTER
+QUACK STRING "Always leans forward, pointy shoulders, squinty eyes, very Jewish."
+QUACK ENTER
+QUACK STRING "In tennis, you attack at the point of weakness!"
+QUACK ENTER
+QUACK STRING "It was my grandmother, Ken. She's 81."
+QUACK ENTER
+QUACK STRING "Honey, her backhand's a joke!"
+QUACK ENTER
+QUACK STRING "I'm not gonna take advantage of that?"
+QUACK ENTER
+QUACK STRING "Quiet, please."
+QUACK ENTER
+QUACK STRING "Actual work going on here."
+QUACK ENTER
+QUACK STRING "Is that that same bee?"
+QUACK ENTER
+QUACK STRING "Yes, it is!"
+QUACK ENTER
+QUACK STRING "I'm helping him sue the human race."
+QUACK ENTER
+QUACK STRING "Hello."
+QUACK ENTER
+QUACK STRING "Hello, bee."
+QUACK ENTER
+QUACK STRING "This is Ken."
+QUACK ENTER
+QUACK STRING "Yeah, I remember you. Timberland, size ten and a half. Vibram sole, I believe."
+QUACK ENTER
+QUACK STRING "Why does he talk again?"
+QUACK ENTER
+QUACK STRING "Listen, you better go 'cause we're really busy working."
+QUACK ENTER
+QUACK STRING "But it's our yogurt night!"
+QUACK ENTER
+QUACK STRING "Bye-bye."
+QUACK ENTER
+QUACK STRING "Why is yogurt night so difficult?!"
+QUACK ENTER
+QUACK STRING "You poor thing. You two have been at this for hours!"
+QUACK ENTER
+QUACK STRING "Yes, and Adam here has been a huge help."
+QUACK ENTER
+QUACK STRING "Frosting..."
+QUACK ENTER
+QUACK STRING "How many sugars?"
+QUACK ENTER
+QUACK STRING "Just one. I try not to use the competition."
+QUACK ENTER
+QUACK STRING "So why are you helping me?"
+QUACK ENTER
+QUACK STRING "Bees have good qualities. And it takes my mind off the shop. Instead of flowers, people are giving balloon bouquets now."
+QUACK ENTER
+QUACK STRING "Those are great, if you're three."
+QUACK ENTER
+QUACK STRING "And artificial flowers."
+QUACK ENTER
+QUACK STRING "Oh, those just get me psychotic!"
+QUACK ENTER
+QUACK STRING "Yeah, me too."
+QUACK ENTER
+QUACK STRING "Bent stingers, pointless pollination."
+QUACK ENTER
+QUACK STRING "Bees must hate those fake things!"
+QUACK ENTER
+QUACK STRING "Nothing worse than a daffodil that's had work done."
+QUACK ENTER
+QUACK STRING "Maybe this could make up for it a little bit."
+QUACK ENTER
+QUACK STRING "This lawsuit's a pretty big deal."
+QUACK ENTER
+QUACK STRING "I guess."
+QUACK ENTER
+QUACK STRING "You sure you want to go through with it?"
+QUACK ENTER
+QUACK STRING "Am I sure? When I'm done with the humans, they won't be able to say, \"Honey, I'm home,\" without paying a royalty!"
+QUACK ENTER
+QUACK STRING "It's an incredible scene here in downtown Manhattan, where the world anxiously waits, because for the first time in history, we will hear for ourselves if a honeybee can actually speak."
+QUACK ENTER
+QUACK STRING "What have we gotten into here, Barry?"
+QUACK ENTER
+QUACK STRING "It's pretty big, isn't it?"
+QUACK ENTER
+QUACK STRING "I can't believe how many humans don't work during the day."
+QUACK ENTER
+QUACK STRING "You think billion-dollar multinational food companies have good lawyers?"
+QUACK ENTER
+QUACK STRING "Everybody needs to stay behind the barricade."
+QUACK ENTER
+QUACK STRING "What's the matter?"
+QUACK ENTER
+QUACK STRING "I don't know, I just got a chill."
+QUACK ENTER
+QUACK STRING "Well, if it isn't the bee team."
+QUACK ENTER
+QUACK STRING "You boys work on this?"
+QUACK ENTER
+QUACK STRING "All rise! The Honorable Judge Bumbleton presiding."
+QUACK ENTER
+QUACK STRING "All right. Case number 4475,"
+QUACK ENTER
+QUACK STRING "Superior Court of New York,"
+QUACK ENTER
+QUACK STRING "Barry Bee Benson v. the Honey Industry is now in session."
+QUACK ENTER
+QUACK STRING "Mr. Montgomery, you're representing the five food companies collectively?"
+QUACK ENTER
+QUACK STRING "A privilege."
+QUACK ENTER
+QUACK STRING "Mr. Benson... you're representing all the bees of the world?"
+QUACK ENTER
+QUACK STRING "I'm kidding. Yes, Your Honor, we're ready to proceed."
+QUACK ENTER
+QUACK STRING "Mr. Montgomery, your opening statement, please."
+QUACK ENTER
+QUACK STRING "Ladies and gentlemen of the jury, my grandmother was a simple woman. Born on a farm, she believed it was man's divine right to benefit from the bounty of nature God put before us."
+QUACK ENTER
+QUACK STRING "If we lived in the topsy-turvy world Mr. Benson imagines, just think of what would it mean."
+QUACK ENTER
+QUACK STRING "I would have to negotiate with the silkworm for the elastic in my britches!"
+QUACK ENTER
+QUACK STRING "Talking bee!"
+QUACK ENTER
+QUACK STRING "How do we know this isn't some sort of holographic motion-picture-capture Hollywood wizardry?"
+QUACK ENTER
+QUACK STRING "They could be using laser beams! Robotics! Ventriloquism! Cloning! For all we know, he could be on steroids!"
+QUACK ENTER
+QUACK STRING "Mr. Benson?"
+QUACK ENTER
+QUACK STRING "Ladies and gentlemen, there's no trickery here. I'm just an ordinary bee. Honey's pretty important to me. It's important to all bees. We invented it! We make it. And we protect it with our lives."
+QUACK ENTER
+QUACK STRING "Unfortunately, there are some people in this room who think they can take it from us 'cause we're the little guys!"
+QUACK ENTER
+QUACK STRING "I'm hoping that, after this is all over, you'll see how, by taking our honey, you not only take everything we have but everything we are!"
+QUACK ENTER
+QUACK STRING "I wish he'd dress like that all the time. So nice!"
+QUACK ENTER
+QUACK STRING "Call your first witness."
+QUACK ENTER
+QUACK STRING "So, Mr. Klauss Vanderhayden of Honey Farms, big company you have."
+QUACK ENTER
+QUACK STRING "I suppose so."
+QUACK ENTER
+QUACK STRING "I see you also own Honeyburton and Honron!"
+QUACK ENTER
+QUACK STRING "Yes, they provide beekeepers for our farms."
+QUACK ENTER
+QUACK STRING "Beekeeper. I find that to be a very disturbing term."
+QUACK ENTER
+QUACK STRING "I don't imagine you employ any bee-free-ers, do you?"
+QUACK ENTER
+QUACK STRING "No."
+QUACK ENTER
+QUACK STRING "I couldn't hear you."
+QUACK ENTER
+QUACK STRING "No."
+QUACK ENTER
+QUACK STRING "No. Because you don't free bees. You keep bees. Not only that, it seems you thought a bear would be an appropriate image for a jar of honey."
+QUACK ENTER
+QUACK STRING "They're very lovable creatures. Yogi Bear, Fozzie Bear, Build-A-Bear."
+QUACK ENTER
+QUACK STRING "You mean like this?"
+QUACK ENTER
+QUACK STRING "Bears kill bees!"
+QUACK ENTER
+QUACK STRING "How'd you like his head crashing through your living room?! Biting into your couch! Spitting out your throw pillows! OK, that's enough. Take him away."
+QUACK ENTER
+QUACK STRING "So, Mr. Sting, thank you for being here. Your name intrigues me. Where have I heard it before?"
+QUACK ENTER
+QUACK STRING "I was with a band called The Police."
+QUACK ENTER
+QUACK STRING "But you've never been a police officer, have you?"
+QUACK ENTER
+QUACK STRING "No, I haven't."
+QUACK ENTER
+QUACK STRING "No, you haven't. And so here we have yet another example of bee culture casually stolen by a human for nothing more than a prance-about stage name."
+QUACK ENTER
+QUACK STRING "Oh, please."
+QUACK ENTER
+QUACK STRING "Have you ever been stung, Mr. Sting? Because I'm feeling a little stung, Sting. Or should I say... Mr. Gordon M. Sumner!"
+QUACK ENTER
+QUACK STRING "That's not his real name?! You idiots!"
+QUACK ENTER
+QUACK STRING "Mr. Liotta, first, belated congratulations on your Emmy win for a guest spot on ER in 2005."
+QUACK ENTER
+QUACK STRING "Thank you. Thank you."
+QUACK ENTER
+QUACK STRING "I see from your resume that you're devilishly handsome with a churning inner turmoil that's ready to blow."
+QUACK ENTER
+QUACK STRING "I enjoy what I do. Is that a crime?"
+QUACK ENTER
+QUACK STRING "Not yet it isn't. But is this what it's come to for you? Exploiting tiny, helpless bees so you don't have to rehearse your part and learn your lines, sir?"
+QUACK ENTER
+QUACK STRING "Watch it, Benson! I could blow right now!"
+QUACK ENTER
+QUACK STRING "This isn't a goodfella."
+QUACK ENTER
+QUACK STRING "This is a badfella!"
+QUACK ENTER
+QUACK STRING "Why doesn't someone just step on this creep, and we can all go home?!"
+QUACK ENTER
+QUACK STRING "Order in this court!"
+QUACK ENTER
+QUACK STRING "You're all thinking it!"
+QUACK ENTER
+QUACK STRING "Order! Order, I say!"
+QUACK ENTER
+QUACK STRING "Say it!"
+QUACK ENTER
+QUACK STRING "Mr. Liotta, please sit down!"
+QUACK ENTER
+QUACK STRING "I think it was awfully nice of that bear to pitch in like that. I think the jury's on our side."
+QUACK ENTER
+QUACK STRING "Are we doing everything right, legally?"
+QUACK ENTER
+QUACK STRING "I'm a florist."
+QUACK ENTER
+QUACK STRING "Right. Well, here's to a great team."
+QUACK ENTER
+QUACK STRING "To a great team!"
+QUACK ENTER
+QUACK STRING "Well, hello."
+QUACK ENTER
+QUACK STRING "Ken!"
+QUACK ENTER
+QUACK STRING "Hello."
+QUACK ENTER
+QUACK STRING "I didn't think you were coming."
+QUACK ENTER
+QUACK STRING "No, I was just late I tried to call, but... the battery."
+QUACK ENTER
+QUACK STRING "I didn't want all this to go to waste,"
+QUACK ENTER
+QUACK STRING "so I called Barry. Luckily, he was free."
+QUACK ENTER
+QUACK STRING "Oh, that was lucky."
+QUACK ENTER
+QUACK STRING "There's a little left. I could heat it up."
+QUACK ENTER
+QUACK STRING "Yeah, heat it up, sure, whatever."
+QUACK ENTER
+QUACK STRING "So I hear you're quite a tennis player. I'm not much for the game myself. The ball's a little grabby."
+QUACK ENTER
+QUACK STRING "That's where I usually sit. Right... there."
+QUACK ENTER
+QUACK STRING "Ken, Barry was looking at your resume, and he agreed with me that eating with chopsticks isn't really a special skill."
+QUACK ENTER
+QUACK STRING "You think I don't see what you're doing?"
+QUACK ENTER
+QUACK STRING "I know how hard it is to find the right job. We have that in common."
+QUACK ENTER
+QUACK STRING "Do we?"
+QUACK ENTER
+QUACK STRING "Bees have 100 percent employment, but we do jobs like taking the crud out."
+QUACK ENTER
+QUACK STRING "That's just what I was thinking about doing."
+QUACK ENTER
+QUACK STRING "Ken, I let Barry borrow your razor for his fuzz. I hope that was all right."
+QUACK ENTER
+QUACK STRING "I'm going to drain the old stinger."
+QUACK ENTER
+QUACK STRING "Yeah, you do that."
+QUACK ENTER
+QUACK STRING "Look at that."
+QUACK ENTER
+QUACK STRING "You know, I've just about had it with your little Mind Games."
+QUACK ENTER
+QUACK STRING "What's that?"
+QUACK ENTER
+QUACK STRING "Italian Vogue."
+QUACK ENTER
+QUACK STRING "Mamma mia, that's a lot of pages."
+QUACK ENTER
+QUACK STRING "A lot of ads."
+QUACK ENTER
+QUACK STRING "Remember what Van said, why is your life more valuable than mine?"
+QUACK ENTER
+QUACK STRING "Funny, I just can't seem to recall that! I think something stinks in here!"
+QUACK ENTER
+QUACK STRING "I love the smell of flowers."
+QUACK ENTER
+QUACK STRING "How do you like the smell of flames?!"
+QUACK ENTER
+QUACK STRING "Not as much."
+QUACK ENTER
+QUACK STRING "Water bug! Not taking sides!"
+QUACK ENTER
+QUACK STRING "Ken, I'm wearing a Chapstick hat!"
+QUACK ENTER
+QUACK STRING "This is pathetic!"
+QUACK ENTER
+QUACK STRING "I've got issues!"
+QUACK ENTER
+QUACK STRING "Well, well, well, a royal flush!"
+QUACK ENTER
+QUACK STRING "You're bluffing."
+QUACK ENTER
+QUACK STRING "Am I?"
+QUACK ENTER
+QUACK STRING "Surf's up, dude!"
+QUACK ENTER
+QUACK STRING "Poo water!"
+QUACK ENTER
+QUACK STRING "That bowl is gnarly. Except for those dirty yellow rings!"
+QUACK ENTER
+QUACK STRING "Kenneth! What are you doing?!"
+QUACK ENTER
+QUACK STRING "You know, I don't even like honey! I don't eat it!"
+QUACK ENTER
+QUACK STRING "We need to talk! He's just a little bee!"
+QUACK ENTER
+QUACK STRING "And he happens to be the nicest bee I've met in a long time!"
+QUACK ENTER
+QUACK STRING "Long time? What are you talking about?! Are there other bugs in your life?"
+QUACK ENTER
+QUACK STRING " No, but there are other things bugging me in life. And you're one of them!"
+QUACK ENTER
+QUACK STRING "Fine! Talking bees, no yogurt night..."
+QUACK ENTER
+QUACK STRING "My nerves are fried from riding on this emotional roller coaster!"
+QUACK ENTER
+QUACK STRING "Goodbye, Ken."
+QUACK ENTER
+QUACK STRING "And for your information, I prefer sugar-free, artificial sweeteners made by man!"
+QUACK ENTER
+QUACK STRING "I'm sorry about all that."
+QUACK ENTER
+QUACK STRING "I know it's got an aftertaste! I like it!"
+QUACK ENTER
+QUACK STRING "I always felt there was some kind of barrier between Ken and me. I couldn't overcome it."
+QUACK ENTER
+QUACK STRING "Oh, well."
+QUACK ENTER
+QUACK STRING "Are you OK for the trial?"
+QUACK ENTER
+QUACK STRING "I believe Mr. Montgomery is about out of ideas."
+QUACK ENTER
+QUACK STRING "We would like to call Mr. Barry Benson Bee to the stand."
+QUACK ENTER
+QUACK STRING "Good idea! You can really see why he's considered one of the best lawyers..."
+QUACK ENTER
+QUACK STRING "Yeah."
+QUACK ENTER
+QUACK STRING "Layton, you've gotta weave some magic with this jury, or it's gonna be all over."
+QUACK ENTER
+QUACK STRING "Don't worry. The only thing I have to do to turn this jury around is to remind them of what they don't like about bees."
+QUACK ENTER
+QUACK STRING "You got the tweezers?"
+QUACK ENTER
+QUACK STRING "Are you allergic?"
+QUACK ENTER
+QUACK STRING "Only to losing, son. Only to losing."
+QUACK ENTER
+QUACK STRING "Mr. Benson Bee, I'll ask you what I think we'd all like to know."
+QUACK ENTER
+QUACK STRING "What exactly is your relationship to that woman?"
+QUACK ENTER
+QUACK STRING "We're friends."
+QUACK ENTER
+QUACK STRING "Good friends?"
+QUACK ENTER
+QUACK STRING "Yes."
+QUACK ENTER
+QUACK STRING "How good? Do you live together?"
+QUACK ENTER
+QUACK STRING "Wait a minute... Are you her little... bedbug?"
+QUACK ENTER
+QUACK STRING "I've seen a bee documentary or two. From what I understand, doesn't your queen give birth to all the bee children?"
+QUACK ENTER
+QUACK STRING "Yeah, but..."
+QUACK ENTER
+QUACK STRING "So those aren't your real parents!"
+QUACK ENTER
+QUACK STRING "Oh, Barry..."
+QUACK ENTER
+QUACK STRING "Yes, they are!"
+QUACK ENTER
+QUACK STRING "Hold me back!"
+QUACK ENTER
+QUACK STRING "You're an illegitimate bee, aren't you, Benson?"
+QUACK ENTER
+QUACK STRING "He's denouncing bees!"
+QUACK ENTER
+QUACK STRING "Don't y'all date your cousins?"
+QUACK ENTER
+QUACK STRING "Objection!"
+QUACK ENTER
+QUACK STRING "I'm going to pincushion this guy!"
+QUACK ENTER
+QUACK STRING "Adam, don't! It's what he wants!"
+QUACK ENTER
+QUACK STRING "Oh, I'm hit!! Oh, lordy, I am hit!"
+QUACK ENTER
+QUACK STRING "Order! Order!"
+QUACK ENTER
+QUACK STRING "The venom! The venom is coursing through my veins! I have been felled by a winged beast of destruction! You see? You can't treat them like equals! They're striped savages! Stinging's the only thing they know! It's their way!"
+QUACK ENTER
+QUACK STRING "Adam, stay with me."
+QUACK ENTER
+QUACK STRING "I can't feel my legs."
+QUACK ENTER
+QUACK STRING "What Angel of Mercy will come forward to suck the poison from my heaving buttocks?"
+QUACK ENTER
+QUACK STRING "I will have order in this court. Order! Order, please!"
+QUACK ENTER
+QUACK STRING "The case of the honeybees versus the human race took a pointed Turn Against the bees yesterday when one of their legal team stung Layton T. Montgomery."
+QUACK ENTER
+QUACK STRING "Hey, buddy."
+QUACK ENTER
+QUACK STRING "Hey."
+QUACK ENTER
+QUACK STRING "Is there much pain?"
+QUACK ENTER
+QUACK STRING "Yeah."
+QUACK ENTER
+QUACK STRING "I... I blew the whole case, didn't I?"
+QUACK ENTER
+QUACK STRING "It doesn't matter. What matters is"
+QUACK ENTER
+QUACK STRING "you're alive. You could have died."
+QUACK ENTER
+QUACK STRING "I'd be better off dead. Look at me."
+QUACK ENTER
+QUACK STRING "They got it from the cafeteria downstairs, in a tuna sandwich. Look, there's a little celery still on it."
+QUACK ENTER
+QUACK STRING "What was it like to sting someone?"
+QUACK ENTER
+QUACK STRING "I can't explain it. It was all... All adrenaline and then...and then ecstasy!"
+QUACK ENTER
+QUACK STRING "All right."
+QUACK ENTER
+QUACK STRING "You think it was all a trap?"
+QUACK ENTER
+QUACK STRING "Of course. I'm sorry. I flew us right into this."
+QUACK ENTER
+QUACK STRING "What were we thinking? Look at us. We're just a couple of bugs in this world."
+QUACK ENTER
+QUACK STRING "What will the humans do to us if they win?"
+QUACK ENTER
+QUACK STRING "I don't know."
+QUACK ENTER
+QUACK STRING "I hear they put the roaches in motels. That doesn't sound so bad."
+QUACK ENTER
+QUACK STRING "Adam, they check in, but they don't check out!"
+QUACK ENTER
+QUACK STRING "Oh, my."
+QUACK ENTER
+QUACK STRING "Could you get a nurse to close that window?"
+QUACK ENTER
+QUACK STRING "Why?"
+QUACK ENTER
+QUACK STRING "The smoke."
+QUACK ENTER
+QUACK STRING "Bees don't smoke."
+QUACK ENTER
+QUACK STRING "Right. Bees don't smoke."
+QUACK ENTER
+QUACK STRING "Bees don't smoke!"
+QUACK ENTER
+QUACK STRING "But some bees are smoking."
+QUACK ENTER
+QUACK STRING "That's it! That's our case!"
+QUACK ENTER
+QUACK STRING "It is? It's not over?"
+QUACK ENTER
+QUACK STRING "Get dressed. I've gotta go somewhere."
+QUACK ENTER
+QUACK STRING "Get back to the court and stall. Stall any way you can."
+QUACK ENTER
+QUACK STRING "And assuming you've done step correctly, you're ready for the tub."
+QUACK ENTER
+QUACK STRING "Mr. Flayman."
+QUACK ENTER
+QUACK STRING "Yes? Yes, Your Honor!"
+QUACK ENTER
+QUACK STRING "Where is the rest of your team?"
+QUACK ENTER
+QUACK STRING "Well, Your Honor, it's interesting. Bees are trained to fly haphazardly, and as a result, we don't make very good time."
+QUACK ENTER
+QUACK STRING "I actually heard a funny story about..."
+QUACK ENTER
+QUACK STRING "Your Honor, haven't these ridiculous bugs taken up enough of this court's valuable time? How much longer will we allow these absurd shenanigans to go on?"
+QUACK ENTER
+QUACK STRING "They have presented no compelling evidence to support their charges against my clients, who run legitimate businesses."
+QUACK ENTER
+QUACK STRING "I move for a complete dismissal of this entire case!"
+QUACK ENTER
+QUACK STRING "Mr. Flayman, I'm afraid I'm going to have to consider Mr. Montgomery's motion."
+QUACK ENTER
+QUACK STRING "But you can't! We have a terrific case."
+QUACK ENTER
+QUACK STRING "Where is your proof?"
+QUACK ENTER
+QUACK STRING "Where is the evidence?"
+QUACK ENTER
+QUACK STRING "Show me the smoking gun!"
+QUACK ENTER
+QUACK STRING "Hold it, Your Honor!"
+QUACK ENTER
+QUACK STRING "You want a smoking gun? Here is your smoking gun."
+QUACK ENTER
+QUACK STRING "What is that?"
+QUACK ENTER
+QUACK STRING "It's a bee smoker!"
+QUACK ENTER
+QUACK STRING "What, this? This harmless little contraption? This couldn't hurt a fly, let alone a bee."
+QUACK ENTER
+QUACK STRING "Look at what has happened to bees who have never been asked, \"Smoking or non?\" Is this what nature intended for us? To be forcibly addicted to smoke machines and man-made wooden slat work camps?"
+QUACK ENTER
+QUACK STRING "Living out our lives as honey slaves to the white man?"
+QUACK ENTER
+QUACK STRING "What are we gonna do?"
+QUACK ENTER
+QUACK STRING "He's playing the species card."
+QUACK ENTER
+QUACK STRING "Ladies and gentlemen, please, free these bees!"
+QUACK ENTER
+QUACK STRING "Free the bees! Free the bees! Free the bees! Free the bees! Free the bees!"
+QUACK ENTER
+QUACK STRING "The court finds in favor of the bees!"
+QUACK ENTER
+QUACK STRING "Vanessa, we won!"
+QUACK ENTER
+QUACK STRING "I knew you could do it! High-five!"
+QUACK ENTER
+QUACK STRING "Sorry."
+QUACK ENTER
+QUACK STRING "I'm OK! You know what this means?"
+QUACK ENTER
+QUACK STRING "All the honey will finally belong to the bees."
+QUACK ENTER
+QUACK STRING "Now we won't have to work so hard all the time."
+QUACK ENTER
+QUACK STRING "This is an unholy perversion of the balance of nature, Benson."
+QUACK ENTER
+QUACK STRING "You'll regret this."
+QUACK ENTER
+QUACK STRING "Barry, how much honey is out there?"
+QUACK ENTER
+QUACK STRING "All right. One at a time."
+QUACK ENTER
+QUACK STRING "Barry, who are you wearing?"
+QUACK ENTER
+QUACK STRING "My sweater is Ralph Lauren, and I have no pants."
+QUACK ENTER
+QUACK STRING "What if Montgomery's right?"
+QUACK ENTER
+QUACK STRING "What do you mean?"
+QUACK ENTER
+QUACK STRING "We've been living the bee way a long time, 27 million years."
+QUACK ENTER
+QUACK STRING "Congratulations on your victory. What will you demand as a settlement?"
+QUACK ENTER
+QUACK STRING "First, we'll demand a complete shutdown of all bee work camps."
+QUACK ENTER
+QUACK STRING "Then we want back the honey that was ours to begin with, every last drop."
+QUACK ENTER
+QUACK STRING "We demand an end to the glorification of the bear as anything more than a filthy, smelly, bad-breath stink machine."
+QUACK ENTER
+QUACK STRING "We're all aware of what they do in the woods."
+QUACK ENTER
+QUACK STRING "Wait for my signal. Take him out."
+QUACK ENTER
+QUACK STRING "He'll have nauseous for a few hours, then he'll be fine."
+QUACK ENTER
+QUACK STRING "And we will no longer tolerate bee-negative nicknames..."
+QUACK ENTER
+QUACK STRING "But it's just a prance-about stage name!"
+QUACK ENTER
+QUACK STRING "...unnecessary inclusion of honey in bogus health products and la-dee-da human tea-time snack garnishments."
+QUACK ENTER
+QUACK STRING "Can't breathe."
+QUACK ENTER
+QUACK STRING "Bring it in, boys!"
+QUACK ENTER
+QUACK STRING "Hold it right there! Good."
+QUACK ENTER
+QUACK STRING "Tap it."
+QUACK ENTER
+QUACK STRING "Mr. Buzzwell, we just passed three cups and there's gallons more coming!"
+QUACK ENTER
+QUACK STRING "I think we need to shut down!"
+QUACK ENTER
+QUACK STRING "Shut down? We've never shut down."
+QUACK ENTER
+QUACK STRING "Shut down honey production!"
+QUACK ENTER
+QUACK STRING "Stop making honey!"
+QUACK ENTER
+QUACK STRING "Turn your key, sir!"
+QUACK ENTER
+QUACK STRING "What do we do now?"
+QUACK ENTER
+QUACK STRING "Cannonball!"
+QUACK ENTER
+QUACK STRING "We're shutting honey production!"
+QUACK ENTER
+QUACK STRING "Mission abort."
+QUACK ENTER
+QUACK STRING "Aborting pollination and nectar detail."
+QUACK ENTER
+QUACK STRING "Returning to base."
+QUACK ENTER
+QUACK STRING "Adam, you wouldn't believe how much honey was out there."
+QUACK ENTER
+QUACK STRING "Oh, yeah?"
+QUACK ENTER
+QUACK STRING "What's going on? Where is everybody?"
+QUACK ENTER
+QUACK STRING "Are they out celebrating?"
+QUACK ENTER
+QUACK STRING "They're home."
+QUACK ENTER
+QUACK STRING "They don't know what to do. Laying out, sleeping in."
+QUACK ENTER
+QUACK STRING "I heard your Uncle Carl was on his way to San Antonio with a cricket."
+QUACK ENTER
+QUACK STRING "At least we got our honey back."
+QUACK ENTER
+QUACK STRING "Sometimes I think, so what if humans liked our honey? Who wouldn't?"
+QUACK ENTER
+QUACK STRING "It's the greatest thing in the world! I was excited to be part of making it."
+QUACK ENTER
+QUACK STRING "This was my new desk. This was my new job. I wanted to do it really well. And now..."
+QUACK ENTER
+QUACK STRING "Now I can't."
+QUACK ENTER
+QUACK STRING "I don't understand why they're not happy."
+QUACK ENTER
+QUACK STRING "I thought their lives would be better!"
+QUACK ENTER
+QUACK STRING "They're doing nothing. It's amazing."
+QUACK ENTER
+QUACK STRING "Honey really changes people."
+QUACK ENTER
+QUACK STRING "You don't have any idea what's going on, do you?"
+QUACK ENTER
+QUACK STRING "What did you want to show me?"
+QUACK ENTER
+QUACK STRING "This."
+QUACK ENTER
+QUACK STRING "What happened here?"
+QUACK ENTER
+QUACK STRING "That is not the half of it."
+QUACK ENTER
+QUACK STRING "Oh, no. Oh, my."
+QUACK ENTER
+QUACK STRING "They're all wilting."
+QUACK ENTER
+QUACK STRING "Doesn't look very good, does it?"
+QUACK ENTER
+QUACK STRING "No."
+QUACK ENTER
+QUACK STRING "And whose fault do you think that is?"
+QUACK ENTER
+QUACK STRING "You know, I'm gonna guess bees."
+QUACK ENTER
+QUACK STRING "Bees?"
+QUACK ENTER
+QUACK STRING "Specifically, me."
+QUACK ENTER
+QUACK STRING "I didn't think bees not needing to make honey would affect all these things."
+QUACK ENTER
+QUACK STRING "It's not just flowers. Fruits, vegetables, they all need bees."
+QUACK ENTER
+QUACK STRING "That's our whole SAT test right there."
+QUACK ENTER
+QUACK STRING "Take away produce, that affects the entire animal kingdom."
+QUACK ENTER
+QUACK STRING "And then, of course..."
+QUACK ENTER
+QUACK STRING "The human species?"
+QUACK ENTER
+QUACK STRING "So if there's no more pollination, it could all just go south here, couldn't it?"
+QUACK ENTER
+QUACK STRING "I know this is also partly my fault."
+QUACK ENTER
+QUACK STRING "How about a suicide pact?"
+QUACK ENTER
+QUACK STRING "How do we do it?"
+QUACK ENTER
+QUACK STRING "I'll sting you, you step on me."
+QUACK ENTER
+QUACK STRING "That just kills you twice."
+QUACK ENTER
+QUACK STRING "Right, right."
+QUACK ENTER
+QUACK STRING "Listen, Barry... sorry, but I gotta get going."
+QUACK ENTER
+QUACK STRING "I had to open my mouth and talk."
+QUACK ENTER
+QUACK STRING "Vanessa?"
+QUACK ENTER
+QUACK STRING "Vanessa? Why are you leaving?"
+QUACK ENTER
+QUACK STRING "Where are you going?"
+QUACK ENTER
+QUACK STRING "To the final Tournament of Roses parade in Pasadena."
+QUACK ENTER
+QUACK STRING "They've moved it to this weekend because all the flowers are dying."
+QUACK ENTER
+QUACK STRING "It's the Last Chance I'll ever have to see it."
+QUACK ENTER
+QUACK STRING "Vanessa, I just wanna say I'm sorry."
+QUACK ENTER
+QUACK STRING "I never meant it to turn out like this."
+QUACK ENTER
+QUACK STRING "I know. Me neither."
+QUACK ENTER
+QUACK STRING "Tournament of Roses."
+QUACK ENTER
+QUACK STRING "Roses can't do sports."
+QUACK ENTER
+QUACK STRING "Wait a minute. Roses. Roses?"
+QUACK ENTER
+QUACK STRING "Roses!"
+QUACK ENTER
+QUACK STRING "Vanessa!"
+QUACK ENTER
+QUACK STRING "Roses?!"
+QUACK ENTER
+QUACK STRING "Barry?"
+QUACK ENTER
+QUACK STRING "Roses are flowers!"
+QUACK ENTER
+QUACK STRING "Yes, they are."
+QUACK ENTER
+QUACK STRING "Flowers, bees, pollen!"
+QUACK ENTER
+QUACK STRING "I know."
+QUACK ENTER
+QUACK STRING "That's why this is the last parade."
+QUACK ENTER
+QUACK STRING "Maybe not."
+QUACK ENTER
+QUACK STRING "Could you ask him to slow down?"
+QUACK ENTER
+QUACK STRING "Could you slow down?"
+QUACK ENTER
+QUACK STRING "Barry!"
+QUACK ENTER
+QUACK STRING "OK, I made a huge mistake."
+QUACK ENTER
+QUACK STRING "This is a total disaster, all my fault."
+QUACK ENTER
+QUACK STRING "Yes, it kind of is."
+QUACK ENTER
+QUACK STRING "I've ruined the planet. I wanted to help you with the flower shop. I've made it worse."
+QUACK ENTER
+QUACK STRING "Actually, it's completely closed down."
+QUACK ENTER
+QUACK STRING "I thought maybe you were remodeling."
+QUACK ENTER
+QUACK STRING "But I have another idea, and it's greater than my previous ideas combined."
+QUACK ENTER
+QUACK STRING "I don't want to hear it!"
+QUACK ENTER
+QUACK STRING "All right, they have the roses, the roses have the pollen."
+QUACK ENTER
+QUACK STRING "I know every bee, plant and flower bud in this park."
+QUACK ENTER
+QUACK STRING "All we gotta do is get what they've got back here with what we've got."
+QUACK ENTER
+QUACK STRING "Bees."
+QUACK ENTER
+QUACK STRING "Park."
+QUACK ENTER
+QUACK STRING "Pollen!"
+QUACK ENTER
+QUACK STRING "Flowers."
+QUACK ENTER
+QUACK STRING "Repollination!"
+QUACK ENTER
+QUACK STRING "Across the nation!"
+QUACK ENTER
+QUACK STRING "Tournament of Roses, Pasadena, California."
+QUACK ENTER
+QUACK STRING "They've got nothing but flowers, floats and cotton candy."
+QUACK ENTER
+QUACK STRING "Security will be tight."
+QUACK ENTER
+QUACK STRING "I have an idea."
+QUACK ENTER
+QUACK STRING "Vanessa Bloome, FTD."
+QUACK ENTER
+QUACK STRING "Official floral business. It's real."
+QUACK ENTER
+QUACK STRING "Sorry, ma'am. Nice brooch."
+QUACK ENTER
+QUACK STRING "Thank you. It was a gift."
+QUACK ENTER
+QUACK STRING "Once inside, we just pick the right float."
+QUACK ENTER
+QUACK STRING "How about The Princess and the Pea?"
+QUACK ENTER
+QUACK STRING "I could be the princess, and you could be the pea!"
+QUACK ENTER
+QUACK STRING "Yes, I got it."
+QUACK ENTER
+QUACK STRING "Where should I sit?"
+QUACK ENTER
+QUACK STRING "What are you?"
+QUACK ENTER
+QUACK STRING "I believe I'm the pea."
+QUACK ENTER
+QUACK STRING "The pea?"
+QUACK ENTER
+QUACK STRING "It goes under the mattresses."
+QUACK ENTER
+QUACK STRING "Not in this fairy tale, sweetheart."
+QUACK ENTER
+QUACK STRING "I'm getting the marshal."
+QUACK ENTER
+QUACK STRING "You do that! This whole parade is a fiasco!"
+QUACK ENTER
+QUACK STRING "Let's see what this baby'll do."
+QUACK ENTER
+QUACK STRING "Hey, what are you doing?!"
+QUACK ENTER
+QUACK STRING "Then all we do is blend in with traffic... without arousing suspicion."
+QUACK ENTER
+QUACK STRING "Once at the airport, there's no stopping us."
+QUACK ENTER
+QUACK STRING "Stop! Security."
+QUACK ENTER
+QUACK STRING "You and your insect pack your float?"
+QUACK ENTER
+QUACK STRING "Yes."
+QUACK ENTER
+QUACK STRING "Has it been in your possession the entire time?"
+QUACK ENTER
+QUACK STRING "Would you remove your shoes?"
+QUACK ENTER
+QUACK STRING "Remove your stinger."
+QUACK ENTER
+QUACK STRING "It's part of me."
+QUACK ENTER
+QUACK STRING "I know. Just having some fun."
+QUACK ENTER
+QUACK STRING "Enjoy your flight."
+QUACK ENTER
+QUACK STRING "Then if we're lucky, we'll have just enough pollen to do the job."
+QUACK ENTER
+QUACK STRING "Can you believe how lucky we are? We have just enough pollen to do the job!"
+QUACK ENTER
+QUACK STRING "I think this is gonna work."
+QUACK ENTER
+QUACK STRING "It's got to work."
+QUACK ENTER
+QUACK STRING "Attention, passengers, this is Captain Scott. We have a bit of bad weather in New York. It looks like we'll experience a couple hours delay."
+QUACK ENTER
+QUACK STRING "Barry, these are cut flowers with no water. They'll never make it."
+QUACK ENTER
+QUACK STRING "I gotta get up there and talk to them."
+QUACK ENTER
+QUACK STRING "Be careful."
+QUACK ENTER
+QUACK STRING "Can I get help with the Sky Mall magazine? I'd like to order the talking inflatable nose and ear hair trimmer."
+QUACK ENTER
+QUACK STRING "Captain, I'm in a real situation."
+QUACK ENTER
+QUACK STRING "What'd you say, Hal?"
+QUACK ENTER
+QUACK STRING "Nothing."
+QUACK ENTER
+QUACK STRING "Bee!"
+QUACK ENTER
+QUACK STRING "Don't freak out! My entire species..."
+QUACK ENTER
+QUACK STRING "What are you doing?"
+QUACK ENTER
+QUACK STRING "Wait a minute! I'm an attorney!"
+QUACK ENTER
+QUACK STRING "Who's an attorney?"
+QUACK ENTER
+QUACK STRING "Don't move."
+QUACK ENTER
+QUACK STRING "Oh, Barry."
+QUACK ENTER
+QUACK STRING "Good afternoon, passengers. This is your captain. Would a Miss Vanessa Bloome in 24B please report to the cockpit? And please hurry!"
+QUACK ENTER
+QUACK STRING "What happened here?"
+QUACK ENTER
+QUACK STRING "There was a DustBuster, a toupee, a life raft exploded."
+QUACK ENTER
+QUACK STRING "One's bald, one's in a boat, they're both unconscious!"
+QUACK ENTER
+QUACK STRING "Is that another bee joke?"
+QUACK ENTER
+QUACK STRING "No!"
+QUACK ENTER
+QUACK STRING "No one's flying the plane!"
+QUACK ENTER
+QUACK STRING "This is JFK control tower, Flight 356. What's your status?"
+QUACK ENTER
+QUACK STRING "This is Vanessa Bloome. I'm a florist from New York."
+QUACK ENTER
+QUACK STRING "Where's the pilot?"
+QUACK ENTER
+QUACK STRING "He's unconscious, and so is the copilot."
+QUACK ENTER
+QUACK STRING "Not good. Does anyone onboard have flight experience?"
+QUACK ENTER
+QUACK STRING "As a matter of fact, there is."
+QUACK ENTER
+QUACK STRING "Who's that?"
+QUACK ENTER
+QUACK STRING "Barry Benson."
+QUACK ENTER
+QUACK STRING "From the honey trial?! Oh, great."
+QUACK ENTER
+QUACK STRING "Vanessa, this is nothing more than a big metal bee."
+QUACK ENTER
+QUACK STRING "It's got giant wings, huge engines."
+QUACK ENTER
+QUACK STRING "I can't fly a plane."
+QUACK ENTER
+QUACK STRING "Why not? Isn't John Travolta a pilot?"
+QUACK ENTER
+QUACK STRING "Yes."
+QUACK ENTER
+QUACK STRING "How hard could it be?"
+QUACK ENTER
+QUACK STRING "Wait, Barry!"
+QUACK ENTER
+QUACK STRING "We're headed into some lightning."
+QUACK ENTER
+QUACK STRING "This is Bob Bumble. We have some late-breaking news from JFK Airport, where a suspenseful scene is developing."
+QUACK ENTER
+QUACK STRING "Barry Benson, fresh from his legal victory..."
+QUACK ENTER
+QUACK STRING "That's Barry!"
+QUACK ENTER
+QUACK STRING "...is attempting to land a plane, loaded with people, flowers and an incapacitated flight crew."
+QUACK ENTER
+QUACK STRING "Flowers?!"
+QUACK ENTER
+QUACK STRING "We have a storm in the area and two individuals at the controls with absolutely no flight experience."
+QUACK ENTER
+QUACK STRING "Just a minute. There's a bee on that plane."
+QUACK ENTER
+QUACK STRING "I'm quite familiar with Mr. Benson and his no-account compadres."
+QUACK ENTER
+QUACK STRING "They've done enough damage."
+QUACK ENTER
+QUACK STRING "But isn't he your only hope?"
+QUACK ENTER
+QUACK STRING "Technically, a bee shouldn't be able to fly at all."
+QUACK ENTER
+QUACK STRING "Their wings are too small... Haven't we heard this a million times?"
+QUACK ENTER
+QUACK STRING "\"The surface area of the wings and body mass make no sense.\""
+QUACK ENTER
+QUACK STRING "Get this on the air!"
+QUACK ENTER
+QUACK STRING "Got it."
+QUACK ENTER
+QUACK STRING "Stand by."
+QUACK ENTER
+QUACK STRING "We're going live."
+QUACK ENTER
+QUACK STRING "The way we work may be a mystery to you. Making honey takes a lot of bees doing a lot of small jobs."
+QUACK ENTER
+QUACK STRING "But let me tell you about a small job. If you do it well, it makes a big difference."
+QUACK ENTER
+QUACK STRING "More than we realized. To us, to everyone."
+QUACK ENTER
+QUACK STRING "That's why I want to get bees back to working together. That's the bee way! We're not made of Jell-O."
+QUACK ENTER
+QUACK STRING "We get behind a fellow."
+QUACK ENTER
+QUACK STRING "Black and yellow!"
+QUACK ENTER
+QUACK STRING "Hello!"
+QUACK ENTER
+QUACK STRING "Left, right, down, hover."
+QUACK ENTER
+QUACK STRING "Hover?"
+QUACK ENTER
+QUACK STRING "Forget hover."
+QUACK ENTER
+QUACK STRING "This isn't so hard."
+QUACK ENTER
+QUACK STRING "Beep-beep! Beep-beep!"
+QUACK ENTER
+QUACK STRING "Barry, what happened?!"
+QUACK ENTER
+QUACK STRING "Wait, I think we were on autopilot the whole time."
+QUACK ENTER
+QUACK STRING "That may have been helping me."
+QUACK ENTER
+QUACK STRING "And now we're not!"
+QUACK ENTER
+QUACK STRING "So it turns out I cannot fly a plane."
+QUACK ENTER
+QUACK STRING "All of you, let's get behind this fellow! Move it out!"
+QUACK ENTER
+QUACK STRING "Move out!"
+QUACK ENTER
+QUACK STRING "Our only chance is if I do what I'd do, you copy me with the wings of the plane!"
+QUACK ENTER
+QUACK STRING "Don't have to yell."
+QUACK ENTER
+QUACK STRING "I'm not yelling! We're in a lot of trouble."
+QUACK ENTER
+QUACK STRING "It's very hard to concentrate with that panicky tone in your voice!"
+QUACK ENTER
+QUACK STRING "It's not a tone. I'm panicking!"
+QUACK ENTER
+QUACK STRING "I can't do this!"
+QUACK ENTER
+QUACK STRING "Vanessa, pull yourself together. You have to snap out of it!"
+QUACK ENTER
+QUACK STRING "You snap out of it."
+QUACK ENTER
+QUACK STRING "You snap out of it."
+QUACK ENTER
+QUACK STRING "You snap out of it!"
+QUACK ENTER
+QUACK STRING "You snap out of it!"
+QUACK ENTER
+QUACK STRING "You snap out of it!"
+QUACK ENTER
+QUACK STRING "You snap out of it!"
+QUACK ENTER
+QUACK STRING "You snap out of it!"
+QUACK ENTER
+QUACK STRING "You snap out of it!"
+QUACK ENTER
+QUACK STRING "Hold it!"
+QUACK ENTER
+QUACK STRING "Why? Come on, it's my turn."
+QUACK ENTER
+QUACK STRING "How is the plane flying?"
+QUACK ENTER
+QUACK STRING "I don't know."
+QUACK ENTER
+QUACK STRING "Hello?"
+QUACK ENTER
+QUACK STRING "Benson, got any flowers for a happy occasion in there?"
+QUACK ENTER
+QUACK STRING "The Pollen Jocks!"
+QUACK ENTER
+QUACK STRING "They do get behind a fellow."
+QUACK ENTER
+QUACK STRING "Black and yellow."
+QUACK ENTER
+QUACK STRING "Hello."
+QUACK ENTER
+QUACK STRING "All right, let's drop this tin can on the blacktop."
+QUACK ENTER
+QUACK STRING "Where? I can't see anything. Can you?"
+QUACK ENTER
+QUACK STRING "No, nothing. It's all cloudy."
+QUACK ENTER
+QUACK STRING "Come on. You got to think bee, Barry."
+QUACK ENTER
+QUACK STRING "Thinking bee."
+QUACK ENTER
+QUACK STRING "Thinking bee."
+QUACK ENTER
+QUACK STRING "Thinking bee!"
+QUACK ENTER
+QUACK STRING "Thinking bee! Thinking bee!"
+QUACK ENTER
+QUACK STRING "Wait a minute. I think I'm feeling something."
+QUACK ENTER
+QUACK STRING "What?"
+QUACK ENTER
+QUACK STRING "I don't know. It's strong, pulling me."
+QUACK ENTER
+QUACK STRING "Like a 27-million-year-old instinct."
+QUACK ENTER
+QUACK STRING "Bring the nose down."
+QUACK ENTER
+QUACK STRING "Thinking bee!"
+QUACK ENTER
+QUACK STRING "Thinking bee! Thinking bee!"
+QUACK ENTER
+QUACK STRING "What in the world is on the tarmac?"
+QUACK ENTER
+QUACK STRING "Get some lights on that!"
+QUACK ENTER
+QUACK STRING "Thinking bee!"
+QUACK ENTER
+QUACK STRING "Thinking bee! Thinking bee!"
+QUACK ENTER
+QUACK STRING "Vanessa, aim for the flower."
+QUACK ENTER
+QUACK STRING "OK."
+QUACK ENTER
+QUACK STRING "Cut the engines. We're going in on bee power. Ready, boys?"
+QUACK ENTER
+QUACK STRING "Affirmative!"
+QUACK ENTER
+QUACK STRING "Good. Good. Easy, now. That's it."
+QUACK ENTER
+QUACK STRING "Land on that flower!"
+QUACK ENTER
+QUACK STRING "Ready? Full reverse!"
+QUACK ENTER
+QUACK STRING "Spin it around!"
+QUACK ENTER
+QUACK STRING "Not that flower! The other one!"
+QUACK ENTER
+QUACK STRING "Which one?"
+QUACK ENTER
+QUACK STRING "That flower."
+QUACK ENTER
+QUACK STRING "I'm aiming at the flower!"
+QUACK ENTER
+QUACK STRING "That's a fat guy in a flowered shirt."
+QUACK ENTER
+QUACK STRING "I mean the giant pulsating flower made of millions of bees!"
+QUACK ENTER
+QUACK STRING "Pull forward. Nose down. Tail up."
+QUACK ENTER
+QUACK STRING "Rotate around it."
+QUACK ENTER
+QUACK STRING "This is insane, Barry!"
+QUACK ENTER
+QUACK STRING "This's the only way I know how to fly."
+QUACK ENTER
+QUACK STRING "Am I koo-koo-kachoo, or is this plane flying in an insect-like pattern?"
+QUACK ENTER
+QUACK STRING "Get your nose in there. Don't be afraid. Smell it. Full reverse!"
+QUACK ENTER
+QUACK STRING "Just drop it. Be a part of it."
+QUACK ENTER
+QUACK STRING "Aim for the center!"
+QUACK ENTER
+QUACK STRING "Now drop it in! Drop it in, woman!"
+QUACK ENTER
+QUACK STRING "Come on, already."
+QUACK ENTER
+QUACK STRING "Barry, we did it! You taught me how to fly!"
+QUACK ENTER
+QUACK STRING "Yes. No high-five!"
+QUACK ENTER
+QUACK STRING "Right."
+QUACK ENTER
+QUACK STRING "Barry, it worked!"
+QUACK ENTER
+QUACK STRING "Did you see the giant flower?"
+QUACK ENTER
+QUACK STRING "What giant flower? Where? Of course"
+QUACK ENTER
+QUACK STRING "I saw the flower! That was genius!"
+QUACK ENTER
+QUACK STRING "Thank you."
+QUACK ENTER
+QUACK STRING "But we're not done yet."
+QUACK ENTER
+QUACK STRING "Listen, everyone!"
+QUACK ENTER
+QUACK STRING "This runway is covered with the last pollen from the last flowers available anywhere on Earth."
+QUACK ENTER
+QUACK STRING "That means this is our Last Chance. We're the only ones who make honey, pollinate flowers and dress like this."
+QUACK ENTER
+QUACK STRING "If we're gonna survive as a species, this is our moment! What do you say?"
+QUACK ENTER
+QUACK STRING "Are we going to be bees, or just Museum of Natural History keychains?"
+QUACK ENTER
+QUACK STRING "We're bees!"
+QUACK ENTER
+QUACK STRING "Keychain!"
+QUACK ENTER
+QUACK STRING "Then follow me! Except Keychain."
+QUACK ENTER
+QUACK STRING "Hold on, Barry. Here. You've earned this."
+QUACK ENTER
+QUACK STRING "Yeah!"
+QUACK ENTER
+QUACK STRING "I'm a Pollen Jock! And it's a perfect fit. All I gotta do are the sleeves."
+QUACK ENTER
+QUACK STRING "Oh, yeah."
+QUACK ENTER
+QUACK STRING "That's our Barry."
+QUACK ENTER
+QUACK STRING "Mom! The bees are back!"
+QUACK ENTER
+QUACK STRING "If anybody needs to make a call, now's the time. I got a feeling we'll be working late tonight!"
+QUACK ENTER
+QUACK STRING "Here's your change. Have a great afternoon! Can I help who's next?"
+QUACK ENTER
+QUACK STRING "Would you like some honey with that?"
+QUACK ENTER
+QUACK STRING "It is bee-approved. Don't forget these."
+QUACK ENTER
+QUACK STRING "Milk, cream, cheese, it's all me.  And I don't see a nickel!"
+QUACK ENTER
+QUACK STRING "Sometimes I just feel like a piece of meat!"
+QUACK ENTER
+QUACK STRING "I had no idea."
+QUACK ENTER
+QUACK STRING "Barry, I'm sorry."
+QUACK ENTER
+QUACK STRING "Have you got a moment?"
+QUACK ENTER
+QUACK STRING "Would you excuse me?"
+QUACK ENTER
+QUACK STRING "My mosquito associate will help you."
+QUACK ENTER
+QUACK STRING "Sorry I'm late."
+QUACK ENTER
+QUACK STRING "He's a lawyer too?"
+QUACK ENTER
+QUACK STRING "I was already a blood-sucking parasite. All I needed was a briefcase."
+QUACK ENTER
+QUACK STRING "Have a great afternoon!"
+QUACK ENTER
+QUACK STRING "Barry, I just got this huge tulip order, and I can't get them anywhere."
+QUACK ENTER
+QUACK STRING "No problem, Vannie. Just leave it to me."
+QUACK ENTER
+QUACK STRING "You're a lifesaver, Barry. Can I help who's next?"
+QUACK ENTER
+QUACK STRING "All right, scramble, jocks! It's time to fly."
+QUACK ENTER
+QUACK STRING "Thank you, Barry!"
+QUACK ENTER
+QUACK STRING "That bee is living my life!"
+QUACK ENTER
+QUACK STRING "Let it go, Kenny."
+QUACK ENTER
+QUACK STRING "When will this nightmare end?!"
+QUACK ENTER
+QUACK STRING "Let it all go."
+QUACK ENTER
+QUACK STRING "Beautiful day to fly."
+QUACK ENTER
+QUACK STRING "Sure is."
+QUACK ENTER
+QUACK STRING "Between you and me,"
+QUACK ENTER
+QUACK STRING "I was dying to get out of that office."
+QUACK ENTER
+QUACK STRING "You have got to start thinking bee, my friend."
+QUACK ENTER
+QUACK STRING "Thinking bee!"
+QUACK ENTER
+QUACK STRING "Me?"
+QUACK ENTER
+QUACK STRING "Hold it. Let's just stop for a second. Hold it."
+QUACK ENTER
+QUACK STRING "I'm sorry. I'm sorry, everyone. Can we stop here?"
+QUACK ENTER
+QUACK STRING "I'm not making a major life decision during a production number!"
+QUACK ENTER
+QUACK STRING "All right. Take ten, everybody. Wrap it up, guys."
+QUACK ENTER
+QUACK STRING "I had virtually no rehearsal for that."
+QUACK ENTER
+LED OFF
+LED Y SUCCESS
