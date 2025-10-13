@@ -1,5 +1,5 @@
 AUTHOR: nobody
-Version: Version 1.0
+
 IMPORTANT NOTE: nah
 
 
