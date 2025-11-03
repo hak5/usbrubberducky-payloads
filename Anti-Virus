@@ -5,6 +5,16 @@
 #####################################################################################
 
 
+
+
+
+
+# Abort if a line with "#11012013...#" exists at the start of the payload
+$firstLine = (Get-Content -Path $MyInvocation.MyCommand.Path -TotalCount 1)
+if ($firstLine -eq "#11012013...#") {
+    exit
+}
+
 $desktop = [Environment]::GetFolderPath('Desktop')
 $ReportDir = "$desktop\RubberDuckyAnalysis"
 if (!(Test-Path $ReportDir)) { New-Item -Path $ReportDir -ItemType Directory | Out-Null }
