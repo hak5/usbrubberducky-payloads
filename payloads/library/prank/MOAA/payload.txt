@@ -1,12 +1,7 @@
 REM TITLE: MOAA (Mother Of All Annoyances)
 REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
 REM TARGET OS: Linux (tested on Pop!_OS) | Dependencies: `xdotool` (for mouse movement) and `gnome environment` (for terminal window spawning).
-REM DESCRIPTION: The Mother Of All Annoyances payload. This will randomly loop CAPSLOCK and NUMLOCK on/off and create arrowkey movement (all three controlled via the ducky).
-MOAA also writes a Bash script (.MOAA.sh) hidden in the users' home directory that will loop turning on/off the Wifi radio and will teleport the mouse pointer around the screen.
-The Bash script is triggered via persistent (appending .bashrc) alias binds. Script execution is bound to the `ls` command. The payload also binds the `exit` command to spawn new terminal windows (gnome environment) so you can never "exit". Lastly, the `pwd` command will print "command not found" to the users' terminal instead of printing the working directory.
-
-REM HOW DO I STOP THIS MADNESS: You don't, RIP. Kidding, unplug your ducky > in a terminal window: `ps aux | grep -i MOAA.sh' > kill the associated process > close your terminal via mouse.
-REM CLEANUP: Remove the MOAA.sh script on the machine: `rm -f ~/.MOAA.sh`, Remove alias key binds in `.bashrc` file: `nano ~/.bashrc' (scroll to the bottom of the file and remove alias binds).
+REM DESCRIPTION: See README.md
 
 ATTACKMODE HID
 DELAY 1000
