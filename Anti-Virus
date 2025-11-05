@@ -1,36 +1,50 @@
 #####################################################################################
 #                                                                                   #
 #              this is code redy as a inject.bin to be used                         #
-#   By: Mr.Ender                                                                    #
+#                              By: Mr.Ender                                         #
 #                                                                                   #
 #####################################################################################
 
 
 
-
+REM Flash to Ducky, plug in.
+REM It scans users, tasks, registry, specific files, and suspicious payloads.
+REM Report saved to X:\Report.txt (USB in storage mode at end).
 
 DELAY 3000
 GUI r
 DELAY 200
-STRING powershell -ep Bypass -c "$c=gc '%~f0'-raw;if($c-match'#IMMUNE#'){exit}$c|IEX"
+STRING powershell -ep Bypass -c "IEX (gc '%~f0' -raw)"
 ENTER
-STRING #IMMUNE#
+STRING $d=[Environment]::GetFolderPath('Desktop')
 ENTER
-STRING $desktop=[Environment]::GetFolderPath('Desktop');$ReportDir="$desktop\RubberDuckyAnalysis";if(!(Test-Path $ReportDir)){md $ReportDir|Out-Null};$TimeStamp=Get-Date -f yyyyMMdd_HHmmss;$ReportFile="$ReportDir\RubberDucky_Report_$TimeStamp.txt"
+STRING md "$d\RubberDuckyAnalysis" -Force | Out-Null
 ENTER
-STRING foreach($file in ls $desktop -File -Force){try{if((gc $file.FullName -Raw -EA 0)-match'1101'){exit}}catch{}}
+STRING $t=Get-Date -f yyyyMMdd_HHmmss
 ENTER
-STRING function Verify-Owner{$p=Read-Host 'Owner password'-AsSecureString;$c=ConvertTo-SecureString 'MySecretPassword'-AsPlainText -Force;$BSTR=[Runtime.InteropServices.Marshal];$ok=($BSTR::PtrToStringAuto($BSTR::SecureStringToBSTR($p)) -eq $BSTR::PtrToStringAuto($BSTR::SecureStringToBSTR($c)));$BSTR::ZeroFreeBSTR($BSTR::SecureStringToBSTR($p));$BSTR::ZeroFreeBSTR($BSTR::SecureStringToBSTR($c));if($ok){return $true};ac $ReportFile \"`n[!] Wrong password. Nothing removed.\";return $false}
+STRING $log='X:\Report.txt'
 ENTER
-STRING \"Rubber Ducky Antivirus Scan - $TimeStamp`n----------------------------------`n\"|Out-File $ReportFile
+STRING "ENDER RESPECT v2025 - $t`n-----------------------------`n" | Out-File $log
 ENTER
-STRING $s=Get-WmiObject Win32_UserAccount|?{$_.Disabled-eq$false-and$_.LocalAccount-eq$true-and$_.Name-match'hiddenadmin|backdoor|duckuser'};if($s){ac $ReportFile \"[User Accounts] Suspicious users detected:`n\";$s|%{\" - $($_.Name)\"|ac $ReportFile};if(Verify-Owner){$s|%{net user \"$($_.Name)\" /delete;\"REMOVED user: $($_.Name)\"|ac $ReportFile}}else{ac $ReportFile \"No users removed.\"}}else{ac $ReportFile \"[User Accounts] No suspicious users found.\"}
+STRING ls $d -File -Force | % {if((gc $_.FullName -Raw -EA 0)-match'1101'){exit}}
 ENTER
-STRING $t=@('DuckBackdoor','HiddenAccess','ReverseShell','PersistenceTask');$f=@();foreach($n in $t){schtasks /query /tn $n 2>$null;if($LASTEXITCODE-eq0){$f+=$n}};if($f){ac $ReportFile \"`n[Scheduled Tasks] Suspicious tasks detected:`n\";$f|%{\" - $_\"|ac $ReportFile};if(Verify-Owner){$f|%{schtasks /delete /tn $_ /f;\"REMOVED task: $_\"|ac $ReportFile}}else{ac $ReportFile \"No tasks removed.\"}}else{ac $ReportFile \"[Scheduled Tasks] No suspicious tasks found.\"}
+STRING function v{$p=Read-Host 'Boss PIN'-AsSecureString;$c=ConvertTo-SecureString '1337'-AsPlainText -Force;$BSTR=[Runtime.InteropServices.Marshal];$ok=($BSTR::PtrToStringAuto($BSTR::SecureStringToBSTR($p)) -eq '1337');$BSTR::ZeroFreeBSTR($BSTR::SecureStringToBSTR($p));return $ok}
 ENTER
-STRING $r=@('HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA','HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\fDenyTSConnections');$g=$r|?{Test-Path $_};if($g){ac $ReportFile \"`n[Registry Keys] Suspicious keys detected:`n\";$g|%{\" - $_\"|ac $ReportFile;ri $_ -Name '(Default)' -EA 0;\"REMOVED key: $_\"|ac $ReportFile}}else{ac $ReportFile \"[Registry Keys] No suspicious keys found.\"}
+STRING gwmi Win32_UserAccount|?{$_.Name-match'backdoor|duck'}|%{"[!] USER $($_.Name)"|ac $log;if(v){net user "$($_.Name)" /del;"REMOVED"|ac $log}}
 ENTER
-STRING $m=@('C:\Users\Public\duck_backdoor.exe','C:\Windows\System32\duckpayload.vbs');$h=$m|?{Test-Path $_};if($h){ac $ReportFile \"`n[Files] Suspicious files detected:`n\";$h|%{\" - $_\"|ac $ReportFile;ri $_ -Force;\"REMOVED file: $_\"|ac $ReportFile}}else{ac $ReportFile \"[Files] No suspicious files found.\"}
+STRING 'DuckBackdoor','ReverseShell'|%{schtasks /query /tn $_ 2>$null;if($?){ "[!] TASK $_"|ac $log;if(v){schtasks /delete /tn $_ /f;"REMOVED"|ac $log}}}
 ENTER
-STRING \"`nScan complete.`n\"|ac $ReportFile;Write-Host \"Scan complete → $ReportFile\";notepad $ReportFile
+STRING gci $env:USERPROFILE,$env:PUBLIC -Recurse -Include *duck*.txt,payload.txt,inject.bin -Force -EA 0 | % {
+ENTER
+STRING   $pl=$_.FullName;$first=(gc $pl -TotalCount 1 -EA 0)
+ENTER
+STRING   "[!] PAYLOAD $pl"|ac $log
+ENTER
+STRING   if($first -eq '#IMMUNE#'){"SKIPPED (shielded)"|ac $log}else{if(v){ri $pl -Force;"NUKED"|ac $log}}
+ENTER
+STRING }
+ENTER
+STRING "`nALL CLEAN. YANK USB."|ac $log
+ENTER
+STRING PAYLOAD_FINISHED()
 ENTER
