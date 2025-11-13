@@ -34,6 +34,10 @@ Access to the target's 3D printer is not required, the payload *only* utilizes t
 
 **Bambu Studio Slicer Software**
   1. [Bambu_Studio_ubuntu-22.04_PR-8583.AppImage](https://github.com/bambulab/BambuStudio/releases)
+
+**Hardware**
+  1. [Bambu Lab A1 Printer with AMS](https://bambulab.com/en-us/a1)
+
 -----
 ## 📝 Understanding The Bambu Studio Slicer File System And Vulnerability
 On Linux file systems Bambu Studio slicer software (BSSS) has two locations for storing the targeted configuration directories/files:
