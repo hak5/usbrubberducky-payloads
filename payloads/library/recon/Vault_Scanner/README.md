@@ -15,7 +15,7 @@ Scans for password manager database files and sends findings to Discord webhook.
 
 ### 2. Configure Payload
 - Edit `payload.txt` and replace `example.com` with your actual server URL
-- Encode to `inject.bin` using DuckEncoder
+- Encode to `inject.bin` using PayloadStudio
 
 ### 3. Deploy
 - Copy `inject.bin` to your Rubber Ducky
