@@ -1,0 +1,105 @@
+#####################################################################################
+#                Just run antivirus/run.ps1                                         #
+#(or with PowerShell: powershell -ExecutionPolicy Bypass -File antivirus/run.ps1)   #
+#                                                                                   #
+#####################################################################################
+
+
+$desktop = [Environment]::GetFolderPath('Desktop')
+$ReportDir = "$desktop\RubberDuckyAnalysis"
+if (!(Test-Path $ReportDir)) { New-Item -Path $ReportDir -ItemType Directory | Out-Null }
+$TimeStamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$ReportFile = "$ReportDir\RubberDucky_Report_$TimeStamp.txt"
+
+# Abort if any Desktop file contains '1101'
+foreach ($file in Get-ChildItem -Path $desktop -File -Force) {
+    try {
+        if ((Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue) -match "1101") {
+            exit
+        }
+    } catch {}
+}
+
+function Verify-Owner {
+    $ownerPassword = Read-Host "Enter owner verification password" -AsSecureString
+    $correctPassword = ConvertTo-SecureString "MySecretPassword" -AsPlainText -Force
+    if ((ConvertFrom-SecureString $ownerPassword) -eq (ConvertFrom-SecureString $correctPassword)) { return $true }
+    else {
+        Add-Content $ReportFile "`n[!] Owner verification failed. No critical actions taken."
+        return $false
+    }
+}
+
+Add-Content $ReportFile "Rubber Ducky Antivirus Scan - $TimeStamp`n----------------------------------`n"
+
+# Suspicious Users
+$suspiciousUsers = Get-WmiObject Win32_UserAccount | Where-Object {
+    $_.Disabled -eq $false -and $_.LocalAccount -eq $true -and ($_.Name -match "hiddenadmin|backdoor|duckuser")
+}
+if ($suspiciousUsers) {
+    Add-Content $ReportFile "[User Accounts] Suspicious users detected:`n"
+    foreach ($user in $suspiciousUsers) { Add-Content $ReportFile "- $($user.Name)" }
+    if (Verify-Owner) {
+        foreach ($user in $suspiciousUsers) {
+            net user $user.Name /delete
+            Add-Content $ReportFile "REMOVED user: $($user.Name)"
+        }
+    } else { Add-Content $ReportFile "Owner did NOT verify. No users removed." }
+} else { Add-Content $ReportFile "[User Accounts] No suspicious users found." }
+
+# Scheduled Tasks
+$maliciousTasks = @("DuckBackdoor", "HiddenAccess", "ReverseShell", "PersistenceTask")
+$foundTasks = @()
+foreach ($task in $maliciousTasks) {
+    schtasks /query /tn $task 2>$null
+    if ($LASTEXITCODE -eq 0) { $foundTasks += $task }
+}
+if ($foundTasks) {
+    Add-Content $ReportFile "`n[Scheduled Tasks] Suspicious tasks detected:`n"
+    foreach ($task in $foundTasks) { Add-Content $ReportFile "- $task" }
+    if (Verify-Owner) {
+        foreach ($task in $foundTasks) {
+            schtasks /delete /tn $task /f
+            Add-Content $ReportFile "REMOVED task: $task"
+        }
+    } else { Add-Content $ReportFile "Owner did NOT verify. No tasks removed." }
+} else { Add-Content $ReportFile "[Scheduled Tasks] No suspicious tasks found." }
+
+# Registry Keys
+$regPaths = @(
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA",
+    "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\fDenyTSConnections"
+)
+$foundRegs = @()
+foreach ($path in $regPaths) {
+    if (Test-Path $path) { $foundRegs += $path }
+}
+if ($foundRegs) {
+    Add-Content $ReportFile "`n[Registry Keys] Suspicious registry keys detected:`n"
+    foreach ($path in $foundRegs) {
+        Add-Content $ReportFile "- $path"
+        Remove-ItemProperty -Path $path -Name "(Default)" -ErrorAction SilentlyContinue
+        Add-Content $ReportFile "REMOVED registry key: $path"
+    }
+} else { Add-Content $ReportFile "[Registry Keys] No suspicious keys found." }
+
+# Suspicious Files
+$maliciousFiles = @(
+    "C:\Users\Public\duck_backdoor.exe",
+    "C:\Windows\System32\duckpayload.vbs"
+)
+$foundFiles = @()
+foreach ($file in $maliciousFiles) {
+    if (Test-Path $file) { $foundFiles += $file }
+}
+if ($foundFiles) {
+    Add-Content $ReportFile "`n[Files] Suspicious files detected:`n"
+    foreach ($file in $foundFiles) {
+        Add-Content $ReportFile "- $file"
+        Remove-Item $file -Force
+        Add-Content $ReportFile "REMOVED file: $file"
+    }
+} else { Add-Content $ReportFile "[Files] No suspicious files found." }
+
+Add-Content $ReportFile "`nScan complete.`n"
+Write-Host "Rubber Ducky Antivirus scan complete. See $ReportFile"
