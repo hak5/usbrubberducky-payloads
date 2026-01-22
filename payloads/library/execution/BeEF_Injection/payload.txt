@@ -17,7 +17,7 @@ REM
 REM DESCRIPTION This will open a ton of tabs on the target device.
 REM One of which will be a domain/ip you are hosting. This script is
 REM meant to be used with the beEF framework. All you need to do is 
-REM replace the specified link (Line 62) with your hosted one. The 
+REM replace the specified link (Line 63) with your hosted one. The 
 REM idea is to "hide" the browser tab in the background behind all
 REM the other tabs.                     Written in DuckyScript 1.0 
 REM TARGET Android Devices with Chrome as the default browser.
