@@ -1,0 +1,9 @@
+DELAY 500
+GUI r
+DELAY 500
+STRING cmd
+DELAY 500
+ENTER
+DELAY 500
+STRING start msedge https://youareanidiot.cc/
+ENTER
