@@ -1,15 +1,18 @@
-REM ############################################################
-REM #                                                          #
-REM # Title        : This damn shell doesn't work, SO SAD! :C  #
-REM # Author       : Aleff                                     #
-REM # Version      : 1.0                                       #
-REM # Category     : Prank                                     #
-REM # Target       : Linux                                     #
-REM #                                                          #
-REM ############################################################
+REM_BLOCK
+############################################################
+#                                                          #
+# Title        : This damn shell doesn't work, SO SAD! :C  #
+# Author       : Aleff                                     #
+# Version      : 1.0                                       #
+# Category     : Prank                                     #
+# Target       : Linux                                     #
+#                                                          #
+############################################################
 
-REM Requirements:
-REM     - Nothing <3
+Requirements:
+    - Nothing <3
+END_REM
+
 REM With Kali Linux 2020.4, the new default shell is now ZSH for users who install the distribution.
 DEFINE #TARGET_KALI_LINUX TRUE
 

