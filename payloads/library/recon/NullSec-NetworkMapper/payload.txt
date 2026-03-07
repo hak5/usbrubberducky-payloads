@@ -1,0 +1,127 @@
+REM ====================================================
+REM Title:         NullSec Network Mapper
+REM Author:        NullSec (bad-antics)
+REM Description:   Automated network discovery and
+REM                mapping without external tools.
+REM                Uses native Windows commands only.
+REM Target:        Windows 10/11
+REM Version:       1.0
+REM Category:      Recon
+REM ====================================================
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -ExecutionPolicy Bypass -WindowStyle Hidden
+ENTER
+DELAY 1500
+
+REM Find the Ducky drive
+STRING $d=(Get-CimInstance Win32_LogicalDisk|?{$_.VolumeName -eq 'DUCKY'}).DeviceID;if(!$d){$d=$env:TEMP}
+ENTER
+DELAY 300
+
+STRING $r=@();$r+="=== NULLSEC NETWORK MAPPER ==="
+ENTER
+DELAY 100
+STRING $r+="Timestamp: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+ENTER
+DELAY 100
+STRING $r+="Hostname: $env:COMPUTERNAME"
+ENTER
+DELAY 100
+
+REM Local Network Config
+STRING $r+="`n=== LOCAL INTERFACES ==="
+ENTER
+DELAY 100
+STRING Get-NetAdapter|?{$_.Status -eq 'Up'}|%{$r+="  $($_.Name): $($_.MacAddress) - $($_.LinkSpeed)"}
+ENTER
+DELAY 300
+STRING Get-NetIPAddress -AddressFamily IPv4|?{$_.IPAddress -ne '127.0.0.1'}|%{$r+="  $($_.InterfaceAlias): $($_.IPAddress)/$($_.PrefixLength)"}
+ENTER
+DELAY 300
+
+REM ARP Table
+STRING $r+="`n=== ARP TABLE ==="
+ENTER
+DELAY 100
+STRING Get-NetNeighbor -AddressFamily IPv4|?{$_.State -ne 'Unreachable'}|%{$r+="  $($_.IPAddress) -> $($_.LinkLayerAddress) [$($_.State)]"}
+ENTER
+DELAY 500
+
+REM Routing Table
+STRING $r+="`n=== ROUTING TABLE ==="
+ENTER
+DELAY 100
+STRING Get-NetRoute -AddressFamily IPv4|?{$_.DestinationPrefix -ne '255.255.255.255/32'}|Sort-Object RouteMetric|Select-Object -First 20|%{$r+="  $($_.DestinationPrefix) via $($_.NextHop) metric $($_.RouteMetric)"}
+ENTER
+DELAY 300
+
+REM DNS Cache
+STRING $r+="`n=== DNS CACHE (Recent) ==="
+ENTER
+DELAY 100
+STRING Get-DnsClientCache|Select-Object -First 30|%{$r+="  $($_.Entry) -> $($_.Data) [TTL:$($_.TimeToLive)]"}
+ENTER
+DELAY 500
+
+REM Network Shares
+STRING $r+="`n=== NETWORK SHARES ==="
+ENTER
+DELAY 100
+STRING Get-SmbShare -ErrorAction SilentlyContinue|%{$r+="  \\$env:COMPUTERNAME\$($_.Name) ($($_.ShareType)) - $($_.Path)"}
+ENTER
+DELAY 300
+STRING Get-SmbMapping -ErrorAction SilentlyContinue|%{$r+="  Mapped: $($_.LocalPath) -> $($_.RemotePath) [$($_.Status)]"}
+ENTER
+DELAY 300
+
+REM Active Connections
+STRING $r+="`n=== ACTIVE CONNECTIONS ==="
+ENTER
+DELAY 100
+STRING Get-NetTCPConnection|?{$_.State -eq 'Established'}|Sort-Object RemoteAddress|%{$pn=try{(Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue).ProcessName}catch{'?'};$r+="  $($_.LocalAddress):$($_.LocalPort) -> $($_.RemoteAddress):$($_.RemotePort) [$pn]"}
+ENTER
+DELAY 500
+
+REM Listening Services
+STRING $r+="`n=== LISTENING SERVICES ==="
+ENTER
+DELAY 100
+STRING Get-NetTCPConnection|?{$_.State -eq 'Listen'}|Sort-Object LocalPort|%{$pn=try{(Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue).ProcessName}catch{'?'};$r+="  :$($_.LocalPort) [$pn]"}
+ENTER
+DELAY 300
+
+REM Subnet Ping Sweep
+STRING $r+="`n=== SUBNET PING SWEEP ==="
+ENTER
+DELAY 100
+STRING $gw=(Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue).NextHop;$subnet=$gw -replace '\.\d+$',''
+ENTER
+DELAY 200
+STRING $r+="Scanning $subnet.0/24..."
+ENTER
+DELAY 100
+STRING 1..254|%{$ip="$subnet.$_";$j=Test-Connection -ComputerName $ip -Count 1 -TimeoutSeconds 1 -ErrorAction SilentlyContinue;if($j){$r+="  [ALIVE] $ip (RTT: $($j.Latency)ms)"}}
+ENTER
+DELAY 15000
+
+REM Port scan on alive hosts
+STRING $r+="`n=== QUICK PORT SCAN (Gateway) ==="
+ENTER
+DELAY 100
+STRING $ports=@(21,22,23,25,53,80,110,135,139,143,443,445,993,995,1433,3306,3389,5432,5900,8080,8443);foreach($p in $ports){try{$t=New-Object Net.Sockets.TcpClient;$c=$t.BeginConnect($gw,$p,$null,$null);$w=$c.AsyncWaitHandle.WaitOne(500,$false);if($w){$r+="  $gw`:$p OPEN"};$t.Close()}catch{}}
+ENTER
+DELAY 5000
+
+REM Save report
+STRING $r+="`n=== END NETWORK MAP ==="
+ENTER
+DELAY 100
+STRING $r -join "`n"|Out-File "$d\network_map_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Encoding UTF8
+ENTER
+DELAY 500
+
+STRING Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue;exit
+ENTER
