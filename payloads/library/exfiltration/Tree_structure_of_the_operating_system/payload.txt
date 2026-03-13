@@ -1,12 +1,14 @@
-REM ###########################################################
-REM #                                                         |
-REM # Title        : Tree Structure Of The Operating System   |
-REM # Author       : Aleff                                    |
-REM # Version      : 1.0                                      |
-REM # Category     : Exfiltration                             |
-REM # Target       : Windows 10-11                            |
-REM #                                                         |
-REM ###########################################################
+REM_BLOCK
+###########################################################
+#                                                         #
+# Title        : Tree Structure Of The Operating System   #
+# Author       : Aleff                                    #
+# Version      : 1.0                                      #
+# Category     : Exfiltration                             #
+# Target       : Windows 10-11                            #
+#                                                         #
+###########################################################
+END_REM
 
 REM Requirements:
 REM     - Internet connection
