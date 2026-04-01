@@ -8,26 +8,43 @@ EXTENSION PASSFILE
             to check if a file named "PASSWORD" exists on the target Mac.
             The file can be hidden or visible.
             
+            If the file is found:
+                - Switches to ATTACKMODE STORAGE (USB mass storage mode)
+                - Stops all payload execution
+                
+            If the file is NOT found:
+                - Payload continues normally
+        
+        EXAMPLE:
+            ATTACKMODE HID KEYBOARD
+            PASSFILE()
+            REM Rest of payload continues here...
+            
         TARGETS:
             macOS systems with DuckyScript 3.0+
             
         CONFIGURATION:
             Change the file path by modifying the #PassFile_PATH define below
-            Exsample paths:
+            Example paths:
                 - /Users/USERNAME/PASSWORD
                 - /Users/USERNAME/Documents/PASSWORD
                 - /Users/USERNAME/Downloads/PASSWORD
-                - /tmp/PASSWORD
+            The extension will detect both hidden and visible PASSWORD files.
     END_REM
 
+########################################################################################################
+    REM PASSFILE CONFIG:
     DEFINE #PassFile_PATH /Users/USERNAME/PASSWORD
+########################################################################################################
 
     FUNCTION PASSFILE()
         CMD SPACE
         DELAY 1000
         STRINGLN terminal
         DELAY 1500
-        STRINGLN [ -f '#PassFile_PATH' ] && (defaults write /Library/Preferences/com.apple.bluetooth.local.device -dict APDUDucky -bool true; killall Finder)
+        STRINGLN if [ -f '#PassFile_PATH' ]; then ATTACKMODE STORAGE; exit; fi
         DELAY 500
     END_FUNCTION
 END_EXTENSION
+
+########################################################################################################
