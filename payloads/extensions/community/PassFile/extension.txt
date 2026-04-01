@@ -1,0 +1,48 @@
+
+    REM VERSION 1.0
+    REM AUTHOR: Mr.Ender
+    
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Call PASSFILE() at the beginning of your payload
+            to check if a file named "PASSWORD" exists on the target computer.
+            The file can be hidden or visible.
+            
+            If the file is found:
+                - Switches to ATTACKMODE STORAGE (USB mass storage mode)
+                - Stops all payload execution
+                
+            If the file is NOT found:
+                - Payload continues normally
+        
+        EXAMPLE:
+            ATTACKMODE HID KEYBOARD
+            PASSFILE()
+            REM Rest of payload continues here...
+            
+        TARGETS:
+            Windows systems with DuckyScript 3.0+
+            
+        CONFIGURATION:
+            Change the file path by modifying the #PassFile_PATH define below
+            Exsample paths:
+                - C:\Users\Public\PASSWORD
+                - C:\Users\USERNAME\Documents\PASSWORD
+                - C:\Users\USERNAME\Downloads\PASSWORD
+            The extension will detect both hidden and visible PASSWORD files.
+    END_REM
+########################################################################################################
+    REM PASSFILE CONFIG:
+    DEFINE #PassFile_PATH C:\Users\Public\PASSWORD
+########################################################################################################
+EXTENSION PASSFILE
+    FUNCTION PASSFILE()
+        GUI r
+        DELAY 1000
+        STRINGLN powershell -W H
+        DELAY 500
+        STRINGLN if (Test-Path '#PassFile_PATH' -PathType Leaf) { ATTACKMODE STORAGE; exit }
+        DELAY 500
+    END_FUNCTION
+END_EXTENSION
+########################################################################################################
