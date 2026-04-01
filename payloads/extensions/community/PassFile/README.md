@@ -27,7 +27,6 @@ Insert at the beginning of your payload:
 
 ```DuckyScript
 ATTACKMODE HID KEYBOARD
-INCLUDE payloads/extensions/community/PASSFILE/passfile.txt
 
 PASSFILE()
 
@@ -41,7 +40,6 @@ ENTER
 
 ```DuckyScript
 ATTACKMODE HID KEYBOARD
-INCLUDE payloads/extensions/community/PASSFILE/passfile_macos.txt
 
 PASSFILE()
 
@@ -55,7 +53,6 @@ ENTER
 
 ```DuckyScript
 ATTACKMODE HID KEYBOARD
-INCLUDE payloads/extensions/community/PASSFILE/passfile_linux.txt
 
 PASSFILE()
 
@@ -144,7 +141,6 @@ All versions detect:
 ### Windows Example
 ```DuckyScript
 ATTACKMODE HID KEYBOARD
-INCLUDE payloads/extensions/community/PASSFILE/passfile.txt
 
 PASSFILE()
 
@@ -161,7 +157,6 @@ ENTER
 ### macOS Example
 ```DuckyScript
 ATTACKMODE HID KEYBOARD
-INCLUDE payloads/extensions/community/PASSFILE/passfile_macos.txt
 
 PASSFILE()
 
@@ -178,7 +173,6 @@ ENTER
 ### Linux Example
 ```DuckyScript
 ATTACKMODE HID KEYBOARD
-INCLUDE payloads/extensions/community/PASSFILE/passfile_linux.txt
 
 PASSFILE()
 
