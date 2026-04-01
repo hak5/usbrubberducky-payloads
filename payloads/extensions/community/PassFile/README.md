@@ -1,5 +1,5 @@
 # PassFile - PASSWORD File Detection Extension
-- **By**: Mr.Ender
+
 This extension checks if a file named "PASSWORD" exists on the target computer. If the file is found (whether hidden or visible), the Rubber Ducky immediately switches to **ATTACKMODE STORAGE** and stops payload execution.
 
 ## Use Case
