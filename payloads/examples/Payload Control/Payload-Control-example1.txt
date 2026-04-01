@@ -1,1 +1,15 @@
-REM Example RESTART_PAYLOADATTACKMODE HID STORAGEDELAY 2000STRINGLN Hello, World!RESTART_PAYLOADSTRINGLN Nothing to see here.REM The payload loop typing the "Hello, World!" line infinitely.REM The "Nothing to see here." string will never be typed.
+REM ==================================
+REM iOS - devices
+REM made by **bst04**
+REM change [person] and [text]
+REM ==================================
+
+DELAY 150
+DELAY 150
+DELAY 250
+DELAY 250
+STRING [Refugee girls face several struggles when trying to attend school, according to the excerpt. Many girls have responsibilities at home, which can keep them from going to school regularly. Some also lack support or opportunities, making it harder for them to stay motivated and continue their education. Because of these challenges, girls may fall behind or even stop attending school.
+
+The program Together for Girls helps encourage change, especially through sports. The excerpt explains that sports give girls a reason to attend school and stay involved. By participating in sports, girls build confidence and feel more included in their community. This helps them become more motivated to keep learning. The program also encourages communities to see the value of educating girls and supporting their growth both in school and in activities like sports.
+
+In conclusion, refugee girls struggle with responsibilities and limited opportunities, but Together for Girls helps by using sports and support systems to keep girls engaged in school and create positive change]
