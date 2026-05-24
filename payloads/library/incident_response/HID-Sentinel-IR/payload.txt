@@ -1,0 +1,22 @@
+REM Title: HID Sentinel IR v1.0
+REM Author: sucloudflare
+REM Description: Lightweight defensive framework against BadUSB/HID attacks. Detects rogue USB devices and suspicious PowerShell activity with low noise.
+REM Target: Windows 10/11
+REM Version: 1.0
+REM Category: Incident Response
+REM =============================================
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+
+IF ($_OS != WINDOWS)
+    LED_R
+    STOP_PAYLOAD
+END_IF
+
+ATTACKMODE HID STORAGE
+DEFAULT_DELAY 250
+
+REM === Launch HID Sentinel IR ===
+GUI r
+DELAY 700
+STRINGLN powershell -NoP -Ep Bypass -W Hidden -C "$Host.UI.RawUI.WindowTitle='HID Sentinel IR v1.0';function Log{param($m,$l='INFO');$t=Get-Date -Format 'HH:mm:ss';\"[$t] [$l] $m\"|Out-File 'C:\Windows\Temp\sentinel.log'-Append -Encoding UTF8;Write-Host \"[$l] $m\" -ForegroundColor(@{INFO='White';WARN='Yellow';ALERT='Red';SUCCESS='Green'}[$l])};Log 'HID Sentinel IR v1.0 started - Anti-BadUSB Protection' 'SUCCESS';Register-WmiEvent -Class Win32_DeviceChangeEvent -SourceIdentifier 'USBChange' -Action {if($Event.SourceEventArgs.NewEvent.EventType -eq 2){Start-Sleep -Milliseconds 700;$u=Get-PnpDevice -Class USB|Where-Object Status -eq 'OK'|Select-Object -Last 5;foreach($d in $u){if($d.FriendlyName -match '(?i)Rubber Ducky|BadUSB|HID Injector|Attack'){Log \"ROGUE BADUSB DETECTED: $($d.FriendlyName)\" 'ALERT'}}}};while($true){Get-Process -Name 'powershell*' -EA 0|Where-Object{$_.CommandLine -match '(?i)iex|downloadstring|invoke-webrequest'}|ForEach-Object{Log \"Suspicious PowerShell detected (PID: $($_.Id))\" 'WARN'};Start-Sleep -Seconds 12}"
