@@ -4,7 +4,10 @@ EXTENSION RUN_HOSTED_POWERSHELL
         Author: PlumpyTurkey
         Description: This extension allows you to run a hosted PowerShell script using the Windows Run dialog box.
         Target: Windows 10, 11
-        Version: 1.1
+        Version: 1.2
+
+        Warning: This extension is deprecated. Windows Defender now blocks remote PowerShell execution via the Run window.
+
     END_REM
 
     REM Required options:
