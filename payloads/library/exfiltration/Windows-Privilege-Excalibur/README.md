@@ -1,4 +1,4 @@
-## Windows Privilege Excalibur
+# Windows Privilege Excalibur
 
 <p>
     <a href="https://payloadstudio.hak5.org/community/?device=usb-rubber-ducky&viewurl=https://raw.githubusercontent.com/hak5/usbrubberducky-payloads/master/payloads/library/exfiltration/Windows-Privilege-Excalibur/payload.txt">
@@ -8,40 +8,54 @@
         <img alt="TARGET: WINDOWS 10, 11" src="https://img.shields.io/badge/TARGET-WINDOWS_10,_11-blue?style=for-the-badge">
     </a>
     <a href="#">
-        <img alt="VERSION: 1.4" src="https://img.shields.io/badge/VERSION-1.4-green?style=for-the-badge">
+        <img alt="VERSION: 1.5" src="https://img.shields.io/badge/VERSION-1.5-green?style=for-the-badge">
     </a>
 </p>
 
-This payload sends you a brief user privilege escalation report via Dropbox. Once you have the report, you can perform further privilege escalation analysis, including using the following resources:
+This payload sends you a brief user privilege escalation report via Dropbox.
 
-|Report Category|Useful Resources|
-|-|-|
-|System Information|[WES-NG](https://github.com/bitsadmin/wesng)|
-|User Information|[Priv2Admin](https://github.com/gtworek/Priv2Admin)|
-|Stored Credentials||
-|Installed Programs|[Exploit Database](https://www.exploit-db.com/) & [Packet Storm](https://packetstormsecurity.com/)|
+| Report section     | Useful resources                                                                                   |
+|--------------------|----------------------------------------------------------------------------------------------------|
+| System information | [WES-NG](https://github.com/bitsadmin/wesng)                                                       |
+| User information   | [Priv2Admin](https://github.com/gtworek/Priv2Admin)                                                |
+| Stored credentials |                                                                                                    |
+| Installed programs | [Exploit Database](https://www.exploit-db.com/) & [Packet Storm](https://packetstormsecurity.com/) |
 
 ## Process
 
 1. Detects when the USB Rubber Ducky is ready and whether the target operating system is Windows.
-2. Opens a Windows Run dialog box.
-3. Executes a hosted PowerShell script that performs the following actions:
-- Clears the history of the Windows Run menu.
-- Prepares a report on target PC user privilege escalation.
-- Sends the report to a file in your Dropbox.
+2. Opens PowerShell from the Windows quick link menu (Win+X).
+3. Collects system, user, credential, and installed program information.
+4. Exfiltrates the report to your Dropbox using
+   the [PowerShell To Dropbox](https://codeberg.org/PlumpyTurkey/Ducky-Utilities/src/branch/main/Extensions/PowerShell-To-Dropbox)
+   extension.
+5. Clears the PowerShell command history and exits the session.
+6. Disables the USB Rubber Ducky when `DISABLE_AFTER_EXECUTION` is enabled.
 
 ## Prerequisites
 
-First of all, you need to set up an appropriate Dropbox exfiltration "App" to obtain your "app key", "app secret" and "refresh token", which you can do by following the quick tutorial available [here](https://codeberg.org/PlumpyTurkey/Ducky-Utilities/src/branch/main/PowerShell-Functions/Send-ToDropbox). Once you get them, you need to download the "script.ps1" file for this payload and edit it to add the values for your "App". Once you've done that, all you need to do is host the modified file and make it downloadable from a URL that you set as an option for this payload.
-
-> [!WARNING]
-> If you're using Dropbox to host your script, make sure the download link for your script ends with "dl=1" and not "dl=0".
+Configure a Dropbox app and set `PTD_REFRESH_TOKEN`, `PTD_APP_KEY`, and `PTD_APP_SECRET` in
+`payload.txt`. See
+the [PowerShell To Dropbox](https://codeberg.org/PlumpyTurkey/Ducky-Utilities/src/branch/main/Extensions/PowerShell-To-Dropbox)
+README for setup instructions.
 
 ## Options
 
-|Required extension options|Extension|Data type|Default value|Description|
-|-|-|-|-|-|
-|RHP_SCRIPT_URL|Run Hosted PowerShell|String|example.com|Your PowerShell script download link|
+### [PowerShell To Dropbox](https://codeberg.org/PlumpyTurkey/Ducky-Utilities/src/branch/main/Extensions/PowerShell-To-Dropbox) - Required
+
+| Option              | Type   | Default                                                            | Description                  |
+|---------------------|--------|--------------------------------------------------------------------|------------------------------|
+| `PTD_REFRESH_TOKEN` | String | `XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX` | Your Dropbox `refresh_token` |
+| `PTD_APP_KEY`       | String | `XXXXXXXXXXXXXXX`                                                  | Your Dropbox `APP_KEY`       |
+| `PTD_APP_SECRET`    | String | `XXXXXXXXXXXXXXX`                                                  | Your Dropbox `APP_SECRET`    |
+
+### Advanced payload options
+
+| Option                    | Type    | Default | Description                                   |
+|---------------------------|---------|---------|-----------------------------------------------|
+| `SHORT_DELAY`             | Integer | `500`   | Short delay (ms)                              |
+| `MEDIUM_DELAY`            | Integer | `2000`  | Medium delay (ms)                             |
+| `DISABLE_AFTER_EXECUTION` | Boolean | `TRUE`  | Disables the USB Rubber Ducky after execution |
 
 ## Contributors
 

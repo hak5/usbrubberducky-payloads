@@ -12,47 +12,53 @@
     </a>
 </p>
 
-This payload sets up a trustworthy proxy for the user, enabling a [Man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack). After executing your payload, the proxy server will intercept all the target user's network traffic.
+This payload sets up a trustworthy proxy for the user, enabling a Man-in-the-middle attack.
 
 ## Process
 
 1. Detects when the USB Rubber Ducky is ready and whether the target operating system is Windows.
 2. Creates a new virtual desktop.
-3. Opens a PowerShell window using the Windows+X menu.
-4. Runs PowerShell code that performs the following actions:
-- Downloads your certificate to a temporary file.
-- *Configures Firefox to accepts root user certificates for each profile.*
-- Configures and activates the proxy for the current user.
-- Deletes the temporary certificate file and PowerShell history, then closes the window.
-5. Confirms the addition of a trusted certificate in the confirmation dialog box.
-6. Closes the virtual desktop.
-7. *Disables USB Rubber Ducky*
+3. Opens PowerShell from the Windows quick link menu (Win+X).
+4. Downloads your root certificate, optionally configures Firefox, and enables the system proxy for the current user.
+5. Clears the temporary certificate file and PowerShell command history, then exits the session.
+6. Confirms the trusted certificate prompt and closes the virtual desktop.
+7. Disables the USB Rubber Ducky when `DISABLE_AFTER_EXECUTION` is enabled.
 
 > [!NOTE]
 > No configuration is required for Chromium-based browsers since they accept user root certificates by default.
 
 ## Prerequisites
 
-To use this payload, you'll need a proxy server and a [root certificate](https://en.wikipedia.org/wiki/Root_certificate). The certificate must be downloadable from a website, either from your proxy server or from an online file hosting service such as [Dropbox](https://www.dropbox.com/). You can easily generate the certificate using tools such as [mitmproxy](https://mitmproxy.org/) or [Burp Suite](https://portswigger.net/burp).
+You need a proxy server and a [root certificate](https://en.wikipedia.org/wiki/Root_certificate) downloadable from a
+URL (`CERT_URL`). Host the certificate on your proxy server or a file hosting service such
+as [Dropbox](https://www.dropbox.com/). Generate certificates with tools such as [mitmproxy](https://mitmproxy.org/)
+or [Burp Suite](https://portswigger.net/burp).
 
 > [!WARNING]
-> To ensure the payload functions properly, generate the "mitmproxy-ca-cert.pem" certificate in the "Other platforms" section when using mitmproxy.
+> When using mitmproxy, generate the `mitmproxy-ca-cert.pem` certificate under **Other platforms**.
+
+> [!WARNING]
+> If you host the certificate on Dropbox, use a download link ending with `dl=1`, not `dl=0`.
 
 ## Options
 
-|Required options|Data type|Default value|Description|
-|-|-|-|-|
-|CERT_URL|String|example.com|The download link for your Trusted Root CA certificate|
-|PROXY_IP|String|127.0.0.1|Your proxy's IP address|
-|PROXY_PORT|Integer|8080|Your proxy port|
+### Required
 
-|Advanced options|Data type|Default value|Description|
-|-|-|-|-|
-|SHORT_DELAY|Integer|500|Short delay time|
-|MEDIUM_DELAY|Integer|2000|Medium delay time|
-|LONG_DELAY|Integer|4000|Long delay time|
-|CONFIGURE_FIREFOX|Boolean|TRUE|Configures Firefox to accepts root user certificates for each profile|
-|DISABLE_AFTER_EXECUTION|Boolean|TRUE|Disables USB Rubber Ducky after payload execution|
+| Option       | Type    | Default       | Description                                        |
+|--------------|---------|---------------|----------------------------------------------------|
+| `CERT_URL`   | String  | `example.com` | Download link for your trusted root CA certificate |
+| `PROXY_IP`   | String  | `127.0.0.1`   | Proxy server IP address                            |
+| `PROXY_PORT` | Integer | `8080`        | Proxy server port                                  |
+
+### Advanced payload options
+
+| Option                    | Type    | Default | Description                                                    |
+|---------------------------|---------|---------|----------------------------------------------------------------|
+| `SHORT_DELAY`             | Integer | `500`   | Short delay (ms)                                               |
+| `MEDIUM_DELAY`            | Integer | `2000`  | Medium delay (ms)                                              |
+| `LONG_DELAY`              | Integer | `4000`  | Long delay (ms)                                                |
+| `CONFIGURE_FIREFOX`       | Boolean | `TRUE`  | Configures Firefox to trust root user certificates per profile |
+| `DISABLE_AFTER_EXECUTION` | Boolean | `TRUE`  | Disables the USB Rubber Ducky after execution                  |
 
 ## Contributors
 
