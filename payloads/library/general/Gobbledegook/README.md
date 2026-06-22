@@ -1,12 +1,9 @@
 <div align="center">
   
 # 🔑 Gobbledegook 🔒
-
-Gobbledegook is a proof of concept (PoC) hotplug attack payload resistant to post-incident disk-forensics targeting Linux systems.
-
-[github.com/OSINTI4L](https://github.com/OSINTI4L)
-
 </div>
+
+Gobbledegook is a proof of concept (PoC) hotplug attack payload emphasizing measures to reduce on-disk payload artifacts targeting Linux systems. This is partially accomplished by utilizing environmental keying against the hotplug itself, allowing key derivation for encrypted payloads to be generated at runtime in memory.
 
 **Lab Environment:**
 - Ubuntu Server 24.04
@@ -14,7 +11,7 @@ Gobbledegook is a proof of concept (PoC) hotplug attack payload resistant to pos
 - [Hak5 USB Rubber Ducky](https://shop.hak5.org/products/usb-rubber-ducky)
 
 ## Abstract
-Gobbledegook utilizes a two step payload encryption method implemented via `openssl` to fetch an attacker's externally hosted encrypted payload as well as encrypt a hotplug downloader payload (used to inject and fetch the externally hosted payload) to increase resistance to post-incident disk-forensics. The payloads are encrypted and `base64` wrapped via `openssl` using symmetric environmental keying derived from USB "architectual parameters" gathered via `lsusb -v` from the hotplug device itself. This means payload decryption key derivation is performed in memory at runtime of the attack; not stored on the hotplug device, fetched from external sources, or saved to disk. The values gathered from USB "architectual parameters" are not typically logged to disk and are strung together to create the decryption key via `lsusb -v -d 0x046D:0xC05A 2>/dev/null | grep -E "bmAttri|MaxPower|wMaxPacket" | awk '"'"'{print $2}'"'"' | paste -sd "-" -` at runtime in memory (key example: `0xc0-100mA-3-0x0008`). Hotplug vendor and product ID are spoofed (`VID_0x046D PID_0xC05A MAN_Logitech SERIAL_0 PROD_M100`) so that post-incident log analysis identifies the device as a Logitech mouse, obfuscating that a hotplug device was utilized. The hotplug downloader payload (as previously mentioned) is also encrypted. This means that injected commands are not decrypted until runtime, thus, logging of terminal command input will only provide cipher text, `set +o history && unset HISTFILE` is also utilized as additional methods to reduce the logging surface. Once injected, decryption key derivation is perfomed and passed to `openssl` to decrypt the downloader payload. The downloader payload is then piped to `Bash` to be executed in memory, forgoing writing any file to disk. The primary payload is then fetched via `curl`, passed to `openssl` for decryption, and then piped to `Bash` for execution; the process is performed entirely in memory. Terminal `exit` is then used post-execution to obfuscate terminal interaction.
+Gobbledegook utilizes symmetric encryption implemented via `openssl` to fetch an attacker's externally hosted encrypted payload as well as encrypt a hotplug downloader payload (used to inject and fetch the externally hosted payload). The payloads are encrypted and `base64` wrapped via `openssl` using environmental keying derived from USB "architectual parameters" gathered via `lsusb -v` from the hotplug device itself. This means payload decryption key derivation is performed in memory at runtime of the attack; not stored on the hotplug device, fetched from external sources, or saved to disk. The values gathered from USB "architectual parameters" are not typically logged to disk and are strung together to create the decryption key via `lsusb -v -d 0x046D:0xC05A 2>/dev/null | grep -E "bmAttri|MaxPower|wMaxPacket" | awk '"'"'{print $2}'"'"' | paste -sd "-" -` at runtime in memory (key example: `0xc0-100mA-3-0x0008`). Hotplug vendor and product ID are spoofed (`VID_0x046D PID_0xC05A MAN_Logitech SERIAL_0 PROD_M100`) so that post-incident log analysis identifies the device as a Logitech mouse, obfuscating that a hotplug device was utilized. The hotplug downloader payload (as previously mentioned) is also encrypted. This means that injected commands are not decrypted until runtime, thus, logging of terminal command input will only provide cipher text. `set +o history && unset HISTFILE` is also utilized as additional methods to reduce the logging surface. Once injected, decryption key derivation is perfomed and passed to `openssl` to decrypt the downloader payload. The downloader payload is then piped to `Bash` to be executed in memory, forgoing writing any file to disk. The primary payload is then fetched via `curl`, passed to `openssl` for decryption, and then piped to `Bash` for execution; the process is performed entirely in memory. Terminal `exit` is then used post-execution to obfuscate terminal interaction.
 
 **A flow of the payload execution process is as follows:**
   1) Hotplug device is inserted into target machine
@@ -29,10 +26,10 @@ Gobbledegook utilizes a two step payload encryption method implemented via `open
   10) `exit` utilized to obfuscate terminal interaction upon payload completion
 
 ## Use Case
-Disk-forensic operational security considerations when attempting to compromise Linux machines via hotplug attack.
+Operational security considerations to reduce on-disk payload artifacts when attempting to compromise Linux machines via hotplug attack.
 
 ## Considerations
-While steps in this PoC carry an emphasis on anti disk-forensics, it should be noted that *it is **NOT** all encompassing* regarding total forensic circumvention. EDR systems, network monitoring systems, RAM/process monitoring, recovering data from non re-allocated memory space, etc, may circumvent anti-forensic efforts. Additionally, while the *key itself* is deisgned to be dervied in memory at runtime only, the key derivation process (`"$(lsusb -v -d 0x046D:0xC05A 2>/dev/null | grep -E "bmAttri|MaxPower|wMaxPacket" | awk '"'"'{print $2}'"'"' | paste -sd "-" -)"`) must remain in clear text so that it may be interpreted by the shell. This does not mean that the *key* itself is stored, but does mean that analysts can see *how* it was derived.
+While steps in this PoC carry an emphasis on reducing on-disk payload artifacts, it should be noted that *it is **NOT** all encompassing* regarding total forensic circumvention. EDR systems, network monitoring systems, RAM/process monitoring, recovering data from non re-allocated memory space, etc, may circumvent anti-forensic efforts. Additionally, while the *key itself* is deisgned to be dervied in memory at runtime only, the key derivation process (`"$(lsusb -v -d 0x046D:0xC05A 2>/dev/null | grep -E "bmAttri|MaxPower|wMaxPacket" | awk '"'"'{print $2}'"'"' | paste -sd "-" -)"`) must remain in clear text so that it may be interpreted by the shell. This does not mean that the *key* itself is stored, but does mean that analysts can see *how* it was derived.
 
 ## Workflow
 ### Gathering Keys
