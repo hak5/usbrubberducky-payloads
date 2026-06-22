@@ -1,11 +1,12 @@
 <div align="center">
   
 # 🔑 Gobbledegook 🔒
-</div>
 
 Gobbledegook is a proof of concept (PoC) hotplug attack payload resistant to post-incident disk-forensics targeting Linux systems.
 
 [github.com/OSINTI4L](https://github.com/OSINTI4L)
+
+</div>
 
 **Lab Environment:**
 - Ubuntu Server 24.04
