@@ -1,0 +1,68 @@
+REM ###############################################
+REM #                                             |
+REM # Title        : NullSec System Recon         |
+REM # Author       : bad-antics                   |
+REM # Version      : 1.1                          |
+REM # Category     : Recon                        |
+REM # Target       : Windows 10/11                |
+REM #                                             |
+REM ###############################################
+
+REM Requirements:
+REM     - Windows 10/11
+REM     - PowerShell access
+
+DELAY 1000
+GUI r
+DELAY 500
+STRINGLN powershell -w hidden
+DELAY 1500
+
+REM Gather comprehensive system information
+STRINGLN $report = @()
+DELAY 200
+
+REM System Info
+STRINGLN $report += "=== SYSTEM INFO ==="
+STRINGLN $report += (systeminfo | Select-String "OS Name|OS Version|System Type|Total Physical Memory")
+DELAY 500
+
+REM Current User
+STRINGLN $report += "`n=== CURRENT USER ==="
+STRINGLN $report += "User: $env:USERNAME"
+STRINGLN $report += "Domain: $env:USERDOMAIN"
+STRINGLN $report += "Computer: $env:COMPUTERNAME"
+DELAY 200
+
+REM Local Users
+STRINGLN $report += "`n=== LOCAL USERS ==="
+STRINGLN $report += (Get-LocalUser | Select-Object Name, Enabled | Format-Table | Out-String)
+DELAY 300
+
+REM Network Config
+STRINGLN $report += "`n=== NETWORK CONFIG ==="
+STRINGLN $report += (ipconfig /all | Select-String "IPv4|Default Gateway|DNS Servers|Physical Address")
+DELAY 500
+
+REM Running Processes
+STRINGLN $report += "`n=== TOP PROCESSES ==="
+STRINGLN $report += (Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 Name, CPU, Id | Format-Table | Out-String)
+DELAY 300
+
+REM Installed Software
+STRINGLN $report += "`n=== INSTALLED SOFTWARE ==="
+STRINGLN $report += (Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion | Sort-Object DisplayName | Format-Table | Out-String)
+DELAY 500
+
+REM AV Status
+STRINGLN $report += "`n=== ANTIVIRUS ==="
+STRINGLN $report += (Get-MpComputerStatus | Select-Object AntivirusEnabled, RealTimeProtectionEnabled | Format-List | Out-String)
+DELAY 200
+
+REM Output (customize as needed)
+STRINGLN $report | Out-File "$env:TEMP\recon.txt"
+DELAY 500
+
+REM Cleanup
+STRINGLN Remove-Item "$env:TEMP\recon.txt" -Force -ErrorAction SilentlyContinue
+STRINGLN exit
