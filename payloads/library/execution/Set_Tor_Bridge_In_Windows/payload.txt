@@ -1,12 +1,14 @@
-REM ###################################
-REM #                                 |
-REM # Title        : Set Tor Bridge   |
-REM # Author       : Aleff            |
-REM # Version      : 1.0              |
-REM # Category     : Execution        |
-REM # Target       : Windows 10/11    |
-REM #                                 |
-REM ###################################
+REM_BLOCK
+###################################
+#                                 #
+# Title        : Set Tor Bridge   #
+# Author       : Aleff            #
+# Version      : 1.0              #
+# Category     : Execution        #
+# Target       : Windows 10/11    #
+#                                 #
+###################################
+END_REM
 
 REM Requirements:
 REM     - Tor installed

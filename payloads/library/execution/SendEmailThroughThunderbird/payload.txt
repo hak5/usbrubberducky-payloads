@@ -1,13 +1,14 @@
-REM ########################################################
-REM #                                                      |
-REM # Title        : Send Email Through Thunderbird        |
-REM # Author       : Aleff                                 |
-REM # Version      : 1.0                                   |
-REM # Category     : Execution                             |
-REM # Target       : Windows 10/11 - Linux(debian tested)  |
-REM #                                                      |
-REM ########################################################
-
+REM_BLOCK
+########################################################
+#                                                      #
+# Title        : Send Email Through Thunderbird        #
+# Author       : Aleff                                 #
+# Version      : 1.0                                   #
+# Category     : Execution                             #
+# Target       : Windows 10/11 - Linux(debian tested)  #
+#                                                      #
+########################################################
+END_REM
 
 REM Requirements:
 REM     - Internet Connection

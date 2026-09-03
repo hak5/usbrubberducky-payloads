@@ -1,12 +1,12 @@
 REM_BLOCK
 ################################################################
-#                                                              |
-# Title        : Set An Arbitrary And Persistent Tor Circuit   |
-# Author       : Aleff                                         |
-# Version      : 1.0                                           |
-# Category     : Execution                                     |
-# Target       : Windows 10/11; Linux;                         |
-#                                                              |
+#                                                              #
+# Title        : Set An Arbitrary And Persistent Tor Circuit   #
+# Author       : Aleff                                         #
+# Version      : 1.0                                           #
+# Category     : Execution                                     #
+# Target       : Windows 10/11; Linux;                         #
+#                                                              #
 ################################################################
 
 Requirements:

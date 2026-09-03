@@ -1,5 +1,5 @@
  
-# Exfiltrate Network Configuration - Linux ✅
+# Exfiltrate Network Configuration - Linux
 
 A script used to exfiltrate the network configuration on a Linux machine.
 
