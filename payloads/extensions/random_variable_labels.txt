@@ -1,0 +1,121 @@
+EXTENSION RANDOM_VARIABLE_LABELS
+    REM_BLOCK Documentation
+        This extension is used to generate 5 guaranteed random unique random strings  or characters
+
+        TARGET: 
+            Any
+
+        USAGE:
+            Place this extension at top of your payload. Replace usages of 
+            static variable names within the code youre injecting with usages of 
+            the function calls below - RANDOM_LABEL_N - where N is 1-5
+
+        CONFIGURATION:
+            To change the type of random label replace RANDOM_LABEL_TYPE with 
+            one of the following:
+                $_RANDOM_LETTER_KEYCODE
+                $_RANDOM_CHAR_KEYCODE
+                $_RANDOM_NUMBER_KEYCODE
+            WARNING: be sure to choose something that is a valid variable name in
+            the language you intend to use this with
+
+
+            If you only need 5 or less random variable names and would prefer 
+            injection performance and reduced payload size, set SINGLE_CHAR_MODE
+            to TRUE
+
+            If you need MORE than 5 random variable names, use the template at 
+            the end of this extension to generate as many unique strings as 
+            needed with the 5 base variables: $random_label_1 through $random_label_5
+            note: if this is the case you will need to keep SINGLE_CHAR_MODE FALSE
+
+    END_REM
+
+
+    DEFINE #RANDOM_LABEL_TYPE $_RANDOM_LETTER_KEYCODE
+
+    DEFINE #SINGLE_CHAR_MODE FALSE
+
+    VAR $random_label_1 = #RANDOM_LABEL_TYPE
+    VAR $random_label_2 = #RANDOM_LABEL_TYPE
+    WHILE ($random_label_1 == $random_label_2)
+        $random_label_2 = #RANDOM_LABEL_TYPE
+    END_WHILE
+    VAR $random_label_3 = #RANDOM_LABEL_TYPE
+    WHILE (($random_label_1 == $random_label_3) || ($random_label_2 == $random_label_3))
+        $random_label_3 = #RANDOM_LABEL_TYPE
+    END_WHILE
+    VAR $random_label_4 = #RANDOM_LABEL_TYPE
+    WHILE (($random_label_1 == $random_label_4) || ($random_label_2 == $random_label_3) || ($random_label_3 == $random_label_4))
+        $random_label_4 = #RANDOM_LABEL_TYPE
+    END_WHILE
+    VAR $random_label_5 = #RANDOM_LABEL_TYPE
+    WHILE (($random_label_1 == $random_label_5) || ($random_label_2 == $random_label_5) || ($random_label_3 == $random_label_5) || ($random_label_4 == $random_label_5))
+        $random_label_5 = #RANDOM_LABEL_TYPE
+    END_WHILE
+
+
+    FUNCTION RANDOM_LABEL_1()
+        INJECT_VAR $random_label_1
+        IF_NOT_DEFINED_TRUE #SINGLE_CHAR_MODE
+            INJECT_VAR $random_label_2
+            INJECT_VAR $random_label_3
+            INJECT_VAR $random_label_4
+            INJECT_VAR $random_label_5
+        END_IF_DEFINED
+    END_FUNCTION
+
+    FUNCTION RANDOM_LABEL_2()
+        INJECT_VAR $random_label_2
+        IF_NOT_DEFINED_TRUE #SINGLE_CHAR_MODE
+            INJECT_VAR $random_label_1
+            INJECT_VAR $random_label_3
+            INJECT_VAR $random_label_4
+            INJECT_VAR $random_label_5
+        END_IF_DEFINED
+    END_FUNCTION
+
+    FUNCTION RANDOM_LABEL_3()
+        INJECT_VAR $random_label_3
+        IF_NOT_DEFINED_TRUE #SINGLE_CHAR_MODE
+            INJECT_VAR $random_label_2
+            INJECT_VAR $random_label_1
+            INJECT_VAR $random_label_4
+            INJECT_VAR $random_label_5
+        END_IF_DEFINED
+    END_FUNCTION
+
+    FUNCTION RANDOM_LABEL_4()
+        INJECT_VAR $random_label_4
+        IF_NOT_DEFINED_TRUE #SINGLE_CHAR_MODE
+            INJECT_VAR $random_label_3
+            INJECT_VAR $random_label_2
+            INJECT_VAR $random_label_1
+            INJECT_VAR $random_label_5
+        END_IF_DEFINED
+    END_FUNCTION
+
+    FUNCTION RANDOM_LABEL_5()
+        INJECT_VAR $random_label_5
+        IF_NOT_DEFINED_TRUE #SINGLE_CHAR_MODE
+            INJECT_VAR $random_label_3
+            INJECT_VAR $random_label_4
+            INJECT_VAR $random_label_2
+            INJECT_VAR $random_label_1
+        END_IF_DEFINED
+    END_FUNCTION
+
+    REM_BLOCK
+    REM    Template; if you need more than 5 variable names
+
+    FUNCTION RANDOM_LABEL_^()
+        INJECT_VAR $random_label_2
+        INJECT_VAR $random_label_3
+        INJECT_VAR $random_label_4
+        INJECT_VAR $random_label_5
+        INJECT_VAR $random_label_1
+    END_FUNCTION
+
+    END_REM
+
+END_EXTENSION
