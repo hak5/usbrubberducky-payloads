@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#  Modified by 0iphor13 for PingZhellDucky
+#  Modified by 0i41E for PingZhellDucky
 #
 # 
 #

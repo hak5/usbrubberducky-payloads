@@ -95,7 +95,7 @@ Arf
 
 * [Hak5](https://hak5.org/)
 * [MG](https://github.com/OMG-MG)
-* [0iphor13](https://github.com/0iphor13)
+* [0i41E](https://github.com/0i41E)
 * [PhilSutter](https://github.com/PhilSutter)
 
 

